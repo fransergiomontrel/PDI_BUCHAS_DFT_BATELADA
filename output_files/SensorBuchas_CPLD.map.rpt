@@ -1,0 +1,298 @@
+Analysis & Synthesis report for SensorBuchas_CPLD
+Sat Mar 27 10:46:04 2021
+Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |main_sm|sm
+  9. General Register Statistics
+ 10. Inverted Register Statistics
+ 11. Parameter Settings for User Entity Instance: synchronizer:sync
+ 12. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++---------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                              ;
++-----------------------------+---------------------------------------------+
+; Analysis & Synthesis Status ; Successful - Sat Mar 27 10:46:04 2021       ;
+; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
+; Revision Name               ; SensorBuchas_CPLD                           ;
+; Top-level Entity Name       ; main_sm                                     ;
+; Family                      ; MAX II                                      ;
+; Total logic elements        ; 31                                          ;
+; Total pins                  ; 9                                           ;
+; Total virtual pins          ; 0                                           ;
+; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
++-----------------------------+---------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; EPM1270T144C5      ;                    ;
+; Top-level entity name                                            ; main_sm            ; SensorBuchas_CPLD  ;
+; Family name                                                      ; MAX II             ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 2           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                       ;
++----------------------------------+-----------------+------------------------+------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                         ; Library ;
++----------------------------------+-----------------+------------------------+------------------------------------------------------+---------+
+; main_sm.tdf                      ; yes             ; User AHDL File         ; //Mac/Home/Documents/SensorBuchasV2/main_sm.tdf      ;         ;
+; modes.inc                        ; yes             ; User Unspecified File  ; //Mac/Home/Documents/SensorBuchasV2/modes.inc        ;         ;
+; synchronizer.tdf                 ; yes             ; User AHDL File         ; //Mac/Home/Documents/SensorBuchasV2/synchronizer.tdf ;         ;
+; synchronizer.inc                 ; yes             ; Auto-Found AHDL File   ; //Mac/Home/Documents/SensorBuchasV2/synchronizer.inc ;         ;
++----------------------------------+-----------------+------------------------+------------------------------------------------------+---------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Total logic elements                        ; 31    ;
+;     -- Combinational with no register       ; 12    ;
+;     -- Register only                        ; 10    ;
+;     -- Combinational with a register        ; 9     ;
+;                                             ;       ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 12    ;
+;     -- 3 input functions                    ; 5     ;
+;     -- 2 input functions                    ; 2     ;
+;     -- 1 input functions                    ; 1     ;
+;     -- 0 input functions                    ; 1     ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 31    ;
+;     -- arithmetic mode                      ; 0     ;
+;     -- qfbk mode                            ; 0     ;
+;     -- register cascade mode                ; 0     ;
+;     -- synchronous clear/load mode          ; 0     ;
+;     -- asynchronous clear/load mode         ; 9     ;
+;                                             ;       ;
+; Total registers                             ; 19    ;
+; I/O pins                                    ; 9     ;
+; Maximum fan-out node                        ; clk   ;
+; Maximum fan-out                             ; 19    ;
+; Total fan-out                               ; 114   ;
+; Average fan-out                             ; 2.85  ;
++---------------------------------------------+-------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                        ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------+--------------+--------------+
+; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name        ; Entity Name  ; Library Name ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------+--------------+--------------+
+; |main_sm                   ; 31 (21)     ; 19           ; 0          ; 9    ; 0            ; 12 (10)      ; 10 (2)            ; 9 (9)            ; 0 (0)           ; 0 (0)      ; |main_sm                   ; main_sm      ; work         ;
+;    |synchronizer:sync|     ; 10 (10)     ; 8            ; 0          ; 0    ; 0            ; 2 (2)        ; 8 (8)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |main_sm|synchronizer:sync ; synchronizer ; work         ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------+--------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------------------------+
+; State Machine - |main_sm|sm                                                                                    ;
++--------------------+-----------+-------------+----------------+-------+--------------------+------------+------+
+; Name               ; sReadData ; sAquisition ; sConfiguration ; sNone ; sWait_mode_changed ; sWait_Busy ; sRst ;
++--------------------+-----------+-------------+----------------+-------+--------------------+------------+------+
+; sRst               ; 0         ; 0           ; 0              ; 0     ; 0                  ; 0          ; 0    ;
+; sWait_Busy         ; 0         ; 0           ; 0              ; 0     ; 0                  ; 1          ; 1    ;
+; sWait_mode_changed ; 0         ; 0           ; 0              ; 0     ; 1                  ; 0          ; 1    ;
+; sNone              ; 0         ; 0           ; 0              ; 1     ; 0                  ; 0          ; 1    ;
+; sConfiguration     ; 0         ; 0           ; 1              ; 0     ; 0                  ; 0          ; 1    ;
+; sAquisition        ; 0         ; 1           ; 0              ; 0     ; 0                  ; 0          ; 1    ;
+; sReadData          ; 1         ; 0           ; 0              ; 0     ; 0                  ; 0          ; 1    ;
++--------------------+-----------+-------------+----------------+-------+--------------------+------------+------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 19    ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 9     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 4     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; changing_ff                            ; 1       ;
+; Total number of inverted registers = 1 ;         ;
++----------------------------------------+---------+
+
+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: synchronizer:sync ;
++----------------+-------+---------------------------------------+
+; Parameter Name ; Value ; Type                                  ;
++----------------+-------+---------------------------------------+
+; bus_size       ; 2     ; Untyped                               ;
++----------------+-------+---------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+    Info: Processing started: Sat Mar 27 10:45:52 2021
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off SensorBuchas_CPLD -c SensorBuchas_CPLD
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file conversion_ctrl.tdf
+    Info (12023): Found entity 1: conversion_ctrl File: //Mac/Home/Documents/SensorBuchasV2/conversion_ctrl.tdf Line: 7
+Info (12021): Found 1 design units, including 1 entities, in source file sensorbuchas_cpld.bdf
+    Info (12023): Found entity 1: SensorBuchas_CPLD
+Info (12021): Found 1 design units, including 1 entities, in source file single_pulse.tdf
+    Info (12023): Found entity 1: single_pulse File: //Mac/Home/Documents/SensorBuchasV2/single_pulse.tdf Line: 3
+Warning (287004): Group name "mode_s" is missing brackets ([ ]) File: //Mac/Home/Documents/SensorBuchasV2/main_sm.tdf Line: 33
+Warning (287004): Group name "mode_out" is missing brackets ([ ]) File: //Mac/Home/Documents/SensorBuchasV2/main_sm.tdf Line: 45
+Warning (287004): Group name "mode_s" is missing brackets ([ ]) File: //Mac/Home/Documents/SensorBuchasV2/main_sm.tdf Line: 60
+Info (12021): Found 1 design units, including 1 entities, in source file main_sm.tdf
+    Info (12023): Found entity 1: main_sm File: //Mac/Home/Documents/SensorBuchasV2/main_sm.tdf Line: 4
+Info (12021): Found 1 design units, including 1 entities, in source file adc_aquisition.tdf
+    Info (12023): Found entity 1: adc_aquisition File: //Mac/Home/Documents/SensorBuchasV2/adc_aquisition.tdf Line: 21
+Info (12021): Found 1 design units, including 1 entities, in source file synchronizer.tdf
+    Info (12023): Found entity 1: synchronizer File: //Mac/Home/Documents/SensorBuchasV2/synchronizer.tdf Line: 7
+Info (12021): Found 1 design units, including 1 entities, in source file aquisition_ctrl.tdf
+    Info (12023): Found entity 1: aquisition_ctrl File: //Mac/Home/Documents/SensorBuchasV2/aquisition_ctrl.tdf Line: 21
+Info (12021): Found 1 design units, including 1 entities, in source file counter.tdf
+    Info (12023): Found entity 1: counter File: //Mac/Home/Documents/SensorBuchasV2/counter.tdf Line: 8
+Info (12127): Elaborating entity "main_sm" for the top level hierarchy
+Info (12128): Elaborating entity "synchronizer" for hierarchy "synchronizer:sync" File: //Mac/Home/Documents/SensorBuchasV2/main_sm.tdf Line: 17
+Warning (287013): Variable or input pin "regs1_4" is defined but never used. File: //Mac/Home/Documents/SensorBuchasV2/synchronizer.tdf Line: 15
+Warning (287013): Variable or input pin "regs0_4" is defined but never used. File: //Mac/Home/Documents/SensorBuchasV2/synchronizer.tdf Line: 15
+Info (18000): Registers with preset signals will power-up high File: //Mac/Home/Documents/SensorBuchasV2/main_sm.tdf Line: 19
+Info (21057): Implemented 40 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 5 input pins
+    Info (21059): Implemented 4 output pins
+    Info (21061): Implemented 31 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
+    Info: Peak virtual memory: 4685 megabytes
+    Info: Processing ended: Sat Mar 27 10:46:04 2021
+    Info: Elapsed time: 00:00:12
+    Info: Total CPU time (on all processors): 00:00:19
+
+

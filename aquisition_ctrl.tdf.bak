@@ -1,0 +1,24 @@
+PARAMETERS
+(
+		active_period = 3,
+		period = 10,
+		samples = 3
+--		active_period = 68,
+--		period = 463,
+--		samples = 7200
+);
+
+
+
+ASSERT active_period < period
+	REPORT		"'active_period'(%) deve ser maior que 'period' (%)" active_period, period
+	SEVERITY	ERROR;
+
+CONSTANT MAX_VALUE = period-1;	
+CONSTANT N_BITS = LOG2(period);	
+
+subdesign aquisition_ctrl(
+)
+variable
+begin
+end;

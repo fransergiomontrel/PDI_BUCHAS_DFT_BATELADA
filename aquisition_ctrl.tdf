@@ -1,0 +1,151 @@
+PARAMETERS
+(
+		active_period = 6,
+		period = 40,
+		samples = 3
+--		active_period = 68,
+--		period = 463,
+--		samples = 7200
+);
+
+
+include "counter.inc";
+
+ASSERT active_period < period
+	REPORT		"'active_period'(%) deve ser maior que 'period' (%)" active_period, period
+	SEVERITY	ERROR;
+
+CONSTANT MAX_VALUE = period-1;	
+CONSTANT N_BITS = LOG2(period);	
+
+subdesign aquisition_ctrl(
+	clk: INPUT;				-- Clock principal
+	start: input;
+	reset: input;
+	
+	convst: output;
+	
+	serialize:output;
+	serialize_ok:input;
+	
+	store:output;
+	store_ok:input;
+	
+	running: output;
+
+	--
+	test_clock_counter[log2(period+1)-1..0]: output;
+	test_sm_state[2..0]: output;
+	test_samples_counter[log2(samples+1)-1..0]: output; 
+)
+variable
+	sm: MACHINE WITH STATES (WAITING_START_LOW, WAITING_START_HIGH, AQUISITIONING, SERIALIZING, STORING, WAITING_END_OF_CYCLE);
+	clock_counter: counter with (MAX_VALUE = period-1);
+	samples_counter: counter with (MAX_VALUE = samples);
+	convst_ff, serialize_ff, store_ff, running_ff: dff;
+begin
+	defaults
+		convst_ff.d = Gnd;
+		serialize_ff.d = Gnd;
+		store_ff.d = Gnd;
+		running_ff.d = Vcc;
+		
+		clock_counter.clr = Gnd;
+		clock_counter.inc = Vcc;
+
+		samples_counter.clr = Gnd;
+		samples_counter.inc = Gnd;
+end defaults;
+	
+	clock_counter.clk = clk;
+	clock_counter.reset = reset;
+
+	samples_counter.clk = clk;
+	samples_counter.reset = reset;
+	
+	convst_ff.clk = clk;
+	serialize_ff.clk = clk;
+	store_ff.clk = clk;
+	running_ff.clk = clk;
+
+	sm.clk = clk;
+	sm.reset = reset;
+	convst_ff.clrn = !reset;
+	serialize_ff.clrn = !reset;
+	store_ff.clrn = !reset;
+	running_ff.clrn = !reset;
+	
+	case sm is
+		when WAITING_START_LOW =>
+			test_sm_state[] = 0;
+			samples_counter.clr = Vcc;
+			clock_counter.clr = Vcc;	-- Contador parado enquanto não há start
+			running_ff.d = Gnd;
+			if !start then
+				sm = WAITING_START_HIGH;
+			end if;
+		when WAITING_START_HIGH =>
+			test_sm_state[] = 1;
+			samples_counter.clr = Vcc;
+			clock_counter.clr = Vcc;	-- Contador parado enquanto não há start
+			if start then
+				sm = AQUISITIONING;
+				convst_ff.d = Vcc;
+			else
+				running_ff.d = Gnd;
+			end if;
+
+		when AQUISITIONING =>
+			test_sm_state[] = 2;
+			clock_counter.inc = Vcc;
+			if clock_counter.o[] == active_period-1 then
+				sm = SERIALIZING;
+				serialize_ff.d = Vcc;
+			else
+				convst_ff.d = Vcc;
+			end if;
+			
+		when SERIALIZING =>
+			test_sm_state[] = 3;
+			if serialize_ok then
+				sm = STORING;
+				store_ff.d = Vcc;
+			else
+				serialize_ff.d = Vcc;
+			end if;
+		
+		when STORING =>
+			test_sm_state[] = 4;
+			if store_ok then
+				sm = WAITING_END_OF_CYCLE;
+				samples_counter.inc = Vcc;
+			else
+				store_ff.d = Vcc;
+			end if;
+			
+		when WAITING_END_OF_CYCLE =>
+			test_sm_state[] = 5;
+			
+			if samples_counter.o[] == samples then
+				sm = WAITING_START_LOW;
+				samples_counter.clr = Vcc; -- Zera o contador de amostras
+				clock_counter.clr = Vcc;	-- Reinicia o contador
+				running_ff.d = Gnd;
+			else
+				if clock_counter.o[] == period-1 then
+					sm = AQUISITIONING;
+					clock_counter.clr = Vcc;	-- Reinicia o contador
+					convst_ff.d = Vcc; -- Liga o convst
+				end if;
+			end if;
+	end case;
+	
+	convst = convst_ff.q;
+	serialize = serialize_ff.q;
+	store = store_ff.q;
+	running = running_ff.q;
+
+-- TESTES ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	test_clock_counter[] = clock_counter.o[];
+	test_samples_counter[] = samples_counter.o[];
+end;

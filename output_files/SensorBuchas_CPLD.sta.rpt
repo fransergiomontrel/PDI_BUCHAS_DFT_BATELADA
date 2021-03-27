@@ -1,0 +1,435 @@
+Timing Analyzer report for SensorBuchas_CPLD
+Sat Mar 27 10:46:11 2021
+Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Parallel Compilation
+  4. Clocks
+  5. Fmax Summary
+  6. Setup Summary
+  7. Hold Summary
+  8. Recovery Summary
+  9. Removal Summary
+ 10. Minimum Pulse Width Summary
+ 11. Setup: 'clk'
+ 12. Hold: 'clk'
+ 13. Setup Transfers
+ 14. Hold Transfers
+ 15. Report TCCS
+ 16. Report RSKM
+ 17. Unconstrained Paths Summary
+ 18. Clock Status Summary
+ 19. Unconstrained Input Ports
+ 20. Unconstrained Output Ports
+ 21. Unconstrained Input Ports
+ 22. Unconstrained Output Ports
+ 23. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++-----------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                     ;
++-----------------------+-----------------------------------------------------+
+; Quartus Prime Version ; Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
+; Timing Analyzer       ; Legacy Timing Analyzer                              ;
+; Revision Name         ; SensorBuchas_CPLD                                   ;
+; Device Family         ; MAX II                                              ;
+; Device Name           ; EPM1270T144C5                                       ;
+; Timing Models         ; Final                                               ;
+; Delay Model           ; Slow Model                                          ;
+; Rise/Fall Delays      ; Unavailable                                         ;
++-----------------------+-----------------------------------------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 2           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clocks                                                                                                                                                                          ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
+; Clock Name ; Type ; Period ; Frequency  ; Rise  ; Fall  ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
+; clk        ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { clk } ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
+
+
++--------------------------------------------------+
+; Fmax Summary                                     ;
++------------+-----------------+------------+------+
+; Fmax       ; Restricted Fmax ; Clock Name ; Note ;
++------------+-----------------+------------+------+
+; 157.33 MHz ; 157.33 MHz      ; clk        ;      ;
++------------+-----------------+------------+------+
+This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
+
+
++--------------------------------+
+; Setup Summary                  ;
++-------+--------+---------------+
+; Clock ; Slack  ; End Point TNS ;
++-------+--------+---------------+
+; clk   ; -5.356 ; -51.130       ;
++-------+--------+---------------+
+
+
++-------------------------------+
+; Hold Summary                  ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; clk   ; 1.396 ; 0.000         ;
++-------+-------+---------------+
+
+
+--------------------
+; Recovery Summary ;
+--------------------
+No paths to report.
+
+
+-------------------
+; Removal Summary ;
+-------------------
+No paths to report.
+
+
++--------------------------------+
+; Minimum Pulse Width Summary    ;
++-------+--------+---------------+
+; Clock ; Slack  ; End Point TNS ;
++-------+--------+---------------+
+; clk   ; -2.289 ; -2.289        ;
++-------+--------+---------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------+
+; Setup: 'clk'                                                                                                                               ;
++--------+------------------------------+------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                    ; To Node                      ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+------------------------------+------------------------------+--------------+-------------+--------------+------------+------------+
+; -5.356 ; synchronizer:sync|regs[1][3] ; sWait_Busy                   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.023      ;
+; -5.235 ; synchronizer:sync|regs[0][3] ; sWait_Busy                   ; clk          ; clk         ; 1.000        ; 0.000      ; 5.902      ;
+; -5.111 ; sConfiguration               ; sWait_Busy                   ; clk          ; clk         ; 1.000        ; 0.000      ; 5.778      ;
+; -4.865 ; synchronizer:sync|regs[0][3] ; sWait_mode_changed           ; clk          ; clk         ; 1.000        ; 0.000      ; 5.532      ;
+; -4.682 ; synchronizer:sync|regs[1][3] ; changing_ff                  ; clk          ; clk         ; 1.000        ; 0.000      ; 5.349      ;
+; -4.664 ; synchronizer:sync|regs[1][3] ; sWait_mode_changed           ; clk          ; clk         ; 1.000        ; 0.000      ; 5.331      ;
+; -4.642 ; sReadData                    ; sWait_Busy                   ; clk          ; clk         ; 1.000        ; 0.000      ; 5.309      ;
+; -4.594 ; sAquisition                  ; sWait_Busy                   ; clk          ; clk         ; 1.000        ; 0.000      ; 5.261      ;
+; -4.561 ; synchronizer:sync|regs[0][3] ; changing_ff                  ; clk          ; clk         ; 1.000        ; 0.000      ; 5.228      ;
+; -4.437 ; sConfiguration               ; changing_ff                  ; clk          ; clk         ; 1.000        ; 0.000      ; 5.104      ;
+; -4.296 ; synchronizer:sync|regs[1][3] ; ready_ff                     ; clk          ; clk         ; 1.000        ; 0.000      ; 4.963      ;
+; -4.281 ; synchronizer:sync|regs[0][3] ; ready_ff                     ; clk          ; clk         ; 1.000        ; 0.000      ; 4.948      ;
+; -4.272 ; sReadData                    ; sWait_mode_changed           ; clk          ; clk         ; 1.000        ; 0.000      ; 4.939      ;
+; -4.209 ; sReadData                    ; changing_ff                  ; clk          ; clk         ; 1.000        ; 0.000      ; 4.876      ;
+; -4.175 ; synchronizer:sync|regs[0][2] ; synchronizer:sync|regs[0][3] ; clk          ; clk         ; 1.000        ; 0.000      ; 4.842      ;
+; -4.175 ; synchronizer:sync|regs[0][2] ; synchronizer:sync|regs[1][3] ; clk          ; clk         ; 1.000        ; 0.000      ; 4.842      ;
+; -4.169 ; sAquisition                  ; changing_ff                  ; clk          ; clk         ; 1.000        ; 0.000      ; 4.836      ;
+; -3.922 ; sConfiguration               ; sWait_mode_changed           ; clk          ; clk         ; 1.000        ; 0.000      ; 4.589      ;
+; -3.902 ; sConfiguration               ; ready_ff                     ; clk          ; clk         ; 1.000        ; 0.000      ; 4.569      ;
+; -3.860 ; synchronizer:sync|regs[1][0] ; synchronizer:sync|regs[0][3] ; clk          ; clk         ; 1.000        ; 0.000      ; 4.527      ;
+; -3.860 ; synchronizer:sync|regs[1][0] ; synchronizer:sync|regs[1][3] ; clk          ; clk         ; 1.000        ; 0.000      ; 4.527      ;
+; -3.735 ; sReadData                    ; ready_ff                     ; clk          ; clk         ; 1.000        ; 0.000      ; 4.402      ;
+; -3.695 ; sAquisition                  ; ready_ff                     ; clk          ; clk         ; 1.000        ; 0.000      ; 4.362      ;
+; -3.691 ; synchronizer:sync|regs[1][1] ; synchronizer:sync|regs[0][3] ; clk          ; clk         ; 1.000        ; 0.000      ; 4.358      ;
+; -3.691 ; synchronizer:sync|regs[1][1] ; synchronizer:sync|regs[1][3] ; clk          ; clk         ; 1.000        ; 0.000      ; 4.358      ;
+; -3.637 ; synchronizer:sync|regs[0][0] ; synchronizer:sync|regs[0][3] ; clk          ; clk         ; 1.000        ; 0.000      ; 4.304      ;
+; -3.637 ; synchronizer:sync|regs[0][0] ; synchronizer:sync|regs[1][3] ; clk          ; clk         ; 1.000        ; 0.000      ; 4.304      ;
+; -3.634 ; sReadData                    ; sReadData                    ; clk          ; clk         ; 1.000        ; 0.000      ; 4.301      ;
+; -3.591 ; sWait_Busy                   ; sWait_Busy                   ; clk          ; clk         ; 1.000        ; 0.000      ; 4.258      ;
+; -3.500 ; sNone                        ; changing_ff                  ; clk          ; clk         ; 1.000        ; 0.000      ; 4.167      ;
+; -3.351 ; sAquisition                  ; sWait_mode_changed           ; clk          ; clk         ; 1.000        ; 0.000      ; 4.018      ;
+; -3.344 ; synchronizer:sync|regs[1][2] ; synchronizer:sync|regs[1][3] ; clk          ; clk         ; 1.000        ; 0.000      ; 4.011      ;
+; -3.341 ; synchronizer:sync|regs[0][3] ; sConfiguration               ; clk          ; clk         ; 1.000        ; 0.000      ; 4.008      ;
+; -3.336 ; synchronizer:sync|regs[0][3] ; sAquisition                  ; clk          ; clk         ; 1.000        ; 0.000      ; 4.003      ;
+; -3.334 ; synchronizer:sync|regs[0][3] ; sReadData                    ; clk          ; clk         ; 1.000        ; 0.000      ; 4.001      ;
+; -3.319 ; synchronizer:sync|regs[1][3] ; sConfiguration               ; clk          ; clk         ; 1.000        ; 0.000      ; 3.986      ;
+; -3.315 ; sNone                        ; ready_ff                     ; clk          ; clk         ; 1.000        ; 0.000      ; 3.982      ;
+; -3.227 ; sNone                        ; sWait_mode_changed           ; clk          ; clk         ; 1.000        ; 0.000      ; 3.894      ;
+; -3.203 ; sAquisition                  ; sAquisition                  ; clk          ; clk         ; 1.000        ; 0.000      ; 3.870      ;
+; -3.137 ; synchronizer:sync|regs[0][1] ; synchronizer:sync|regs[0][3] ; clk          ; clk         ; 1.000        ; 0.000      ; 3.804      ;
+; -3.137 ; synchronizer:sync|regs[0][1] ; synchronizer:sync|regs[1][3] ; clk          ; clk         ; 1.000        ; 0.000      ; 3.804      ;
+; -3.090 ; sNone                        ; sNone                        ; clk          ; clk         ; 1.000        ; 0.000      ; 3.757      ;
+; -3.017 ; synchronizer:sync|regs[0][3] ; sNone                        ; clk          ; clk         ; 1.000        ; 0.000      ; 3.684      ;
+; -2.917 ; sWait_Busy                   ; changing_ff                  ; clk          ; clk         ; 1.000        ; 0.000      ; 3.584      ;
+; -2.907 ; synchronizer:sync|regs[1][3] ; mode_out_ff[1]               ; clk          ; clk         ; 1.000        ; 0.000      ; 3.574      ;
+; -2.904 ; synchronizer:sync|regs[1][3] ; sNone                        ; clk          ; clk         ; 1.000        ; 0.000      ; 3.571      ;
+; -2.881 ; sRst                         ; sWait_mode_changed           ; clk          ; clk         ; 1.000        ; 0.000      ; 3.548      ;
+; -2.842 ; synchronizer:sync|regs[1][3] ; sAquisition                  ; clk          ; clk         ; 1.000        ; 0.000      ; 3.509      ;
+; -2.840 ; synchronizer:sync|regs[1][3] ; sReadData                    ; clk          ; clk         ; 1.000        ; 0.000      ; 3.507      ;
+; -2.765 ; sNone                        ; sWait_Busy                   ; clk          ; clk         ; 1.000        ; 0.000      ; 3.432      ;
+; -2.632 ; synchronizer:sync|regs[1][2] ; synchronizer:sync|regs[0][3] ; clk          ; clk         ; 1.000        ; 0.000      ; 3.299      ;
+; -2.345 ; synchronizer:sync|regs[0][3] ; mode_out_ff[0]               ; clk          ; clk         ; 1.000        ; 0.000      ; 3.012      ;
+; -2.239 ; sWait_mode_changed           ; mode_out_ff[0]               ; clk          ; clk         ; 1.000        ; 0.000      ; 2.906      ;
+; -2.239 ; sWait_mode_changed           ; mode_out_ff[1]               ; clk          ; clk         ; 1.000        ; 0.000      ; 2.906      ;
+; -2.200 ; sWait_mode_changed           ; sNone                        ; clk          ; clk         ; 1.000        ; 0.000      ; 2.867      ;
+; -2.118 ; sConfiguration               ; sConfiguration               ; clk          ; clk         ; 1.000        ; 0.000      ; 2.785      ;
+; -2.066 ; sWait_Busy                   ; sWait_mode_changed           ; clk          ; clk         ; 1.000        ; 0.000      ; 2.733      ;
+; -2.062 ; synchronizer:sync|regs[0][0] ; synchronizer:sync|regs[0][1] ; clk          ; clk         ; 1.000        ; 0.000      ; 2.729      ;
+; -1.933 ; sWait_mode_changed           ; sReadData                    ; clk          ; clk         ; 1.000        ; 0.000      ; 2.600      ;
+; -1.932 ; sWait_mode_changed           ; sAquisition                  ; clk          ; clk         ; 1.000        ; 0.000      ; 2.599      ;
+; -1.930 ; sWait_mode_changed           ; sConfiguration               ; clk          ; clk         ; 1.000        ; 0.000      ; 2.597      ;
+; -0.964 ; synchronizer:sync|regs[1][0] ; synchronizer:sync|regs[1][1] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.631      ;
+; -0.952 ; synchronizer:sync|regs[0][1] ; synchronizer:sync|regs[0][2] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.619      ;
+; -0.950 ; synchronizer:sync|regs[1][1] ; synchronizer:sync|regs[1][2] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.617      ;
++--------+------------------------------+------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Hold: 'clk'                                                                                                                               ;
++-------+------------------------------+------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                    ; To Node                      ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+------------------------------+------------------------------+--------------+-------------+--------------+------------+------------+
+; 1.396 ; synchronizer:sync|regs[1][1] ; synchronizer:sync|regs[1][2] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.617      ;
+; 1.398 ; synchronizer:sync|regs[0][1] ; synchronizer:sync|regs[0][2] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.619      ;
+; 1.410 ; synchronizer:sync|regs[1][0] ; synchronizer:sync|regs[1][1] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.631      ;
+; 2.376 ; sWait_mode_changed           ; sConfiguration               ; clk          ; clk         ; 0.000        ; 0.000      ; 2.597      ;
+; 2.378 ; sWait_mode_changed           ; sAquisition                  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.599      ;
+; 2.379 ; sWait_mode_changed           ; sReadData                    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.600      ;
+; 2.461 ; synchronizer:sync|regs[0][2] ; synchronizer:sync|regs[0][3] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.682      ;
+; 2.508 ; synchronizer:sync|regs[0][0] ; synchronizer:sync|regs[0][1] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.729      ;
+; 2.512 ; sWait_Busy                   ; sWait_mode_changed           ; clk          ; clk         ; 0.000        ; 0.000      ; 2.733      ;
+; 2.537 ; sNone                        ; changing_ff                  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.758      ;
+; 2.564 ; sConfiguration               ; sConfiguration               ; clk          ; clk         ; 0.000        ; 0.000      ; 2.785      ;
+; 2.646 ; sWait_mode_changed           ; sNone                        ; clk          ; clk         ; 0.000        ; 0.000      ; 2.867      ;
+; 2.685 ; sWait_mode_changed           ; mode_out_ff[0]               ; clk          ; clk         ; 0.000        ; 0.000      ; 2.906      ;
+; 2.685 ; sWait_mode_changed           ; mode_out_ff[1]               ; clk          ; clk         ; 0.000        ; 0.000      ; 2.906      ;
+; 2.791 ; synchronizer:sync|regs[0][3] ; mode_out_ff[0]               ; clk          ; clk         ; 0.000        ; 0.000      ; 3.012      ;
+; 3.078 ; synchronizer:sync|regs[1][2] ; synchronizer:sync|regs[0][3] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.299      ;
+; 3.078 ; synchronizer:sync|regs[1][2] ; synchronizer:sync|regs[1][3] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.299      ;
+; 3.211 ; sNone                        ; sWait_Busy                   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.432      ;
+; 3.286 ; synchronizer:sync|regs[1][3] ; sReadData                    ; clk          ; clk         ; 0.000        ; 0.000      ; 3.507      ;
+; 3.288 ; synchronizer:sync|regs[1][3] ; sAquisition                  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.509      ;
+; 3.327 ; sRst                         ; sWait_mode_changed           ; clk          ; clk         ; 0.000        ; 0.000      ; 3.548      ;
+; 3.350 ; synchronizer:sync|regs[1][3] ; sNone                        ; clk          ; clk         ; 0.000        ; 0.000      ; 3.571      ;
+; 3.353 ; synchronizer:sync|regs[1][3] ; mode_out_ff[1]               ; clk          ; clk         ; 0.000        ; 0.000      ; 3.574      ;
+; 3.363 ; sWait_Busy                   ; changing_ff                  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.584      ;
+; 3.463 ; synchronizer:sync|regs[0][3] ; sNone                        ; clk          ; clk         ; 0.000        ; 0.000      ; 3.684      ;
+; 3.492 ; synchronizer:sync|regs[0][3] ; sWait_mode_changed           ; clk          ; clk         ; 0.000        ; 0.000      ; 3.713      ;
+; 3.536 ; sNone                        ; sNone                        ; clk          ; clk         ; 0.000        ; 0.000      ; 3.757      ;
+; 3.583 ; synchronizer:sync|regs[0][1] ; synchronizer:sync|regs[0][3] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.804      ;
+; 3.583 ; synchronizer:sync|regs[0][1] ; synchronizer:sync|regs[1][3] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.804      ;
+; 3.625 ; synchronizer:sync|regs[0][3] ; changing_ff                  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.846      ;
+; 3.649 ; sAquisition                  ; sAquisition                  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.870      ;
+; 3.673 ; sNone                        ; sWait_mode_changed           ; clk          ; clk         ; 0.000        ; 0.000      ; 3.894      ;
+; 3.761 ; sNone                        ; ready_ff                     ; clk          ; clk         ; 0.000        ; 0.000      ; 3.982      ;
+; 3.765 ; synchronizer:sync|regs[1][3] ; sConfiguration               ; clk          ; clk         ; 0.000        ; 0.000      ; 3.986      ;
+; 3.780 ; synchronizer:sync|regs[0][3] ; sReadData                    ; clk          ; clk         ; 0.000        ; 0.000      ; 4.001      ;
+; 3.782 ; synchronizer:sync|regs[0][3] ; sAquisition                  ; clk          ; clk         ; 0.000        ; 0.000      ; 4.003      ;
+; 3.787 ; synchronizer:sync|regs[0][3] ; sConfiguration               ; clk          ; clk         ; 0.000        ; 0.000      ; 4.008      ;
+; 3.797 ; sAquisition                  ; sWait_mode_changed           ; clk          ; clk         ; 0.000        ; 0.000      ; 4.018      ;
+; 3.905 ; synchronizer:sync|regs[1][3] ; changing_ff                  ; clk          ; clk         ; 0.000        ; 0.000      ; 4.126      ;
+; 4.028 ; synchronizer:sync|regs[1][3] ; sWait_mode_changed           ; clk          ; clk         ; 0.000        ; 0.000      ; 4.249      ;
+; 4.037 ; sWait_Busy                   ; sWait_Busy                   ; clk          ; clk         ; 0.000        ; 0.000      ; 4.258      ;
+; 4.080 ; sReadData                    ; sReadData                    ; clk          ; clk         ; 0.000        ; 0.000      ; 4.301      ;
+; 4.083 ; synchronizer:sync|regs[0][0] ; synchronizer:sync|regs[0][3] ; clk          ; clk         ; 0.000        ; 0.000      ; 4.304      ;
+; 4.083 ; synchronizer:sync|regs[0][0] ; synchronizer:sync|regs[1][3] ; clk          ; clk         ; 0.000        ; 0.000      ; 4.304      ;
+; 4.137 ; synchronizer:sync|regs[1][1] ; synchronizer:sync|regs[0][3] ; clk          ; clk         ; 0.000        ; 0.000      ; 4.358      ;
+; 4.137 ; synchronizer:sync|regs[1][1] ; synchronizer:sync|regs[1][3] ; clk          ; clk         ; 0.000        ; 0.000      ; 4.358      ;
+; 4.141 ; sAquisition                  ; ready_ff                     ; clk          ; clk         ; 0.000        ; 0.000      ; 4.362      ;
+; 4.181 ; sReadData                    ; ready_ff                     ; clk          ; clk         ; 0.000        ; 0.000      ; 4.402      ;
+; 4.281 ; synchronizer:sync|regs[1][3] ; ready_ff                     ; clk          ; clk         ; 0.000        ; 0.000      ; 4.502      ;
+; 4.299 ; synchronizer:sync|regs[0][3] ; sWait_Busy                   ; clk          ; clk         ; 0.000        ; 0.000      ; 4.520      ;
+; 4.306 ; synchronizer:sync|regs[1][0] ; synchronizer:sync|regs[0][3] ; clk          ; clk         ; 0.000        ; 0.000      ; 4.527      ;
+; 4.306 ; synchronizer:sync|regs[1][0] ; synchronizer:sync|regs[1][3] ; clk          ; clk         ; 0.000        ; 0.000      ; 4.527      ;
+; 4.348 ; sConfiguration               ; ready_ff                     ; clk          ; clk         ; 0.000        ; 0.000      ; 4.569      ;
+; 4.366 ; sAquisition                  ; changing_ff                  ; clk          ; clk         ; 0.000        ; 0.000      ; 4.587      ;
+; 4.368 ; sConfiguration               ; sWait_mode_changed           ; clk          ; clk         ; 0.000        ; 0.000      ; 4.589      ;
+; 4.414 ; sReadData                    ; changing_ff                  ; clk          ; clk         ; 0.000        ; 0.000      ; 4.635      ;
+; 4.500 ; synchronizer:sync|regs[0][3] ; ready_ff                     ; clk          ; clk         ; 0.000        ; 0.000      ; 4.721      ;
+; 4.533 ; sConfiguration               ; changing_ff                  ; clk          ; clk         ; 0.000        ; 0.000      ; 4.754      ;
+; 4.579 ; synchronizer:sync|regs[1][3] ; sWait_Busy                   ; clk          ; clk         ; 0.000        ; 0.000      ; 4.800      ;
+; 4.621 ; synchronizer:sync|regs[0][2] ; synchronizer:sync|regs[1][3] ; clk          ; clk         ; 0.000        ; 0.000      ; 4.842      ;
+; 4.718 ; sReadData                    ; sWait_mode_changed           ; clk          ; clk         ; 0.000        ; 0.000      ; 4.939      ;
+; 5.040 ; sAquisition                  ; sWait_Busy                   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.261      ;
+; 5.088 ; sReadData                    ; sWait_Busy                   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.309      ;
+; 5.557 ; sConfiguration               ; sWait_Busy                   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.778      ;
++-------+------------------------------+------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++-------------------------------------------------------------------+
+; Setup Transfers                                                   ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; clk        ; clk      ; 94       ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++-------------------------------------------------------------------+
+; Hold Transfers                                                    ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; clk        ; clk      ; 94       ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
+---------------
+; Report TCCS ;
+---------------
+No dedicated SERDES Transmitter circuitry present in device or used in design
+
+
+---------------
+; Report RSKM ;
+---------------
+No non-DPA dedicated SERDES Receiver circuitry present in device or used in design
+
+
++------------------------------------------------+
+; Unconstrained Paths Summary                    ;
++---------------------------------+-------+------+
+; Property                        ; Setup ; Hold ;
++---------------------------------+-------+------+
+; Illegal Clocks                  ; 0     ; 0    ;
+; Unconstrained Clocks            ; 0     ; 0    ;
+; Unconstrained Input Ports       ; 4     ; 4    ;
+; Unconstrained Input Port Paths  ; 14    ; 14   ;
+; Unconstrained Output Ports      ; 4     ; 4    ;
+; Unconstrained Output Port Paths ; 4     ; 4    ;
++---------------------------------+-------+------+
+
+
++-------------------------------------+
+; Clock Status Summary                ;
++--------+-------+------+-------------+
+; Target ; Clock ; Type ; Status      ;
++--------+-------+------+-------------+
+; clk    ; clk   ; Base ; Constrained ;
++--------+-------+------+-------------+
+
+
++---------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                         ;
++------------+--------------------------------------------------------------------------------------+
+; Input Port ; Comment                                                                              ;
++------------+--------------------------------------------------------------------------------------+
+; busy       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; mode_in[0] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; mode_in[1] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; reset      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++------------+--------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                          ;
++-------------+---------------------------------------------------------------------------------------+
+; Output Port ; Comment                                                                               ;
++-------------+---------------------------------------------------------------------------------------+
+; changing    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; mode_out[0] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; mode_out[1] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ready       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------+---------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                         ;
++------------+--------------------------------------------------------------------------------------+
+; Input Port ; Comment                                                                              ;
++------------+--------------------------------------------------------------------------------------+
+; busy       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; mode_in[0] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; mode_in[1] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; reset      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++------------+--------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                          ;
++-------------+---------------------------------------------------------------------------------------+
+; Output Port ; Comment                                                                               ;
++-------------+---------------------------------------------------------------------------------------+
+; changing    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; mode_out[0] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; mode_out[1] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ready       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------+---------------------------------------------------------------------------------------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+    Info: Processing started: Sat Mar 27 10:46:10 2021
+Info: Command: quartus_sta SensorBuchas_CPLD -c SensorBuchas_CPLD
+Info: qsta_default_script.tcl version: #1
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (21077): Low junction temperature is 0 degrees C
+Info (21077): High junction temperature is 85 degrees C
+Info (334003): Started post-fitting delay annotation
+Info (334004): Delay annotation completed successfully
+Critical Warning (332012): Synopsys Design Constraints File file not found: 'SensorBuchas_CPLD.sdc'. A Synopsys Design Constraints File is required by the Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
+Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
+Info (332105): Deriving Clocks
+    Info (332105): create_clock -period 1.000 -name clk clk
+Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
+Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
+Critical Warning (332148): Timing requirements not met
+Info (332146): Worst-case setup slack is -5.356
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    -5.356             -51.130 clk 
+Info (332146): Worst-case hold slack is 1.396
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     1.396               0.000 clk 
+Info (332140): No Recovery paths to report
+Info (332140): No Removal paths to report
+Info (332146): Worst-case minimum pulse width slack is -2.289
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    -2.289              -2.289 clk 
+Info (332001): The selected device family is not supported by the report_metastability command.
+Info (332102): Design is not fully constrained for setup requirements
+Info (332102): Design is not fully constrained for hold requirements
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 3 warnings
+    Info: Peak virtual memory: 4654 megabytes
+    Info: Processing ended: Sat Mar 27 10:46:11 2021
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
+
+

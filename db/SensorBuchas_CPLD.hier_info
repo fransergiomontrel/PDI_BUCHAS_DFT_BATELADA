@@ -1,0 +1,43 @@
+|main_sm
+clk => synchronizer:sync.clk
+clk => changing_ff.CLK
+clk => ready_ff.CLK
+clk => mode_out_ff[1].CLK
+clk => mode_out_ff[0].CLK
+clk => sm.IN1
+mode_in[0] => synchronizer:sync.i[0]
+mode_in[1] => synchronizer:sync.i[1]
+reset => ready_ff.IN0
+reset => changing_ff.IN0
+reset => sm.IN1
+busy => _.IN1
+busy => _.IN0
+busy => _.IN1
+busy => _.IN0
+busy => _.IN1
+busy => _.IN0
+busy => _.IN1
+busy => _.IN0
+busy => _.IN1
+busy => _.IN0
+mode_out[0] <= mode_out_ff[0].DB_MAX_OUTPUT_PORT_TYPE
+mode_out[1] <= mode_out_ff[1].DB_MAX_OUTPUT_PORT_TYPE
+ready <= ready_ff.DB_MAX_OUTPUT_PORT_TYPE
+changing <= changing_ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main_sm|synchronizer:sync
+clk => regs[1][3].CLK
+clk => regs[1][2].CLK
+clk => regs[1][1].CLK
+clk => regs[1][0].CLK
+clk => regs[0][3].CLK
+clk => regs[0][2].CLK
+clk => regs[0][1].CLK
+clk => regs[0][0].CLK
+i[0] => regs[0][0].DATAIN
+i[1] => regs[1][0].DATAIN
+o[0] <= regs[0][3].DB_MAX_OUTPUT_PORT_TYPE
+o[1] <= regs[1][3].DB_MAX_OUTPUT_PORT_TYPE
+
+

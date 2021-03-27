@@ -1,0 +1,37 @@
+PARAMETERS
+(
+	conversion_period = 9
+);
+
+
+subdesign conversion_ctrl
+(
+	start: INPUT;			-- Início do processo de aquisição
+	clk: INPUT;				-- Clock principal
+	resetn: INPUT;			-- reset do módulo
+--	ADC_convst: OUTPUT;	-- Pino enviado aos ADCs solicitando o processo de conversão
+	running: OUTPUT;		-- Esta saída indica que o processo de aquisição está em andamento
+	
+	out[9..0]: OUTPUT; 
+)
+variable
+	counter[9..0]: dff;	-- Contador que gerencia a temporização
+	run: dff;				-- Este FF indica que o processo de aquisição está em andamento
+
+begin
+	run.clk = clk;
+	run.d = start or run.q;	-- Fica bloqueado até concluir a aquisição
+	run.clrn = resetn;
+	
+	counter[].clk = clk;
+	if counter[].q == conversion_period then
+		counter[].d = 0;
+	else
+		counter[].d = counter[].q + 1;
+	end if;
+	counter[].clrn = resetn and run.q;		-- O contador é liberado quando não há sinal de reset e run está ativo
+	
+	running = run.q;
+	out[] = counter[].q;
+end;
+

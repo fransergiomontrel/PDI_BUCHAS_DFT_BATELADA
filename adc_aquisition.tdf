@@ -1,0 +1,80 @@
+
+PARAMETERS
+(
+		active_period = 3,
+		period = 10,
+		samples = 3
+--		active_period = 68,
+--		period = 463,
+--		samples = 7200
+);
+
+
+
+ASSERT active_period < period
+	REPORT		"'active_period'(%) deve ser maior que 'period' (%)" active_period, period
+	SEVERITY	ERROR;
+
+CONSTANT MAX_VALUE = period-1;	
+CONSTANT N_BITS = LOG2(period);	
+
+subdesign adc_aquisition
+(
+	start: input;			-- Início do processo de aquisição
+	clk: input;				-- Clock principal
+	reset: input;			-- reset do módulo
+	
+	convst: output;
+	running: output;		-- Esta saída indica que o processo de aquisição está em andamento
+	out[N_BITS-1..0]: output;
+
+	test_count[N_BITS..0]: output;	-- Contador que gerencia a temporização
+	test_samples_counter_ff[3..0]: output;
+)
+variable
+	counter[N_BITS-1..0]: dff;	-- Contador que gerencia a temporização
+	run: dff;				-- Este FF indica que o processo de aquisição está em andamento
+	convst_ff: dff;
+	samples_counter_ff[3..0]:dffe;
+
+	test_count_ff[N_BITS..0]: dff;	-- Contador que gerencia a temporização
+
+begin
+	defaults
+		samples_counter_ff[].ena = gnd;
+	end defaults;
+
+
+	run.clk = clk;
+	run.clrn = !reset;
+	run.d = (start or run.q) and (samples_counter_ff[] != samples);	-- Fica bloqueado até concluir a aquisição
+	
+	convst_ff.clk = clk;
+	convst_ff.d = (counter[] != 0 and counter[] <= active_period);
+	
+	samples_counter_ff[].clk = clk;
+	samples_counter_ff[].clrn = !reset and run.q;
+	samples_counter_ff[].d = samples_counter_ff[].q+1;
+	
+	counter[].clk = clk;
+	if counter[].q == MAX_VALUE then
+		counter[].d = 0;
+		samples_counter_ff[].ena = vcc;
+	else
+		counter[].d = counter[].q + 1;
+	end if;
+	counter[].clrn = !reset and run.q;		-- O contador é liberado quando não há sinal de reset e run está ativo
+	
+	running = run.q;
+	out[] = counter[].q;
+	convst = convst_ff.q;
+
+	test_count_ff[] = test_count_ff[]+1;
+	test_count[] = test_count_ff[];
+	test_count_ff[].clk = clk;
+	test_samples_counter_ff[] = samples_counter_ff;
+	
+end;
+
+
+-- CONSTANT __constant_name = __constant_value;
