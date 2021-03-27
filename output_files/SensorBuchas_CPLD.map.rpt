@@ -1,5 +1,5 @@
 Analysis & Synthesis report for SensorBuchas_CPLD
-Sat Mar 27 11:53:40 2021
+Sat Mar 27 17:27:17 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -13,11 +13,14 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |main_sm|sm
-  9. General Register Statistics
- 10. Inverted Register Statistics
- 11. Parameter Settings for User Entity Instance: synchronizer:sync
- 12. Analysis & Synthesis Messages
+  8. State Machine - |aquisition_module|aquisition_ctrl:inst|sm
+  9. Registers Removed During Synthesis
+ 10. General Register Statistics
+ 11. Parameter Settings for User Entity Instance: aquisition_ctrl:inst
+ 12. Parameter Settings for User Entity Instance: aquisition_ctrl:inst|counter:clock_counter
+ 13. Parameter Settings for User Entity Instance: aquisition_ctrl:inst|counter:samples_counter
+ 14. Parameter Settings for User Entity Instance: aquisition_serializer:inst1|counter:count
+ 15. Analysis & Synthesis Messages
 
 
 
@@ -44,13 +47,13 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Sat Mar 27 11:53:40 2021       ;
+; Analysis & Synthesis Status ; Successful - Sat Mar 27 17:27:17 2021       ;
 ; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name               ; SensorBuchas_CPLD                           ;
-; Top-level Entity Name       ; main_sm                                     ;
+; Top-level Entity Name       ; aquisition_module                           ;
 ; Family                      ; MAX II                                      ;
-; Total logic elements        ; 31                                          ;
-; Total pins                  ; 9                                           ;
+; Total logic elements        ; 40                                          ;
+; Total pins                  ; 7                                           ;
 ; Total virtual pins          ; 0                                           ;
 ; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
 +-----------------------------+---------------------------------------------+
@@ -62,7 +65,7 @@ https://fpgasoftware.intel.com/eula.
 ; Option                                                           ; Setting            ; Default Value      ;
 +------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                           ; EPM1270T144C5      ;                    ;
-; Top-level entity name                                            ; main_sm            ; SensorBuchas_CPLD  ;
+; Top-level entity name                                            ; aquisition_module  ; SensorBuchas_CPLD  ;
 ; Family name                                                      ; MAX II             ; Cyclone V          ;
 ; Use smart compilation                                            ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
@@ -143,16 +146,17 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                              ;
-+----------------------------------+-----------------+------------------------+-------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                ; Library ;
-+----------------------------------+-----------------+------------------------+-------------------------------------------------------------+---------+
-; main_sm.tdf                      ; yes             ; User AHDL File         ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/main_sm.tdf      ;         ;
-; modes.inc                        ; yes             ; User Unspecified File  ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/modes.inc        ;         ;
-; synchronizer.tdf                 ; yes             ; User AHDL File         ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/synchronizer.tdf ;         ;
-; synchronizer.inc                 ; yes             ; Auto-Found AHDL File   ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/synchronizer.inc ;         ;
-+----------------------------------+-----------------+------------------------+-------------------------------------------------------------+---------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                   ;
++----------------------------------+-----------------+------------------------------------+----------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                         ; Library ;
++----------------------------------+-----------------+------------------------------------+----------------------------------------------------------------------+---------+
+; aquisition_ctrl.tdf              ; yes             ; User AHDL File                     ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/aquisition_ctrl.tdf       ;         ;
+; counter.tdf                      ; yes             ; User AHDL File                     ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.tdf               ;         ;
+; aquisition_serializer.tdf        ; yes             ; User AHDL File                     ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/aquisition_serializer.tdf ;         ;
+; aquisition_module.bdf            ; yes             ; User Block Diagram/Schematic File  ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/aquisition_module.bdf     ;         ;
+; counter.inc                      ; yes             ; Auto-Found AHDL File               ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.inc               ;         ;
++----------------------------------+-----------------+------------------------------------+----------------------------------------------------------------------+---------+
 
 
 +-----------------------------------------------------+
@@ -160,60 +164,76 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Total logic elements                        ; 31    ;
-;     -- Combinational with no register       ; 12    ;
-;     -- Register only                        ; 10    ;
-;     -- Combinational with a register        ; 9     ;
+; Total logic elements                        ; 40    ;
+;     -- Combinational with no register       ; 17    ;
+;     -- Register only                        ; 2     ;
+;     -- Combinational with a register        ; 21    ;
 ;                                             ;       ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 12    ;
-;     -- 3 input functions                    ; 4     ;
-;     -- 2 input functions                    ; 3     ;
-;     -- 1 input functions                    ; 1     ;
-;     -- 0 input functions                    ; 1     ;
+;     -- 4 input functions                    ; 16    ;
+;     -- 3 input functions                    ; 9     ;
+;     -- 2 input functions                    ; 13    ;
+;     -- 1 input functions                    ; 0     ;
+;     -- 0 input functions                    ; 0     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 31    ;
-;     -- arithmetic mode                      ; 0     ;
+;     -- normal mode                          ; 33    ;
+;     -- arithmetic mode                      ; 7     ;
 ;     -- qfbk mode                            ; 0     ;
 ;     -- register cascade mode                ; 0     ;
-;     -- synchronous clear/load mode          ; 0     ;
-;     -- asynchronous clear/load mode         ; 9     ;
+;     -- synchronous clear/load mode          ; 5     ;
+;     -- asynchronous clear/load mode         ; 22    ;
 ;                                             ;       ;
-; Total registers                             ; 19    ;
-; I/O pins                                    ; 9     ;
+; Total registers                             ; 23    ;
+; Total logic cells in carry chains           ; 9     ;
+; I/O pins                                    ; 7     ;
 ; Maximum fan-out node                        ; clk   ;
-; Maximum fan-out                             ; 19    ;
-; Total fan-out                               ; 119   ;
-; Average fan-out                             ; 2.98  ;
+; Maximum fan-out                             ; 23    ;
+; Total fan-out                               ; 172   ;
+; Average fan-out                             ; 3.66  ;
 +---------------------------------------------+-------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                        ;
-+----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------+--------------+--------------+
-; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name        ; Entity Name  ; Library Name ;
-+----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------+--------------+--------------+
-; |main_sm                   ; 31 (21)     ; 19           ; 0          ; 9    ; 0            ; 12 (10)      ; 10 (2)            ; 9 (9)            ; 0 (0)           ; 0 (0)      ; |main_sm                   ; main_sm      ; work         ;
-;    |synchronizer:sync|     ; 10 (10)     ; 8            ; 0          ; 0    ; 0            ; 2 (2)        ; 8 (8)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |main_sm|synchronizer:sync ; synchronizer ; work         ;
-+----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------+--------------+--------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                            ;
++----------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------+-----------------------+--------------+
+; Compilation Hierarchy Node       ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                             ; Entity Name           ; Library Name ;
++----------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------+-----------------------+--------------+
+; |aquisition_module               ; 40 (0)      ; 23           ; 0          ; 7    ; 0            ; 17 (0)       ; 2 (0)             ; 21 (0)           ; 9 (0)           ; 0 (0)      ; |aquisition_module                                              ; aquisition_module     ; work         ;
+;    |aquisition_ctrl:inst|        ; 26 (15)     ; 17           ; 0          ; 0    ; 0            ; 9 (6)        ; 2 (2)             ; 15 (7)           ; 5 (0)           ; 0 (0)      ; |aquisition_module|aquisition_ctrl:inst                         ; aquisition_ctrl       ; work         ;
+;       |counter:clock_counter|    ; 8 (8)       ; 6            ; 0          ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 6 (6)            ; 5 (5)           ; 0 (0)      ; |aquisition_module|aquisition_ctrl:inst|counter:clock_counter   ; counter               ; work         ;
+;       |counter:samples_counter|  ; 3 (3)       ; 2            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 2 (2)            ; 0 (0)           ; 0 (0)      ; |aquisition_module|aquisition_ctrl:inst|counter:samples_counter ; counter               ; work         ;
+;    |aquisition_serializer:inst1| ; 14 (1)      ; 6            ; 0          ; 0    ; 0            ; 8 (0)        ; 0 (0)             ; 6 (1)            ; 4 (0)           ; 0 (0)      ; |aquisition_module|aquisition_serializer:inst1                  ; aquisition_serializer ; work         ;
+;       |counter:count|            ; 13 (13)     ; 5            ; 0          ; 0    ; 0            ; 8 (8)        ; 0 (0)             ; 5 (5)            ; 4 (4)           ; 0 (0)      ; |aquisition_module|aquisition_serializer:inst1|counter:count    ; counter               ; work         ;
++----------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------+-----------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
 Encoding Type:  One-Hot
-+----------------------------------------------------------------------------------------------------------------+
-; State Machine - |main_sm|sm                                                                                    ;
-+--------------------+-----------+-------------+----------------+-------+--------------------+------------+------+
-; Name               ; sReadData ; sAquisition ; sConfiguration ; sNone ; sWait_mode_changed ; sWait_Busy ; sRst ;
-+--------------------+-----------+-------------+----------------+-------+--------------------+------------+------+
-; sRst               ; 0         ; 0           ; 0              ; 0     ; 0                  ; 0          ; 0    ;
-; sWait_Busy         ; 0         ; 0           ; 0              ; 0     ; 0                  ; 1          ; 1    ;
-; sWait_mode_changed ; 0         ; 0           ; 0              ; 0     ; 1                  ; 0          ; 1    ;
-; sNone              ; 0         ; 0           ; 0              ; 1     ; 0                  ; 0          ; 1    ;
-; sConfiguration     ; 0         ; 0           ; 1              ; 0     ; 0                  ; 0          ; 1    ;
-; sAquisition        ; 0         ; 1           ; 0              ; 0     ; 0                  ; 0          ; 1    ;
-; sReadData          ; 1         ; 0           ; 0              ; 0     ; 0                  ; 0          ; 1    ;
-+--------------------+-----------+-------------+----------------+-------+--------------------+------------+------+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |aquisition_module|aquisition_ctrl:inst|sm                                                                                ;
++----------------------+----------------------+---------+-------------+------------+---------------+--------------------+-------------------+
+; Name                 ; WAITING_END_OF_CYCLE ; STORING ; SERIALIZING ; WAIT_STATE ; AQUISITIONING ; WAITING_START_HIGH ; WAITING_START_LOW ;
++----------------------+----------------------+---------+-------------+------------+---------------+--------------------+-------------------+
+; WAITING_START_LOW    ; 0                    ; 0       ; 0           ; 0          ; 0             ; 0                  ; 0                 ;
+; WAITING_START_HIGH   ; 0                    ; 0       ; 0           ; 0          ; 0             ; 1                  ; 1                 ;
+; AQUISITIONING        ; 0                    ; 0       ; 0           ; 0          ; 1             ; 0                  ; 1                 ;
+; WAIT_STATE           ; 0                    ; 0       ; 0           ; 1          ; 0             ; 0                  ; 1                 ;
+; SERIALIZING          ; 0                    ; 0       ; 1           ; 0          ; 0             ; 0                  ; 1                 ;
+; STORING              ; 0                    ; 1       ; 0           ; 0          ; 0             ; 0                  ; 1                 ;
+; WAITING_END_OF_CYCLE ; 1                    ; 0       ; 0           ; 0          ; 0             ; 0                  ; 1                 ;
++----------------------+----------------------+---------+-------------+------------+---------------+--------------------+-------------------+
+
+
++--------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                   ;
++---------------------------------------+----------------------------------------------+
+; Register name                         ; Reason for Removal                           ;
++---------------------------------------+----------------------------------------------+
+; aquisition_ctrl:inst|serialize_ff     ; Merged with aquisition_ctrl:inst|SERIALIZING ;
+; aquisition_ctrl:inst|store_ff         ; Merged with aquisition_ctrl:inst|STORING     ;
+; Total Number of Removed Registers = 2 ;                                              ;
++---------------------------------------+----------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -221,33 +241,55 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 19    ;
-; Number of registers using Synchronous Clear  ; 0     ;
+; Total registers                              ; 23    ;
+; Number of registers using Synchronous Clear  ; 5     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 9     ;
+; Number of registers using Asynchronous Clear ; 22    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 10    ;
+; Number of registers using Clock Enable       ; 0     ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+--------------------------------------------------+
-; Inverted Register Statistics                     ;
-+----------------------------------------+---------+
-; Inverted Register                      ; Fan out ;
-+----------------------------------------+---------+
-; changing_ff                            ; 1       ;
-; Total number of inverted registers = 1 ;         ;
-+----------------------------------------+---------+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: aquisition_ctrl:inst ;
++----------------+-------+------------------------------------------+
+; Parameter Name ; Value ; Type                                     ;
++----------------+-------+------------------------------------------+
+; active_period  ; 6     ; Untyped                                  ;
+; period         ; 40    ; Untyped                                  ;
+; samples        ; 3     ; Untyped                                  ;
++----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+----------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: synchronizer:sync ;
-+----------------+-------+---------------------------------------+
-; Parameter Name ; Value ; Type                                  ;
-+----------------+-------+---------------------------------------+
-; bus_size       ; 2     ; Untyped                               ;
-+----------------+-------+---------------------------------------+
++-----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: aquisition_ctrl:inst|counter:clock_counter ;
++----------------+-------+----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                           ;
++----------------+-------+----------------------------------------------------------------+
+; MAX_VALUE      ; 39    ; Untyped                                                        ;
++----------------+-------+----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: aquisition_ctrl:inst|counter:samples_counter ;
++----------------+-------+------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                             ;
++----------------+-------+------------------------------------------------------------------+
+; MAX_VALUE      ; 3     ; Untyped                                                          ;
++----------------+-------+------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: aquisition_serializer:inst1|counter:count ;
++----------------+-------+---------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                          ;
++----------------+-------+---------------------------------------------------------------+
+; MAX_VALUE      ; 16    ; Untyped                                                       ;
++----------------+-------+---------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -257,7 +299,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Sat Mar 27 11:53:27 2021
+    Info: Processing started: Sat Mar 27 17:27:04 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off SensorBuchas_CPLD -c SensorBuchas_CPLD
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -267,24 +309,41 @@ Info (12021): Found 1 design units, including 1 entities, in source file sensorb
     Info (12023): Found entity 1: SensorBuchas_CPLD
 Info (12021): Found 1 design units, including 1 entities, in source file single_pulse.tdf
     Info (12023): Found entity 1: single_pulse File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/single_pulse.tdf Line: 3
-Info (12021): Found 1 design units, including 1 entities, in source file main_sm.tdf
-    Info (12023): Found entity 1: main_sm File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/main_sm.tdf Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file synchronizer.tdf
     Info (12023): Found entity 1: synchronizer File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/synchronizer.tdf Line: 7
 Info (12021): Found 1 design units, including 1 entities, in source file aquisition_ctrl.tdf
     Info (12023): Found entity 1: aquisition_ctrl File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/aquisition_ctrl.tdf Line: 21
 Info (12021): Found 1 design units, including 1 entities, in source file counter.tdf
     Info (12023): Found entity 1: counter File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.tdf Line: 8
-Info (12127): Elaborating entity "main_sm" for the top level hierarchy
-Info (12128): Elaborating entity "synchronizer" for hierarchy "synchronizer:sync" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/main_sm.tdf Line: 17
-Info (18000): Registers with preset signals will power-up high File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/main_sm.tdf Line: 19
-Info (21057): Implemented 40 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 5 input pins
+Info (12021): Found 1 design units, including 1 entities, in source file mode_selector.tdf
+    Info (12023): Found entity 1: mode_selector File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/mode_selector.tdf Line: 4
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.inc Line: 26
+Info (12021): Found 1 design units, including 1 entities, in source file aquisition_serializer.tdf
+    Info (12023): Found entity 1: aquisition_serializer File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/aquisition_serializer.tdf Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file aquisition_module.bdf
+    Info (12023): Found entity 1: aquisition_module
+Info (12127): Elaborating entity "aquisition_module" for the top level hierarchy
+Warning (275005): Result of expression  for parameter  is not an integer
+Warning (275043): Pin "adc_sdi" is missing source
+Info (12128): Elaborating entity "aquisition_ctrl" for hierarchy "aquisition_ctrl:inst"
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/aquisition_ctrl.tdf Line: 19
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/aquisition_ctrl.tdf Line: 37
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.inc Line: 26
+Info (12128): Elaborating entity "counter" for hierarchy "aquisition_ctrl:inst|counter:clock_counter" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/aquisition_ctrl.tdf Line: 43
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.tdf Line: 6
+Info (12128): Elaborating entity "counter" for hierarchy "aquisition_ctrl:inst|counter:samples_counter" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/aquisition_ctrl.tdf Line: 44
+Info (12128): Elaborating entity "aquisition_serializer" for hierarchy "aquisition_serializer:inst1"
+Info (12128): Elaborating entity "counter" for hierarchy "aquisition_serializer:inst1|counter:count" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/aquisition_serializer.tdf Line: 19
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.tdf Line: 6
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "adc_sdi" is stuck at GND
+Info (21057): Implemented 47 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 3 input pins
     Info (21059): Implemented 4 output pins
-    Info (21061): Implemented 31 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4699 megabytes
-    Info: Processing ended: Sat Mar 27 11:53:40 2021
+    Info (21061): Implemented 40 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 11 warnings
+    Info: Peak virtual memory: 4701 megabytes
+    Info: Processing ended: Sat Mar 27 17:27:17 2021
     Info: Elapsed time: 00:00:13
     Info: Total CPU time (on all processors): 00:00:19
 

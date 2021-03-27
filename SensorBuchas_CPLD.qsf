@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "MAX II"
 set_global_assignment -name DEVICE EPM1270T144C5
-set_global_assignment -name TOP_LEVEL_ENTITY main_sm
+set_global_assignment -name TOP_LEVEL_ENTITY aquisition_module
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:45:03  MARCH 24, 2021"
 set_global_assignment -name LAST_QUARTUS_VERSION "20.1.1 Lite Edition"
@@ -59,12 +59,16 @@ set_global_assignment -name AHDL_FILE conversion_ctrl.tdf
 set_global_assignment -name BDF_FILE SensorBuchas_CPLD.bdf
 set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform.vwf
 set_global_assignment -name AHDL_FILE single_pulse.tdf
-set_global_assignment -name AHDL_FILE main_sm.tdf
 set_global_assignment -name INCLUDE_FILE modes.inc
-set_global_assignment -name VECTOR_WAVEFORM_FILE teste_main_sm.vwf
 set_global_assignment -name AHDL_FILE synchronizer.tdf
 set_global_assignment -name VECTOR_WAVEFORM_FILE teste_synchronizer.vwf
 set_global_assignment -name AHDL_FILE aquisition_ctrl.tdf
 set_global_assignment -name AHDL_FILE counter.tdf
 set_global_assignment -name VECTOR_WAVEFORM_FILE teste_counter.vwf
 set_global_assignment -name VECTOR_WAVEFORM_FILE teste_aquisition_ctrl.vwf
+set_global_assignment -name AHDL_FILE mode_selector.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE teste_mode_selector.vwf
+set_global_assignment -name AHDL_FILE aquisition_serializer.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE teste_aquisition_serializer.vwf
+set_global_assignment -name BDF_FILE aquisition_module.bdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE teste_aquisition_module.vwf

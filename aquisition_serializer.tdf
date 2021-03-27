@@ -1,0 +1,71 @@
+include "counter.inc";
+
+subdesign aquisition_serializer(
+	reset: input;
+	clk: input;
+	enable: input;
+	msb, re: input;
+	
+	data[7..0]: bidir;
+	complete: output;			-- TODO  Bufferizar...
+	
+	adc_sdi: input;
+	adc_sclk: output;
+)
+variable
+	ts_nodes[7..0]: TRI_STATE_NODE;
+	buff[7..0]: TRI;
+	data_buffer[15..0]: dffe;
+	count: counter with (MAX_VALUE = 16);
+	div2_clock: dffe;
+	
+begin
+	defaults
+		data_buffer[].ena = Gnd;
+	end defaults;
+	
+	-- Clock com metade da frequencia e encerramento em 15
+	div2_clock.clk = clk;
+	if enable then
+		if count.o[] == 16 and !div2_clock.q then	-- Criterio de enceramento da serialização
+			-- Concluiu a serializacao
+			complete = Vcc;
+			div2_clock.ena = Gnd;
+			count.inc = Gnd;
+		else
+			-- Habilitado e serializando
+			complete = Gnd;
+			div2_clock = !div2_clock;
+			div2_clock.ena = Vcc;
+			count.inc = div2_clock;
+			data_buffer[].ena = !div2_clock.q;
+		end if;
+	else
+		-- Desabilitado
+		div2_clock = Gnd;
+		count.inc = Gnd;
+	end if;
+
+	-- Contador de bits
+	count.clk = clk;
+	count.reset = reset;
+	count.clr = !enable;
+	
+	-- Serial clock
+	adc_sclk = div2_clock.q;
+
+	-- Shift register
+	data_buffer[15..1].d = data_buffer[14..0].q;
+	data_buffer[0].d = adc_sdi;
+	data_buffer[].clk = clk;
+	
+	-- Buffer de saida
+	if msb then
+		buff[].in = data_buffer[15..8].q;
+	else
+		buff[].in = data_buffer[7..0].q;
+	end if;
+	buff[].oe = re;
+	ts_nodes[] = buff[].out;
+	data[] = ts_nodes[];
+end;
