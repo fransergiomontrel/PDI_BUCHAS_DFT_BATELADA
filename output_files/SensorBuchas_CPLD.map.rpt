@@ -1,5 +1,5 @@
 Analysis & Synthesis report for SensorBuchas_CPLD
-Sat Mar 27 10:46:04 2021
+Sat Mar 27 11:53:40 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -44,7 +44,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Sat Mar 27 10:46:04 2021       ;
+; Analysis & Synthesis Status ; Successful - Sat Mar 27 11:53:40 2021       ;
 ; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name               ; SensorBuchas_CPLD                           ;
 ; Top-level Entity Name       ; main_sm                                     ;
@@ -143,16 +143,16 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                       ;
-+----------------------------------+-----------------+------------------------+------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                         ; Library ;
-+----------------------------------+-----------------+------------------------+------------------------------------------------------+---------+
-; main_sm.tdf                      ; yes             ; User AHDL File         ; //Mac/Home/Documents/SensorBuchasV2/main_sm.tdf      ;         ;
-; modes.inc                        ; yes             ; User Unspecified File  ; //Mac/Home/Documents/SensorBuchasV2/modes.inc        ;         ;
-; synchronizer.tdf                 ; yes             ; User AHDL File         ; //Mac/Home/Documents/SensorBuchasV2/synchronizer.tdf ;         ;
-; synchronizer.inc                 ; yes             ; Auto-Found AHDL File   ; //Mac/Home/Documents/SensorBuchasV2/synchronizer.inc ;         ;
-+----------------------------------+-----------------+------------------------+------------------------------------------------------+---------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                              ;
++----------------------------------+-----------------+------------------------+-------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                ; Library ;
++----------------------------------+-----------------+------------------------+-------------------------------------------------------------+---------+
+; main_sm.tdf                      ; yes             ; User AHDL File         ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/main_sm.tdf      ;         ;
+; modes.inc                        ; yes             ; User Unspecified File  ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/modes.inc        ;         ;
+; synchronizer.tdf                 ; yes             ; User AHDL File         ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/synchronizer.tdf ;         ;
+; synchronizer.inc                 ; yes             ; Auto-Found AHDL File   ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/synchronizer.inc ;         ;
++----------------------------------+-----------------+------------------------+-------------------------------------------------------------+---------+
 
 
 +-----------------------------------------------------+
@@ -167,8 +167,8 @@ https://fpgasoftware.intel.com/eula.
 ;                                             ;       ;
 ; Logic element usage by number of LUT inputs ;       ;
 ;     -- 4 input functions                    ; 12    ;
-;     -- 3 input functions                    ; 5     ;
-;     -- 2 input functions                    ; 2     ;
+;     -- 3 input functions                    ; 4     ;
+;     -- 2 input functions                    ; 3     ;
 ;     -- 1 input functions                    ; 1     ;
 ;     -- 0 input functions                    ; 1     ;
 ;                                             ;       ;
@@ -184,8 +184,8 @@ https://fpgasoftware.intel.com/eula.
 ; I/O pins                                    ; 9     ;
 ; Maximum fan-out node                        ; clk   ;
 ; Maximum fan-out                             ; 19    ;
-; Total fan-out                               ; 114   ;
-; Average fan-out                             ; 2.85  ;
+; Total fan-out                               ; 119   ;
+; Average fan-out                             ; 2.98  ;
 +---------------------------------------------+-------+
 
 
@@ -226,7 +226,7 @@ Encoding Type:  One-Hot
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 9     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 4     ;
+; Number of registers using Clock Enable       ; 10    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -257,42 +257,35 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Sat Mar 27 10:45:52 2021
+    Info: Processing started: Sat Mar 27 11:53:27 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off SensorBuchas_CPLD -c SensorBuchas_CPLD
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file conversion_ctrl.tdf
-    Info (12023): Found entity 1: conversion_ctrl File: //Mac/Home/Documents/SensorBuchasV2/conversion_ctrl.tdf Line: 7
+    Info (12023): Found entity 1: conversion_ctrl File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/conversion_ctrl.tdf Line: 7
 Info (12021): Found 1 design units, including 1 entities, in source file sensorbuchas_cpld.bdf
     Info (12023): Found entity 1: SensorBuchas_CPLD
 Info (12021): Found 1 design units, including 1 entities, in source file single_pulse.tdf
-    Info (12023): Found entity 1: single_pulse File: //Mac/Home/Documents/SensorBuchasV2/single_pulse.tdf Line: 3
-Warning (287004): Group name "mode_s" is missing brackets ([ ]) File: //Mac/Home/Documents/SensorBuchasV2/main_sm.tdf Line: 33
-Warning (287004): Group name "mode_out" is missing brackets ([ ]) File: //Mac/Home/Documents/SensorBuchasV2/main_sm.tdf Line: 45
-Warning (287004): Group name "mode_s" is missing brackets ([ ]) File: //Mac/Home/Documents/SensorBuchasV2/main_sm.tdf Line: 60
+    Info (12023): Found entity 1: single_pulse File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/single_pulse.tdf Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file main_sm.tdf
-    Info (12023): Found entity 1: main_sm File: //Mac/Home/Documents/SensorBuchasV2/main_sm.tdf Line: 4
-Info (12021): Found 1 design units, including 1 entities, in source file adc_aquisition.tdf
-    Info (12023): Found entity 1: adc_aquisition File: //Mac/Home/Documents/SensorBuchasV2/adc_aquisition.tdf Line: 21
+    Info (12023): Found entity 1: main_sm File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/main_sm.tdf Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file synchronizer.tdf
-    Info (12023): Found entity 1: synchronizer File: //Mac/Home/Documents/SensorBuchasV2/synchronizer.tdf Line: 7
+    Info (12023): Found entity 1: synchronizer File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/synchronizer.tdf Line: 7
 Info (12021): Found 1 design units, including 1 entities, in source file aquisition_ctrl.tdf
-    Info (12023): Found entity 1: aquisition_ctrl File: //Mac/Home/Documents/SensorBuchasV2/aquisition_ctrl.tdf Line: 21
+    Info (12023): Found entity 1: aquisition_ctrl File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/aquisition_ctrl.tdf Line: 21
 Info (12021): Found 1 design units, including 1 entities, in source file counter.tdf
-    Info (12023): Found entity 1: counter File: //Mac/Home/Documents/SensorBuchasV2/counter.tdf Line: 8
+    Info (12023): Found entity 1: counter File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.tdf Line: 8
 Info (12127): Elaborating entity "main_sm" for the top level hierarchy
-Info (12128): Elaborating entity "synchronizer" for hierarchy "synchronizer:sync" File: //Mac/Home/Documents/SensorBuchasV2/main_sm.tdf Line: 17
-Warning (287013): Variable or input pin "regs1_4" is defined but never used. File: //Mac/Home/Documents/SensorBuchasV2/synchronizer.tdf Line: 15
-Warning (287013): Variable or input pin "regs0_4" is defined but never used. File: //Mac/Home/Documents/SensorBuchasV2/synchronizer.tdf Line: 15
-Info (18000): Registers with preset signals will power-up high File: //Mac/Home/Documents/SensorBuchasV2/main_sm.tdf Line: 19
+Info (12128): Elaborating entity "synchronizer" for hierarchy "synchronizer:sync" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/main_sm.tdf Line: 17
+Info (18000): Registers with preset signals will power-up high File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/main_sm.tdf Line: 19
 Info (21057): Implemented 40 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 5 input pins
     Info (21059): Implemented 4 output pins
     Info (21061): Implemented 31 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 4685 megabytes
-    Info: Processing ended: Sat Mar 27 10:46:04 2021
-    Info: Elapsed time: 00:00:12
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 4699 megabytes
+    Info: Processing ended: Sat Mar 27 11:53:40 2021
+    Info: Elapsed time: 00:00:13
     Info: Total CPU time (on all processors): 00:00:19
 
 

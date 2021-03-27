@@ -37,6 +37,13 @@ clk => regs[0][1].CLK
 clk => regs[0][0].CLK
 i[0] => regs[0][0].DATAIN
 i[1] => regs[1][0].DATAIN
+enable => regs[1][2].ENA
+enable => regs[1][1].ENA
+enable => regs[1][0].ENA
+enable => regs[0][2].ENA
+enable => regs[0][1].ENA
+enable => regs[0][0].ENA
+stable <= stable.DB_MAX_OUTPUT_PORT_TYPE
 o[0] <= regs[0][3].DB_MAX_OUTPUT_PORT_TYPE
 o[1] <= regs[1][3].DB_MAX_OUTPUT_PORT_TYPE
 

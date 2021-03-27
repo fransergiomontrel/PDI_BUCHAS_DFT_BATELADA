@@ -21,7 +21,7 @@ variable
 begin
 	defaults
 		changing_ff.d = Vcc;
-		ready_ff.d = Gnd;
+		ready_ff = Gnd;
 		mode_out_ff[].ena = Gnd;
 	end defaults;
 
@@ -30,7 +30,7 @@ begin
 	
 	sync.clk = clk;
 	sync.i[] = mode_in[];
-	mode_s = sync.o[];
+	mode_s[] = sync.o[];
 	
 	ready_ff.clk = clk;
 	ready_ff.clrn = !reset;
@@ -42,8 +42,8 @@ begin
 	
 	mode_out_ff[].clk = clk;
 	mode_out_ff[] = mode_s[];
-	mode_out = mode_out_ff[];
-	
+	mode_out[] = mode_out_ff[];
+
 	case sm is
 		when sRst =>
 			sm = sWait_mode_changed;
@@ -57,7 +57,7 @@ begin
 
 		when sWait_mode_changed =>
 			mode_out_ff[].ena = Vcc;
-			case mode_s is
+			case mode_s[] is
 				when mode_NONE =>
 					sm = sNone;
 				when mode_CONFIGURATION =>
@@ -70,8 +70,9 @@ begin
 			
 		when sNone =>
 			if mode_s[] == mode_NONE then
-				ready_ff = Vcc;
+				ready_ff = sync.stable;
 				changing_ff.d = Gnd;
+				sync.enable = Vcc;		-- Só permite alterar o valor da entrada mode se já estiver estável em um modo (durante a alteração a entrada mode é ignorada)
 			else
 				if busy then
 					changing_ff.d = Gnd;
@@ -83,8 +84,9 @@ begin
 			
 		when sConfiguration =>
 			if mode_s[] == mode_CONFIGURATION then
-				ready_ff = Vcc;
+				ready_ff = sync.stable;
 				changing_ff.d = Gnd;
+				sync.enable = Vcc;		-- Só permite alterar o valor da entrada mode se já estiver estável em um modo (durante a alteração a entrada mode é ignorada)
 			else
 				if busy then
 					changing_ff.d = Gnd;
@@ -96,8 +98,9 @@ begin
 			
 		when sAquisition =>
 			if mode_s[] == mode_AQUISITION then
-				ready_ff = Vcc;
+				ready_ff = sync.stable;
 				changing_ff.d = Gnd;
+				sync.enable = Vcc;		-- Só permite alterar o valor da entrada mode se já estiver estável em um modo (durante a alteração a entrada mode é ignorada)
 			else
 				if busy then
 					changing_ff.d = Gnd;
@@ -109,8 +112,9 @@ begin
 			
 		when sReadData =>
 			if mode_s[] == MODE_READ_DATA then
-				ready_ff = Vcc;
+				ready_ff = sync.stable;
 				changing_ff.d = Gnd;
+				sync.enable = Vcc;		-- Só permite alterar o valor da entrada mode se já estiver estável em um modo (durante a alteração a entrada mode é ignorada)
 			else
 				if busy then
 					changing_ff.d = Gnd;

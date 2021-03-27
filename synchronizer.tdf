@@ -8,20 +8,21 @@ subdesign synchronizer
 (
 	clk: input;				-- Clock principal
 	i[bus_size-1..0]: input;
+	enable: input = Vcc;
 	
+	stable: output;
 	o[bus_size-1..0]: output;
 )
 variable
-	regs[bus_size-1..0][4..0]: dffe;
+	regs[bus_size-1..0][3..0]: dffe;
 begin
-	regs[][0].clk = clk;
-	regs[][1].clk = clk;
-	regs[][2].clk = clk;
-	regs[][3].clk = clk;
+	regs[][3..0].clk = clk;
 	regs[][0].d = i[];
 	regs[][3..1].d = regs[][2..0].q;
 	o[] = regs[][3].q;
-	regs[][3].ena = (regs[][2] == regs[][1])and (regs[][1] == regs[][0]);
+	stable = (regs[][2] == regs[][1]) and (regs[][1] == regs[][0]);
+	regs[][3].ena = stable;
+	regs[][2..0].ena = enable;
 end;
 
 
