@@ -1,5 +1,5 @@
 Analysis & Synthesis report for SensorBuchas_CPLD
-Sun Mar 28 09:12:35 2021
+Sun Mar 28 09:36:41 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -47,7 +47,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Sun Mar 28 09:12:34 2021       ;
+; Analysis & Synthesis Status ; Successful - Sun Mar 28 09:36:41 2021       ;
 ; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name               ; SensorBuchas_CPLD                           ;
 ; Top-level Entity Name       ; aquisition_module                           ;
@@ -165,14 +165,14 @@ https://fpgasoftware.intel.com/eula.
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
 ; Total logic elements                        ; 54    ;
-;     -- Combinational with no register       ; 26    ;
+;     -- Combinational with no register       ; 25    ;
 ;     -- Register only                        ; 2     ;
-;     -- Combinational with a register        ; 26    ;
+;     -- Combinational with a register        ; 27    ;
 ;                                             ;       ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 28    ;
-;     -- 3 input functions                    ; 4     ;
-;     -- 2 input functions                    ; 20    ;
+;     -- 4 input functions                    ; 30    ;
+;     -- 3 input functions                    ; 5     ;
+;     -- 2 input functions                    ; 17    ;
 ;     -- 1 input functions                    ; 0     ;
 ;     -- 0 input functions                    ; 0     ;
 ;                                             ;       ;
@@ -182,15 +182,15 @@ https://fpgasoftware.intel.com/eula.
 ;     -- qfbk mode                            ; 0     ;
 ;     -- register cascade mode                ; 0     ;
 ;     -- synchronous clear/load mode          ; 8     ;
-;     -- asynchronous clear/load mode         ; 27    ;
+;     -- asynchronous clear/load mode         ; 28    ;
 ;                                             ;       ;
-; Total registers                             ; 28    ;
+; Total registers                             ; 29    ;
 ; Total logic cells in carry chains           ; 12    ;
 ; I/O pins                                    ; 12    ;
 ; Maximum fan-out node                        ; clk   ;
-; Maximum fan-out                             ; 28    ;
-; Total fan-out                               ; 232   ;
-; Average fan-out                             ; 3.52  ;
+; Maximum fan-out                             ; 29    ;
+; Total fan-out                               ; 239   ;
+; Average fan-out                             ; 3.62  ;
 +---------------------------------------------+-------+
 
 
@@ -199,12 +199,12 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------+-----------------------+--------------+
 ; Compilation Hierarchy Node       ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                             ; Entity Name           ; Library Name ;
 +----------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------+-----------------------+--------------+
-; |aquisition_module               ; 54 (0)      ; 28           ; 0          ; 12   ; 0            ; 26 (0)       ; 2 (0)             ; 26 (0)           ; 12 (0)          ; 0 (0)      ; |aquisition_module                                              ; aquisition_module     ; work         ;
+; |aquisition_module               ; 54 (0)      ; 29           ; 0          ; 12   ; 0            ; 25 (0)       ; 2 (0)             ; 27 (0)           ; 12 (0)          ; 0 (0)      ; |aquisition_module                                              ; aquisition_module     ; work         ;
 ;    |aquisition_ctrl:inst|        ; 38 (17)     ; 22           ; 0          ; 0    ; 0            ; 16 (8)       ; 2 (2)             ; 20 (7)           ; 8 (0)           ; 0 (0)      ; |aquisition_module|aquisition_ctrl:inst                         ; aquisition_ctrl       ; work         ;
 ;       |counter:clock_counter|    ; 12 (12)     ; 9            ; 0          ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 9 (9)            ; 8 (8)           ; 0 (0)      ; |aquisition_module|aquisition_ctrl:inst|counter:clock_counter   ; counter               ; work         ;
 ;       |counter:samples_counter|  ; 9 (9)       ; 4            ; 0          ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 4 (4)            ; 0 (0)           ; 0 (0)      ; |aquisition_module|aquisition_ctrl:inst|counter:samples_counter ; counter               ; work         ;
-;    |aquisition_serializer:inst2| ; 16 (1)      ; 6            ; 0          ; 0    ; 0            ; 10 (0)       ; 0 (0)             ; 6 (1)            ; 4 (0)           ; 0 (0)      ; |aquisition_module|aquisition_serializer:inst2                  ; aquisition_serializer ; work         ;
-;       |counter:count|            ; 15 (15)     ; 5            ; 0          ; 0    ; 0            ; 10 (10)      ; 0 (0)             ; 5 (5)            ; 4 (4)           ; 0 (0)      ; |aquisition_module|aquisition_serializer:inst2|counter:count    ; counter               ; work         ;
+;    |aquisition_serializer:inst2| ; 16 (2)      ; 7            ; 0          ; 0    ; 0            ; 9 (0)        ; 0 (0)             ; 7 (2)            ; 4 (0)           ; 0 (0)      ; |aquisition_module|aquisition_serializer:inst2                  ; aquisition_serializer ; work         ;
+;       |counter:count|            ; 14 (14)     ; 5            ; 0          ; 0    ; 0            ; 9 (9)        ; 0 (0)             ; 5 (5)            ; 4 (4)           ; 0 (0)      ; |aquisition_module|aquisition_serializer:inst2|counter:count    ; counter               ; work         ;
 +----------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------+-----------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -241,10 +241,10 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 28    ;
+; Total registers                              ; 29    ;
 ; Number of registers using Synchronous Clear  ; 8     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 27    ;
+; Number of registers using Asynchronous Clear ; 28    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 0     ;
 ; Number of registers using Preset             ; 0     ;
@@ -299,7 +299,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Sun Mar 28 09:12:22 2021
+    Info: Processing started: Sun Mar 28 09:36:28 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off SensorBuchas_CPLD -c SensorBuchas_CPLD
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -351,8 +351,8 @@ Info (21057): Implemented 66 device resources after synthesis - the final resour
     Info (21059): Implemented 9 output pins
     Info (21061): Implemented 54 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 20 warnings
-    Info: Peak virtual memory: 4701 megabytes
-    Info: Processing ended: Sun Mar 28 09:12:35 2021
+    Info: Peak virtual memory: 4691 megabytes
+    Info: Processing ended: Sun Mar 28 09:36:41 2021
     Info: Elapsed time: 00:00:13
     Info: Total CPU time (on all processors): 00:00:19
 

@@ -1,5 +1,5 @@
 Timing Analyzer report for SensorBuchas_CPLD
-Sun Mar 28 09:12:42 2021
+Sun Mar 28 09:36:48 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -91,13 +91,13 @@ https://fpgasoftware.intel.com/eula.
 +------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
 
 
-+--------------------------------------------------+
-; Fmax Summary                                     ;
-+------------+-----------------+------------+------+
-; Fmax       ; Restricted Fmax ; Clock Name ; Note ;
-+------------+-----------------+------------+------+
-; 125.38 MHz ; 125.38 MHz      ; clk        ;      ;
-+------------+-----------------+------------+------+
++-------------------------------------------------+
+; Fmax Summary                                    ;
++-----------+-----------------+------------+------+
+; Fmax      ; Restricted Fmax ; Clock Name ; Note ;
++-----------+-----------------+------------+------+
+; 125.9 MHz ; 125.9 MHz       ; clk        ;      ;
++-----------+-----------------+------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
 
@@ -106,7 +106,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------+--------+---------------+
 ; Clock ; Slack  ; End Point TNS ;
 +-------+--------+---------------+
-; clk   ; -6.976 ; -151.830      ;
+; clk   ; -6.943 ; -151.362      ;
 +-------+--------+---------------+
 
 
@@ -115,7 +115,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------+-------+---------------+
 ; Clock ; Slack ; End Point TNS ;
 +-------+-------+---------------+
-; clk   ; 1.727 ; 0.000         ;
+; clk   ; 1.709 ; 0.000         ;
 +-------+-------+---------------+
 
 
@@ -145,106 +145,106 @@ No paths to report.
 +--------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
 ; Slack  ; From Node                                           ; To Node                                             ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
 +--------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; -6.976 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.643      ;
-; -6.976 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.643      ;
-; -6.976 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.643      ;
-; -6.976 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.643      ;
-; -6.976 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.643      ;
-; -6.976 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.643      ;
-; -6.976 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.643      ;
-; -6.976 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.643      ;
-; -6.811 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.478      ;
-; -6.811 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.478      ;
-; -6.811 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.478      ;
-; -6.811 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.478      ;
-; -6.811 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.478      ;
-; -6.811 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.478      ;
-; -6.811 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.478      ;
-; -6.811 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.478      ;
-; -6.629 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.296      ;
-; -6.629 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.296      ;
-; -6.629 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.296      ;
-; -6.629 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.296      ;
-; -6.629 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.296      ;
-; -6.629 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.296      ;
-; -6.629 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.296      ;
-; -6.629 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.296      ;
-; -6.543 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.210      ;
-; -6.523 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 1.000        ; 0.000      ; 7.190      ;
-; -6.378 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.045      ;
-; -6.358 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 1.000        ; 0.000      ; 7.025      ;
-; -6.275 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.942      ;
-; -6.275 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.942      ;
-; -6.275 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.942      ;
-; -6.275 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.942      ;
-; -6.275 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.942      ;
-; -6.275 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.942      ;
-; -6.275 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.942      ;
-; -6.275 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.942      ;
-; -6.252 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.919      ;
-; -6.250 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.917      ;
-; -6.243 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.910      ;
-; -6.196 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.863      ;
-; -6.176 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.843      ;
-; -6.176 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.843      ;
-; -6.176 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.843      ;
-; -6.176 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.843      ;
-; -6.176 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.843      ;
-; -6.176 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.843      ;
-; -6.176 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.843      ;
-; -6.176 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.843      ;
-; -6.176 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 1.000        ; 0.000      ; 6.843      ;
-; -6.085 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.752      ;
-; -6.085 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.752      ;
-; -6.085 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.752      ;
-; -6.085 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.752      ;
-; -6.085 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.752      ;
-; -6.085 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.752      ;
-; -6.085 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.752      ;
-; -6.085 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.752      ;
-; -6.067 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 1.000        ; 0.000      ; 6.734      ;
-; -6.041 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.708      ;
-; -6.039 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.706      ;
-; -6.032 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.699      ;
-; -5.892 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.559      ;
-; -5.890 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.557      ;
-; -5.883 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.550      ;
-; -5.874 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.541      ;
-; -5.874 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.541      ;
-; -5.874 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.541      ;
-; -5.874 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.541      ;
-; -5.874 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.541      ;
-; -5.874 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.541      ;
-; -5.874 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.541      ;
-; -5.874 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.541      ;
-; -5.861 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|convst_ff                      ; clk          ; clk         ; 1.000        ; 0.000      ; 6.528      ;
-; -5.853 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.520      ;
-; -5.853 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.520      ;
-; -5.853 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.520      ;
-; -5.853 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.520      ;
-; -5.853 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.520      ;
-; -5.853 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.520      ;
-; -5.853 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.520      ;
-; -5.853 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.520      ;
-; -5.842 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.509      ;
-; -5.822 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 1.000        ; 0.000      ; 6.489      ;
-; -5.744 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 1.000        ; 0.000      ; 6.411      ;
-; -5.743 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.410      ;
-; -5.725 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
-; -5.725 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
-; -5.725 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
-; -5.725 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
-; -5.725 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
-; -5.725 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
-; -5.725 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
-; -5.725 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
-; -5.696 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|convst_ff                      ; clk          ; clk         ; 1.000        ; 0.000      ; 6.363      ;
-; -5.625 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.292      ;
-; -5.625 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.292      ;
-; -5.625 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.292      ;
-; -5.625 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.292      ;
-; -5.625 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.292      ;
-; -5.625 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.292      ;
+; -6.943 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.610      ;
+; -6.943 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.610      ;
+; -6.943 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.610      ;
+; -6.943 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.610      ;
+; -6.943 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.610      ;
+; -6.943 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.610      ;
+; -6.943 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.610      ;
+; -6.943 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.610      ;
+; -6.913 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 1.000        ; 0.000      ; 7.580      ;
+; -6.779 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.446      ;
+; -6.779 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.446      ;
+; -6.779 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.446      ;
+; -6.779 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.446      ;
+; -6.779 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.446      ;
+; -6.779 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.446      ;
+; -6.779 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.446      ;
+; -6.779 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.446      ;
+; -6.749 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 1.000        ; 0.000      ; 7.416      ;
+; -6.586 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.253      ;
+; -6.586 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.253      ;
+; -6.586 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.253      ;
+; -6.586 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.253      ;
+; -6.586 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.253      ;
+; -6.586 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.253      ;
+; -6.586 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.253      ;
+; -6.586 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.253      ;
+; -6.556 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 1.000        ; 0.000      ; 7.223      ;
+; -6.241 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.908      ;
+; -6.241 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.908      ;
+; -6.241 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.908      ;
+; -6.241 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.908      ;
+; -6.241 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.908      ;
+; -6.241 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.908      ;
+; -6.241 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.908      ;
+; -6.241 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.908      ;
+; -6.211 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 1.000        ; 0.000      ; 6.878      ;
+; -6.143 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.810      ;
+; -6.143 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.810      ;
+; -6.143 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.810      ;
+; -6.143 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.810      ;
+; -6.143 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.810      ;
+; -6.143 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.810      ;
+; -6.143 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.810      ;
+; -6.143 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.810      ;
+; -6.143 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.810      ;
+; -6.132 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|convst_ff                      ; clk          ; clk         ; 1.000        ; 0.000      ; 6.799      ;
+; -6.113 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 1.000        ; 0.000      ; 6.780      ;
+; -5.979 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.646      ;
+; -5.968 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|convst_ff                      ; clk          ; clk         ; 1.000        ; 0.000      ; 6.635      ;
+; -5.925 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 1.000        ; 0.000      ; 6.592      ;
+; -5.857 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.524      ;
+; -5.856 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.523      ;
+; -5.851 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.518      ;
+; -5.834 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.501      ;
+; -5.834 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.501      ;
+; -5.834 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.501      ;
+; -5.834 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.501      ;
+; -5.834 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.501      ;
+; -5.834 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.501      ;
+; -5.834 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.501      ;
+; -5.834 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.501      ;
+; -5.804 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 1.000        ; 0.000      ; 6.471      ;
+; -5.786 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.453      ;
+; -5.775 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|convst_ff                      ; clk          ; clk         ; 1.000        ; 0.000      ; 6.442      ;
+; -5.725 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
+; -5.725 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
+; -5.725 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
+; -5.725 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
+; -5.725 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
+; -5.725 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
+; -5.725 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
+; -5.725 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.392      ;
+; -5.723 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 1.000        ; 0.000      ; 6.390      ;
+; -5.706 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.373      ;
+; -5.706 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.373      ;
+; -5.706 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.373      ;
+; -5.706 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.373      ;
+; -5.706 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.373      ;
+; -5.706 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.373      ;
+; -5.706 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.373      ;
+; -5.706 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.373      ;
+; -5.665 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.332      ;
+; -5.665 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.332      ;
+; -5.665 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.332      ;
+; -5.665 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.332      ;
+; -5.665 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.332      ;
+; -5.665 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.332      ;
+; -5.665 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.332      ;
+; -5.665 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.332      ;
+; -5.655 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.322      ;
+; -5.654 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.321      ;
+; -5.649 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.316      ;
+; -5.600 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.267      ;
+; -5.600 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.267      ;
+; -5.600 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.267      ;
+; -5.600 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.267      ;
+; -5.600 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.267      ;
+; -5.600 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.267      ;
+; -5.600 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.267      ;
+; -5.600 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.267      ;
 +--------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
@@ -253,106 +253,106 @@ No paths to report.
 +-------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
 ; Slack ; From Node                                           ; To Node                                             ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
 +-------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; 1.727 ; aquisition_serializer:inst2|div2_clock              ; aquisition_ctrl:inst|SERIALIZING                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.948      ;
-; 1.949 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|WAITING_START_HIGH             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.170      ;
-; 1.967 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|convst_ff                      ; clk          ; clk         ; 0.000        ; 0.000      ; 2.188      ;
-; 1.997 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.218      ;
-; 2.083 ; aquisition_serializer:inst2|counter:count|ffs[0]    ; aquisition_serializer:inst2|div2_clock              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.304      ;
-; 2.116 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.337      ;
-; 2.136 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.357      ;
-; 2.144 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|WAITING_START_LOW              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.365      ;
-; 2.152 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|running_ff                     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.373      ;
-; 2.178 ; aquisition_ctrl:inst|STORING                        ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.399      ;
-; 2.193 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_ctrl:inst|SERIALIZING                    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.414      ;
-; 2.195 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_serializer:inst2|counter:count|ffs[3]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.416      ;
-; 2.197 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_serializer:inst2|counter:count|ffs[2]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.418      ;
-; 2.199 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_serializer:inst2|div2_clock              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.420      ;
+; 1.709 ; aquisition_serializer:inst2|counter:count|ffs[0]    ; aquisition_serializer:inst2|counter:count|ffs[0]    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.930      ;
+; 1.766 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.987      ;
+; 1.918 ; aquisition_serializer:inst2|counter:count|ffs[2]    ; aquisition_serializer:inst2|counter:count|ffs[2]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.139      ;
+; 1.936 ; aquisition_ctrl:inst|WAITING_END_OF_CYCLE           ; aquisition_ctrl:inst|WAITING_END_OF_CYCLE           ; clk          ; clk         ; 0.000        ; 0.000      ; 2.157      ;
+; 1.937 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|WAITING_START_LOW              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.158      ;
+; 1.960 ; aquisition_serializer:inst2|complete_ff             ; aquisition_ctrl:inst|SERIALIZING                    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.181      ;
+; 1.974 ; aquisition_serializer:inst2|complete_ff             ; aquisition_ctrl:inst|STORING                        ; clk          ; clk         ; 0.000        ; 0.000      ; 2.195      ;
+; 1.995 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_serializer:inst2|counter:count|ffs[4]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.216      ;
+; 2.061 ; aquisition_ctrl:inst|AQUISITIONING                  ; aquisition_ctrl:inst|convst_ff                      ; clk          ; clk         ; 0.000        ; 0.000      ; 2.282      ;
+; 2.127 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.348      ;
+; 2.127 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|WAITING_START_HIGH             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.348      ;
+; 2.162 ; aquisition_ctrl:inst|WAIT_STATE                     ; aquisition_ctrl:inst|SERIALIZING                    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.383      ;
+; 2.186 ; aquisition_serializer:inst2|div2_clock              ; aquisition_serializer:inst2|div2_clock              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.407      ;
+; 2.188 ; aquisition_serializer:inst2|div2_clock              ; aquisition_serializer:inst2|counter:count|ffs[4]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.409      ;
+; 2.191 ; aquisition_serializer:inst2|div2_clock              ; aquisition_serializer:inst2|complete_ff             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.412      ;
 ; 2.222 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.443      ;
 ; 2.230 ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.451      ;
 ; 2.231 ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.452      ;
-; 2.278 ; aquisition_ctrl:inst|WAITING_END_OF_CYCLE           ; aquisition_ctrl:inst|WAITING_END_OF_CYCLE           ; clk          ; clk         ; 0.000        ; 0.000      ; 2.499      ;
-; 2.279 ; aquisition_ctrl:inst|WAITING_END_OF_CYCLE           ; aquisition_ctrl:inst|running_ff                     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.500      ;
-; 2.284 ; aquisition_ctrl:inst|WAITING_END_OF_CYCLE           ; aquisition_ctrl:inst|WAITING_START_LOW              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.505      ;
-; 2.307 ; aquisition_ctrl:inst|AQUISITIONING                  ; aquisition_ctrl:inst|WAIT_STATE                     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.528      ;
-; 2.473 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_serializer:inst2|counter:count|ffs[1]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.694      ;
+; 2.231 ; aquisition_serializer:inst2|counter:count|ffs[3]    ; aquisition_serializer:inst2|counter:count|ffs[3]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.452      ;
+; 2.232 ; aquisition_serializer:inst2|counter:count|ffs[1]    ; aquisition_serializer:inst2|counter:count|ffs[1]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.453      ;
+; 2.272 ; aquisition_serializer:inst2|counter:count|ffs[4]    ; aquisition_serializer:inst2|counter:count|ffs[4]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.493      ;
+; 2.318 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_serializer:inst2|complete_ff             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.539      ;
+; 2.318 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_ctrl:inst|SERIALIZING                    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.539      ;
+; 2.323 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_serializer:inst2|div2_clock              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.544      ;
+; 2.329 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_ctrl:inst|STORING                        ; clk          ; clk         ; 0.000        ; 0.000      ; 2.550      ;
+; 2.401 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_serializer:inst2|counter:count|ffs[3]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.622      ;
+; 2.404 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_serializer:inst2|counter:count|ffs[1]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.625      ;
+; 2.499 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.720      ;
 ; 2.514 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.735      ;
-; 2.515 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.736      ;
-; 2.529 ; aquisition_serializer:inst2|div2_clock              ; aquisition_ctrl:inst|STORING                        ; clk          ; clk         ; 0.000        ; 0.000      ; 2.750      ;
-; 2.531 ; aquisition_serializer:inst2|counter:count|ffs[0]    ; aquisition_serializer:inst2|counter:count|ffs[4]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.752      ;
-; 2.534 ; aquisition_ctrl:inst|AQUISITIONING                  ; aquisition_ctrl:inst|convst_ff                      ; clk          ; clk         ; 0.000        ; 0.000      ; 2.755      ;
-; 2.538 ; aquisition_serializer:inst2|div2_clock              ; aquisition_serializer:inst2|counter:count|ffs[4]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.759      ;
-; 2.541 ; aquisition_serializer:inst2|div2_clock              ; aquisition_serializer:inst2|counter:count|ffs[0]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.762      ;
-; 2.562 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|WAITING_START_HIGH             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.783      ;
-; 2.596 ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; aquisition_ctrl:inst|WAIT_STATE                     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.817      ;
-; 2.604 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.825      ;
-; 2.613 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.834      ;
-; 2.634 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.855      ;
+; 2.529 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.750      ;
+; 2.543 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.764      ;
+; 2.578 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|convst_ff                      ; clk          ; clk         ; 0.000        ; 0.000      ; 2.799      ;
+; 2.620 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.841      ;
 ; 2.634 ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.855      ;
-; 2.649 ; aquisition_serializer:inst2|div2_clock              ; aquisition_serializer:inst2|div2_clock              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.870      ;
-; 2.658 ; aquisition_ctrl:inst|STORING                        ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.879      ;
-; 2.679 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_serializer:inst2|counter:count|ffs[4]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.900      ;
-; 2.682 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_serializer:inst2|counter:count|ffs[0]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.903      ;
-; 2.682 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_ctrl:inst|STORING                        ; clk          ; clk         ; 0.000        ; 0.000      ; 2.903      ;
-; 2.685 ; aquisition_ctrl:inst|STORING                        ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.906      ;
-; 2.689 ; aquisition_ctrl:inst|STORING                        ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.910      ;
-; 2.727 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.948      ;
-; 2.737 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.958      ;
-; 2.753 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.974      ;
-; 2.766 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.987      ;
-; 2.769 ; aquisition_serializer:inst2|counter:count|ffs[0]    ; aquisition_serializer:inst2|counter:count|ffs[0]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.990      ;
-; 2.772 ; aquisition_serializer:inst2|counter:count|ffs[0]    ; aquisition_ctrl:inst|STORING                        ; clk          ; clk         ; 0.000        ; 0.000      ; 2.993      ;
-; 2.772 ; aquisition_serializer:inst2|div2_clock              ; aquisition_serializer:inst2|counter:count|ffs[3]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.993      ;
-; 2.856 ; aquisition_serializer:inst2|counter:count|ffs[3]    ; aquisition_serializer:inst2|div2_clock              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.077      ;
-; 2.859 ; aquisition_serializer:inst2|counter:count|ffs[1]    ; aquisition_serializer:inst2|counter:count|ffs[1]    ; clk          ; clk         ; 0.000        ; 0.000      ; 3.080      ;
-; 2.868 ; aquisition_serializer:inst2|counter:count|ffs[3]    ; aquisition_serializer:inst2|counter:count|ffs[3]    ; clk          ; clk         ; 0.000        ; 0.000      ; 3.089      ;
-; 2.926 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.147      ;
-; 2.948 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.169      ;
-; 2.992 ; aquisition_serializer:inst2|div2_clock              ; aquisition_serializer:inst2|counter:count|ffs[2]    ; clk          ; clk         ; 0.000        ; 0.000      ; 3.213      ;
-; 3.059 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.280      ;
-; 3.060 ; aquisition_serializer:inst2|counter:count|ffs[4]    ; aquisition_serializer:inst2|counter:count|ffs[4]    ; clk          ; clk         ; 0.000        ; 0.000      ; 3.281      ;
-; 3.096 ; aquisition_serializer:inst2|counter:count|ffs[2]    ; aquisition_serializer:inst2|counter:count|ffs[2]    ; clk          ; clk         ; 0.000        ; 0.000      ; 3.317      ;
+; 2.642 ; aquisition_serializer:inst2|div2_clock              ; aquisition_serializer:inst2|counter:count|ffs[0]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.863      ;
+; 2.643 ; aquisition_serializer:inst2|div2_clock              ; aquisition_serializer:inst2|counter:count|ffs[1]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.864      ;
+; 2.644 ; aquisition_serializer:inst2|div2_clock              ; aquisition_serializer:inst2|counter:count|ffs[2]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.865      ;
+; 2.645 ; aquisition_serializer:inst2|div2_clock              ; aquisition_serializer:inst2|counter:count|ffs[3]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.866      ;
+; 2.679 ; aquisition_serializer:inst2|counter:count|ffs[4]    ; aquisition_serializer:inst2|div2_clock              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.900      ;
+; 2.683 ; aquisition_serializer:inst2|counter:count|ffs[4]    ; aquisition_serializer:inst2|complete_ff             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.904      ;
+; 2.685 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|WAITING_START_HIGH             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.906      ;
+; 2.693 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|running_ff                     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.914      ;
+; 2.712 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_serializer:inst2|counter:count|ffs[2]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.933      ;
+; 2.715 ; aquisition_ctrl:inst|SERIALIZING                    ; aquisition_serializer:inst2|counter:count|ffs[0]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.936      ;
+; 2.744 ; aquisition_ctrl:inst|AQUISITIONING                  ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.965      ;
+; 2.756 ; aquisition_serializer:inst2|counter:count|ffs[0]    ; aquisition_serializer:inst2|counter:count|ffs[2]    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.977      ;
+; 2.835 ; aquisition_ctrl:inst|AQUISITIONING                  ; aquisition_ctrl:inst|WAIT_STATE                     ; clk          ; clk         ; 0.000        ; 0.000      ; 3.056      ;
+; 2.836 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|running_ff                     ; clk          ; clk         ; 0.000        ; 0.000      ; 3.057      ;
+; 2.906 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.127      ;
+; 2.944 ; aquisition_serializer:inst2|counter:count|ffs[0]    ; aquisition_serializer:inst2|complete_ff             ; clk          ; clk         ; 0.000        ; 0.000      ; 3.165      ;
+; 2.949 ; aquisition_serializer:inst2|counter:count|ffs[0]    ; aquisition_serializer:inst2|div2_clock              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.170      ;
+; 2.987 ; aquisition_serializer:inst2|counter:count|ffs[0]    ; aquisition_serializer:inst2|counter:count|ffs[3]    ; clk          ; clk         ; 0.000        ; 0.000      ; 3.208      ;
+; 3.090 ; aquisition_ctrl:inst|WAITING_END_OF_CYCLE           ; aquisition_ctrl:inst|running_ff                     ; clk          ; clk         ; 0.000        ; 0.000      ; 3.311      ;
+; 3.144 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.365      ;
+; 3.156 ; aquisition_ctrl:inst|WAITING_END_OF_CYCLE           ; aquisition_ctrl:inst|WAITING_START_LOW              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.377      ;
 ; 3.162 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.383      ;
-; 3.170 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.391      ;
 ; 3.170 ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.391      ;
-; 3.203 ; aquisition_ctrl:inst|STORING                        ; aquisition_ctrl:inst|WAITING_END_OF_CYCLE           ; clk          ; clk         ; 0.000        ; 0.000      ; 3.424      ;
-; 3.208 ; aquisition_ctrl:inst|WAIT_STATE                     ; aquisition_ctrl:inst|SERIALIZING                    ; clk          ; clk         ; 0.000        ; 0.000      ; 3.429      ;
-; 3.235 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.456      ;
-; 3.266 ; aquisition_ctrl:inst|AQUISITIONING                  ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.487      ;
+; 3.183 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.404      ;
+; 3.231 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.452      ;
+; 3.231 ; aquisition_ctrl:inst|STORING                        ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.452      ;
+; 3.262 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.483      ;
+; 3.272 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.493      ;
+; 3.275 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|WAITING_END_OF_CYCLE           ; clk          ; clk         ; 0.000        ; 0.000      ; 3.496      ;
 ; 3.281 ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.502      ;
-; 3.281 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.502      ;
-; 3.327 ; aquisition_serializer:inst2|div2_clock              ; aquisition_serializer:inst2|counter:count|ffs[1]    ; clk          ; clk         ; 0.000        ; 0.000      ; 3.548      ;
+; 3.331 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.552      ;
+; 3.331 ; aquisition_ctrl:inst|WAITING_START_HIGH             ; aquisition_ctrl:inst|AQUISITIONING                  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.552      ;
 ; 3.346 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.567      ;
-; 3.347 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.568      ;
-; 3.406 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|WAIT_STATE                     ; clk          ; clk         ; 0.000        ; 0.000      ; 3.627      ;
-; 3.458 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.679      ;
+; 3.356 ; aquisition_serializer:inst2|counter:count|ffs[4]    ; aquisition_serializer:inst2|counter:count|ffs[0]    ; clk          ; clk         ; 0.000        ; 0.000      ; 3.577      ;
+; 3.356 ; aquisition_serializer:inst2|counter:count|ffs[1]    ; aquisition_serializer:inst2|div2_clock              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.577      ;
+; 3.360 ; aquisition_serializer:inst2|counter:count|ffs[1]    ; aquisition_serializer:inst2|complete_ff             ; clk          ; clk         ; 0.000        ; 0.000      ; 3.581      ;
+; 3.361 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.582      ;
+; 3.442 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.663      ;
+; 3.472 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.693      ;
 ; 3.492 ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.713      ;
 ; 3.492 ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.713      ;
 ; 3.492 ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.713      ;
-; 3.545 ; aquisition_serializer:inst2|counter:count|ffs[2]    ; aquisition_serializer:inst2|div2_clock              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.766      ;
-; 3.569 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.790      ;
-; 3.574 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.795      ;
-; 3.582 ; aquisition_serializer:inst2|counter:count|ffs[4]    ; aquisition_serializer:inst2|div2_clock              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.803      ;
-; 3.584 ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; aquisition_ctrl:inst|WAIT_STATE                     ; clk          ; clk         ; 0.000        ; 0.000      ; 3.805      ;
-; 3.585 ; aquisition_ctrl:inst|WAITING_START_LOW              ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.806      ;
-; 3.611 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.832      ;
+; 3.493 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|convst_ff                      ; clk          ; clk         ; 0.000        ; 0.000      ; 3.714      ;
+; 3.516 ; aquisition_ctrl:inst|STORING                        ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.737      ;
+; 3.524 ; aquisition_serializer:inst2|counter:count|ffs[4]    ; aquisition_serializer:inst2|counter:count|ffs[1]    ; clk          ; clk         ; 0.000        ; 0.000      ; 3.745      ;
+; 3.536 ; aquisition_ctrl:inst|STORING                        ; aquisition_ctrl:inst|WAITING_END_OF_CYCLE           ; clk          ; clk         ; 0.000        ; 0.000      ; 3.757      ;
+; 3.549 ; aquisition_serializer:inst2|counter:count|ffs[0]    ; aquisition_serializer:inst2|counter:count|ffs[4]    ; clk          ; clk         ; 0.000        ; 0.000      ; 3.770      ;
+; 3.551 ; aquisition_serializer:inst2|counter:count|ffs[2]    ; aquisition_serializer:inst2|div2_clock              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.772      ;
+; 3.553 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.774      ;
+; 3.555 ; aquisition_serializer:inst2|counter:count|ffs[2]    ; aquisition_serializer:inst2|complete_ff             ; clk          ; clk         ; 0.000        ; 0.000      ; 3.776      ;
+; 3.560 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|WAITING_END_OF_CYCLE           ; clk          ; clk         ; 0.000        ; 0.000      ; 3.781      ;
+; 3.560 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.781      ;
+; 3.564 ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.785      ;
+; 3.583 ; aquisition_ctrl:inst|counter:clock_counter|ffs[2]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.804      ;
+; 3.592 ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; aquisition_ctrl:inst|convst_ff                      ; clk          ; clk         ; 0.000        ; 0.000      ; 3.813      ;
 ; 3.631 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.852      ;
 ; 3.631 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.852      ;
 ; 3.631 ; aquisition_ctrl:inst|counter:clock_counter|ffs[4]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.852      ;
-; 3.655 ; aquisition_serializer:inst2|counter:count|ffs[3]    ; aquisition_ctrl:inst|STORING                        ; clk          ; clk         ; 0.000        ; 0.000      ; 3.876      ;
-; 3.661 ; aquisition_serializer:inst2|counter:count|ffs[3]    ; aquisition_serializer:inst2|counter:count|ffs[0]    ; clk          ; clk         ; 0.000        ; 0.000      ; 3.882      ;
-; 3.674 ; aquisition_ctrl:inst|WAITING_END_OF_CYCLE           ; aquisition_ctrl:inst|convst_ff                      ; clk          ; clk         ; 0.000        ; 0.000      ; 3.895      ;
-; 3.685 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.906      ;
-; 3.714 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|WAIT_STATE                     ; clk          ; clk         ; 0.000        ; 0.000      ; 3.935      ;
-; 3.725 ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; aquisition_ctrl:inst|WAIT_STATE                     ; clk          ; clk         ; 0.000        ; 0.000      ; 3.946      ;
-; 3.735 ; aquisition_ctrl:inst|counter:samples_counter|ffs[1] ; aquisition_ctrl:inst|running_ff                     ; clk          ; clk         ; 0.000        ; 0.000      ; 3.956      ;
-; 3.750 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[6]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.971      ;
-; 3.750 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[7]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.971      ;
-; 3.750 ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[8]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.971      ;
-; 3.760 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.981      ;
-; 3.762 ; aquisition_serializer:inst2|counter:count|ffs[1]    ; aquisition_serializer:inst2|div2_clock              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.983      ;
-; 3.764 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.985      ;
-; 3.773 ; aquisition_ctrl:inst|WAITING_END_OF_CYCLE           ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.994      ;
-; 3.795 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[1]   ; clk          ; clk         ; 0.000        ; 0.000      ; 4.016      ;
+; 3.664 ; aquisition_ctrl:inst|counter:clock_counter|ffs[0]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.885      ;
+; 3.666 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|running_ff                     ; clk          ; clk         ; 0.000        ; 0.000      ; 3.887      ;
+; 3.671 ; aquisition_ctrl:inst|counter:clock_counter|ffs[3]   ; aquisition_ctrl:inst|counter:clock_counter|ffs[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.892      ;
+; 3.708 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:samples_counter|ffs[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.929      ;
+; 3.711 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|WAITING_END_OF_CYCLE           ; clk          ; clk         ; 0.000        ; 0.000      ; 3.932      ;
+; 3.715 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.936      ;
+; 3.726 ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; aquisition_ctrl:inst|counter:samples_counter|ffs[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.947      ;
+; 3.747 ; aquisition_ctrl:inst|counter:samples_counter|ffs[0] ; aquisition_ctrl:inst|WAITING_START_LOW              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.968      ;
 +-------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
@@ -396,7 +396,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 0     ; 0    ;
 ; Unconstrained Input Ports       ; 2     ; 2    ;
-; Unconstrained Input Port Paths  ; 32    ; 32   ;
+; Unconstrained Input Port Paths  ; 33    ; 33   ;
 ; Unconstrained Output Ports      ; 3     ; 3    ;
 ; Unconstrained Output Port Paths ; 3     ; 3    ;
 +---------------------------------+-------+------+
@@ -459,7 +459,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Sun Mar 28 09:12:41 2021
+    Info: Processing started: Sun Mar 28 09:36:47 2021
 Info: Command: quartus_sta SensorBuchas_CPLD -c SensorBuchas_CPLD
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -475,14 +475,14 @@ Info (332105): Deriving Clocks
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
 Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -6.976
+Info (332146): Worst-case setup slack is -6.943
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -6.976            -151.830 clk 
-Info (332146): Worst-case hold slack is 1.727
+    Info (332119):    -6.943            -151.362 clk 
+Info (332146): Worst-case hold slack is 1.709
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     1.727               0.000 clk 
+    Info (332119):     1.709               0.000 clk 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -2.289
@@ -493,8 +493,8 @@ Info (332001): The selected device family is not supported by the report_metasta
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 4655 megabytes
-    Info: Processing ended: Sun Mar 28 09:12:42 2021
+    Info: Peak virtual memory: 4661 megabytes
+    Info: Processing ended: Sun Mar 28 09:36:48 2021
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 

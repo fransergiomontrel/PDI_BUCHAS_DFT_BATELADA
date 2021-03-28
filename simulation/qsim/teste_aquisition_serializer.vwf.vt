@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "03/27/2021 17:02:29"
+// Generated on "03/28/2021 09:36:12"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          aquisition_serializer
 // 
@@ -30,7 +30,7 @@
 module aquisition_serializer_vlg_vec_tst();
 // constants                                           
 // general purpose registers
-reg adc_sdi;
+reg [5:0] adc_sdi;
 reg clk;
 reg [7:0] treg_data;
 reg enable;
@@ -82,26 +82,6 @@ begin
 	enable = 1'b0;
 	enable = #140000 1'b1;
 	enable = #900000 1'b0;
-end 
-
-// adc_sdi
-initial
-begin
-	adc_sdi = 1'b0;
-	adc_sdi = #40000 1'b1;
-	adc_sdi = #40000 1'b0;
-	adc_sdi = #70000 1'b1;
-	adc_sdi = #90000 1'b0;
-	adc_sdi = #40000 1'b1;
-	# 40000;
-	repeat(9)
-	begin
-		adc_sdi = 1'b0;
-		adc_sdi = #40000 1'b1;
-		# 40000;
-	end
-	adc_sdi = 1'b0;
-	adc_sdi = #950000 1'b1;
 end 
 
 // msb
@@ -158,6 +138,36 @@ end
 initial
 begin
 	treg_data[0] = 1'bZ;
+end 
+// adc_sdi[ 5 ]
+initial
+begin
+	adc_sdi[5] = 1'b0;
+end 
+// adc_sdi[ 4 ]
+initial
+begin
+	adc_sdi[4] = 1'b0;
+end 
+// adc_sdi[ 3 ]
+initial
+begin
+	adc_sdi[3] = 1'b0;
+end 
+// adc_sdi[ 2 ]
+initial
+begin
+	adc_sdi[2] = 1'b0;
+end 
+// adc_sdi[ 1 ]
+initial
+begin
+	adc_sdi[1] = 1'b0;
+end 
+// adc_sdi[ 0 ]
+initial
+begin
+	adc_sdi[0] = 1'b0;
 end 
 endmodule
 

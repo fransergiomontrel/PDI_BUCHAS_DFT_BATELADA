@@ -100,6 +100,7 @@ o[3] <= ffs[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
 |aquisition_module|aquisition_serializer:inst2
+reset => complete_ff.IN0
 reset => counter:count.reset
 clk => counter:count.clk
 clk => data_buffer[5][15].CLK
@@ -199,7 +200,8 @@ clk => data_buffer[0][2].CLK
 clk => data_buffer[0][1].CLK
 clk => data_buffer[0][0].CLK
 clk => div2_clock.CLK
-enable => complete~0.IN0
+clk => complete_ff.CLK
+enable => _.IN0
 enable => _.IN0
 enable => _.IN0
 enable => _.IN0
@@ -228,7 +230,7 @@ data[4] <> buff[4]
 data[5] <> buff[5]
 data[6] <> buff[6]
 data[7] <> buff[7]
-complete <= complete.DB_MAX_OUTPUT_PORT_TYPE
+complete <= complete_ff.DB_MAX_OUTPUT_PORT_TYPE
 adc_sdi[0] => data_buffer[0][0].DATAIN
 adc_sdi[1] => data_buffer[1][0].DATAIN
 adc_sdi[2] => data_buffer[2][0].DATAIN

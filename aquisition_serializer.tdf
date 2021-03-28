@@ -7,7 +7,7 @@ subdesign aquisition_serializer(
 	msb, re: input;
 	
 	data[7..0]: bidir;
-	complete: output;			-- TODO  Bufferizar...
+	complete: output;
 	
 	adc_sdi[5..0]: input;
 	adc_sclk: output;
@@ -18,10 +18,12 @@ variable
 	data_buffer[5..0][15..0]: dffe;
 	count: counter with (MAX_VALUE = 16);
 	div2_clock: dffe;
+	complete_ff: dff;
 	
 begin
 	defaults
 		data_buffer[][].ena = Gnd;
+		complete_ff.d = Gnd;
 	end defaults;
 	
 	-- Clock com metade da frequencia e encerramento em 15
@@ -29,23 +31,28 @@ begin
 	if enable then
 		if count.o[] == 16 and !div2_clock.q then	-- Criterio de enceramento da serialização
 			-- Concluiu a serializacao
-			complete = Vcc;
+			complete_ff.d = Vcc;
 			div2_clock.ena = Gnd;
 			count.inc = Gnd;
 		else
 			-- Habilitado e serializando
-			complete = Gnd;
+			complete_ff.d = Gnd;
 			div2_clock = !div2_clock;
 			div2_clock.ena = Vcc;
 			count.inc = div2_clock;
 			data_buffer[][].ena = !div2_clock.q;
 		end if;
-	else
+	else		
 		-- Desabilitado
 		div2_clock = Gnd;
 		count.inc = Gnd;
 	end if;
 
+	-- complete serializado
+	complete_ff.clk = clk;
+	complete_ff.clrn = !reset;
+	complete = complete_ff.q;
+	
 	-- Contador de bits
 	count.clk = clk;
 	count.reset = reset;
