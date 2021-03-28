@@ -9,19 +9,19 @@ subdesign aquisition_serializer(
 	data[7..0]: bidir;
 	complete: output;			-- TODO  Bufferizar...
 	
-	adc_sdi: input;
+	adc_sdi[5..0]: input;
 	adc_sclk: output;
 )
 variable
 	ts_nodes[7..0]: TRI_STATE_NODE;
 	buff[7..0]: TRI;
-	data_buffer[15..0]: dffe;
+	data_buffer[5..0][15..0]: dffe;
 	count: counter with (MAX_VALUE = 16);
 	div2_clock: dffe;
 	
 begin
 	defaults
-		data_buffer[].ena = Gnd;
+		data_buffer[][].ena = Gnd;
 	end defaults;
 	
 	-- Clock com metade da frequencia e encerramento em 15
@@ -38,7 +38,7 @@ begin
 			div2_clock = !div2_clock;
 			div2_clock.ena = Vcc;
 			count.inc = div2_clock;
-			data_buffer[].ena = !div2_clock.q;
+			data_buffer[][].ena = !div2_clock.q;
 		end if;
 	else
 		-- Desabilitado
@@ -55,15 +55,15 @@ begin
 	adc_sclk = div2_clock.q;
 
 	-- Shift register
-	data_buffer[15..1].d = data_buffer[14..0].q;
-	data_buffer[0].d = adc_sdi;
-	data_buffer[].clk = clk;
+	data_buffer[][15..1].d = data_buffer[][14..0].q;
+	data_buffer[][0].d = adc_sdi[];
+	data_buffer[][].clk = clk;
 	
 	-- Buffer de saida
 	if msb then
-		buff[].in = data_buffer[15..8].q;
+		buff[].in = data_buffer[0][15..8].q;
 	else
-		buff[].in = data_buffer[7..0].q;
+		buff[].in = data_buffer[0][7..0].q;
 	end if;
 	buff[].oe = re;
 	ts_nodes[] = buff[].out;

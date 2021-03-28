@@ -24,7 +24,7 @@ https://fpgasoftware.intel.com/eula.
 	(input)
 	(rect 16 8 184 24)
 	(text "INPUT" (rect 125 0 161 13)(font "Arial" (font_size 6)))
-	(text "clk" (rect 5 0 21 14)(font "Arial" ))
+	(text "clk" (rect 5 0 20 14)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -40,7 +40,7 @@ https://fpgasoftware.intel.com/eula.
 	(input)
 	(rect 16 24 184 40)
 	(text "INPUT" (rect 125 0 161 13)(font "Arial" (font_size 6)))
-	(text "start" (rect 5 0 33 19)(font "Intel Clear" ))
+	(text "start" (rect 5 0 32 19)(font "Intel Clear" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -56,7 +56,7 @@ https://fpgasoftware.intel.com/eula.
 	(input)
 	(rect 16 -8 184 8)
 	(text "INPUT" (rect 125 0 161 13)(font "Arial" (font_size 6)))
-	(text "reset" (rect 5 0 35 14)(font "Arial" ))
+	(text "reset" (rect 5 0 34 14)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -102,9 +102,9 @@ https://fpgasoftware.intel.com/eula.
 )
 (pin
 	(output)
-	(rect 824 128 1000 144)
+	(rect 824 168 1000 184)
 	(text "OUTPUT" (rect 1 0 51 13)(font "Arial" (font_size 6)))
-	(text "adc_sdi" (rect 90 0 136 19)(font "Intel Clear" ))
+	(text "running" (rect 90 0 132 14)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -118,9 +118,9 @@ https://fpgasoftware.intel.com/eula.
 )
 (pin
 	(output)
-	(rect 824 168 1000 184)
+	(rect 824 128 1000 144)
 	(text "OUTPUT" (rect 1 0 51 13)(font "Arial" (font_size 6)))
-	(text "running" (rect 90 0 132 14)(font "Arial" ))
+	(text "adc_sdi[5..0]" (rect 90 0 166 19)(font "Intel Clear" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -130,6 +130,77 @@ https://fpgasoftware.intel.com/eula.
 		(line (pt 78 4)(pt 82 8))
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
+	)
+)
+(symbol
+	(rect 152 624 344 768)
+	(text "aquisition_serializer" (rect 5 0 117 14)(font "Arial" ))
+	(text "inst2" (rect 8 128 35 142)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "reset" (rect 0 0 29 14)(font "Arial" ))
+		(text "reset" (rect 21 27 50 41)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "clk" (rect 0 0 15 14)(font "Arial" ))
+		(text "clk" (rect 21 43 36 57)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "enable" (rect 0 0 37 14)(font "Arial" ))
+		(text "enable" (rect 21 59 58 73)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "msb" (rect 0 0 23 14)(font "Arial" ))
+		(text "msb" (rect 21 75 44 89)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "re" (rect 0 0 11 14)(font "Arial" ))
+		(text "re" (rect 21 91 32 105)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "adc_sdi[5..0]" (rect 0 0 73 14)(font "Arial" ))
+		(text "adc_sdi[5..0]" (rect 21 107 94 121)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 3))
+	)
+	(port
+		(pt 192 48)
+		(output)
+		(text "complete" (rect 0 0 50 14)(font "Arial" ))
+		(text "complete" (rect 129 43 171 57)(font "Arial" ))
+		(line (pt 192 48)(pt 176 48))
+	)
+	(port
+		(pt 192 64)
+		(output)
+		(text "adc_sclk" (rect 0 0 50 14)(font "Arial" ))
+		(text "adc_sclk" (rect 129 59 171 73)(font "Arial" ))
+		(line (pt 192 64)(pt 176 64))
+	)
+	(port
+		(pt 192 32)
+		(bidir)
+		(text "data[7..0]" (rect 0 0 53 14)(font "Arial" ))
+		(text "data[7..0]" (rect 135 27 188 41)(font "Arial" ))
+		(line (pt 192 32)(pt 176 32)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 176 128))
 	)
 )
 (symbol
@@ -222,94 +293,23 @@ https://fpgasoftware.intel.com/eula.
 	)
 	(parameter
 		"active_period"
-		"6"
+		"67"
 		""
 	)
 	(parameter
 		"period"
-		"40"
+		"463"
 		""
 	)
 	(parameter
 		"samples"
-		"3"
+		"10"
 		""
 	)
 	(drawing
 		(rectangle (rect 16 16 344 160))
 	)
 	(annotation_block (parameter)(rect 496 -8 656 72))
-)
-(symbol
-	(rect 104 304 272 448)
-	(text "aquisition_serializer" (rect 5 0 117 14)(font "Arial" ))
-	(text "inst1" (rect 8 128 37 147)(font "Intel Clear" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "reset" (rect 0 0 29 14)(font "Arial" ))
-		(text "reset" (rect 21 27 50 41)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "clk" (rect 0 0 15 14)(font "Arial" ))
-		(text "clk" (rect 21 43 36 57)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "enable" (rect 0 0 37 14)(font "Arial" ))
-		(text "enable" (rect 21 59 58 73)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "msb" (rect 0 0 23 14)(font "Arial" ))
-		(text "msb" (rect 21 75 44 89)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80))
-	)
-	(port
-		(pt 0 96)
-		(input)
-		(text "re" (rect 0 0 11 14)(font "Arial" ))
-		(text "re" (rect 21 91 32 105)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96))
-	)
-	(port
-		(pt 0 112)
-		(input)
-		(text "adc_sdi" (rect 0 0 44 14)(font "Arial" ))
-		(text "adc_sdi" (rect 21 107 65 121)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112))
-	)
-	(port
-		(pt 168 48)
-		(output)
-		(text "complete" (rect 0 0 50 14)(font "Arial" ))
-		(text "complete" (rect 105 43 155 57)(font "Arial" ))
-		(line (pt 168 48)(pt 152 48))
-	)
-	(port
-		(pt 168 64)
-		(output)
-		(text "adc_sclk" (rect 0 0 50 14)(font "Arial" ))
-		(text "adc_sclk" (rect 105 59 155 73)(font "Arial" ))
-		(line (pt 168 64)(pt 152 64))
-	)
-	(port
-		(pt 168 32)
-		(bidir)
-		(text "data[7..0]" (rect 0 0 53 14)(font "Arial" ))
-		(text "data[7..0]" (rect 111 27 164 41)(font "Arial" ))
-		(line (pt 168 32)(pt 152 32)(line_width 3))
-	)
-	(drawing
-		(rectangle (rect 16 16 152 128))
-	)
 )
 (connector
 	(text "clk" (rect 72 80 88 99)(font "Intel Clear" ))
@@ -332,39 +332,9 @@ https://fpgasoftware.intel.com/eula.
 	(pt 64 152)
 )
 (connector
-	(text "serialize_ok" (rect 273 328 342 347)(font "Intel Clear" ))
-	(pt 272 352)
-	(pt 320 352)
-)
-(connector
-	(text "adc_sclk" (rect 273 344 323 363)(font "Intel Clear" ))
-	(pt 272 368)
-	(pt 320 368)
-)
-(connector
-	(text "adc_sdi" (rect 56 392 102 411)(font "Intel Clear" ))
-	(pt 104 416)
-	(pt 48 416)
-)
-(connector
-	(text "reset" (rect 56 312 85 331)(font "Intel Clear" ))
-	(pt 104 336)
-	(pt 48 336)
-)
-(connector
-	(text "clk" (rect 56 328 72 347)(font "Intel Clear" ))
-	(pt 104 352)
-	(pt 48 352)
-)
-(connector
 	(text "serialize" (rect 504 96 552 115)(font "Intel Clear" ))
 	(pt 496 120)
 	(pt 528 120)
-)
-(connector
-	(text "serialize" (rect 56 344 104 363)(font "Intel Clear" ))
-	(pt 104 368)
-	(pt 48 368)
 )
 (connector
 	(text "store_ok" (rect 72 144 122 163)(font "Intel Clear" ))
@@ -385,4 +355,35 @@ https://fpgasoftware.intel.com/eula.
 	(text "running" (rect 497 128 540 147)(font "Intel Clear" ))
 	(pt 496 152)
 	(pt 536 152)
+)
+(connector
+	(text "serialize_ok" (rect 345 648 414 667)(font "Intel Clear" ))
+	(pt 344 672)
+	(pt 392 672)
+)
+(connector
+	(text "adc_sclk" (rect 345 664 395 683)(font "Intel Clear" ))
+	(pt 344 688)
+	(pt 392 688)
+)
+(connector
+	(text "reset" (rect 104 632 133 651)(font "Intel Clear" ))
+	(pt 152 656)
+	(pt 96 656)
+)
+(connector
+	(text "clk" (rect 104 648 120 667)(font "Intel Clear" ))
+	(pt 152 672)
+	(pt 96 672)
+)
+(connector
+	(text "serialize" (rect 104 664 152 683)(font "Intel Clear" ))
+	(pt 152 688)
+	(pt 96 688)
+)
+(connector
+	(text "adc_sdi[5..0]" (rect 64 712 140 731)(font "Intel Clear" ))
+	(pt 64 736)
+	(pt 152 736)
+	(bus)
 )

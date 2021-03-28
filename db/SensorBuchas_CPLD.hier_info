@@ -1,12 +1,17 @@
 |aquisition_module
 adc_convst <= aquisition_ctrl:inst.convst
 clk => aquisition_ctrl:inst.clk
-clk => aquisition_serializer:inst1.clk
+clk => aquisition_serializer:inst2.clk
 start => aquisition_ctrl:inst.start
 reset => aquisition_ctrl:inst.reset
-reset => aquisition_serializer:inst1.reset
-adc_sdi <= <GND>
-adc_sclk <= aquisition_serializer:inst1.adc_sclk
+reset => aquisition_serializer:inst2.reset
+adc_sdi[0] <= <GND>
+adc_sdi[1] <= <GND>
+adc_sdi[2] <= <GND>
+adc_sdi[3] <= <GND>
+adc_sdi[4] <= <GND>
+adc_sdi[5] <= <GND>
+adc_sclk <= aquisition_serializer:inst2.adc_sclk
 running <= aquisition_ctrl:inst.running
 
 
@@ -42,21 +47,29 @@ test_clock_counter[2] <= counter:clock_counter.o[2]
 test_clock_counter[3] <= counter:clock_counter.o[3]
 test_clock_counter[4] <= counter:clock_counter.o[4]
 test_clock_counter[5] <= counter:clock_counter.o[5]
+test_clock_counter[6] <= counter:clock_counter.o[6]
+test_clock_counter[7] <= counter:clock_counter.o[7]
+test_clock_counter[8] <= counter:clock_counter.o[8]
 test_sm_state[0] <= test_sm_state[0].DB_MAX_OUTPUT_PORT_TYPE
 test_sm_state[1] <= test_sm_state[1].DB_MAX_OUTPUT_PORT_TYPE
 test_sm_state[2] <= test_sm_state[2].DB_MAX_OUTPUT_PORT_TYPE
 test_samples_counter[0] <= counter:samples_counter.o[0]
 test_samples_counter[1] <= counter:samples_counter.o[1]
+test_samples_counter[2] <= counter:samples_counter.o[2]
+test_samples_counter[3] <= counter:samples_counter.o[3]
 
 
 |aquisition_module|aquisition_ctrl:inst|counter:clock_counter
+clk => ffs[8].CLK
+clk => ffs[7].CLK
+clk => ffs[6].CLK
 clk => ffs[5].CLK
 clk => ffs[4].CLK
 clk => ffs[3].CLK
 clk => ffs[2].CLK
 clk => ffs[1].CLK
 clk => ffs[0].CLK
-reset => ffs[5].IN0
+reset => ffs[8].IN0
 clr => _.IN0
 inc => _.IN1
 inc => _.IN0
@@ -66,38 +79,125 @@ o[2] <= ffs[2].DB_MAX_OUTPUT_PORT_TYPE
 o[3] <= ffs[3].DB_MAX_OUTPUT_PORT_TYPE
 o[4] <= ffs[4].DB_MAX_OUTPUT_PORT_TYPE
 o[5] <= ffs[5].DB_MAX_OUTPUT_PORT_TYPE
+o[6] <= ffs[6].DB_MAX_OUTPUT_PORT_TYPE
+o[7] <= ffs[7].DB_MAX_OUTPUT_PORT_TYPE
+o[8] <= ffs[8].DB_MAX_OUTPUT_PORT_TYPE
 
 
 |aquisition_module|aquisition_ctrl:inst|counter:samples_counter
+clk => ffs[3].CLK
+clk => ffs[2].CLK
 clk => ffs[1].CLK
 clk => ffs[0].CLK
-reset => ffs[1].IN0
+reset => ffs[3].IN0
 clr => _.IN0
 inc => _.IN1
 inc => _.IN0
 o[0] <= ffs[0].DB_MAX_OUTPUT_PORT_TYPE
 o[1] <= ffs[1].DB_MAX_OUTPUT_PORT_TYPE
+o[2] <= ffs[2].DB_MAX_OUTPUT_PORT_TYPE
+o[3] <= ffs[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|aquisition_module|aquisition_serializer:inst1
+|aquisition_module|aquisition_serializer:inst2
 reset => counter:count.reset
 clk => counter:count.clk
-clk => data_buffer[15].CLK
-clk => data_buffer[14].CLK
-clk => data_buffer[13].CLK
-clk => data_buffer[12].CLK
-clk => data_buffer[11].CLK
-clk => data_buffer[10].CLK
-clk => data_buffer[9].CLK
-clk => data_buffer[8].CLK
-clk => data_buffer[7].CLK
-clk => data_buffer[6].CLK
-clk => data_buffer[5].CLK
-clk => data_buffer[4].CLK
-clk => data_buffer[3].CLK
-clk => data_buffer[2].CLK
-clk => data_buffer[1].CLK
-clk => data_buffer[0].CLK
+clk => data_buffer[5][15].CLK
+clk => data_buffer[5][14].CLK
+clk => data_buffer[5][13].CLK
+clk => data_buffer[5][12].CLK
+clk => data_buffer[5][11].CLK
+clk => data_buffer[5][10].CLK
+clk => data_buffer[5][9].CLK
+clk => data_buffer[5][8].CLK
+clk => data_buffer[5][7].CLK
+clk => data_buffer[5][6].CLK
+clk => data_buffer[5][5].CLK
+clk => data_buffer[5][4].CLK
+clk => data_buffer[5][3].CLK
+clk => data_buffer[5][2].CLK
+clk => data_buffer[5][1].CLK
+clk => data_buffer[5][0].CLK
+clk => data_buffer[4][15].CLK
+clk => data_buffer[4][14].CLK
+clk => data_buffer[4][13].CLK
+clk => data_buffer[4][12].CLK
+clk => data_buffer[4][11].CLK
+clk => data_buffer[4][10].CLK
+clk => data_buffer[4][9].CLK
+clk => data_buffer[4][8].CLK
+clk => data_buffer[4][7].CLK
+clk => data_buffer[4][6].CLK
+clk => data_buffer[4][5].CLK
+clk => data_buffer[4][4].CLK
+clk => data_buffer[4][3].CLK
+clk => data_buffer[4][2].CLK
+clk => data_buffer[4][1].CLK
+clk => data_buffer[4][0].CLK
+clk => data_buffer[3][15].CLK
+clk => data_buffer[3][14].CLK
+clk => data_buffer[3][13].CLK
+clk => data_buffer[3][12].CLK
+clk => data_buffer[3][11].CLK
+clk => data_buffer[3][10].CLK
+clk => data_buffer[3][9].CLK
+clk => data_buffer[3][8].CLK
+clk => data_buffer[3][7].CLK
+clk => data_buffer[3][6].CLK
+clk => data_buffer[3][5].CLK
+clk => data_buffer[3][4].CLK
+clk => data_buffer[3][3].CLK
+clk => data_buffer[3][2].CLK
+clk => data_buffer[3][1].CLK
+clk => data_buffer[3][0].CLK
+clk => data_buffer[2][15].CLK
+clk => data_buffer[2][14].CLK
+clk => data_buffer[2][13].CLK
+clk => data_buffer[2][12].CLK
+clk => data_buffer[2][11].CLK
+clk => data_buffer[2][10].CLK
+clk => data_buffer[2][9].CLK
+clk => data_buffer[2][8].CLK
+clk => data_buffer[2][7].CLK
+clk => data_buffer[2][6].CLK
+clk => data_buffer[2][5].CLK
+clk => data_buffer[2][4].CLK
+clk => data_buffer[2][3].CLK
+clk => data_buffer[2][2].CLK
+clk => data_buffer[2][1].CLK
+clk => data_buffer[2][0].CLK
+clk => data_buffer[1][15].CLK
+clk => data_buffer[1][14].CLK
+clk => data_buffer[1][13].CLK
+clk => data_buffer[1][12].CLK
+clk => data_buffer[1][11].CLK
+clk => data_buffer[1][10].CLK
+clk => data_buffer[1][9].CLK
+clk => data_buffer[1][8].CLK
+clk => data_buffer[1][7].CLK
+clk => data_buffer[1][6].CLK
+clk => data_buffer[1][5].CLK
+clk => data_buffer[1][4].CLK
+clk => data_buffer[1][3].CLK
+clk => data_buffer[1][2].CLK
+clk => data_buffer[1][1].CLK
+clk => data_buffer[1][0].CLK
+clk => data_buffer[0][15].CLK
+clk => data_buffer[0][14].CLK
+clk => data_buffer[0][13].CLK
+clk => data_buffer[0][12].CLK
+clk => data_buffer[0][11].CLK
+clk => data_buffer[0][10].CLK
+clk => data_buffer[0][9].CLK
+clk => data_buffer[0][8].CLK
+clk => data_buffer[0][7].CLK
+clk => data_buffer[0][6].CLK
+clk => data_buffer[0][5].CLK
+clk => data_buffer[0][4].CLK
+clk => data_buffer[0][3].CLK
+clk => data_buffer[0][2].CLK
+clk => data_buffer[0][1].CLK
+clk => data_buffer[0][0].CLK
 clk => div2_clock.CLK
 enable => complete~0.IN0
 enable => _.IN0
@@ -129,11 +229,16 @@ data[5] <> buff[5]
 data[6] <> buff[6]
 data[7] <> buff[7]
 complete <= complete.DB_MAX_OUTPUT_PORT_TYPE
-adc_sdi => data_buffer[0].DATAIN
+adc_sdi[0] => data_buffer[0][0].DATAIN
+adc_sdi[1] => data_buffer[1][0].DATAIN
+adc_sdi[2] => data_buffer[2][0].DATAIN
+adc_sdi[3] => data_buffer[3][0].DATAIN
+adc_sdi[4] => data_buffer[4][0].DATAIN
+adc_sdi[5] => data_buffer[5][0].DATAIN
 adc_sclk <= div2_clock.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|aquisition_module|aquisition_serializer:inst1|counter:count
+|aquisition_module|aquisition_serializer:inst2|counter:count
 clk => ffs[4].CLK
 clk => ffs[3].CLK
 clk => ffs[2].CLK

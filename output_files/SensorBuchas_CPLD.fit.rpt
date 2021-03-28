@@ -1,5 +1,5 @@
 Fitter report for SensorBuchas_CPLD
-Sat Mar 27 17:27:21 2021
+Sun Mar 28 09:12:38 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -57,15 +57,15 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------+
 ; Fitter Summary                                                      ;
 +-----------------------+---------------------------------------------+
-; Fitter Status         ; Successful - Sat Mar 27 17:27:21 2021       ;
+; Fitter Status         ; Successful - Sun Mar 28 09:12:38 2021       ;
 ; Quartus Prime Version ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name         ; SensorBuchas_CPLD                           ;
 ; Top-level Entity Name ; aquisition_module                           ;
 ; Family                ; MAX II                                      ;
 ; Device                ; EPM1270T144C5                               ;
 ; Timing Models         ; Final                                       ;
-; Total logic elements  ; 38 / 1,270 ( 3 % )                          ;
-; Total pins            ; 7 / 116 ( 6 % )                             ;
+; Total logic elements  ; 52 / 1,270 ( 4 % )                          ;
+; Total pins            ; 12 / 116 ( 10 % )                           ;
 ; Total virtual pins    ; 0                                           ;
 ; UFM blocks            ; 0 / 1 ( 0 % )                               ;
 +-----------------------+---------------------------------------------+
@@ -133,7 +133,7 @@ https://fpgasoftware.intel.com/eula.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.3%      ;
+;     Processor 2            ;   0.4%      ;
 +----------------------------+-------------+
 
 
@@ -148,31 +148,31 @@ The pin-out file can be found in /Documents/CPLD-Sensor-Buchas-V2/output_files/S
 +---------------------------------------------+--------------------+
 ; Resource                                    ; Usage              ;
 +---------------------------------------------+--------------------+
-; Total logic elements                        ; 38 / 1,270 ( 3 % ) ;
-;     -- Combinational with no register       ; 15                 ;
+; Total logic elements                        ; 52 / 1,270 ( 4 % ) ;
+;     -- Combinational with no register       ; 24                 ;
 ;     -- Register only                        ; 0                  ;
-;     -- Combinational with a register        ; 23                 ;
+;     -- Combinational with a register        ; 28                 ;
 ;                                             ;                    ;
 ; Logic element usage by number of LUT inputs ;                    ;
-;     -- 4 input functions                    ; 16                 ;
-;     -- 3 input functions                    ; 9                  ;
-;     -- 2 input functions                    ; 13                 ;
+;     -- 4 input functions                    ; 28                 ;
+;     -- 3 input functions                    ; 4                  ;
+;     -- 2 input functions                    ; 20                 ;
 ;     -- 1 input functions                    ; 0                  ;
 ;     -- 0 input functions                    ; 0                  ;
 ;                                             ;                    ;
 ; Logic elements by mode                      ;                    ;
-;     -- normal mode                          ; 31                 ;
-;     -- arithmetic mode                      ; 7                  ;
+;     -- normal mode                          ; 42                 ;
+;     -- arithmetic mode                      ; 10                 ;
 ;     -- qfbk mode                            ; 1                  ;
 ;     -- register cascade mode                ; 0                  ;
-;     -- synchronous clear/load mode          ; 6                  ;
-;     -- asynchronous clear/load mode         ; 22                 ;
+;     -- synchronous clear/load mode          ; 9                  ;
+;     -- asynchronous clear/load mode         ; 27                 ;
 ;                                             ;                    ;
-; Total registers                             ; 23 / 1,270 ( 2 % ) ;
+; Total registers                             ; 28 / 1,270 ( 2 % ) ;
 ; Total LABs                                  ; 6 / 127 ( 5 % )    ;
-; Logic elements in carry chains              ; 9                  ;
+; Logic elements in carry chains              ; 12                 ;
 ; Virtual pins                                ; 0                  ;
-; I/O pins                                    ; 7 / 116 ( 6 % )    ;
+; I/O pins                                    ; 12 / 116 ( 10 % )  ;
 ;     -- Clock pins                           ; 2 / 4 ( 50 % )     ;
 ;                                             ;                    ;
 ; UFM blocks                                  ; 0 / 1 ( 0 % )      ;
@@ -183,12 +183,12 @@ The pin-out file can be found in /Documents/CPLD-Sensor-Buchas-V2/output_files/S
 ; Global signals                              ; 2                  ;
 ;     -- Global clocks                        ; 2 / 4 ( 50 % )     ;
 ; JTAGs                                       ; 0 / 1 ( 0 % )      ;
-; Average interconnect usage (total/H/V)      ; 0.1% / 0.2% / 0.1% ;
-; Peak interconnect usage (total/H/V)         ; 0.2% / 0.3% / 0.1% ;
-; Maximum fan-out                             ; 23                 ;
-; Highest non-global fan-out                  ; 7                  ;
-; Total fan-out                               ; 170                ;
-; Average fan-out                             ; 3.78               ;
+; Average interconnect usage (total/H/V)      ; 0.4% / 0.6% / 0.1% ;
+; Peak interconnect usage (total/H/V)         ; 0.8% / 1.5% / 0.1% ;
+; Maximum fan-out                             ; 28                 ;
+; Highest non-global fan-out                  ; 10                 ;
+; Total fan-out                               ; 232                ;
+; Average fan-out                             ; 3.63               ;
 +---------------------------------------------+--------------------+
 
 
@@ -197,9 +197,9 @@ The pin-out file can be found in /Documents/CPLD-Sensor-Buchas-V2/output_files/S
 +-------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+-----------------+----------+--------------+--------------+----------------------+----------------+
 ; Name  ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Combinational Fan-Out ; Registered Fan-Out ; Global ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Location assigned by ; Slow Slew Rate ;
 +-------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+-----------------+----------+--------------+--------------+----------------------+----------------+
-; clk   ; 18    ; 1        ; 0            ; 7            ; 5           ; 23                    ; 0                  ; yes    ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Fitter               ; no             ;
-; reset ; 20    ; 1        ; 0            ; 7            ; 6           ; 22                    ; 0                  ; yes    ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Fitter               ; no             ;
-; start ; 133   ; 2        ; 7            ; 11           ; 1           ; 4                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Fitter               ; no             ;
+; clk   ; 18    ; 1        ; 0            ; 7            ; 5           ; 28                    ; 0                  ; yes    ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Fitter               ; no             ;
+; reset ; 20    ; 1        ; 0            ; 7            ; 6           ; 27                    ; 0                  ; yes    ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Fitter               ; no             ;
+; start ; 7     ; 1        ; 0            ; 8            ; 0           ; 4                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Fitter               ; no             ;
 +-------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+-----------------+----------+--------------+--------------+----------------------+----------------+
 
 
@@ -208,10 +208,15 @@ The pin-out file can be found in /Documents/CPLD-Sensor-Buchas-V2/output_files/S
 +------------+-------+----------+--------------+--------------+-------------+-----------------+----------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+------------------------+----------------------+-------+----------------------+---------------------+
 ; Name       ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Output Register ; Slow Slew Rate ; PCI I/O Enabled ; Open Drain ; TRI Primitive ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Fast Output Connection ; Location assigned by ; Load  ; Output Enable Source ; Output Enable Group ;
 +------------+-------+----------+--------------+--------------+-------------+-----------------+----------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+------------------------+----------------------+-------+----------------------+---------------------+
-; adc_convst ; 129   ; 2        ; 8            ; 11           ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; adc_sclk   ; 119   ; 2        ; 11           ; 11           ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; adc_sdi    ; 30    ; 1        ; 0            ; 5            ; 6           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; running    ; 132   ; 2        ; 7            ; 11           ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; yes                    ; Fitter               ; 10 pF ; -                    ; -                   ;
+; adc_convst ; 140   ; 2        ; 4            ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; adc_sclk   ; 134   ; 2        ; 7            ; 11           ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; adc_sdi[0] ; 22    ; 1        ; 0            ; 6            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; adc_sdi[1] ; 1     ; 1        ; 0            ; 10           ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; adc_sdi[2] ; 87    ; 3        ; 17           ; 5            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; adc_sdi[3] ; 27    ; 1        ; 0            ; 6            ; 5           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; adc_sdi[4] ; 23    ; 1        ; 0            ; 6            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; adc_sdi[5] ; 28    ; 1        ; 0            ; 5            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; running    ; 11    ; 1        ; 0            ; 8            ; 6           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
 +------------+-------+----------+--------------+--------------+-------------+-----------------+----------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+------------------------+----------------------+-------+----------------------+---------------------+
 
 
@@ -220,9 +225,9 @@ The pin-out file can be found in /Documents/CPLD-Sensor-Buchas-V2/output_files/S
 +----------+-----------------+---------------+--------------+
 ; I/O Bank ; Usage           ; VCCIO Voltage ; VREF Voltage ;
 +----------+-----------------+---------------+--------------+
-; 1        ; 3 / 26 ( 12 % ) ; 3.3V          ; --           ;
-; 2        ; 4 / 30 ( 13 % ) ; 3.3V          ; --           ;
-; 3        ; 0 / 30 ( 0 % )  ; 3.3V          ; --           ;
+; 1        ; 9 / 26 ( 35 % ) ; 3.3V          ; --           ;
+; 2        ; 2 / 30 ( 7 % )  ; 3.3V          ; --           ;
+; 3        ; 1 / 30 ( 3 % )  ; 3.3V          ; --           ;
 ; 4        ; 0 / 30 ( 0 % )  ; 3.3V          ; --           ;
 +----------+-----------------+---------------+--------------+
 
@@ -232,17 +237,17 @@ The pin-out file can be found in /Documents/CPLD-Sensor-Buchas-V2/output_files/S
 +----------+------------+----------+----------------+--------+--------------+-----------+------------+-----------------+----------+--------------+
 ; Location ; Pad Number ; I/O Bank ; Pin Name/Usage ; Dir.   ; I/O Standard ; Voltage   ; I/O Type   ; User Assignment ; Bus Hold ; Weak Pull Up ;
 +----------+------------+----------+----------------+--------+--------------+-----------+------------+-----------------+----------+--------------+
-; 1        ; 2          ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
+; 1        ; 2          ; 1        ; adc_sdi[1]     ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; N               ; no       ; Off          ;
 ; 2        ; 3          ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 3        ; 5          ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 4        ; 7          ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 5        ; 9          ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 6        ; 10         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
-; 7        ; 14         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
+; 7        ; 14         ; 1        ; start          ; input  ; 3.3-V LVTTL  ;           ; Row I/O    ; N               ; no       ; Off          ;
 ; 8        ; 15         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 9        ;            ; 1        ; VCCIO1         ; power  ;              ; 3.3V      ; --         ;                 ; --       ; --           ;
 ; 10       ;            ;          ; GNDIO          ; gnd    ;              ;           ; --         ;                 ; --       ; --           ;
-; 11       ; 20         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
+; 11       ; 20         ; 1        ; running        ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; N               ; no       ; Off          ;
 ; 12       ; 21         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 13       ; 22         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 14       ; 23         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
@@ -253,15 +258,15 @@ The pin-out file can be found in /Documents/CPLD-Sensor-Buchas-V2/output_files/S
 ; 19       ;            ;          ; VCCINT         ; power  ;              ; 2.5V/3.3V ; --         ;                 ; --       ; --           ;
 ; 20       ; 27         ; 1        ; reset          ; input  ; 3.3-V LVTTL  ;           ; Row I/O    ; N               ; no       ; Off          ;
 ; 21       ; 28         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
-; 22       ; 29         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
-; 23       ; 30         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
+; 22       ; 29         ; 1        ; adc_sdi[0]     ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; N               ; no       ; Off          ;
+; 23       ; 30         ; 1        ; adc_sdi[4]     ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; N               ; no       ; Off          ;
 ; 24       ; 31         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 25       ;            ; 1        ; VCCIO1         ; power  ;              ; 3.3V      ; --         ;                 ; --       ; --           ;
 ; 26       ;            ;          ; GNDIO          ; gnd    ;              ;           ; --         ;                 ; --       ; --           ;
-; 27       ; 33         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
-; 28       ; 36         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
+; 27       ; 33         ; 1        ; adc_sdi[3]     ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; N               ; no       ; Off          ;
+; 28       ; 36         ; 1        ; adc_sdi[5]     ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; N               ; no       ; Off          ;
 ; 29       ; 37         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
-; 30       ; 41         ; 1        ; adc_sdi        ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; N               ; no       ; Off          ;
+; 30       ; 41         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 31       ; 44         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 32       ; 47         ; 1        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 33       ; 50         ; 1        ; #TMS           ; input  ;              ;           ; --         ;                 ; --       ; --           ;
@@ -318,7 +323,7 @@ The pin-out file can be found in /Documents/CPLD-Sensor-Buchas-V2/output_files/S
 ; 84       ; 129        ; 3        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 85       ; 130        ; 3        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 86       ; 131        ; 3        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
-; 87       ; 132        ; 3        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
+; 87       ; 132        ; 3        ; adc_sdi[2]     ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; N               ; no       ; Off          ;
 ; 88       ; 133        ; 3        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 89       ; 134        ; 3        ; GND*           ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 90       ;            ;          ; VCCINT         ; power  ;              ; 2.5V/3.3V ; --         ;                 ; --       ; --           ;
@@ -350,7 +355,7 @@ The pin-out file can be found in /Documents/CPLD-Sensor-Buchas-V2/output_files/S
 ; 116      ;            ; 2        ; VCCIO2         ; power  ;              ; 3.3V      ; --         ;                 ; --       ; --           ;
 ; 117      ; 180        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 118      ; 181        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
-; 119      ; 182        ; 2        ; adc_sclk       ; output ; 3.3-V LVTTL  ;           ; Column I/O ; N               ; no       ; Off          ;
+; 119      ; 182        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 120      ; 183        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 121      ; 184        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 122      ; 185        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
@@ -360,18 +365,18 @@ The pin-out file can be found in /Documents/CPLD-Sensor-Buchas-V2/output_files/S
 ; 126      ;            ;          ; VCCINT         ; power  ;              ; 2.5V/3.3V ; --         ;                 ; --       ; --           ;
 ; 127      ; 189        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 128      ;            ;          ; GNDINT         ; gnd    ;              ;           ; --         ;                 ; --       ; --           ;
-; 129      ; 190        ; 2        ; adc_convst     ; output ; 3.3-V LVTTL  ;           ; Column I/O ; N               ; no       ; Off          ;
+; 129      ; 190        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 130      ; 191        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 131      ; 192        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
-; 132      ; 193        ; 2        ; running        ; output ; 3.3-V LVTTL  ;           ; Column I/O ; N               ; no       ; Off          ;
-; 133      ; 194        ; 2        ; start          ; input  ; 3.3-V LVTTL  ;           ; Column I/O ; N               ; no       ; Off          ;
-; 134      ; 195        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
+; 132      ; 193        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
+; 133      ; 194        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
+; 134      ; 195        ; 2        ; adc_sclk       ; output ; 3.3-V LVTTL  ;           ; Column I/O ; N               ; no       ; Off          ;
 ; 135      ;            ;          ; GNDIO          ; gnd    ;              ;           ; --         ;                 ; --       ; --           ;
 ; 136      ;            ; 2        ; VCCIO2         ; power  ;              ; 3.3V      ; --         ;                 ; --       ; --           ;
 ; 137      ; 199        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 138      ; 200        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 139      ; 201        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
-; 140      ; 204        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
+; 140      ; 204        ; 2        ; adc_convst     ; output ; 3.3-V LVTTL  ;           ; Column I/O ; N               ; no       ; Off          ;
 ; 141      ; 205        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 142      ; 208        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 143      ; 212        ; 2        ; GND*           ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
@@ -403,7 +408,12 @@ Note: User assignments will override these defaults. The user specified values a
 ; Pin Name   ; Reason                      ;
 +------------+-----------------------------+
 ; adc_convst ; Missing location assignment ;
-; adc_sdi    ; Missing location assignment ;
+; adc_sdi[5] ; Missing location assignment ;
+; adc_sdi[4] ; Missing location assignment ;
+; adc_sdi[3] ; Missing location assignment ;
+; adc_sdi[2] ; Missing location assignment ;
+; adc_sdi[1] ; Missing location assignment ;
+; adc_sdi[0] ; Missing location assignment ;
 ; adc_sclk   ; Missing location assignment ;
 ; running    ; Missing location assignment ;
 ; start      ; Missing location assignment ;
@@ -417,12 +427,12 @@ Note: User assignments will override these defaults. The user specified values a
 +----------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------+-----------------------+--------------+
 ; Compilation Hierarchy Node       ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                             ; Entity Name           ; Library Name ;
 +----------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------+-----------------------+--------------+
-; |aquisition_module               ; 38 (0)      ; 23           ; 0          ; 7    ; 0            ; 15 (0)       ; 0 (0)             ; 23 (0)           ; 9 (0)           ; 1 (0)      ; |aquisition_module                                              ; aquisition_module     ; work         ;
-;    |aquisition_ctrl:inst|        ; 24 (13)     ; 17           ; 0          ; 0    ; 0            ; 7 (4)        ; 0 (0)             ; 17 (9)           ; 5 (0)           ; 1 (1)      ; |aquisition_module|aquisition_ctrl:inst                         ; aquisition_ctrl       ; work         ;
-;       |counter:clock_counter|    ; 8 (8)       ; 6            ; 0          ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 6 (6)            ; 5 (5)           ; 0 (0)      ; |aquisition_module|aquisition_ctrl:inst|counter:clock_counter   ; counter               ; work         ;
-;       |counter:samples_counter|  ; 3 (3)       ; 2            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 2 (2)            ; 0 (0)           ; 0 (0)      ; |aquisition_module|aquisition_ctrl:inst|counter:samples_counter ; counter               ; work         ;
-;    |aquisition_serializer:inst1| ; 14 (1)      ; 6            ; 0          ; 0    ; 0            ; 8 (0)        ; 0 (0)             ; 6 (1)            ; 4 (0)           ; 0 (0)      ; |aquisition_module|aquisition_serializer:inst1                  ; aquisition_serializer ; work         ;
-;       |counter:count|            ; 13 (13)     ; 5            ; 0          ; 0    ; 0            ; 8 (8)        ; 0 (0)             ; 5 (5)            ; 4 (4)           ; 0 (0)      ; |aquisition_module|aquisition_serializer:inst1|counter:count    ; counter               ; work         ;
+; |aquisition_module               ; 52 (0)      ; 28           ; 0          ; 12   ; 0            ; 24 (0)       ; 0 (0)             ; 28 (0)           ; 12 (0)          ; 1 (0)      ; |aquisition_module                                              ; aquisition_module     ; work         ;
+;    |aquisition_ctrl:inst|        ; 36 (15)     ; 22           ; 0          ; 0    ; 0            ; 14 (6)       ; 0 (0)             ; 22 (9)           ; 8 (0)           ; 1 (1)      ; |aquisition_module|aquisition_ctrl:inst                         ; aquisition_ctrl       ; work         ;
+;       |counter:clock_counter|    ; 12 (12)     ; 9            ; 0          ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 9 (9)            ; 8 (8)           ; 0 (0)      ; |aquisition_module|aquisition_ctrl:inst|counter:clock_counter   ; counter               ; work         ;
+;       |counter:samples_counter|  ; 9 (9)       ; 4            ; 0          ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 4 (4)            ; 0 (0)           ; 0 (0)      ; |aquisition_module|aquisition_ctrl:inst|counter:samples_counter ; counter               ; work         ;
+;    |aquisition_serializer:inst2| ; 16 (1)      ; 6            ; 0          ; 0    ; 0            ; 10 (0)       ; 0 (0)             ; 6 (1)            ; 4 (0)           ; 0 (0)      ; |aquisition_module|aquisition_serializer:inst2                  ; aquisition_serializer ; work         ;
+;       |counter:count|            ; 15 (15)     ; 5            ; 0          ; 0    ; 0            ; 10 (10)      ; 0 (0)             ; 5 (5)            ; 4 (4)           ; 0 (0)      ; |aquisition_module|aquisition_serializer:inst2|counter:count    ; counter               ; work         ;
 +----------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------+-----------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -433,7 +443,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name       ; Pin Type ; Pad to Core 0 ;
 +------------+----------+---------------+
 ; adc_convst ; Output   ; --            ;
-; adc_sdi    ; Output   ; --            ;
+; adc_sdi[5] ; Output   ; --            ;
+; adc_sdi[4] ; Output   ; --            ;
+; adc_sdi[3] ; Output   ; --            ;
+; adc_sdi[2] ; Output   ; --            ;
+; adc_sdi[1] ; Output   ; --            ;
+; adc_sdi[0] ; Output   ; --            ;
 ; adc_sclk   ; Output   ; --            ;
 ; running    ; Output   ; --            ;
 ; start      ; Input    ; (1)           ;
@@ -442,15 +457,15 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------------+----------+---------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------+
-; Control Signals                                                                                                                           ;
-+------------------------------------------------+--------------+---------+--------------+--------+----------------------+------------------+
-; Name                                           ; Location     ; Fan-Out ; Usage        ; Global ; Global Resource Used ; Global Line Name ;
-+------------------------------------------------+--------------+---------+--------------+--------+----------------------+------------------+
-; aquisition_ctrl:inst|counter:clock_counter|_~4 ; LC_X9_Y10_N8 ; 6       ; Sync. clear  ; no     ; --                   ; --               ;
-; clk                                            ; PIN_18       ; 23      ; Clock        ; yes    ; Global Clock         ; GCLK0            ;
-; reset                                          ; PIN_20       ; 22      ; Async. clear ; yes    ; Global Clock         ; GCLK1            ;
-+------------------------------------------------+--------------+---------+--------------+--------+----------------------+------------------+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Control Signals                                                                                                                          ;
++------------------------------------------------+-------------+---------+--------------+--------+----------------------+------------------+
+; Name                                           ; Location    ; Fan-Out ; Usage        ; Global ; Global Resource Used ; Global Line Name ;
++------------------------------------------------+-------------+---------+--------------+--------+----------------------+------------------+
+; aquisition_ctrl:inst|counter:clock_counter|_~2 ; LC_X5_Y8_N8 ; 8       ; Sync. clear  ; no     ; --                   ; --               ;
+; clk                                            ; PIN_18      ; 28      ; Clock        ; yes    ; Global Clock         ; GCLK0            ;
+; reset                                          ; PIN_20      ; 27      ; Async. clear ; yes    ; Global Clock         ; GCLK1            ;
++------------------------------------------------+-------------+---------+--------------+--------+----------------------+------------------+
 
 
 +----------------------------------------------------------------------+
@@ -458,8 +473,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------+----------+---------+----------------------+------------------+
 ; Name  ; Location ; Fan-Out ; Global Resource Used ; Global Line Name ;
 +-------+----------+---------+----------------------+------------------+
-; clk   ; PIN_18   ; 23      ; Global Clock         ; GCLK0            ;
-; reset ; PIN_20   ; 22      ; Global Clock         ; GCLK1            ;
+; clk   ; PIN_18   ; 28      ; Global Clock         ; GCLK0            ;
+; reset ; PIN_20   ; 27      ; Global Clock         ; GCLK1            ;
 +-------+----------+---------+----------------------+------------------+
 
 
@@ -468,30 +483,30 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+----------------------+
 ; Routing Resource Type ; Usage                ;
 +-----------------------+----------------------+
-; C4s                   ; 4 / 2,870 ( < 1 % )  ;
-; Direct links          ; 20 / 3,938 ( < 1 % ) ;
+; C4s                   ; 2 / 2,870 ( < 1 % )  ;
+; Direct links          ; 39 / 3,938 ( < 1 % ) ;
 ; Global clocks         ; 2 / 4 ( 50 % )       ;
 ; LAB clocks            ; 12 / 72 ( 17 % )     ;
-; LUT chains            ; 5 / 1,143 ( < 1 % )  ;
-; Local interconnects   ; 29 / 3,938 ( < 1 % ) ;
-; R4s                   ; 5 / 2,832 ( < 1 % )  ;
+; LUT chains            ; 10 / 1,143 ( < 1 % ) ;
+; Local interconnects   ; 57 / 3,938 ( 1 % )   ;
+; R4s                   ; 15 / 2,832 ( < 1 % ) ;
 +-----------------------+----------------------+
 
 
 +--------------------------------------------------------------------------+
 ; LAB Logic Elements                                                       ;
 +--------------------------------------------+-----------------------------+
-; Number of Logic Elements  (Average = 6.33) ; Number of LABs  (Total = 6) ;
+; Number of Logic Elements  (Average = 8.67) ; Number of LABs  (Total = 6) ;
 +--------------------------------------------+-----------------------------+
-; 1                                          ; 2                           ;
+; 1                                          ; 0                           ;
 ; 2                                          ; 0                           ;
 ; 3                                          ; 0                           ;
 ; 4                                          ; 0                           ;
-; 5                                          ; 0                           ;
-; 6                                          ; 1                           ;
+; 5                                          ; 1                           ;
+; 6                                          ; 0                           ;
 ; 7                                          ; 0                           ;
-; 8                                          ; 0                           ;
-; 9                                          ; 0                           ;
+; 8                                          ; 1                           ;
+; 9                                          ; 1                           ;
 ; 10                                         ; 3                           ;
 +--------------------------------------------+-----------------------------+
 
@@ -509,18 +524,18 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                       ;
 +---------------------------------------------+-----------------------------+
-; Number of Signals Sourced  (Average = 6.67) ; Number of LABs  (Total = 6) ;
+; Number of Signals Sourced  (Average = 9.00) ; Number of LABs  (Total = 6) ;
 +---------------------------------------------+-----------------------------+
 ; 0                                           ; 0                           ;
-; 1                                           ; 2                           ;
+; 1                                           ; 0                           ;
 ; 2                                           ; 0                           ;
 ; 3                                           ; 0                           ;
 ; 4                                           ; 0                           ;
-; 5                                           ; 0                           ;
-; 6                                           ; 1                           ;
+; 5                                           ; 1                           ;
+; 6                                           ; 0                           ;
 ; 7                                           ; 0                           ;
-; 8                                           ; 0                           ;
-; 9                                           ; 0                           ;
+; 8                                           ; 1                           ;
+; 9                                           ; 1                           ;
 ; 10                                          ; 2                           ;
 ; 11                                          ; 0                           ;
 ; 12                                          ; 1                           ;
@@ -530,31 +545,43 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                       ;
 +-------------------------------------------------+-----------------------------+
-; Number of Signals Sourced Out  (Average = 3.67) ; Number of LABs  (Total = 6) ;
+; Number of Signals Sourced Out  (Average = 5.33) ; Number of LABs  (Total = 6) ;
 +-------------------------------------------------+-----------------------------+
 ; 0                                               ; 0                           ;
-; 1                                               ; 2                           ;
+; 1                                               ; 1                           ;
 ; 2                                               ; 0                           ;
-; 3                                               ; 1                           ;
-; 4                                               ; 0                           ;
-; 5                                               ; 1                           ;
-; 6                                               ; 2                           ;
+; 3                                               ; 0                           ;
+; 4                                               ; 1                           ;
+; 5                                               ; 0                           ;
+; 6                                               ; 3                           ;
+; 7                                               ; 0                           ;
+; 8                                               ; 0                           ;
+; 9                                               ; 1                           ;
 +-------------------------------------------------+-----------------------------+
 
 
 +---------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                       ;
 +---------------------------------------------+-----------------------------+
-; Number of Distinct Inputs  (Average = 5.67) ; Number of LABs  (Total = 6) ;
+; Number of Distinct Inputs  (Average = 8.50) ; Number of LABs  (Total = 6) ;
 +---------------------------------------------+-----------------------------+
 ; 0                                           ; 0                           ;
 ; 1                                           ; 0                           ;
 ; 2                                           ; 0                           ;
-; 3                                           ; 1                           ;
+; 3                                           ; 0                           ;
 ; 4                                           ; 0                           ;
-; 5                                           ; 0                           ;
-; 6                                           ; 4                           ;
-; 7                                           ; 1                           ;
+; 5                                           ; 1                           ;
+; 6                                           ; 0                           ;
+; 7                                           ; 2                           ;
+; 8                                           ; 2                           ;
+; 9                                           ; 0                           ;
+; 10                                          ; 0                           ;
+; 11                                          ; 0                           ;
+; 12                                          ; 0                           ;
+; 13                                          ; 0                           ;
+; 14                                          ; 0                           ;
+; 15                                          ; 0                           ;
+; 16                                          ; 1                           ;
 +---------------------------------------------+-----------------------------+
 
 
@@ -588,7 +615,7 @@ Info (176444): Device migration not selected. If you intend to use device migrat
     Info (176445): Device EPM570T144A5 is compatible
     Info (176445): Device EPM1270T144I5 is compatible
     Info (176445): Device EPM1270T144A5 is compatible
-Critical Warning (169085): No exact pin location assignment(s) for 7 pins of 7 total pins. For the list of pins please refer to the I/O Assignment Warnings table in the fitter report.
+Critical Warning (169085): No exact pin location assignment(s) for 12 pins of 12 total pins. For the list of pins please refer to the I/O Assignment Warnings table in the fitter report.
 Critical Warning (332012): Synopsys Design Constraints File file not found: 'SensorBuchas_CPLD.sdc'. A Synopsys Design Constraints File is required by the Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
 Info (332144): No user constrained base clocks found in the design
 Info (332128): Timing requirements not specified -- optimizing circuit to achieve the following default global requirements
@@ -606,7 +633,7 @@ Info (186468): Started processing fast register assignments
 Info (186469): Finished processing fast register assignments
 Info (176235): Finished register packing
 Info (176214): Statistics of I/O pins that need to be placed that use the same VCCIO and VREF, before I/O pin placement
-    Info (176211): Number of I/O pins in group: 5 (unused VREF, 3.3V VCCIO, 1 input, 4 output, 0 bidirectional)
+    Info (176211): Number of I/O pins in group: 10 (unused VREF, 3.3V VCCIO, 1 input, 9 output, 0 bidirectional)
         Info (176212): I/O standards used: 3.3-V LVTTL.
 Info (176215): I/O bank details before I/O pin placement
     Info (176214): Statistics of I/O banks
@@ -627,13 +654,13 @@ Info (170195): Router estimated average interconnect usage is 0% of the availabl
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
-Info (11888): Total time spent on timing analysis during the Fitter is 0.17 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.15 seconds.
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:00
 Warning (169174): The Reserve All Unused Pins setting has not been specified, and will default to 'As output driving ground'.
 Info (144001): Generated suppressed messages file /Documents/CPLD-Sensor-Buchas-V2/output_files/SensorBuchas_CPLD.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 5 warnings
-    Info: Peak virtual memory: 5075 megabytes
-    Info: Processing ended: Sat Mar 27 17:27:21 2021
+    Info: Peak virtual memory: 5044 megabytes
+    Info: Processing ended: Sun Mar 28 09:12:38 2021
     Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:02
 
