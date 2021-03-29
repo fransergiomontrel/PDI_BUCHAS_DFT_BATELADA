@@ -1,0 +1,96 @@
+PARAMETERS
+(
+		little_endian = 1
+);
+
+include "counter.inc";
+
+subdesign acquisition_serializer(
+	reset: input;
+	clk: input;
+	enable: input;
+	msb: input;
+	channel[2..0]: input;
+	
+	data[7..0]: output;
+	serialize_ok: output;
+	
+	adc_sdo[5..0]: input;
+	adc_sclk: output;
+)
+variable
+	data_buffer[5..0][15..0]: dffe;
+	count: counter with (MAX_VALUE = 16);
+	div2_clock: dffe;
+	serialize_ok_ff: dff;
+	bus_bits[15..0]: node;
+	
+begin
+	defaults
+		data_buffer[][].ena = Gnd;
+		serialize_ok_ff.d = Gnd;
+	end defaults;
+	
+	-- Clock com metade da frequencia e encerramento em 15
+	div2_clock.clk = clk;
+	if enable then
+		if count.o[] == 16 and !div2_clock.q then	-- Criterio de enceramento da serialização
+			-- Concluiu a serializacao
+			serialize_ok_ff.d = Vcc;
+			div2_clock.ena = Gnd;
+			count.inc = Gnd;
+		else
+			-- Habilitado e serializando
+			serialize_ok_ff.d = Gnd;
+			div2_clock = !div2_clock;
+			div2_clock.ena = Vcc;
+			count.inc = div2_clock;
+			data_buffer[][].ena = !div2_clock.q;
+		end if;
+	else		
+		-- Desabilitado
+		div2_clock = Gnd;
+		count.inc = Gnd;
+	end if;
+
+	-- serialize_ok serializado
+	serialize_ok_ff.clk = clk;
+	serialize_ok_ff.clrn = !reset;
+	serialize_ok = serialize_ok_ff.q;
+	
+	-- Contador de bits
+	count.clk = clk;
+	count.reset = reset;
+	count.clr = !enable;
+	
+	-- Serial clock
+	adc_sclk = div2_clock.q;
+
+	-- Shift register
+	data_buffer[][15..1].d = data_buffer[][14..0].q;
+	data_buffer[][0].d = adc_sdo[];
+	data_buffer[][].clk = clk;
+	
+	-- Buffer de saida
+	CASE channel[] IS
+	WHEN 0 =>
+		bus_bits[] = data_buffer[0][].q;
+	WHEN 1 =>
+		bus_bits[] = data_buffer[1][].q;
+	WHEN 2 =>
+		bus_bits[] = data_buffer[2][].q;
+	WHEN 3 =>
+		bus_bits[] = data_buffer[3][].q;
+	WHEN 4 =>
+		bus_bits[] = data_buffer[4][].q;
+	WHEN 5 =>
+		bus_bits[] = data_buffer[5][].q;
+END CASE;
+
+	-- Seleciona o Endian
+	if msb $ little_endian then
+		data[] = bus_bits[7..0];
+	else
+		data[] = bus_bits[15..8];
+	end if;
+end;

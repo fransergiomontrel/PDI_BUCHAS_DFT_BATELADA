@@ -7,9 +7,9 @@ constant N_BITS = log2(MAX_VALUE+1);
 
 subdesign counter(
 	clk: input;
-	reset: input;
-	clr: input;
-	inc: input;
+	reset: input = Gnd;
+	clr: input = Gnd;
+	inc: input = Gnd;
 	
 	o[N_BITS-1..0]: output
 )

@@ -19,15 +19,15 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "03/26/2021 14:55:23"
+// Generated on "03/29/2021 18:06:24"
                                                                                 
-// Verilog Test Bench (with test vectors) for design :                          counter
+// Verilog Test Bench (with test vectors) for design :                          teste
 // 
 // Simulation tool : 3rd Party
 // 
 
 `timescale 1 ps/ 1 ps
-module counter_vlg_vec_tst();
+module teste_vlg_vec_tst();
 // constants                                           
 // general purpose registers
 reg clk;
@@ -35,10 +35,10 @@ reg clr;
 reg inc;
 reg reset;
 // wires                                               
-wire [2:0] o;
+wire [3:0] o;
 
 // assign statements (if any)                          
-counter i1 (
+teste i1 (
 // port map - connection between master ports and signals/registers   
 	.clk(clk),
 	.clr(clr),
@@ -60,11 +60,23 @@ begin
 end 
 
 // clr
-always
+initial
 begin
+	repeat(2)
+	begin
+		clr = 1'b0;
+		clr = #50000 1'b1;
+		# 50000;
+	end
 	clr = 1'b0;
-	clr = #50000 1'b1;
-	#50000;
+	clr = #350000 1'b1;
+	# 50000;
+	repeat(4)
+	begin
+		clr = 1'b0;
+		clr = #50000 1'b1;
+		# 50000;
+	end
 end 
 
 // inc

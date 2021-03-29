@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "MAX II"
 set_global_assignment -name DEVICE EPM1270T144C5
-set_global_assignment -name TOP_LEVEL_ENTITY aquisition_module
+set_global_assignment -name TOP_LEVEL_ENTITY RAM_interface
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:45:03  MARCH 24, 2021"
 set_global_assignment -name LAST_QUARTUS_VERSION "20.1.1 Lite Edition"
@@ -55,20 +55,21 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
-set_global_assignment -name AHDL_FILE conversion_ctrl.tdf
-set_global_assignment -name BDF_FILE SensorBuchas_CPLD.bdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform.vwf
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "NO HEAT SINK WITH STILL AIR"
+set_global_assignment -name VECTOR_WAVEFORM_FILE teste_acquisition_module.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE teste_acquisition_ctrl.vwf
+set_global_assignment -name AHDL_FILE acquisition_serializer.tdf
+set_global_assignment -name BDF_FILE acquisition_module.bdf
+set_global_assignment -name AHDL_FILE acquisition_ctrl.tdf
 set_global_assignment -name AHDL_FILE single_pulse.tdf
 set_global_assignment -name INCLUDE_FILE modes.inc
 set_global_assignment -name AHDL_FILE synchronizer.tdf
 set_global_assignment -name VECTOR_WAVEFORM_FILE teste_synchronizer.vwf
-set_global_assignment -name AHDL_FILE aquisition_ctrl.tdf
 set_global_assignment -name AHDL_FILE counter.tdf
 set_global_assignment -name VECTOR_WAVEFORM_FILE teste_counter.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE teste_aquisition_ctrl.vwf
 set_global_assignment -name AHDL_FILE mode_selector.tdf
 set_global_assignment -name VECTOR_WAVEFORM_FILE teste_mode_selector.vwf
-set_global_assignment -name AHDL_FILE aquisition_serializer.tdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE teste_aquisition_serializer.vwf
-set_global_assignment -name BDF_FILE aquisition_module.bdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE teste_aquisition_module.vwf
+set_global_assignment -name AHDL_FILE acquisition_store.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE teste_acquisition_store.vwf
+set_global_assignment -name AHDL_FILE RAM_interface.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE teste_RAM_interface.vwf

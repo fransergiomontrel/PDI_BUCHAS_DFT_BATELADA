@@ -7,7 +7,7 @@ Note: if both ModelSim-Altera and ModelSim executables are available, ModelSim-A
 
 **** Generating the ModelSim Testbench ****
 
-quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off SensorBuchas_CPLD -c SensorBuchas_CPLD --vector_source="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/teste_aquisition_module.vwf" --testbench_file="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/teste_aquisition_module.vwf.vt"
+quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off SensorBuchas_CPLD -c SensorBuchas_CPLD --vector_source="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/teste_RAM_interface.vwf" --testbench_file="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/teste_RAM_interface.vwf.vt"
 
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
@@ -26,8 +26,8 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Sun Mar 28 09:36:55 2021
-Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off SensorBuchas_CPLD -c SensorBuchas_CPLD --vector_source=//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/teste_aquisition_module.vwf --testbench_file=//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/teste_aquisition_module.vwf.vt
+    Info: Processing started: Mon Mar 29 19:13:19 2021
+Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off SensorBuchas_CPLD -c SensorBuchas_CPLD --vector_source=//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/teste_RAM_interface.vwf --testbench_file=//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/teste_RAM_interface.vwf.vt
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 
 Completed successfully. 
@@ -55,14 +55,14 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Sun Mar 28 09:36:56 2021
+    Info: Processing started: Mon Mar 29 19:13:20 2021
 Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory=//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/ SensorBuchas_CPLD -c SensorBuchas_CPLD
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (204019): Generated file SensorBuchas_CPLD.vo in folder "//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim//" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 4615 megabytes
-    Info: Processing ended: Sun Mar 28 09:36:57 2021
-    Info: Elapsed time: 00:00:01
+    Info: Processing ended: Mon Mar 29 19:13:20 2021
+    Info: Elapsed time: 00:00:00
     Info: Total CPU time (on all processors): 00:00:01
 
 Completed successfully. 
@@ -86,53 +86,53 @@ Reading pref.tcl
 # ** Warning: (vlib-34) Library already exists at "work".
 
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 09:36:58 on Mar 28,2021
+# Start time: 19:13:21 on Mar 29,2021
 # vlog -work work SensorBuchas_CPLD.vo 
 
-# -- Compiling module aquisition_module
+# -- Compiling module RAM_interface
 # 
 # Top level modules:
-# 	aquisition_module
-# End time: 09:36:58 on Mar 28,2021, Elapsed time: 0:00:00
+# 	RAM_interface
+# End time: 19:13:22 on Mar 29,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 09:36:58 on Mar 28,2021
-# vlog -work work teste_aquisition_module.vwf.vt 
+# Start time: 19:13:22 on Mar 29,2021
+# vlog -work work teste_RAM_interface.vwf.vt 
 
-# -- Compiling module aquisition_module_vlg_vec_tst
+# -- Compiling module RAM_interface_vlg_vec_tst
+
 # 
 # Top level modules:
-# 	aquisition_module_vlg_vec_tst
-# End time: 09:36:59 on Mar 28,2021, Elapsed time: 0:00:01
+# 	RAM_interface_vlg_vec_tst
+# End time: 19:13:22 on Mar 29,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 
-# vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.aquisition_module_vlg_vec_tst 
-# Start time: 09:36:59 on Mar 28,2021
-# Loading work.aquisition_module_vlg_vec_tst
-# Loading work.aquisition_module
+# vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.RAM_interface_vlg_vec_tst 
+# Start time: 19:13:22 on Mar 29,2021
+# Loading work.RAM_interface_vlg_vec_tst
+# Loading work.RAM_interface
 # Loading maxii_ver.maxii_io
 # Loading maxii_ver.maxii_lcell
 # Loading maxii_ver.maxii_asynch_lcell
 # Loading maxii_ver.maxii_lcell_register
 # after#25
-
-# ** Note: $finish    : teste_aquisition_module.vwf.vt(55)
-#    Time: 100 us  Iteration: 0  Instance: /aquisition_module_vlg_vec_tst
-# End time: 09:36:59 on Mar 28,2021, Elapsed time: 0:00:00
+# ** Note: $finish    : teste_RAM_interface.vwf.vt(73)
+#    Time: 1 us  Iteration: 0  Instance: /RAM_interface_vlg_vec_tst
+# End time: 19:13:23 on Mar 29,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 
 Completed successfully. 
 
 **** Converting ModelSim VCD to vector waveform ****
 
-Reading //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/teste_aquisition_module.vwf...
+Reading //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/teste_RAM_interface.vwf...
 
 Reading //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/SensorBuchas_CPLD.msim.vcd...
 
 Processing channel transitions... 
 
-Writing the resulting VWF to //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/SensorBuchas_CPLD_20210328093700.sim.vwf
+Writing the resulting VWF to //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/SensorBuchas_CPLD_20210329191323.sim.vwf
 
 Finished VCD to VWF conversion.
 

@@ -1,0 +1,57 @@
+include "lpm_counter.inc";
+include "modes.inc";
+
+PARAMETERS
+(
+		N_BITS = 19
+);
+
+subdesign RAM_interface(
+	clk: input;
+	reset: input;
+	addr_clr: input;
+	addr_inc: input;
+	data_in[7..0]: input;
+	we_n: input;
+	cs_n: input;
+	
+	mode[1..0]: input;
+	changing: input;
+	
+	data_out[7..0]: output;
+	
+	ram_address[N_BITS-1..0]: output;
+	ram_data_bus[7..0]: bidir;
+	ram_we_n: output;
+	ram_cs_n: output;
+	ram_oe_n: output;
+)
+variable
+	address_counter: lpm_counter with(LPM_DIRECTION="UP", LPM_WIDTH = N_BITS);
+	tsn[7..0]: TRI_STATE_NODE;
+	buffer[7..0]: TRI;
+	write, read: node;
+	driver[7..0]: lcell;
+begin
+	address_counter.clock = clk;
+	address_counter.aclr = reset;
+	address_counter.sclr = addr_clr;
+	address_counter.cnt_en = addr_inc;
+	
+	ram_address[] = address_counter.q[];
+	
+	write = (mode[] == MODE_AQUISITION) and !changing;
+	read = (mode[] == MODE_READ_DATA) and !changing;
+	
+	buffer[].in = data_in[];
+	buffer[].oe = write;
+	tsn[] = buffer[].out;
+	ram_data_bus[] = tsn[];
+	
+	ram_we_n = we_n or !write;
+	ram_cs_n = cs_n or !(write or read);
+	ram_oe_n = !read;
+	
+	driver[].in = tsn[];
+	data_out[] = driver[].out;
+end;
