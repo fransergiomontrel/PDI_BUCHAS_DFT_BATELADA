@@ -16,7 +16,7 @@ subdesign RAM_interface(
 	cs_n: input;
 	
 	mode[1..0]: input;
-	changing: input;
+	changing_mode: input;
 	
 	data_out[7..0]: output;
 	
@@ -40,8 +40,8 @@ begin
 	
 	ram_address[] = address_counter.q[];
 	
-	write = (mode[] == MODE_AQUISITION) and !changing;
-	read = (mode[] == MODE_READ_DATA) and !changing;
+	write = (mode[] == MODE_AQUISITION) and !changing_mode;
+	read = (mode[] == MODE_READ_DATA) and !changing_mode;
 	
 	buffer[].in = data_in[];
 	buffer[].oe = write;

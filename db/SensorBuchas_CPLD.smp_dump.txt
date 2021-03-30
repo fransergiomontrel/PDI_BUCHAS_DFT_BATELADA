@@ -9,6 +9,14 @@ CS1b 0 0 1 0 0 0 1
 INC_CHANNEL 0 1 0 0 0 0 1 
 WAIT_END 1 0 0 0 0 0 1 
 
+State Machine - |acquisition_module|host_interface:inst3|mode_selector:mode_sel|sm
+Name sChangedRequested sStable sWaitingChangeOk sUpdateMode sNoticeChanging 
+sNoticeChanging 0 0 0 0 0 
+sUpdateMode 0 0 0 1 1 
+sWaitingChangeOk 0 0 1 0 1 
+sStable 0 1 0 0 1 
+sChangedRequested 1 0 0 0 1 
+
 State Machine - |acquisition_module|acquisition_ctrl:inst9|sm
 Name WAITING_END_OF_CYCLE STORING SERIALIZING WAIT_STATE AQUISITIONING WAITING_START_HIGH WAITING_START_LOW 
 WAITING_START_LOW 0 0 0 0 0 0 0 
