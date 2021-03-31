@@ -1,5 +1,5 @@
 Timing Analyzer report for SensorBuchas_CPLD
-Tue Mar 30 12:51:11 2021
+Wed Mar 31 16:55:50 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -91,13 +91,13 @@ https://fpgasoftware.intel.com/eula.
 +------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
 
 
-+-------------------------------------------------+
-; Fmax Summary                                    ;
-+-----------+-----------------+------------+------+
-; Fmax      ; Restricted Fmax ; Clock Name ; Note ;
-+-----------+-----------------+------------+------+
-; 135.7 MHz ; 135.7 MHz       ; clk        ;      ;
-+-----------+-----------------+------------+------+
++--------------------------------------------------+
+; Fmax Summary                                     ;
++------------+-----------------+------------+------+
+; Fmax       ; Restricted Fmax ; Clock Name ; Note ;
++------------+-----------------+------------+------+
+; 141.48 MHz ; 141.48 MHz      ; clk        ;      ;
++------------+-----------------+------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
 
@@ -106,7 +106,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------+--------+---------------+
 ; Clock ; Slack  ; End Point TNS ;
 +-------+--------+---------------+
-; clk   ; -6.369 ; -867.306      ;
+; clk   ; -6.068 ; -882.767      ;
 +-------+--------+---------------+
 
 
@@ -140,220 +140,220 @@ No paths to report.
 +-------+--------+---------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Setup: 'clk'                                                                                                                                                                                                                                ;
-+--------+--------------------------------------------------------------------------+-----------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; Slack  ; From Node                                                                ; To Node                                                                           ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+--------+--------------------------------------------------------------------------+-----------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; -6.369 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                      ; acquisition_ctrl:inst9|AQUISITIONING                                              ; clk          ; clk         ; 1.000        ; 0.000      ; 7.036      ;
-; -6.345 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[0]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[8]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 7.012      ;
-; -6.345 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[0]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[1]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 7.012      ;
-; -6.345 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[0]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[5]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 7.012      ;
-; -6.345 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[0]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 7.012      ;
-; -6.345 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[0]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[4]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 7.012      ;
-; -6.345 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[0]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[2]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 7.012      ;
-; -6.345 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[0]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 7.012      ;
-; -6.345 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[0]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 7.012      ;
-; -6.123 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[8] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.790      ;
-; -6.123 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.790      ;
-; -6.123 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[7] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.790      ;
-; -6.123 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[6] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.790      ;
-; -6.123 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.790      ;
-; -6.123 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.790      ;
-; -6.123 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.790      ;
-; -6.123 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.790      ;
-; -6.123 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.790      ;
-; -6.097 ; acquisition_ctrl:inst9|running_ff                                        ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][0]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.764      ;
-; -6.097 ; acquisition_ctrl:inst9|running_ff                                        ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.764      ;
-; -6.097 ; acquisition_ctrl:inst9|running_ff                                        ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][0]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.764      ;
-; -6.097 ; acquisition_ctrl:inst9|running_ff                                        ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.764      ;
-; -6.097 ; acquisition_ctrl:inst9|running_ff                                        ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][1]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.764      ;
-; -6.097 ; acquisition_ctrl:inst9|running_ff                                        ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][2]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.764      ;
-; -6.063 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[8]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.730      ;
-; -6.063 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[1]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.730      ;
-; -6.063 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[5]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.730      ;
-; -6.063 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.730      ;
-; -6.063 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[4]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.730      ;
-; -6.063 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[2]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.730      ;
-; -6.063 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.730      ;
-; -6.063 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.730      ;
-; -6.034 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][0]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.701      ;
-; -6.034 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.701      ;
-; -6.034 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][0]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.701      ;
-; -6.034 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.701      ;
-; -6.034 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][1]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.701      ;
-; -6.034 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][2]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.701      ;
-; -6.023 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                      ; acquisition_ctrl:inst9|AQUISITIONING                                              ; clk          ; clk         ; 1.000        ; 0.000      ; 6.690      ;
-; -5.970 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[1]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[8]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.637      ;
-; -5.970 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[1]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[1]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.637      ;
-; -5.970 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[1]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[5]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.637      ;
-; -5.970 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[1]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.637      ;
-; -5.970 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[1]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[4]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.637      ;
-; -5.970 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[1]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[2]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.637      ;
-; -5.970 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[1]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.637      ;
-; -5.970 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[1]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.637      ;
-; -5.898 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                      ; acquisition_ctrl:inst9|AQUISITIONING                                              ; clk          ; clk         ; 1.000        ; 0.000      ; 6.565      ;
-; -5.824 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[0]                      ; acquisition_ctrl:inst9|AQUISITIONING                                              ; clk          ; clk         ; 1.000        ; 0.000      ; 6.491      ;
-; -5.765 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; acquisition_ctrl:inst9|counter:clock_counter|ffs[8]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.432      ;
-; -5.765 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; acquisition_ctrl:inst9|counter:clock_counter|ffs[1]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.432      ;
-; -5.765 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; acquisition_ctrl:inst9|counter:clock_counter|ffs[5]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.432      ;
-; -5.765 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.432      ;
-; -5.765 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; acquisition_ctrl:inst9|counter:clock_counter|ffs[4]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.432      ;
-; -5.765 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; acquisition_ctrl:inst9|counter:clock_counter|ffs[2]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.432      ;
-; -5.765 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.432      ;
-; -5.765 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.432      ;
-; -5.758 ; acquisition_ctrl:inst9|STORING                                           ; acquisition_ctrl:inst9|counter:samples_counter|ffs[0]                             ; clk          ; clk         ; 1.000        ; 0.000      ; 6.425      ;
-; -5.751 ; acquisition_ctrl:inst9|STORING                                           ; acquisition_ctrl:inst9|WAITING_END_OF_CYCLE                                       ; clk          ; clk         ; 1.000        ; 0.000      ; 6.418      ;
-; -5.750 ; acquisition_ctrl:inst9|STORING                                           ; acquisition_ctrl:inst9|counter:samples_counter|ffs[1]                             ; clk          ; clk         ; 1.000        ; 0.000      ; 6.417      ;
-; -5.740 ; acquisition_ctrl:inst9|counter:samples_counter|ffs[0]                    ; acquisition_ctrl:inst9|counter:clock_counter|ffs[0]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.407      ;
-; -5.734 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[1]                      ; acquisition_ctrl:inst9|AQUISITIONING                                              ; clk          ; clk         ; 1.000        ; 0.000      ; 6.401      ;
-; -5.717 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[8]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.384      ;
-; -5.717 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[1]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.384      ;
-; -5.717 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[5]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.384      ;
-; -5.717 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.384      ;
-; -5.717 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[4]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.384      ;
-; -5.717 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[2]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.384      ;
-; -5.717 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.384      ;
-; -5.717 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.384      ;
-; -5.716 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[2]                      ; acquisition_ctrl:inst9|AQUISITIONING                                              ; clk          ; clk         ; 1.000        ; 0.000      ; 6.383      ;
-; -5.697 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                      ; acquisition_ctrl:inst9|convst_ff                                                  ; clk          ; clk         ; 1.000        ; 0.000      ; 6.364      ;
-; -5.678 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][0]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.345      ;
-; -5.678 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.345      ;
-; -5.678 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][0]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.345      ;
-; -5.678 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.345      ;
-; -5.678 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][1]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.345      ;
-; -5.678 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][2]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.345      ;
-; -5.640 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][3] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][0]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.307      ;
-; -5.640 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][3] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.307      ;
-; -5.640 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][3] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][0]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.307      ;
-; -5.640 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][3] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.307      ;
-; -5.640 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][3] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][1]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.307      ;
-; -5.640 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][3] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][2]          ; clk          ; clk         ; 1.000        ; 0.000      ; 6.307      ;
-; -5.632 ; acquisition_ctrl:inst9|WAITING_END_OF_CYCLE                              ; acquisition_ctrl:inst9|counter:clock_counter|ffs[8]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.299      ;
-; -5.632 ; acquisition_ctrl:inst9|WAITING_END_OF_CYCLE                              ; acquisition_ctrl:inst9|counter:clock_counter|ffs[1]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.299      ;
-; -5.632 ; acquisition_ctrl:inst9|WAITING_END_OF_CYCLE                              ; acquisition_ctrl:inst9|counter:clock_counter|ffs[5]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.299      ;
-; -5.632 ; acquisition_ctrl:inst9|WAITING_END_OF_CYCLE                              ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.299      ;
-; -5.632 ; acquisition_ctrl:inst9|WAITING_END_OF_CYCLE                              ; acquisition_ctrl:inst9|counter:clock_counter|ffs[4]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.299      ;
-; -5.632 ; acquisition_ctrl:inst9|WAITING_END_OF_CYCLE                              ; acquisition_ctrl:inst9|counter:clock_counter|ffs[2]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.299      ;
-; -5.632 ; acquisition_ctrl:inst9|WAITING_END_OF_CYCLE                              ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.299      ;
-; -5.632 ; acquisition_ctrl:inst9|WAITING_END_OF_CYCLE                              ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.299      ;
-; -5.622 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[8]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.289      ;
-; -5.622 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[1]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.289      ;
-; -5.622 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[5]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.289      ;
-; -5.622 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.289      ;
-; -5.622 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[4]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.289      ;
-; -5.622 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[2]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.289      ;
-; -5.622 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[3]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.289      ;
-; -5.622 ; acquisition_ctrl:inst9|counter:clock_counter|ffs[6]                      ; acquisition_ctrl:inst9|counter:clock_counter|ffs[7]                               ; clk          ; clk         ; 1.000        ; 0.000      ; 6.289      ;
-+--------+--------------------------------------------------------------------------+-----------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Setup: 'clk'                                                                                                                                                                                                                                   ;
++--------+--------------------------------------------------------------------------------+--------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                                                                      ; To Node                                                                        ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+--------------------------------------------------------------------------------+--------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; -6.068 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][0]       ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 6.735      ;
+; -6.068 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][0]       ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 6.735      ;
+; -6.068 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][0]       ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 6.735      ;
+; -6.068 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][0]       ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 6.735      ;
+; -6.068 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][0]       ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 6.735      ;
+; -6.068 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][0]       ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 6.735      ;
+; -6.036 ; acquisition_module:inst|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE             ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[8]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.703      ;
+; -6.036 ; acquisition_module:inst|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE             ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[1]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.703      ;
+; -6.036 ; acquisition_module:inst|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE             ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[6]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.703      ;
+; -6.036 ; acquisition_module:inst|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE             ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[4]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.703      ;
+; -6.036 ; acquisition_module:inst|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE             ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[5]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.703      ;
+; -6.036 ; acquisition_module:inst|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE             ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[2]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.703      ;
+; -6.036 ; acquisition_module:inst|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE             ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[3]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.703      ;
+; -6.036 ; acquisition_module:inst|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE             ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[7]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.703      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][15]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][14]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][14]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][14]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][14]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][5]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][13]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][13]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][13]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][4]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][4]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][3]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][3]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][2]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][2]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][1]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][1]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -6.016 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][0]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.683      ;
+; -5.907 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][0]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.574      ;
+; -5.907 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][0]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.574      ;
+; -5.878 ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:samples_counter|ffs[1]   ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[8]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.545      ;
+; -5.878 ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:samples_counter|ffs[1]   ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[1]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.545      ;
+; -5.878 ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:samples_counter|ffs[1]   ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[6]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.545      ;
+; -5.878 ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:samples_counter|ffs[1]   ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[4]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.545      ;
+; -5.878 ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:samples_counter|ffs[1]   ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[5]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.545      ;
+; -5.878 ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:samples_counter|ffs[1]   ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[2]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.545      ;
+; -5.878 ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:samples_counter|ffs[1]   ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[3]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.545      ;
+; -5.878 ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:samples_counter|ffs[1]   ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[7]     ; clk          ; clk         ; 1.000        ; 0.000      ; 6.545      ;
+; -5.862 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][4]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.529      ;
+; -5.862 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][12]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.529      ;
+; -5.862 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][3]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.529      ;
+; -5.862 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][11]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.529      ;
+; -5.862 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][2]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.529      ;
+; -5.862 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][10]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.529      ;
+; -5.862 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][1]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.529      ;
+; -5.862 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][9]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.529      ;
+; -5.862 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][0]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.529      ;
+; -5.862 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][8]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.529      ;
+; -5.854 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][7]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.521      ;
+; -5.854 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][15]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.521      ;
+; -5.854 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][6]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.521      ;
+; -5.854 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][14]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.521      ;
+; -5.854 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][5]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.521      ;
+; -5.854 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][13]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.521      ;
+; -5.854 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][4]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.521      ;
+; -5.822 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[0] ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.489      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][15]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][14]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][14]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][14]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][14]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][5]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][13]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][13]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][13]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][4]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][4]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][3]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][3]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][2]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][2]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][1]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][1]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.794 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][0]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.461      ;
+; -5.745 ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[3]     ; acquisition_module:inst|acquisition_ctrl:ctrl|AQUISITIONING                    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.412      ;
+; -5.717 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[0] ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.384      ;
+; -5.685 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][0]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.352      ;
+; -5.685 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][0]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.352      ;
+; -5.679 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1]       ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 6.346      ;
+; -5.679 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1]       ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 6.346      ;
+; -5.679 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1]       ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 6.346      ;
+; -5.679 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1]       ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 6.346      ;
+; -5.679 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1]       ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 6.346      ;
+; -5.679 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1]       ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 6.346      ;
+; -5.670 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[1] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][15]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.337      ;
+; -5.670 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[1] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][14]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.337      ;
+; -5.670 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[1] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][14]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.337      ;
+; -5.670 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[1] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][14]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.337      ;
+; -5.670 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[1] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][14]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.337      ;
+; -5.670 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[1] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][5]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.337      ;
+; -5.670 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[1] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][13]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.337      ;
+; -5.670 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[1] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][13]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.337      ;
+; -5.670 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[1] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][13]   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.337      ;
+; -5.670 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[1] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][4]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.337      ;
+; -5.670 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[1] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][4]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.337      ;
+; -5.670 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[1] ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][3]    ; clk          ; clk         ; 1.000        ; 0.000      ; 6.337      ;
++--------+--------------------------------------------------------------------------------+--------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Hold: 'clk'                                                                                                                                                                                                                       ;
-+-------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; Slack ; From Node                                                                ; To Node                                                                  ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+-------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; 1.078 ; host_interface:inst3|mode_selector:mode_sel|sStable                      ; host_interface:inst3|mode_selector:mode_sel|sStable                      ; clk          ; clk         ; 0.000        ; 0.000      ; 1.299      ;
-; 1.078 ; acquisition_store:inst13|WAIT_END                                        ; acquisition_store:inst13|WAIT_END                                        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.299      ;
-; 1.376 ; acquisition_serializer:inst12|data_buffer[5][8]                          ; acquisition_serializer:inst12|data_buffer[5][9]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.597      ;
-; 1.386 ; acquisition_serializer:inst12|data_buffer[2][0]                          ; acquisition_serializer:inst12|data_buffer[2][1]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.607      ;
-; 1.387 ; acquisition_serializer:inst12|data_buffer[4][5]                          ; acquisition_serializer:inst12|data_buffer[4][6]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.608      ;
-; 1.387 ; acquisition_serializer:inst12|data_buffer[5][5]                          ; acquisition_serializer:inst12|data_buffer[5][6]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.608      ;
-; 1.387 ; acquisition_serializer:inst12|data_buffer[5][0]                          ; acquisition_serializer:inst12|data_buffer[5][1]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.608      ;
-; 1.388 ; acquisition_serializer:inst12|data_buffer[1][13]                         ; acquisition_serializer:inst12|data_buffer[1][14]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.609      ;
-; 1.390 ; acquisition_serializer:inst12|data_buffer[5][13]                         ; acquisition_serializer:inst12|data_buffer[5][14]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.611      ;
-; 1.393 ; acquisition_serializer:inst12|data_buffer[5][11]                         ; acquisition_serializer:inst12|data_buffer[5][12]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.614      ;
-; 1.393 ; acquisition_serializer:inst12|data_buffer[2][10]                         ; acquisition_serializer:inst12|data_buffer[2][11]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.614      ;
-; 1.394 ; acquisition_serializer:inst12|data_buffer[3][1]                          ; acquisition_serializer:inst12|data_buffer[3][2]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.615      ;
-; 1.394 ; acquisition_serializer:inst12|data_buffer[1][8]                          ; acquisition_serializer:inst12|data_buffer[1][9]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.615      ;
-; 1.394 ; acquisition_serializer:inst12|data_buffer[3][0]                          ; acquisition_serializer:inst12|data_buffer[3][1]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.615      ;
-; 1.395 ; acquisition_serializer:inst12|data_buffer[3][13]                         ; acquisition_serializer:inst12|data_buffer[3][14]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.616      ;
-; 1.395 ; acquisition_serializer:inst12|data_buffer[4][7]                          ; acquisition_serializer:inst12|data_buffer[4][8]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.616      ;
-; 1.396 ; acquisition_serializer:inst12|data_buffer[3][11]                         ; acquisition_serializer:inst12|data_buffer[3][12]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.617      ;
-; 1.397 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][1] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.618      ;
-; 1.397 ; acquisition_serializer:inst12|data_buffer[2][13]                         ; acquisition_serializer:inst12|data_buffer[2][14]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.618      ;
-; 1.397 ; acquisition_serializer:inst12|data_buffer[3][3]                          ; acquisition_serializer:inst12|data_buffer[3][4]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.618      ;
-; 1.397 ; acquisition_serializer:inst12|data_buffer[2][11]                         ; acquisition_serializer:inst12|data_buffer[2][12]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.618      ;
-; 1.399 ; acquisition_serializer:inst12|data_buffer[1][10]                         ; acquisition_serializer:inst12|data_buffer[1][11]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.620      ;
-; 1.399 ; acquisition_serializer:inst12|data_buffer[3][2]                          ; acquisition_serializer:inst12|data_buffer[3][3]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.620      ;
-; 1.399 ; acquisition_serializer:inst12|data_buffer[3][10]                         ; acquisition_serializer:inst12|data_buffer[3][11]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.620      ;
-; 1.399 ; acquisition_serializer:inst12|data_buffer[1][9]                          ; acquisition_serializer:inst12|data_buffer[1][10]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.620      ;
-; 1.400 ; acquisition_serializer:inst12|data_buffer[2][8]                          ; acquisition_serializer:inst12|data_buffer[2][9]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.621      ;
-; 1.401 ; acquisition_serializer:inst12|data_buffer[1][11]                         ; acquisition_serializer:inst12|data_buffer[1][12]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.622      ;
-; 1.401 ; acquisition_serializer:inst12|data_buffer[5][3]                          ; acquisition_serializer:inst12|data_buffer[5][4]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.622      ;
-; 1.402 ; acquisition_serializer:inst12|data_buffer[0][9]                          ; acquisition_serializer:inst12|data_buffer[0][10]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.623      ;
-; 1.403 ; acquisition_serializer:inst12|data_buffer[0][10]                         ; acquisition_serializer:inst12|data_buffer[0][11]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.624      ;
-; 1.403 ; acquisition_serializer:inst12|data_buffer[5][9]                          ; acquisition_serializer:inst12|data_buffer[5][10]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.624      ;
-; 1.404 ; acquisition_serializer:inst12|data_buffer[5][12]                         ; acquisition_serializer:inst12|data_buffer[5][13]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.625      ;
-; 1.407 ; acquisition_serializer:inst12|data_buffer[0][8]                          ; acquisition_serializer:inst12|data_buffer[0][9]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.628      ;
-; 1.409 ; acquisition_serializer:inst12|data_buffer[3][5]                          ; acquisition_serializer:inst12|data_buffer[3][6]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.630      ;
-; 1.410 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][2] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.631      ;
-; 1.410 ; acquisition_serializer:inst12|data_buffer[0][11]                         ; acquisition_serializer:inst12|data_buffer[0][12]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.631      ;
-; 1.412 ; acquisition_serializer:inst12|data_buffer[1][6]                          ; acquisition_serializer:inst12|data_buffer[1][7]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.633      ;
-; 1.412 ; acquisition_serializer:inst12|data_buffer[1][2]                          ; acquisition_serializer:inst12|data_buffer[1][3]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.633      ;
-; 1.413 ; acquisition_serializer:inst12|data_buffer[5][4]                          ; acquisition_serializer:inst12|data_buffer[5][5]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.634      ;
-; 1.415 ; acquisition_serializer:inst12|data_buffer[4][2]                          ; acquisition_serializer:inst12|data_buffer[4][3]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.636      ;
-; 1.417 ; acquisition_serializer:inst12|data_buffer[4][14]                         ; acquisition_serializer:inst12|data_buffer[4][15]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.638      ;
-; 1.418 ; acquisition_serializer:inst12|data_buffer[2][6]                          ; acquisition_serializer:inst12|data_buffer[2][7]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.639      ;
-; 1.421 ; acquisition_serializer:inst12|data_buffer[2][5]                          ; acquisition_serializer:inst12|data_buffer[2][6]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.642      ;
-; 1.424 ; acquisition_serializer:inst12|data_buffer[0][3]                          ; acquisition_serializer:inst12|data_buffer[0][4]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.645      ;
-; 1.427 ; acquisition_serializer:inst12|data_buffer[3][14]                         ; acquisition_serializer:inst12|data_buffer[3][15]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.648      ;
-; 1.640 ; acquisition_serializer:inst12|data_buffer[5][14]                         ; acquisition_serializer:inst12|data_buffer[5][15]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.861      ;
-; 1.646 ; host_interface:inst3|mode_selector:mode_sel|mode_out_ff[0]               ; host_interface:inst3|mode_selector:mode_sel|sStable                      ; clk          ; clk         ; 0.000        ; 0.000      ; 1.867      ;
-; 1.651 ; acquisition_serializer:inst12|data_buffer[3][6]                          ; acquisition_serializer:inst12|data_buffer[3][7]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.872      ;
-; 1.661 ; acquisition_serializer:inst12|data_buffer[4][0]                          ; acquisition_serializer:inst12|data_buffer[4][1]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.882      ;
-; 1.662 ; acquisition_store:inst13|CS0a                                            ; acquisition_store:inst13|CS0b                                            ; clk          ; clk         ; 0.000        ; 0.000      ; 1.883      ;
-; 1.668 ; acquisition_serializer:inst12|data_buffer[1][1]                          ; acquisition_serializer:inst12|data_buffer[1][2]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.889      ;
-; 1.671 ; acquisition_serializer:inst12|data_buffer[0][1]                          ; acquisition_serializer:inst12|data_buffer[0][2]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.892      ;
-; 1.677 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; clk          ; clk         ; 0.000        ; 0.000      ; 1.898      ;
-; 1.677 ; acquisition_serializer:inst12|data_buffer[1][0]                          ; acquisition_serializer:inst12|data_buffer[1][1]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.898      ;
-; 1.678 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][3] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.899      ;
-; 1.678 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][0] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.899      ;
-; 1.678 ; acquisition_serializer:inst12|data_buffer[0][0]                          ; acquisition_serializer:inst12|data_buffer[0][1]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.899      ;
-; 1.679 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; acquisition_ctrl:inst9|running_ff                                        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.900      ;
-; 1.679 ; acquisition_serializer:inst12|data_buffer[4][4]                          ; acquisition_serializer:inst12|data_buffer[4][5]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.900      ;
-; 1.679 ; acquisition_serializer:inst12|data_buffer[1][3]                          ; acquisition_serializer:inst12|data_buffer[1][4]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.900      ;
-; 1.680 ; acquisition_ctrl:inst9|SERIALIZING                                       ; acquisition_serializer:inst12|counter:count|ffs[0]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.901      ;
-; 1.681 ; acquisition_ctrl:inst9|SERIALIZING                                       ; acquisition_serializer:inst12|serialize_ok_ff                            ; clk          ; clk         ; 0.000        ; 0.000      ; 1.902      ;
-; 1.681 ; acquisition_serializer:inst12|data_buffer[2][3]                          ; acquisition_serializer:inst12|data_buffer[2][4]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.902      ;
-; 1.682 ; acquisition_serializer:inst12|data_buffer[2][2]                          ; acquisition_serializer:inst12|data_buffer[2][3]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.903      ;
-; 1.682 ; acquisition_serializer:inst12|data_buffer[4][9]                          ; acquisition_serializer:inst12|data_buffer[4][10]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.903      ;
-; 1.683 ; acquisition_serializer:inst12|data_buffer[4][3]                          ; acquisition_serializer:inst12|data_buffer[4][4]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.904      ;
-; 1.683 ; acquisition_serializer:inst12|data_buffer[4][8]                          ; acquisition_serializer:inst12|data_buffer[4][9]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.904      ;
-; 1.684 ; acquisition_serializer:inst12|data_buffer[0][2]                          ; acquisition_serializer:inst12|data_buffer[0][3]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.905      ;
-; 1.693 ; acquisition_serializer:inst12|data_buffer[4][11]                         ; acquisition_serializer:inst12|data_buffer[4][12]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.914      ;
-; 1.694 ; host_interface:inst3|mode_selector:mode_sel|sWaitingChangeOk             ; host_interface:inst3|mode_selector:mode_sel|sWaitingChangeOk             ; clk          ; clk         ; 0.000        ; 0.000      ; 1.915      ;
-; 1.698 ; acquisition_serializer:inst12|data_buffer[4][13]                         ; acquisition_serializer:inst12|data_buffer[4][14]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.919      ;
-; 1.700 ; host_interface:inst3|mode_selector:mode_sel|sChangedRequested            ; host_interface:inst3|mode_selector:mode_sel|changing_ff                  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.921      ;
-; 1.702 ; acquisition_serializer:inst12|data_buffer[4][12]                         ; acquisition_serializer:inst12|data_buffer[4][13]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.923      ;
-; 1.706 ; host_interface:inst3|mode_selector:mode_sel|sNoticeChanging              ; host_interface:inst3|mode_selector:mode_sel|sUpdateMode                  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.927      ;
-; 1.710 ; host_interface:inst3|mode_selector:mode_sel|sChangedRequested            ; host_interface:inst3|mode_selector:mode_sel|sNoticeChanging              ; clk          ; clk         ; 0.000        ; 0.000      ; 1.931      ;
-; 1.749 ; acquisition_serializer:inst12|data_buffer[4][10]                         ; acquisition_serializer:inst12|data_buffer[4][11]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.970      ;
-; 1.767 ; acquisition_serializer:inst12|data_buffer[3][4]                          ; acquisition_serializer:inst12|data_buffer[3][5]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.988      ;
-; 1.769 ; acquisition_serializer:inst12|data_buffer[5][10]                         ; acquisition_serializer:inst12|data_buffer[5][11]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.990      ;
-; 1.777 ; acquisition_serializer:inst12|data_buffer[2][14]                         ; acquisition_serializer:inst12|data_buffer[2][15]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.998      ;
-; 1.780 ; acquisition_serializer:inst12|data_buffer[3][12]                         ; acquisition_serializer:inst12|data_buffer[3][13]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 2.001      ;
-; 1.783 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][2] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][3] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.004      ;
-; 1.783 ; acquisition_serializer:inst12|data_buffer[3][9]                          ; acquisition_serializer:inst12|data_buffer[3][10]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 2.004      ;
-; 1.787 ; acquisition_serializer:inst12|data_buffer[2][9]                          ; acquisition_serializer:inst12|data_buffer[2][10]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 2.008      ;
-; 1.788 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][0] ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][1] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.009      ;
-; 1.808 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][3] ; host_interface:inst3|mode_selector:mode_sel|mode_out_ff[0]               ; clk          ; clk         ; 0.000        ; 0.000      ; 2.029      ;
-; 1.808 ; acquisition_serializer:inst12|data_buffer[1][14]                         ; acquisition_serializer:inst12|data_buffer[1][15]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 2.029      ;
-; 1.833 ; acquisition_store:inst13|CS0b                                            ; acquisition_store:inst13|CS1b                                            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.054      ;
-; 1.843 ; acquisition_store:inst13|CS1b                                            ; acquisition_store:inst13|INC_CHANNEL                                     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.064      ;
-; 1.858 ; acquisition_serializer:inst12|data_buffer[4][6]                          ; acquisition_serializer:inst12|data_buffer[4][7]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.079      ;
-; 1.861 ; acquisition_serializer:inst12|data_buffer[5][2]                          ; acquisition_serializer:inst12|data_buffer[5][3]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.082      ;
-; 1.911 ; acquisition_serializer:inst12|serialize_ok_ff                            ; acquisition_ctrl:inst9|SERIALIZING                                       ; clk          ; clk         ; 0.000        ; 0.000      ; 2.132      ;
-; 1.953 ; host_interface:inst3|mode_selector:mode_sel|sUpdateMode                  ; host_interface:inst3|mode_selector:mode_sel|sWaitingChangeOk             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.174      ;
-; 1.958 ; acquisition_ctrl:inst9|WAITING_START_LOW                                 ; acquisition_ctrl:inst9|WAITING_START_HIGH                                ; clk          ; clk         ; 0.000        ; 0.000      ; 2.179      ;
-; 1.967 ; acquisition_store:inst13|WAIT_END                                        ; acquisition_store:inst13|we_n_ff                                         ; clk          ; clk         ; 0.000        ; 0.000      ; 2.188      ;
-; 1.972 ; host_interface:inst3|mode_selector:mode_sel|sStable                      ; host_interface:inst3|mode_selector:mode_sel|sChangedRequested            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.193      ;
-; 1.975 ; acquisition_store:inst13|WAIT_END                                        ; acquisition_store:inst13|counter:channel_counter|ffs[3]                  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.196      ;
-; 2.044 ; acquisition_serializer:inst12|div2_clock                                 ; acquisition_serializer:inst12|counter:count|ffs[2]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 2.265      ;
-; 2.055 ; acquisition_serializer:inst12|div2_clock                                 ; acquisition_serializer:inst12|counter:count|ffs[4]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 2.276      ;
-; 2.079 ; acquisition_store:inst13|CS1a                                            ; acquisition_store:inst13|cs_n_ff                                         ; clk          ; clk         ; 0.000        ; 0.000      ; 2.300      ;
-; 2.081 ; acquisition_store:inst13|CS1a                                            ; acquisition_store:inst13|CS0a                                            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.302      ;
-+-------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Hold: 'clk'                                                                                                                                                                                                                                           ;
++-------+------------------------------------------------------------------------------------+------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                                                                          ; To Node                                                                            ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+------------------------------------------------------------------------------------+------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 1.078 ; host_interface:inst3|mode_selector:mode_sel|sStable                                ; host_interface:inst3|mode_selector:mode_sel|sStable                                ; clk          ; clk         ; 0.000        ; 0.000      ; 1.299      ;
+; 1.078 ; acquisition_module:inst|acquisition_store:storer|WAIT_END                          ; acquisition_module:inst|acquisition_store:storer|WAIT_END                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.299      ;
+; 1.375 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][10]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][11]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.596      ;
+; 1.381 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][13]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][14]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.602      ;
+; 1.383 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][2]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][3]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.604      ;
+; 1.385 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][13]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][14]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.606      ;
+; 1.386 ; acquisition_module:inst|acquisition_store:storer|CS0b                              ; acquisition_module:inst|acquisition_store:storer|CS1b                              ; clk          ; clk         ; 0.000        ; 0.000      ; 1.607      ;
+; 1.386 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][5]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][6]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.607      ;
+; 1.389 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][13]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][14]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.610      ;
+; 1.391 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][14]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][15]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.612      ;
+; 1.392 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][14]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][15]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.613      ;
+; 1.392 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][8]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][9]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.613      ;
+; 1.393 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][3]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][4]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.614      ;
+; 1.393 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][9]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][10]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.614      ;
+; 1.394 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][10]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][11]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.615      ;
+; 1.396 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][11]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][12]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.617      ;
+; 1.396 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][10]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][11]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.617      ;
+; 1.396 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][0]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][1]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.617      ;
+; 1.397 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][3]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][4]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.618      ;
+; 1.398 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][13]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][14]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.619      ;
+; 1.398 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][9]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][10]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.619      ;
+; 1.399 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][11]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][12]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.620      ;
+; 1.401 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][4]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][5]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.622      ;
+; 1.401 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][8]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][9]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.622      ;
+; 1.402 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][13]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][14]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.623      ;
+; 1.402 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][9]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][10]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.623      ;
+; 1.403 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][6]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][7]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.624      ;
+; 1.403 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][2]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][3]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.624      ;
+; 1.403 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][9]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][10]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.624      ;
+; 1.404 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][0]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][1]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.625      ;
+; 1.405 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][11]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][12]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.626      ;
+; 1.409 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][10]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][11]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.630      ;
+; 1.412 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][6]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[3][7]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.633      ;
+; 1.412 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][10]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][11]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.633      ;
+; 1.412 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][1]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][2]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.633      ;
+; 1.414 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][0]           ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][1]           ; clk          ; clk         ; 0.000        ; 0.000      ; 1.635      ;
+; 1.416 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][6]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][7]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.637      ;
+; 1.416 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][1]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][2]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.637      ;
+; 1.418 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][2]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][3]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.639      ;
+; 1.419 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][0]           ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1]           ; clk          ; clk         ; 0.000        ; 0.000      ; 1.640      ;
+; 1.423 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][4]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][5]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.644      ;
+; 1.430 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][5]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][6]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.651      ;
+; 1.432 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][6]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][7]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.653      ;
+; 1.646 ; host_interface:inst3|mode_selector:mode_sel|mode_out_ff[0]                         ; host_interface:inst3|mode_selector:mode_sel|sStable                                ; clk          ; clk         ; 0.000        ; 0.000      ; 1.867      ;
+; 1.646 ; acquisition_module:inst|acquisition_store:storer|INC_CHANNEL                       ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:samples_counter|ffs[1]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.867      ;
+; 1.646 ; acquisition_module:inst|acquisition_ctrl:ctrl|AQUISITIONING                        ; acquisition_module:inst|acquisition_ctrl:ctrl|convst_ff                            ; clk          ; clk         ; 0.000        ; 0.000      ; 1.867      ;
+; 1.654 ; acquisition_module:inst|acquisition_ctrl:ctrl|WAIT_STATE                           ; acquisition_module:inst|acquisition_ctrl:ctrl|SERIALIZING                          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.875      ;
+; 1.664 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][1]           ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2]           ; clk          ; clk         ; 0.000        ; 0.000      ; 1.885      ;
+; 1.665 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][2]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[0][3]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.886      ;
+; 1.666 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][2]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][3]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.887      ;
+; 1.667 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][3]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][4]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.888      ;
+; 1.668 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][6]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][7]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.889      ;
+; 1.670 ; host_interface:inst3|mode_selector:mode_sel|sStable                                ; host_interface:inst3|mode_selector:mode_sel|sChangedRequested                      ; clk          ; clk         ; 0.000        ; 0.000      ; 1.891      ;
+; 1.673 ; host_interface:inst3|mode_selector:mode_sel|sStable                                ; host_interface:inst3|mode_selector:mode_sel|ready_ff                               ; clk          ; clk         ; 0.000        ; 0.000      ; 1.894      ;
+; 1.678 ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[0]         ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[0]         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.899      ;
+; 1.678 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][9]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][10]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.899      ;
+; 1.679 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][11]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][12]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.900      ;
+; 1.680 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][10]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][11]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.901      ;
+; 1.681 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][3]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][4]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.902      ;
+; 1.682 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][2]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][3]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.903      ;
+; 1.684 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][1]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][2]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.905      ;
+; 1.684 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][1]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][2]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.905      ;
+; 1.688 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][12]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][13]       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.909      ;
+; 1.710 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][0]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[1][1]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.931      ;
+; 1.713 ; acquisition_module:inst|acquisition_store:storer|WAIT_STORE                        ; acquisition_module:inst|acquisition_store:storer|counter:channel_counter|ffs[3]    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.934      ;
+; 1.747 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][2]           ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][3]           ; clk          ; clk         ; 0.000        ; 0.000      ; 1.968      ;
+; 1.747 ; acquisition_module:inst|acquisition_store:storer|CS1b                              ; acquisition_module:inst|acquisition_store:storer|counter:channel_counter|ffs[1]    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.968      ;
+; 1.748 ; acquisition_module:inst|acquisition_store:storer|CS1b                              ; acquisition_module:inst|acquisition_store:storer|counter:channel_counter|ffs[0]    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.969      ;
+; 1.749 ; acquisition_module:inst|acquisition_store:storer|CS1b                              ; acquisition_module:inst|acquisition_store:storer|counter:channel_counter|ffs[2]    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.970      ;
+; 1.769 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][1]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][2]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.990      ;
+; 1.769 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][8]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][9]        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.990      ;
+; 1.784 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][8]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][9]        ; clk          ; clk         ; 0.000        ; 0.000      ; 2.005      ;
+; 1.786 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][11]       ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[2][12]       ; clk          ; clk         ; 0.000        ; 0.000      ; 2.007      ;
+; 1.794 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][3]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][4]        ; clk          ; clk         ; 0.000        ; 0.000      ; 2.015      ;
+; 1.800 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][1]           ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][2]           ; clk          ; clk         ; 0.000        ; 0.000      ; 2.021      ;
+; 1.806 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][2]           ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[1][3]           ; clk          ; clk         ; 0.000        ; 0.000      ; 2.027      ;
+; 1.809 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][4]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[4][5]        ; clk          ; clk         ; 0.000        ; 0.000      ; 2.030      ;
+; 1.871 ; host_interface:inst3|mode_selector:mode_sel|synchronizer:sync|regs[0][3]           ; host_interface:inst3|mode_selector:mode_sel|mode_out_ff[0]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 2.092      ;
+; 1.925 ; acquisition_module:inst|acquisition_ctrl:ctrl|AQUISITIONING                        ; acquisition_module:inst|acquisition_ctrl:ctrl|WAIT_STATE                           ; clk          ; clk         ; 0.000        ; 0.000      ; 2.146      ;
+; 1.967 ; host_interface:inst3|start_ff                                                      ; acquisition_module:inst|acquisition_ctrl:ctrl|WAITING_START_LOW                    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.188      ;
+; 1.981 ; host_interface:inst3|start_ff                                                      ; acquisition_module:inst|acquisition_ctrl:ctrl|WAITING_START_HIGH                   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.202      ;
+; 1.995 ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[1]     ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[1]     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.216      ;
+; 2.066 ; acquisition_module:inst|acquisition_serializer:serializer|div2_clock               ; acquisition_module:inst|acquisition_serializer:serializer|div2_clock               ; clk          ; clk         ; 0.000        ; 0.000      ; 2.287      ;
+; 2.084 ; acquisition_module:inst|acquisition_serializer:serializer|div2_clock               ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[4]     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.305      ;
+; 2.086 ; acquisition_module:inst|acquisition_serializer:serializer|div2_clock               ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[3]     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.307      ;
+; 2.089 ; acquisition_module:inst|acquisition_store:storer|INC_CHANNEL                       ; acquisition_module:inst|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE                 ; clk          ; clk         ; 0.000        ; 0.000      ; 2.310      ;
+; 2.089 ; acquisition_module:inst|acquisition_serializer:serializer|div2_clock               ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[0]     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.310      ;
+; 2.090 ; acquisition_module:inst|acquisition_store:storer|INC_CHANNEL                       ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:samples_counter|ffs[0]       ; clk          ; clk         ; 0.000        ; 0.000      ; 2.311      ;
+; 2.090 ; acquisition_module:inst|acquisition_serializer:serializer|div2_clock               ; acquisition_module:inst|acquisition_serializer:serializer|counter:count|ffs[2]     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.311      ;
+; 2.096 ; acquisition_module:inst|acquisition_store:storer|WAIT_END                          ; acquisition_module:inst|acquisition_ctrl:ctrl|STORING                              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.317      ;
+; 2.107 ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[9]  ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[9]  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.328      ;
+; 2.107 ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][6]        ; acquisition_module:inst|acquisition_serializer:serializer|data_buffer[5][7]        ; clk          ; clk         ; 0.000        ; 0.000      ; 2.328      ;
+; 2.116 ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[10] ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[10] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.337      ;
+; 2.116 ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[0]  ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[0]  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.337      ;
+; 2.117 ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[18] ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[18] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.338      ;
+; 2.117 ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[8]  ; RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated|safe_q[8]  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.338      ;
+; 2.117 ; acquisition_module:inst|acquisition_ctrl:ctrl|running_ff                           ; host_interface:inst3|mode_selector:mode_sel|sWaitingChangeOk                       ; clk          ; clk         ; 0.000        ; 0.000      ; 2.338      ;
+; 2.118 ; acquisition_module:inst|acquisition_ctrl:ctrl|SERIALIZING                          ; acquisition_module:inst|acquisition_ctrl:ctrl|SERIALIZING                          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.339      ;
+; 2.126 ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[2]         ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[2]         ; clk          ; clk         ; 0.000        ; 0.000      ; 2.347      ;
+; 2.127 ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[3]         ; acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter|ffs[3]         ; clk          ; clk         ; 0.000        ; 0.000      ; 2.348      ;
++-------+------------------------------------------------------------------------------------+------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
 +-------------------------------------------------------------------+
@@ -361,7 +361,7 @@ No paths to report.
 +------------+----------+----------+----------+----------+----------+
 ; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 1818     ; 0        ; 0        ; 0        ;
+; clk        ; clk      ; 1806     ; 0        ; 0        ; 0        ;
 +------------+----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -371,7 +371,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +------------+----------+----------+----------+----------+----------+
 ; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 1818     ; 0        ; 0        ; 0        ;
+; clk        ; clk      ; 1806     ; 0        ; 0        ; 0        ;
 +------------+----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -397,8 +397,8 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; Unconstrained Clocks            ; 0     ; 0    ;
 ; Unconstrained Input Ports       ; 10    ; 10   ;
 ; Unconstrained Input Port Paths  ; 74    ; 74   ;
-; Unconstrained Output Ports      ; 39    ; 39   ;
-; Unconstrained Output Port Paths ; 197   ; 197  ;
+; Unconstrained Output Ports      ; 36    ; 36   ;
+; Unconstrained Output Port Paths ; 188   ; 188  ;
 +---------------------------------+-------+------+
 
 
@@ -416,12 +416,12 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +--------------+--------------------------------------------------------------------------------------+
 ; Input Port   ; Comment                                                                              ;
 +--------------+--------------------------------------------------------------------------------------+
-; adc_sdo[0]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; adc_sdo[1]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; adc_sdo[2]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; adc_sdo[3]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; adc_sdo[4]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; adc_sdo[5]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[0]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[1]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[2]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[3]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[4]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[5]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; host_mode[0] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; host_mode[1] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; host_start   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
@@ -429,51 +429,48 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +--------------+--------------------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------+
-; Unconstrained Output Ports                                                                               ;
-+------------------+---------------------------------------------------------------------------------------+
-; Output Port      ; Comment                                                                               ;
-+------------------+---------------------------------------------------------------------------------------+
-; adc_convst       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; adc_sclk         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[0]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[1]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[2]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[3]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[4]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[5]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[6]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[7]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[8]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[9]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[10]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[11]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[12]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[13]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[14]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[15]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[16]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[17]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[18]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[0]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[1]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[2]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[3]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[4]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[5]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[6]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[7]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; host_ready       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_cs_n         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_oe_n         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_we_n         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_addr_clr    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_addr_inc    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_running     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_sm_state[0] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_sm_state[1] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_sm_state[2] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+------------------+---------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                            ;
++---------------+---------------------------------------------------------------------------------------+
+; Output Port   ; Comment                                                                               ;
++---------------+---------------------------------------------------------------------------------------+
+; adc_convst    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sclk      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[0]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[1]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[2]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[3]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[4]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[5]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[6]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[7]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[8]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[9]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[10]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[11]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[12]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[13]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[14]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[15]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[16]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[17]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[18]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[0]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[1]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[2]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[3]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[4]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[5]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[6]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[7]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_ready    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_cs_n      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_oe_n      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_we_n      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_addr_clr ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_addr_inc ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_running  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++---------------+---------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------------------------------------+
@@ -481,12 +478,12 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +--------------+--------------------------------------------------------------------------------------+
 ; Input Port   ; Comment                                                                              ;
 +--------------+--------------------------------------------------------------------------------------+
-; adc_sdo[0]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; adc_sdo[1]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; adc_sdo[2]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; adc_sdo[3]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; adc_sdo[4]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; adc_sdo[5]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[0]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[1]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[2]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[3]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[4]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[5]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; host_mode[0] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; host_mode[1] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; host_start   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
@@ -494,51 +491,48 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +--------------+--------------------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------+
-; Unconstrained Output Ports                                                                               ;
-+------------------+---------------------------------------------------------------------------------------+
-; Output Port      ; Comment                                                                               ;
-+------------------+---------------------------------------------------------------------------------------+
-; adc_convst       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; adc_sclk         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[0]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[1]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[2]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[3]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[4]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[5]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[6]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[7]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[8]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[9]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[10]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[11]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[12]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[13]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[14]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[15]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[16]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[17]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; address[18]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[0]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[1]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[2]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[3]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[4]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[5]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[6]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus[7]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; host_ready       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_cs_n         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_oe_n         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_we_n         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_addr_clr    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_addr_inc    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_running     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_sm_state[0] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_sm_state[1] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_sm_state[2] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+------------------+---------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                            ;
++---------------+---------------------------------------------------------------------------------------+
+; Output Port   ; Comment                                                                               ;
++---------------+---------------------------------------------------------------------------------------+
+; adc_convst    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sclk      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[0]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[1]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[2]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[3]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[4]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[5]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[6]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[7]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[8]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[9]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[10]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[11]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[12]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[13]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[14]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[15]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[16]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[17]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; address[18]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[0]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[1]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[2]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[3]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[4]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[5]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[6]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[7]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_ready    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_cs_n      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_oe_n      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_we_n      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_addr_clr ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_addr_inc ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_running  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++---------------+---------------------------------------------------------------------------------------+
 
 
 +--------------------------+
@@ -547,7 +541,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Tue Mar 30 12:51:10 2021
+    Info: Processing started: Wed Mar 31 16:55:49 2021
 Info: Command: quartus_sta SensorBuchas_CPLD -c SensorBuchas_CPLD
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -563,10 +557,10 @@ Info (332105): Deriving Clocks
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
 Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -6.369
+Info (332146): Worst-case setup slack is -6.068
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -6.369            -867.306 clk 
+    Info (332119):    -6.068            -882.767 clk 
 Info (332146): Worst-case hold slack is 1.078
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
@@ -581,8 +575,8 @@ Info (332001): The selected device family is not supported by the report_metasta
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 4664 megabytes
-    Info: Processing ended: Tue Mar 30 12:51:11 2021
+    Info: Peak virtual memory: 4656 megabytes
+    Info: Processing ended: Wed Mar 31 16:55:50 2021
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 

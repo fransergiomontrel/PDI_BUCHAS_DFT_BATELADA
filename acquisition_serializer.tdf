@@ -8,14 +8,14 @@ include "counter.inc";
 subdesign acquisition_serializer(
 	reset: input;
 	clk: input;
-	enable: input;
+	serialize: input;
 	msb: input;
 	channel[2..0]: input;
 	
 	data[7..0]: output;
 	serialize_ok: output;
 	
-	adc_sdo[5..0]: input;
+	adc_sdi[5..0]: input;
 	adc_sclk: output;
 )
 variable
@@ -33,7 +33,7 @@ begin
 	
 	-- Clock com metade da frequencia e encerramento em 15
 	div2_clock.clk = clk;
-	if enable then
+	if serialize then
 		if count.o[] == 16 and !div2_clock.q then	-- Criterio de enceramento da serialização
 			-- Concluiu a serializacao
 			serialize_ok_ff.d = Vcc;
@@ -61,14 +61,14 @@ begin
 	-- Contador de bits
 	count.clk = clk;
 	count.reset = reset;
-	count.clr = !enable;
+	count.clr = !serialize;
 	
 	-- Serial clock
 	adc_sclk = div2_clock.q;
 
 	-- Shift register
 	data_buffer[][15..1].d = data_buffer[][14..0].q;
-	data_buffer[][0].d = adc_sdo[];
+	data_buffer[][0].d = adc_sdi[];
 	data_buffer[][].clk = clk;
 	
 	-- Buffer de saida

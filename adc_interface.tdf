@@ -1,32 +1,56 @@
+include "modes.inc";
 
-
-subdesign adc_interface
-(
-	start: INPUT;			-- Início do processo de aquisição
-	clk: INPUT;				-- Clock principal
-	reset: INPUT;			-- reset do módulo
-	running: OUTPUT;		-- Esta saída indica que o processo de aquisição está em andamento
+subdesign adc_interface(
+	rst_n: input;
 	
-	out[9..0]: OUTPUT; 
+	mode[1..0]: input;
+	changing_mode: input;
+	
+	convst: input;
+	sclk_: input;
+	sdi[5..0]: output;
+	sdo[5..0]: input;
+	
+	adc_rst_n[5..0]: output;
+	adc_convst[5..0]: output;
+	adc_sclk[5..0]: output;
+	adc_sdi[5..0]: input;
+	adc_sdo[5..0]: output;
+	adc_rvs[5..0]: input;
+	
+	host_sdi: input;
+	host_sclk: input;
+	host_sdo: output;
 )
 variable
-	counter[9..0]: dff;	-- Contador que gerencia a temporização
-	run: dff;				-- Este FF indica que o processo de aquisição está em andamento
-
+	adc_rst_n_cell[5..0], adc_convst_cell[5..0], adc_sclk_cell[5..0], adc_sdo_cell[5..0]: lcell;
 begin
-	run.clk = clk;
-	run.d = start or run.q;	-- Fica bloqueado até concluir a aquisição
-	run.clrn = resetn;
-	
-	counter[].clk = clk;
-	if counter[].q == conversion_period then
-		counter[].d = 0;
-	else
-		counter[].d = counter[].q + 1;
-	end if;
-	counter[].clrn = resetn and run.q;		-- O contador é liberado quando não há sinal de reset e run está ativo
-	
-	running = run.q;
-	out[] = counter[].q;
-end;
+	case mode[] is
+		when MODE_CONFIGURATION =>
+			adc_sdo_cell[5..1].in = adc_sdi[4..0];
+			adc_sdo_cell[0].in= host_sdi;
+			host_sdo = adc_sdi[5];
+			adc_sclk_cell[5..0].in = host_sclk;
+			
+		when MODE_AQUISITION =>
+			adc_sdo_cell[].in = sdo[];
+			sdi[] = adc_sdi[];
+			host_sdo = Gnd;
+			adc_sclk_cell[5..0].in = sclk_;
+			
+		when others =>
+			adc_sdo_cell[].in = Gnd;
+			host_sdo = Gnd;
+			adc_sclk_cell[5..0].in = GND;
+			
+	end case;
 
+	adc_rst_n_cell[5..0].in = rst_n;
+	adc_convst_cell[5..0].in = convst;
+
+	adc_rst_n[5..0] = adc_rst_n_cell[5..0].out or changing_mode;		-- Seta se está mudando o estado
+	adc_convst[5..0] = adc_convst_cell[5..0].out and !changing_mode;	-- Zera se está mudando o estado
+	adc_sclk[5..0] = adc_sclk_cell[5..0].out and !changing_mode;		-- Zera se está mudando o estado
+	adc_sdo[5..0] = adc_sdo_cell[5..0].out and !changing_mode;			-- Zera se está mudando o estado
+
+end;

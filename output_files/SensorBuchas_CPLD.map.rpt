@@ -1,5 +1,5 @@
 Analysis & Synthesis report for SensorBuchas_CPLD
-Tue Mar 30 12:51:03 2021
+Wed Mar 31 16:55:42 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -13,22 +13,23 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |acquisition_module|acquisition_store:inst13|sm
-  9. State Machine - |acquisition_module|host_interface:inst3|mode_selector:mode_sel|sm
- 10. State Machine - |acquisition_module|acquisition_ctrl:inst9|sm
+  8. State Machine - |sensor_buchas_CPLD|host_interface:inst3|mode_selector:mode_sel|sm
+  9. State Machine - |sensor_buchas_CPLD|acquisition_module:inst|acquisition_store:storer|sm
+ 10. State Machine - |sensor_buchas_CPLD|acquisition_module:inst|acquisition_ctrl:ctrl|sm
  11. Registers Removed During Synthesis
  12. General Register Statistics
  13. Inverted Register Statistics
- 14. Parameter Settings for User Entity Instance: acquisition_ctrl:inst9
- 15. Parameter Settings for User Entity Instance: acquisition_ctrl:inst9|counter:clock_counter
- 16. Parameter Settings for User Entity Instance: acquisition_ctrl:inst9|counter:samples_counter
- 17. Parameter Settings for User Entity Instance: host_interface:inst3|mode_selector:mode_sel|synchronizer:sync
- 18. Parameter Settings for User Entity Instance: acquisition_serializer:inst12
- 19. Parameter Settings for User Entity Instance: acquisition_serializer:inst12|counter:count
- 20. Parameter Settings for User Entity Instance: acquisition_store:inst13|counter:channel_counter
- 21. Parameter Settings for User Entity Instance: RAM_interface:inst1
- 22. Parameter Settings for User Entity Instance: RAM_interface:inst1|lpm_counter:address_counter
- 23. Analysis & Synthesis Messages
+ 14. Parameter Settings for User Entity Instance: acquisition_module:inst
+ 15. Parameter Settings for User Entity Instance: acquisition_module:inst|acquisition_ctrl:ctrl
+ 16. Parameter Settings for User Entity Instance: acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter
+ 17. Parameter Settings for User Entity Instance: acquisition_module:inst|acquisition_ctrl:ctrl|counter:samples_counter
+ 18. Parameter Settings for User Entity Instance: acquisition_module:inst|acquisition_serializer:serializer
+ 19. Parameter Settings for User Entity Instance: acquisition_module:inst|acquisition_serializer:serializer|counter:count
+ 20. Parameter Settings for User Entity Instance: acquisition_module:inst|acquisition_store:storer|counter:channel_counter
+ 21. Parameter Settings for User Entity Instance: host_interface:inst3|mode_selector:mode_sel|synchronizer:sync
+ 22. Parameter Settings for User Entity Instance: RAM_interface:inst1
+ 23. Parameter Settings for User Entity Instance: RAM_interface:inst1|lpm_counter:address_counter
+ 24. Analysis & Synthesis Messages
 
 
 
@@ -55,12 +56,12 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Tue Mar 30 12:51:03 2021       ;
+; Analysis & Synthesis Status ; Successful - Wed Mar 31 16:55:42 2021       ;
 ; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name               ; SensorBuchas_CPLD                           ;
-; Top-level Entity Name       ; acquisition_module                          ;
+; Top-level Entity Name       ; sensor_buchas_CPLD                          ;
 ; Family                      ; MAX II                                      ;
-; Total logic elements        ; 297                                         ;
+; Total logic elements        ; 293                                         ;
 ; Total pins                  ; 50                                          ;
 ; Total virtual pins          ; 0                                           ;
 ; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
@@ -73,7 +74,7 @@ https://fpgasoftware.intel.com/eula.
 ; Option                                                           ; Setting            ; Default Value      ;
 +------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                           ; EPM1270T144C5      ;                    ;
-; Top-level entity name                                            ; acquisition_module ; SensorBuchas_CPLD  ;
+; Top-level entity name                                            ; sensor_buchas_CPLD ; SensorBuchas_CPLD  ;
 ; Family name                                                      ; MAX II             ; Cyclone V          ;
 ; Use smart compilation                                            ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
@@ -159,8 +160,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                                   ; Library ;
 +----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------------+---------+
+; sensor_buchas_CPLD.bdf           ; yes             ; User Block Diagram/Schematic File  ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/sensor_buchas_CPLD.bdf              ;         ;
 ; acquisition_serializer.tdf       ; yes             ; User AHDL File                     ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_serializer.tdf          ;         ;
-; acquisition_module.bdf           ; yes             ; User Block Diagram/Schematic File  ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_module.bdf              ;         ;
 ; acquisition_ctrl.tdf             ; yes             ; User AHDL File                     ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_ctrl.tdf                ;         ;
 ; modes.inc                        ; yes             ; User Unspecified File              ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/modes.inc                           ;         ;
 ; synchronizer.tdf                 ; yes             ; User AHDL File                     ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/synchronizer.tdf                    ;         ;
@@ -169,10 +170,14 @@ https://fpgasoftware.intel.com/eula.
 ; acquisition_store.tdf            ; yes             ; User AHDL File                     ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_store.tdf               ;         ;
 ; RAM_interface.tdf                ; yes             ; User AHDL File                     ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf                   ;         ;
 ; host_interface.tdf               ; yes             ; User AHDL File                     ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/host_interface.tdf                  ;         ;
+; acquisition_module.tdf           ; yes             ; User AHDL File                     ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_module.tdf              ;         ;
 ; counter.inc                      ; yes             ; Auto-Found AHDL File               ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.inc                         ;         ;
 ; synchronizer.inc                 ; yes             ; Auto-Found AHDL File               ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/synchronizer.inc                    ;         ;
 ; lpm_counter.inc                  ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_counter.inc         ;         ;
 ; mode_selector.inc                ; yes             ; Auto-Found AHDL File               ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/mode_selector.inc                   ;         ;
+; acquisition_ctrl.inc             ; yes             ; Auto-Found AHDL File               ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_ctrl.inc                ;         ;
+; acquisition_serializer.inc       ; yes             ; Auto-Found AHDL File               ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_serializer.inc          ;         ;
+; acquisition_store.inc            ; yes             ; Auto-Found AHDL File               ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_store.inc               ;         ;
 ; lpm_counter.tdf                  ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_counter.tdf         ;         ;
 ; lpm_constant.inc                 ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_constant.inc        ;         ;
 ; lpm_decode.inc                   ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_decode.inc          ;         ;
@@ -191,20 +196,20 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Total logic elements                        ; 297   ;
-;     -- Combinational with no register       ; 124   ;
+; Total logic elements                        ; 293   ;
+;     -- Combinational with no register       ; 120   ;
 ;     -- Register only                        ; 115   ;
 ;     -- Combinational with a register        ; 58    ;
 ;                                             ;       ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 102   ;
-;     -- 3 input functions                    ; 57    ;
-;     -- 2 input functions                    ; 21    ;
+;     -- 4 input functions                    ; 98    ;
+;     -- 3 input functions                    ; 58    ;
+;     -- 2 input functions                    ; 20    ;
 ;     -- 1 input functions                    ; 2     ;
 ;     -- 0 input functions                    ; 0     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 269   ;
+;     -- normal mode                          ; 265   ;
 ;     -- arithmetic mode                      ; 28    ;
 ;     -- qfbk mode                            ; 0     ;
 ;     -- register cascade mode                ; 0     ;
@@ -216,53 +221,38 @@ https://fpgasoftware.intel.com/eula.
 ; I/O pins                                    ; 50    ;
 ; Maximum fan-out node                        ; clk   ;
 ; Maximum fan-out                             ; 173   ;
-; Total fan-out                               ; 1156  ;
-; Average fan-out                             ; 3.33  ;
+; Total fan-out                               ; 1138  ;
+; Average fan-out                             ; 3.32  ;
 +---------------------------------------------+-------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                            ;
-+-------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------------------------------------------------------------+------------------------+--------------+
-; Compilation Hierarchy Node          ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                         ; Entity Name            ; Library Name ;
-+-------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------------------------------------------------------------+------------------------+--------------+
-; |acquisition_module                 ; 297 (0)     ; 173          ; 0          ; 50   ; 0            ; 124 (0)      ; 115 (0)           ; 58 (0)           ; 31 (0)          ; 0 (0)      ; |acquisition_module                                                                         ; acquisition_module     ; work         ;
-;    |RAM_interface:inst1|            ; 23 (4)      ; 19           ; 0          ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 19 (0)           ; 19 (0)          ; 0 (0)      ; |acquisition_module|RAM_interface:inst1                                                     ; RAM_interface          ; work         ;
-;       |lpm_counter:address_counter| ; 19 (0)      ; 19           ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 19 (0)           ; 19 (0)          ; 0 (0)      ; |acquisition_module|RAM_interface:inst1|lpm_counter:address_counter                         ; lpm_counter            ; work         ;
-;          |cntr_kqi:auto_generated|  ; 19 (19)     ; 19           ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 19 (19)          ; 19 (19)         ; 0 (0)      ; |acquisition_module|RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated ; cntr_kqi               ; work         ;
-;    |acquisition_ctrl:inst9|         ; 36 (23)     ; 20           ; 0          ; 0    ; 0            ; 16 (14)      ; 2 (2)             ; 18 (7)           ; 8 (0)           ; 0 (0)      ; |acquisition_module|acquisition_ctrl:inst9                                                  ; acquisition_ctrl       ; work         ;
-;       |counter:clock_counter|       ; 10 (10)     ; 9            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 9 (9)            ; 8 (8)           ; 0 (0)      ; |acquisition_module|acquisition_ctrl:inst9|counter:clock_counter                            ; counter                ; work         ;
-;       |counter:samples_counter|     ; 3 (3)       ; 2            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 2 (2)            ; 0 (0)           ; 0 (0)      ; |acquisition_module|acquisition_ctrl:inst9|counter:samples_counter                          ; counter                ; work         ;
-;    |acquisition_serializer:inst12|  ; 194 (180)   ; 103          ; 0          ; 0    ; 0            ; 91 (82)      ; 96 (96)           ; 7 (2)            ; 4 (0)           ; 0 (0)      ; |acquisition_module|acquisition_serializer:inst12                                           ; acquisition_serializer ; work         ;
-;       |counter:count|               ; 14 (14)     ; 5            ; 0          ; 0    ; 0            ; 9 (9)        ; 0 (0)             ; 5 (5)            ; 4 (4)           ; 0 (0)      ; |acquisition_module|acquisition_serializer:inst12|counter:count                             ; counter                ; work         ;
-;    |acquisition_store:inst13|       ; 20 (13)     ; 13           ; 0          ; 0    ; 0            ; 7 (4)        ; 5 (5)             ; 8 (4)            ; 0 (0)           ; 0 (0)      ; |acquisition_module|acquisition_store:inst13                                                ; acquisition_store      ; work         ;
-;       |counter:channel_counter|     ; 7 (7)       ; 4            ; 0          ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 4 (4)            ; 0 (0)           ; 0 (0)      ; |acquisition_module|acquisition_store:inst13|counter:channel_counter                        ; counter                ; work         ;
-;    |host_interface:inst3|           ; 24 (1)      ; 18           ; 0          ; 0    ; 0            ; 6 (0)        ; 12 (1)            ; 6 (0)            ; 0 (0)           ; 0 (0)      ; |acquisition_module|host_interface:inst3                                                    ; host_interface         ; work         ;
-;       |mode_selector:mode_sel|      ; 23 (13)     ; 17           ; 0          ; 0    ; 0            ; 6 (4)        ; 11 (3)            ; 6 (6)            ; 0 (0)           ; 0 (0)      ; |acquisition_module|host_interface:inst3|mode_selector:mode_sel                             ; mode_selector          ; work         ;
-;          |synchronizer:sync|        ; 10 (10)     ; 8            ; 0          ; 0    ; 0            ; 2 (2)        ; 8 (8)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |acquisition_module|host_interface:inst3|mode_selector:mode_sel|synchronizer:sync           ; synchronizer           ; work         ;
-+-------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------------------------------------------------------------+------------------------+--------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                   ;
++-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------------------------------------------------------------------------+------------------------+--------------+
+; Compilation Hierarchy Node                ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                          ; Entity Name            ; Library Name ;
++-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------------------------------------------------------------------------+------------------------+--------------+
+; |sensor_buchas_CPLD                       ; 293 (0)     ; 173          ; 0          ; 50   ; 0            ; 120 (0)      ; 115 (0)           ; 58 (0)           ; 31 (0)          ; 0 (0)      ; |sensor_buchas_CPLD                                                                          ; sensor_buchas_CPLD     ; work         ;
+;    |RAM_interface:inst1|                  ; 23 (4)      ; 19           ; 0          ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 19 (0)           ; 19 (0)          ; 0 (0)      ; |sensor_buchas_CPLD|RAM_interface:inst1                                                      ; RAM_interface          ; work         ;
+;       |lpm_counter:address_counter|       ; 19 (0)      ; 19           ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 19 (0)           ; 19 (0)          ; 0 (0)      ; |sensor_buchas_CPLD|RAM_interface:inst1|lpm_counter:address_counter                          ; lpm_counter            ; work         ;
+;          |cntr_kqi:auto_generated|        ; 19 (19)     ; 19           ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 19 (19)          ; 19 (19)         ; 0 (0)      ; |sensor_buchas_CPLD|RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated  ; cntr_kqi               ; work         ;
+;    |acquisition_module:inst|              ; 246 (0)     ; 136          ; 0          ; 0    ; 0            ; 110 (0)      ; 103 (0)           ; 33 (0)           ; 12 (0)          ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst                                                  ; acquisition_module     ; work         ;
+;       |acquisition_ctrl:ctrl|             ; 32 (17)     ; 20           ; 0          ; 0    ; 0            ; 12 (8)       ; 2 (2)             ; 18 (7)           ; 8 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst|acquisition_ctrl:ctrl                            ; acquisition_ctrl       ; work         ;
+;          |counter:clock_counter|          ; 12 (12)     ; 9            ; 0          ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 9 (9)            ; 8 (8)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter      ; counter                ; work         ;
+;          |counter:samples_counter|        ; 3 (3)       ; 2            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 2 (2)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst|acquisition_ctrl:ctrl|counter:samples_counter    ; counter                ; work         ;
+;       |acquisition_serializer:serializer| ; 194 (180)   ; 103          ; 0          ; 0    ; 0            ; 91 (82)      ; 96 (96)           ; 7 (2)            ; 4 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst|acquisition_serializer:serializer                ; acquisition_serializer ; work         ;
+;          |counter:count|                  ; 14 (14)     ; 5            ; 0          ; 0    ; 0            ; 9 (9)        ; 0 (0)             ; 5 (5)            ; 4 (4)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst|acquisition_serializer:serializer|counter:count  ; counter                ; work         ;
+;       |acquisition_store:storer|          ; 20 (13)     ; 13           ; 0          ; 0    ; 0            ; 7 (4)        ; 5 (5)             ; 8 (4)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst|acquisition_store:storer                         ; acquisition_store      ; work         ;
+;          |counter:channel_counter|        ; 7 (7)       ; 4            ; 0          ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 4 (4)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst|acquisition_store:storer|counter:channel_counter ; counter                ; work         ;
+;    |host_interface:inst3|                 ; 24 (1)      ; 18           ; 0          ; 0    ; 0            ; 6 (0)        ; 12 (1)            ; 6 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|host_interface:inst3                                                     ; host_interface         ; work         ;
+;       |mode_selector:mode_sel|            ; 23 (13)     ; 17           ; 0          ; 0    ; 0            ; 6 (4)        ; 11 (3)            ; 6 (6)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|host_interface:inst3|mode_selector:mode_sel                              ; mode_selector          ; work         ;
+;          |synchronizer:sync|              ; 10 (10)     ; 8            ; 0          ; 0    ; 0            ; 2 (2)        ; 8 (8)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|host_interface:inst3|mode_selector:mode_sel|synchronizer:sync            ; synchronizer           ; work         ;
++-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------------------------------------------------------------------------+------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
 Encoding Type:  One-Hot
-+-------------------------------------------------------------------------------+
-; State Machine - |acquisition_module|acquisition_store:inst13|sm               ;
-+-------------+----------+-------------+------+------+------+------+------------+
-; Name        ; WAIT_END ; INC_CHANNEL ; CS1b ; CS0b ; CS0a ; CS1a ; WAIT_STORE ;
-+-------------+----------+-------------+------+------+------+------+------------+
-; WAIT_STORE  ; 0        ; 0           ; 0    ; 0    ; 0    ; 0    ; 0          ;
-; CS1a        ; 0        ; 0           ; 0    ; 0    ; 0    ; 1    ; 1          ;
-; CS0a        ; 0        ; 0           ; 0    ; 0    ; 1    ; 0    ; 1          ;
-; CS0b        ; 0        ; 0           ; 0    ; 1    ; 0    ; 0    ; 1          ;
-; CS1b        ; 0        ; 0           ; 1    ; 0    ; 0    ; 0    ; 1          ;
-; INC_CHANNEL ; 0        ; 1           ; 0    ; 0    ; 0    ; 0    ; 1          ;
-; WAIT_END    ; 1        ; 0           ; 0    ; 0    ; 0    ; 0    ; 1          ;
-+-------------+----------+-------------+------+------+------+------+------------+
-
-
-Encoding Type:  One-Hot
 +----------------------------------------------------------------------------------------------------+
-; State Machine - |acquisition_module|host_interface:inst3|mode_selector:mode_sel|sm                 ;
+; State Machine - |sensor_buchas_CPLD|host_interface:inst3|mode_selector:mode_sel|sm                 ;
 +-------------------+-------------------+---------+------------------+-------------+-----------------+
 ; Name              ; sChangedRequested ; sStable ; sWaitingChangeOk ; sUpdateMode ; sNoticeChanging ;
 +-------------------+-------------------+---------+------------------+-------------+-----------------+
@@ -275,8 +265,24 @@ Encoding Type:  One-Hot
 
 
 Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------+
+; State Machine - |sensor_buchas_CPLD|acquisition_module:inst|acquisition_store:storer|sm ;
++-------------+----------+-------------+------+------+------+------+----------------------+
+; Name        ; WAIT_END ; INC_CHANNEL ; CS1b ; CS0b ; CS0a ; CS1a ; WAIT_STORE           ;
++-------------+----------+-------------+------+------+------+------+----------------------+
+; WAIT_STORE  ; 0        ; 0           ; 0    ; 0    ; 0    ; 0    ; 0                    ;
+; CS1a        ; 0        ; 0           ; 0    ; 0    ; 0    ; 1    ; 1                    ;
+; CS0a        ; 0        ; 0           ; 0    ; 0    ; 1    ; 0    ; 1                    ;
+; CS0b        ; 0        ; 0           ; 0    ; 1    ; 0    ; 0    ; 1                    ;
+; CS1b        ; 0        ; 0           ; 1    ; 0    ; 0    ; 0    ; 1                    ;
+; INC_CHANNEL ; 0        ; 1           ; 0    ; 0    ; 0    ; 0    ; 1                    ;
+; WAIT_END    ; 1        ; 0           ; 0    ; 0    ; 0    ; 0    ; 1                    ;
++-------------+----------+-------------+------+------+------+------+----------------------+
+
+
+Encoding Type:  One-Hot
 +-------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |acquisition_module|acquisition_ctrl:inst9|sm                                                                             ;
+; State Machine - |sensor_buchas_CPLD|acquisition_module:inst|acquisition_ctrl:ctrl|sm                                                      ;
 +----------------------+----------------------+---------+-------------+------------+---------------+--------------------+-------------------+
 ; Name                 ; WAITING_END_OF_CYCLE ; STORING ; SERIALIZING ; WAIT_STATE ; AQUISITIONING ; WAITING_START_HIGH ; WAITING_START_LOW ;
 +----------------------+----------------------+---------+-------------+------------+---------------+--------------------+-------------------+
@@ -290,15 +296,15 @@ Encoding Type:  One-Hot
 +----------------------+----------------------+---------+-------------+------------+---------------+--------------------+-------------------+
 
 
-+----------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                     ;
-+---------------------------------------+------------------------------------------------+
-; Register name                         ; Reason for Removal                             ;
-+---------------------------------------+------------------------------------------------+
-; acquisition_ctrl:inst9|serialize_ff   ; Merged with acquisition_ctrl:inst9|SERIALIZING ;
-; acquisition_ctrl:inst9|store_ff       ; Merged with acquisition_ctrl:inst9|STORING     ;
-; Total Number of Removed Registers = 2 ;                                                ;
-+---------------------------------------+------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                 ;
++------------------------------------------------------------+-----------------------------------------------------------------------+
+; Register name                                              ; Reason for Removal                                                    ;
++------------------------------------------------------------+-----------------------------------------------------------------------+
+; acquisition_module:inst|acquisition_ctrl:ctrl|serialize_ff ; Merged with acquisition_module:inst|acquisition_ctrl:ctrl|SERIALIZING ;
+; acquisition_module:inst|acquisition_ctrl:ctrl|store_ff     ; Merged with acquisition_module:inst|acquisition_ctrl:ctrl|STORING     ;
+; Total Number of Removed Registers = 2                      ;                                                                       ;
++------------------------------------------------------------+-----------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -316,47 +322,87 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 
 
-+-------------------------------------------------------------------+
-; Inverted Register Statistics                                      ;
-+---------------------------------------------------------+---------+
-; Inverted Register                                       ; Fan out ;
-+---------------------------------------------------------+---------+
-; acquisition_store:inst13|we_n_ff                        ; 1       ;
-; host_interface:inst3|mode_selector:mode_sel|changing_ff ; 4       ;
-; acquisition_store:inst13|cs_n_ff                        ; 1       ;
-; Total number of inverted registers = 3                  ;         ;
-+---------------------------------------------------------+---------+
++--------------------------------------------------------------------+
+; Inverted Register Statistics                                       ;
++----------------------------------------------------------+---------+
+; Inverted Register                                        ; Fan out ;
++----------------------------------------------------------+---------+
+; acquisition_module:inst|acquisition_store:storer|we_n_ff ; 1       ;
+; host_interface:inst3|mode_selector:mode_sel|changing_ff  ; 4       ;
+; acquisition_module:inst|acquisition_store:storer|cs_n_ff ; 1       ;
+; Total number of inverted registers = 3                   ;         ;
++----------------------------------------------------------+---------+
 
 
-+---------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: acquisition_ctrl:inst9 ;
-+----------------+-------+--------------------------------------------+
-; Parameter Name ; Value ; Type                                       ;
-+----------------+-------+--------------------------------------------+
-; active_period  ; 68    ; Untyped                                    ;
-; period         ; 463   ; Untyped                                    ;
-; samples        ; 3     ; Untyped                                    ;
-+----------------+-------+--------------------------------------------+
++----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: acquisition_module:inst ;
++----------------+-------+---------------------------------------------+
+; Parameter Name ; Value ; Type                                        ;
++----------------+-------+---------------------------------------------+
+; samples        ; 3     ; Untyped                                     ;
++----------------+-------+---------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+-------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: acquisition_ctrl:inst9|counter:clock_counter ;
-+----------------+-------+------------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                             ;
-+----------------+-------+------------------------------------------------------------------+
-; MAX_VALUE      ; 462   ; Untyped                                                          ;
-+----------------+-------+------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: acquisition_module:inst|acquisition_ctrl:ctrl ;
++----------------+-------+-------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                              ;
++----------------+-------+-------------------------------------------------------------------+
+; active_period  ; 68    ; Untyped                                                           ;
+; period         ; 463   ; Untyped                                                           ;
+; samples        ; 3     ; Untyped                                                           ;
++----------------+-------+-------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+---------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: acquisition_ctrl:inst9|counter:samples_counter ;
-+----------------+-------+--------------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                               ;
-+----------------+-------+--------------------------------------------------------------------+
-; MAX_VALUE      ; 3     ; Untyped                                                            ;
-+----------------+-------+--------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter ;
++----------------+-------+-----------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                    ;
++----------------+-------+-----------------------------------------------------------------------------------------+
+; MAX_VALUE      ; 462   ; Untyped                                                                                 ;
++----------------+-------+-----------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: acquisition_module:inst|acquisition_ctrl:ctrl|counter:samples_counter ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                      ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+; MAX_VALUE      ; 3     ; Untyped                                                                                   ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: acquisition_module:inst|acquisition_serializer:serializer ;
++----------------+-------+-------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                          ;
++----------------+-------+-------------------------------------------------------------------------------+
+; little_endian  ; 1     ; Untyped                                                                       ;
++----------------+-------+-------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: acquisition_module:inst|acquisition_serializer:serializer|counter:count ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                        ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+; MAX_VALUE      ; 16    ; Untyped                                                                                     ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: acquisition_module:inst|acquisition_store:storer|counter:channel_counter ;
++----------------+-------+----------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                         ;
++----------------+-------+----------------------------------------------------------------------------------------------+
+; MAX_VALUE      ; 12    ; Untyped                                                                                      ;
++----------------+-------+----------------------------------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -367,36 +413,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+-------+-----------------------------------------------------------------------------------+
 ; bus_size       ; 2     ; Untyped                                                                           ;
 +----------------+-------+-----------------------------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+----------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: acquisition_serializer:inst12 ;
-+----------------+-------+---------------------------------------------------+
-; Parameter Name ; Value ; Type                                              ;
-+----------------+-------+---------------------------------------------------+
-; little_endian  ; 1     ; Untyped                                           ;
-+----------------+-------+---------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: acquisition_serializer:inst12|counter:count ;
-+----------------+-------+-----------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                            ;
-+----------------+-------+-----------------------------------------------------------------+
-; MAX_VALUE      ; 16    ; Untyped                                                         ;
-+----------------+-------+-----------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: acquisition_store:inst13|counter:channel_counter ;
-+----------------+-------+----------------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                                 ;
-+----------------+-------+----------------------------------------------------------------------+
-; MAX_VALUE      ; 12    ; Untyped                                                              ;
-+----------------+-------+----------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -443,14 +459,14 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Tue Mar 30 12:50:48 2021
+    Info: Processing started: Wed Mar 31 16:55:28 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off SensorBuchas_CPLD -c SensorBuchas_CPLD
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file sensor_buchas_cpld.bdf
+    Info (12023): Found entity 1: sensor_buchas_CPLD
 Info (12021): Found 1 design units, including 1 entities, in source file acquisition_serializer.tdf
     Info (12023): Found entity 1: acquisition_serializer File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_serializer.tdf Line: 8
-Info (12021): Found 1 design units, including 1 entities, in source file acquisition_module.bdf
-    Info (12023): Found entity 1: acquisition_module
 Info (12021): Found 1 design units, including 1 entities, in source file acquisition_ctrl.tdf
     Info (12023): Found entity 1: acquisition_ctrl File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_ctrl.tdf Line: 19
 Info (12021): Found 1 design units, including 1 entities, in source file single_pulse.tdf
@@ -468,25 +484,31 @@ Info (12021): Found 1 design units, including 1 entities, in source file ram_int
     Info (12023): Found entity 1: RAM_interface File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 9
 Info (12021): Found 1 design units, including 1 entities, in source file host_interface.tdf
     Info (12023): Found entity 1: host_interface File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/host_interface.tdf Line: 3
-Info (12127): Elaborating entity "acquisition_module" for the top level hierarchy
-Warning (275005): Result of expression  for parameter  is not an integer
-Info (12128): Elaborating entity "acquisition_ctrl" for hierarchy "acquisition_ctrl:inst9"
+Info (12021): Found 1 design units, including 1 entities, in source file adc_interface.tdf
+    Info (12023): Found entity 1: adc_interface File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/adc_interface.tdf Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file acquisition_module.tdf
+    Info (12023): Found entity 1: acquisition_module File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_module.tdf Line: 10
+Info (12127): Elaborating entity "sensor_buchas_CPLD" for the top level hierarchy
+Warning (275043): Pin "test_sm_state[2..0]" is missing source
+Info (12128): Elaborating entity "acquisition_module" for hierarchy "acquisition_module:inst"
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_ctrl.inc Line: 26
+Info (12128): Elaborating entity "acquisition_ctrl" for hierarchy "acquisition_module:inst|acquisition_ctrl:ctrl" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_module.tdf Line: 28
 Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_ctrl.tdf Line: 17
 Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_ctrl.tdf Line: 37
 Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.inc Line: 26
-Info (12128): Elaborating entity "counter" for hierarchy "acquisition_ctrl:inst9|counter:clock_counter" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_ctrl.tdf Line: 43
+Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_ctrl.tdf Line: 43
 Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.tdf Line: 6
-Info (12128): Elaborating entity "counter" for hierarchy "acquisition_ctrl:inst9|counter:samples_counter" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_ctrl.tdf Line: 44
+Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst|acquisition_ctrl:ctrl|counter:samples_counter" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_ctrl.tdf Line: 44
+Info (12128): Elaborating entity "acquisition_serializer" for hierarchy "acquisition_module:inst|acquisition_serializer:serializer" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_module.tdf Line: 29
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.inc Line: 26
+Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst|acquisition_serializer:serializer|counter:count" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_serializer.tdf Line: 23
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.tdf Line: 6
+Info (12128): Elaborating entity "acquisition_store" for hierarchy "acquisition_module:inst|acquisition_store:storer" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_module.tdf Line: 30
+Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst|acquisition_store:storer|counter:channel_counter" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_store.tdf Line: 20
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.tdf Line: 6
 Info (12128): Elaborating entity "host_interface" for hierarchy "host_interface:inst3"
 Info (12128): Elaborating entity "mode_selector" for hierarchy "host_interface:inst3|mode_selector:mode_sel" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/host_interface.tdf Line: 17
 Info (12128): Elaborating entity "synchronizer" for hierarchy "host_interface:inst3|mode_selector:mode_sel|synchronizer:sync" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/mode_selector.tdf Line: 19
-Info (12128): Elaborating entity "acquisition_serializer" for hierarchy "acquisition_serializer:inst12"
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.inc Line: 26
-Info (12128): Elaborating entity "counter" for hierarchy "acquisition_serializer:inst12|counter:count" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_serializer.tdf Line: 23
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.tdf Line: 6
-Info (12128): Elaborating entity "acquisition_store" for hierarchy "acquisition_store:inst13"
-Info (12128): Elaborating entity "counter" for hierarchy "acquisition_store:inst13|counter:channel_counter" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_store.tdf Line: 20
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.tdf Line: 6
 Info (12128): Elaborating entity "RAM_interface" for hierarchy "RAM_interface:inst1"
 Info (12128): Elaborating entity "lpm_counter" for hierarchy "RAM_interface:inst1|lpm_counter:address_counter" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 30
 Info (12130): Elaborated megafunction instantiation "RAM_interface:inst1|lpm_counter:address_counter" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 30
@@ -496,16 +518,20 @@ Info (12133): Instantiated megafunction "RAM_interface:inst1|lpm_counter:address
 Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_kqi.tdf
     Info (12023): Found entity 1: cntr_kqi File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/db/cntr_kqi.tdf Line: 26
 Info (12128): Elaborating entity "cntr_kqi" for hierarchy "RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated" File: c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_counter.tdf Line: 259
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "test_sm_state[2]" is stuck at GND
+    Warning (13410): Pin "test_sm_state[1]" is stuck at GND
+    Warning (13410): Pin "test_sm_state[0]" is stuck at GND
 Info (18000): Registers with preset signals will power-up high File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_store.tdf Line: 18
-Info (21057): Implemented 347 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 343 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 11 input pins
     Info (21059): Implemented 31 output pins
     Info (21060): Implemented 8 bidirectional pins
-    Info (21061): Implemented 297 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 10 warnings
-    Info: Peak virtual memory: 4707 megabytes
-    Info: Processing ended: Tue Mar 30 12:51:03 2021
-    Info: Elapsed time: 00:00:15
-    Info: Total CPU time (on all processors): 00:00:21
+    Info (21061): Implemented 293 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 15 warnings
+    Info: Peak virtual memory: 4708 megabytes
+    Info: Processing ended: Wed Mar 31 16:55:42 2021
+    Info: Elapsed time: 00:00:14
+    Info: Total CPU time (on all processors): 00:00:20
 
 

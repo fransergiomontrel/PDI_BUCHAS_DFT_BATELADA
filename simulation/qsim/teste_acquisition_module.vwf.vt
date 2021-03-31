@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "03/29/2021 18:10:09"
+// Generated on "03/31/2021 15:57:29"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          acquisition_module
 // 
@@ -30,22 +30,25 @@
 module acquisition_module_vlg_vec_tst();
 // constants                                           
 // general purpose registers
-reg [5:0] adc_sdo;
+reg [5:0] adc_sdi;
 reg clk;
 reg [7:0] treg_data_bus;
+reg [1:0] host_mode;
+reg host_start;
 reg reset;
-reg start;
 // wires                                               
 wire adc_convst;
 wire adc_sclk;
 wire [18:0] address;
-wire cs_n;
 wire [7:0] data_bus;
-wire running;
+wire host_ready;
+wire ram_cs_n;
+wire ram_oe_n;
+wire ram_we_n;
 wire test_addr_clr;
 wire test_addr_inc;
+wire test_running;
 wire [2:0] test_sm_state;
-wire we_n;
 
 // assign statements (if any)                          
 assign data_bus = treg_data_bus;
@@ -53,18 +56,21 @@ acquisition_module i1 (
 // port map - connection between master ports and signals/registers   
 	.adc_convst(adc_convst),
 	.adc_sclk(adc_sclk),
-	.adc_sdo(adc_sdo),
+	.adc_sdi(adc_sdi),
 	.address(address),
 	.clk(clk),
-	.cs_n(cs_n),
 	.data_bus(data_bus),
+	.host_mode(host_mode),
+	.host_ready(host_ready),
+	.host_start(host_start),
+	.ram_cs_n(ram_cs_n),
+	.ram_oe_n(ram_oe_n),
+	.ram_we_n(ram_we_n),
 	.reset(reset),
-	.running(running),
-	.start(start),
 	.test_addr_clr(test_addr_clr),
 	.test_addr_inc(test_addr_inc),
-	.test_sm_state(test_sm_state),
-	.we_n(we_n)
+	.test_running(test_running),
+	.test_sm_state(test_sm_state)
 );
 initial 
 begin 
@@ -86,42 +92,62 @@ begin
 	reset = #45000 1'b0;
 end 
 
-// start
+// host_start
 initial
 begin
-	start = 1'b0;
-	start = #75000 1'b1;
-	start = #40000 1'b0;
+	host_start = 1'b0;
+	host_start = #640000 1'b1;
+	host_start = #1280000 1'b0;
 end 
-// adc_sdo[ 5 ]
+// host_mode[ 1 ]
 initial
 begin
-	adc_sdo[5] = 1'b0;
+	host_mode[1] = 1'b0;
 end 
-// adc_sdo[ 4 ]
+// host_mode[ 0 ]
 initial
 begin
-	adc_sdo[4] = 1'b0;
+	host_mode[0] = 1'b0;
 end 
-// adc_sdo[ 3 ]
+// data_bus[ 7 ]
 initial
 begin
-	adc_sdo[3] = 1'b0;
+	treg_data_bus[7] = 1'bZ;
 end 
-// adc_sdo[ 2 ]
+// data_bus[ 6 ]
 initial
 begin
-	adc_sdo[2] = 1'b0;
+	treg_data_bus[6] = 1'bZ;
 end 
-// adc_sdo[ 1 ]
+// data_bus[ 5 ]
 initial
 begin
-	adc_sdo[1] = 1'b0;
+	treg_data_bus[5] = 1'bZ;
 end 
-// adc_sdo[ 0 ]
+// data_bus[ 4 ]
 initial
 begin
-	adc_sdo[0] = 1'b0;
+	treg_data_bus[4] = 1'bZ;
+end 
+// data_bus[ 3 ]
+initial
+begin
+	treg_data_bus[3] = 1'bZ;
+end 
+// data_bus[ 2 ]
+initial
+begin
+	treg_data_bus[2] = 1'bZ;
+end 
+// data_bus[ 1 ]
+initial
+begin
+	treg_data_bus[1] = 1'bZ;
+end 
+// data_bus[ 0 ]
+initial
+begin
+	treg_data_bus[0] = 1'bZ;
 end 
 endmodule
 

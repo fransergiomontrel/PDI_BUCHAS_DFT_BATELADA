@@ -1,25 +1,21 @@
-|acquisition_module
-adc_convst <= acquisition_ctrl:inst9.convst
-clk => acquisition_ctrl:inst9.clk
+|sensor_buchas_CPLD
+adc_convst <= acquisition_module:inst.convst
+clk => acquisition_module:inst.clk
 clk => host_interface:inst3.clk
-clk => acquisition_serializer:inst12.clk
-clk => acquisition_store:inst13.clk
 clk => RAM_interface:inst1.clk
+reset => acquisition_module:inst.reset
 reset => host_interface:inst3.reset
-reset => acquisition_ctrl:inst9.reset
-reset => acquisition_serializer:inst12.reset
-reset => acquisition_store:inst13.reset
 reset => RAM_interface:inst1.reset
 host_start => host_interface:inst3.host_start
 host_mode[0] => host_interface:inst3.host_mode[0]
 host_mode[1] => host_interface:inst3.host_mode[1]
-adc_sdo[0] => acquisition_serializer:inst12.adc_sdo[0]
-adc_sdo[1] => acquisition_serializer:inst12.adc_sdo[1]
-adc_sdo[2] => acquisition_serializer:inst12.adc_sdo[2]
-adc_sdo[3] => acquisition_serializer:inst12.adc_sdo[3]
-adc_sdo[4] => acquisition_serializer:inst12.adc_sdo[4]
-adc_sdo[5] => acquisition_serializer:inst12.adc_sdo[5]
-adc_sclk <= acquisition_serializer:inst12.adc_sclk
+adc_sdi[0] => acquisition_module:inst.adc_sdi[0]
+adc_sdi[1] => acquisition_module:inst.adc_sdi[1]
+adc_sdi[2] => acquisition_module:inst.adc_sdi[2]
+adc_sdi[3] => acquisition_module:inst.adc_sdi[3]
+adc_sdi[4] => acquisition_module:inst.adc_sdi[4]
+adc_sdi[5] => acquisition_module:inst.adc_sdi[5]
+adc_sclk <= acquisition_module:inst.adc_sclk
 test_addr_clr <= addr_clr.DB_MAX_OUTPUT_PORT_TYPE
 test_addr_inc <= addr_inc.DB_MAX_OUTPUT_PORT_TYPE
 ram_we_n <= RAM_interface:inst1.ram_we_n
@@ -54,12 +50,43 @@ address[15] <= RAM_interface:inst1.ram_address[15]
 address[16] <= RAM_interface:inst1.ram_address[16]
 address[17] <= RAM_interface:inst1.ram_address[17]
 address[18] <= RAM_interface:inst1.ram_address[18]
-test_sm_state[0] <= acquisition_ctrl:inst9.test_sm_state[0]
-test_sm_state[1] <= acquisition_ctrl:inst9.test_sm_state[1]
-test_sm_state[2] <= acquisition_ctrl:inst9.test_sm_state[2]
+test_sm_state[0] <= <GND>
+test_sm_state[1] <= <GND>
+test_sm_state[2] <= <GND>
 
 
-|acquisition_module|acquisition_ctrl:inst9
+|sensor_buchas_CPLD|acquisition_module:inst
+clk => acquisition_ctrl:ctrl.clk
+clk => acquisition_serializer:serializer.clk
+clk => acquisition_store:storer.clk
+reset => acquisition_ctrl:ctrl.reset
+reset => acquisition_serializer:serializer.reset
+reset => acquisition_store:storer.reset
+start => acquisition_ctrl:ctrl.start
+adc_sdi[0] => acquisition_serializer:serializer.adc_sdi[0]
+adc_sdi[1] => acquisition_serializer:serializer.adc_sdi[1]
+adc_sdi[2] => acquisition_serializer:serializer.adc_sdi[2]
+adc_sdi[3] => acquisition_serializer:serializer.adc_sdi[3]
+adc_sdi[4] => acquisition_serializer:serializer.adc_sdi[4]
+adc_sdi[5] => acquisition_serializer:serializer.adc_sdi[5]
+adc_sclk <= acquisition_serializer:serializer.adc_sclk
+convst <= acquisition_ctrl:ctrl.convst
+addr_inc <= acquisition_store:storer.addr_inc
+addr_clr <= acquisition_ctrl:ctrl.addr_clr
+running <= acquisition_ctrl:ctrl.running
+we_n <= acquisition_store:storer.we_n
+cs_n <= acquisition_store:storer.cs_n
+data[0] <= acquisition_serializer:serializer.data[0]
+data[1] <= acquisition_serializer:serializer.data[1]
+data[2] <= acquisition_serializer:serializer.data[2]
+data[3] <= acquisition_serializer:serializer.data[3]
+data[4] <= acquisition_serializer:serializer.data[4]
+data[5] <= acquisition_serializer:serializer.data[5]
+data[6] <= acquisition_serializer:serializer.data[6]
+data[7] <= acquisition_serializer:serializer.data[7]
+
+
+|sensor_buchas_CPLD|acquisition_module:inst|acquisition_ctrl:ctrl
 clk => counter:clock_counter.clk
 clk => counter:samples_counter.clk
 clk => convst_ff.CLK
@@ -102,7 +129,7 @@ test_samples_counter[0] <= counter:samples_counter.o[0]
 test_samples_counter[1] <= counter:samples_counter.o[1]
 
 
-|acquisition_module|acquisition_ctrl:inst9|counter:clock_counter
+|sensor_buchas_CPLD|acquisition_module:inst|acquisition_ctrl:ctrl|counter:clock_counter
 clk => ffs[8].CLK
 clk => ffs[7].CLK
 clk => ffs[6].CLK
@@ -127,7 +154,7 @@ o[7] <= ffs[7].DB_MAX_OUTPUT_PORT_TYPE
 o[8] <= ffs[8].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|acquisition_module|acquisition_ctrl:inst9|counter:samples_counter
+|sensor_buchas_CPLD|acquisition_module:inst|acquisition_ctrl:ctrl|counter:samples_counter
 clk => ffs[1].CLK
 clk => ffs[0].CLK
 reset => ffs[1].IN0
@@ -138,63 +165,7 @@ o[0] <= ffs[0].DB_MAX_OUTPUT_PORT_TYPE
 o[1] <= ffs[1].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|acquisition_module|host_interface:inst3
-clk => mode_selector:mode_sel.clk
-clk => start_ff.CLK
-reset => mode_selector:mode_sel.reset
-host_mode[0] => mode_selector:mode_sel.mode_in[0]
-host_mode[1] => mode_selector:mode_sel.mode_in[1]
-host_start => start_ff.DATAIN
-host_ready <= mode_selector:mode_sel.ready
-running => _.IN0
-mode[0] <= mode_selector:mode_sel.mode_out[0]
-mode[1] <= mode_selector:mode_sel.mode_out[1]
-changing_mode <= mode_selector:mode_sel.changing
-start <= start_ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|host_interface:inst3|mode_selector:mode_sel
-clk => synchronizer:sync.clk
-clk => changing_ff.CLK
-clk => ready_ff.CLK
-clk => mode_out_ff[1].CLK
-clk => mode_out_ff[0].CLK
-clk => sm.IN1
-mode_in[0] => synchronizer:sync.i[0]
-mode_in[1] => synchronizer:sync.i[1]
-reset => ready_ff.IN0
-reset => changing_ff.IN0
-reset => sm.IN1
-change_ok => _.IN1
-mode_out[0] <= mode_out_ff[0].DB_MAX_OUTPUT_PORT_TYPE
-mode_out[1] <= mode_out_ff[1].DB_MAX_OUTPUT_PORT_TYPE
-ready <= ready_ff.DB_MAX_OUTPUT_PORT_TYPE
-changing <= changing_ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|host_interface:inst3|mode_selector:mode_sel|synchronizer:sync
-clk => regs[1][3].CLK
-clk => regs[1][2].CLK
-clk => regs[1][1].CLK
-clk => regs[1][0].CLK
-clk => regs[0][3].CLK
-clk => regs[0][2].CLK
-clk => regs[0][1].CLK
-clk => regs[0][0].CLK
-i[0] => regs[0][0].DATAIN
-i[1] => regs[1][0].DATAIN
-enable => regs[1][2].ENA
-enable => regs[1][1].ENA
-enable => regs[1][0].ENA
-enable => regs[0][2].ENA
-enable => regs[0][1].ENA
-enable => regs[0][0].ENA
-stable <= stable.DB_MAX_OUTPUT_PORT_TYPE
-o[0] <= regs[0][3].DB_MAX_OUTPUT_PORT_TYPE
-o[1] <= regs[1][3].DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:inst12
+|sensor_buchas_CPLD|acquisition_module:inst|acquisition_serializer:serializer
 reset => serialize_ok_ff.IN0
 reset => counter:count.reset
 clk => counter:count.clk
@@ -296,10 +267,10 @@ clk => data_buffer[0][1].CLK
 clk => data_buffer[0][0].CLK
 clk => div2_clock.CLK
 clk => serialize_ok_ff.CLK
-enable => _.IN0
-enable => _.IN0
-enable => _.IN0
-enable => _.IN0
+serialize => _.IN0
+serialize => _.IN0
+serialize => _.IN0
+serialize => _.IN0
 msb => _.IN0
 channel[0] => _.IN0
 channel[0] => _.IN2
@@ -328,16 +299,16 @@ data[5] <= data[5].DB_MAX_OUTPUT_PORT_TYPE
 data[6] <= data[6].DB_MAX_OUTPUT_PORT_TYPE
 data[7] <= data[7].DB_MAX_OUTPUT_PORT_TYPE
 serialize_ok <= serialize_ok_ff.DB_MAX_OUTPUT_PORT_TYPE
-adc_sdo[0] => data_buffer[0][0].DATAIN
-adc_sdo[1] => data_buffer[1][0].DATAIN
-adc_sdo[2] => data_buffer[2][0].DATAIN
-adc_sdo[3] => data_buffer[3][0].DATAIN
-adc_sdo[4] => data_buffer[4][0].DATAIN
-adc_sdo[5] => data_buffer[5][0].DATAIN
+adc_sdi[0] => data_buffer[0][0].DATAIN
+adc_sdi[1] => data_buffer[1][0].DATAIN
+adc_sdi[2] => data_buffer[2][0].DATAIN
+adc_sdi[3] => data_buffer[3][0].DATAIN
+adc_sdi[4] => data_buffer[4][0].DATAIN
+adc_sdi[5] => data_buffer[5][0].DATAIN
 adc_sclk <= div2_clock.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|acquisition_module|acquisition_serializer:inst12|counter:count
+|sensor_buchas_CPLD|acquisition_module:inst|acquisition_serializer:serializer|counter:count
 clk => ffs[4].CLK
 clk => ffs[3].CLK
 clk => ffs[2].CLK
@@ -354,7 +325,7 @@ o[3] <= ffs[3].DB_MAX_OUTPUT_PORT_TYPE
 o[4] <= ffs[4].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|acquisition_module|acquisition_store:inst13
+|sensor_buchas_CPLD|acquisition_module:inst|acquisition_store:storer
 clk => counter:channel_counter.clk
 clk => we_n_ff.CLK
 clk => cs_n_ff.CLK
@@ -380,7 +351,7 @@ test_sm[1] <= test_sm[1].DB_MAX_OUTPUT_PORT_TYPE
 test_sm[2] <= test_sm[2].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|acquisition_module|acquisition_store:inst13|counter:channel_counter
+|sensor_buchas_CPLD|acquisition_module:inst|acquisition_store:storer|counter:channel_counter
 clk => ffs[3].CLK
 clk => ffs[2].CLK
 clk => ffs[1].CLK
@@ -395,7 +366,63 @@ o[2] <= ffs[2].DB_MAX_OUTPUT_PORT_TYPE
 o[3] <= ffs[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|acquisition_module|RAM_interface:inst1
+|sensor_buchas_CPLD|host_interface:inst3
+clk => mode_selector:mode_sel.clk
+clk => start_ff.CLK
+reset => mode_selector:mode_sel.reset
+host_mode[0] => mode_selector:mode_sel.mode_in[0]
+host_mode[1] => mode_selector:mode_sel.mode_in[1]
+host_start => start_ff.DATAIN
+host_ready <= mode_selector:mode_sel.ready
+running => _.IN0
+mode[0] <= mode_selector:mode_sel.mode_out[0]
+mode[1] <= mode_selector:mode_sel.mode_out[1]
+changing_mode <= mode_selector:mode_sel.changing
+start <= start_ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas_CPLD|host_interface:inst3|mode_selector:mode_sel
+clk => synchronizer:sync.clk
+clk => changing_ff.CLK
+clk => ready_ff.CLK
+clk => mode_out_ff[1].CLK
+clk => mode_out_ff[0].CLK
+clk => sm.IN1
+mode_in[0] => synchronizer:sync.i[0]
+mode_in[1] => synchronizer:sync.i[1]
+reset => ready_ff.IN0
+reset => changing_ff.IN0
+reset => sm.IN1
+change_ok => _.IN1
+mode_out[0] <= mode_out_ff[0].DB_MAX_OUTPUT_PORT_TYPE
+mode_out[1] <= mode_out_ff[1].DB_MAX_OUTPUT_PORT_TYPE
+ready <= ready_ff.DB_MAX_OUTPUT_PORT_TYPE
+changing <= changing_ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas_CPLD|host_interface:inst3|mode_selector:mode_sel|synchronizer:sync
+clk => regs[1][3].CLK
+clk => regs[1][2].CLK
+clk => regs[1][1].CLK
+clk => regs[1][0].CLK
+clk => regs[0][3].CLK
+clk => regs[0][2].CLK
+clk => regs[0][1].CLK
+clk => regs[0][0].CLK
+i[0] => regs[0][0].DATAIN
+i[1] => regs[1][0].DATAIN
+enable => regs[1][2].ENA
+enable => regs[1][1].ENA
+enable => regs[1][0].ENA
+enable => regs[0][2].ENA
+enable => regs[0][1].ENA
+enable => regs[0][0].ENA
+stable <= stable.DB_MAX_OUTPUT_PORT_TYPE
+o[0] <= regs[0][3].DB_MAX_OUTPUT_PORT_TYPE
+o[1] <= regs[1][3].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas_CPLD|RAM_interface:inst1
 clk => lpm_counter:address_counter.clock
 reset => lpm_counter:address_counter.aclr
 addr_clr => lpm_counter:address_counter.sclr
@@ -456,7 +483,7 @@ ram_cs_n <= ram_cs_n.DB_MAX_OUTPUT_PORT_TYPE
 ram_oe_n <= ram_oe_n.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|acquisition_module|RAM_interface:inst1|lpm_counter:address_counter
+|sensor_buchas_CPLD|RAM_interface:inst1|lpm_counter:address_counter
 clock => cntr_kqi:auto_generated.clock
 clk_en => ~NO_FANOUT~
 cnt_en => cntr_kqi:auto_generated.cnt_en
@@ -527,7 +554,7 @@ eq[14] <= <GND>
 eq[15] <= <GND>
 
 
-|acquisition_module|RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated
+|sensor_buchas_CPLD|RAM_interface:inst1|lpm_counter:address_counter|cntr_kqi:auto_generated
 aclr => counter_cella0.ACLR
 aclr => counter_cella1.ACLR
 aclr => counter_cella2.ACLR

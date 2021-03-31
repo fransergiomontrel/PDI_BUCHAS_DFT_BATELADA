@@ -1,0 +1,62 @@
+include "acquisition_ctrl.inc";
+include "acquisition_serializer.inc";
+include "acquisition_store.inc";
+
+parameters(
+	samples = 3
+);
+
+
+subdesign acquisition_module(
+	clk: input;
+	reset: input;
+	start: input;
+	adc_sdi[5..0]: input;
+	
+
+	adc_sclk: output;	
+	convst: output;
+	addr_inc: output;
+	addr_clr: output;
+	running: output;
+	we_n: output;
+	cs_n: output;
+	data[7..0]: output;
+)
+variable
+	
+	ctrl: acquisition_ctrl with (active_period = 68, period = 463, samples = samples);
+	serializer: acquisition_serializer with (little_endian = 1);
+	storer: acquisition_store;
+begin
+	-- CTRL
+	ctrl.clk = clk;
+	ctrl.reset = reset;
+	ctrl.start = start;
+	ctrl.serialize_ok = serializer.serialize_ok;
+	ctrl.store_ok = storer.store_ok;
+
+	-- SERIALIZER
+	serializer.clk = clk;
+	serializer.reset = reset;
+	serializer.serialize = ctrl.serialize;
+	serializer.msb = storer.msb;
+	serializer.channel[] = storer.channel[];
+	serializer.adc_sdi[] = adc_sdi[];
+	
+	-- STORE
+	storer.clk = clk;
+	storer.reset = reset;
+	storer.store = ctrl.store;
+		
+	-- OUTPUTS	
+	convst = ctrl.convst;
+	addr_clr = ctrl.addr_clr;
+	running = ctrl.running;
+	adc_sclk = serializer.adc_sclk;
+	cs_n = storer.cs_n;
+	we_n = storer.we_n;
+	addr_inc = storer.addr_inc;
+	data[] = serializer.data[];
+end;
+
