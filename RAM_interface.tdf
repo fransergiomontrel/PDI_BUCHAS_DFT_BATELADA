@@ -16,15 +16,15 @@ subdesign RAM_interface(
 	cs_n: input;
 	
 	mode[1..0]: input;
-	changing_mode: input;
-	
-	data_out[7..0]: output;
+	changing_mode: input;	
 	
 	ram_address[N_BITS-1..0]: output;
 	ram_data_bus[7..0]: bidir;
 	ram_we_n: output;
 	ram_cs_n: output;
 	ram_oe_n: output;
+
+	data_out[7..0]: output;
 )
 variable
 	address_counter: lpm_counter with(LPM_DIRECTION="UP", LPM_WIDTH = N_BITS);

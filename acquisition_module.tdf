@@ -11,10 +11,10 @@ subdesign acquisition_module(
 	clk: input;
 	reset: input;
 	start: input;
-	adc_sdi[5..0]: input;
+	sdi[5..0]: input;
 	
 
-	adc_sclk: output;	
+	sclk_: output;	
 	convst: output;
 	addr_inc: output;
 	addr_clr: output;
@@ -42,7 +42,7 @@ begin
 	serializer.serialize = ctrl.serialize;
 	serializer.msb = storer.msb;
 	serializer.channel[] = storer.channel[];
-	serializer.adc_sdi[] = adc_sdi[];
+	serializer.adc_sdi[] = sdi[];
 	
 	-- STORE
 	storer.clk = clk;
@@ -53,7 +53,7 @@ begin
 	convst = ctrl.convst;
 	addr_clr = ctrl.addr_clr;
 	running = ctrl.running;
-	adc_sclk = serializer.adc_sclk;
+	sclk_ = serializer.adc_sclk;
 	cs_n = storer.cs_n;
 	we_n = storer.we_n;
 	addr_inc = storer.addr_inc;

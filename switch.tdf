@@ -1,0 +1,76 @@
+include "modes.inc";
+
+subdesign switch(
+	clk: input;
+	reset: input;
+	
+	-- Host Interface
+	HI_mode[1..0]: input;
+	HI_changing_mode: input;
+	HI_start: input;
+	HI_convst: input;
+	HI_rst_n: input;
+	HI_running: output;
+	
+	-- RAM Interface
+	RI_data_out[7..0]: input;
+	RI_addr_clr: output;
+	RI_addr_inc: output;
+	RI_data_in[7..0]: output;
+	RI_we_n: output;
+	RI_cs_n: output;
+	RI_mode[1..0]: output;
+	RI_changing_mode: output;
+	
+	-- ADC Interface
+	AI_sdi[5..0]: input;
+	AI_changing_mode: output;
+	AI_rst_n: output;
+	AI_convst: output;
+	AI_sclk: output;
+	AI_sdo[5..0]: output;
+	
+	-- Acquisition Module
+	AM_adc_sclk: input;
+	AM_adc_convst: input;
+	AM_addr_inc: input;
+	AM_add_clr: input;
+	AM_running: input;
+	AM_we_n: input;
+	AM_cs_n: input;
+	AM_data[7..0]: input;
+	AM_start: output;
+	AM_adc_sdi: output;
+)
+begin
+	-- Host Interface
+	HI_running = Gnd;
+	
+	-- RAM Interface
+	RI_addr_clr = Gnd;
+	RI_addr_inc = Gnd;
+	RI_data_in[7..0] = Gnd;
+	RI_we_n = Gnd;
+	RI_cs_n = Gnd;
+	RI_mode[1..0] = Gnd;
+	RI_changing_mode = Gnd;
+	
+	-- ADC Interface
+	AI_changing_mode = Gnd;
+	AI_rst_n = Gnd;
+	AI_convst = Gnd;
+	AI_sclk = Gnd;
+	AI_sdo[5..0] = Gnd;
+	
+	-- Acquisition Module
+	AM_start = Gnd;
+	AM_adc_sd = Gnd;
+
+
+--	case mode[] is
+--		when MODE_NONE =>			
+--		when MODE_CONFIGURATION =>
+--		when MODE_AQUISITION =>
+--		when MODE_READ_DATA =>
+--	end case;
+end;
