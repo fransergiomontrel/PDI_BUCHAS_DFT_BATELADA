@@ -17,6 +17,7 @@ subdesign host_interface(
 	start: output;
 	convst: output;
 	rst_n: output;
+	host_running: output;
 	host_ready: output;
 	host_sdi[5..0]: output;
 )
@@ -29,9 +30,10 @@ begin
 	mode_sel.reset = reset;
 	mode_sel.mode_in[] = host_mode[];
 	mode[] = mode_sel.mode_out[];
+	host_running = running;
 	host_ready = mode_sel.ready;
 	changing_mode = mode_sel.changing;
-	mode_sel.change_ok = !running;
+	mode_sel.change_ok = Vcc;		-- TODO: ainda não há um critério para evitar a mudança de estado
 
 	-- start
 	start_ff.clk = clk;

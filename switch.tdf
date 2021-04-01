@@ -35,44 +35,65 @@ subdesign switch(
 	AM_adc_sclk: input;
 	AM_adc_convst: input;
 	AM_addr_inc: input;
-	AM_add_clr: input;
+	AM_addr_clr: input;
 	AM_running: input;
 	AM_we_n: input;
 	AM_cs_n: input;
 	AM_data[7..0]: input;
 	AM_start: output;
-	AM_adc_sdi: output;
+	AM_adc_sdi[5..0]: output;
 )
 begin
-	-- Host Interface
-	HI_running = Gnd;
-	HI_sdi[] = Gnd;
-	
-	-- RAM Interface
-	RI_addr_clr = Gnd;
-	RI_addr_inc = Gnd;
-	RI_data_in[7..0] = Gnd;
-	RI_we_n = Gnd;
-	RI_cs_n = Gnd;
-	RI_mode[1..0] = Gnd;
-	RI_changing_mode = Gnd;
-	
-	-- ADC Interface
-	AI_changing_mode = Gnd;
-	AI_rst_n = Gnd;
-	AI_convst = Gnd;
-	AI_sclk = Gnd;
-	AI_sdo[5..0] = Gnd;
-	
-	-- Acquisition Module
-	AM_start = Gnd;
-	AM_adc_sdi = Gnd;
+	-- Modes
+	RI_mode[] = HI_mode[];
+	AI_changing_mode = HI_changing_mode;
+	RI_changing_mode = HI_changing_mode;
 
-
---	case mode[] is
+	case HI_mode[] is
 --		when MODE_NONE =>			
 --		when MODE_CONFIGURATION =>
---		when MODE_AQUISITION =>
+		when MODE_AQUISITION =>
+			-- Host Interface
+			HI_running = AM_running;
+			HI_sdi[] = Gnd;
+			
+			-- RAM Interface
+			RI_addr_clr = AM_addr_clr;
+			RI_addr_inc = AM_addr_inc;
+			RI_data_in[] = AM_data[];
+			RI_we_n = AM_we_n;
+			RI_cs_n = AM_cs_n;
+			
+			-- ADC Interface
+			AI_rst_n = Vcc;
+			AI_convst = AM_adc_convst;
+			AI_sclk = AM_adc_sclk;
+			AI_sdo[] = Gnd;
+			
+			-- Acquisition Module
+			AM_start = HI_start;
+			AM_adc_sdi[] = AI_sdi[];
+
 --		when MODE_READ_DATA =>
---	end case;
+		when others =>
+			HI_running = Gnd;
+			HI_sdi[] = Gnd;
+			
+			-- RAM Interface
+			RI_addr_clr = Gnd;
+			RI_addr_inc = Gnd;
+			RI_data_in[] = Gnd;
+			RI_we_n = Vcc;
+			RI_cs_n = Vcc;
+			
+			-- ADC Interface
+			AI_rst_n = Vcc;
+			AI_convst = Gnd;
+			AI_sclk = Gnd;
+			AI_sdo[] = Gnd;
+			
+			-- Acquisition Module
+			AM_start = Gnd;
+			AM_adc_sdi[] = Gnd;
+	end case;
 end;
