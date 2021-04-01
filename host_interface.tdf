@@ -4,6 +4,7 @@ subdesign host_interface(
 	clk: input;
 	reset: input;
 	running: input = Vcc;
+	sdi[5..0]: input;
 
 	host_mode[1..0]: input;
 	host_start: input;
@@ -36,4 +37,6 @@ begin
 	start_ff.clk = clk;
 	start_ff.d = host_start;
 	start = start_ff.q;
+	
+	host_sdi[] = sdi[];
 end;
