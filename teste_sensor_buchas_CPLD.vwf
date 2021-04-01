@@ -22,6 +22,7 @@ run -all
 quit -f
 
 
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -40,6 +41,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 
 
 </modelsim_script_timing>
@@ -137,16 +139,6 @@ SIGNAL("host_ready")
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = OUTPUT;
-	PARENT = "";
-}
-
-SIGNAL("host_start")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = INPUT;
 	PARENT = "";
 }
 
@@ -600,6 +592,66 @@ SIGNAL("host_running")
 	PARENT = "";
 }
 
+SIGNAL("host_convst_start")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("host_MISO")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("host_MOSI")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("host_SCLK")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("host_SS_n")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("adc_sdo[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
 TRANSITION_LIST("reset")
 {
 	NODE
@@ -631,7 +683,9 @@ TRANSITION_LIST("host_mode[1]")
 	{
 		REPEAT = 1;
 		LEVEL 0 FOR 270.0;
-		LEVEL 1 FOR 99730.0;
+		LEVEL 1 FOR 13730.0;
+		LEVEL 0 FOR 7840.0;
+		LEVEL 1 FOR 78160.0;
 	}
 }
 
@@ -640,7 +694,9 @@ TRANSITION_LIST("host_mode[0]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 100000.0;
+		LEVEL 0 FOR 14000.0;
+		LEVEL 1 FOR 7840.0;
+		LEVEL 0 FOR 78160.0;
 	}
 }
 
@@ -653,23 +709,14 @@ TRANSITION_LIST("host_ready")
 	}
 }
 
-TRANSITION_LIST("host_start")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 360.0;
-		LEVEL 1 FOR 50.0;
-		LEVEL 0 FOR 99590.0;
-	}
-}
-
 TRANSITION_LIST("adc_sdi[5]")
 {
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 100000.0;
+		LEVEL 0 FOR 14400.0;
+		LEVEL 1 FOR 320.0;
+		LEVEL 0 FOR 85280.0;
 	}
 }
 
@@ -1044,6 +1091,79 @@ TRANSITION_LIST("host_running")
 	}
 }
 
+TRANSITION_LIST("host_convst_start")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 420.0;
+		LEVEL 1 FOR 40.0;
+		LEVEL 0 FOR 14660.0;
+		LEVEL 1 FOR 480.0;
+		LEVEL 0 FOR 84400.0;
+	}
+}
+
+TRANSITION_LIST("host_MISO")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 100000.0;
+	}
+}
+
+TRANSITION_LIST("host_MOSI")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 2500;
+			LEVEL 0 FOR 20.0;
+			LEVEL 1 FOR 20.0;
+		}
+	}
+}
+
+TRANSITION_LIST("host_SCLK")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 5000;
+			LEVEL 0 FOR 10.0;
+			LEVEL 1 FOR 10.0;
+		}
+	}
+}
+
+TRANSITION_LIST("host_SS_n")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 625;
+			LEVEL 0 FOR 80.0;
+			LEVEL 1 FOR 80.0;
+		}
+	}
+}
+
+TRANSITION_LIST("adc_sdo[0]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 100000.0;
+	}
+}
+
 DISPLAY_LINE
 {
 	CHANNEL = "reset";
@@ -1103,7 +1223,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "host_start";
+	CHANNEL = "host_convst_start";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 6;
@@ -1548,6 +1668,51 @@ DISPLAY_LINE
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 51;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "host_MISO";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 52;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "host_MOSI";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 53;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "host_SCLK";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 54;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "host_SS_n";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 55;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "adc_sdo[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 56;
 	TREE_LEVEL = 0;
 }
 

@@ -1,6 +1,7 @@
 include "acquisition_ctrl.inc";
 include "acquisition_serializer.inc";
 include "acquisition_store.inc";
+include "modes.inc";
 
 parameters(
 	samples = 3
@@ -11,7 +12,9 @@ subdesign acquisition_module(
 	clk: input;
 	reset: input;
 	start: input;
+	mode[1..0]: input;
 	sdi[5..0]: input;
+	changing_mode: input;
 	
 
 	sclk_: output;	
@@ -24,15 +27,20 @@ subdesign acquisition_module(
 	data[7..0]: output;
 )
 variable
-	
+	start_ff: dffe;
 	ctrl: acquisition_ctrl with (active_period = 68, period = 463, samples = samples);
 	serializer: acquisition_serializer with (little_endian = 1);
 	storer: acquisition_store;
 begin
+	-- START
+	start_ff.d = start;
+	start_ff.clk = clk;
+	start_ff.ena = !changing_mode and mode[] == MODE_AQUISITION;
+
 	-- CTRL
 	ctrl.clk = clk;
 	ctrl.reset = reset;
-	ctrl.start = start;
+	ctrl.start = start_ff.q;
 	ctrl.serialize_ok = serializer.serialize_ok;
 	ctrl.store_ok = storer.store_ok;
 
