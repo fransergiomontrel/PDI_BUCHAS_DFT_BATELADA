@@ -1,0 +1,132 @@
+include "shift_reg_2x.inc";
+include "counter.inc";
+include "modes.inc";
+
+subdesign read_data_module(
+	clk: input;
+	reset: input;
+	
+	mode[1..0]: input;
+	addr_clr: output;
+	addr_inc: output;
+	oe_n: output;
+	
+	SCLK_: input;
+	MISO: output;
+	
+	data[7..0]: input;
+	
+	test_async_load: output;
+	test_loading: output;
+	test_state[3..0]: output;
+)
+variable
+	shift: shift_reg_2x;
+	
+	sm: machine with states(wait_mode, init_buffers1, init_buffers2, init_buffers3, init_buffers4, wait_loading, wait_loading_n);
+	
+	oe_n_FF, init_shift_FF, load_parallel_FF, addr_inc_FF: dff;
+	init_shift_0: node;
+begin
+	defaults
+		addr_clr = Gnd;
+		addr_inc = Gnd;
+		oe_n_FF.d = Gnd;
+		init_shift_FF.d = Gnd;
+		load_parallel_FF.d = Gnd;
+		addr_inc_FF.d = GND;
+	end defaults;
+	
+	shift.clk = SCLK_;
+	shift.i[] = data[];
+	
+	oe_n_FF.clk = clk;
+	oe_n = oe_n_FF.q;
+	oe_n_FF.prn = !reset;
+	
+	load_parallel_FF.clk = clk;
+	shift.async_load = load_parallel_FF.q;
+	load_parallel_FF.prn = !reset;
+	
+	init_shift_FF.clk = clk;
+	init_shift_0 = init_shift_FF.q;
+	init_shift_FF.clrn = !reset;
+	
+	addr_inc_FF.clk = clk;
+	addr_inc = addr_inc_FF.q;
+	addr_inc_FF.clrn = !reset;
+
+	sm.reset = reset;
+	sm.clk = clk;
+	
+	case sm is
+		when wait_mode =>
+			if mode[] == MODE_READ_DATA then
+				addr_clr = Vcc;
+				init_shift_FF.d = Vcc;
+				sm = init_buffers1;
+			else
+				oe_n_FF.d = Vcc;
+				sm = wait_mode;
+			end if;
+
+		when init_buffers1 =>					-- 4 estados para dar temporização suficiente da leitura da RAM (taa)
+			init_shift_FF.d = Vcc;
+			load_parallel_FF.d = Vcc;
+			sm = init_buffers2;
+
+		when init_buffers2 =>
+			init_shift_FF.d = Vcc;
+			load_parallel_FF.d = Vcc;
+			sm = init_buffers3;
+
+		when init_buffers3 =>
+			init_shift_FF.d = Vcc;
+			addr_inc_FF.d = Vcc;
+			sm = init_buffers4;
+
+		when init_buffers4 =>
+			sm = wait_loading;
+		
+		when wait_loading =>
+			if mode[] == MODE_READ_DATA then
+				if !shift.loading then
+					sm = wait_loading;
+				else
+					sm = wait_loading_n;
+				end if;
+			else
+				oe_n_FF.d = Vcc;
+				sm = wait_mode;
+			end if;
+
+		when wait_loading_n =>
+			if mode[] == MODE_READ_DATA then
+				if shift.loading then
+					sm = wait_loading_n;
+				else
+					sm = init_buffers1;
+				end if;
+			else
+				oe_n_FF.d = Vcc;
+				sm = wait_mode;
+			end if;
+	end case;
+	
+	MISO = shift.o;
+	
+	-- TESTS
+	test_async_load = load_parallel_FF.q;
+	test_loading = shift.loading;
+	
+	TABLE
+		sm					=> test_state[];
+		wait_mode 		=>	0;
+		init_buffers1 	=>	1;
+		init_buffers2 	=>	2;
+		init_buffers3 	=>	3;
+		init_buffers4 	=>	4;
+		wait_loading 	=>	5;
+		wait_loading_n	=>	6;
+	END TABLE;
+end;
