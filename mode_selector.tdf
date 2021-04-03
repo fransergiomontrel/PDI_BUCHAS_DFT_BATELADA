@@ -1,10 +1,11 @@
 include "modes.inc";
 include "synchronizer.inc";
+include "dffes.inc";
 
 subdesign mode_selector(
 	clk: INPUT;				-- Clock principal
 	mode_in[1..0]: input;
-	reset: input;
+	sreset: input;
 	change_ok: input = Vcc;
 	
 	mode_out[1..0]: output;
@@ -17,39 +18,39 @@ subdesign mode_selector(
 variable
 	sm : MACHINE WITH STATES (sNoticeChanging, sUpdateMode, sWaitingChangeOk, sStable, sChangedRequested);
 	sync: synchronizer with (bus_size = 2);
-	changing_ff, ready_ff: dff;
-	mode_out_ff[1..0]: dffe;
+	changing_ff, ready_ff: dffes;
+	mode_out_ff[1..0]: dffes;
 begin
 	defaults
 		mode_out_ff[].ena = Gnd;
 		sync.enable = Gnd;
-		changing_ff = Gnd;
-		ready_ff = Gnd;
+		changing_ff.d = Gnd;
+		ready_ff.d = Gnd;
 	end defaults;
 
 	sm.clk = clk;
-	sm.reset = reset;
+	sm.reset = sreset;
 	
 	sync.clk = clk;
 	sync.i[] = mode_in[];
 --	stable = sync.stable;
 	
 	ready_ff.clk = clk;
-	ready_ff.clrn = !reset;
-	ready = ready_ff;
+	ready_ff.sclr = sreset;
+	ready = ready_ff.q;
 	
 	changing_ff.clk = clk;
-	changing_ff.prn = !reset;
-	changing = changing_ff;
+	changing_ff.spre = sreset;
+	changing = changing_ff.q;
 	
 	mode_out_ff[].clk = clk;
-	mode_out_ff[] = sync.o[];
-	mode_out[] = mode_out_ff[];
+	mode_out_ff[].d = sync.o[];
+	mode_out[] = mode_out_ff[].q;
 
 	case sm is
 		when sNoticeChanging =>
 --state[]=0;
-			changing_ff = Vcc;
+			changing_ff.d = Vcc;
 			mode_out_ff[].ena = Vcc;
 			sm = sUpdateMode;
 			
@@ -61,13 +62,13 @@ begin
 --state[]=2;
 			if change_ok then
 				sync.enable = Vcc;
-				ready_ff = Vcc;
+				ready_ff.d = Vcc;
 				sm = sStable;
 			end if;
 
 		when sStable =>
 --state[]=3;
-			ready_ff = Vcc;
+			ready_ff.d = Vcc;
 			if sync.o[] != mode_out[] and sync.stable then
 				sm = sChangedRequested;
 			else
@@ -77,11 +78,11 @@ begin
 		when sChangedRequested =>
 --state[]=4;
 			if sync.o[] != mode_out[] and sync.stable then
-				changing_ff = Vcc;
+				changing_ff.d = Vcc;
 				sm = sNoticeChanging;
 			else
 				sync.enable = Vcc;
-				ready_ff = Vcc;
+				ready_ff.d = Vcc;
 				sm = sStable;
 			end if;
 			

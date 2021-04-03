@@ -8,11 +8,12 @@ PARAMETERS
 
 subdesign RAM_interface(
 	clk: input;
-	reset: input;
+	sreset: input;
 	addr_clr: input;
 	addr_inc: input;
 	data_in[7..0]: input;
 	we_n: input;
+	oe_n: input;
 	cs_n: input;
 	
 	mode[1..0]: input;
@@ -34,8 +35,7 @@ variable
 	driver[7..0]: lcell;
 begin
 	address_counter.clock = clk;
-	address_counter.aclr = reset;
-	address_counter.sclr = addr_clr;
+	address_counter.sclr = addr_clr or sreset;
 	address_counter.cnt_en = addr_inc;
 	
 	ram_address[] = address_counter.q[];
@@ -50,7 +50,7 @@ begin
 	
 	ram_we_n = we_n or !write;
 	ram_cs_n = cs_n or !(write or read);
-	ram_oe_n = !read;
+	ram_oe_n = oe_n or !read;
 	
 	driver[].in = tsn[];
 	data_out[] = driver[].out;

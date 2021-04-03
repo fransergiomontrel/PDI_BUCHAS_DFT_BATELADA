@@ -1,8 +1,9 @@
 include "counter.inc";
+include "dffes.inc";
 
 subdesign acquisition_store(
 	clk: input;
-	reset: input;
+	sreset: input;
 	store: input;
 	
 	we_n: output;
@@ -15,15 +16,15 @@ subdesign acquisition_store(
 	test_sm[2..0]: output;
 )
 variable	
-	we_n_ff, cs_n_ff: dff;
+	we_n_ff, cs_n_ff: dffes;
 	
 	channel_counter: counter with (MAX_VALUE = 12);
 	
 	sm: MACHINE WITH STATES(WAIT_STORE, CS1a, CS0a, CS0b, CS1b, INC_CHANNEL, WAIT_END);
 begin
 	defaults
-		we_n_ff = Gnd;
-		cs_n_ff = Vcc;
+		we_n_ff.d = Gnd;
+		cs_n_ff.d = Vcc;
 		addr_inc = Gnd;
 		store_ok = Gnd;
 
@@ -31,11 +32,11 @@ begin
 		channel_counter.clr = Gnd;
 	end defaults;
 	
-	-- resets
-	channel_counter.reset = reset;
-	sm.reset = reset;
-	we_n_ff.prn = !reset;
-	cs_n_ff.prn = !reset;
+	-- sresets
+	channel_counter.sreset = sreset;
+	sm.reset = sreset;
+	we_n_ff.spre = sreset;
+	cs_n_ff.spre = sreset;
 	
 	-- Sync data
 	we_n_ff.clk = clk;
@@ -49,19 +50,19 @@ test_sm[] = 0;
 			if store then
 				sm = CS1a;
 			else
-				we_n_ff = Vcc;
+				we_n_ff.d = Vcc;
 				channel_counter.clr = Vcc;
 				sm = WAIT_STORE;
 			end if;
 			
 		WHEN CS1a =>
 test_sm[] = 1;
-			cs_n_ff = Gnd;
+			cs_n_ff.d = Gnd;
 			sm = CS0a;
 			
 		WHEN CS0a =>
 test_sm[] = 2;
-			cs_n_ff = Gnd;
+			cs_n_ff.d = Gnd;
 			sm = CS0b;
 
 		WHEN CS0b =>
@@ -77,7 +78,7 @@ test_sm[] = 4;
 		WHEN INC_CHANNEL =>
 test_sm[] = 5;
 			if channel_counter.o[] == 12 then
-				we_n_ff = Vcc;
+				we_n_ff.d = Vcc;
 				store_ok = Vcc;
 				sm = WAIT_END;				
 			else
@@ -87,10 +88,10 @@ test_sm[] = 5;
 		WHEN WAIT_END =>
 test_sm[] = 6;
 			if store then
-				we_n_ff = Vcc;
+				we_n_ff.d = Vcc;
 				store_ok = Vcc;
 			else
-				we_n_ff = Vcc;
+				we_n_ff.d = Vcc;
 				channel_counter.clr = Vcc;
 				sm = WAIT_STORE;
 				
@@ -98,8 +99,8 @@ test_sm[] = 6;
 	END CASE;
 
 	-- Sync outs
-	we_n = we_n_ff;
-	cs_n = cs_n_ff;
+	we_n = we_n_ff.q;
+	cs_n = cs_n_ff.q;
 	channel[] = channel_counter.o[3..1];
 	msb = channel_counter.o[0];
 end;

@@ -1,20 +1,25 @@
 include "shift_reg_2x.inc";
 include "counter.inc";
 include "modes.inc";
+include "dffes.inc";
 
 subdesign read_data_module(
 	clk: input;
-	reset: input;
+	sreset: input;
 	
+	changing_mode: input;
 	mode[1..0]: input;
 	addr_clr: output;
 	addr_inc: output;
 	oe_n: output;
+	cs_n: output;
 	
 	SCLK_: input;
 	MISO: output;
 	
 	data[7..0]: input;
+	
+	busy: output;
 	
 	test_async_load: output;
 	test_loading: output;
@@ -25,7 +30,7 @@ variable
 	
 	sm: machine with states(wait_mode, init_buffers1, init_buffers2, init_buffers3, init_buffers4, wait_loading, wait_loading_n);
 	
-	oe_n_FF, init_shift_FF, load_parallel_FF, addr_inc_FF: dff;
+	oe_n_FF, init_shift_FF, load_parallel_FF, addr_inc_FF, busy_ff: dffes;
 	init_shift_0: node;
 begin
 	defaults
@@ -35,28 +40,34 @@ begin
 		init_shift_FF.d = Gnd;
 		load_parallel_FF.d = Gnd;
 		addr_inc_FF.d = GND;
+		busy_ff.d = Gnd;
 	end defaults;
 	
 	shift.clk = SCLK_;
 	shift.i[] = data[];
 	
 	oe_n_FF.clk = clk;
+	cs_n = oe_n_FF.q;
 	oe_n = oe_n_FF.q;
-	oe_n_FF.prn = !reset;
-	
+	oe_n_FF.spre = sreset;
+
 	load_parallel_FF.clk = clk;
 	shift.async_load = load_parallel_FF.q;
-	load_parallel_FF.prn = !reset;
+	load_parallel_FF.spre = sreset;
 	
 	init_shift_FF.clk = clk;
 	init_shift_0 = init_shift_FF.q;
-	init_shift_FF.clrn = !reset;
+	init_shift_FF.sclr = sreset;
 	
 	addr_inc_FF.clk = clk;
 	addr_inc = addr_inc_FF.q;
-	addr_inc_FF.clrn = !reset;
+	addr_inc_FF.sclr = sreset;
+	
+	busy_ff.clk = clk;
+	busy = busy_ff.q or changing_mode;
+	busy_ff.sclr = sreset;
 
-	sm.reset = reset;
+	sm.reset = sreset;
 	sm.clk = clk;
 	
 	case sm is
@@ -65,6 +76,7 @@ begin
 				addr_clr = Vcc;
 				init_shift_FF.d = Vcc;
 				sm = init_buffers1;
+				busy_ff.d = Vcc;
 			else
 				oe_n_FF.d = Vcc;
 				sm = wait_mode;
@@ -73,19 +85,23 @@ begin
 		when init_buffers1 =>					-- 4 estados para dar temporização suficiente da leitura da RAM (taa)
 			init_shift_FF.d = Vcc;
 			load_parallel_FF.d = Vcc;
+			busy_ff.d = Vcc;
 			sm = init_buffers2;
 
 		when init_buffers2 =>
 			init_shift_FF.d = Vcc;
 			load_parallel_FF.d = Vcc;
+			busy_ff.d = Vcc;
 			sm = init_buffers3;
 
 		when init_buffers3 =>
 			init_shift_FF.d = Vcc;
 			addr_inc_FF.d = Vcc;
+			busy_ff.d = Vcc;
 			sm = init_buffers4;
 
 		when init_buffers4 =>
+			busy_ff.d = Vcc;
 			sm = wait_loading;
 		
 		when wait_loading =>

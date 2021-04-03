@@ -32,6 +32,8 @@ quit -f
 
 
 
+
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -50,6 +52,8 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
+
 
 
 
@@ -360,6 +364,26 @@ SIGNAL("test_loading")
 	PARENT = "";
 }
 
+SIGNAL("busy")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("changing_mode")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
 TRANSITION_LIST("clk")
 {
 	NODE
@@ -614,6 +638,26 @@ TRANSITION_LIST("test_loading")
 	}
 }
 
+TRANSITION_LIST("busy")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 10000.0;
+	}
+}
+
+TRANSITION_LIST("changing_mode")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 210.0;
+		LEVEL 1 FOR 30.0;
+		LEVEL 0 FOR 9760.0;
+	}
+}
+
 DISPLAY_LINE
 {
 	CHANNEL = "clk";
@@ -801,12 +845,21 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
+	CHANNEL = "changing_mode";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 19;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
 	CHANNEL = "mode";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
-	TREE_INDEX = 19;
+	TREE_INDEX = 20;
 	TREE_LEVEL = 0;
-	CHILDREN = 20, 21;
+	CHILDREN = 21, 22;
 }
 
 DISPLAY_LINE
@@ -814,9 +867,9 @@ DISPLAY_LINE
 	CHANNEL = "mode[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
-	TREE_INDEX = 20;
+	TREE_INDEX = 21;
 	TREE_LEVEL = 1;
-	PARENT = 19;
+	PARENT = 20;
 }
 
 DISPLAY_LINE
@@ -824,23 +877,14 @@ DISPLAY_LINE
 	CHANNEL = "mode[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
-	TREE_INDEX = 21;
+	TREE_INDEX = 22;
 	TREE_LEVEL = 1;
-	PARENT = 19;
+	PARENT = 20;
 }
 
 DISPLAY_LINE
 {
 	CHANNEL = "addr_clr";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
-	TREE_INDEX = 22;
-	TREE_LEVEL = 0;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "addr_inc";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 23;
@@ -849,7 +893,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "test_async_load";
+	CHANNEL = "addr_inc";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 24;
@@ -858,10 +902,28 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "test_loading";
+	CHANNEL = "test_async_load";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 25;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_loading";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 26;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "busy";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 27;
 	TREE_LEVEL = 0;
 }
 

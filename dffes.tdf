@@ -1,0 +1,21 @@
+
+
+subdesign dffes(
+	d: input;
+	clk: input;
+	ena: input = Vcc;
+	sclr: input = Gnd;
+	spre: input = Gnd;
+	
+	q: output;
+)
+variable
+	ff: dffeas;
+begin
+	ff.d = d;
+	ff.clk = clk;
+	ff.ena = ena or sclr or spre;
+	ff.sclr = sclr;
+	ff.sload = spre;
+	q = ff.q;
+end;

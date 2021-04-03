@@ -2,8 +2,8 @@ include "mode_selector.inc";
 
 subdesign host_interface(
 	clk: input;
-	reset: input;
-	running: input = Vcc;
+	sreset: input;
+	busy: input = Vcc;
 	MISO: input;
 
 	host_mode[1..0]: input;
@@ -21,8 +21,7 @@ subdesign host_interface(
 	SCLK_: output;
 	MOSI: output;
 	SS_n: output;
-	host_running: output;
-	host_ready: output;
+	host_busy: output;
 	host_MISO: output;
 )
 variable
@@ -30,11 +29,10 @@ variable
 begin
 	-- Mode selector
 	mode_sel.clk = clk;
-	mode_sel.reset = reset;
+	mode_sel.sreset = sreset;
 	mode_sel.mode_in[] = host_mode[];
 	mode[] = mode_sel.mode_out[];
-	host_running = running;
-	host_ready = mode_sel.ready;
+	host_busy = busy or !mode_sel.ready;
 	changing_mode = mode_sel.changing;
 	mode_sel.change_ok = Vcc;		-- TODO: ainda não há um critério para evitar a mudança de estado
 	

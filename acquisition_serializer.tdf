@@ -1,12 +1,13 @@
+include "counter.inc";
+include "dffes.inc";
+
 PARAMETERS
 (
 		little_endian = 1
 );
 
-include "counter.inc";
-
 subdesign acquisition_serializer(
-	reset: input;
+	sreset: input;
 	clk: input;
 	serialize: input;
 	msb: input;
@@ -19,10 +20,10 @@ subdesign acquisition_serializer(
 	adc_sclk: output;
 )
 variable
-	data_buffer[5..0][15..0]: dffe;
+	data_buffer[5..0][15..0]: dffes;
 	count: counter with (MAX_VALUE = 16);
-	div2_clock: dffe;
-	serialize_ok_ff: dff;
+	div2_clock: dffes;
+	serialize_ok_ff: dffes;
 	bus_bits[15..0]: node;
 	
 begin
@@ -42,25 +43,25 @@ begin
 		else
 			-- Habilitado e serializando
 			serialize_ok_ff.d = Gnd;
-			div2_clock = !div2_clock;
+			div2_clock.d = !div2_clock.q;
 			div2_clock.ena = Vcc;
-			count.inc = div2_clock;
+			count.inc = div2_clock.q;
 			data_buffer[][].ena = !div2_clock.q;
 		end if;
 	else		
 		-- Desabilitado
-		div2_clock = Gnd;
+		div2_clock.d = Gnd;
 		count.inc = Gnd;
 	end if;
 
 	-- serialize_ok serializado
 	serialize_ok_ff.clk = clk;
-	serialize_ok_ff.clrn = !reset;
+	serialize_ok_ff.sclr = sreset;
 	serialize_ok = serialize_ok_ff.q;
 	
 	-- Contador de bits
 	count.clk = clk;
-	count.reset = reset;
+	count.sreset = sreset;
 	count.clr = !serialize;
 	
 	-- Serial clock

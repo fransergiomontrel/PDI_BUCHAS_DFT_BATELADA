@@ -2,6 +2,7 @@ include "acquisition_ctrl.inc";
 include "acquisition_serializer.inc";
 include "acquisition_store.inc";
 include "modes.inc";
+include "dffes.inc";
 
 parameters(
 	samples = 3
@@ -10,7 +11,7 @@ parameters(
 
 subdesign acquisition_module(
 	clk: input;
-	reset: input;
+	sreset: input;
 	start: input;
 	mode[1..0]: input;
 	sdi[5..0]: input;
@@ -21,13 +22,13 @@ subdesign acquisition_module(
 	convst: output;
 	addr_inc: output;
 	addr_clr: output;
-	running: output;
+	busy: output;
 	we_n: output;
 	cs_n: output;
 	data[7..0]: output;
 )
 variable
-	start_ff: dffe;
+	start_ff: dffes;
 	ctrl: acquisition_ctrl with (active_period = 68, period = 463, samples = samples);
 	serializer: acquisition_serializer with (little_endian = 1);
 	storer: acquisition_store;
@@ -39,14 +40,14 @@ begin
 
 	-- CTRL
 	ctrl.clk = clk;
-	ctrl.reset = reset;
+	ctrl.sreset = sreset;
 	ctrl.start = start_ff.q;
 	ctrl.serialize_ok = serializer.serialize_ok;
 	ctrl.store_ok = storer.store_ok;
 
 	-- SERIALIZER
 	serializer.clk = clk;
-	serializer.reset = reset;
+	serializer.sreset = sreset;
 	serializer.serialize = ctrl.serialize;
 	serializer.msb = storer.msb;
 	serializer.channel[] = storer.channel[];
@@ -54,13 +55,13 @@ begin
 	
 	-- STORE
 	storer.clk = clk;
-	storer.reset = reset;
+	storer.sreset = sreset;
 	storer.store = ctrl.store;
 		
 	-- OUTPUTS	
 	convst = ctrl.convst;
 	addr_clr = ctrl.addr_clr;
-	running = ctrl.running;
+	busy = ctrl.busy or changing_mode;
 	sclk_ = serializer.adc_sclk;
 	cs_n = storer.cs_n;
 	we_n = storer.we_n;

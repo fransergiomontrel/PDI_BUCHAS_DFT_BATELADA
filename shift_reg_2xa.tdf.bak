@@ -1,0 +1,43 @@
+
+
+subdesign shift_reg_2x(
+	clk: input;
+	async_load: input;
+	o: output;
+	i[7..0]: input;
+	
+	loading: output;
+	
+	test_shift[7..0]: output;
+)
+variable
+	data_shift[7..0], control_shift[7..0], init_control: dff;
+begin
+	data_shift[].clrn = !(async_load and !i[]);
+	data_shift[].prn  = !(async_load and  i[]);
+	
+	control_shift[7..0].clrn = !async_load;
+	init_control.prn = !async_load;
+	control_shift[7..2].d = control_shift[6..1].q;
+	control_shift[1].d = control_shift[0].q or init_control.q;
+	control_shift[0].d = control_shift[7].q;
+	init_control.d = Gnd;
+	
+	if control_shift[7] then
+		data_shift[].d = i[];
+	else
+		data_shift[7..1].d = data_shift[6..0].q;
+	end if;
+	data_shift[0].d = Gnd;
+
+	control_shift[].clk = !clk;
+	init_control.clk = !clk;
+	data_shift[].clk = !clk;
+	
+	o = data_shift[7].q;
+	
+	loading = control_shift[7];
+	
+	test_shift[] = control_shift[];
+	
+end;
