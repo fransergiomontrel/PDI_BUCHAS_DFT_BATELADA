@@ -19,34 +19,52 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "04/03/2021 16:48:46"
+// Generated on "04/07/2021 11:59:28"
                                                                                 
-// Verilog Test Bench (with test vectors) for design :                          shift_reg_2xa
+// Verilog Test Bench (with test vectors) for design :                          read_data_module
 // 
 // Simulation tool : 3rd Party
 // 
 
 `timescale 1 ps/ 1 ps
-module shift_reg_2xa_vlg_vec_tst();
+module read_data_module_vlg_vec_tst();
 // constants                                           
 // general purpose registers
-reg async_load;
+reg changing_mode;
 reg clk;
-reg [7:0] i;
+reg [7:0] data;
+reg [1:0] mode;
+reg SCLK_;
+reg sreset;
 // wires                                               
-wire loading;
-wire o;
-wire [7:0] test_shift;
+wire addr_clr;
+wire addr_inc;
+wire busy;
+wire cs_n;
+wire MISO;
+wire oe_n;
+wire test_async_load;
+wire test_loading;
+wire [3:0] test_state;
 
 // assign statements (if any)                          
-shift_reg_2xa i1 (
+read_data_module i1 (
 // port map - connection between master ports and signals/registers   
-	.async_load(async_load),
+	.addr_clr(addr_clr),
+	.addr_inc(addr_inc),
+	.busy(busy),
+	.changing_mode(changing_mode),
 	.clk(clk),
-	.i(i),
-	.loading(loading),
-	.o(o),
-	.test_shift(test_shift)
+	.cs_n(cs_n),
+	.data(data),
+	.MISO(MISO),
+	.mode(mode),
+	.oe_n(oe_n),
+	.SCLK_(SCLK_),
+	.sreset(sreset),
+	.test_async_load(test_async_load),
+	.test_loading(test_loading),
+	.test_state(test_state)
 );
 initial 
 begin 
@@ -59,6 +77,112 @@ begin
 	clk = 1'b0;
 	clk = #5000 1'b1;
 	#5000;
+end 
+
+// SCLK_
+initial
+begin
+	SCLK_ = 1'b0;
+	SCLK_ = #14000 1'b1;
+	# 10000;
+	repeat(10)
+	begin
+		SCLK_ = 1'b0;
+		SCLK_ = #10000 1'b1;
+		# 10000;
+	end
+	SCLK_ = 1'b0;
+	SCLK_ = #1346000 1'b1;
+	# 50000;
+	repeat(53)
+	begin
+		SCLK_ = 1'b0;
+		SCLK_ = #50000 1'b1;
+		# 50000;
+	end
+	SCLK_ = 1'b0;
+end 
+// data[ 7 ]
+initial
+begin
+	data[7] = 1'b0;
+	data[7] = #260000 1'b1;
+	data[7] = #30000 1'b0;
+end 
+// data[ 6 ]
+initial
+begin
+	data[6] = 1'b0;
+	data[6] = #290000 1'b1;
+	data[6] = #2150000 1'b0;
+end 
+// data[ 5 ]
+initial
+begin
+	data[5] = 1'b0;
+	data[5] = #260000 1'b1;
+	data[5] = #30000 1'b0;
+end 
+// data[ 4 ]
+initial
+begin
+	data[4] = 1'b0;
+	data[4] = #290000 1'b1;
+	data[4] = #2150000 1'b0;
+end 
+// data[ 3 ]
+initial
+begin
+	data[3] = 1'b0;
+	data[3] = #290000 1'b1;
+	data[3] = #2150000 1'b0;
+end 
+// data[ 2 ]
+initial
+begin
+	data[2] = 1'b0;
+	data[2] = #260000 1'b1;
+	data[2] = #30000 1'b0;
+end 
+// data[ 1 ]
+initial
+begin
+	data[1] = 1'b0;
+	data[1] = #290000 1'b1;
+	data[1] = #2150000 1'b0;
+end 
+// data[ 0 ]
+initial
+begin
+	data[0] = 1'b0;
+	data[0] = #260000 1'b1;
+	data[0] = #30000 1'b0;
+end 
+
+// changing_mode
+initial
+begin
+	changing_mode = 1'b0;
+	changing_mode = #210000 1'b1;
+	changing_mode = #30000 1'b0;
+end 
+// mode[ 1 ]
+initial
+begin
+	mode[1] = 1'b0;
+	mode[1] = #225000 1'b1;
+	mode[1] = #3775000 1'b0;
+	mode[1] = #416000 1'b1;
+	mode[1] = #2944000 1'b0;
+end 
+// mode[ 0 ]
+initial
+begin
+	mode[0] = 1'b0;
+	mode[0] = #225000 1'b1;
+	mode[0] = #3775000 1'b0;
+	mode[0] = #416000 1'b1;
+	mode[0] = #2944000 1'b0;
 end 
 endmodule
 
