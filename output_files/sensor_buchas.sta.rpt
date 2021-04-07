@@ -1,0 +1,963 @@
+Timing Analyzer report for sensor_buchas
+Wed Apr 07 17:49:26 2021
+Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Parallel Compilation
+  4. Clocks
+  5. Fmax Summary
+  6. Setup Summary
+  7. Hold Summary
+  8. Recovery Summary
+  9. Removal Summary
+ 10. Minimum Pulse Width Summary
+ 11. Setup: 'clk'
+ 12. Setup: 'host_SCLK'
+ 13. Hold: 'host_SCLK'
+ 14. Hold: 'clk'
+ 15. Recovery: 'clk'
+ 16. Recovery: 'host_SCLK'
+ 17. Removal: 'host_SCLK'
+ 18. Removal: 'clk'
+ 19. Setup Transfers
+ 20. Hold Transfers
+ 21. Recovery Transfers
+ 22. Removal Transfers
+ 23. Report TCCS
+ 24. Report RSKM
+ 25. Unconstrained Paths Summary
+ 26. Clock Status Summary
+ 27. Unconstrained Input Ports
+ 28. Unconstrained Output Ports
+ 29. Unconstrained Input Ports
+ 30. Unconstrained Output Ports
+ 31. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++-----------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                     ;
++-----------------------+-----------------------------------------------------+
+; Quartus Prime Version ; Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
+; Timing Analyzer       ; Legacy Timing Analyzer                              ;
+; Revision Name         ; sensor_buchas                                       ;
+; Device Family         ; MAX II                                              ;
+; Device Name           ; EPM1270T144C5                                       ;
+; Timing Models         ; Final                                               ;
+; Delay Model           ; Slow Model                                          ;
+; Rise/Fall Delays      ; Unavailable                                         ;
++-----------------------+-----------------------------------------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 2           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clocks                                                                                                                                                                                ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------------+
+; Clock Name ; Type ; Period ; Frequency  ; Rise  ; Fall  ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets       ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------------+
+; clk        ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { clk }       ;
+; host_SCLK  ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { host_SCLK } ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------------+
+
+
++--------------------------------------------------+
+; Fmax Summary                                     ;
++------------+-----------------+------------+------+
+; Fmax       ; Restricted Fmax ; Clock Name ; Note ;
++------------+-----------------+------------+------+
+; 115.25 MHz ; 115.25 MHz      ; clk        ;      ;
+; 235.4 MHz  ; 235.4 MHz       ; host_SCLK  ;      ;
++------------+-----------------+------------+------+
+This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
+
+
++------------------------------------+
+; Setup Summary                      ;
++-----------+--------+---------------+
+; Clock     ; Slack  ; End Point TNS ;
++-----------+--------+---------------+
+; clk       ; -7.677 ; -1070.740     ;
+; host_SCLK ; -3.248 ; -34.176       ;
++-----------+--------+---------------+
+
+
++------------------------------------+
+; Hold Summary                       ;
++-----------+--------+---------------+
+; Clock     ; Slack  ; End Point TNS ;
++-----------+--------+---------------+
+; host_SCLK ; -0.613 ; -1.352        ;
+; clk       ; 1.078  ; 0.000         ;
++-----------+--------+---------------+
+
+
++------------------------------------+
+; Recovery Summary                   ;
++-----------+--------+---------------+
+; Clock     ; Slack  ; End Point TNS ;
++-----------+--------+---------------+
+; clk       ; -4.709 ; -122.434      ;
+; host_SCLK ; -2.837 ; -36.078       ;
++-----------+--------+---------------+
+
+
++------------------------------------+
+; Removal Summary                    ;
++-----------+--------+---------------+
+; Clock     ; Slack  ; End Point TNS ;
++-----------+--------+---------------+
+; host_SCLK ; -0.258 ; -0.511        ;
+; clk       ; 5.155  ; 0.000         ;
++-----------+--------+---------------+
+
+
++------------------------------------+
+; Minimum Pulse Width Summary        ;
++-----------+--------+---------------+
+; Clock     ; Slack  ; End Point TNS ;
++-----------+--------+---------------+
+; clk       ; -2.289 ; -2.289        ;
+; host_SCLK ; -2.289 ; -2.289        ;
++-----------+--------+---------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Setup: 'clk'                                                                                                                                                                                                                                                        ;
++--------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                                                                                  ; To Node                                                                                 ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; -7.677 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.344      ;
+; -7.677 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.344      ;
+; -7.677 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.344      ;
+; -7.677 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.344      ;
+; -7.572 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.239      ;
+; -7.557 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.224      ;
+; -7.557 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.224      ;
+; -7.557 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.224      ;
+; -7.557 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.224      ;
+; -7.557 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.224      ;
+; -7.557 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.224      ;
+; -7.557 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.224      ;
+; -7.557 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.224      ;
+; -7.557 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.224      ;
+; -7.557 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[9]        ; clk          ; clk         ; 1.000        ; 0.000      ; 8.224      ;
+; -7.524 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][0]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.191      ;
+; -7.524 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][0]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.191      ;
+; -7.524 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][0]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.191      ;
+; -7.524 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][0]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.191      ;
+; -7.407 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][2]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.074      ;
+; -7.407 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][2]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.074      ;
+; -7.407 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][2]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.074      ;
+; -7.407 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][2]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.074      ;
+; -7.334 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.001      ;
+; -7.334 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.001      ;
+; -7.334 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.001      ;
+; -7.334 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 8.001      ;
+; -7.319 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.986      ;
+; -7.319 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.986      ;
+; -7.319 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.986      ;
+; -7.319 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.986      ;
+; -7.319 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.986      ;
+; -7.319 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.986      ;
+; -7.319 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.986      ;
+; -7.319 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.986      ;
+; -7.319 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[9]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.986      ;
+; -7.251 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.918      ;
+; -7.251 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.918      ;
+; -7.164 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][0]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.831      ;
+; -7.164 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][0]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.831      ;
+; -7.164 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][0]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.831      ;
+; -7.164 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][0]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.831      ;
+; -7.098 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][0]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.765      ;
+; -7.098 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][0]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.765      ;
+; -7.031 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.698      ;
+; -7.031 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.698      ;
+; -7.031 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[7]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.698      ;
+; -7.031 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[6]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.698      ;
+; -7.031 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[5]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.698      ;
+; -7.031 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.698      ;
+; -7.031 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.698      ;
+; -7.031 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.698      ;
+; -7.031 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.698      ;
+; -7.017 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.684      ;
+; -7.015 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.682      ;
+; -6.991 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][1]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.658      ;
+; -6.991 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][1]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.658      ;
+; -6.991 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][1]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.658      ;
+; -6.991 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][1]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.658      ;
+; -6.981 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][2]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.648      ;
+; -6.981 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][2]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.648      ;
+; -6.908 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.575      ;
+; -6.908 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff               ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.575      ;
+; -6.793 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.460      ;
+; -6.793 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[7]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.460      ;
+; -6.793 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[6]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.460      ;
+; -6.793 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[5]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.460      ;
+; -6.793 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.460      ;
+; -6.793 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.460      ;
+; -6.793 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]        ; clk          ; clk         ; 1.000        ; 0.000      ; 7.460      ;
+; -6.738 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][0]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.405      ;
+; -6.738 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][0]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.405      ;
+; -6.704 ; acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|dffes:ffs[3]|ff ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter|dffes:ffs[1]|ff ; clk          ; clk         ; 1.000        ; 0.000      ; 7.371      ;
+; -6.703 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; read_data_module:inst2|dffes:oe_n_FF|ff                                                 ; clk          ; clk         ; 1.000        ; 0.000      ; 7.370      ;
+; -6.646 ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[2]|ff      ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[6]|ff   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.313      ;
+; -6.645 ; acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|dffes:ffs[3]|ff ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter|dffes:ffs[0]|ff ; clk          ; clk         ; 1.000        ; 0.000      ; 7.312      ;
+; -6.645 ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[2]|ff      ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[8]|ff   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.312      ;
+; -6.585 ; acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|dffes:ffs[2]|ff ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter|dffes:ffs[1]|ff ; clk          ; clk         ; 1.000        ; 0.000      ; 7.252      ;
+; -6.565 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][1]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.232      ;
+; -6.565 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][1]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.232      ;
+; -6.549 ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[0]|ff      ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[6]|ff   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.216      ;
+; -6.548 ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[0]|ff      ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[8]|ff   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.215      ;
+; -6.538 ; acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|dffes:ffs[3]|ff ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE                    ; clk          ; clk         ; 1.000        ; 0.000      ; 7.205      ;
+; -6.526 ; acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|dffes:ffs[2]|ff ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter|dffes:ffs[0]|ff ; clk          ; clk         ; 1.000        ; 0.000      ; 7.193      ;
+; -6.485 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][1]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][0]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.152      ;
+; -6.485 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][1]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.152      ;
+; -6.485 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][1]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][1]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.152      ;
+; -6.485 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][1]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][2]       ; clk          ; clk         ; 1.000        ; 0.000      ; 7.152      ;
+; -6.462 ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_HIGH                         ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[6]|ff   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.129      ;
+; -6.461 ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_HIGH                         ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[8]|ff   ; clk          ; clk         ; 1.000        ; 0.000      ; 7.128      ;
+; -6.419 ; acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|dffes:ffs[2]|ff ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE                    ; clk          ; clk         ; 1.000        ; 0.000      ; 7.086      ;
+; -6.408 ; acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|dffes:ffs[0]|ff ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter|dffes:ffs[1]|ff ; clk          ; clk         ; 1.000        ; 0.000      ; 7.075      ;
+; -6.349 ; acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|dffes:ffs[0]|ff ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter|dffes:ffs[0]|ff ; clk          ; clk         ; 1.000        ; 0.000      ; 7.016      ;
+; -6.341 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff               ; host_interface:Host_interface|mode_selector:mode_sel|dffes:changing_ff|ff               ; clk          ; clk         ; 1.000        ; 0.000      ; 7.008      ;
+; -6.328 ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[2]|ff      ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[2]|ff   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.995      ;
+; -6.327 ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[2]|ff      ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[3]|ff   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.994      ;
+; -6.326 ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[2]|ff      ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[7]|ff   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.993      ;
+; -6.325 ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[2]|ff      ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[4]|ff   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.992      ;
+; -6.318 ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[3]|ff      ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[6]|ff   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.985      ;
+; -6.317 ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[3]|ff      ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|dffes:ffs[8]|ff   ; clk          ; clk         ; 1.000        ; 0.000      ; 6.984      ;
++--------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Setup: 'host_SCLK'                                                                                                                                                                                                       ;
++--------+------------------------------------------------------------------------------+------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                                                                    ; To Node                                                    ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+------------------------------------------------------------------------------+------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; -3.248 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[0] ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 3.915      ;
+; -3.242 ; read_data_module:inst2|shift_reg_2x:shift|data_shift[0]                      ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]    ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 3.909      ;
+; -3.124 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]    ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 3.791      ;
+; -2.836 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]    ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 3.503      ;
+; -2.833 ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]                      ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]    ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 3.500      ;
+; -2.829 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]    ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 3.496      ;
+; -2.797 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[7]    ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 3.464      ;
+; -2.795 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]    ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 3.462      ;
+; -2.793 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]    ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 3.460      ;
+; -2.792 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]    ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 3.459      ;
+; -2.539 ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]                      ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]    ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 3.206      ;
+; -2.436 ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]                      ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]    ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 3.103      ;
+; -2.396 ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]                      ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]    ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 3.063      ;
+; -2.143 ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]                      ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]    ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 2.810      ;
+; -2.046 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[6]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7] ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 2.713      ;
+; -2.046 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[0]    ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 2.713      ;
+; -1.701 ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]                      ; read_data_module:inst2|shift_reg_2x:shift|data_shift[7]    ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 2.368      ;
+; -1.478 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[0]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[1] ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 2.145      ;
+; -1.205 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[4]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[5] ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 1.872      ;
+; -1.205 ; read_data_module:inst2|shift_reg_2x:shift|init_control                       ; read_data_module:inst2|shift_reg_2x:shift|control_shift[1] ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 1.872      ;
+; -1.197 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[5]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[6] ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 1.864      ;
+; -0.952 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[1]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[2] ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 1.619      ;
+; -0.951 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[3]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[4] ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 1.618      ;
+; -0.929 ; read_data_module:inst2|shift_reg_2x:shift|control_shift[2]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[3] ; host_SCLK    ; host_SCLK   ; 1.000        ; 0.000      ; 1.596      ;
+; -0.535 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[0]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 4.928      ;
+; -0.466 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 4.859      ;
+; -0.464 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 4.857      ;
+; -0.456 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 4.849      ;
+; -0.451 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[7]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 4.844      ;
+; -0.013 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[0]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 4.406      ;
+; 0.005  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 4.388      ;
+; 0.104  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 4.289      ;
+; 0.106  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 4.287      ;
+; 0.114  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 4.279      ;
+; 0.119  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[7]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 4.274      ;
+; 0.486  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 3.907      ;
+; 0.489  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 3.904      ;
+; 0.575  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 3.818      ;
+; 1.056  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 3.337      ;
+; 1.059  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 3.334      ;
++--------+------------------------------------------------------------------------------+------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Hold: 'host_SCLK'                                                                                                                                                                                                        ;
++--------+------------------------------------------------------------------------------+------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                                                                    ; To Node                                                    ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+------------------------------------------------------------------------------+------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; -0.613 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 3.334      ;
+; -0.610 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 3.337      ;
+; -0.129 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 3.818      ;
+; -0.043 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 3.904      ;
+; -0.040 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 3.907      ;
+; 0.327  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[7]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 4.274      ;
+; 0.332  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 4.279      ;
+; 0.340  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 4.287      ;
+; 0.342  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 4.289      ;
+; 0.441  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 4.388      ;
+; 0.459  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[0]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 4.406      ;
+; 0.897  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[7]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 4.844      ;
+; 0.902  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 4.849      ;
+; 0.910  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 4.857      ;
+; 0.912  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 4.859      ;
+; 0.981  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[0]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 4.928      ;
+; 1.375  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[2]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[3] ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 1.596      ;
+; 1.397  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[3]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[4] ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 1.618      ;
+; 1.398  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[1]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[2] ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 1.619      ;
+; 1.643  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[5]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[6] ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 1.864      ;
+; 1.651  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[4]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[5] ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 1.872      ;
+; 1.651  ; read_data_module:inst2|shift_reg_2x:shift|init_control                       ; read_data_module:inst2|shift_reg_2x:shift|control_shift[1] ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 1.872      ;
+; 1.924  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[0]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[1] ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 2.145      ;
+; 2.147  ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]                      ; read_data_module:inst2|shift_reg_2x:shift|data_shift[7]    ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 2.368      ;
+; 2.492  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[6]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7] ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 2.713      ;
+; 2.492  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[0]    ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 2.713      ;
+; 2.589  ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]                      ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]    ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 2.810      ;
+; 2.842  ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]                      ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]    ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 3.063      ;
+; 2.882  ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]                      ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]    ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 3.103      ;
+; 2.985  ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]                      ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]    ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 3.206      ;
+; 3.238  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]    ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 3.459      ;
+; 3.239  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]    ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 3.460      ;
+; 3.241  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]    ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 3.462      ;
+; 3.243  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[7]    ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 3.464      ;
+; 3.275  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]    ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 3.496      ;
+; 3.279  ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]                      ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]    ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 3.500      ;
+; 3.282  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]    ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 3.503      ;
+; 3.570  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]    ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 3.791      ;
+; 3.688  ; read_data_module:inst2|shift_reg_2x:shift|data_shift[0]                      ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]    ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 3.909      ;
+; 3.694  ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                   ; read_data_module:inst2|shift_reg_2x:shift|control_shift[0] ; host_SCLK    ; host_SCLK   ; 0.000        ; 0.000      ; 3.915      ;
++--------+------------------------------------------------------------------------------+------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Hold: 'clk'                                                                                                                                                                                                                                                           ;
++-------+--------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                                                                                  ; To Node                                                                                    ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+--------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 1.078 ; host_interface:Host_interface|mode_selector:mode_sel|sStable                               ; host_interface:Host_interface|mode_selector:mode_sel|sStable                               ; clk          ; clk         ; 0.000        ; 0.000      ; 1.299      ;
+; 1.376 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][5]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][6]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.597      ;
+; 1.376 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][1]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][2]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.597      ;
+; 1.377 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][4]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][5]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.598      ;
+; 1.380 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][13]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][14]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.601      ;
+; 1.385 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][12]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][13]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.606      ;
+; 1.386 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][3]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][4]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.607      ;
+; 1.387 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][6]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][7]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.608      ;
+; 1.387 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][4]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][5]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.608      ;
+; 1.387 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][12]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][13]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.608      ;
+; 1.387 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][3]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][4]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.608      ;
+; 1.387 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][0]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][1]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.608      ;
+; 1.389 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][7]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][8]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.610      ;
+; 1.393 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][9]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][10]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.614      ;
+; 1.395 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][13]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][14]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.616      ;
+; 1.396 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][10]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][11]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.617      ;
+; 1.397 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][14]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][15]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.618      ;
+; 1.397 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][9]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][10]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.618      ;
+; 1.398 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][11]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][12]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.619      ;
+; 1.398 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][11]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][12]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.619      ;
+; 1.398 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][8]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][9]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.619      ;
+; 1.399 ; acquisition_module:inst11|acquisition_store:storer|CS0b                                    ; acquisition_module:inst11|acquisition_store:storer|CS1b                                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.620      ;
+; 1.399 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][9]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][10]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.620      ;
+; 1.400 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][13]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][14]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.621      ;
+; 1.400 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][10]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][11]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.621      ;
+; 1.400 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][8]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][9]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.621      ;
+; 1.401 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][12]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][13]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.622      ;
+; 1.401 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][9]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][10]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.622      ;
+; 1.402 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][14]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][15]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.623      ;
+; 1.402 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][10]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][11]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.623      ;
+; 1.402 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][0]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][1]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.623      ;
+; 1.406 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][8]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][9]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.627      ;
+; 1.411 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][1]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][2]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.632      ;
+; 1.413 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][1]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][2]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.634      ;
+; 1.415 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][1]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][2]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.636      ;
+; 1.417 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][12]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][13]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.638      ;
+; 1.418 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][2]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][3]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.639      ;
+; 1.423 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][8]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][9]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.644      ;
+; 1.425 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][0]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][1]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.646      ;
+; 1.432 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][14]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][15]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.653      ;
+; 1.432 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][12]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][13]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.653      ;
+; 1.645 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][13]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][14]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.866      ;
+; 1.653 ; acquisition_module:inst11|acquisition_store:storer|CS0a                                    ; acquisition_module:inst11|acquisition_store:storer|dffes:cs_n_ff|ff                        ; clk          ; clk         ; 0.000        ; 0.000      ; 1.874      ;
+; 1.664 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][5]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][6]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.885      ;
+; 1.664 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][4]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][5]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.885      ;
+; 1.665 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][2]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][3]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.886      ;
+; 1.667 ; read_data_module:inst2|init_buffers3                                                       ; read_data_module:inst2|init_buffers4                                                       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.888      ;
+; 1.668 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][14]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][15]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.889      ;
+; 1.669 ; acquisition_module:inst11|acquisition_ctrl:ctrl|STORING                                    ; acquisition_module:inst11|acquisition_ctrl:ctrl|STORING                                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.890      ;
+; 1.674 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][2]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][3]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.895      ;
+; 1.678 ; read_data_module:inst2|wait_mode                                                           ; read_data_module:inst2|wait_mode                                                           ; clk          ; clk         ; 0.000        ; 0.000      ; 1.899      ;
+; 1.678 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][5]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][6]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.899      ;
+; 1.682 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][4]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][5]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.903      ;
+; 1.683 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][4]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][5]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.904      ;
+; 1.685 ; acquisition_module:inst11|acquisition_serializer:serializer|counter:count|dffes:ffs[1]|ff  ; acquisition_module:inst11|acquisition_serializer:serializer|counter:count|dffes:ffs[1]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.906      ;
+; 1.685 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][5]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][6]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.906      ;
+; 1.685 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][11]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][12]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.906      ;
+; 1.686 ; acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|dffes:ffs[1]|ff ; acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|dffes:ffs[1]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 1.907      ;
+; 1.687 ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_HIGH                         ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_HIGH                         ; clk          ; clk         ; 0.000        ; 0.000      ; 1.908      ;
+; 1.749 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][10]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][11]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.970      ;
+; 1.764 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][4]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][5]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.985      ;
+; 1.765 ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][0]          ; host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][1]          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.986      ;
+; 1.768 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][5]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][6]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.989      ;
+; 1.774 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][8]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][9]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.995      ;
+; 1.780 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][8]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][9]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.001      ;
+; 1.783 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][1]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][2]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.004      ;
+; 1.788 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][14]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][15]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.009      ;
+; 1.790 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][2]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][3]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.011      ;
+; 1.798 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][10]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][11]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.019      ;
+; 1.798 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][10]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][11]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.019      ;
+; 1.807 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][6]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][7]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.028      ;
+; 1.835 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][6]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][7]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.056      ;
+; 1.835 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][3]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][4]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.056      ;
+; 1.889 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][6]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][7]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.110      ;
+; 1.890 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][12]|ff    ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][13]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.111      ;
+; 1.934 ; acquisition_module:inst11|acquisition_ctrl:ctrl|SERIALIZING                                ; acquisition_module:inst11|acquisition_ctrl:ctrl|SERIALIZING                                ; clk          ; clk         ; 0.000        ; 0.000      ; 2.155      ;
+; 1.935 ; host_interface:Host_interface|mode_selector:mode_sel|sChangedRequested                     ; host_interface:Host_interface|mode_selector:mode_sel|sNoticeChanging                       ; clk          ; clk         ; 0.000        ; 0.000      ; 2.156      ;
+; 1.938 ; acquisition_module:inst11|acquisition_store:storer|INC_CHANNEL                             ; acquisition_module:inst11|acquisition_store:storer|CS1a                                    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.159      ;
+; 1.939 ; acquisition_module:inst11|acquisition_ctrl:ctrl|AQUISITIONING                              ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAIT_STATE                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 2.160      ;
+; 1.949 ; acquisition_module:inst11|acquisition_ctrl:ctrl|SERIALIZING                                ; acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:serialize_ff|ff                      ; clk          ; clk         ; 0.000        ; 0.000      ; 2.170      ;
+; 2.068 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][3]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][4]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.289      ;
+; 2.080 ; host_interface:Host_interface|mode_selector:mode_sel|sNoticeChanging                       ; host_interface:Host_interface|mode_selector:mode_sel|sUpdateMode                           ; clk          ; clk         ; 0.000        ; 0.000      ; 2.301      ;
+; 2.095 ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][1]|ff     ; acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][2]|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.316      ;
+; 2.108 ; read_data_module:inst2|init_buffers4                                                       ; read_data_module:inst2|wait_loading                                                        ; clk          ; clk         ; 0.000        ; 0.000      ; 2.329      ;
+; 2.110 ; read_data_module:inst2|init_buffers2                                                       ; read_data_module:inst2|dffes:load_parallel_FF|ff                                           ; clk          ; clk         ; 0.000        ; 0.000      ; 2.331      ;
+; 2.116 ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10]          ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10]          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.337      ;
+; 2.116 ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]           ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]           ; clk          ; clk         ; 0.000        ; 0.000      ; 2.337      ;
+; 2.117 ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18]          ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18]          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.338      ;
+; 2.117 ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]           ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]           ; clk          ; clk         ; 0.000        ; 0.000      ; 2.338      ;
+; 2.144 ; acquisition_module:inst11|acquisition_serializer:serializer|counter:count|dffes:ffs[4]|ff  ; acquisition_module:inst11|acquisition_serializer:serializer|counter:count|dffes:ffs[4]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.365      ;
+; 2.152 ; acquisition_module:inst11|acquisition_serializer:serializer|counter:count|dffes:ffs[3]|ff  ; acquisition_module:inst11|acquisition_serializer:serializer|counter:count|dffes:ffs[3]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.373      ;
+; 2.154 ; host_interface:Host_interface|mode_selector:mode_sel|sChangedRequested                     ; host_interface:Host_interface|mode_selector:mode_sel|sStable                               ; clk          ; clk         ; 0.000        ; 0.000      ; 2.375      ;
+; 2.155 ; host_interface:Host_interface|mode_selector:mode_sel|sChangedRequested                     ; host_interface:Host_interface|mode_selector:mode_sel|dffes:ready_ff|ff                     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.376      ;
+; 2.164 ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter|dffes:ffs[1]|ff    ; acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter|dffes:ffs[1]|ff    ; clk          ; clk         ; 0.000        ; 0.000      ; 2.385      ;
+; 2.167 ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE                       ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_LOW                          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.388      ;
+; 2.175 ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE                       ; acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:busy_ff|ff                           ; clk          ; clk         ; 0.000        ; 0.000      ; 2.396      ;
+; 2.184 ; acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|dffes:ffs[2]|ff ; acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|dffes:ffs[2]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 2.405      ;
+; 2.188 ; acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|dffes:ffs[0]|ff ; acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|dffes:ffs[0]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 2.409      ;
+; 2.221 ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17]          ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17]          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.442      ;
+; 2.221 ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12]          ; RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12]          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.442      ;
++-------+--------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Recovery: 'clk'                                                                                                                                                   ;
++--------+-----------+------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node ; To Node                                                                ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+-----------+------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; -4.709 ; inst1     ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_HIGH     ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; host_interface:Host_interface|mode_selector:mode_sel|sChangedRequested ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; host_interface:Host_interface|mode_selector:mode_sel|sNoticeChanging   ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE   ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_LOW      ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; host_interface:Host_interface|mode_selector:mode_sel|sStable           ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; host_interface:Host_interface|mode_selector:mode_sel|sWaitingChangeOk  ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; acquisition_module:inst11|acquisition_store:storer|CS1a                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; acquisition_module:inst11|acquisition_store:storer|CS0a                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; acquisition_module:inst11|acquisition_store:storer|CS0b                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; acquisition_module:inst11|acquisition_store:storer|WAIT_END            ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; acquisition_module:inst11|acquisition_store:storer|WAIT_STORE          ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; acquisition_module:inst11|acquisition_store:storer|CS1b                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; acquisition_module:inst11|acquisition_store:storer|INC_CHANNEL         ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; acquisition_module:inst11|acquisition_ctrl:ctrl|STORING                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; read_data_module:inst2|wait_loading                                    ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; read_data_module:inst2|wait_loading_n                                  ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; read_data_module:inst2|wait_mode                                       ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAIT_STATE             ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; acquisition_module:inst11|acquisition_ctrl:ctrl|SERIALIZING            ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; acquisition_module:inst11|acquisition_ctrl:ctrl|AQUISITIONING          ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; read_data_module:inst2|init_buffers1                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; read_data_module:inst2|init_buffers2                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; read_data_module:inst2|init_buffers3                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; read_data_module:inst2|init_buffers4                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.709 ; inst1     ; host_interface:Host_interface|mode_selector:mode_sel|sUpdateMode       ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
++--------+-----------+------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Recovery: 'host_SCLK'                                                                                                                                                                                                    ;
++--------+------------------------------------------------------------------------------+------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                                                                    ; To Node                                                    ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+------------------------------------------------------------------------------+------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; -2.837 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[7]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 7.230      ;
+; -2.643 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[7]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 7.036      ;
+; -2.643 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 7.036      ;
+; -2.643 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 7.036      ;
+; -2.643 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 7.036      ;
+; -2.643 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 7.036      ;
+; -2.643 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 7.036      ;
+; -2.643 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 7.036      ;
+; -2.643 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[0]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 7.036      ;
+; -2.396 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7] ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 6.789      ;
+; -1.543 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[6] ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.936      ;
+; -1.543 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[5] ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.936      ;
+; -1.543 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[4] ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.936      ;
+; -1.543 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[3] ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.936      ;
+; -1.543 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[2] ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.936      ;
+; -1.543 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[1] ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.936      ;
+; -1.543 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[0] ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.936      ;
+; -1.543 ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|init_control     ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.936      ;
+; -1.376 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.769      ;
+; -1.374 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.767      ;
+; -1.092 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.485      ;
+; -1.036 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[0]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.429      ;
+; -1.034 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.427      ;
+; -1.024 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.417      ;
+; -0.960 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.353      ;
+; -0.906 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.299      ;
+; -0.880 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.273      ;
+; -0.876 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 5.269      ;
+; -0.494 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 4.887      ;
+; -0.474 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[7]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 4.867      ;
+; -0.430 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[0]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 4.823      ;
+; 0.699  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 3.694      ;
+; 0.704  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]    ; clk          ; host_SCLK   ; 1.000        ; 3.726      ; 3.689      ;
++--------+------------------------------------------------------------------------------+------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removal: 'host_SCLK'                                                                                                                                                                                                     ;
++--------+------------------------------------------------------------------------------+------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                                                                    ; To Node                                                    ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+------------------------------------------------------------------------------+------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; -0.258 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 3.689      ;
+; -0.253 ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 3.694      ;
+; 0.876  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[0]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 4.823      ;
+; 0.920  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[7]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 4.867      ;
+; 0.940  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 4.887      ;
+; 1.322  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.269      ;
+; 1.326  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.273      ;
+; 1.352  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.299      ;
+; 1.406  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.353      ;
+; 1.470  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.417      ;
+; 1.480  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.427      ;
+; 1.482  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[0]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.429      ;
+; 1.538  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.485      ;
+; 1.820  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.767      ;
+; 1.822  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.769      ;
+; 1.989  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[6] ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.936      ;
+; 1.989  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[5] ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.936      ;
+; 1.989  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[4] ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.936      ;
+; 1.989  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[3] ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.936      ;
+; 1.989  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[2] ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.936      ;
+; 1.989  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[1] ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.936      ;
+; 1.989  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[0] ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.936      ;
+; 1.989  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|init_control     ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 5.936      ;
+; 2.842  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|control_shift[7] ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 6.789      ;
+; 3.089  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[7]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 7.036      ;
+; 3.089  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[6]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 7.036      ;
+; 3.089  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[5]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 7.036      ;
+; 3.089  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[4]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 7.036      ;
+; 3.089  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[3]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 7.036      ;
+; 3.089  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[2]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 7.036      ;
+; 3.089  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[1]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 7.036      ;
+; 3.089  ; read_data_module:inst2|dffes:load_parallel_FF|ff                             ; read_data_module:inst2|shift_reg_2x:shift|data_shift[0]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 7.036      ;
+; 3.283  ; host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff ; read_data_module:inst2|shift_reg_2x:shift|data_shift[7]    ; clk          ; host_SCLK   ; 0.000        ; 3.726      ; 7.230      ;
++--------+------------------------------------------------------------------------------+------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removal: 'clk'                                                                                                                                                   ;
++-------+-----------+------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node ; To Node                                                                ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-----------+------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 5.155 ; inst1     ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_HIGH     ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; host_interface:Host_interface|mode_selector:mode_sel|sChangedRequested ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; host_interface:Host_interface|mode_selector:mode_sel|sNoticeChanging   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_LOW      ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; host_interface:Host_interface|mode_selector:mode_sel|sStable           ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; host_interface:Host_interface|mode_selector:mode_sel|sWaitingChangeOk  ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; acquisition_module:inst11|acquisition_store:storer|CS1a                ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; acquisition_module:inst11|acquisition_store:storer|CS0a                ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; acquisition_module:inst11|acquisition_store:storer|CS0b                ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; acquisition_module:inst11|acquisition_store:storer|WAIT_END            ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; acquisition_module:inst11|acquisition_store:storer|WAIT_STORE          ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; acquisition_module:inst11|acquisition_store:storer|CS1b                ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; acquisition_module:inst11|acquisition_store:storer|INC_CHANNEL         ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; acquisition_module:inst11|acquisition_ctrl:ctrl|STORING                ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; read_data_module:inst2|wait_loading                                    ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; read_data_module:inst2|wait_loading_n                                  ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; read_data_module:inst2|wait_mode                                       ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; acquisition_module:inst11|acquisition_ctrl:ctrl|WAIT_STATE             ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; acquisition_module:inst11|acquisition_ctrl:ctrl|SERIALIZING            ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; acquisition_module:inst11|acquisition_ctrl:ctrl|AQUISITIONING          ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; read_data_module:inst2|init_buffers1                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; read_data_module:inst2|init_buffers2                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; read_data_module:inst2|init_buffers3                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; read_data_module:inst2|init_buffers4                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
+; 5.155 ; inst1     ; host_interface:Host_interface|mode_selector:mode_sel|sUpdateMode       ; clk          ; clk         ; 0.000        ; 0.000      ; 5.376      ;
++-------+-----------+------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++--------------------------------------------------------------------+
+; Setup Transfers                                                    ;
++------------+-----------+----------+----------+----------+----------+
+; From Clock ; To Clock  ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+-----------+----------+----------+----------+----------+
+; clk        ; clk       ; 2220     ; 0        ; 0        ; 0        ;
+; host_SCLK  ; clk       ; 3        ; 0        ; 0        ; 0        ;
+; clk        ; host_SCLK ; 16       ; 0        ; 0        ; 0        ;
+; host_SCLK  ; host_SCLK ; 24       ; 0        ; 0        ; 0        ;
++------------+-----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++--------------------------------------------------------------------+
+; Hold Transfers                                                     ;
++------------+-----------+----------+----------+----------+----------+
+; From Clock ; To Clock  ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+-----------+----------+----------+----------+----------+
+; clk        ; clk       ; 2220     ; 0        ; 0        ; 0        ;
+; host_SCLK  ; clk       ; 3        ; 0        ; 0        ; 0        ;
+; clk        ; host_SCLK ; 16       ; 0        ; 0        ; 0        ;
+; host_SCLK  ; host_SCLK ; 24       ; 0        ; 0        ; 0        ;
++------------+-----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++--------------------------------------------------------------------+
+; Recovery Transfers                                                 ;
++------------+-----------+----------+----------+----------+----------+
+; From Clock ; To Clock  ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+-----------+----------+----------+----------+----------+
+; clk        ; clk       ; 26       ; 0        ; 0        ; 0        ;
+; clk        ; host_SCLK ; 33       ; 0        ; 0        ; 0        ;
++------------+-----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++--------------------------------------------------------------------+
+; Removal Transfers                                                  ;
++------------+-----------+----------+----------+----------+----------+
+; From Clock ; To Clock  ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+-----------+----------+----------+----------+----------+
+; clk        ; clk       ; 26       ; 0        ; 0        ; 0        ;
+; clk        ; host_SCLK ; 33       ; 0        ; 0        ; 0        ;
++------------+-----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
+---------------
+; Report TCCS ;
+---------------
+No dedicated SERDES Transmitter circuitry present in device or used in design
+
+
+---------------
+; Report RSKM ;
+---------------
+No non-DPA dedicated SERDES Receiver circuitry present in device or used in design
+
+
++------------------------------------------------+
+; Unconstrained Paths Summary                    ;
++---------------------------------+-------+------+
+; Property                        ; Setup ; Hold ;
++---------------------------------+-------+------+
+; Illegal Clocks                  ; 0     ; 0    ;
+; Unconstrained Clocks            ; 0     ; 0    ;
+; Unconstrained Input Ports       ; 21    ; 21   ;
+; Unconstrained Input Port Paths  ; 43    ; 43   ;
+; Unconstrained Output Ports      ; 61    ; 61   ;
+; Unconstrained Output Port Paths ; 326   ; 326  ;
++---------------------------------+-------+------+
+
+
++--------------------------------------------+
+; Clock Status Summary                       ;
++-----------+-----------+------+-------------+
+; Target    ; Clock     ; Type ; Status      ;
++-----------+-----------+------+-------------+
+; clk       ; clk       ; Base ; Constrained ;
+; host_SCLK ; host_SCLK ; Base ; Constrained ;
++-----------+-----------+------+-------------+
+
+
++----------------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                                ;
++-------------------+--------------------------------------------------------------------------------------+
+; Input Port        ; Comment                                                                              ;
++-------------------+--------------------------------------------------------------------------------------+
+; adc_sdi[0]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[1]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[2]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[3]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[4]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[5]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[0]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[1]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[2]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[3]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[4]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[5]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[6]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[7]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_MOSI         ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_SCLK         ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_convst_start ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_mode[0]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_mode[1]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_rst_n        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; rst               ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------------+--------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                                 ;
++--------------------+---------------------------------------------------------------------------------------+
+; Output Port        ; Comment                                                                               ;
++--------------------+---------------------------------------------------------------------------------------+
+; adc_convst[0]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_convst[1]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_convst[2]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_convst[3]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_convst[4]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_convst[5]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_rst_n[0]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_rst_n[1]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_rst_n[2]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_rst_n[3]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_rst_n[4]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_rst_n[5]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sclk[0]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sclk[1]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sclk[2]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sclk[3]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sclk[4]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sclk[5]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdo[0]         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdo[1]         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdo[2]         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdo[3]         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdo[4]         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdo[5]         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[0]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[1]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[2]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[3]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[4]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[5]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[6]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[7]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_MISO          ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_busy          ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[0]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[1]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[2]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[3]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[4]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[5]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[6]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[7]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[8]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[9]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[10]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[11]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[12]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[13]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[14]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[15]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[16]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[17]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[18]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_cs_n           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_oe_n           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_we_n           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_AM_adc_convst ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_AM_adc_sclk   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_addr_clr      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_addr_inc      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_running       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++--------------------+---------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                                ;
++-------------------+--------------------------------------------------------------------------------------+
+; Input Port        ; Comment                                                                              ;
++-------------------+--------------------------------------------------------------------------------------+
+; adc_sdi[0]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[1]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[2]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[3]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[4]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdi[5]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[0]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[1]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[2]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[3]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[4]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[5]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[6]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[7]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_MOSI         ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_SCLK         ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_convst_start ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_mode[0]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_mode[1]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_rst_n        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; rst               ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------------+--------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                                 ;
++--------------------+---------------------------------------------------------------------------------------+
+; Output Port        ; Comment                                                                               ;
++--------------------+---------------------------------------------------------------------------------------+
+; adc_convst[0]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_convst[1]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_convst[2]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_convst[3]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_convst[4]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_convst[5]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_rst_n[0]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_rst_n[1]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_rst_n[2]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_rst_n[3]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_rst_n[4]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_rst_n[5]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sclk[0]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sclk[1]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sclk[2]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sclk[3]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sclk[4]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sclk[5]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdo[0]         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdo[1]         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdo[2]         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdo[3]         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdo[4]         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; adc_sdo[5]         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[0]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[1]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[2]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[3]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[4]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[5]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[6]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus[7]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_MISO          ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; host_busy          ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[0]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[1]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[2]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[3]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[4]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[5]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[6]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[7]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[8]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[9]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[10]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[11]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[12]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[13]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[14]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[15]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[16]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[17]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_address[18]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_cs_n           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_oe_n           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; ram_we_n           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_AM_adc_convst ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_AM_adc_sclk   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_addr_clr      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_addr_inc      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_running       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++--------------------+---------------------------------------------------------------------------------------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+    Info: Processing started: Wed Apr 07 17:49:24 2021
+Info: Command: quartus_sta sensor_buchas -c sensor_buchas
+Info: qsta_default_script.tcl version: #1
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (21077): Low junction temperature is 0 degrees C
+Info (21077): High junction temperature is 85 degrees C
+Info (334003): Started post-fitting delay annotation
+Info (334004): Delay annotation completed successfully
+Critical Warning (332012): Synopsys Design Constraints File file not found: 'sensor_buchas.sdc'. A Synopsys Design Constraints File is required by the Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
+Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
+Info (332105): Deriving Clocks
+    Info (332105): create_clock -period 1.000 -name clk clk
+    Info (332105): create_clock -period 1.000 -name host_SCLK host_SCLK
+Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
+Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
+Critical Warning (332148): Timing requirements not met
+Info (332146): Worst-case setup slack is -7.677
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    -7.677           -1070.740 clk 
+    Info (332119):    -3.248             -34.176 host_SCLK 
+Info (332146): Worst-case hold slack is -0.613
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    -0.613              -1.352 host_SCLK 
+    Info (332119):     1.078               0.000 clk 
+Info (332146): Worst-case recovery slack is -4.709
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    -4.709            -122.434 clk 
+    Info (332119):    -2.837             -36.078 host_SCLK 
+Info (332146): Worst-case removal slack is -0.258
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    -0.258              -0.511 host_SCLK 
+    Info (332119):     5.155               0.000 clk 
+Info (332146): Worst-case minimum pulse width slack is -2.289
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    -2.289              -2.289 clk 
+    Info (332119):    -2.289              -2.289 host_SCLK 
+Info (332001): The selected device family is not supported by the report_metastability command.
+Info (332102): Design is not fully constrained for setup requirements
+Info (332102): Design is not fully constrained for hold requirements
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 3 warnings
+    Info: Peak virtual memory: 4655 megabytes
+    Info: Processing ended: Wed Apr 07 17:49:26 2021
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:02
+
+
