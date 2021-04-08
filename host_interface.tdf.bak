@@ -1,0 +1,46 @@
+include "mode_selector.inc";
+
+subdesign host_interface(
+	clk: input;
+	sreset: input;
+	busy: input = Vcc;
+	MISO: input;
+
+	host_mode[1..0]: input;
+	host_convst_start: input;
+	host_rst_n: input;
+
+	host_SCLK: input;
+	host_MOSI: input;
+	host_SS_n: input;
+	
+	mode[1..0]: output;
+	changing_mode: output;
+	convst_start: output;
+	rst_n: output;
+	SCLK_: output;
+	MOSI: output;
+	SS_n: output;
+	host_busy: output;
+	host_MISO: output;
+)
+variable
+	mode_sel: mode_selector;
+begin
+	-- Mode selector
+	mode_sel.clk = clk;
+	mode_sel.sreset = sreset;
+	mode_sel.mode_in[] = host_mode[];
+	mode[] = mode_sel.mode_out[];
+	host_busy = busy or !mode_sel.ready;
+	changing_mode = mode_sel.changing;
+	mode_sel.change_ok = Vcc;		-- TODO: ainda não há um critério para evitar a mudança de estado
+	
+	convst_start = host_convst_start;
+	rst_n = host_rst_n;
+	
+	SCLK_ = host_SCLK;
+	MOSI = host_MOSI;
+	host_MISO = MISO;
+	SS_n = host_SS_n;
+end;

@@ -32,7 +32,7 @@ begin
 	mode_sel.sreset = sreset;
 	mode_sel.mode_in[] = host_mode[];
 	mode[] = mode_sel.mode_out[];
-	host_busy = busy or !mode_sel.ready;
+	host_busy = busy or !mode_sel.ready or mode_sel.changing;
 	changing_mode = mode_sel.changing;
 	mode_sel.change_ok = Vcc;		-- TODO: ainda não há um critério para evitar a mudança de estado
 	

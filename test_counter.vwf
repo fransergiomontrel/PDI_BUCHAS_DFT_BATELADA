@@ -1,16 +1,16 @@
 /*<simulation_settings>
-<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off SensorBuchas_CPLD -c SensorBuchas_CPLD --vector_source="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/teste_counter.vwf" --testbench_file="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/teste_counter.vwf.vt"</ftestbench_cmd>
-<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off SensorBuchas_CPLD -c SensorBuchas_CPLD --vector_source="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/teste_counter.vwf" --testbench_file="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/teste_counter.vwf.vt"</ttestbench_cmd>
-<fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/" SensorBuchas_CPLD -c SensorBuchas_CPLD</fnetlist_cmd>
-<tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/" SensorBuchas_CPLD -c SensorBuchas_CPLD</tnetlist_cmd>
+<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/test_counter.vwf" --testbench_file="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/test_counter.vwf.vt"</ftestbench_cmd>
+<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/test_counter.vwf" --testbench_file="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/test_counter.vwf.vt"</ttestbench_cmd>
+<fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/" sensor_buchas -c sensor_buchas</fnetlist_cmd>
+<tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/" sensor_buchas -c sensor_buchas</tnetlist_cmd>
 <modelsim_script>onerror {exit -code 1}
 vlib work
-vlog -work work SensorBuchas_CPLD.vo
-vlog -work work teste_counter.vwf.vt
-vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.teste_vlg_vec_tst
-vcd file -direction SensorBuchas_CPLD.msim.vcd
-vcd add -internal teste_vlg_vec_tst/*
-vcd add -internal teste_vlg_vec_tst/i1/*
+vlog -work work sensor_buchas.vo
+vlog -work work test_counter.vwf.vt
+vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.counter_vlg_vec_tst
+vcd file -direction sensor_buchas.msim.vcd
+vcd add -internal counter_vlg_vec_tst/*
+vcd add -internal counter_vlg_vec_tst/i1/*
 proc simTimestamp {} {
     echo "Simulation time: $::now ps"
     if { [string equal running [runStatus]] } {
@@ -23,12 +23,12 @@ quit -f
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
-vlog -work work SensorBuchas_CPLD.vo
-vlog -work work teste_counter.vwf.vt
-vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.teste_vlg_vec_tst
-vcd file -direction SensorBuchas_CPLD.msim.vcd
-vcd add -internal teste_vlg_vec_tst/*
-vcd add -internal teste_vlg_vec_tst/i1/*
+vlog -work work sensor_buchas.vo
+vlog -work work test_counter.vwf.vt
+vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.counter_vlg_vec_tst
+vcd file -direction sensor_buchas.msim.vcd
+vcd add -internal counter_vlg_vec_tst/*
+vcd add -internal counter_vlg_vec_tst/i1/*
 proc simTimestamp {} {
     echo "Simulation time: $::now ps"
     if { [string equal running [runStatus]] } {
@@ -120,20 +120,10 @@ SIGNAL("o")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = BUS;
-	WIDTH = 4;
+	WIDTH = 3;
 	LSB_INDEX = 0;
 	DIRECTION = OUTPUT;
 	PARENT = "";
-}
-
-SIGNAL("o[3]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = OUTPUT;
-	PARENT = "o";
 }
 
 SIGNAL("o[2]")
@@ -227,15 +217,6 @@ TRANSITION_LIST("reset")
 	}
 }
 
-TRANSITION_LIST("o[3]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL X FOR 1000.0;
-	}
-}
-
 TRANSITION_LIST("o[2]")
 {
 	NODE
@@ -306,12 +287,12 @@ DISPLAY_LINE
 	RADIX = Unsigned;
 	TREE_INDEX = 4;
 	TREE_LEVEL = 0;
-	CHILDREN = 5, 6, 7, 8;
+	CHILDREN = 5, 6, 7;
 }
 
 DISPLAY_LINE
 {
-	CHANNEL = "o[3]";
+	CHANNEL = "o[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 5;
@@ -321,7 +302,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "o[2]";
+	CHANNEL = "o[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 6;
@@ -331,20 +312,10 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "o[1]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Unsigned;
-	TREE_INDEX = 7;
-	TREE_LEVEL = 1;
-	PARENT = 4;
-}
-
-DISPLAY_LINE
-{
 	CHANNEL = "o[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
-	TREE_INDEX = 8;
+	TREE_INDEX = 7;
 	TREE_LEVEL = 1;
 	PARENT = 4;
 }

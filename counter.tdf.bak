@@ -1,0 +1,37 @@
+include "dffes.inc";
+
+PARAMETERS
+(
+		MAX_VALUE = 7
+);
+
+constant N_BITS = log2(MAX_VALUE+1);
+
+subdesign counter(
+	clk: input;
+	sreset: input = Gnd;
+	clr: input = Gnd;
+	inc: input = Gnd;
+	
+	o[N_BITS-1..0]: output
+)
+variable
+	ffs[N_BITS-1..0]: dffes;
+begin
+	ffs[].clk = clk;
+	ffs[].sclr = sreset;
+	if clr then
+		ffs[].d = 0;
+	else
+		if inc then
+			if ffs[].q == MAX_VALUE then
+				ffs[].d = 0;
+			else
+				ffs[].d = ffs[].q + 1;
+			end if;
+		else
+			ffs[].d = ffs[].q;
+		end if;
+	end if;
+	o[] = ffs[].q;
+end;

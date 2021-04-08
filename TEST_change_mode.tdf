@@ -1,0 +1,83 @@
+include "counter.inc";
+include "sensor_buchas_CPLD.inc";
+include "modes.inc";
+
+CONSTANT STATE_NONE = h"F";
+
+
+subdesign TEST_change_mode(
+	clk, rst: input;
+	
+	host_mode[1..0]: output;
+	host_busy: output;
+	
+	state_test[3..0]: output;
+	pause_test[3..0]: output;
+	run_test: output;
+)
+variable
+	s: sensor_buchas_CPLD;
+	state[3..0]: dffe;
+	pause: counter with (MAX_VALUE = 1000);
+	mode[1..0]: node;
+	run, next_state[3..0]: node;
+	mode_ff[1..0]: dffe;
+	div2: dff;
+begin
+	defaults
+		run = Gnd;
+		next_state[] = h"F";
+	end defaults;
+
+	div2.clk = clk;
+	div2.d = !div2.q;
+
+	s.clk = div2.q;
+	s.rst = rst;
+	host_busy = s.host_busy;
+	
+
+	pause.clk = div2.q;
+	pause.clr = run;
+	pause.inc = Vcc;
+	pause.sreset = rst;
+	pause_test[] = pause.o[3..0];
+	
+	
+	state[].clk = div2.q;
+	state[].clrn = !rst;
+	state_test[] = state[].q;
+	state[].ena = run;
+	state[].d = next_state[];
+
+	run = (next_state[] != STATE_NONE);
+
+	run_test = run;
+	
+	mode_ff[].clrn = !rst;
+	mode_ff[].clk = div2.q;
+	mode_ff[].d = mode;
+	mode_ff[].ena = run;
+	host_mode[] = mode_ff[].q;
+	s.host_mode[] = mode_ff[].q;
+		
+	TABLE
+		state[].q,	pause.o[]		=> 	next_state[],	mode[];
+		0,				5					=> 	1,					MODE_NONE;
+		1,				10					=> 	2,					MODE_CONFIGURATION;
+		2,				10					=> 	3,					MODE_NONE;
+		3,				10					=> 	4,					MODE_AQUISITION;
+		4,				10					=> 	5,					MODE_NONE;
+		5,				10					=> 	6,					MODE_READ_DATA;
+		6,				15					=> 	7,					MODE_NONE;
+		7,				10					=> 	8,					MODE_CONFIGURATION;
+		8,				10					=> 	9,					MODE_AQUISITION;
+		9,				10					=> 	10,				MODE_CONFIGURATION;
+		10,			10					=> 	11,				MODE_READ_DATA;
+		11,			15					=> 	12,				MODE_CONFIGURATION;
+		12,			10					=> 	13,				MODE_AQUISITION;
+		13,			10					=> 	14,				MODE_READ_DATA;
+		14,			15					=> 	0,					MODE_AQUISITION;
+	END TABLE;
+
+end;

@@ -11,9 +11,9 @@ subdesign mode_selector(
 	mode_out[1..0]: output;
 	ready: output;
 	changing: output;
+	stable: output;
 	
 --	state[2..0]: output;
---	stable: output;
 )
 variable
 	sm : MACHINE WITH STATES (sNoticeChanging, sUpdateMode, sWaitingChangeOk, sStable, sChangedRequested);
@@ -33,7 +33,7 @@ begin
 	
 	sync.clk = clk;
 	sync.i[] = mode_in[];
---	stable = sync.stable;
+	stable = sync.stable;
 	
 	ready_ff.clk = clk;
 	ready_ff.sclr = sreset;
