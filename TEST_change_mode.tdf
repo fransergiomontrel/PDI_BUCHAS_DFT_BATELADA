@@ -1,6 +1,7 @@
 include "counter.inc";
 include "sensor_buchas_CPLD.inc";
 include "modes.inc";
+include "divfreq.inc";
 
 CONSTANT STATE_NONE = h"F";
 
@@ -10,6 +11,9 @@ subdesign TEST_change_mode(
 	
 	host_mode[1..0]: output;
 	host_busy: output;
+	host_MISO: output;
+	adc_sdo[5..0]: output;
+	adc_rst_n[5..0]: output;
 	
 	state_test[3..0]: output;
 	pause_test[3..0]: output;
@@ -22,29 +26,38 @@ variable
 	mode[1..0]: node;
 	run, next_state[3..0]: node;
 	mode_ff[1..0]: dffe;
-	div2: dff;
+	clock: node;
+	
+	c[5..0]: dff;
 begin
 	defaults
 		run = Gnd;
 		next_state[] = h"F";
 	end defaults;
+	
+	c[].clk = clk;
+	c[].d = c[].q+1;
+	c[].clrn = !rst;
 
-	div2.clk = clk;
-	div2.d = !div2.q;
-
-	s.clk = div2.q;
+	s.clk = clk;
 	s.rst = rst;
 	host_busy = s.host_busy;
+	host_MISO = s.host_MISO;
+	s.adc_sdi[5] = c[2].q;
+	s.host_rst_n = c[1].q;
+	s.host_MOSI = c[0].q;
+	adc_sdo[] = s.adc_sdo[];
+	adc_rst_n[] = s.adc_rst_n[];
 	
 
-	pause.clk = div2.q;
+	pause.clk = c[2].q;
 	pause.clr = run;
 	pause.inc = Vcc;
 	pause.sreset = rst;
 	pause_test[] = pause.o[3..0];
 	
 	
-	state[].clk = div2.q;
+	state[].clk = c[2].q;
 	state[].clrn = !rst;
 	state_test[] = state[].q;
 	state[].ena = run;
@@ -55,8 +68,8 @@ begin
 	run_test = run;
 	
 	mode_ff[].clrn = !rst;
-	mode_ff[].clk = div2.q;
-	mode_ff[].d = mode;
+	mode_ff[].clk = c[2].q;
+	mode_ff[].d = mode[];
 	mode_ff[].ena = run;
 	host_mode[] = mode_ff[].q;
 	s.host_mode[] = mode_ff[].q;

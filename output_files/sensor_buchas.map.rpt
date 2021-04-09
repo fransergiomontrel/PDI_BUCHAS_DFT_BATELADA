@@ -1,5 +1,5 @@
 Analysis & Synthesis report for sensor_buchas
-Wed Apr 07 21:13:10 2021
+Thu Apr 08 21:31:03 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -59,13 +59,13 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Wed Apr 07 21:13:10 2021       ;
+; Analysis & Synthesis Status ; Successful - Thu Apr 08 21:31:03 2021       ;
 ; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name               ; sensor_buchas                               ;
 ; Top-level Entity Name       ; TEST_change_mode                            ;
 ; Family                      ; MAX II                                      ;
-; Total logic elements        ; 99                                          ;
-; Total pins                  ; 14                                          ;
+; Total logic elements        ; 159                                         ;
+; Total pins                  ; 27                                          ;
 ; Total virtual pins          ; 0                                           ;
 ; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
 +-----------------------------+---------------------------------------------+
@@ -190,6 +190,7 @@ https://fpgasoftware.intel.com/eula.
 ; acquisition_serializer.inc       ; yes             ; Auto-Found AHDL File               ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_serializer.inc          ;         ;
 ; acquisition_store.inc            ; yes             ; Auto-Found AHDL File               ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_store.inc               ;         ;
 ; sensor_buchas_cpld.inc           ; yes             ; Auto-Found AHDL File               ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/sensor_buchas_cpld.inc              ;         ;
+; divfreq.inc                      ; yes             ; Auto-Found AHDL File               ; //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/divfreq.inc                         ;         ;
 ; lpm_counter.tdf                  ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_counter.tdf         ;         ;
 ; lpm_constant.inc                 ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_constant.inc        ;         ;
 ; lpm_decode.inc                   ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_decode.inc          ;         ;
@@ -203,39 +204,39 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------------+---------+
 
 
-+-----------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary         ;
-+---------------------------------------------+-------+
-; Resource                                    ; Usage ;
-+---------------------------------------------+-------+
-; Total logic elements                        ; 99    ;
-;     -- Combinational with no register       ; 46    ;
-;     -- Register only                        ; 23    ;
-;     -- Combinational with a register        ; 30    ;
-;                                             ;       ;
-; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 47    ;
-;     -- 3 input functions                    ; 10    ;
-;     -- 2 input functions                    ; 16    ;
-;     -- 1 input functions                    ; 2     ;
-;     -- 0 input functions                    ; 1     ;
-;                                             ;       ;
-; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 91    ;
-;     -- arithmetic mode                      ; 8     ;
-;     -- qfbk mode                            ; 0     ;
-;     -- register cascade mode                ; 0     ;
-;     -- synchronous clear/load mode          ; 13    ;
-;     -- asynchronous clear/load mode         ; 27    ;
-;                                             ;       ;
-; Total registers                             ; 53    ;
-; Total logic cells in carry chains           ; 9     ;
-; I/O pins                                    ; 14    ;
-; Maximum fan-out node                        ; div2  ;
-; Maximum fan-out                             ; 44    ;
-; Total fan-out                               ; 396   ;
-; Average fan-out                             ; 3.50  ;
-+---------------------------------------------+-------+
++-------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                               ;
++---------------------------------------------+---------------------------------------------+
+; Resource                                    ; Usage                                       ;
++---------------------------------------------+---------------------------------------------+
+; Total logic elements                        ; 159                                         ;
+;     -- Combinational with no register       ; 96                                          ;
+;     -- Register only                        ; 30                                          ;
+;     -- Combinational with a register        ; 33                                          ;
+;                                             ;                                             ;
+; Logic element usage by number of LUT inputs ;                                             ;
+;     -- 4 input functions                    ; 60                                          ;
+;     -- 3 input functions                    ; 24                                          ;
+;     -- 2 input functions                    ; 29                                          ;
+;     -- 1 input functions                    ; 2                                           ;
+;     -- 0 input functions                    ; 14                                          ;
+;                                             ;                                             ;
+; Logic elements by mode                      ;                                             ;
+;     -- normal mode                          ; 150                                         ;
+;     -- arithmetic mode                      ; 9                                           ;
+;     -- qfbk mode                            ; 0                                           ;
+;     -- register cascade mode                ; 0                                           ;
+;     -- synchronous clear/load mode          ; 13                                          ;
+;     -- asynchronous clear/load mode         ; 38                                          ;
+;                                             ;                                             ;
+; Total registers                             ; 63                                          ;
+; Total logic cells in carry chains           ; 11                                          ;
+; I/O pins                                    ; 27                                          ;
+; Maximum fan-out node                        ; sensor_buchas_CPLD:s|switch:inst6|RI_we_n~4 ;
+; Maximum fan-out                             ; 44                                          ;
+; Total fan-out                               ; 564                                         ;
+; Average fan-out                             ; 3.03                                        ;
++---------------------------------------------+---------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -243,9 +244,11 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------------------------------------------------------------------------------+--------------------+--------------+
 ; Compilation Hierarchy Node            ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                                              ; Entity Name        ; Library Name ;
 +---------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------------------------------------------------------------------------------+--------------------+--------------+
-; |TEST_change_mode                     ; 99 (42)     ; 53           ; 0          ; 14   ; 0            ; 46 (35)      ; 23 (0)            ; 30 (7)           ; 9 (0)           ; 0 (0)      ; |TEST_change_mode                                                                                                ; TEST_change_mode   ; work         ;
-;    |counter:pause|                    ; 14 (14)     ; 10           ; 0          ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 10 (10)          ; 9 (9)           ; 0 (0)      ; |TEST_change_mode|counter:pause                                                                                  ; counter            ; work         ;
-;    |sensor_buchas_CPLD:s|             ; 43 (1)      ; 36           ; 0          ; 0    ; 0            ; 7 (0)        ; 23 (1)            ; 13 (0)           ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s                                                                           ; sensor_buchas_CPLD ; work         ;
+; |TEST_change_mode                     ; 159 (44)    ; 63           ; 0          ; 27   ; 0            ; 96 (35)      ; 30 (0)            ; 33 (9)           ; 11 (2)          ; 0 (0)      ; |TEST_change_mode                                                                                                ; TEST_change_mode   ; work         ;
+;    |counter:pause|                    ; 15 (15)     ; 10           ; 0          ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 10 (10)          ; 9 (9)           ; 0 (0)      ; |TEST_change_mode|counter:pause                                                                                  ; counter            ; work         ;
+;    |sensor_buchas_CPLD:s|             ; 100 (1)     ; 44           ; 0          ; 0    ; 0            ; 56 (0)       ; 30 (1)            ; 14 (0)           ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s                                                                           ; sensor_buchas_CPLD ; work         ;
+;       |RAM_interface:inst|            ; 8 (8)       ; 0            ; 0          ; 0    ; 0            ; 8 (8)        ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|RAM_interface:inst                                                        ; RAM_interface      ; work         ;
+;       |adc_interface:inst4|           ; 24 (24)     ; 0            ; 0          ; 0    ; 0            ; 24 (24)      ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|adc_interface:inst4                                                       ; adc_interface      ; work         ;
 ;       |host_interface:Host_interface| ; 23 (1)      ; 17           ; 0          ; 0    ; 0            ; 6 (1)        ; 12 (0)            ; 5 (0)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|host_interface:Host_interface                                             ; host_interface     ; work         ;
 ;          |mode_selector:mode_sel|     ; 22 (8)      ; 17           ; 0          ; 0    ; 0            ; 5 (3)        ; 12 (2)            ; 5 (3)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel                      ; mode_selector      ; work         ;
 ;             |dffes:changing_ff|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:changing_ff    ; dffes              ; work         ;
@@ -253,11 +256,11 @@ https://fpgasoftware.intel.com/eula.
 ;             |dffes:mode_out_ff[1]|    ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1] ; dffes              ; work         ;
 ;             |dffes:ready_ff|          ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:ready_ff       ; dffes              ; work         ;
 ;             |synchronizer:sync|       ; 10 (10)     ; 8            ; 0          ; 0    ; 0            ; 2 (2)        ; 8 (8)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync    ; synchronizer       ; work         ;
-;       |read_data_module:inst2|        ; 18 (7)      ; 18           ; 0          ; 0    ; 0            ; 0 (0)        ; 10 (3)            ; 8 (4)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|read_data_module:inst2                                                    ; read_data_module   ; work         ;
+;       |read_data_module:inst2|        ; 33 (7)      ; 26           ; 0          ; 0    ; 0            ; 7 (0)        ; 17 (3)            ; 9 (4)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|read_data_module:inst2                                                    ; read_data_module   ; work         ;
 ;          |dffes:busy_ff|              ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|read_data_module:inst2|dffes:busy_ff                                      ; dffes              ; work         ;
 ;          |dffes:load_parallel_FF|     ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|read_data_module:inst2|dffes:load_parallel_FF                             ; dffes              ; work         ;
-;          |shift_reg_2x:shift|         ; 9 (9)       ; 9            ; 0          ; 0    ; 0            ; 0 (0)        ; 7 (7)             ; 2 (2)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|read_data_module:inst2|shift_reg_2x:shift                                 ; shift_reg_2x       ; work         ;
-;       |switch:inst6|                  ; 1 (1)       ; 0            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|switch:inst6                                                              ; switch             ; work         ;
+;          |shift_reg_2x:shift|         ; 24 (24)     ; 17           ; 0          ; 0    ; 0            ; 7 (7)        ; 14 (14)           ; 3 (3)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|read_data_module:inst2|shift_reg_2x:shift                                 ; shift_reg_2x       ; work         ;
+;       |switch:inst6|                  ; 11 (11)     ; 0            ; 0          ; 0    ; 0            ; 11 (11)      ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |TEST_change_mode|sensor_buchas_CPLD:s|switch:inst6                                                              ; switch             ; work         ;
 +---------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------------------------------------------------------------------------------+--------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -324,79 +327,270 @@ Encoding Type:  One-Hot
 +----------------------+----------------------+---------+-------------+------------+---------------+--------------------+-------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                                                                 ;
-+-----------------------------------------------------------------------------------------------------------+----------------------------------------+
-; Register name                                                                                             ; Reason for Removal                     ;
-+-----------------------------------------------------------------------------------------------------------+----------------------------------------+
-; sensor_buchas_CPLD:s|acquisition_module:inst11|dffes:start_ff|ff                                          ; Stuck at VCC due to stuck port data_in ;
-; sensor_buchas_CPLD:s|RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0..18] ; Lost fanout                            ;
-; sensor_buchas_CPLD:s|read_data_module:inst2|dffes:addr_inc_FF|ff                                          ; Lost fanout                            ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_HIGH                   ; Stuck at GND due to stuck port data_in ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_LOW                    ; Stuck at GND due to stuck port data_in ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:busy_ff|ff                     ; Stuck at GND due to stuck port reg_out ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter|ffs[0,1]     ; Stuck at GND due to stuck port data_in ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[0]         ; Stuck at GND due to stuck port data_in ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAIT_STATE                           ; Stuck at GND due to stuck port data_in ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|AQUISITIONING                        ; Lost fanout                            ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|SERIALIZING                          ; Stuck at GND due to stuck port data_in ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:serialize_ff|ff                ; Stuck at GND due to stuck port reg_out ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[0..4]  ; Lost fanout                            ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|STORING                              ; Stuck at GND due to stuck port data_in ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:div2_clock|ff      ; Lost fanout                            ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:store_ff|ff                    ; Stuck at GND due to stuck port reg_out ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE                 ; Stuck at GND due to stuck port data_in ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|ffs[0..3] ; Lost fanout                            ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|INC_CHANNEL                       ; Lost fanout                            ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|WAIT_END                          ; Lost fanout                            ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[1..8]      ; Lost fanout                            ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|WAIT_STORE                        ; Lost fanout                            ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS1b                              ; Lost fanout                            ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS0b                              ; Lost fanout                            ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS0a                              ; Lost fanout                            ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS1a                              ; Lost fanout                            ;
-; Total Number of Removed Registers = 59                                                                    ;                                        ;
-+-----------------------------------------------------------------------------------------------------------+----------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                                         ;
++--------------------------------------------------------------------------------------------------------------+---------------------------------------------+
+; Register name                                                                                                ; Reason for Removal                          ;
++--------------------------------------------------------------------------------------------------------------+---------------------------------------------+
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][0]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][1]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][2]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][3]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][4]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][5]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][6]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][7]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][8]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][9]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][10]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][11]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][12]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][13]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][14]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][15]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][0]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][1]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][2]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][3]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][4]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][5]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][6]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][7]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][8]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][9]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][10]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][11]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][12]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][13]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][14]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][15]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][0]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][1]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][2]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][3]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][4]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][5]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][6]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][7]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][8]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][9]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][10]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][11]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][12]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][13]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][14]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][15]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][0]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][1]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][2]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][3]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][4]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][5]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][6]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][7]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][8]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][9]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][10]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][11]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][12]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][13]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][14]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][15]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][0]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][1]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][2]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][3]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][4]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][5]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][6]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][7]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][8]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][9]|ff  ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][10]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][11]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][12]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][13]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][14]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][15]|ff ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|dffes:start_ff|ff                                             ; Stuck at VCC due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0..18]    ; Lost fanout                                 ;
+; sensor_buchas_CPLD:s|read_data_module:inst2|dffes:addr_inc_FF|ff                                             ; Lost fanout                                 ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_HIGH                      ; Stuck at GND due to stuck port data_in      ;
+; c[3..5]                                                                                                      ; Lost fanout                                 ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_LOW                       ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:busy_ff|ff                        ; Stuck at GND due to stuck port reg_out      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter|ffs[0,1]        ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[0]            ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAIT_STATE                              ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|AQUISITIONING                           ; Lost fanout                                 ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|SERIALIZING                             ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:serialize_ff|ff                   ; Stuck at GND due to stuck port reg_out      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][5]|ff  ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][13]|ff ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[1..4]     ; Lost fanout                                 ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][4]|ff  ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][12]|ff ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][3]|ff  ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][11]|ff ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][2]|ff  ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][10]|ff ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][1]|ff  ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][9]|ff  ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][0]|ff  ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][8]|ff  ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][7]|ff  ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][15]|ff ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][6]|ff  ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][14]|ff ; Stuck at GND due to stuck port clock_enable ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[0]        ; Lost fanout                                 ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|STORING                                 ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:div2_clock|ff         ; Lost fanout                                 ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:store_ff|ff                       ; Stuck at GND due to stuck port reg_out      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE                    ; Stuck at GND due to stuck port data_in      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|ffs[0..3]    ; Lost fanout                                 ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|INC_CHANNEL                          ; Lost fanout                                 ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|WAIT_END                             ; Lost fanout                                 ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[1..8]         ; Lost fanout                                 ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|WAIT_STORE                           ; Lost fanout                                 ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS1b                                 ; Lost fanout                                 ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS0b                                 ; Lost fanout                                 ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS0a                                 ; Lost fanout                                 ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS1a                                 ; Lost fanout                                 ;
+; Total Number of Removed Registers = 158                                                                      ;                                             ;
++--------------------------------------------------------------------------------------------------------------+---------------------------------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                                                                                                                               ;
-+-----------------------------------------------------------------------------------------------------+---------------------------+---------------------------------------------------------------------------------------------------------+
-; Register name                                                                                       ; Reason for Removal        ; Registers Removed due to This Register                                                                  ;
-+-----------------------------------------------------------------------------------------------------+---------------------------+---------------------------------------------------------------------------------------------------------+
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_LOW              ; Stuck at GND              ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[0],      ;
-;                                                                                                     ; due to stuck port data_in ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAIT_STATE,                        ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|SERIALIZING,                       ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:serialize_ff|ff,             ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[4],  ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[3],  ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[2],  ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[1],  ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|STORING,                           ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:div2_clock|ff,   ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE,              ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|ffs[2], ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|ffs[1], ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|ffs[0], ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|WAIT_END                        ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_HIGH             ; Stuck at GND              ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[1],      ;
-;                                                                                                     ; due to stuck port data_in ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[2],      ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[3],      ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[6],      ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[7],      ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[8]       ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:store_ff|ff              ; Stuck at GND              ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|WAIT_STORE,                     ;
-;                                                                                                     ; due to stuck port reg_out ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS1b,                           ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS0b,                           ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS0a,                           ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS1a                            ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|dffes:start_ff|ff                                    ; Stuck at VCC              ; sensor_buchas_CPLD:s|read_data_module:inst2|dffes:addr_inc_FF|ff,                                       ;
-;                                                                                                     ; due to stuck port data_in ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:busy_ff|ff,                  ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[4],      ;
-;                                                                                                     ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[5]       ;
-; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter|ffs[1] ; Stuck at GND              ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|ffs[3], ;
-;                                                                                                     ; due to stuck port data_in ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|INC_CHANNEL                     ;
-+-----------------------------------------------------------------------------------------------------+---------------------------+---------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                                                                                                                             ;
++-------------------------------------------------------------------------------------------------------------+---------------------------+---------------------------------------------------------------------------------------------------------------+
+; Register name                                                                                               ; Reason for Removal        ; Registers Removed due to This Register                                                                        ;
++-------------------------------------------------------------------------------------------------------------+---------------------------+---------------------------------------------------------------------------------------------------------------+
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][0]|ff ; Stuck at GND              ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][1]|ff,  ;
+;                                                                                                             ; due to stuck port data_in ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][2]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][3]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][4]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][5]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][6]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][7]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][8]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][9]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][10]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][11]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][12]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][13]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][14]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][15]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[4],        ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[3],        ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[2],        ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[1],        ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[0],        ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:div2_clock|ff,         ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|ffs[3],       ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|ffs[2],       ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|ffs[1],       ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|ffs[0]        ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_LOW                      ; Stuck at GND              ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[0],            ;
+;                                                                                                             ; due to stuck port data_in ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAIT_STATE,                              ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|SERIALIZING,                             ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:serialize_ff|ff,                   ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][5]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][13]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][4]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][12]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][3]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][11]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][2]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][10]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][1]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][9]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][0]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][8]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][7]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][15]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][6]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][14]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|STORING,                                 ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE,                    ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|WAIT_END                              ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][0]|ff ; Stuck at GND              ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][1]|ff,  ;
+;                                                                                                             ; due to stuck port data_in ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][2]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][3]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][4]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][5]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][6]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][7]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][8]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][9]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][10]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][11]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][12]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][13]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][14]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][15]|ff  ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][0]|ff ; Stuck at GND              ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][1]|ff,  ;
+;                                                                                                             ; due to stuck port data_in ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][2]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][3]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][4]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][5]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][6]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][7]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][8]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][9]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][10]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][11]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][12]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][13]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][14]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][15]|ff  ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][0]|ff ; Stuck at GND              ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][1]|ff,  ;
+;                                                                                                             ; due to stuck port data_in ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][2]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][3]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][4]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][5]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][6]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][7]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][8]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][9]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][10]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][11]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][12]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][13]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][14]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][15]|ff  ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][0]|ff ; Stuck at GND              ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][1]|ff,  ;
+;                                                                                                             ; due to stuck port data_in ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][2]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][3]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][4]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][5]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][6]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][7]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][8]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][9]|ff,  ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][10]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][11]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][12]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][13]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][14]|ff, ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][15]|ff  ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_HIGH                     ; Stuck at GND              ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[1],            ;
+;                                                                                                             ; due to stuck port data_in ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[2],            ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[3],            ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[6],            ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[7],            ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[8]             ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:store_ff|ff                      ; Stuck at GND              ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|WAIT_STORE,                           ;
+;                                                                                                             ; due to stuck port reg_out ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS1b,                                 ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS0b,                                 ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS0a,                                 ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS1a                                  ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|dffes:start_ff|ff                                            ; Stuck at VCC              ; sensor_buchas_CPLD:s|read_data_module:inst2|dffes:addr_inc_FF|ff,                                             ;
+;                                                                                                             ; due to stuck port data_in ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:busy_ff|ff,                        ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[4],            ;
+;                                                                                                             ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[5]             ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter|ffs[1]         ; Stuck at GND              ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|INC_CHANNEL                           ;
+;                                                                                                             ; due to stuck port data_in ;                                                                                                               ;
++-------------------------------------------------------------------------------------------------------------+---------------------------+---------------------------------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -404,11 +598,11 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 53    ;
+; Total registers                              ; 63    ;
 ; Number of registers using Synchronous Clear  ; 11    ;
 ; Number of registers using Synchronous Load   ; 2     ;
-; Number of registers using Asynchronous Clear ; 27    ;
-; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Asynchronous Clear ; 30    ;
+; Number of registers using Asynchronous Load  ; 8     ;
 ; Number of registers using Clock Enable       ; 16    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
@@ -559,7 +753,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Wed Apr 07 21:12:48 2021
+    Info: Processing started: Thu Apr 08 21:30:49 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off sensor_buchas -c sensor_buchas
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -595,11 +789,13 @@ Info (12021): Found 1 design units, including 1 entities, in source file acquisi
 Info (12021): Found 1 design units, including 1 entities, in source file acquisition_ctrl.tdf
     Info (12023): Found entity 1: acquisition_ctrl File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_ctrl.tdf Line: 20
 Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.inc Line: 26
-Warning (287004): Group name "mode" is missing brackets ([ ]) File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/TEST_change_mode.tdf Line: 59
+Warning (287013): Variable or input pin "clock" is defined but never used. File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/TEST_change_mode.tdf Line: 29
 Info (12021): Found 1 design units, including 1 entities, in source file test_change_mode.tdf
-    Info (12023): Found entity 1: TEST_change_mode File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/TEST_change_mode.tdf Line: 8
+    Info (12023): Found entity 1: TEST_change_mode File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/TEST_change_mode.tdf Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file divfreq.tdf
+    Info (12023): Found entity 1: divfreq File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/divfreq.tdf Line: 9
 Info (12127): Elaborating entity "TEST_change_mode" for the top level hierarchy
-Info (12128): Elaborating entity "sensor_buchas_CPLD" for hierarchy "sensor_buchas_CPLD:s" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/TEST_change_mode.tdf Line: 19
+Info (12128): Elaborating entity "sensor_buchas_CPLD" for hierarchy "sensor_buchas_CPLD:s" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/TEST_change_mode.tdf Line: 23
 Info (12128): Elaborating entity "acquisition_module" for hierarchy "sensor_buchas_CPLD:s|acquisition_module:inst11"
 Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_ctrl.inc Line: 26
 Info (12128): Elaborating entity "dffes" for hierarchy "sensor_buchas_CPLD:s|acquisition_module:inst11|dffes:start_ff" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/acquisition_module.tdf Line: 31
@@ -640,18 +836,41 @@ Info (12133): Instantiated megafunction "sensor_buchas_CPLD:s|RAM_interface:inst
 Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_ici.tdf
     Info (12023): Found entity 1: cntr_ici File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/db/cntr_ici.tdf Line: 26
 Info (12128): Elaborating entity "cntr_ici" for hierarchy "sensor_buchas_CPLD:s|RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated" File: c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_counter.tdf Line: 259
-Info (12128): Elaborating entity "counter" for hierarchy "counter:pause" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/TEST_change_mode.tdf Line: 21
+Info (12128): Elaborating entity "counter" for hierarchy "counter:pause" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/TEST_change_mode.tdf Line: 25
 Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/counter.tdf Line: 8
+Warning (13046): Tri-state node(s) do not directly drive top-level pin(s)
+    Warning (13049): Converted tri-state buffer "sensor_buchas_CPLD:s|RAM_interface:inst|buffer[7]" feeding internal logic into a wire File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 33
+    Warning (13049): Converted tri-state buffer "sensor_buchas_CPLD:s|RAM_interface:inst|buffer[6]" feeding internal logic into a wire File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 33
+    Warning (13049): Converted tri-state buffer "sensor_buchas_CPLD:s|RAM_interface:inst|buffer[5]" feeding internal logic into a wire File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 33
+    Warning (13049): Converted tri-state buffer "sensor_buchas_CPLD:s|RAM_interface:inst|buffer[4]" feeding internal logic into a wire File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 33
+    Warning (13049): Converted tri-state buffer "sensor_buchas_CPLD:s|RAM_interface:inst|buffer[3]" feeding internal logic into a wire File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 33
+    Warning (13049): Converted tri-state buffer "sensor_buchas_CPLD:s|RAM_interface:inst|buffer[2]" feeding internal logic into a wire File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 33
+    Warning (13049): Converted tri-state buffer "sensor_buchas_CPLD:s|RAM_interface:inst|buffer[1]" feeding internal logic into a wire File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 33
+    Warning (13049): Converted tri-state buffer "sensor_buchas_CPLD:s|RAM_interface:inst|buffer[0]" feeding internal logic into a wire File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 33
 Info (18000): Registers with preset signals will power-up high File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/shift_reg_2x.tdf Line: 14
-Info (17049): 46 registers lost all their fanouts during netlist optimizations.
-Info (21057): Implemented 113 device resources after synthesis - the final resource count might be different
+Info (17049): 49 registers lost all their fanouts during netlist optimizations.
+Info (17016): Found the following redundant logic cells in design
+    Info (17048): Logic cell "sensor_buchas_CPLD:s|adc_interface:inst4|adc_sdo_cell[1]" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/adc_interface.tdf Line: 26
+    Info (17048): Logic cell "sensor_buchas_CPLD:s|adc_interface:inst4|adc_sdo_cell[2]" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/adc_interface.tdf Line: 26
+    Info (17048): Logic cell "sensor_buchas_CPLD:s|adc_interface:inst4|adc_sdo_cell[3]" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/adc_interface.tdf Line: 26
+    Info (17048): Logic cell "sensor_buchas_CPLD:s|adc_interface:inst4|adc_sdo_cell[4]" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/adc_interface.tdf Line: 26
+    Info (17048): Logic cell "sensor_buchas_CPLD:s|adc_interface:inst4|adc_sdo_cell[5]" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/adc_interface.tdf Line: 26
+    Info (17048): Logic cell "sensor_buchas_CPLD:s|RAM_interface:inst|driver[7]" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "sensor_buchas_CPLD:s|RAM_interface:inst|driver[6]" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "sensor_buchas_CPLD:s|RAM_interface:inst|driver[5]" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "sensor_buchas_CPLD:s|RAM_interface:inst|driver[4]" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "sensor_buchas_CPLD:s|RAM_interface:inst|driver[3]" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "sensor_buchas_CPLD:s|RAM_interface:inst|driver[2]" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "sensor_buchas_CPLD:s|RAM_interface:inst|driver[1]" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "sensor_buchas_CPLD:s|RAM_interface:inst|driver[0]" File: //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/RAM_interface.tdf Line: 35
+Info (21057): Implemented 186 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 2 input pins
-    Info (21059): Implemented 12 output pins
-    Info (21061): Implemented 99 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 18 warnings
-    Info: Peak virtual memory: 4710 megabytes
-    Info: Processing ended: Wed Apr 07 21:13:10 2021
-    Info: Elapsed time: 00:00:22
-    Info: Total CPU time (on all processors): 00:00:31
+    Info (21059): Implemented 25 output pins
+    Info (21061): Implemented 159 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 27 warnings
+    Info: Peak virtual memory: 4708 megabytes
+    Info: Processing ended: Thu Apr 08 21:31:03 2021
+    Info: Elapsed time: 00:00:14
+    Info: Total CPU time (on all processors): 00:00:20
 
 
