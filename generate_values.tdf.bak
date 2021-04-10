@@ -1,0 +1,12 @@
+--Este módulo gera contagem em sequencia diferente dependendo de SEED.
+--É útil para testar módulos que precisam de valores distintos de entrada.
+
+parameters(
+	SEED = b"000"
+)
+
+subdesign generate_values(
+	reset: input;
+	clk: input;
+	inc: input;
+)

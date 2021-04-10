@@ -40,7 +40,7 @@ begin
 
 	-- CTRL
 	ctrl.clk = clk;
-	ctrl.sreset = sreset;
+	ctrl.sreset = sreset or changing_mode;
 	ctrl.start = start_ff.q;
 	ctrl.serialize_ok = serializer.serialize_ok;
 	ctrl.store_ok = storer.store_ok;
