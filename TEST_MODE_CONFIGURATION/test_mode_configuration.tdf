@@ -1,0 +1,61 @@
+-- Este teste avalia o modo MODE_CONFIGURATION
+--
+-- Os sinais monitorados neste modo são:
+--
+-- adc_rst_n[0]	-> para ter certeza que copiam exatamente o sinal host_rst_n (clk/2)
+-- adc_convst[0]	-> para ter certeza que copiam exatamente o sinal host_convst_start (clk/4)
+-- adc_sclk[0]		-> para ter certeza que copiam exatamente o sinal host_SCLK (clk/8)
+-- adc_sdo[0]		-> para ter certeza que copiam exatamente o sinal host_MOSI (clk/16)
+-- adc_sdo[5..1]	-> para ter certeza que copiam exatamente o sinal adc_sdi[0..4] (clk/512~clk/32)
+-- host_MISO		-> para ter certeza que copiam exatamente o sinal adc_sdi[5] (clk/1024)
+
+include "sensor_buchas_CPLD.inc";
+include "modes.inc";
+include "counter.inc";
+
+subdesign test_mode_configuration(
+	clk, rst: input;
+	
+	adc_rst_n: output;
+	adc_convst: output;
+	adc_sclk: output;
+	adc_sdo[5..0]: output;
+	host_MISO: output;
+	
+	test_probe: output;
+)
+variable
+	s: sensor_buchas_CPLD;
+	cont: counter with (MAX_VALUE = 1023);
+begin
+	cont.clk = clk;
+	cont.inc = Vcc;
+	
+	s.clk = clk;
+	s.rst = rst;
+	
+	s.host_mode[] = MODE_CONFIGURATION;
+	
+	adc_rst_n = cont.o[0];
+	adc_convst = cont.o[1];
+	adc_sclk = cont.o[2];
+	adc_sdo[5..0] = cont.o[8..3];
+	host_MISO = cont.o[9];
+
+
+--	s.host_rst_n = cont.o[0];
+--	s.host_convst_start = cont.o[1];
+--	s.host_SCLK = cont.o[2];
+--	s.host_MOSI = cont.o[3];
+--	s.adc_sdi[4..0] = cont.o[8..4];
+--	s.adc_sdi[5] = cont.o[9];
+--
+--	adc_rst_n = s.adc_rst_n[0];
+--	adc_convst = s.adc_convst[0];
+--	adc_sclk = s.adc_sclk[0];
+--	adc_sdo[0] = s.adc_sdo[0];
+--	adc_sdo[5..1] = s.adc_sdo[5..1];
+--	host_MISO = s.host_MISO;
+
+	test_probe = cont.o[7];
+end;

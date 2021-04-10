@@ -1,0 +1,674 @@
+Analysis & Synthesis report for test_mode_configuration
+Sat Apr 10 16:55:04 2021
+Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |test_mode_configuration|sensor_buchas_CPLD:s|read_data_module:inst2|sm
+  9. State Machine - |test_mode_configuration|sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|sm
+ 10. State Machine - |test_mode_configuration|sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|sm
+ 11. State Machine - |test_mode_configuration|sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|sm
+ 12. Registers Removed During Synthesis
+ 13. Removed Registers Triggering Further Register Optimizations
+ 14. General Register Statistics
+ 15. Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|acquisition_module:inst11
+ 16. Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl
+ 17. Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter
+ 18. Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter
+ 19. Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer
+ 20. Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count
+ 21. Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter
+ 22. Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync
+ 23. Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|RAM_interface:inst
+ 24. Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|RAM_interface:inst|lpm_counter:address_counter
+ 25. Parameter Settings for User Entity Instance: counter:cont
+ 26. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++---------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                              ;
++-----------------------------+---------------------------------------------+
+; Analysis & Synthesis Status ; Successful - Sat Apr 10 16:55:04 2021       ;
+; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
+; Revision Name               ; test_mode_configuration                     ;
+; Top-level Entity Name       ; test_mode_configuration                     ;
+; Family                      ; MAX II                                      ;
+; Total logic elements        ; 13                                          ;
+; Total pins                  ; 13                                          ;
+; Total virtual pins          ; 0                                           ;
+; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
++-----------------------------+---------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++------------------------------------------------------------------+-------------------------+-------------------------+
+; Option                                                           ; Setting                 ; Default Value           ;
++------------------------------------------------------------------+-------------------------+-------------------------+
+; Device                                                           ; EPM1270T144C5           ;                         ;
+; Top-level entity name                                            ; test_mode_configuration ; test_mode_configuration ;
+; Family name                                                      ; MAX II                  ; Cyclone V               ;
+; Use smart compilation                                            ; Off                     ; Off                     ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                      ; On                      ;
+; Enable compact report table                                      ; Off                     ; Off                     ;
+; Restructure Multiplexers                                         ; Auto                    ; Auto                    ;
+; Create Debugging Nodes for IP Cores                              ; Off                     ; Off                     ;
+; Preserve fewer node names                                        ; On                      ; On                      ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable                  ; Enable                  ;
+; Verilog Version                                                  ; Verilog_2001            ; Verilog_2001            ;
+; VHDL Version                                                     ; VHDL_1993               ; VHDL_1993               ;
+; State Machine Processing                                         ; Auto                    ; Auto                    ;
+; Safe State Machine                                               ; Off                     ; Off                     ;
+; Extract Verilog State Machines                                   ; On                      ; On                      ;
+; Extract VHDL State Machines                                      ; On                      ; On                      ;
+; Ignore Verilog initial constructs                                ; Off                     ; Off                     ;
+; Iteration limit for constant Verilog loops                       ; 5000                    ; 5000                    ;
+; Iteration limit for non-constant Verilog loops                   ; 250                     ; 250                     ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                      ; On                      ;
+; Infer RAMs from Raw Logic                                        ; On                      ; On                      ;
+; Parallel Synthesis                                               ; On                      ; On                      ;
+; NOT Gate Push-Back                                               ; On                      ; On                      ;
+; Power-Up Don't Care                                              ; On                      ; On                      ;
+; Remove Redundant Logic Cells                                     ; Off                     ; Off                     ;
+; Remove Duplicate Registers                                       ; On                      ; On                      ;
+; Ignore CARRY Buffers                                             ; Off                     ; Off                     ;
+; Ignore CASCADE Buffers                                           ; Off                     ; Off                     ;
+; Ignore GLOBAL Buffers                                            ; Off                     ; Off                     ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                     ; Off                     ;
+; Ignore LCELL Buffers                                             ; Off                     ; Off                     ;
+; Ignore SOFT Buffers                                              ; On                      ; On                      ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                     ; Off                     ;
+; Optimization Technique                                           ; Balanced                ; Balanced                ;
+; Carry Chain Length                                               ; 70                      ; 70                      ;
+; Auto Carry Chains                                                ; On                      ; On                      ;
+; Auto Open-Drain Pins                                             ; On                      ; On                      ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                     ; Off                     ;
+; Auto Shift Register Replacement                                  ; Auto                    ; Auto                    ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto                    ; Auto                    ;
+; Auto Clock Enable Replacement                                    ; On                      ; On                      ;
+; Allow Synchronous Control Signals                                ; On                      ; On                      ;
+; Force Use of Synchronous Clear Signals                           ; Off                     ; Off                     ;
+; Auto Resource Sharing                                            ; Off                     ; Off                     ;
+; Use LogicLock Constraints during Resource Balancing              ; On                      ; On                      ;
+; Ignore translate_off and synthesis_off directives                ; Off                     ; Off                     ;
+; Report Parameter Settings                                        ; On                      ; On                      ;
+; Report Source Assignments                                        ; On                      ; On                      ;
+; Report Connectivity Checks                                       ; On                      ; On                      ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                     ; Off                     ;
+; Synchronization Register Chain Length                            ; 2                       ; 2                       ;
+; Power Optimization During Synthesis                              ; Normal compilation      ; Normal compilation      ;
+; HDL message level                                                ; Level2                  ; Level2                  ;
+; Suppress Register Optimization Related Messages                  ; Off                     ; Off                     ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000                    ; 5000                    ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000                    ; 5000                    ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                     ; 100                     ;
+; Clock MUX Protection                                             ; On                      ; On                      ;
+; Block Design Naming                                              ; Auto                    ; Auto                    ;
+; Synthesis Effort                                                 ; Auto                    ; Auto                    ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                      ; On                      ;
+; Analysis & Synthesis Message Level                               ; Medium                  ; Medium                  ;
+; Disable Register Merging Across Hierarchies                      ; Auto                    ; Auto                    ;
++------------------------------------------------------------------+-------------------------+-------------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 2           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                   ;
++----------------------------------+-----------------+------------------------------------------+--------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                                ; File Name with Absolute Path                                                   ; Library ;
++----------------------------------+-----------------+------------------------------------------+--------------------------------------------------------------------------------+---------+
+; test_mode_configuration.tdf      ; yes             ; User AHDL File                           ; C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/test_mode_configuration.tdf          ;         ;
+; sensor_buchas_cpld.inc           ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/sensor_buchas_cpld.inc                                       ;         ;
+; modes.inc                        ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/modes.inc                                                    ;         ;
+; counter.inc                      ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/counter.inc                                                  ;         ;
+; sensor_buchas_cpld.bdf           ; yes             ; Auto-Found Block Diagram/Schematic File  ; c:/sensorbuchasv2/sensor_buchas_cpld.bdf                                       ;         ;
+; acquisition_module.tdf           ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/acquisition_module.tdf                                       ;         ;
+; acquisition_ctrl.inc             ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/acquisition_ctrl.inc                                         ;         ;
+; acquisition_serializer.inc       ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/acquisition_serializer.inc                                   ;         ;
+; acquisition_store.inc            ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/acquisition_store.inc                                        ;         ;
+; dffes.inc                        ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/dffes.inc                                                    ;         ;
+; dffes.tdf                        ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/dffes.tdf                                                    ;         ;
+; acquisition_ctrl.tdf             ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/acquisition_ctrl.tdf                                         ;         ;
+; counter.tdf                      ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/counter.tdf                                                  ;         ;
+; acquisition_serializer.tdf       ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/acquisition_serializer.tdf                                   ;         ;
+; acquisition_store.tdf            ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/acquisition_store.tdf                                        ;         ;
+; host_interface.tdf               ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/host_interface.tdf                                           ;         ;
+; mode_selector.inc                ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/mode_selector.inc                                            ;         ;
+; mode_selector.tdf                ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/mode_selector.tdf                                            ;         ;
+; synchronizer.inc                 ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/synchronizer.inc                                             ;         ;
+; synchronizer.tdf                 ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/synchronizer.tdf                                             ;         ;
+; switch.tdf                       ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/switch.tdf                                                   ;         ;
+; read_data_module.tdf             ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/read_data_module.tdf                                         ;         ;
+; shift_reg_2x.inc                 ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/shift_reg_2x.inc                                             ;         ;
+; shift_reg_2x.tdf                 ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/shift_reg_2x.tdf                                             ;         ;
+; adc_interface.tdf                ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/adc_interface.tdf                                            ;         ;
+; ram_interface.tdf                ; yes             ; Auto-Found AHDL File                     ; c:/sensorbuchasv2/ram_interface.tdf                                            ;         ;
+; lpm_counter.inc                  ; yes             ; Megafunction                             ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_counter.inc         ;         ;
+; lpm_counter.tdf                  ; yes             ; Megafunction                             ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_counter.tdf         ;         ;
+; lpm_constant.inc                 ; yes             ; Megafunction                             ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_constant.inc        ;         ;
+; lpm_decode.inc                   ; yes             ; Megafunction                             ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_decode.inc          ;         ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                             ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_add_sub.inc         ;         ;
+; cmpconst.inc                     ; yes             ; Megafunction                             ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/cmpconst.inc            ;         ;
+; lpm_compare.inc                  ; yes             ; Megafunction                             ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_compare.inc         ;         ;
+; dffeea.inc                       ; yes             ; Megafunction                             ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/dffeea.inc              ;         ;
+; alt_counter_stratix.inc          ; yes             ; Megafunction                             ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/alt_counter_stratix.inc ;         ;
+; aglobal201.inc                   ; yes             ; Megafunction                             ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/aglobal201.inc          ;         ;
+; db/cntr_ici.tdf                  ; yes             ; Auto-Generated Megafunction              ; C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/db/cntr_ici.tdf                      ;         ;
++----------------------------------+-----------------+------------------------------------------+--------------------------------------------------------------------------------+---------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Total logic elements                        ; 13    ;
+;     -- Combinational with no register       ; 3     ;
+;     -- Register only                        ; 0     ;
+;     -- Combinational with a register        ; 10    ;
+;                                             ;       ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 3     ;
+;     -- 3 input functions                    ; 0     ;
+;     -- 2 input functions                    ; 9     ;
+;     -- 1 input functions                    ; 1     ;
+;     -- 0 input functions                    ; 0     ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 5     ;
+;     -- arithmetic mode                      ; 8     ;
+;     -- qfbk mode                            ; 0     ;
+;     -- register cascade mode                ; 0     ;
+;     -- synchronous clear/load mode          ; 9     ;
+;     -- asynchronous clear/load mode         ; 0     ;
+;                                             ;       ;
+; Total registers                             ; 10    ;
+; Total logic cells in carry chains           ; 9     ;
+; I/O pins                                    ; 13    ;
+; Maximum fan-out node                        ; clk   ;
+; Maximum fan-out                             ; 10    ;
+; Total fan-out                               ; 61    ;
+; Average fan-out                             ; 2.35  ;
++---------------------------------------------+-------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                              ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------+-------------------------+--------------+
+; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                   ; Entity Name             ; Library Name ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------+-------------------------+--------------+
+; |test_mode_configuration   ; 13 (0)      ; 10           ; 0          ; 13   ; 0            ; 3 (0)        ; 0 (0)             ; 10 (0)           ; 9 (0)           ; 0 (0)      ; |test_mode_configuration              ; test_mode_configuration ; work         ;
+;    |counter:cont|          ; 13 (13)     ; 10           ; 0          ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 10 (10)          ; 9 (9)           ; 0 (0)      ; |test_mode_configuration|counter:cont ; counter                 ; work         ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------+-------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |test_mode_configuration|sensor_buchas_CPLD:s|read_data_module:inst2|sm                                    ;
++----------------+----------------+--------------+---------------+---------------+---------------+---------------+-----------+
+; Name           ; wait_loading_n ; wait_loading ; init_buffers4 ; init_buffers3 ; init_buffers2 ; init_buffers1 ; wait_mode ;
++----------------+----------------+--------------+---------------+---------------+---------------+---------------+-----------+
+; wait_mode      ; 0              ; 0            ; 0             ; 0             ; 0             ; 0             ; 0         ;
+; init_buffers1  ; 0              ; 0            ; 0             ; 0             ; 0             ; 1             ; 1         ;
+; init_buffers2  ; 0              ; 0            ; 0             ; 0             ; 1             ; 0             ; 1         ;
+; init_buffers3  ; 0              ; 0            ; 0             ; 1             ; 0             ; 0             ; 1         ;
+; init_buffers4  ; 0              ; 0            ; 1             ; 0             ; 0             ; 0             ; 1         ;
+; wait_loading   ; 0              ; 1            ; 0             ; 0             ; 0             ; 0             ; 1         ;
+; wait_loading_n ; 1              ; 0            ; 0             ; 0             ; 0             ; 0             ; 1         ;
++----------------+----------------+--------------+---------------+---------------+---------------+---------------+-----------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------+
+; State Machine - |test_mode_configuration|sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|sm ;
++-------------------+-------------------+---------+------------------+-------------+------------------------------------+
+; Name              ; sChangedRequested ; sStable ; sWaitingChangeOk ; sUpdateMode ; sNoticeChanging                    ;
++-------------------+-------------------+---------+------------------+-------------+------------------------------------+
+; sNoticeChanging   ; 0                 ; 0       ; 0                ; 0           ; 0                                  ;
+; sUpdateMode       ; 0                 ; 0       ; 0                ; 1           ; 1                                  ;
+; sWaitingChangeOk  ; 0                 ; 0       ; 1                ; 0           ; 1                                  ;
+; sStable           ; 0                 ; 1       ; 0                ; 0           ; 1                                  ;
+; sChangedRequested ; 1                 ; 0       ; 0                ; 0           ; 1                                  ;
++-------------------+-------------------+---------+------------------+-------------+------------------------------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------------+
+; State Machine - |test_mode_configuration|sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|sm ;
++-------------+----------+-------------+------+------+------+------+--------------------------------------------------+
+; Name        ; WAIT_END ; INC_CHANNEL ; CS1b ; CS0b ; CS0a ; CS1a ; WAIT_STORE                                       ;
++-------------+----------+-------------+------+------+------+------+--------------------------------------------------+
+; WAIT_STORE  ; 0        ; 0           ; 0    ; 0    ; 0    ; 0    ; 0                                                ;
+; CS1a        ; 0        ; 0           ; 0    ; 0    ; 0    ; 1    ; 1                                                ;
+; CS0a        ; 0        ; 0           ; 0    ; 0    ; 1    ; 0    ; 1                                                ;
+; CS0b        ; 0        ; 0           ; 0    ; 1    ; 0    ; 0    ; 1                                                ;
+; CS1b        ; 0        ; 0           ; 1    ; 0    ; 0    ; 0    ; 1                                                ;
+; INC_CHANNEL ; 0        ; 1           ; 0    ; 0    ; 0    ; 0    ; 1                                                ;
+; WAIT_END    ; 1        ; 0           ; 0    ; 0    ; 0    ; 0    ; 1                                                ;
++-------------+----------+-------------+------+------+------+------+--------------------------------------------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |test_mode_configuration|sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|sm                          ;
++----------------------+----------------------+---------+-------------+------------+---------------+--------------------+-------------------+
+; Name                 ; WAITING_END_OF_CYCLE ; STORING ; SERIALIZING ; WAIT_STATE ; AQUISITIONING ; WAITING_START_HIGH ; WAITING_START_LOW ;
++----------------------+----------------------+---------+-------------+------------+---------------+--------------------+-------------------+
+; WAITING_START_LOW    ; 0                    ; 0       ; 0           ; 0          ; 0             ; 0                  ; 0                 ;
+; WAITING_START_HIGH   ; 0                    ; 0       ; 0           ; 0          ; 0             ; 1                  ; 1                 ;
+; AQUISITIONING        ; 0                    ; 0       ; 0           ; 0          ; 1             ; 0                  ; 1                 ;
+; WAIT_STATE           ; 0                    ; 0       ; 0           ; 1          ; 0             ; 0                  ; 1                 ;
+; SERIALIZING          ; 0                    ; 0       ; 1           ; 0          ; 0             ; 0                  ; 1                 ;
+; STORING              ; 0                    ; 1       ; 0           ; 0          ; 0             ; 0                  ; 1                 ;
+; WAITING_END_OF_CYCLE ; 1                    ; 0       ; 0           ; 0          ; 0             ; 0                  ; 1                 ;
++----------------------+----------------------+---------+-------------+------------+---------------+--------------------+-------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                                 ;
++-----------------------------------------------------------------------------------------------------------+----------------------------------------+
+; Register name                                                                                             ; Reason for Removal                     ;
++-----------------------------------------------------------------------------------------------------------+----------------------------------------+
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][0]    ; Stuck at GND due to stuck port data_in ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][0]    ; Stuck at VCC due to stuck port data_in ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|dffes:start_ff|ff                                          ; Stuck at VCC due to stuck port data_in ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][1]    ; Stuck at GND due to stuck port data_in ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][1]    ; Stuck at VCC due to stuck port data_in ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][2]    ; Stuck at GND due to stuck port data_in ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][2]    ; Stuck at VCC due to stuck port data_in ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[1][3]    ; Stuck at GND due to stuck port data_in ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync|regs[0][3]    ; Stuck at VCC due to stuck port data_in ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff         ; Stuck at VCC due to stuck port data_in ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]|ff         ; Stuck at GND due to stuck port data_in ;
+; sensor_buchas_CPLD:s|read_data_module:inst2|dffes:addr_inc_FF|ff                                          ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|read_data_module:inst2|shift_reg_2x:shift|control_shift[7]                           ; Stuck at GND due to stuck port clock   ;
+; sensor_buchas_CPLD:s|read_data_module:inst2|shift_reg_2x:shift|control_shift[0..6]                        ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|read_data_module:inst2|shift_reg_2x:shift|init_control                               ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|read_data_module:inst2|dffes:load_parallel_FF|ff                                     ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0..18] ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|read_data_module:inst2|init_buffers1                                                 ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|read_data_module:inst2|init_buffers2                                                 ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|read_data_module:inst2|init_buffers3                                                 ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|read_data_module:inst2|init_buffers4                                                 ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|sWaitingChangeOk                ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|sStable                         ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|sUpdateMode                     ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|sChangedRequested               ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|read_data_module:inst2|wait_loading                                                  ; Stuck at GND due to stuck port data_in ;
+; sensor_buchas_CPLD:s|read_data_module:inst2|wait_loading_n                                                ; Stuck at GND due to stuck port data_in ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_HIGH                   ; Stuck at GND due to stuck port data_in ;
+; sensor_buchas_CPLD:s|inst1                                                                                ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:store_ff|ff                    ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|ffs[0..3] ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter|ffs[0,1]     ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[0..8]      ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:serialize_ok_ff|ff ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:changing_ff|ff            ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:serialize_ff|ff                ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[0..4]  ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:div2_clock|ff      ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|read_data_module:inst2|wait_mode                                                     ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|sNoticeChanging                 ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|WAIT_STORE                        ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS1a                              ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS0a                              ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS0b                              ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS1b                              ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|INC_CHANNEL                       ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|WAIT_END                          ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_LOW                    ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|AQUISITIONING                        ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAIT_STATE                           ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|SERIALIZING                          ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|STORING                              ; Lost fanout                            ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE                 ; Lost fanout                            ;
+; Total Number of Removed Registers = 93                                                                    ;                                        ;
++-----------------------------------------------------------------------------------------------------------+----------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                                                                                                                ;
++---------------------------------------------------------------------------------------------------+---------------------------+------------------------------------------------------------------------------------------------------------+
+; Register name                                                                                     ; Reason for Removal        ; Registers Removed due to This Register                                                                     ;
++---------------------------------------------------------------------------------------------------+---------------------------+------------------------------------------------------------------------------------------------------------+
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:store_ff|ff            ; Lost Fanouts              ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|ffs[3],    ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|ffs[2],    ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|ffs[1],    ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter|ffs[0],    ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:serialize_ok_ff|ff, ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:serialize_ff|ff,                ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[4],     ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[3],     ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[2],     ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[1],     ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count|ffs[0],     ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|dffes:div2_clock|ff,      ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|CS1b,                              ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|INC_CHANNEL,                       ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|WAIT_END,                          ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAIT_STATE,                           ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|SERIALIZING                           ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff ; Stuck at VCC              ; sensor_buchas_CPLD:s|read_data_module:inst2|shift_reg_2x:shift|control_shift[7],                           ;
+;                                                                                                   ; due to stuck port data_in ; sensor_buchas_CPLD:s|read_data_module:inst2|shift_reg_2x:shift|control_shift[6],                           ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|read_data_module:inst2|shift_reg_2x:shift|control_shift[5],                           ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|read_data_module:inst2|shift_reg_2x:shift|control_shift[4],                           ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|read_data_module:inst2|shift_reg_2x:shift|control_shift[3],                           ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|read_data_module:inst2|shift_reg_2x:shift|control_shift[2],                           ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|read_data_module:inst2|shift_reg_2x:shift|control_shift[1],                           ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|read_data_module:inst2|shift_reg_2x:shift|control_shift[0],                           ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|read_data_module:inst2|shift_reg_2x:shift|init_control,                               ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|read_data_module:inst2|dffes:load_parallel_FF|ff                                      ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_HIGH           ; Stuck at GND              ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[8],         ;
+;                                                                                                   ; due to stuck port data_in ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[7],         ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[6],         ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[3],         ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[2],         ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[1],         ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_START_LOW,                    ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|STORING,                              ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE                  ;
+; sensor_buchas_CPLD:s|acquisition_module:inst11|dffes:start_ff|ff                                  ; Stuck at VCC              ; sensor_buchas_CPLD:s|read_data_module:inst2|dffes:addr_inc_FF|ff,                                          ;
+;                                                                                                   ; due to stuck port data_in ; sensor_buchas_CPLD:s|inst1,                                                                                ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter|ffs[1],       ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter|ffs[0],       ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[5],         ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[4],         ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter|ffs[0],         ;
+;                                                                                                   ;                           ; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:changing_ff|ff             ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|sWaitingChangeOk        ; Lost Fanouts              ; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|sUpdateMode                      ;
+; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|sStable                 ; Lost Fanouts              ; sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|sNoticeChanging                  ;
++---------------------------------------------------------------------------------------------------+---------------------------+------------------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 10    ;
+; Number of registers using Synchronous Clear  ; 9     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|acquisition_module:inst11 ;
++----------------+-------+--------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                               ;
++----------------+-------+--------------------------------------------------------------------+
+; samples        ; 3     ; Untyped                                                            ;
++----------------+-------+--------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl ;
++----------------+-------+------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                     ;
++----------------+-------+------------------------------------------------------------------------------------------+
+; active_period  ; 68    ; Untyped                                                                                  ;
+; period         ; 463   ; Untyped                                                                                  ;
+; samples        ; 3     ; Untyped                                                                                  ;
++----------------+-------+------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter ;
++----------------+-------+----------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                           ;
++----------------+-------+----------------------------------------------------------------------------------------------------------------+
+; MAX_VALUE      ; 462   ; Untyped                                                                                                        ;
++----------------+-------+----------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter ;
++----------------+-------+------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                             ;
++----------------+-------+------------------------------------------------------------------------------------------------------------------+
+; MAX_VALUE      ; 3     ; Untyped                                                                                                          ;
++----------------+-------+------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer ;
++----------------+-------+------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                 ;
++----------------+-------+------------------------------------------------------------------------------------------------------+
+; little_endian  ; 1     ; Untyped                                                                                              ;
++----------------+-------+------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count ;
++----------------+-------+--------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                               ;
++----------------+-------+--------------------------------------------------------------------------------------------------------------------+
+; MAX_VALUE      ; 16    ; Untyped                                                                                                            ;
++----------------+-------+--------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter ;
++----------------+-------+---------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                                ;
++----------------+-------+---------------------------------------------------------------------------------------------------------------------+
+; MAX_VALUE      ; 12    ; Untyped                                                                                                             ;
++----------------+-------+---------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                            ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------+
+; bus_size       ; 2     ; Untyped                                                                                                         ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|RAM_interface:inst ;
++----------------+-------+-------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                        ;
++----------------+-------+-------------------------------------------------------------+
+; N_BITS         ; 19    ; Untyped                                                     ;
++----------------+-------+-------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sensor_buchas_CPLD:s|RAM_interface:inst|lpm_counter:address_counter ;
++------------------------+-------------------+---------------------------------------------------------------------+
+; Parameter Name         ; Value             ; Type                                                                ;
++------------------------+-------------------+---------------------------------------------------------------------+
+; AUTO_CARRY_CHAINS      ; ON                ; AUTO_CARRY                                                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF               ; IGNORE_CARRY                                                        ;
+; AUTO_CASCADE_CHAINS    ; ON                ; AUTO_CASCADE                                                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF               ; IGNORE_CASCADE                                                      ;
+; LPM_WIDTH              ; 19                ; Untyped                                                             ;
+; LPM_DIRECTION          ; UP                ; Untyped                                                             ;
+; LPM_MODULUS            ; 0                 ; Untyped                                                             ;
+; LPM_AVALUE             ; UNUSED            ; Untyped                                                             ;
+; LPM_SVALUE             ; UNUSED            ; Untyped                                                             ;
+; LPM_PORT_UPDOWN        ; PORT_CONNECTIVITY ; Untyped                                                             ;
+; DEVICE_FAMILY          ; MAX II            ; Untyped                                                             ;
+; CARRY_CHAIN            ; MANUAL            ; Untyped                                                             ;
+; CARRY_CHAIN_LENGTH     ; 48                ; CARRY_CHAIN_LENGTH                                                  ;
+; NOT_GATE_PUSH_BACK     ; ON                ; NOT_GATE_PUSH_BACK                                                  ;
+; CARRY_CNT_EN           ; SMART             ; Untyped                                                             ;
+; LABWIDE_SCLR           ; ON                ; Untyped                                                             ;
+; USE_NEW_VERSION        ; TRUE              ; Untyped                                                             ;
+; CBXI_PARAMETER         ; cntr_ici          ; Untyped                                                             ;
++------------------------+-------------------+---------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: counter:cont ;
++----------------+-------+----------------------------------+
+; Parameter Name ; Value ; Type                             ;
++----------------+-------+----------------------------------+
+; MAX_VALUE      ; 1023  ; Untyped                          ;
++----------------+-------+----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+    Info: Processing started: Sat Apr 10 16:54:52 2021
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off test_mode_configuration -c test_mode_configuration
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file generate_random_values.tdf
+    Info (12023): Found entity 1: generate_random_values File: C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/generate_random_values.tdf Line: 12
+Info (12021): Found 1 design units, including 1 entities, in source file test_mode_configuration.tdf
+    Info (12023): Found entity 1: test_mode_configuration File: C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/test_mode_configuration.tdf Line: 16
+Info (12127): Elaborating entity "test_mode_configuration" for the top level hierarchy
+Warning (12125): Using design file /sensorbuchasv2/sensor_buchas_cpld.bdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: sensor_buchas_CPLD
+Info (12128): Elaborating entity "sensor_buchas_CPLD" for hierarchy "sensor_buchas_CPLD:s" File: C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/test_mode_configuration.tdf Line: 28
+Warning (12125): Using design file /sensorbuchasv2/acquisition_module.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: acquisition_module File: c:/sensorbuchasv2/acquisition_module.tdf Line: 12
+Info (12128): Elaborating entity "acquisition_module" for hierarchy "sensor_buchas_CPLD:s|acquisition_module:inst11"
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: c:/sensorbuchasv2/acquisition_ctrl.inc Line: 26
+Warning (12125): Using design file /sensorbuchasv2/dffes.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: dffes File: c:/sensorbuchasv2/dffes.tdf Line: 3
+Info (12128): Elaborating entity "dffes" for hierarchy "sensor_buchas_CPLD:s|acquisition_module:inst11|dffes:start_ff" File: c:/sensorbuchasv2/acquisition_module.tdf Line: 31
+Warning (12125): Using design file /sensorbuchasv2/acquisition_ctrl.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: acquisition_ctrl File: c:/sensorbuchasv2/acquisition_ctrl.tdf Line: 20
+Info (12128): Elaborating entity "acquisition_ctrl" for hierarchy "sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl" File: c:/sensorbuchasv2/acquisition_module.tdf Line: 32
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: c:/sensorbuchasv2/acquisition_ctrl.tdf Line: 18
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: c:/sensorbuchasv2/acquisition_ctrl.tdf Line: 38
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: c:/sensorbuchasv2/counter.inc Line: 26
+Warning (12125): Using design file /sensorbuchasv2/counter.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: counter File: c:/sensorbuchasv2/counter.tdf Line: 10
+Info (12128): Elaborating entity "counter" for hierarchy "sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter" File: c:/sensorbuchasv2/acquisition_ctrl.tdf Line: 44
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: c:/sensorbuchasv2/counter.tdf Line: 8
+Info (12128): Elaborating entity "counter" for hierarchy "sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter" File: c:/sensorbuchasv2/acquisition_ctrl.tdf Line: 45
+Info (12128): Elaborating entity "dffes" for hierarchy "sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:convst_ff" File: c:/sensorbuchasv2/acquisition_ctrl.tdf Line: 46
+Warning (12125): Using design file /sensorbuchasv2/acquisition_serializer.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: acquisition_serializer File: c:/sensorbuchasv2/acquisition_serializer.tdf Line: 9
+Info (12128): Elaborating entity "acquisition_serializer" for hierarchy "sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer" File: c:/sensorbuchasv2/acquisition_module.tdf Line: 33
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: c:/sensorbuchasv2/counter.inc Line: 26
+Info (12128): Elaborating entity "counter" for hierarchy "sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_serializer:serializer|counter:count" File: c:/sensorbuchasv2/acquisition_serializer.tdf Line: 24
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: c:/sensorbuchasv2/counter.tdf Line: 8
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: c:/sensorbuchasv2/counter.inc Line: 26
+Warning (12125): Using design file /sensorbuchasv2/acquisition_store.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: acquisition_store File: c:/sensorbuchasv2/acquisition_store.tdf Line: 4
+Info (12128): Elaborating entity "acquisition_store" for hierarchy "sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer" File: c:/sensorbuchasv2/acquisition_module.tdf Line: 34
+Info (12128): Elaborating entity "dffes" for hierarchy "sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|dffes:we_n_ff" File: c:/sensorbuchasv2/acquisition_store.tdf Line: 19
+Info (12128): Elaborating entity "counter" for hierarchy "sensor_buchas_CPLD:s|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter" File: c:/sensorbuchasv2/acquisition_store.tdf Line: 21
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: c:/sensorbuchasv2/counter.tdf Line: 8
+Warning (12125): Using design file /sensorbuchasv2/host_interface.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: host_interface File: c:/sensorbuchasv2/host_interface.tdf Line: 3
+Info (12128): Elaborating entity "host_interface" for hierarchy "sensor_buchas_CPLD:s|host_interface:Host_interface"
+Warning (12125): Using design file /sensorbuchasv2/mode_selector.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: mode_selector File: c:/sensorbuchasv2/mode_selector.tdf Line: 5
+Info (12128): Elaborating entity "mode_selector" for hierarchy "sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel" File: c:/sensorbuchasv2/host_interface.tdf Line: 28
+Warning (12125): Using design file /sensorbuchasv2/synchronizer.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: synchronizer File: c:/sensorbuchasv2/synchronizer.tdf Line: 7
+Info (12128): Elaborating entity "synchronizer" for hierarchy "sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync" File: c:/sensorbuchasv2/mode_selector.tdf Line: 20
+Warning (12125): Using design file /sensorbuchasv2/switch.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: switch File: c:/sensorbuchasv2/switch.tdf Line: 3
+Info (12128): Elaborating entity "switch" for hierarchy "sensor_buchas_CPLD:s|switch:inst6"
+Warning (287013): Variable or input pin "clk" is defined but never used. File: c:/sensorbuchasv2/switch.tdf Line: 4
+Warning (287013): Variable or input pin "sreset" is defined but never used. File: c:/sensorbuchasv2/switch.tdf Line: 5
+Warning (287013): Variable or input pin "HI_SS_n" is defined but never used. File: c:/sensorbuchasv2/switch.tdf Line: 16
+Warning (12125): Using design file /sensorbuchasv2/read_data_module.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: read_data_module File: c:/sensorbuchasv2/read_data_module.tdf Line: 6
+Info (12128): Elaborating entity "read_data_module" for hierarchy "sensor_buchas_CPLD:s|read_data_module:inst2"
+Warning (12125): Using design file /sensorbuchasv2/shift_reg_2x.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: shift_reg_2x File: c:/sensorbuchasv2/shift_reg_2x.tdf Line: 3
+Info (12128): Elaborating entity "shift_reg_2x" for hierarchy "sensor_buchas_CPLD:s|read_data_module:inst2|shift_reg_2x:shift" File: c:/sensorbuchasv2/read_data_module.tdf Line: 29
+Warning (12125): Using design file /sensorbuchasv2/adc_interface.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: adc_interface File: c:/sensorbuchasv2/adc_interface.tdf Line: 3
+Info (12128): Elaborating entity "adc_interface" for hierarchy "sensor_buchas_CPLD:s|adc_interface:inst4"
+Warning (287013): Variable or input pin "clk" is defined but never used. File: c:/sensorbuchasv2/adc_interface.tdf Line: 4
+Warning (287013): Variable or input pin "adc_rvs" is defined but never used. File: c:/sensorbuchasv2/adc_interface.tdf Line: 22
+Warning (12125): Using design file /sensorbuchasv2/ram_interface.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: RAM_interface File: c:/sensorbuchasv2/ram_interface.tdf Line: 9
+Info (12128): Elaborating entity "RAM_interface" for hierarchy "sensor_buchas_CPLD:s|RAM_interface:inst"
+Info (12128): Elaborating entity "lpm_counter" for hierarchy "sensor_buchas_CPLD:s|RAM_interface:inst|lpm_counter:address_counter" File: c:/sensorbuchasv2/ram_interface.tdf Line: 31
+Info (12130): Elaborated megafunction instantiation "sensor_buchas_CPLD:s|RAM_interface:inst|lpm_counter:address_counter" File: c:/sensorbuchasv2/ram_interface.tdf Line: 31
+Info (12133): Instantiated megafunction "sensor_buchas_CPLD:s|RAM_interface:inst|lpm_counter:address_counter" with the following parameter: File: c:/sensorbuchasv2/ram_interface.tdf Line: 31
+    Info (12134): Parameter "LPM_WIDTH" = "19"
+    Info (12134): Parameter "LPM_DIRECTION" = "UP"
+Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_ici.tdf
+    Info (12023): Found entity 1: cntr_ici File: C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/db/cntr_ici.tdf Line: 26
+Info (12128): Elaborating entity "cntr_ici" for hierarchy "sensor_buchas_CPLD:s|RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated" File: c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_counter.tdf Line: 259
+Info (12128): Elaborating entity "counter" for hierarchy "counter:cont" File: C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/test_mode_configuration.tdf Line: 29
+Info (17049): 78 registers lost all their fanouts during netlist optimizations.
+Warning (21074): Design contains 1 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "rst" File: C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/test_mode_configuration.tdf Line: 17
+Info (21057): Implemented 26 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 2 input pins
+    Info (21059): Implemented 11 output pins
+    Info (21061): Implemented 13 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 32 warnings
+    Info: Peak virtual memory: 4700 megabytes
+    Info: Processing ended: Sat Apr 10 16:55:04 2021
+    Info: Elapsed time: 00:00:12
+    Info: Total CPU time (on all processors): 00:00:18
+
+

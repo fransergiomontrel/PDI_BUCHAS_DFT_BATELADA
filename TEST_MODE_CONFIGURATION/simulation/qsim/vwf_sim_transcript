@@ -1,0 +1,145 @@
+Determining the location of the ModelSim executable...
+
+Using: c:/intelfpga_lite/20.1/modelsim_ase/win32aloem/
+
+To specify a ModelSim executable directory, select: Tools -> Options -> EDA Tool Options
+Note: if both ModelSim-Altera and ModelSim executables are available, ModelSim-Altera will be used.
+
+**** Generating the ModelSim Testbench ****
+
+quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off test_mode_configuration -c test_mode_configuration --vector_source="C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/test_mode_configuration.vwf" --testbench_file="C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/simulation/qsim/test_mode_configuration.vwf.vt"
+
+Info: *******************************************************************
+Info: Running Quartus Prime EDA Netlist Writer
+    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+    Info: Copyright (C) 2020  Intel Corporation. All rights reserved.
+    Info: Your use of Intel Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Intel Program License 
+    Info: Subscription Agreement, the Intel Quartus Prime License Agreement,
+    Info: the Intel FPGA IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Intel and sold by Intel or its authorized distributors.  Please
+    Info: refer to the applicable agreement for further details, at
+    Info: https://fpgasoftware.intel.com/eula.
+    Info: Processing started: Sat Apr 10 16:29:58 2021
+Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off test_mode_configuration -c test_mode_configuration --vector_source=C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/test_mode_configuration.vwf --testbench_file=C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/simulation/qsim/test_mode_configuration.vwf.vt
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+
+Completed successfully. 
+
+Completed successfully. 
+
+**** Generating the timing simulation netlist ****
+
+quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/simulation/qsim/" test_mode_configuration -c test_mode_configuration
+
+Info: *******************************************************************
+Info: Running Quartus Prime EDA Netlist Writer
+    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+    Info: Copyright (C) 2020  Intel Corporation. All rights reserved.
+    Info: Your use of Intel Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Intel Program License 
+    Info: Subscription Agreement, the Intel Quartus Prime License Agreement,
+    Info: the Intel FPGA IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Intel and sold by Intel or its authorized distributors.  Please
+    Info: refer to the applicable agreement for further details, at
+    Info: https://fpgasoftware.intel.com/eula.
+    Info: Processing started: Sat Apr 10 16:29:59 2021
+Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory=C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/simulation/qsim/ test_mode_configuration -c test_mode_configuration
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (204018): Generated files "test_mode_configuration.vo" and "test_mode_configuration_v.sdo" in directory "C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/simulation/qsim//" for EDA simulation tool
+Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 4615 megabytes
+    Info: Processing ended: Sat Apr 10 16:30:00 2021
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
+
+Completed successfully. 
+
+**** Generating the ModelSim .do script ****
+
+C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/simulation/qsim/test_mode_configuration.do generated.
+
+Completed successfully. 
+
+**** Running the ModelSim simulation ****
+
+c:/intelfpga_lite/20.1/modelsim_ase/win32aloem//vsim -c -do test_mode_configuration.do
+
+Reading pref.tcl
+
+# 2020.1
+
+# do test_mode_configuration.do
+
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 16:30:01 on Apr 10,2021
+# vlog -work work test_mode_configuration.vo 
+
+# -- Compiling module test_mode_configuration
+# 
+# Top level modules:
+# 	test_mode_configuration
+# End time: 16:30:01 on Apr 10,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 16:30:01 on Apr 10,2021
+# vlog -work work test_mode_configuration.vwf.vt 
+
+# -- Compiling module test_mode_configuration_vlg_vec_tst
+# 
+# Top level modules:
+# 	test_mode_configuration_vlg_vec_tst
+# End time: 16:30:01 on Apr 10,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+
+# vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.test_mode_configuration_vlg_vec_tst 
+# Start time: 16:30:01 on Apr 10,2021
+# Loading work.test_mode_configuration_vlg_vec_tst
+# Loading work.test_mode_configuration
+# Loading maxii_ver.maxii_io
+# Loading maxii_ver.maxii_lcell
+# Loading maxii_ver.maxii_asynch_lcell
+# Loading maxii_ver.maxii_lcell_register
+# SDF 2020.1 Compiler 2020.02 Feb 28 2020
+# 
+# Loading instances from test_mode_configuration_v.sdo
+# Loading timing data from test_mode_configuration_v.sdo
+# ** Note: (vsim-3587) SDF Backannotation Successfully Completed.
+#    Time: 0 ps  Iteration: 0  Instance: /test_mode_configuration_vlg_vec_tst File: test_mode_configuration.vwf.vt
+# after#25
+
+# ** Note: $finish    : test_mode_configuration.vwf.vt(57)
+#    Time: 10 us  Iteration: 0  Instance: /test_mode_configuration_vlg_vec_tst
+# End time: 16:30:02 on Apr 10,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+
+Completed successfully. 
+
+**** Converting ModelSim VCD to vector waveform ****
+
+Reading C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/test_mode_configuration.vwf...
+
+Reading C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/simulation/qsim/test_mode_configuration.msim.vcd...
+
+Processing channel transitions... 
+
+Writing the resulting VWF to C:/SensorBuchasV2/TEST_MODE_CONFIGURATION/simulation/qsim/test_mode_configuration_20210410163002.sim.vwf
+
+Finished VCD to VWF conversion.
+
+Completed successfully. 
+
+All completed.

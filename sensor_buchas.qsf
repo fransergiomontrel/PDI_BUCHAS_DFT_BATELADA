@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "MAX II"
 set_global_assignment -name DEVICE EPM1270T144C5
-set_global_assignment -name TOP_LEVEL_ENTITY generate_values
+set_global_assignment -name TOP_LEVEL_ENTITY sensor_buchas_CPLD
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:48:22  APRIL 07, 2021"
 set_global_assignment -name LAST_QUARTUS_VERSION "20.1.1 Lite Edition"
@@ -86,22 +86,3 @@ set_global_assignment -name VECTOR_WAVEFORM_FILE test_adc_acquisition.vwf
 set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_store.vwf
 set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_serializer.vwf
 set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_ctrl.vwf
-set_global_assignment -name AHDL_FILE TEST_change_mode.tdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_TEST_change_mode.vwf
-set_global_assignment -name AHDL_FILE divfreq.tdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_divfreq.vwf
-set_location_assignment PIN_18 -to clk
-set_location_assignment PIN_137 -to host_busy
-set_location_assignment PIN_139 -to host_mode[1]
-set_location_assignment PIN_142 -to host_mode[0]
-set_location_assignment PIN_15 -to rst
-set_location_assignment PIN_111 -to host_MISO
-set_location_assignment PIN_113 -to adc_sdo[0]
-set_location_assignment PIN_114 -to adc_rst_n[0]
-set_location_assignment PIN_134 -to adc_convst
-set_location_assignment PIN_133 -to adc_rst_n
-set_location_assignment PIN_130 -to ram_cs_n
-set_location_assignment PIN_127 -to ram_we_n
-set_global_assignment -name AHDL_FILE generate_values.tdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_generate_values.vwf
-set_global_assignment -name AHDL_FILE generate_values.tdf
