@@ -1,5 +1,5 @@
 Fitter report for test_ram
-Thu Apr 15 17:51:17 2021
+Thu Apr 15 18:11:54 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -58,7 +58,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------+
 ; Fitter Summary                                                      ;
 +-----------------------+---------------------------------------------+
-; Fitter Status         ; Successful - Thu Apr 15 17:51:17 2021       ;
+; Fitter Status         ; Successful - Thu Apr 15 18:11:54 2021       ;
 ; Quartus Prime Version ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name         ; test_ram                                    ;
 ; Top-level Entity Name ; test_RAM                                    ;
@@ -156,8 +156,8 @@ The pin-out file can be found in C:/CPLD_Sensor_Buchas_V2/TEST_RAM/output_files/
 ;                                             ;                    ;
 ; Logic element usage by number of LUT inputs ;                    ;
 ;     -- 4 input functions                    ; 6                  ;
-;     -- 3 input functions                    ; 21                 ;
-;     -- 2 input functions                    ; 2                  ;
+;     -- 3 input functions                    ; 20                 ;
+;     -- 2 input functions                    ; 3                  ;
 ;     -- 1 input functions                    ; 8                  ;
 ;     -- 0 input functions                    ; 1                  ;
 ;                                             ;                    ;
@@ -166,11 +166,11 @@ The pin-out file can be found in C:/CPLD_Sensor_Buchas_V2/TEST_RAM/output_files/
 ;     -- arithmetic mode                      ; 18                 ;
 ;     -- qfbk mode                            ; 6                  ;
 ;     -- register cascade mode                ; 0                  ;
-;     -- synchronous clear/load mode          ; 28                 ;
+;     -- synchronous clear/load mode          ; 31                 ;
 ;     -- asynchronous clear/load mode         ; 17                 ;
 ;                                             ;                    ;
 ; Total registers                             ; 37 / 1,270 ( 3 % ) ;
-; Total LABs                                  ; 6 / 127 ( 5 % )    ;
+; Total LABs                                  ; 5 / 127 ( 4 % )    ;
 ; Logic elements in carry chains              ; 19                 ;
 ; Virtual pins                                ; 0                  ;
 ; I/O pins                                    ; 47 / 116 ( 41 % )  ;
@@ -184,8 +184,8 @@ The pin-out file can be found in C:/CPLD_Sensor_Buchas_V2/TEST_RAM/output_files/
 ; Global signals                              ; 2                  ;
 ;     -- Global clocks                        ; 2 / 4 ( 50 % )     ;
 ; JTAGs                                       ; 0 / 1 ( 0 % )      ;
-; Average interconnect usage (total/H/V)      ; 4.0% / 4.0% / 4.0% ;
-; Peak interconnect usage (total/H/V)         ; 4.8% / 4.5% / 5.2% ;
+; Average interconnect usage (total/H/V)      ; 3.9% / 3.8% / 4.1% ;
+; Peak interconnect usage (total/H/V)         ; 4.6% / 4.1% / 5.2% ;
 ; Maximum fan-out                             ; 37                 ;
 ; Highest non-global fan-out                  ; 19                 ;
 ; Total fan-out                               ; 250                ;
@@ -238,11 +238,11 @@ The pin-out file can be found in C:/CPLD_Sensor_Buchas_V2/TEST_RAM/output_files/
 ; ram_address[8]  ; 2     ; 1        ; 0            ; 10           ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_address[9]  ; 1     ; 1        ; 0            ; 10           ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_cs_n        ; 142   ; 2        ; 3            ; 11           ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; ram_oe_n        ; 98    ; 3        ; 17           ; 6            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; ram_oe_n        ; 130   ; 2        ; 8            ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_we_n        ; 6     ; 1        ; 0            ; 9            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; test_state[0]   ; 61    ; 4        ; 10           ; 3            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; test_state[1]   ; 59    ; 4        ; 9            ; 3            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; test_state[2]   ; 63    ; 4        ; 10           ; 3            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; test_state[1]   ; 63    ; 4        ; 10           ; 3            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; test_state[2]   ; 114   ; 2        ; 12           ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
 ; test_state[3]   ; 62    ; 4        ; 10           ; 3            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
 ; we_n            ; 94    ; 3        ; 17           ; 6            ; 4           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 +-----------------+-------+----------+--------------+--------------+-------------+-----------------+----------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+------------------------+----------------------+-------+----------------------+---------------------+
@@ -270,9 +270,9 @@ The pin-out file can be found in C:/CPLD_Sensor_Buchas_V2/TEST_RAM/output_files/
 ; I/O Bank ; Usage            ; VCCIO Voltage ; VREF Voltage ;
 +----------+------------------+---------------+--------------+
 ; 1        ; 9 / 26 ( 35 % )  ; 3.3V          ; --           ;
-; 2        ; 23 / 30 ( 77 % ) ; 3.3V          ; --           ;
-; 3        ; 11 / 30 ( 37 % ) ; 3.3V          ; --           ;
-; 4        ; 4 / 30 ( 13 % )  ; 3.3V          ; --           ;
+; 2        ; 25 / 30 ( 83 % ) ; 3.3V          ; --           ;
+; 3        ; 10 / 30 ( 33 % ) ; 3.3V          ; --           ;
+; 4        ; 3 / 30 ( 10 % )  ; 3.3V          ; --           ;
 +----------+------------------+---------------+--------------+
 
 
@@ -339,11 +339,11 @@ The pin-out file can be found in C:/CPLD_Sensor_Buchas_V2/TEST_RAM/output_files/
 ; 56       ;            ;          ; VCCINT          ; power  ;              ; 2.5V/3.3V ; --         ;                 ; --       ; --           ;
 ; 57       ; 82         ; 4        ; GND*            ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 58       ; 83         ; 4        ; GND*            ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
-; 59       ; 84         ; 4        ; test_state[1]   ; output ; 3.3-V LVTTL  ;           ; Column I/O ; N               ; no       ; Off          ;
+; 59       ; 84         ; 4        ; GND*            ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 60       ; 85         ; 4        ; GND*            ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 61       ; 86         ; 4        ; test_state[0]   ; output ; 3.3-V LVTTL  ;           ; Column I/O ; N               ; no       ; Off          ;
 ; 62       ; 87         ; 4        ; test_state[3]   ; output ; 3.3-V LVTTL  ;           ; Column I/O ; N               ; no       ; Off          ;
-; 63       ; 88         ; 4        ; test_state[2]   ; output ; 3.3-V LVTTL  ;           ; Column I/O ; N               ; no       ; Off          ;
+; 63       ; 88         ; 4        ; test_state[1]   ; output ; 3.3-V LVTTL  ;           ; Column I/O ; N               ; no       ; Off          ;
 ; 64       ;            ; 4        ; VCCIO4          ; power  ;              ; 3.3V      ; --         ;                 ; --       ; --           ;
 ; 65       ;            ;          ; GNDIO           ; gnd    ;              ;           ; --         ;                 ; --       ; --           ;
 ; 66       ; 91         ; 4        ; GND*            ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
@@ -378,7 +378,7 @@ The pin-out file can be found in C:/CPLD_Sensor_Buchas_V2/TEST_RAM/output_files/
 ; 95       ; 138        ; 3        ; GND*            ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 96       ; 139        ; 3        ; GND*            ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 97       ; 140        ; 3        ; GND*            ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
-; 98       ; 141        ; 3        ; ram_oe_n        ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
+; 98       ; 141        ; 3        ; GND*            ;        ;              ;           ; Row I/O    ;                 ; no       ; Off          ;
 ; 99       ;            ;          ; GNDIO           ; gnd    ;              ;           ; --         ;                 ; --       ; --           ;
 ; 100      ;            ; 3        ; VCCIO3          ; power  ;              ; 3.3V      ; --         ;                 ; --       ; --           ;
 ; 101      ; 142        ; 3        ; reset           ; input  ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
@@ -394,7 +394,7 @@ The pin-out file can be found in C:/CPLD_Sensor_Buchas_V2/TEST_RAM/output_files/
 ; 111      ; 166        ; 2        ; GND*            ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 112      ; 171        ; 2        ; GND*            ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
 ; 113      ; 174        ; 2        ; GND*            ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
-; 114      ; 177        ; 2        ; GND*            ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
+; 114      ; 177        ; 2        ; test_state[2]   ; output ; 3.3-V LVTTL  ;           ; Column I/O ; N               ; no       ; Off          ;
 ; 115      ;            ;          ; GNDIO           ; gnd    ;              ;           ; --         ;                 ; --       ; --           ;
 ; 116      ;            ; 2        ; VCCIO2          ; power  ;              ; 3.3V      ; --         ;                 ; --       ; --           ;
 ; 117      ; 180        ; 2        ; GND*            ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
@@ -410,7 +410,7 @@ The pin-out file can be found in C:/CPLD_Sensor_Buchas_V2/TEST_RAM/output_files/
 ; 127      ; 189        ; 2        ; ram_data_bus[6] ; bidir  ; 3.3-V LVTTL  ;           ; Column I/O ; Y               ; no       ; Off          ;
 ; 128      ;            ;          ; GNDINT          ; gnd    ;              ;           ; --         ;                 ; --       ; --           ;
 ; 129      ; 190        ; 2        ; ram_data_bus[7] ; bidir  ; 3.3-V LVTTL  ;           ; Column I/O ; Y               ; no       ; Off          ;
-; 130      ; 191        ; 2        ; GND*            ;        ;              ;           ; Column I/O ;                 ; no       ; Off          ;
+; 130      ; 191        ; 2        ; ram_oe_n        ; output ; 3.3-V LVTTL  ;           ; Column I/O ; Y               ; no       ; Off          ;
 ; 131      ; 192        ; 2        ; ram_address[15] ; output ; 3.3-V LVTTL  ;           ; Column I/O ; Y               ; no       ; Off          ;
 ; 132      ; 193        ; 2        ; ram_address[16] ; output ; 3.3-V LVTTL  ;           ; Column I/O ; Y               ; no       ; Off          ;
 ; 133      ; 194        ; 2        ; ram_address[17] ; output ; 3.3-V LVTTL  ;           ; Column I/O ; Y               ; no       ; Off          ;
@@ -531,11 +531,11 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------+--------------+---------+---------------+--------+----------------------+------------------+
 ; Name                 ; Location     ; Fan-Out ; Usage         ; Global ; Global Resource Used ; Global Line Name ;
 +----------------------+--------------+---------+---------------+--------+----------------------+------------------+
-; RAM_interface:ri|_~1 ; LC_X12_Y3_N4 ; 19      ; Sync. clear   ; no     ; --                   ; --               ;
-; _~0                  ; LC_X12_Y3_N1 ; 9       ; Output enable ; no     ; --                   ; --               ;
+; RAM_interface:ri|_~1 ; LC_X12_Y3_N8 ; 19      ; Sync. clear   ; no     ; --                   ; --               ;
+; _~0                  ; LC_X12_Y3_N5 ; 9       ; Output enable ; no     ; --                   ; --               ;
 ; clk                  ; PIN_18       ; 37      ; Clock         ; yes    ; Global Clock         ; GCLK0            ;
-; ff_rst               ; LC_X12_Y3_N4 ; 17      ; Async. clear  ; yes    ; Global Clock         ; GCLK3            ;
-; le2                  ; LC_X12_Y3_N7 ; 11      ; Clock enable  ; no     ; --                   ; --               ;
+; ff_rst               ; LC_X12_Y3_N8 ; 17      ; Async. clear  ; yes    ; Global Clock         ; GCLK3            ;
+; le2                  ; LC_X12_Y9_N2 ; 11      ; Clock enable  ; no     ; --                   ; --               ;
 +----------------------+--------------+---------+---------------+--------+----------------------+------------------+
 
 
@@ -545,7 +545,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name   ; Location     ; Fan-Out ; Global Resource Used ; Global Line Name ;
 +--------+--------------+---------+----------------------+------------------+
 ; clk    ; PIN_18       ; 37      ; Global Clock         ; GCLK0            ;
-; ff_rst ; LC_X12_Y3_N4 ; 17      ; Global Clock         ; GCLK3            ;
+; ff_rst ; LC_X12_Y3_N8 ; 17      ; Global Clock         ; GCLK3            ;
 +--------+--------------+---------+----------------------+------------------+
 
 
@@ -554,106 +554,106 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+---------------------+
 ; Routing Resource Type ; Usage               ;
 +-----------------------+---------------------+
-; C4s                   ; 98 / 2,870 ( 3 % )  ;
-; Direct links          ; 4 / 3,938 ( < 1 % ) ;
+; C4s                   ; 102 / 2,870 ( 4 % ) ;
+; Direct links          ; 9 / 3,938 ( < 1 % ) ;
 ; Global clocks         ; 2 / 4 ( 50 % )      ;
-; LAB clocks            ; 5 / 72 ( 7 % )      ;
-; LUT chains            ; 2 / 1,143 ( < 1 % ) ;
-; Local interconnects   ; 75 / 3,938 ( 2 % )  ;
-; R4s                   ; 100 / 2,832 ( 4 % ) ;
+; LAB clocks            ; 4 / 72 ( 6 % )      ;
+; LUT chains            ; 4 / 1,143 ( < 1 % ) ;
+; Local interconnects   ; 84 / 3,938 ( 2 % )  ;
+; R4s                   ; 99 / 2,832 ( 3 % )  ;
 +-----------------------+---------------------+
 
 
 +--------------------------------------------------------------------------+
 ; LAB Logic Elements                                                       ;
 +--------------------------------------------+-----------------------------+
-; Number of Logic Elements  (Average = 7.83) ; Number of LABs  (Total = 6) ;
+; Number of Logic Elements  (Average = 9.40) ; Number of LABs  (Total = 5) ;
 +--------------------------------------------+-----------------------------+
 ; 1                                          ; 0                           ;
-; 2                                          ; 1                           ;
+; 2                                          ; 0                           ;
 ; 3                                          ; 0                           ;
 ; 4                                          ; 0                           ;
 ; 5                                          ; 0                           ;
 ; 6                                          ; 0                           ;
 ; 7                                          ; 0                           ;
-; 8                                          ; 2                           ;
+; 8                                          ; 1                           ;
 ; 9                                          ; 1                           ;
-; 10                                         ; 2                           ;
+; 10                                         ; 3                           ;
 +--------------------------------------------+-----------------------------+
 
 
 +------------------------------------------------------------------+
 ; LAB-wide Signals                                                 ;
 +------------------------------------+-----------------------------+
-; LAB-wide Signals  (Average = 2.17) ; Number of LABs  (Total = 6) ;
+; LAB-wide Signals  (Average = 2.00) ; Number of LABs  (Total = 5) ;
 +------------------------------------+-----------------------------+
-; 1 Async. clear                     ; 3                           ;
-; 1 Clock                            ; 6                           ;
-; 1 Clock enable                     ; 2                           ;
+; 1 Async. clear                     ; 2                           ;
+; 1 Clock                            ; 5                           ;
+; 1 Clock enable                     ; 1                           ;
 ; 1 Sync. clear                      ; 2                           ;
 +------------------------------------+-----------------------------+
 
 
-+---------------------------------------------------------------------------+
-; LAB Signals Sourced                                                       ;
-+---------------------------------------------+-----------------------------+
-; Number of Signals Sourced  (Average = 8.83) ; Number of LABs  (Total = 6) ;
-+---------------------------------------------+-----------------------------+
-; 0                                           ; 0                           ;
-; 1                                           ; 0                           ;
-; 2                                           ; 1                           ;
-; 3                                           ; 0                           ;
-; 4                                           ; 0                           ;
-; 5                                           ; 0                           ;
-; 6                                           ; 0                           ;
-; 7                                           ; 0                           ;
-; 8                                           ; 2                           ;
-; 9                                           ; 1                           ;
-; 10                                          ; 1                           ;
-; 11                                          ; 0                           ;
-; 12                                          ; 0                           ;
-; 13                                          ; 0                           ;
-; 14                                          ; 0                           ;
-; 15                                          ; 0                           ;
-; 16                                          ; 1                           ;
-+---------------------------------------------+-----------------------------+
++----------------------------------------------------------------------------+
+; LAB Signals Sourced                                                        ;
++----------------------------------------------+-----------------------------+
+; Number of Signals Sourced  (Average = 10.60) ; Number of LABs  (Total = 5) ;
++----------------------------------------------+-----------------------------+
+; 0                                            ; 0                           ;
+; 1                                            ; 0                           ;
+; 2                                            ; 0                           ;
+; 3                                            ; 0                           ;
+; 4                                            ; 0                           ;
+; 5                                            ; 0                           ;
+; 6                                            ; 0                           ;
+; 7                                            ; 0                           ;
+; 8                                            ; 1                           ;
+; 9                                            ; 1                           ;
+; 10                                           ; 1                           ;
+; 11                                           ; 1                           ;
+; 12                                           ; 0                           ;
+; 13                                           ; 0                           ;
+; 14                                           ; 0                           ;
+; 15                                           ; 1                           ;
++----------------------------------------------+-----------------------------+
 
 
 +-------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                       ;
 +-------------------------------------------------+-----------------------------+
-; Number of Signals Sourced Out  (Average = 7.00) ; Number of LABs  (Total = 6) ;
+; Number of Signals Sourced Out  (Average = 8.20) ; Number of LABs  (Total = 5) ;
 +-------------------------------------------------+-----------------------------+
 ; 0                                               ; 0                           ;
 ; 1                                               ; 0                           ;
-; 2                                               ; 1                           ;
+; 2                                               ; 0                           ;
 ; 3                                               ; 0                           ;
-; 4                                               ; 2                           ;
+; 4                                               ; 1                           ;
 ; 5                                               ; 0                           ;
 ; 6                                               ; 0                           ;
-; 7                                               ; 0                           ;
+; 7                                               ; 1                           ;
 ; 8                                               ; 0                           ;
 ; 9                                               ; 1                           ;
 ; 10                                              ; 1                           ;
-; 11                                              ; 0                           ;
-; 12                                              ; 0                           ;
-; 13                                              ; 1                           ;
+; 11                                              ; 1                           ;
 +-------------------------------------------------+-----------------------------+
 
 
 +---------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                       ;
 +---------------------------------------------+-----------------------------+
-; Number of Distinct Inputs  (Average = 5.33) ; Number of LABs  (Total = 6) ;
+; Number of Distinct Inputs  (Average = 5.60) ; Number of LABs  (Total = 5) ;
 +---------------------------------------------+-----------------------------+
 ; 0                                           ; 0                           ;
 ; 1                                           ; 0                           ;
 ; 2                                           ; 0                           ;
 ; 3                                           ; 1                           ;
-; 4                                           ; 1                           ;
-; 5                                           ; 1                           ;
-; 6                                           ; 1                           ;
-; 7                                           ; 2                           ;
+; 4                                           ; 2                           ;
+; 5                                           ; 0                           ;
+; 6                                           ; 0                           ;
+; 7                                           ; 1                           ;
+; 8                                           ; 0                           ;
+; 9                                           ; 0                           ;
+; 10                                          ; 1                           ;
 +---------------------------------------------+-----------------------------+
 
 
@@ -711,8 +711,8 @@ Info (176214): Statistics of I/O pins that need to be placed that use the same V
 Info (176215): I/O bank details before I/O pin placement
     Info (176214): Statistics of I/O banks
         Info (176213): I/O bank number 1 does not use VREF pins and has 3.3V VCCIO pins. 9 total pin(s) used --  17 pins available
-        Info (176213): I/O bank number 2 does not use VREF pins and has 3.3V VCCIO pins. 23 total pin(s) used --  7 pins available
-        Info (176213): I/O bank number 3 does not use VREF pins and has 3.3V VCCIO pins. 11 total pin(s) used --  19 pins available
+        Info (176213): I/O bank number 2 does not use VREF pins and has 3.3V VCCIO pins. 24 total pin(s) used --  6 pins available
+        Info (176213): I/O bank number 3 does not use VREF pins and has 3.3V VCCIO pins. 10 total pin(s) used --  20 pins available
         Info (176213): I/O bank number 4 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  30 pins available
 Info (171121): Fitter preparation operations ending: elapsed time is 00:00:00
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
@@ -733,7 +733,7 @@ Warning (169174): The Reserve All Unused Pins setting has not been specified, an
 Info (144001): Generated suppressed messages file C:/CPLD_Sensor_Buchas_V2/TEST_RAM/output_files/test_ram.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 5 warnings
     Info: Peak virtual memory: 5331 megabytes
-    Info: Processing ended: Thu Apr 15 17:51:17 2021
+    Info: Processing ended: Thu Apr 15 18:11:54 2021
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:02
 

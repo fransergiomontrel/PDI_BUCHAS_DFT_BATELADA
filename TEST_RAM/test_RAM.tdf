@@ -73,6 +73,7 @@ begin
 	ff_out[].clk = clk;
 	ff_out[].d = ri.data_out[];
 	data_out[] = ff_out[].q;
+--	data_out[] = ri.ram_address[7..0];
 	
 	case sm is
 		when init =>
@@ -116,7 +117,6 @@ test_state[]=5;
 		when le2 =>
 test_state[]=6;
 			ri.mode[] = MODE_READ_DATA;
-			ri.addr_inc = Vcc;
 			ri.oe_n = Gnd;
 			ff_out[].ena = Vcc;
 			sm = le2a;
