@@ -1,8 +1,15 @@
 #include "SPI.h"
+// Para arquino UNO
+// SCLK = 13
+// MISO = 12
+// MOSI = 11
 
+// Para arquino MEGA
+// SCLK = 52
+// MISO = 50
+// MOSI = 51
 
-int SS_pin = 10;
-
+int SS_pin = 10;  // <- Arduino UNO (para o MEGA é o pino 53)
 
 void setup() {
   pinMode (SS_pin, OUTPUT);
