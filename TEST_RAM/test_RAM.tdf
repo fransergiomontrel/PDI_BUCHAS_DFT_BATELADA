@@ -20,46 +20,45 @@ subdesign test_RAM(
 	data_out[7..0]: output;
 	
 	test_state[3..0]: output;
+
 	we_n: output;
 	oe_n: output;
 	cs_n: output;
+	
+	test_mode[1..0]: output;
 )
 variable
 	ri: RAM_interface with (N_BITS = 19);
-	sm: machine with states (init, grava1, grava2, grava2a, grava3, le1, le2, le2a, le3);
+	sm: machine with states (e0, e1, e2, e3, e3a, e4, e5, e6, e6a, e7);
 	ff_out[7..0]: dffe;
-	ff_rst: dff;
 	sreset: node;
---	ff_clk: dff;
---	clk: node;
+	ff_rst, ff_oe, ff_we, ff_mode[1..0]: dff;
 begin
 	defaults
 		ri.addr_clr = Gnd;
 		ri.addr_inc = Gnd;
-		ri.we_n = Vcc;
-		ri.cs_n = Gnd;
-		ri.oe_n = Vcc;
 		ff_out[].ena = Gnd;
+				ff_oe.d = Vcc;
+		ff_we.d = Vcc;
 	end defaults;
 	
---	ff_clk.d = !ff_clk.q;
---	ff_clk.clk = clk_in;
---	clk = ff_clk.q;
---	ff_clk.clrn = !sreset;
-
-
 	we_n = ram_we_n;
 	oe_n = ram_oe_n;
 	cs_n = ram_cs_n;
 	
 	sm.clk = clk;
 	sm.reset = sreset;
-	
+
 	ff_rst.clk = clk;
 	ff_rst.d = reset;
 	sreset = ff_rst.q;
 	
+	ff_out[].clk = clk;
+	ff_out[].d = ri.data_out[];
+	data_out[] = ff_out[].q;
+--	data_out[] = ri.ram_address[7..0];
 	ff_out[].clrn = !sreset;
+
 	ri.clk = clk;
 	ri.sreset = sreset;
 	ram_address[] = ri.ram_address[];
@@ -69,73 +68,96 @@ begin
 	ri.changing_mode = Gnd;
 	ri.data_in[7..0] = !ri.ram_address[7..0];
 	ram_data_bus[] = ri.ram_data_bus[];
+	ri.cs_n = Gnd;
 	
-	ff_out[].clk = clk;
-	ff_out[].d = ri.data_out[];
-	data_out[] = ff_out[].q;
---	data_out[] = ri.ram_address[7..0];
+	ff_oe.clk = clk;
+	ff_oe.prn = !reset;
+	ri.oe_n = ff_oe.q;
 	
+	ff_we.clk = clk;
+	ff_we.prn = !reset;
+	ri.we_n = ff_we.q;
+	
+	ff_mode[].clk = clk;
+	ri.mode[] = ff_mode[].q;
+	test_mode[] = ff_mode[].q;
+
 	case sm is
-		when init =>
-test_state[]=0;
-			ri.mode[] = MODE_READ_DATA;
+		when e0 =>
+test_state[] = 0;
+			ff_mode[].d = MODE_AQUISITION;
 			ri.addr_clr = Vcc;
-			sm = grava1;
-			
-		when grava1 =>
-test_state[]=1;
-			ri.mode[] = MODE_AQUISITION;
-			sm = grava2;
-			
-		when grava2 =>
-test_state[]=2;
-			ri.mode[] = MODE_AQUISITION;
-			ri.we_n = Gnd;
-			sm = grava2a;
-			
-		when grava2a =>
-test_state[]=3;
-			ri.mode[] = MODE_AQUISITION;
-			ri.addr_inc = Vcc;
-			sm = grava3;
+			sm = e2;
 
-			when grava3 =>
-test_state[]=4;
-			ri.mode[] = MODE_AQUISITION;
-			if ram_address[4] then
+		when e1 =>
+test_state[] = 1;
+			if ri.ram_address[] == H"0F" then
 				ri.addr_clr = Vcc;
-				sm = le1;
 			else
-				sm = grava1;
+				ri.addr_inc = Vcc;
 			end if;
-			
-		when le1 =>
-test_state[]=5;
-			ri.mode[] = MODE_READ_DATA;
-			sm = le2;
-			
-		when le2 =>
-test_state[]=6;
-			ri.mode[] = MODE_READ_DATA;
-			ri.oe_n = Gnd;
+			ff_mode[].d = MODE_AQUISITION;
+			sm = e2;
+
+		when e2 =>
+test_state[] = 2;
+			ff_we.d = Gnd;
+			ff_mode[].d = MODE_AQUISITION;
+			sm = e3;
+
+		when e3 =>
+test_state[] = 3;
+			ff_we.d = Gnd;
+			ff_mode[].d = MODE_AQUISITION;
+			sm = e3a;
+
+		when e3a =>
+test_state[] = 3;
+			if ri.ram_address[] == H"0F" then
+				sm = e4;
+			else
+				sm = e1;
+			end if;
+			ff_mode[].d = MODE_AQUISITION;
+
+		when e4 =>
+test_state[] = 4;
+			if ri.ram_address[] == H"0F" then
+				ri.addr_clr = Vcc;
+			else
+				ri.addr_inc = Vcc;
+			end if;
+			ff_mode[].d = MODE_READ_DATA;
+			sm = e5;
+
+		when e5 =>
+test_state[] = 5;
+			ff_oe.d = Gnd;
+			ff_mode[].d = MODE_READ_DATA;
+			sm = e6;
+
+		when e6 =>
+test_state[] = 6;
+			ff_oe.d = Gnd;
+			ff_mode[].d = MODE_READ_DATA;
+			sm = e6a;
+
+		when e6a =>
+test_state[] = 6;
 			ff_out[].ena = Vcc;
-			sm = le2a;
-			
-		when le2a =>
-test_state[]=7;
-			ri.oe_n = Gnd;
-			ri.mode[] = MODE_READ_DATA;
-			ri.addr_inc = Vcc;
-			sm = le3;
+			ff_oe.d = Gnd;
+			ff_out[].ena = Gnd;
+			ff_mode[].d = MODE_READ_DATA;
+			sm = e7;
 
-		when le3 =>
-test_state[]=8;
+		when e7 =>
+test_state[] = 7;
 			ri.mode[] = MODE_READ_DATA;
-			if ram_address[4] then
-				ri.addr_clr = Vcc;
-				sm = grava1;
+			if ri.ram_address[] == H"0F" then
+				sm = e1;
 			else
-				sm = le1;
+				sm = e4;
 			end if;
+			ff_mode[].d = MODE_READ_DATA;
 	end case;
 end;
