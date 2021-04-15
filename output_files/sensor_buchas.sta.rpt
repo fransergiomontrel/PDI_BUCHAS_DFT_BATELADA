@@ -1,5 +1,5 @@
 Timing Analyzer report for sensor_buchas
-Sat Apr 10 14:21:13 2021
+Thu Apr 15 14:43:27 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -76,8 +76,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 2           ;
-; Maximum allowed            ; 2           ;
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
 ; Maximum used               ; 1           ;
@@ -92,7 +92,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+--------+--------------------------+
 ; SDC File Path     ; Status ; Read at                  ;
 +-------------------+--------+--------------------------+
-; sensor_buchas.sdc ; OK     ; Sat Apr 10 14:21:13 2021 ;
+; sensor_buchas.sdc ; OK     ; Thu Apr 15 14:43:27 2021 ;
 +-------------------+--------+--------------------------+
 
 
@@ -736,19 +736,19 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Sat Apr 10 14:21:12 2021
+    Info: Processing started: Thu Apr 15 14:43:26 2021
 Info: Command: quartus_sta sensor_buchas -c sensor_buchas
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (332104): Reading SDC File: 'sensor_buchas.sdc'
-Warning (332174): Ignored filter at sensor_buchas.sdc(43): sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff could not be matched with a register File: C:/SensorBuchasV2/sensor_buchas.sdc Line: 43
-Warning (332049): Ignored create_clock at sensor_buchas.sdc(43): Argument <targets> is an empty collection File: C:/SensorBuchasV2/sensor_buchas.sdc Line: 43
-    Info (332050): create_clock -name {sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff} -period 10.000 -waveform { 0.000 5.000 } [get_registers { sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff }] File: C:/SensorBuchasV2/sensor_buchas.sdc Line: 43
+Warning (332174): Ignored filter at sensor_buchas.sdc(43): sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff could not be matched with a register File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/sensor_buchas.sdc Line: 43
+Warning (332049): Ignored create_clock at sensor_buchas.sdc(43): Argument <targets> is an empty collection File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/sensor_buchas.sdc Line: 43
+    Info (332050): create_clock -name {sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff} -period 10.000 -waveform { 0.000 5.000 } [get_registers { sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff }] File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/sensor_buchas.sdc Line: 43
 Warning (332060): Node: host_SCLK was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register read_data_module:inst2|shift_reg_2x:shift|data_shift[7] is being clocked by host_SCLK
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
@@ -777,8 +777,8 @@ Info (332001): The selected device family is not supported by the report_metasta
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 4654 megabytes
-    Info: Processing ended: Sat Apr 10 14:21:13 2021
+    Info: Peak virtual memory: 4678 megabytes
+    Info: Processing ended: Thu Apr 15 14:43:27 2021
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 

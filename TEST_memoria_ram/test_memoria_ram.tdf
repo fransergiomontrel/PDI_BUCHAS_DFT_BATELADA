@@ -1,0 +1,97 @@
+include "RAM_interface.inc";
+include "modes.inc";
+PARAMETERS
+(
+		N_BITS = 19
+);
+
+
+subdesign test_memoria_RAM(
+	clk: input;
+	sreset: input;
+	
+	ram_address[N_BITS-1..0]: output;
+	ram_data_bus[7..0]: bidir;
+	
+	ram_we_n: output;
+	ram_cs_n: output;
+	ram_oe_n: output;
+	
+	data_out[7..0]: output;
+)
+variable
+	ri: RAM_interface with (N_BITS = 19);
+	sm: machine with states (init, grava1, grava2, grava3, le1, le2, le3);
+	ff_out[7..0]: dffe;
+begin
+	defaults
+		ri.addr_clr = Gnd;
+		ri.addr_inc = Gnd;
+		ri.we_n = Vcc;
+		ri.cs_n = Gnd;
+		ri.oe_n = Vcc;
+		ff_out[].ena = Gnd;
+	end defaults;
+	
+	
+	sm.clk = clk;
+	sm.reset = sreset;
+	
+	ri.clk = clk;
+	ri.sreset = sreset;
+	ram_address[] = ri.ram_address[];
+	ram_we_n = ri.ram_we_n;
+	ram_cs_n = ri.ram_cs_n;
+	ram_oe_n = ri.ram_oe_n;
+	ri.changing_mode = Gnd;
+	ri.data_in[7..0] = !ri.ram_address[7..0];
+	ram_data_bus[] = ri.ram_data_bus[];
+	
+	ff_out[].clk = clk;
+	ff_out[].d = ri.data_out[];
+	data_out[] = ff_out[].q;
+	
+	case sm is
+		when init =>
+			ri.mode[] = MODE_READ_DATA;
+			ri.addr_clr = Vcc;
+			sm = grava1;
+			
+		when grava1 =>
+			ri.mode[] = MODE_AQUISITION;
+			sm = grava2;
+			
+		when grava2 =>
+			ri.mode[] = MODE_AQUISITION;
+			ri.we_n = Gnd;
+			ri.addr_inc = Vcc;
+			sm = grava3;
+			
+		when grava3 =>
+			ri.mode[] = MODE_AQUISITION;
+			if ram_address[4] then
+				sm = le1;
+			else
+				sm = grava1;
+			end if;
+			
+		when le1 =>
+			ri.mode[] = MODE_READ_DATA;
+			sm = le2;
+			
+		when le2 =>
+			ri.mode[] = MODE_READ_DATA;
+			ri.addr_inc = Vcc;
+			ri.oe_n = Gnd;
+			ff_out[].ena = Vcc;
+			sm = le3;
+			
+		when le3 =>
+			ri.mode[] = MODE_READ_DATA;
+			if ram_address[4] then
+				sm = grava1;
+			else
+				sm = le1;
+			end if;
+	end case;
+end;
