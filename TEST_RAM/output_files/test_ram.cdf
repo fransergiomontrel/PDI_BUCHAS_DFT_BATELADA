@@ -1,0 +1,13 @@
+/* Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition */
+JedecChain;
+	FileRevision(JESD32A);
+	DefaultMfr(6E);
+
+	P ActionCode(Cfg)
+		Device PartName(EPM1270T144) Path("C:/CPLD_Sensor_Buchas_V2/TEST_RAM/output_files/") File("test_ram.pof") MfrSpec(OpMask(1) SEC_Device(EPM1270T144) Child_OpMask(2 1 1));
+
+ChainEnd;
+
+AlteraBegin;
+	ChainType(JTAG);
+AlteraEnd;
