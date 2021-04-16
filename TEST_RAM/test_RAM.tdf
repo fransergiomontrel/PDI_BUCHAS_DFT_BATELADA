@@ -21,6 +21,7 @@ subdesign test_RAM(
 	
 	test_state[3..0]: output;
 
+	
 	we_n: output;
 	oe_n: output;
 	cs_n: output;
@@ -57,6 +58,7 @@ begin
 	ff_out[].d = ri.data_out[];
 	data_out[] = ff_out[].q;
 --	data_out[] = ri.ram_address[7..0];
+--	data_out[] = ram_data_bus[7..0];
 	ff_out[].clrn = !sreset;
 
 	ri.clk = clk;

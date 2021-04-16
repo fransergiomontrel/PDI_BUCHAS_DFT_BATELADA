@@ -1,5 +1,5 @@
 EDA Netlist Writer report for test_ram
-Thu Apr 15 20:31:31 2021
+Fri Apr 16 15:41:47 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -37,9 +37,9 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Thu Apr 15 20:31:31 2021 ;
+; EDA Netlist Writer Status ; Successful - Fri Apr 16 15:41:47 2021 ;
 ; Revision Name             ; test_ram                              ;
-; Top-level Entity Name     ; test_RAM                              ;
+; Top-level Entity Name     ; RAM1                                  ;
 ; Family                    ; MAX II                                ;
 ; Simulation Files Creation ; Successful                            ;
 +---------------------------+---------------------------------------+
@@ -51,8 +51,7 @@ https://fpgasoftware.intel.com/eula.
 ; Option                                                                                            ; Setting                   ;
 +---------------------------------------------------------------------------------------------------+---------------------------+
 ; Tool Name                                                                                         ; ModelSim-Altera (Verilog) ;
-; Generate functional simulation netlist                                                            ; Off                       ;
-; Time scale                                                                                        ; 1 ps                      ;
+; Generate functional simulation netlist                                                            ; On                        ;
 ; Truncate long hierarchy paths                                                                     ; Off                       ;
 ; Map illegal HDL characters                                                                        ; Off                       ;
 ; Flatten buses into individual nodes                                                               ; Off                       ;
@@ -67,14 +66,13 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------------------------------+---------------------------+
 
 
-+------------------------------------------------------------+
-; Simulation Generated Files                                 ;
-+------------------------------------------------------------+
-; Generated Files                                            ;
-+------------------------------------------------------------+
-; C:/SensorBuchasV2/TEST_RAM/simulation/qsim//test_ram.vo    ;
-; C:/SensorBuchasV2/TEST_RAM/simulation/qsim//test_ram_v.sdo ;
-+------------------------------------------------------------+
++---------------------------------------------------------+
+; Simulation Generated Files                              ;
++---------------------------------------------------------+
+; Generated Files                                         ;
++---------------------------------------------------------+
+; C:/sensorbuchasv2/TEST_RAM/simulation/qsim//test_ram.vo ;
++---------------------------------------------------------+
 
 
 +-----------------------------+
@@ -97,14 +95,14 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Thu Apr 15 20:31:31 2021
-Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory=C:/SensorBuchasV2/TEST_RAM/simulation/qsim/ test_ram -c test_ram
+    Info: Processing started: Fri Apr 16 15:41:46 2021
+Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory=C:/sensorbuchasv2/TEST_RAM/simulation/qsim/ test_ram -c test_ram
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (204018): Generated files "test_ram.vo" and "test_ram_v.sdo" in directory "C:/SensorBuchasV2/TEST_RAM/simulation/qsim//" for EDA simulation tool
+Info (204019): Generated file test_ram.vo in folder "C:/sensorbuchasv2/TEST_RAM/simulation/qsim//" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4614 megabytes
-    Info: Processing ended: Thu Apr 15 20:31:31 2021
-    Info: Elapsed time: 00:00:00
+    Info: Peak virtual memory: 4620 megabytes
+    Info: Processing ended: Fri Apr 16 15:41:47 2021
+    Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 
 

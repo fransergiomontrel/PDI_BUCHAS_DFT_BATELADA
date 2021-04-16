@@ -1,5 +1,5 @@
 Fitter report for sensor_buchas
-Thu Apr 15 14:43:24 2021
+Fri Apr 16 14:15:14 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -58,7 +58,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------+
 ; Fitter Summary                                                      ;
 +-----------------------+---------------------------------------------+
-; Fitter Status         ; Successful - Thu Apr 15 14:43:24 2021       ;
+; Fitter Status         ; Successful - Fri Apr 16 14:15:14 2021       ;
 ; Quartus Prime Version ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name         ; sensor_buchas                               ;
 ; Top-level Entity Name ; sensor_buchas_CPLD                          ;
@@ -134,14 +134,15 @@ https://fpgasoftware.intel.com/eula.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-4         ;   0.5%      ;
+;     Processor 2            ;   0.7%      ;
+;     Processors 3-4         ;   0.7%      ;
 +----------------------------+-------------+
 
 
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/output_files/sensor_buchas.pin.
+The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pin.
 
 
 +--------------------------------------------------------------------+
@@ -1003,9 +1004,9 @@ Info (176444): Device migration not selected. If you intend to use device migrat
     Info (176445): Device EPM1270T144A5 is compatible
 Critical Warning (169085): No exact pin location assignment(s) for 86 pins of 86 total pins. For the list of pins please refer to the I/O Assignment Warnings table in the fitter report.
 Info (332104): Reading SDC File: 'sensor_buchas.sdc'
-Warning (332174): Ignored filter at sensor_buchas.sdc(43): sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff could not be matched with a register File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/sensor_buchas.sdc Line: 43
-Warning (332049): Ignored create_clock at sensor_buchas.sdc(43): Argument <targets> is an empty collection File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/sensor_buchas.sdc Line: 43
-    Info (332050): create_clock -name {sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff} -period 10.000 -waveform { 0.000 5.000 } [get_registers { sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff }] File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/sensor_buchas.sdc Line: 43
+Warning (332174): Ignored filter at sensor_buchas.sdc(43): sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff could not be matched with a register File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 43
+Warning (332049): Ignored create_clock at sensor_buchas.sdc(43): Argument <targets> is an empty collection File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 43
+    Info (332050): create_clock -name {sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff} -period 10.000 -waveform { 0.000 5.000 } [get_registers { sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff }] File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 43
 Warning (332060): Node: host_SCLK was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register read_data_module:inst2|shift_reg_2x:shift|data_shift[7] is being clocked by host_SCLK
 Info (332129): Detected timing requirements -- optimizing circuit to achieve only the specified requirements
@@ -1015,20 +1016,20 @@ Info (332111): Found 1 clocks
     Info (332111):   10.000          clk
 Info (186079): Completed User Assigned Global Signals Promotion Operation
 Info (186215): Automatically promoted signal "clk" to use Global clock in PIN 18
-Info (186215): Automatically promoted signal "switch:inst6|RDM_SCLK" to use Global clock File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/switch.tdf Line: 137
+Info (186215): Automatically promoted signal "switch:inst6|RDM_SCLK" to use Global clock File: C:/sensorbuchasv2/switch.tdf Line: 137
 Info (186216): Automatically promoted some destinations of signal "inst1" to use Global clock
-    Info (186217): Destination "read_data_module:inst2|dffes:busy_ff|ff" may be non-global or may not use global clock File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/dffes.tdf Line: 13
-    Info (186217): Destination "read_data_module:inst2|dffes:oe_n_FF|ff" may be non-global or may not use global clock File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/dffes.tdf Line: 13
-    Info (186217): Destination "host_interface:Host_interface|mode_selector:mode_sel|dffes:ready_ff|ff" may be non-global or may not use global clock File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/dffes.tdf Line: 13
-    Info (186217): Destination "host_interface:Host_interface|mode_selector:mode_sel|dffes:changing_ff|ff" may be non-global or may not use global clock File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/dffes.tdf Line: 13
-    Info (186217): Destination "acquisition_module:inst11|acquisition_store:storer|dffes:cs_n_ff|ff" may be non-global or may not use global clock File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/dffes.tdf Line: 13
-    Info (186217): Destination "acquisition_module:inst11|acquisition_store:storer|dffes:we_n_ff|ff" may be non-global or may not use global clock File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/dffes.tdf Line: 13
-    Info (186217): Destination "adc_interface:inst4|adc_convst[5]" may be non-global or may not use global clock File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/adc_interface.tdf Line: 18
-    Info (186217): Destination "adc_interface:inst4|adc_convst[4]" may be non-global or may not use global clock File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/adc_interface.tdf Line: 18
-    Info (186217): Destination "adc_interface:inst4|adc_convst[3]" may be non-global or may not use global clock File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/adc_interface.tdf Line: 18
-    Info (186217): Destination "adc_interface:inst4|adc_convst[2]" may be non-global or may not use global clock File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/adc_interface.tdf Line: 18
+    Info (186217): Destination "read_data_module:inst2|dffes:busy_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
+    Info (186217): Destination "read_data_module:inst2|dffes:oe_n_FF|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
+    Info (186217): Destination "host_interface:Host_interface|mode_selector:mode_sel|dffes:ready_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
+    Info (186217): Destination "host_interface:Host_interface|mode_selector:mode_sel|dffes:changing_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
+    Info (186217): Destination "acquisition_module:inst11|acquisition_store:storer|dffes:cs_n_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
+    Info (186217): Destination "acquisition_module:inst11|acquisition_store:storer|dffes:we_n_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
+    Info (186217): Destination "adc_interface:inst4|adc_convst[5]" may be non-global or may not use global clock File: C:/sensorbuchasv2/adc_interface.tdf Line: 18
+    Info (186217): Destination "adc_interface:inst4|adc_convst[4]" may be non-global or may not use global clock File: C:/sensorbuchasv2/adc_interface.tdf Line: 18
+    Info (186217): Destination "adc_interface:inst4|adc_convst[3]" may be non-global or may not use global clock File: C:/sensorbuchasv2/adc_interface.tdf Line: 18
+    Info (186217): Destination "adc_interface:inst4|adc_convst[2]" may be non-global or may not use global clock File: C:/sensorbuchasv2/adc_interface.tdf Line: 18
     Info (186218): Limited to 10 non-global destinations
-Info (186215): Automatically promoted signal "read_data_module:inst2|dffes:load_parallel_FF|ff" to use Global clock File: C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/dffes.tdf Line: 13
+Info (186215): Automatically promoted signal "read_data_module:inst2|dffes:load_parallel_FF|ff" to use Global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
 Info (186079): Completed Auto Global Promotion Operation
 Info (176234): Starting register packing
 Info (186468): Started processing fast register assignments
@@ -1060,17 +1061,17 @@ Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
 Info (11888): Total time spent on timing analysis during the Fitter is 0.14 seconds.
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:00
 Warning (169174): The Reserve All Unused Pins setting has not been specified, and will default to 'As output driving ground'.
-Info (144001): Generated suppressed messages file C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/output_files/sensor_buchas.fit.smsg
+Info (144001): Generated suppressed messages file C:/sensorbuchasv2/output_files/sensor_buchas.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 7 warnings
-    Info: Peak virtual memory: 5335 megabytes
-    Info: Processing ended: Thu Apr 15 14:43:24 2021
-    Info: Elapsed time: 00:00:04
+    Info: Peak virtual memory: 5352 megabytes
+    Info: Processing ended: Fri Apr 16 14:15:14 2021
+    Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:03
 
 
 +----------------------------+
 ; Fitter Suppressed Messages ;
 +----------------------------+
-The suppressed messages can be found in C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/output_files/sensor_buchas.fit.smsg.
+The suppressed messages can be found in C:/sensorbuchasv2/output_files/sensor_buchas.fit.smsg.
 
 

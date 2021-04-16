@@ -1,0 +1,58 @@
+
+
+
+subdesign RAM(
+	clk: input;
+	a[3..0]: input;
+	d[7..0]: bidir;
+	we_n: input;
+	oe_n: input;
+	
+	test_enas[3..0]: output;
+	test_data[7..0]: output;
+)
+variable
+	ffs[3..0][7..0]: dffe;
+	tsn[7..0]: TRI_STATE_NODE;
+	buffer[7..0]: TRI;
+	enas[3..0]: NODE;
+begin
+	defaults
+		ffs[][].ena = Gnd;
+		enas[] = Gnd;
+	end defaults;
+	
+--	buffer[].in = ffs[];
+	buffer[].oe = !oe_n;
+	tsn[] = buffer[].out;
+	d[] = tsn[];
+	ffs[][].d = tsn[];
+	
+	ffs[0][].ena = enas[0];
+	ffs[1][].ena = enas[1];
+	ffs[2][].ena = enas[2];
+	ffs[3][].ena = enas[3];
+	
+	ffs[0][].clk = clk;
+	
+	test_enas[] = enas[];
+	
+	case a[] is
+		when 0 =>
+			enas[0] = !we_n;
+			buffer[].in = ffs[0][];
+			test_data[] = ffs[0][].q;
+		when 1 =>
+			enas[1] = !we_n;
+			buffer[].in = ffs[1][];
+			test_data[] = ffs[1][].q;
+		when 2 =>
+			enas[2] = !we_n;
+			buffer[].in = ffs[2][];
+			test_data[] = ffs[2][].q;
+		when 3 =>
+			enas[3] = !we_n;
+			buffer[].in = ffs[3][];
+			test_data[] = ffs[3][].q;
+	end case;
+end;

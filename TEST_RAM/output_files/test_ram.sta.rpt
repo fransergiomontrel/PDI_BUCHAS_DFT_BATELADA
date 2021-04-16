@@ -1,5 +1,5 @@
 Timing Analyzer report for test_ram
-Thu Apr 15 20:30:51 2021
+Fri Apr 16 15:38:26 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -16,23 +16,16 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
   8. Recovery Summary
   9. Removal Summary
  10. Minimum Pulse Width Summary
- 11. Setup: 'clk'
- 12. Hold: 'clk'
- 13. Recovery: 'clk'
- 14. Removal: 'clk'
- 15. Setup Transfers
- 16. Hold Transfers
- 17. Recovery Transfers
- 18. Removal Transfers
- 19. Report TCCS
- 20. Report RSKM
- 21. Unconstrained Paths Summary
- 22. Clock Status Summary
- 23. Unconstrained Input Ports
- 24. Unconstrained Output Ports
- 25. Unconstrained Input Ports
- 26. Unconstrained Output Ports
- 27. Timing Analyzer Messages
+ 11. Clock Transfers
+ 12. Report TCCS
+ 13. Report RSKM
+ 14. Unconstrained Paths Summary
+ 15. Clock Status Summary
+ 16. Unconstrained Input Ports
+ 17. Unconstrained Output Ports
+ 18. Unconstrained Input Ports
+ 19. Unconstrained Output Ports
+ 20. Timing Analyzer Messages
 
 
 
@@ -75,8 +68,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 2           ;
-; Maximum allowed            ; 2           ;
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
 ; Maximum used               ; 1           ;
@@ -95,50 +88,34 @@ https://fpgasoftware.intel.com/eula.
 +------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
 
 
-+--------------------------------------------------+
-; Fmax Summary                                     ;
-+------------+-----------------+------------+------+
-; Fmax       ; Restricted Fmax ; Clock Name ; Note ;
-+------------+-----------------+------------+------+
-; 100.36 MHz ; 100.36 MHz      ; clk        ;      ;
-+------------+-----------------+------------+------+
-This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
+----------------
+; Fmax Summary ;
+----------------
+No paths to report.
 
 
-+--------------------------------+
-; Setup Summary                  ;
-+-------+--------+---------------+
-; Clock ; Slack  ; End Point TNS ;
-+-------+--------+---------------+
-; clk   ; -8.964 ; -233.716      ;
-+-------+--------+---------------+
+-----------------
+; Setup Summary ;
+-----------------
+No paths to report.
 
 
-+-------------------------------+
-; Hold Summary                  ;
-+-------+-------+---------------+
-; Clock ; Slack ; End Point TNS ;
-+-------+-------+---------------+
-; clk   ; 1.651 ; 0.000         ;
-+-------+-------+---------------+
+----------------
+; Hold Summary ;
+----------------
+No paths to report.
 
 
-+--------------------------------+
-; Recovery Summary               ;
-+-------+--------+---------------+
-; Clock ; Slack  ; End Point TNS ;
-+-------+--------+---------------+
-; clk   ; -6.156 ; -110.808      ;
-+-------+--------+---------------+
+--------------------
+; Recovery Summary ;
+--------------------
+No paths to report.
 
 
-+-------------------------------+
-; Removal Summary               ;
-+-------+-------+---------------+
-; Clock ; Slack ; End Point TNS ;
-+-------+-------+---------------+
-; clk   ; 6.602 ; 0.000         ;
-+-------+-------+---------------+
+-------------------
+; Removal Summary ;
+-------------------
+No paths to report.
 
 
 +--------------------------------+
@@ -150,312 +127,10 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------+--------+---------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Setup: 'clk'                                                                                                                                                                                                                                     ;
-+--------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; Slack  ; From Node                                                                       ; To Node                                                                         ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+--------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; -8.964 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.631      ;
-; -8.964 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.631      ;
-; -8.964 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.631      ;
-; -8.964 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.631      ;
-; -8.964 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.631      ;
-; -8.964 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[5]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.631      ;
-; -8.964 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[6]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.631      ;
-; -8.964 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[7]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.631      ;
-; -8.964 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.631      ;
-; -8.960 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.627      ;
-; -8.960 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.627      ;
-; -8.960 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.627      ;
-; -8.960 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.627      ;
-; -8.960 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[9]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.627      ;
-; -8.960 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.627      ;
-; -8.960 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.627      ;
-; -8.960 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.627      ;
-; -8.960 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.627      ;
-; -8.960 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.627      ;
-; -8.870 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.537      ;
-; -8.870 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.537      ;
-; -8.870 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.537      ;
-; -8.870 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.537      ;
-; -8.870 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.537      ;
-; -8.870 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[5]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.537      ;
-; -8.870 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[6]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.537      ;
-; -8.870 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[7]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.537      ;
-; -8.870 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.537      ;
-; -8.866 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.533      ;
-; -8.866 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.533      ;
-; -8.866 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.533      ;
-; -8.866 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.533      ;
-; -8.866 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[9]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.533      ;
-; -8.866 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.533      ;
-; -8.866 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.533      ;
-; -8.866 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.533      ;
-; -8.866 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.533      ;
-; -8.866 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.533      ;
-; -8.703 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.370      ;
-; -8.703 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.370      ;
-; -8.703 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.370      ;
-; -8.703 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.370      ;
-; -8.703 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.370      ;
-; -8.703 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[5]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.370      ;
-; -8.703 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[6]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.370      ;
-; -8.703 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[7]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.370      ;
-; -8.703 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.370      ;
-; -8.699 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.366      ;
-; -8.699 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.366      ;
-; -8.699 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.366      ;
-; -8.699 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.366      ;
-; -8.699 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[9]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.366      ;
-; -8.699 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.366      ;
-; -8.699 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.366      ;
-; -8.699 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.366      ;
-; -8.699 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.366      ;
-; -8.699 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.366      ;
-; -8.682 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.349      ;
-; -8.682 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.349      ;
-; -8.682 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.349      ;
-; -8.682 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.349      ;
-; -8.682 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.349      ;
-; -8.682 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[5]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.349      ;
-; -8.682 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[6]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.349      ;
-; -8.682 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[7]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.349      ;
-; -8.682 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.349      ;
-; -8.678 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.345      ;
-; -8.678 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.345      ;
-; -8.678 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.345      ;
-; -8.678 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.345      ;
-; -8.678 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[9]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.345      ;
-; -8.678 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.345      ;
-; -8.678 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.345      ;
-; -8.678 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.345      ;
-; -8.678 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.345      ;
-; -8.678 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.345      ;
-; -8.645 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.312      ;
-; -8.645 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.312      ;
-; -8.645 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.312      ;
-; -8.645 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.312      ;
-; -8.645 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.312      ;
-; -8.645 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[5]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.312      ;
-; -8.645 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[6]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.312      ;
-; -8.645 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[7]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.312      ;
-; -8.645 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.312      ;
-; -8.641 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.308      ;
-; -8.641 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.308      ;
-; -8.641 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.308      ;
-; -8.641 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.308      ;
-; -8.641 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[9]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.308      ;
-; -8.641 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.308      ;
-; -8.641 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.308      ;
-; -8.641 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.308      ;
-; -8.641 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.308      ;
-; -8.641 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15] ; clk          ; clk         ; 1.000        ; 0.000      ; 9.308      ;
-; -8.454 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[0]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.121      ;
-; -8.454 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.121      ;
-; -8.454 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.121      ;
-; -8.454 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.121      ;
-; -8.454 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]  ; clk          ; clk         ; 1.000        ; 0.000      ; 9.121      ;
-+--------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
-
-
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Hold: 'clk'                                                                                                                                                                                                                                     ;
-+-------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; Slack ; From Node                                                                       ; To Node                                                                         ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+-------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; 1.651 ; e3                                                                              ; e3a                                                                             ; clk          ; clk         ; 0.000        ; 0.000      ; 1.872      ;
-; 1.662 ; e6                                                                              ; e6a                                                                             ; clk          ; clk         ; 0.000        ; 0.000      ; 1.883      ;
-; 1.816 ; e2                                                                              ; e3                                                                              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.037      ;
-; 1.838 ; e4                                                                              ; e5                                                                              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.059      ;
-; 2.116 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[9]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[9]  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.337      ;
-; 2.117 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.338      ;
-; 2.117 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.338      ;
-; 2.126 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.347      ;
-; 2.126 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.347      ;
-; 2.126 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.347      ;
-; 2.148 ; e5                                                                              ; e6                                                                              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.369      ;
-; 2.221 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.442      ;
-; 2.221 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.442      ;
-; 2.221 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.442      ;
-; 2.222 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.443      ;
-; 2.230 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[7]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[7]  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.451      ;
-; 2.239 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.460      ;
-; 2.240 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[5]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[5]  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.461      ;
-; 2.241 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.462      ;
-; 2.252 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.473      ;
-; 2.315 ; e5                                                                              ; ff_mode[0]                                                                      ; clk          ; clk         ; 0.000        ; 0.000      ; 2.536      ;
-; 2.404 ; e0                                                                              ; e2                                                                              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.625      ;
-; 2.569 ; e1                                                                              ; e2                                                                              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.790      ;
-; 2.591 ; e3a                                                                             ; e4                                                                              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.812      ;
-; 2.593 ; e3a                                                                             ; e1                                                                              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.814      ;
-; 2.620 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.841      ;
-; 2.646 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[6]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[6]  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.867      ;
-; 2.679 ; e4                                                                              ; ff_mode[0]                                                                      ; clk          ; clk         ; 0.000        ; 0.000      ; 2.900      ;
-; 2.826 ; e6a                                                                             ; ff_mode[0]                                                                      ; clk          ; clk         ; 0.000        ; 0.000      ; 3.047      ;
-; 2.915 ; e2                                                                              ; ff_we                                                                           ; clk          ; clk         ; 0.000        ; 0.000      ; 3.136      ;
-; 2.930 ; e7                                                                              ; ff_mode[0]                                                                      ; clk          ; clk         ; 0.000        ; 0.000      ; 3.151      ;
-; 2.948 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[9]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.169      ;
-; 2.949 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.170      ;
-; 2.958 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.179      ;
-; 2.958 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.179      ;
-; 3.059 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[9]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.280      ;
-; 3.060 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.281      ;
-; 3.069 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.290      ;
-; 3.069 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.290      ;
-; 3.161 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.382      ;
-; 3.161 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.382      ;
-; 3.161 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.382      ;
-; 3.162 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.383      ;
-; 3.170 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[7]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.391      ;
-; 3.170 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[9]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.391      ;
-; 3.179 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[5]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.400      ;
-; 3.180 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[5]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[6]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.401      ;
-; 3.180 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.401      ;
-; 3.181 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.402      ;
-; 3.272 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.493      ;
-; 3.273 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.494      ;
-; 3.280 ; e6a                                                                             ; e7                                                                              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.501      ;
-; 3.281 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[9]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.502      ;
-; 3.290 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[6]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.511      ;
-; 3.291 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[5]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[7]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.512      ;
-; 3.323 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[13] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.544      ;
-; 3.354 ; e3                                                                              ; ff_we                                                                           ; clk          ; clk         ; 0.000        ; 0.000      ; 3.575      ;
-; 3.383 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.604      ;
-; 3.384 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.605      ;
-; 3.401 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[7]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.622      ;
-; 3.402 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[5]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.623      ;
-; 3.413 ; e1                                                                              ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.634      ;
-; 3.494 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.715      ;
-; 3.512 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.733      ;
-; 3.513 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.734      ;
-; 3.513 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[5]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.734      ;
-; 3.513 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[6]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.734      ;
-; 3.513 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[7]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.734      ;
-; 3.513 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.734      ;
-; 3.530 ; e6                                                                              ; ff_mode[0]                                                                      ; clk          ; clk         ; 0.000        ; 0.000      ; 3.751      ;
-; 3.538 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.759      ;
-; 3.538 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.759      ;
-; 3.538 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.759      ;
-; 3.538 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.759      ;
-; 3.538 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[11] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.759      ;
-; 3.552 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; e4                                                                              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.773      ;
-; 3.554 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; e1                                                                              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.775      ;
-; 3.560 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.781      ;
-; 3.586 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[6]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[7]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.807      ;
-; 3.630 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.851      ;
-; 3.630 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.851      ;
-; 3.630 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.851      ;
-; 3.630 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.851      ;
-; 3.630 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[12] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.851      ;
-; 3.647 ; e5                                                                              ; ff_oe                                                                           ; clk          ; clk         ; 0.000        ; 0.000      ; 3.868      ;
-; 3.649 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.870      ;
-; 3.649 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[16] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.870      ;
-; 3.649 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[18] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.870      ;
-; 3.649 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[14] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.870      ;
-; 3.649 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[10] ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[15] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.870      ;
-; 3.650 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[4]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.871      ;
-; 3.650 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[5]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.871      ;
-; 3.650 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[6]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.871      ;
-; 3.650 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[7]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.871      ;
-; 3.650 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[2]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.871      ;
-; 3.671 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[1]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[3]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.892      ;
-; 3.697 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[6]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[8]  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.918      ;
-; 3.709 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; e4                                                                              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.930      ;
-; 3.711 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; e1                                                                              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.932      ;
-; 3.750 ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[9]  ; RAM_interface:ri|lpm_counter:address_counter|cntr_ici:auto_generated|safe_q[17] ; clk          ; clk         ; 0.000        ; 0.000      ; 3.971      ;
-+-------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
-
-
-+------------------------------------------------------------------------------------------------------+
-; Recovery: 'clk'                                                                                      ;
-+--------+-----------+-----------+--------------+-------------+--------------+------------+------------+
-; Slack  ; From Node ; To Node   ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+--------+-----------+-----------+--------------+-------------+--------------+------------+------------+
-; -6.156 ; ff_rst    ; e7        ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; e4        ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; e6        ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; e6a       ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; ff_out[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; ff_out[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; ff_out[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; ff_out[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; ff_out[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; ff_out[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; ff_out[6] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; ff_out[7] ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; e0        ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; e1        ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; e2        ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; e3        ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; e3a       ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-; -6.156 ; ff_rst    ; e5        ; clk          ; clk         ; 1.000        ; 0.000      ; 6.823      ;
-+--------+-----------+-----------+--------------+-------------+--------------+------------+------------+
-
-
-+-----------------------------------------------------------------------------------------------------+
-; Removal: 'clk'                                                                                      ;
-+-------+-----------+-----------+--------------+-------------+--------------+------------+------------+
-; Slack ; From Node ; To Node   ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+-------+-----------+-----------+--------------+-------------+--------------+------------+------------+
-; 6.602 ; ff_rst    ; e7        ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; e4        ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; e6        ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; e6a       ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; ff_out[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; ff_out[1] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; ff_out[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; ff_out[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; ff_out[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; ff_out[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; ff_out[6] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; ff_out[7] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; e0        ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; e1        ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; e2        ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; e3        ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; e3a       ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-; 6.602 ; ff_rst    ; e5        ; clk          ; clk         ; 0.000        ; 0.000      ; 6.823      ;
-+-------+-----------+-----------+--------------+-------------+--------------+------------+------------+
-
-
-+-------------------------------------------------------------------+
-; Setup Transfers                                                   ;
-+------------+----------+----------+----------+----------+----------+
-; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
-+------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 1235     ; 0        ; 0        ; 0        ;
-+------------+----------+----------+----------+----------+----------+
-Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
-
-
-+-------------------------------------------------------------------+
-; Hold Transfers                                                    ;
-+------------+----------+----------+----------+----------+----------+
-; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
-+------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 1235     ; 0        ; 0        ; 0        ;
-+------------+----------+----------+----------+----------+----------+
-Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
-
-
-+-------------------------------------------------------------------+
-; Recovery Transfers                                                ;
-+------------+----------+----------+----------+----------+----------+
-; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
-+------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 18       ; 0        ; 0        ; 0        ;
-+------------+----------+----------+----------+----------+----------+
-Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
-
-
-+-------------------------------------------------------------------+
-; Removal Transfers                                                 ;
-+------------+----------+----------+----------+----------+----------+
-; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
-+------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 18       ; 0        ; 0        ; 0        ;
-+------------+----------+----------+----------+----------+----------+
-Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+-------------------
+; Clock Transfers ;
+-------------------
+Nothing to report.
 
 
 ---------------
@@ -477,10 +152,10 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------------------------+-------+------+
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 0     ; 0    ;
-; Unconstrained Input Ports       ; 9     ; 9    ;
-; Unconstrained Input Port Paths  ; 11    ; 11   ;
-; Unconstrained Output Ports      ; 43    ; 43   ;
-; Unconstrained Output Port Paths ; 78    ; 78   ;
+; Unconstrained Input Ports       ; 16    ; 16   ;
+; Unconstrained Input Port Paths  ; 4110  ; 4110 ;
+; Unconstrained Output Ports      ; 8     ; 8    ;
+; Unconstrained Output Port Paths ; 568   ; 568  ;
 +---------------------------------+-------+------+
 
 
@@ -493,140 +168,84 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +--------+-------+------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Unconstrained Input Ports                                                                              ;
-+-----------------+--------------------------------------------------------------------------------------+
-; Input Port      ; Comment                                                                              ;
-+-----------------+--------------------------------------------------------------------------------------+
-; ram_data_bus[0] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[1] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[2] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[3] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[4] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[5] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[6] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[7] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; reset           ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+-----------------+--------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                         ;
++------------+--------------------------------------------------------------------------------------+
+; Input Port ; Comment                                                                              ;
++------------+--------------------------------------------------------------------------------------+
+; a[0]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; a[1]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; a[2]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; a[3]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; a[4]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; a[5]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[0]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[1]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[2]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[3]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[4]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[5]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[6]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[7]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; oe_n       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; we_n       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++------------+--------------------------------------------------------------------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------+
-; Unconstrained Output Ports                                                                              ;
-+-----------------+---------------------------------------------------------------------------------------+
-; Output Port     ; Comment                                                                               ;
-+-----------------+---------------------------------------------------------------------------------------+
-; data_out[0]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_out[1]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_out[2]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_out[3]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_out[4]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_out[5]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_out[6]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_out[7]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; oe_n            ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[0]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[1]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[2]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[3]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[4]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[5]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[6]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[7]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[8]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[9]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[10] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[11] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[12] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[13] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[14] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[15] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[16] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[17] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[18] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[0] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[1] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[2] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[3] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[4] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[5] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[6] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[7] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_oe_n        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_we_n        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_mode[0]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_state[0]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_state[1]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_state[2]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; we_n            ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+-----------------+---------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                          ;
++-------------+---------------------------------------------------------------------------------------+
+; Output Port ; Comment                                                                               ;
++-------------+---------------------------------------------------------------------------------------+
+; d[0]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[1]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[2]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[3]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[4]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[5]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[6]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[7]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------+---------------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Unconstrained Input Ports                                                                              ;
-+-----------------+--------------------------------------------------------------------------------------+
-; Input Port      ; Comment                                                                              ;
-+-----------------+--------------------------------------------------------------------------------------+
-; ram_data_bus[0] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[1] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[2] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[3] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[4] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[5] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[6] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[7] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; reset           ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+-----------------+--------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                         ;
++------------+--------------------------------------------------------------------------------------+
+; Input Port ; Comment                                                                              ;
++------------+--------------------------------------------------------------------------------------+
+; a[0]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; a[1]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; a[2]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; a[3]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; a[4]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; a[5]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[0]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[1]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[2]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[3]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[4]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[5]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[6]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[7]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; oe_n       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; we_n       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++------------+--------------------------------------------------------------------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------+
-; Unconstrained Output Ports                                                                              ;
-+-----------------+---------------------------------------------------------------------------------------+
-; Output Port     ; Comment                                                                               ;
-+-----------------+---------------------------------------------------------------------------------------+
-; data_out[0]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_out[1]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_out[2]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_out[3]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_out[4]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_out[5]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_out[6]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_out[7]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; oe_n            ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[0]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[1]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[2]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[3]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[4]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[5]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[6]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[7]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[8]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[9]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[10] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[11] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[12] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[13] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[14] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[15] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[16] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[17] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_address[18] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[0] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[1] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[2] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[3] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[4] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[5] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[6] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_data_bus[7] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_oe_n        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ram_we_n        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_mode[0]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_state[0]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_state[1]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_state[2]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; we_n            ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+-----------------+---------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                          ;
++-------------+---------------------------------------------------------------------------------------+
+; Output Port ; Comment                                                                               ;
++-------------+---------------------------------------------------------------------------------------+
+; d[0]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[1]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[2]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[3]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[4]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[5]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[6]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; d[7]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------+---------------------------------------------------------------------------------------+
 
 
 +--------------------------+
@@ -635,11 +254,11 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Thu Apr 15 20:30:50 2021
+    Info: Processing started: Fri Apr 16 15:38:24 2021
 Info: Command: quartus_sta test_ram -c test_ram
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
 Info (334003): Started post-fitting delay annotation
@@ -649,24 +268,13 @@ Info (332142): No user constrained base clocks found in the design. Calling "der
 Info (332105): Deriving Clocks
     Info (332105): create_clock -period 1.000 -name clk clk
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
+Info (332140): No fmax paths to report
 Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
+Info (332140): No Setup paths to report
+Info (332140): No Hold paths to report
+Info (332140): No Recovery paths to report
+Info (332140): No Removal paths to report
 Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -8.964
-    Info (332119):     Slack       End Point TNS Clock 
-    Info (332119): ========= =================== =====================
-    Info (332119):    -8.964            -233.716 clk 
-Info (332146): Worst-case hold slack is 1.651
-    Info (332119):     Slack       End Point TNS Clock 
-    Info (332119): ========= =================== =====================
-    Info (332119):     1.651               0.000 clk 
-Info (332146): Worst-case recovery slack is -6.156
-    Info (332119):     Slack       End Point TNS Clock 
-    Info (332119): ========= =================== =====================
-    Info (332119):    -6.156            -110.808 clk 
-Info (332146): Worst-case removal slack is 6.602
-    Info (332119):     Slack       End Point TNS Clock 
-    Info (332119): ========= =================== =====================
-    Info (332119):     6.602               0.000 clk 
 Info (332146): Worst-case minimum pulse width slack is -2.289
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
@@ -675,9 +283,9 @@ Info (332001): The selected device family is not supported by the report_metasta
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 4652 megabytes
-    Info: Processing ended: Thu Apr 15 20:30:51 2021
-    Info: Elapsed time: 00:00:01
+    Info: Peak virtual memory: 4678 megabytes
+    Info: Processing ended: Fri Apr 16 15:38:26 2021
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:01
 
 
