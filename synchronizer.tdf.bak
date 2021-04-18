@@ -1,0 +1,29 @@
+PARAMETERS
+(
+	bus_size = 2
+);
+
+
+subdesign synchronizer
+(
+	clk: input;				-- Clock principal
+	i[bus_size-1..0]: input;
+	enable: input = Vcc;
+	
+	stable: output;
+	o[bus_size-1..0]: output;
+)
+variable
+	regs[bus_size-1..0][3..0]: dffe;
+begin
+	regs[][3..0].clk = clk;
+	regs[][0].d = i[];
+	regs[][3..1].d = regs[][2..0].q;
+	o[] = regs[][3].q;
+	stable = (regs[][2] == regs[][1]) and (regs[][1] == regs[][0]);
+	regs[][3].ena = stable;
+	regs[][2..0].ena = enable;
+end;
+
+
+-- CONSTANT __constant_name = __constant_value;

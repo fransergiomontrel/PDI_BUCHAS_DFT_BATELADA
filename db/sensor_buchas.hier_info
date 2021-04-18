@@ -1,6 +1,6 @@
-|sensor_buchas_CPLD
+|sensor_buchas
 test_addr_clr <= AM_addr_clr.DB_MAX_OUTPUT_PORT_TYPE
-clk => acquisition_module:inst11.clk
+clk => acquisition_module:inst13.clk
 clk => inst1.CLK
 clk => host_interface:Host_interface.clk
 clk => switch:inst6.clk
@@ -45,6 +45,10 @@ test_AM_adc_sclk <= AM_adc_sclk.DB_MAX_OUTPUT_PORT_TYPE
 test_AM_adc_convst <= AM_adc_convst.DB_MAX_OUTPUT_PORT_TYPE
 host_MISO <= host_interface:Host_interface.host_MISO
 host_busy <= host_interface:Host_interface.host_busy
+test_RDM_busy <= RDM_busy.DB_MAX_OUTPUT_PORT_TYPE
+test_AM_busy <= AM_busy.DB_MAX_OUTPUT_PORT_TYPE
+test_AM_changing_mode <= AM_changing_mode.DB_MAX_OUTPUT_PORT_TYPE
+test_HI_changing_mode <= HI_changing_mode.DB_MAX_OUTPUT_PORT_TYPE
 adc_convst[0] <= adc_interface:inst4.adc_convst[0]
 adc_convst[1] <= adc_interface:inst4.adc_convst[1]
 adc_convst[2] <= adc_interface:inst4.adc_convst[2]
@@ -88,12 +92,9 @@ ram_address[15] <= RAM_interface:inst.ram_address[15]
 ram_address[16] <= RAM_interface:inst.ram_address[16]
 ram_address[17] <= RAM_interface:inst.ram_address[17]
 ram_address[18] <= RAM_interface:inst.ram_address[18]
-test_sm_state[0] <= <GND>
-test_sm_state[1] <= <GND>
-test_sm_state[2] <= <GND>
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11
+|sensor_buchas|acquisition_module:inst13
 clk => dffes:start_ff.clk
 clk => acquisition_ctrl:ctrl.clk
 clk => acquisition_serializer:serializer.clk
@@ -130,7 +131,7 @@ data[6] <= acquisition_serializer:serializer.data[6]
 data[7] <= acquisition_serializer:serializer.data[7]
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|dffes:start_ff
+|sensor_buchas|acquisition_module:inst13|dffes:start_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -141,7 +142,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl
 clk => counter:clock_counter.clk
 clk => counter:samples_counter.clk
 clk => dffes:convst_ff.clk
@@ -184,7 +185,7 @@ test_samples_counter[0] <= counter:samples_counter.o[0]
 test_samples_counter[1] <= counter:samples_counter.o[1]
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|counter:clock_counter
 clk => ffs[8].CLK
 clk => ffs[7].CLK
 clk => ffs[6].CLK
@@ -209,7 +210,7 @@ o[7] <= ffs[7].DB_MAX_OUTPUT_PORT_TYPE
 o[8] <= ffs[8].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|counter:samples_counter
 clk => ffs[1].CLK
 clk => ffs[0].CLK
 sreset => _.IN1
@@ -220,7 +221,7 @@ o[0] <= ffs[0].DB_MAX_OUTPUT_PORT_TYPE
 o[1] <= ffs[1].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:convst_ff
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:convst_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -231,7 +232,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:serialize_ff
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:serialize_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -242,7 +243,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:store_ff
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:store_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -253,7 +254,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:busy_ff
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:busy_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -264,7 +265,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer
 sreset => dffes:serialize_ok_ff.sclr
 sreset => counter:count.sreset
 clk => dffes:div2_clock.clk
@@ -407,7 +408,7 @@ adc_sdi[5] => dffes:data_buffer[5][0].d
 adc_sclk <= dffes:div2_clock.q
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][15]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][15]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -418,7 +419,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][14]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][14]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -429,7 +430,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][13]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][13]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -440,7 +441,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][12]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][12]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -451,7 +452,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][11]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][11]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -462,7 +463,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][10]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][10]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -473,7 +474,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][9]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][9]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -484,7 +485,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][8]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][8]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -495,7 +496,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][7]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][7]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -506,7 +507,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][6]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][6]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -517,7 +518,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][5]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][5]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -528,7 +529,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][4]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][4]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -539,7 +540,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][3]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][3]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -550,7 +551,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][2]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][2]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -561,7 +562,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][1]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][1]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -572,7 +573,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][0]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][0]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -583,7 +584,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][15]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][15]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -594,7 +595,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][14]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][14]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -605,7 +606,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][13]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][13]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -616,7 +617,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][12]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][12]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -627,7 +628,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][11]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][11]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -638,7 +639,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][10]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][10]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -649,7 +650,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][9]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][9]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -660,7 +661,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][8]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][8]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -671,7 +672,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][7]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][7]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -682,7 +683,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][6]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][6]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -693,7 +694,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][5]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][5]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -704,7 +705,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][4]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][4]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -715,7 +716,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][3]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][3]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -726,7 +727,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][2]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][2]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -737,7 +738,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][1]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][1]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -748,7 +749,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][0]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][0]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -759,7 +760,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][15]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][15]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -770,7 +771,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][14]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][14]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -781,7 +782,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][13]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][13]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -792,7 +793,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][12]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][12]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -803,7 +804,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][11]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][11]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -814,7 +815,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][10]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][10]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -825,7 +826,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][9]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][9]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -836,7 +837,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][8]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][8]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -847,7 +848,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][7]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][7]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -858,7 +859,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][6]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][6]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -869,7 +870,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][5]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][5]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -880,7 +881,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][4]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][4]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -891,7 +892,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][3]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][3]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -902,7 +903,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][2]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][2]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -913,7 +914,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][1]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][1]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -924,7 +925,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][0]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][0]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -935,7 +936,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][15]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][15]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -946,7 +947,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][14]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][14]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -957,7 +958,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][13]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][13]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -968,7 +969,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][12]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][12]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -979,7 +980,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][11]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][11]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -990,7 +991,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][10]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][10]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1001,7 +1002,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][9]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][9]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1012,7 +1013,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][8]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][8]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1023,7 +1024,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][7]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][7]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1034,7 +1035,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][6]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][6]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1045,7 +1046,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][5]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][5]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1056,7 +1057,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][4]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][4]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1067,7 +1068,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][3]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][3]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1078,7 +1079,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][2]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][2]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1089,7 +1090,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][1]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][1]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1100,7 +1101,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][0]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][0]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1111,7 +1112,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][15]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][15]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1122,7 +1123,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][14]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][14]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1133,7 +1134,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][13]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][13]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1144,7 +1145,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][12]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][12]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1155,7 +1156,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][11]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][11]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1166,7 +1167,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][10]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][10]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1177,7 +1178,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][9]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][9]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1188,7 +1189,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][8]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][8]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1199,7 +1200,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][7]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][7]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1210,7 +1211,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][6]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][6]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1221,7 +1222,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][5]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][5]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1232,7 +1233,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][4]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][4]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1243,7 +1244,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][3]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][3]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1254,7 +1255,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][2]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][2]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1265,7 +1266,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][1]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][1]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1276,7 +1277,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][0]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][0]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1287,7 +1288,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][15]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][15]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1298,7 +1299,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][14]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][14]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1309,7 +1310,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][13]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][13]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1320,7 +1321,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][12]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][12]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1331,7 +1332,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][11]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][11]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1342,7 +1343,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][10]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][10]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1353,7 +1354,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][9]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][9]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1364,7 +1365,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][8]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][8]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1375,7 +1376,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][7]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][7]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1386,7 +1387,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][6]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][6]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1397,7 +1398,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][5]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][5]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1408,7 +1409,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][4]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][4]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1419,7 +1420,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][3]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][3]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1430,7 +1431,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][2]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][2]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1441,7 +1442,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][1]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][1]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1452,7 +1453,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][0]
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][0]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1463,7 +1464,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|counter:count
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|counter:count
 clk => ffs[4].CLK
 clk => ffs[3].CLK
 clk => ffs[2].CLK
@@ -1480,7 +1481,7 @@ o[3] <= ffs[3].DB_MAX_OUTPUT_PORT_TYPE
 o[4] <= ffs[4].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:div2_clock
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:div2_clock
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1491,7 +1492,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:serialize_ok_ff
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:serialize_ok_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1502,7 +1503,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_store:storer
+|sensor_buchas|acquisition_module:inst13|acquisition_store:storer
 clk => dffes:we_n_ff.clk
 clk => dffes:cs_n_ff.clk
 clk => counter:channel_counter.clk
@@ -1528,7 +1529,7 @@ test_sm[1] <= test_sm[1].DB_MAX_OUTPUT_PORT_TYPE
 test_sm[2] <= test_sm[2].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_store:storer|dffes:we_n_ff
+|sensor_buchas|acquisition_module:inst13|acquisition_store:storer|dffes:we_n_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1539,7 +1540,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_store:storer|dffes:cs_n_ff
+|sensor_buchas|acquisition_module:inst13|acquisition_store:storer|dffes:cs_n_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1550,7 +1551,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter
+|sensor_buchas|acquisition_module:inst13|acquisition_store:storer|counter:channel_counter
 clk => ffs[3].CLK
 clk => ffs[2].CLK
 clk => ffs[1].CLK
@@ -1565,7 +1566,7 @@ o[2] <= ffs[2].DB_MAX_OUTPUT_PORT_TYPE
 o[3] <= ffs[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|host_interface:Host_interface
+|sensor_buchas|host_interface:Host_interface
 clk => mode_selector:mode_sel.clk
 sreset => mode_selector:mode_sel.sreset
 busy => _.IN0
@@ -1589,7 +1590,7 @@ host_busy <= host_busy.DB_MAX_OUTPUT_PORT_TYPE
 host_MISO <= MISO.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|host_interface:Host_interface|mode_selector:mode_sel
+|sensor_buchas|host_interface:Host_interface|mode_selector:mode_sel
 clk => synchronizer:sync.clk
 clk => dffes:ready_ff.clk
 clk => dffes:changing_ff.clk
@@ -1609,7 +1610,7 @@ changing <= dffes:changing_ff.q
 stable <= synchronizer:sync.stable
 
 
-|sensor_buchas_CPLD|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync
+|sensor_buchas|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync
 clk => regs[1][3].CLK
 clk => regs[1][2].CLK
 clk => regs[1][1].CLK
@@ -1631,7 +1632,7 @@ o[0] <= regs[0][3].DB_MAX_OUTPUT_PORT_TYPE
 o[1] <= regs[1][3].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|host_interface:Host_interface|mode_selector:mode_sel|dffes:changing_ff
+|sensor_buchas|host_interface:Host_interface|mode_selector:mode_sel|dffes:changing_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1642,7 +1643,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|host_interface:Host_interface|mode_selector:mode_sel|dffes:ready_ff
+|sensor_buchas|host_interface:Host_interface|mode_selector:mode_sel|dffes:ready_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1653,7 +1654,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]
+|sensor_buchas|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1664,7 +1665,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]
+|sensor_buchas|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1675,7 +1676,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|switch:inst6
+|sensor_buchas|switch:inst6
 clk => ~NO_FANOUT~
 sreset => ~NO_FANOUT~
 HI_mode[0] => RI_mode[0].DATAIN
@@ -1793,7 +1794,7 @@ RDM_MISO => HI_MISO~1.IN1
 RDM_busy => HI_busy.IN0
 
 
-|sensor_buchas_CPLD|read_data_module:inst2
+|sensor_buchas|read_data_module:inst2
 clk => dffes:oe_n_FF.clk
 clk => dffes:load_parallel_FF.clk
 clk => dffes:init_shift_FF.clk
@@ -1836,7 +1837,7 @@ test_state[2] <= test_state[2].DB_MAX_OUTPUT_PORT_TYPE
 test_state[3] <= test_state[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|read_data_module:inst2|shift_reg_2x:shift
+|sensor_buchas|read_data_module:inst2|shift_reg_2x:shift
 clk => control_shift[7].IN0
 clk => init_control.IN0
 clk => data_shift[7].IN0
@@ -1894,7 +1895,7 @@ test_shift[6] <= control_shift[6].DB_MAX_OUTPUT_PORT_TYPE
 test_shift[7] <= control_shift[7].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|read_data_module:inst2|dffes:oe_n_FF
+|sensor_buchas|read_data_module:inst2|dffes:oe_n_FF
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1905,7 +1906,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|read_data_module:inst2|dffes:init_shift_FF
+|sensor_buchas|read_data_module:inst2|dffes:init_shift_FF
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1916,7 +1917,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|read_data_module:inst2|dffes:load_parallel_FF
+|sensor_buchas|read_data_module:inst2|dffes:load_parallel_FF
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1927,7 +1928,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|read_data_module:inst2|dffes:addr_inc_FF
+|sensor_buchas|read_data_module:inst2|dffes:addr_inc_FF
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1938,7 +1939,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|read_data_module:inst2|dffes:busy_ff
+|sensor_buchas|read_data_module:inst2|dffes:busy_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1949,7 +1950,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|adc_interface:inst4
+|sensor_buchas|adc_interface:inst4
 clk => ~NO_FANOUT~
 sreset => disable_output.IN1
 changing_mode => disable_output.IN0
@@ -2021,7 +2022,7 @@ adc_rvs[4] => ~NO_FANOUT~
 adc_rvs[5] => ~NO_FANOUT~
 
 
-|sensor_buchas_CPLD|RAM_interface:inst
+|sensor_buchas|RAM_interface:inst
 clk => lpm_counter:address_counter.clock
 sreset => _.IN1
 addr_clr => _.IN0
@@ -2083,7 +2084,7 @@ data_out[6] <= driver[6].DB_MAX_OUTPUT_PORT_TYPE
 data_out[7] <= driver[7].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas_CPLD|RAM_interface:inst|lpm_counter:address_counter
+|sensor_buchas|RAM_interface:inst|lpm_counter:address_counter
 clock => cntr_ici:auto_generated.clock
 clk_en => ~NO_FANOUT~
 cnt_en => cntr_ici:auto_generated.cnt_en
@@ -2154,7 +2155,7 @@ eq[14] <= <GND>
 eq[15] <= <GND>
 
 
-|sensor_buchas_CPLD|RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated
+|sensor_buchas|RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated
 clock => counter_cella0.CLK
 clock => counter_cella1.CLK
 clock => counter_cella2.CLK

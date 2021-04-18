@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "MAX II"
 set_global_assignment -name DEVICE EPM1270T144C5
-set_global_assignment -name TOP_LEVEL_ENTITY RAM1
+set_global_assignment -name TOP_LEVEL_ENTITY test_RAM
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:34:26  APRIL 15, 2021"
 set_global_assignment -name LAST_QUARTUS_VERSION "20.1.1 Lite Edition"
@@ -100,9 +100,14 @@ set_location_assignment PIN_91 -to cs_n
 set_location_assignment PIN_93 -to oe_n
 set_location_assignment PIN_94 -to we_n
 set_global_assignment -name SEARCH_PATH "c:\\sensorbuchasv2"
+set_global_assignment -name SDC_FILE test_ram.sdc
 set_global_assignment -name VERILOG_FILE single_port_ram.v
 set_global_assignment -name AHDL_FILE test_RAM.tdf
 set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform.vwf
 set_global_assignment -name VECTOR_WAVEFORM_FILE single_port_ram.vwf
 set_global_assignment -name BDF_FILE RAM1.bdf
 set_global_assignment -name VECTOR_WAVEFORM_FILE RAM1.vwf
+set_global_assignment -name BDF_FILE test_com_ram.bdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_com_ram.vwf
+set_global_assignment -name AHDL_FILE stepper.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE stepper.vwf

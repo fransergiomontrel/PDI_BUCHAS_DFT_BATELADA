@@ -26,6 +26,7 @@ subdesign acquisition_module(
 	we_n: output;
 	cs_n: output;
 	data[7..0]: output;
+
 )
 variable
 	start_ff: dffes;
@@ -67,5 +68,6 @@ begin
 	we_n = storer.we_n;
 	addr_inc = storer.addr_inc;
 	data[] = serializer.data[];
+
 end;
 

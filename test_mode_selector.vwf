@@ -1,14 +1,14 @@
 /*<simulation_settings>
-<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off SensorBuchas_CPLD -c SensorBuchas_CPLD --vector_source="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/teste_mode_selector.vwf" --testbench_file="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/teste_mode_selector.vwf.vt"</ftestbench_cmd>
-<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off SensorBuchas_CPLD -c SensorBuchas_CPLD --vector_source="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/teste_mode_selector.vwf" --testbench_file="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/teste_mode_selector.vwf.vt"</ttestbench_cmd>
-<fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/" SensorBuchas_CPLD -c SensorBuchas_CPLD</fnetlist_cmd>
-<tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/" SensorBuchas_CPLD -c SensorBuchas_CPLD</tnetlist_cmd>
+<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="C:/SensorBuchasV2/test_mode_selector.vwf" --testbench_file="C:/SensorBuchasV2/simulation/qsim/test_mode_selector.vwf.vt"</ftestbench_cmd>
+<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="C:/SensorBuchasV2/test_mode_selector.vwf" --testbench_file="C:/SensorBuchasV2/simulation/qsim/test_mode_selector.vwf.vt"</ttestbench_cmd>
+<fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="C:/SensorBuchasV2/simulation/qsim/" sensor_buchas -c sensor_buchas</fnetlist_cmd>
+<tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="C:/SensorBuchasV2/simulation/qsim/" sensor_buchas -c sensor_buchas</tnetlist_cmd>
 <modelsim_script>onerror {exit -code 1}
 vlib work
-vlog -work work SensorBuchas_CPLD.vo
-vlog -work work teste_mode_selector.vwf.vt
+vlog -work work sensor_buchas.vo
+vlog -work work test_mode_selector.vwf.vt
 vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.mode_selector_vlg_vec_tst
-vcd file -direction SensorBuchas_CPLD.msim.vcd
+vcd file -direction sensor_buchas.msim.vcd
 vcd add -internal mode_selector_vlg_vec_tst/*
 vcd add -internal mode_selector_vlg_vec_tst/i1/*
 proc simTimestamp {} {
@@ -20,17 +20,13 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
-
-
-
-
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
-vlog -work work SensorBuchas_CPLD.vo
-vlog -work work teste_mode_selector.vwf.vt
+vlog -work work sensor_buchas.vo
+vlog -work work test_mode_selector.vwf.vt
 vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.mode_selector_vlg_vec_tst
-vcd file -direction SensorBuchas_CPLD.msim.vcd
+vcd file -direction sensor_buchas.msim.vcd
 vcd add -internal mode_selector_vlg_vec_tst/*
 vcd add -internal mode_selector_vlg_vec_tst/i1/*
 proc simTimestamp {} {
@@ -42,10 +38,6 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
-
-
-
-
 </modelsim_script_timing>
 <hdl_lang>verilog</hdl_lang>
 </simulation_settings>*/
@@ -184,46 +176,6 @@ SIGNAL("mode_out[0]")
 	PARENT = "mode_out";
 }
 
-SIGNAL("state")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = BUS;
-	WIDTH = 3;
-	LSB_INDEX = 0;
-	DIRECTION = OUTPUT;
-	PARENT = "";
-}
-
-SIGNAL("state[2]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = OUTPUT;
-	PARENT = "state";
-}
-
-SIGNAL("state[1]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = OUTPUT;
-	PARENT = "state";
-}
-
-SIGNAL("state[0]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = OUTPUT;
-	PARENT = "state";
-}
-
 SIGNAL("stable")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
@@ -336,33 +288,6 @@ TRANSITION_LIST("mode_out[0]")
 		REPEAT = 1;
 		LEVEL X FOR 299.0;
 		LEVEL 0 FOR 701.0;
-	}
-}
-
-TRANSITION_LIST("state[2]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL X FOR 1000.0;
-	}
-}
-
-TRANSITION_LIST("state[1]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL X FOR 1000.0;
-	}
-}
-
-TRANSITION_LIST("state[0]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL X FOR 1000.0;
 	}
 }
 
@@ -484,50 +409,10 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "state";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Unsigned;
-	TREE_INDEX = 10;
-	TREE_LEVEL = 0;
-	CHILDREN = 11, 12, 13;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "state[2]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Unsigned;
-	TREE_INDEX = 11;
-	TREE_LEVEL = 1;
-	PARENT = 10;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "state[1]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Unsigned;
-	TREE_INDEX = 12;
-	TREE_LEVEL = 1;
-	PARENT = 10;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "state[0]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Unsigned;
-	TREE_INDEX = 13;
-	TREE_LEVEL = 1;
-	PARENT = 10;
-}
-
-DISPLAY_LINE
-{
 	CHANNEL = "stable";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 14;
+	TREE_INDEX = 10;
 	TREE_LEVEL = 0;
 }
 
@@ -536,7 +421,7 @@ DISPLAY_LINE
 	CHANNEL = "change_ok";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 15;
+	TREE_INDEX = 11;
 	TREE_LEVEL = 0;
 }
 

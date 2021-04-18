@@ -7,7 +7,7 @@ Note: if both ModelSim-Altera and ModelSim executables are available, ModelSim-A
 
 **** Generating the ModelSim Testbench ****
 
-quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/test_generate_values.vwf" --testbench_file="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/test_generate_values.vwf.vt"
+quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="C:/sensorbuchasv2/sensor_buchas.vwf" --testbench_file="C:/SensorBuchasV2/simulation/qsim/sensor_buchas.vwf.vt"
 
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
@@ -26,9 +26,11 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Sat Apr 10 12:40:30 2021
-Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source=//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/test_generate_values.vwf --testbench_file=//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/test_generate_values.vwf.vt
+    Info: Processing started: Sun Apr 18 18:34:22 2021
+Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source=C:/sensorbuchasv2/sensor_buchas.vwf --testbench_file=C:/SensorBuchasV2/simulation/qsim/sensor_buchas.vwf.vt
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+
+ing test bench files
 
 Completed successfully. 
 
@@ -36,7 +38,7 @@ Completed successfully.
 
 **** Generating the functional simulation netlist ****
 
-quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/" sensor_buchas -c sensor_buchas
+quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="C:/SensorBuchasV2/simulation/qsim/" sensor_buchas -c sensor_buchas
 
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
@@ -55,21 +57,21 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Sat Apr 10 12:40:31 2021
-Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory=//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/ sensor_buchas -c sensor_buchas
+    Info: Processing started: Sun Apr 18 18:34:23 2021
+Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory=C:/SensorBuchasV2/simulation/qsim/ sensor_buchas -c sensor_buchas
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (204019): Generated file sensor_buchas.vo in folder "//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim//" for EDA simulation tool
+Info (204019): Generated file sensor_buchas.vo in folder "C:/SensorBuchasV2/simulation/qsim//" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4611 megabytes
-    Info: Processing ended: Sat Apr 10 12:40:31 2021
-    Info: Elapsed time: 00:00:00
+    Info: Peak virtual memory: 4615 megabytes
+    Info: Processing ended: Sun Apr 18 18:34:24 2021
+    Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 
 Completed successfully. 
 
 **** Generating the ModelSim .do script ****
 
-//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/sensor_buchas.do generated.
+C:/SensorBuchasV2/simulation/qsim/sensor_buchas.do generated.
 
 Completed successfully. 
 
@@ -86,53 +88,53 @@ Reading pref.tcl
 # ** Warning: (vlib-34) Library already exists at "work".
 
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 12:40:33 on Apr 10,2021
+# Start time: 18:34:25 on Apr 18,2021
 # vlog -work work sensor_buchas.vo 
-
-# -- Compiling module generate_values
+# -- Compiling module sensor_buchas
 
 # 
 # Top level modules:
-# 	generate_values
-# End time: 12:40:33 on Apr 10,2021, Elapsed time: 0:00:00
+# 	sensor_buchas
+# End time: 18:34:25 on Apr 18,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
+
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 12:40:33 on Apr 10,2021
-# vlog -work work test_generate_values.vwf.vt 
+# Start time: 18:34:25 on Apr 18,2021
+# vlog -work work sensor_buchas.vwf.vt 
+# -- Compiling module sensor_buchas_vlg_vec_tst
 
-# -- Compiling module generate_values_vlg_vec_tst
 # 
 # Top level modules:
-# 	generate_values_vlg_vec_tst
-# End time: 12:40:34 on Apr 10,2021, Elapsed time: 0:00:01
+# 	sensor_buchas_vlg_vec_tst
+# End time: 18:34:26 on Apr 18,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 
-# vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.generate_values_vlg_vec_tst 
-# Start time: 12:40:34 on Apr 10,2021
-# Loading work.generate_values_vlg_vec_tst
-# Loading work.generate_values
+# vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.sensor_buchas_vlg_vec_tst 
+# Start time: 18:34:26 on Apr 18,2021
+# Loading work.sensor_buchas_vlg_vec_tst
+# Loading work.sensor_buchas
 # Loading maxii_ver.maxii_io
 # Loading maxii_ver.maxii_lcell
 # Loading maxii_ver.maxii_asynch_lcell
 # Loading maxii_ver.maxii_lcell_register
 # after#25
-# ** Note: $finish    : test_generate_values.vwf.vt(49)
-#    Time: 1 us  Iteration: 0  Instance: /generate_values_vlg_vec_tst
 
-# End time: 12:40:34 on Apr 10,2021, Elapsed time: 0:00:00
+# ** Note: $finish    : sensor_buchas.vwf.vt(105)
+#    Time: 100 us  Iteration: 0  Instance: /sensor_buchas_vlg_vec_tst
+# End time: 18:34:27 on Apr 18,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 
 Completed successfully. 
 
 **** Converting ModelSim VCD to vector waveform ****
 
-Reading //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/testes/test_generate_values.vwf...
+Reading C:/SensorBuchasV2/sensor_buchas.vwf...
 
-Reading //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/sensor_buchas.msim.vcd...
+Reading C:/SensorBuchasV2/simulation/qsim/sensor_buchas.msim.vcd...
 
 Processing channel transitions... 
 
-Writing the resulting VWF to //Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/sensor_buchas_20210410124035.sim.vwf
+Writing the resulting VWF to C:/SensorBuchasV2/simulation/qsim/sensor_buchas_20210418183427.sim.vwf
 
 Finished VCD to VWF conversion.
 

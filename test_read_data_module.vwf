@@ -1,14 +1,14 @@
 /*<simulation_settings>
-<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off SensorBuchas_CPLD -c SensorBuchas_CPLD --vector_source="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/test_read_data_module.vwf" --testbench_file="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/test_read_data_module.vwf.vt"</ftestbench_cmd>
-<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off SensorBuchas_CPLD -c SensorBuchas_CPLD --vector_source="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/test_read_data_module.vwf" --testbench_file="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/test_read_data_module.vwf.vt"</ttestbench_cmd>
-<fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/" SensorBuchas_CPLD -c SensorBuchas_CPLD</fnetlist_cmd>
-<tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/simulation/qsim/" SensorBuchas_CPLD -c SensorBuchas_CPLD</tnetlist_cmd>
+<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="C:/SensorBuchasV2/test_read_data_module.vwf" --testbench_file="C:/SensorBuchasV2/simulation/qsim/test_read_data_module.vwf.vt"</ftestbench_cmd>
+<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="C:/SensorBuchasV2/test_read_data_module.vwf" --testbench_file="C:/SensorBuchasV2/simulation/qsim/test_read_data_module.vwf.vt"</ttestbench_cmd>
+<fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="C:/SensorBuchasV2/simulation/qsim/" sensor_buchas -c sensor_buchas</fnetlist_cmd>
+<tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="C:/SensorBuchasV2/simulation/qsim/" sensor_buchas -c sensor_buchas</tnetlist_cmd>
 <modelsim_script>onerror {exit -code 1}
 vlib work
-vlog -work work SensorBuchas_CPLD.vo
+vlog -work work sensor_buchas.vo
 vlog -work work test_read_data_module.vwf.vt
 vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.read_data_module_vlg_vec_tst
-vcd file -direction SensorBuchas_CPLD.msim.vcd
+vcd file -direction sensor_buchas.msim.vcd
 vcd add -internal read_data_module_vlg_vec_tst/*
 vcd add -internal read_data_module_vlg_vec_tst/i1/*
 proc simTimestamp {} {
@@ -20,27 +20,13 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
-vlog -work work SensorBuchas_CPLD.vo
+vlog -work work sensor_buchas.vo
 vlog -work work test_read_data_module.vwf.vt
 vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.read_data_module_vlg_vec_tst
-vcd file -direction SensorBuchas_CPLD.msim.vcd
+vcd file -direction sensor_buchas.msim.vcd
 vcd add -internal read_data_module_vlg_vec_tst/*
 vcd add -internal read_data_module_vlg_vec_tst/i1/*
 proc simTimestamp {} {
@@ -52,20 +38,6 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </modelsim_script_timing>
 <hdl_lang>verilog</hdl_lang>
 </simulation_settings>*/

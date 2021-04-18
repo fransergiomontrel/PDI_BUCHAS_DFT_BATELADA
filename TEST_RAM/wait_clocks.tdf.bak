@@ -1,0 +1,39 @@
+
+parameters(
+	N_CLOCKS = 2
+);
+
+subdesign wait_states(
+	clk: input;
+	start: input;
+	waiting: output;
+	i[N_BITS-1..0]: output;
+)
+variable
+	IF N_CLOCKS != 0 GENERATE
+		cont[N_BITS-1..0]: dffeas;
+		ff_out: dff;
+		increment[N_BITS-1..0]: node;
+	END GENERATE;
+begin
+	IF N_CLOCKS == 0 GENERATE
+		waiting = Gnd;
+	ELSE GENERATE
+		cont[].clk = clk;
+		cont[].sclr = start;
+
+		IF N_CLOCKS == 1 GENERATE
+			cont[].d = Vcc;
+			waiting = !cont[].q;
+		ELSE GENERATE
+			ff_out.clk = clk;
+			increment[] = cont[].q+1;
+			cont[].d = increment[];
+			ff_out.d = (increment[] != N_CLOCKS);
+			waiting = ff_out.q;
+			i[] = increment[];
+		END GENERATE;
+
+		
+	END GENERATE;
+end;

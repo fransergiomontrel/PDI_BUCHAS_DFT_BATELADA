@@ -1,0 +1,29 @@
+
+parameters(
+	N_CLOCKS = 3
+);
+
+subdesign wait_clocks(
+	clk: input;
+	start: input;
+	waiting: output;
+)
+variable
+	IF N_CLOCKS != 0 GENERATE
+		ffs[N_CLOCKS..0]: dff;
+	END GENERATE;
+begin
+	IF N_CLOCKS == 0 GENERATE
+		waiting = Gnd;
+	ELSE GENERATE
+		ffs[].clk = clk;
+		waiting = ffs[N_CLOCKS].q;
+		if start then
+			ffs[N_CLOCKS..1].d = Vcc;
+		else
+			ffs[N_CLOCKS..1].d = ffs[N_CLOCKS-1..0].q;
+		end if;
+		ffs[0].d = Gnd;
+	END GENERATE;
+end;
+

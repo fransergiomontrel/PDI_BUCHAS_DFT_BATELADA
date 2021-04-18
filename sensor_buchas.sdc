@@ -20,10 +20,10 @@
 ## PROGRAM "Quartus Prime"
 ## VERSION "Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition"
 
-## DATE    "Wed Apr 07 20:28:55 2021"
+## DATE    "Sun Apr 18 15:53:16 2021"
 
 ##
-## DEVICE  "5M1270ZT144C5"
+## DEVICE  "EPM1270T144C5"
 ##
 
 
@@ -40,7 +40,7 @@ set_time_format -unit ns -decimal_places 3
 #**************************************************************
 
 create_clock -name {clk} -period 10.000 -waveform { 0.000 5.000 } [get_ports { clk }]
-create_clock -name {sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff} -period 10.000 -waveform { 0.000 5.000 } [get_registers { sensor_buchas_CPLD:s|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]|ff }]
+create_clock -name {host_SCLK} -period 100.000 -waveform { 0.000 50.000 } [get_ports { host_SCLK }]
 
 
 #**************************************************************
@@ -83,6 +83,8 @@ create_clock -name {sensor_buchas_CPLD:s|host_interface:Host_interface|mode_sele
 # Set False Path
 #**************************************************************
 
+set_false_path  -from  [get_clocks {host_SCLK}]  -to  [get_clocks {clk}]
+set_false_path  -from  [get_clocks {clk}]  -to  [get_clocks {host_SCLK}]
 
 
 #**************************************************************

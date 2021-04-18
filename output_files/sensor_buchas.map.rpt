@@ -1,5 +1,5 @@
 Analysis & Synthesis report for sensor_buchas
-Fri Apr 16 14:15:10 2021
+Sun Apr 18 18:30:25 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -13,19 +13,19 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |sensor_buchas_CPLD|read_data_module:inst2|sm
-  9. State Machine - |sensor_buchas_CPLD|host_interface:Host_interface|mode_selector:mode_sel|sm
- 10. State Machine - |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_store:storer|sm
- 11. State Machine - |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl|sm
+  8. State Machine - |sensor_buchas|read_data_module:inst2|sm
+  9. State Machine - |sensor_buchas|host_interface:Host_interface|mode_selector:mode_sel|sm
+ 10. State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_store:storer|sm
+ 11. State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|sm
  12. General Register Statistics
  13. Inverted Register Statistics
- 14. Parameter Settings for User Entity Instance: acquisition_module:inst11
- 15. Parameter Settings for User Entity Instance: acquisition_module:inst11|acquisition_ctrl:ctrl
- 16. Parameter Settings for User Entity Instance: acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter
- 17. Parameter Settings for User Entity Instance: acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter
- 18. Parameter Settings for User Entity Instance: acquisition_module:inst11|acquisition_serializer:serializer
- 19. Parameter Settings for User Entity Instance: acquisition_module:inst11|acquisition_serializer:serializer|counter:count
- 20. Parameter Settings for User Entity Instance: acquisition_module:inst11|acquisition_store:storer|counter:channel_counter
+ 14. Parameter Settings for User Entity Instance: acquisition_module:inst13
+ 15. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_ctrl:ctrl
+ 16. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_ctrl:ctrl|counter:clock_counter
+ 17. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_ctrl:ctrl|counter:samples_counter
+ 18. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_serializer:serializer
+ 19. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_serializer:serializer|counter:count
+ 20. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_store:storer|counter:channel_counter
  21. Parameter Settings for User Entity Instance: host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync
  22. Parameter Settings for User Entity Instance: RAM_interface:inst
  23. Parameter Settings for User Entity Instance: RAM_interface:inst|lpm_counter:address_counter
@@ -56,13 +56,13 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Fri Apr 16 14:15:10 2021       ;
+; Analysis & Synthesis Status ; Successful - Sun Apr 18 18:30:25 2021       ;
 ; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name               ; sensor_buchas                               ;
-; Top-level Entity Name       ; sensor_buchas_CPLD                          ;
+; Top-level Entity Name       ; sensor_buchas                               ;
 ; Family                      ; MAX II                                      ;
-; Total logic elements        ; 416                                         ;
-; Total pins                  ; 86                                          ;
+; Total logic elements        ; 417                                         ;
+; Total pins                  ; 87                                          ;
 ; Total virtual pins          ; 0                                           ;
 ; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
 +-----------------------------+---------------------------------------------+
@@ -74,7 +74,7 @@ https://fpgasoftware.intel.com/eula.
 ; Option                                                           ; Setting            ; Default Value      ;
 +------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                           ; EPM1270T144C5      ;                    ;
-; Top-level entity name                                            ; sensor_buchas_CPLD ; sensor_buchas      ;
+; Top-level entity name                                            ; sensor_buchas      ; sensor_buchas      ;
 ; Family name                                                      ; MAX II             ; Cyclone V          ;
 ; Use smart compilation                                            ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
@@ -144,8 +144,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 8           ;
-; Maximum allowed            ; 4           ;
+; Number detected on machine ; 2           ;
+; Maximum allowed            ; 2           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
 ; Maximum used               ; 1           ;
@@ -160,31 +160,31 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                                   ; Library ;
 +----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------------+---------+
-; modes.inc                        ; yes             ; User Unspecified File              ; C:/sensorbuchasv2/modes.inc                                                    ;         ;
-; synchronizer.tdf                 ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/synchronizer.tdf                                             ;         ;
-; switch.tdf                       ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/switch.tdf                                                   ;         ;
-; shift_reg_2x.tdf                 ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/shift_reg_2x.tdf                                             ;         ;
-; sensor_buchas_CPLD.bdf           ; yes             ; User Block Diagram/Schematic File  ; C:/sensorbuchasv2/sensor_buchas_CPLD.bdf                                       ;         ;
-; read_data_module.tdf             ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/read_data_module.tdf                                         ;         ;
-; RAM_interface.tdf                ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/RAM_interface.tdf                                            ;         ;
-; mode_selector.tdf                ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/mode_selector.tdf                                            ;         ;
-; host_interface.tdf               ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/host_interface.tdf                                           ;         ;
-; dffes.tdf                        ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/dffes.tdf                                                    ;         ;
-; counter.tdf                      ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/counter.tdf                                                  ;         ;
-; adc_interface.tdf                ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/adc_interface.tdf                                            ;         ;
-; acquisition_store.tdf            ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/acquisition_store.tdf                                        ;         ;
-; acquisition_serializer.tdf       ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/acquisition_serializer.tdf                                   ;         ;
-; acquisition_module.tdf           ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/acquisition_module.tdf                                       ;         ;
-; acquisition_ctrl.tdf             ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/acquisition_ctrl.tdf                                         ;         ;
-; shift_reg_2x.inc                 ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/shift_reg_2x.inc                                             ;         ;
-; counter.inc                      ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/counter.inc                                                  ;         ;
-; dffes.inc                        ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/dffes.inc                                                    ;         ;
+; modes.inc                        ; yes             ; User Unspecified File              ; C:/SensorBuchasV2/modes.inc                                                    ;         ;
+; synchronizer.tdf                 ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/synchronizer.tdf                                             ;         ;
+; switch.tdf                       ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/switch.tdf                                                   ;         ;
+; shift_reg_2x.tdf                 ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/shift_reg_2x.tdf                                             ;         ;
+; read_data_module.tdf             ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/read_data_module.tdf                                         ;         ;
+; RAM_interface.tdf                ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/RAM_interface.tdf                                            ;         ;
+; mode_selector.tdf                ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/mode_selector.tdf                                            ;         ;
+; host_interface.tdf               ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/host_interface.tdf                                           ;         ;
+; dffes.tdf                        ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/dffes.tdf                                                    ;         ;
+; counter.tdf                      ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/counter.tdf                                                  ;         ;
+; adc_interface.tdf                ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/adc_interface.tdf                                            ;         ;
+; acquisition_store.tdf            ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/acquisition_store.tdf                                        ;         ;
+; acquisition_serializer.tdf       ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/acquisition_serializer.tdf                                   ;         ;
+; acquisition_module.tdf           ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/acquisition_module.tdf                                       ;         ;
+; acquisition_ctrl.tdf             ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/acquisition_ctrl.tdf                                         ;         ;
+; sensor_buchas.bdf                ; yes             ; User Block Diagram/Schematic File  ; C:/SensorBuchasV2/sensor_buchas.bdf                                            ;         ;
+; shift_reg_2x.inc                 ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/shift_reg_2x.inc                                             ;         ;
+; counter.inc                      ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/counter.inc                                                  ;         ;
+; dffes.inc                        ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/dffes.inc                                                    ;         ;
 ; lpm_counter.inc                  ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_counter.inc         ;         ;
-; synchronizer.inc                 ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/synchronizer.inc                                             ;         ;
-; mode_selector.inc                ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/mode_selector.inc                                            ;         ;
-; acquisition_ctrl.inc             ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/acquisition_ctrl.inc                                         ;         ;
-; acquisition_serializer.inc       ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/acquisition_serializer.inc                                   ;         ;
-; acquisition_store.inc            ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/acquisition_store.inc                                        ;         ;
+; synchronizer.inc                 ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/synchronizer.inc                                             ;         ;
+; mode_selector.inc                ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/mode_selector.inc                                            ;         ;
+; acquisition_ctrl.inc             ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/acquisition_ctrl.inc                                         ;         ;
+; acquisition_serializer.inc       ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/acquisition_serializer.inc                                   ;         ;
+; acquisition_store.inc            ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/acquisition_store.inc                                        ;         ;
 ; lpm_counter.tdf                  ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_counter.tdf         ;         ;
 ; lpm_constant.inc                 ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_constant.inc        ;         ;
 ; lpm_decode.inc                   ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_decode.inc          ;         ;
@@ -194,7 +194,7 @@ https://fpgasoftware.intel.com/eula.
 ; dffeea.inc                       ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/dffeea.inc              ;         ;
 ; alt_counter_stratix.inc          ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/alt_counter_stratix.inc ;         ;
 ; aglobal201.inc                   ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/aglobal201.inc          ;         ;
-; db/cntr_ici.tdf                  ; yes             ; Auto-Generated Megafunction        ; C:/sensorbuchasv2/db/cntr_ici.tdf                                              ;         ;
+; db/cntr_ici.tdf                  ; yes             ; Auto-Generated Megafunction        ; C:/SensorBuchasV2/db/cntr_ici.tdf                                              ;         ;
 +----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------------+---------+
 
 
@@ -203,20 +203,20 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Total logic elements                        ; 416   ;
-;     -- Combinational with no register       ; 212   ;
+; Total logic elements                        ; 417   ;
+;     -- Combinational with no register       ; 213   ;
 ;     -- Register only                        ; 128   ;
 ;     -- Combinational with a register        ; 76    ;
 ;                                             ;       ;
 ; Logic element usage by number of LUT inputs ;       ;
 ;     -- 4 input functions                    ; 133   ;
 ;     -- 3 input functions                    ; 107   ;
-;     -- 2 input functions                    ; 37    ;
+;     -- 2 input functions                    ; 38    ;
 ;     -- 1 input functions                    ; 10    ;
 ;     -- 0 input functions                    ; 1     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 388   ;
+;     -- normal mode                          ; 389   ;
 ;     -- arithmetic mode                      ; 28    ;
 ;     -- qfbk mode                            ; 0     ;
 ;     -- register cascade mode                ; 0     ;
@@ -225,158 +225,158 @@ https://fpgasoftware.intel.com/eula.
 ;                                             ;       ;
 ; Total registers                             ; 204   ;
 ; Total logic cells in carry chains           ; 31    ;
-; I/O pins                                    ; 86    ;
+; I/O pins                                    ; 87    ;
 ; Maximum fan-out node                        ; clk   ;
 ; Maximum fan-out                             ; 187   ;
-; Total fan-out                               ; 1536  ;
+; Total fan-out                               ; 1542  ;
 ; Average fan-out                             ; 3.06  ;
 +---------------------------------------------+-------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                               ;
-+-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------------------------------------------------------------------------------------+------------------------+--------------+
-; Compilation Hierarchy Node                ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                                      ; Entity Name            ; Library Name ;
-+-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------------------------------------------------------------------------------------+------------------------+--------------+
-; |sensor_buchas_CPLD                       ; 416 (1)     ; 204          ; 0          ; 86   ; 0            ; 212 (0)      ; 128 (1)           ; 76 (0)           ; 31 (0)          ; 0 (0)      ; |sensor_buchas_CPLD                                                                                      ; sensor_buchas_CPLD     ; work         ;
-;    |RAM_interface:inst|                   ; 33 (14)     ; 19           ; 0          ; 0    ; 0            ; 14 (14)      ; 0 (0)             ; 19 (0)           ; 19 (0)          ; 0 (0)      ; |sensor_buchas_CPLD|RAM_interface:inst                                                                   ; RAM_interface          ; work         ;
-;       |lpm_counter:address_counter|       ; 19 (0)      ; 19           ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 19 (0)           ; 19 (0)          ; 0 (0)      ; |sensor_buchas_CPLD|RAM_interface:inst|lpm_counter:address_counter                                       ; lpm_counter            ; work         ;
-;          |cntr_ici:auto_generated|        ; 19 (19)     ; 19           ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 19 (19)          ; 19 (19)         ; 0 (0)      ; |sensor_buchas_CPLD|RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated               ; cntr_ici               ; work         ;
-;    |acquisition_module:inst11|            ; 249 (1)     ; 139          ; 0          ; 0    ; 0            ; 110 (1)      ; 96 (0)            ; 43 (0)           ; 12 (0)          ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11                                                            ; acquisition_module     ; work         ;
-;       |acquisition_ctrl:ctrl|             ; 36 (19)     ; 22           ; 0          ; 0    ; 0            ; 14 (12)      ; 0 (0)             ; 22 (7)           ; 8 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl                                      ; acquisition_ctrl       ; work         ;
-;          |counter:clock_counter|          ; 10 (10)     ; 9            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 9 (9)            ; 8 (8)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter                ; counter                ; work         ;
-;          |counter:samples_counter|        ; 3 (3)       ; 2            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 2 (2)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter              ; counter                ; work         ;
-;          |dffes:busy_ff|                  ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:busy_ff                        ; dffes                  ; work         ;
-;          |dffes:convst_ff|                ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:convst_ff                      ; dffes                  ; work         ;
-;          |dffes:serialize_ff|             ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:serialize_ff                   ; dffes                  ; work         ;
-;          |dffes:store_ff|                 ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:store_ff                       ; dffes                  ; work         ;
-;       |acquisition_serializer:serializer| ; 189 (76)    ; 103          ; 0          ; 0    ; 0            ; 86 (76)      ; 90 (0)            ; 13 (0)           ; 4 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer                          ; acquisition_serializer ; work         ;
-;          |counter:count|                  ; 15 (15)     ; 5            ; 0          ; 0    ; 0            ; 10 (10)      ; 0 (0)             ; 5 (5)            ; 4 (4)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|counter:count            ; counter                ; work         ;
-;          |dffes:data_buffer[0][0]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][0]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[0][10]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][10] ; dffes                  ; work         ;
-;          |dffes:data_buffer[0][11]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][11] ; dffes                  ; work         ;
-;          |dffes:data_buffer[0][12]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][12] ; dffes                  ; work         ;
-;          |dffes:data_buffer[0][13]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][13] ; dffes                  ; work         ;
-;          |dffes:data_buffer[0][14]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][14] ; dffes                  ; work         ;
-;          |dffes:data_buffer[0][15]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][15] ; dffes                  ; work         ;
-;          |dffes:data_buffer[0][1]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][1]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[0][2]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][2]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[0][3]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][3]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[0][4]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][4]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[0][5]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][5]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[0][6]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][6]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[0][7]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][7]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[0][8]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][8]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[0][9]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[0][9]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][0]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][0]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][10]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][10] ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][11]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][11] ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][12]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][12] ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][13]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][13] ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][14]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][14] ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][15]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][15] ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][1]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][1]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][2]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][2]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][3]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][3]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][4]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][4]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][5]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][5]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][6]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][6]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][7]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][7]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][8]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][8]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[1][9]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[1][9]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][0]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][0]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][10]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][10] ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][11]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][11] ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][12]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][12] ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][13]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][13] ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][14]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][14] ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][15]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][15] ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][1]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][1]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][2]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][2]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][3]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][3]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][4]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][4]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][5]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][5]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][6]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][6]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][7]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][7]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][8]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][8]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[2][9]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[2][9]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][0]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][0]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][10]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][10] ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][11]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][11] ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][12]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][12] ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][13]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][13] ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][14]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][14] ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][15]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][15] ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][1]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][1]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][2]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][2]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][3]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][3]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][4]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][4]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][5]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][5]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][6]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][6]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][7]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][7]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][8]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][8]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[3][9]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[3][9]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][0]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][0]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][10]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][10] ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][11]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][11] ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][12]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][12] ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][13]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][13] ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][14]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][14] ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][15]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][15] ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][1]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][1]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][2]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][2]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][3]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][3]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][4]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][4]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][5]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][5]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][6]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][6]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][7]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][7]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][8]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][8]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[4][9]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[4][9]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][0]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][0]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][10]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][10] ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][11]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][11] ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][12]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][12] ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][13]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][13] ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][14]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][14] ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][15]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][15] ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][1]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][1]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][2]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][2]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][3]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][3]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][4]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][4]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][5]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][5]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][6]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][6]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][7]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][7]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][8]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][8]  ; dffes                  ; work         ;
-;          |dffes:data_buffer[5][9]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:data_buffer[5][9]  ; dffes                  ; work         ;
-;          |dffes:div2_clock|               ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:div2_clock         ; dffes                  ; work         ;
-;          |dffes:serialize_ok_ff|          ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_serializer:serializer|dffes:serialize_ok_ff    ; dffes                  ; work         ;
-;       |acquisition_store:storer|          ; 22 (12)     ; 13           ; 0          ; 0    ; 0            ; 9 (5)        ; 5 (4)             ; 8 (3)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_store:storer                                   ; acquisition_store      ; work         ;
-;          |counter:channel_counter|        ; 8 (8)       ; 4            ; 0          ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 4 (4)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_store:storer|counter:channel_counter           ; counter                ; work         ;
-;          |dffes:cs_n_ff|                  ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_store:storer|dffes:cs_n_ff                     ; dffes                  ; work         ;
-;          |dffes:we_n_ff|                  ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_store:storer|dffes:we_n_ff                     ; dffes                  ; work         ;
-;       |dffes:start_ff|                    ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|acquisition_module:inst11|dffes:start_ff                                             ; dffes                  ; work         ;
-;    |adc_interface:inst4|                  ; 49 (49)     ; 0            ; 0          ; 0    ; 0            ; 49 (49)      ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|adc_interface:inst4                                                                  ; adc_interface          ; work         ;
-;    |host_interface:Host_interface|        ; 23 (1)      ; 17           ; 0          ; 0    ; 0            ; 6 (1)        ; 12 (0)            ; 5 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|host_interface:Host_interface                                                        ; host_interface         ; work         ;
-;       |mode_selector:mode_sel|            ; 22 (8)      ; 17           ; 0          ; 0    ; 0            ; 5 (3)        ; 12 (2)            ; 5 (3)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|host_interface:Host_interface|mode_selector:mode_sel                                 ; mode_selector          ; work         ;
-;          |dffes:changing_ff|              ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|host_interface:Host_interface|mode_selector:mode_sel|dffes:changing_ff               ; dffes                  ; work         ;
-;          |dffes:mode_out_ff[0]|           ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]            ; dffes                  ; work         ;
-;          |dffes:mode_out_ff[1]|           ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]            ; dffes                  ; work         ;
-;          |dffes:ready_ff|                 ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|host_interface:Host_interface|mode_selector:mode_sel|dffes:ready_ff                  ; dffes                  ; work         ;
-;          |synchronizer:sync|              ; 10 (10)     ; 8            ; 0          ; 0    ; 0            ; 2 (2)        ; 8 (8)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync               ; synchronizer           ; work         ;
-;    |read_data_module:inst2|               ; 39 (10)     ; 28           ; 0          ; 0    ; 0            ; 11 (3)       ; 19 (3)            ; 9 (4)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|read_data_module:inst2                                                               ; read_data_module       ; work         ;
-;       |dffes:addr_inc_FF|                 ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|read_data_module:inst2|dffes:addr_inc_FF                                             ; dffes                  ; work         ;
-;       |dffes:busy_ff|                     ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|read_data_module:inst2|dffes:busy_ff                                                 ; dffes                  ; work         ;
-;       |dffes:load_parallel_FF|            ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|read_data_module:inst2|dffes:load_parallel_FF                                        ; dffes                  ; work         ;
-;       |dffes:oe_n_FF|                     ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|read_data_module:inst2|dffes:oe_n_FF                                                 ; dffes                  ; work         ;
-;       |shift_reg_2x:shift|                ; 25 (25)     ; 17           ; 0          ; 0    ; 0            ; 8 (8)        ; 15 (15)           ; 2 (2)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|read_data_module:inst2|shift_reg_2x:shift                                            ; shift_reg_2x           ; work         ;
-;    |switch:inst6|                         ; 22 (22)     ; 0            ; 0          ; 0    ; 0            ; 22 (22)      ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas_CPLD|switch:inst6                                                                         ; switch                 ; work         ;
-+-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------------------------------------------------------------------------------------+------------------------+--------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                          ;
++-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------------------------------------------+------------------------+--------------+
+; Compilation Hierarchy Node                ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                                 ; Entity Name            ; Library Name ;
++-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------------------------------------------+------------------------+--------------+
+; |sensor_buchas                            ; 417 (1)     ; 204          ; 0          ; 87   ; 0            ; 213 (0)      ; 128 (1)           ; 76 (0)           ; 31 (0)          ; 0 (0)      ; |sensor_buchas                                                                                      ; sensor_buchas          ; work         ;
+;    |RAM_interface:inst|                   ; 33 (14)     ; 19           ; 0          ; 0    ; 0            ; 14 (14)      ; 0 (0)             ; 19 (0)           ; 19 (0)          ; 0 (0)      ; |sensor_buchas|RAM_interface:inst                                                                   ; RAM_interface          ; work         ;
+;       |lpm_counter:address_counter|       ; 19 (0)      ; 19           ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 19 (0)           ; 19 (0)          ; 0 (0)      ; |sensor_buchas|RAM_interface:inst|lpm_counter:address_counter                                       ; lpm_counter            ; work         ;
+;          |cntr_ici:auto_generated|        ; 19 (19)     ; 19           ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 19 (19)          ; 19 (19)         ; 0 (0)      ; |sensor_buchas|RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated               ; cntr_ici               ; work         ;
+;    |acquisition_module:inst13|            ; 249 (1)     ; 139          ; 0          ; 0    ; 0            ; 110 (1)      ; 96 (0)            ; 43 (0)           ; 12 (0)          ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13                                                            ; acquisition_module     ; work         ;
+;       |acquisition_ctrl:ctrl|             ; 36 (19)     ; 22           ; 0          ; 0    ; 0            ; 14 (12)      ; 0 (0)             ; 22 (7)           ; 8 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl                                      ; acquisition_ctrl       ; work         ;
+;          |counter:clock_counter|          ; 10 (10)     ; 9            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 9 (9)            ; 8 (8)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|counter:clock_counter                ; counter                ; work         ;
+;          |counter:samples_counter|        ; 3 (3)       ; 2            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 2 (2)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|counter:samples_counter              ; counter                ; work         ;
+;          |dffes:busy_ff|                  ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:busy_ff                        ; dffes                  ; work         ;
+;          |dffes:convst_ff|                ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:convst_ff                      ; dffes                  ; work         ;
+;          |dffes:serialize_ff|             ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:serialize_ff                   ; dffes                  ; work         ;
+;          |dffes:store_ff|                 ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:store_ff                       ; dffes                  ; work         ;
+;       |acquisition_serializer:serializer| ; 189 (76)    ; 103          ; 0          ; 0    ; 0            ; 86 (76)      ; 90 (0)            ; 13 (0)           ; 4 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer                          ; acquisition_serializer ; work         ;
+;          |counter:count|                  ; 15 (15)     ; 5            ; 0          ; 0    ; 0            ; 10 (10)      ; 0 (0)             ; 5 (5)            ; 4 (4)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|counter:count            ; counter                ; work         ;
+;          |dffes:data_buffer[0][0]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][0]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[0][10]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][10] ; dffes                  ; work         ;
+;          |dffes:data_buffer[0][11]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][11] ; dffes                  ; work         ;
+;          |dffes:data_buffer[0][12]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][12] ; dffes                  ; work         ;
+;          |dffes:data_buffer[0][13]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][13] ; dffes                  ; work         ;
+;          |dffes:data_buffer[0][14]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][14] ; dffes                  ; work         ;
+;          |dffes:data_buffer[0][15]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][15] ; dffes                  ; work         ;
+;          |dffes:data_buffer[0][1]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][1]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[0][2]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][2]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[0][3]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][3]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[0][4]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][4]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[0][5]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][5]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[0][6]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][6]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[0][7]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][7]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[0][8]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][8]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[0][9]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][9]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][0]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][0]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][10]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][10] ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][11]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][11] ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][12]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][12] ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][13]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][13] ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][14]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][14] ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][15]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][15] ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][1]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][1]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][2]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][2]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][3]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][3]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][4]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][4]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][5]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][5]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][6]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][6]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][7]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][7]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][8]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][8]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[1][9]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][9]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][0]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][0]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][10]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][10] ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][11]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][11] ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][12]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][12] ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][13]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][13] ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][14]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][14] ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][15]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][15] ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][1]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][1]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][2]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][2]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][3]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][3]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][4]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][4]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][5]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][5]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][6]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][6]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][7]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][7]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][8]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][8]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[2][9]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][9]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][0]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][0]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][10]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][10] ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][11]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][11] ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][12]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][12] ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][13]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][13] ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][14]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][14] ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][15]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][15] ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][1]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][1]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][2]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][2]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][3]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][3]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][4]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][4]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][5]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][5]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][6]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][6]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][7]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][7]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][8]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][8]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[3][9]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][9]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][0]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][0]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][10]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][10] ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][11]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][11] ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][12]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][12] ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][13]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][13] ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][14]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][14] ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][15]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][15] ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][1]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][1]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][2]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][2]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][3]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][3]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][4]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][4]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][5]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][5]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][6]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][6]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][7]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][7]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][8]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][8]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[4][9]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][9]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][0]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][0]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][10]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][10] ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][11]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][11] ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][12]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][12] ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][13]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][13] ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][14]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][14] ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][15]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][15] ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][1]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][1]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][2]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][2]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][3]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][3]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][4]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][4]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][5]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][5]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][6]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][6]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][7]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][7]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][8]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][8]  ; dffes                  ; work         ;
+;          |dffes:data_buffer[5][9]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][9]  ; dffes                  ; work         ;
+;          |dffes:div2_clock|               ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:div2_clock         ; dffes                  ; work         ;
+;          |dffes:serialize_ok_ff|          ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:serialize_ok_ff    ; dffes                  ; work         ;
+;       |acquisition_store:storer|          ; 22 (12)     ; 13           ; 0          ; 0    ; 0            ; 9 (5)        ; 5 (4)             ; 8 (3)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store:storer                                   ; acquisition_store      ; work         ;
+;          |counter:channel_counter|        ; 8 (8)       ; 4            ; 0          ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 4 (4)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store:storer|counter:channel_counter           ; counter                ; work         ;
+;          |dffes:cs_n_ff|                  ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store:storer|dffes:cs_n_ff                     ; dffes                  ; work         ;
+;          |dffes:we_n_ff|                  ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store:storer|dffes:we_n_ff                     ; dffes                  ; work         ;
+;       |dffes:start_ff|                    ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|dffes:start_ff                                             ; dffes                  ; work         ;
+;    |adc_interface:inst4|                  ; 49 (49)     ; 0            ; 0          ; 0    ; 0            ; 49 (49)      ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|adc_interface:inst4                                                                  ; adc_interface          ; work         ;
+;    |host_interface:Host_interface|        ; 23 (1)      ; 17           ; 0          ; 0    ; 0            ; 6 (1)        ; 12 (0)            ; 5 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:Host_interface                                                        ; host_interface         ; work         ;
+;       |mode_selector:mode_sel|            ; 22 (8)      ; 17           ; 0          ; 0    ; 0            ; 5 (3)        ; 12 (2)            ; 5 (3)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:Host_interface|mode_selector:mode_sel                                 ; mode_selector          ; work         ;
+;          |dffes:changing_ff|              ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:Host_interface|mode_selector:mode_sel|dffes:changing_ff               ; dffes                  ; work         ;
+;          |dffes:mode_out_ff[0]|           ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[0]            ; dffes                  ; work         ;
+;          |dffes:mode_out_ff[1]|           ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:Host_interface|mode_selector:mode_sel|dffes:mode_out_ff[1]            ; dffes                  ; work         ;
+;          |dffes:ready_ff|                 ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:Host_interface|mode_selector:mode_sel|dffes:ready_ff                  ; dffes                  ; work         ;
+;          |synchronizer:sync|              ; 10 (10)     ; 8            ; 0          ; 0    ; 0            ; 2 (2)        ; 8 (8)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync               ; synchronizer           ; work         ;
+;    |read_data_module:inst2|               ; 40 (11)     ; 28           ; 0          ; 0    ; 0            ; 12 (4)       ; 19 (3)            ; 9 (4)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|read_data_module:inst2                                                               ; read_data_module       ; work         ;
+;       |dffes:addr_inc_FF|                 ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|read_data_module:inst2|dffes:addr_inc_FF                                             ; dffes                  ; work         ;
+;       |dffes:busy_ff|                     ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|read_data_module:inst2|dffes:busy_ff                                                 ; dffes                  ; work         ;
+;       |dffes:load_parallel_FF|            ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|read_data_module:inst2|dffes:load_parallel_FF                                        ; dffes                  ; work         ;
+;       |dffes:oe_n_FF|                     ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|read_data_module:inst2|dffes:oe_n_FF                                                 ; dffes                  ; work         ;
+;       |shift_reg_2x:shift|                ; 25 (25)     ; 17           ; 0          ; 0    ; 0            ; 8 (8)        ; 15 (15)           ; 2 (2)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|read_data_module:inst2|shift_reg_2x:shift                                            ; shift_reg_2x           ; work         ;
+;    |switch:inst6|                         ; 22 (22)     ; 0            ; 0          ; 0    ; 0            ; 22 (22)      ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|switch:inst6                                                                         ; switch                 ; work         ;
++-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------------------------------------------+------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
 Encoding Type:  One-Hot
 +----------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |sensor_buchas_CPLD|read_data_module:inst2|sm                                                              ;
+; State Machine - |sensor_buchas|read_data_module:inst2|sm                                                                   ;
 +----------------+----------------+--------------+---------------+---------------+---------------+---------------+-----------+
 ; Name           ; wait_loading_n ; wait_loading ; init_buffers4 ; init_buffers3 ; init_buffers2 ; init_buffers1 ; wait_mode ;
 +----------------+----------------+--------------+---------------+---------------+---------------+---------------+-----------+
@@ -392,7 +392,7 @@ Encoding Type:  One-Hot
 
 Encoding Type:  One-Hot
 +----------------------------------------------------------------------------------------------------+
-; State Machine - |sensor_buchas_CPLD|host_interface:Host_interface|mode_selector:mode_sel|sm        ;
+; State Machine - |sensor_buchas|host_interface:Host_interface|mode_selector:mode_sel|sm             ;
 +-------------------+-------------------+---------+------------------+-------------+-----------------+
 ; Name              ; sChangedRequested ; sStable ; sWaitingChangeOk ; sUpdateMode ; sNoticeChanging ;
 +-------------------+-------------------+---------+------------------+-------------+-----------------+
@@ -405,24 +405,24 @@ Encoding Type:  One-Hot
 
 
 Encoding Type:  One-Hot
-+-------------------------------------------------------------------------------------------+
-; State Machine - |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_store:storer|sm ;
-+-------------+----------+-------------+------+------+------+------+------------------------+
-; Name        ; WAIT_END ; INC_CHANNEL ; CS1b ; CS0b ; CS0a ; CS1a ; WAIT_STORE             ;
-+-------------+----------+-------------+------+------+------+------+------------------------+
-; WAIT_STORE  ; 0        ; 0           ; 0    ; 0    ; 0    ; 0    ; 0                      ;
-; CS1a        ; 0        ; 0           ; 0    ; 0    ; 0    ; 1    ; 1                      ;
-; CS0a        ; 0        ; 0           ; 0    ; 0    ; 1    ; 0    ; 1                      ;
-; CS0b        ; 0        ; 0           ; 0    ; 1    ; 0    ; 0    ; 1                      ;
-; CS1b        ; 0        ; 0           ; 1    ; 0    ; 0    ; 0    ; 1                      ;
-; INC_CHANNEL ; 0        ; 1           ; 0    ; 0    ; 0    ; 0    ; 1                      ;
-; WAIT_END    ; 1        ; 0           ; 0    ; 0    ; 0    ; 0    ; 1                      ;
-+-------------+----------+-------------+------+------+------+------+------------------------+
++--------------------------------------------------------------------------------------+
+; State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_store:storer|sm ;
++-------------+----------+-------------+------+------+------+------+-------------------+
+; Name        ; WAIT_END ; INC_CHANNEL ; CS1b ; CS0b ; CS0a ; CS1a ; WAIT_STORE        ;
++-------------+----------+-------------+------+------+------+------+-------------------+
+; WAIT_STORE  ; 0        ; 0           ; 0    ; 0    ; 0    ; 0    ; 0                 ;
+; CS1a        ; 0        ; 0           ; 0    ; 0    ; 0    ; 1    ; 1                 ;
+; CS0a        ; 0        ; 0           ; 0    ; 0    ; 1    ; 0    ; 1                 ;
+; CS0b        ; 0        ; 0           ; 0    ; 1    ; 0    ; 0    ; 1                 ;
+; CS1b        ; 0        ; 0           ; 1    ; 0    ; 0    ; 0    ; 1                 ;
+; INC_CHANNEL ; 0        ; 1           ; 0    ; 0    ; 0    ; 0    ; 1                 ;
+; WAIT_END    ; 1        ; 0           ; 0    ; 0    ; 0    ; 0    ; 1                 ;
++-------------+----------+-------------+------+------+------+------+-------------------+
 
 
 Encoding Type:  One-Hot
 +-------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |sensor_buchas_CPLD|acquisition_module:inst11|acquisition_ctrl:ctrl|sm                                                    ;
+; State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|sm                                                         ;
 +----------------------+----------------------+---------+-------------+------------+---------------+--------------------+-------------------+
 ; Name                 ; WAITING_END_OF_CYCLE ; STORING ; SERIALIZING ; WAIT_STATE ; AQUISITIONING ; WAITING_START_HIGH ; WAITING_START_LOW ;
 +----------------------+----------------------+---------+-------------+------------+---------------+--------------------+-------------------+
@@ -462,7 +462,7 @@ Encoding Type:  One-Hot
 
 
 +------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: acquisition_module:inst11 ;
+; Parameter Settings for User Entity Instance: acquisition_module:inst13 ;
 +----------------+-------+-----------------------------------------------+
 ; Parameter Name ; Value ; Type                                          ;
 +----------------+-------+-----------------------------------------------+
@@ -472,7 +472,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +----------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: acquisition_module:inst11|acquisition_ctrl:ctrl ;
+; Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_ctrl:ctrl ;
 +----------------+-------+---------------------------------------------------------------------+
 ; Parameter Name ; Value ; Type                                                                ;
 +----------------+-------+---------------------------------------------------------------------+
@@ -484,7 +484,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +--------------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter ;
+; Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_ctrl:ctrl|counter:clock_counter ;
 +----------------+-------+-------------------------------------------------------------------------------------------+
 ; Parameter Name ; Value ; Type                                                                                      ;
 +----------------+-------+-------------------------------------------------------------------------------------------+
@@ -494,7 +494,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +----------------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter ;
+; Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_ctrl:ctrl|counter:samples_counter ;
 +----------------+-------+---------------------------------------------------------------------------------------------+
 ; Parameter Name ; Value ; Type                                                                                        ;
 +----------------+-------+---------------------------------------------------------------------------------------------+
@@ -504,7 +504,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +----------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: acquisition_module:inst11|acquisition_serializer:serializer ;
+; Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_serializer:serializer ;
 +----------------+-------+---------------------------------------------------------------------------------+
 ; Parameter Name ; Value ; Type                                                                            ;
 +----------------+-------+---------------------------------------------------------------------------------+
@@ -514,7 +514,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +------------------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: acquisition_module:inst11|acquisition_serializer:serializer|counter:count ;
+; Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_serializer:serializer|counter:count ;
 +----------------+-------+-----------------------------------------------------------------------------------------------+
 ; Parameter Name ; Value ; Type                                                                                          ;
 +----------------+-------+-----------------------------------------------------------------------------------------------+
@@ -524,7 +524,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +-------------------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: acquisition_module:inst11|acquisition_store:storer|counter:channel_counter ;
+; Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_store:storer|counter:channel_counter ;
 +----------------+-------+------------------------------------------------------------------------------------------------+
 ; Parameter Name ; Value ; Type                                                                                           ;
 +----------------+-------+------------------------------------------------------------------------------------------------+
@@ -586,97 +586,94 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Fri Apr 16 14:15:02 2021
+    Info: Processing started: Sun Apr 18 18:30:09 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off sensor_buchas -c sensor_buchas
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file synchronizer.tdf
-    Info (12023): Found entity 1: synchronizer File: C:/sensorbuchasv2/synchronizer.tdf Line: 7
+    Info (12023): Found entity 1: synchronizer File: C:/SensorBuchasV2/synchronizer.tdf Line: 7
 Info (12021): Found 1 design units, including 1 entities, in source file switch.tdf
-    Info (12023): Found entity 1: switch File: C:/sensorbuchasv2/switch.tdf Line: 3
+    Info (12023): Found entity 1: switch File: C:/SensorBuchasV2/switch.tdf Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file shift_reg_2x.tdf
-    Info (12023): Found entity 1: shift_reg_2x File: C:/sensorbuchasv2/shift_reg_2x.tdf Line: 3
-Info (12021): Found 1 design units, including 1 entities, in source file sensor_buchas_cpld.bdf
-    Info (12023): Found entity 1: sensor_buchas_CPLD
+    Info (12023): Found entity 1: shift_reg_2x File: C:/SensorBuchasV2/shift_reg_2x.tdf Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file read_data_module.tdf
-    Info (12023): Found entity 1: read_data_module File: C:/sensorbuchasv2/read_data_module.tdf Line: 6
+    Info (12023): Found entity 1: read_data_module File: C:/SensorBuchasV2/read_data_module.tdf Line: 6
 Info (12021): Found 1 design units, including 1 entities, in source file ram_interface.tdf
-    Info (12023): Found entity 1: RAM_interface File: C:/sensorbuchasv2/RAM_interface.tdf Line: 9
+    Info (12023): Found entity 1: RAM_interface File: C:/SensorBuchasV2/RAM_interface.tdf Line: 9
 Info (12021): Found 1 design units, including 1 entities, in source file mode_selector.tdf
-    Info (12023): Found entity 1: mode_selector File: C:/sensorbuchasv2/mode_selector.tdf Line: 5
+    Info (12023): Found entity 1: mode_selector File: C:/SensorBuchasV2/mode_selector.tdf Line: 5
 Info (12021): Found 1 design units, including 1 entities, in source file host_interface.tdf
-    Info (12023): Found entity 1: host_interface File: C:/sensorbuchasv2/host_interface.tdf Line: 3
+    Info (12023): Found entity 1: host_interface File: C:/SensorBuchasV2/host_interface.tdf Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file dffes.tdf
-    Info (12023): Found entity 1: dffes File: C:/sensorbuchasv2/dffes.tdf Line: 3
+    Info (12023): Found entity 1: dffes File: C:/SensorBuchasV2/dffes.tdf Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file counter.tdf
-    Info (12023): Found entity 1: counter File: C:/sensorbuchasv2/counter.tdf Line: 10
+    Info (12023): Found entity 1: counter File: C:/SensorBuchasV2/counter.tdf Line: 10
 Info (12021): Found 1 design units, including 1 entities, in source file adc_interface.tdf
-    Info (12023): Found entity 1: adc_interface File: C:/sensorbuchasv2/adc_interface.tdf Line: 3
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/counter.inc Line: 26
+    Info (12023): Found entity 1: adc_interface File: C:/SensorBuchasV2/adc_interface.tdf Line: 3
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/counter.inc Line: 26
 Info (12021): Found 1 design units, including 1 entities, in source file acquisition_store.tdf
-    Info (12023): Found entity 1: acquisition_store File: C:/sensorbuchasv2/acquisition_store.tdf Line: 4
+    Info (12023): Found entity 1: acquisition_store File: C:/SensorBuchasV2/acquisition_store.tdf Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file acquisition_serializer.tdf
-    Info (12023): Found entity 1: acquisition_serializer File: C:/sensorbuchasv2/acquisition_serializer.tdf Line: 9
+    Info (12023): Found entity 1: acquisition_serializer File: C:/SensorBuchasV2/acquisition_serializer.tdf Line: 9
 Info (12021): Found 1 design units, including 1 entities, in source file acquisition_module.tdf
-    Info (12023): Found entity 1: acquisition_module File: C:/sensorbuchasv2/acquisition_module.tdf Line: 12
+    Info (12023): Found entity 1: acquisition_module File: C:/SensorBuchasV2/acquisition_module.tdf Line: 12
 Info (12021): Found 1 design units, including 1 entities, in source file acquisition_ctrl.tdf
-    Info (12023): Found entity 1: acquisition_ctrl File: C:/sensorbuchasv2/acquisition_ctrl.tdf Line: 20
-Info (12127): Elaborating entity "sensor_buchas_CPLD" for the top level hierarchy
-Info (12128): Elaborating entity "acquisition_module" for hierarchy "acquisition_module:inst11"
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/acquisition_ctrl.inc Line: 26
-Info (12128): Elaborating entity "dffes" for hierarchy "acquisition_module:inst11|dffes:start_ff" File: C:/sensorbuchasv2/acquisition_module.tdf Line: 31
-Info (12128): Elaborating entity "acquisition_ctrl" for hierarchy "acquisition_module:inst11|acquisition_ctrl:ctrl" File: C:/sensorbuchasv2/acquisition_module.tdf Line: 32
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/acquisition_ctrl.tdf Line: 18
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/acquisition_ctrl.tdf Line: 38
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/counter.inc Line: 26
-Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst11|acquisition_ctrl:ctrl|counter:clock_counter" File: C:/sensorbuchasv2/acquisition_ctrl.tdf Line: 44
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/counter.tdf Line: 8
-Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst11|acquisition_ctrl:ctrl|counter:samples_counter" File: C:/sensorbuchasv2/acquisition_ctrl.tdf Line: 45
-Info (12128): Elaborating entity "dffes" for hierarchy "acquisition_module:inst11|acquisition_ctrl:ctrl|dffes:convst_ff" File: C:/sensorbuchasv2/acquisition_ctrl.tdf Line: 46
-Info (12128): Elaborating entity "acquisition_serializer" for hierarchy "acquisition_module:inst11|acquisition_serializer:serializer" File: C:/sensorbuchasv2/acquisition_module.tdf Line: 33
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/counter.inc Line: 26
-Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst11|acquisition_serializer:serializer|counter:count" File: C:/sensorbuchasv2/acquisition_serializer.tdf Line: 24
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/counter.tdf Line: 8
-Info (12128): Elaborating entity "acquisition_store" for hierarchy "acquisition_module:inst11|acquisition_store:storer" File: C:/sensorbuchasv2/acquisition_module.tdf Line: 34
-Info (12128): Elaborating entity "dffes" for hierarchy "acquisition_module:inst11|acquisition_store:storer|dffes:we_n_ff" File: C:/sensorbuchasv2/acquisition_store.tdf Line: 19
-Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst11|acquisition_store:storer|counter:channel_counter" File: C:/sensorbuchasv2/acquisition_store.tdf Line: 21
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/counter.tdf Line: 8
+    Info (12023): Found entity 1: acquisition_ctrl File: C:/SensorBuchasV2/acquisition_ctrl.tdf Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file sensor_buchas.bdf
+    Info (12023): Found entity 1: sensor_buchas
+Info (12127): Elaborating entity "sensor_buchas" for the top level hierarchy
+Info (12128): Elaborating entity "acquisition_module" for hierarchy "acquisition_module:inst13"
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/acquisition_ctrl.inc Line: 26
+Info (12128): Elaborating entity "dffes" for hierarchy "acquisition_module:inst13|dffes:start_ff" File: C:/SensorBuchasV2/acquisition_module.tdf Line: 32
+Info (12128): Elaborating entity "acquisition_ctrl" for hierarchy "acquisition_module:inst13|acquisition_ctrl:ctrl" File: C:/SensorBuchasV2/acquisition_module.tdf Line: 33
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/acquisition_ctrl.tdf Line: 20
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/acquisition_ctrl.tdf Line: 40
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/counter.inc Line: 26
+Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst13|acquisition_ctrl:ctrl|counter:clock_counter" File: C:/SensorBuchasV2/acquisition_ctrl.tdf Line: 46
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/counter.tdf Line: 8
+Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst13|acquisition_ctrl:ctrl|counter:samples_counter" File: C:/SensorBuchasV2/acquisition_ctrl.tdf Line: 47
+Info (12128): Elaborating entity "dffes" for hierarchy "acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:convst_ff" File: C:/SensorBuchasV2/acquisition_ctrl.tdf Line: 48
+Info (12128): Elaborating entity "acquisition_serializer" for hierarchy "acquisition_module:inst13|acquisition_serializer:serializer" File: C:/SensorBuchasV2/acquisition_module.tdf Line: 34
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/counter.inc Line: 26
+Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst13|acquisition_serializer:serializer|counter:count" File: C:/SensorBuchasV2/acquisition_serializer.tdf Line: 24
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/counter.tdf Line: 8
+Info (12128): Elaborating entity "acquisition_store" for hierarchy "acquisition_module:inst13|acquisition_store:storer" File: C:/SensorBuchasV2/acquisition_module.tdf Line: 35
+Info (12128): Elaborating entity "dffes" for hierarchy "acquisition_module:inst13|acquisition_store:storer|dffes:we_n_ff" File: C:/SensorBuchasV2/acquisition_store.tdf Line: 19
+Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst13|acquisition_store:storer|counter:channel_counter" File: C:/SensorBuchasV2/acquisition_store.tdf Line: 21
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/counter.tdf Line: 8
 Info (12128): Elaborating entity "host_interface" for hierarchy "host_interface:Host_interface"
-Info (12128): Elaborating entity "mode_selector" for hierarchy "host_interface:Host_interface|mode_selector:mode_sel" File: C:/sensorbuchasv2/host_interface.tdf Line: 28
-Info (12128): Elaborating entity "synchronizer" for hierarchy "host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync" File: C:/sensorbuchasv2/mode_selector.tdf Line: 20
+Info (12128): Elaborating entity "mode_selector" for hierarchy "host_interface:Host_interface|mode_selector:mode_sel" File: C:/SensorBuchasV2/host_interface.tdf Line: 28
+Info (12128): Elaborating entity "synchronizer" for hierarchy "host_interface:Host_interface|mode_selector:mode_sel|synchronizer:sync" File: C:/SensorBuchasV2/mode_selector.tdf Line: 20
 Info (12128): Elaborating entity "switch" for hierarchy "switch:inst6"
-Warning (287013): Variable or input pin "clk" is defined but never used. File: C:/sensorbuchasv2/switch.tdf Line: 4
-Warning (287013): Variable or input pin "sreset" is defined but never used. File: C:/sensorbuchasv2/switch.tdf Line: 5
-Warning (287013): Variable or input pin "HI_SS_n" is defined but never used. File: C:/sensorbuchasv2/switch.tdf Line: 16
+Warning (287013): Variable or input pin "clk" is defined but never used. File: C:/SensorBuchasV2/switch.tdf Line: 4
+Warning (287013): Variable or input pin "sreset" is defined but never used. File: C:/SensorBuchasV2/switch.tdf Line: 5
+Warning (287013): Variable or input pin "HI_SS_n" is defined but never used. File: C:/SensorBuchasV2/switch.tdf Line: 16
 Info (12128): Elaborating entity "read_data_module" for hierarchy "read_data_module:inst2"
-Info (12128): Elaborating entity "shift_reg_2x" for hierarchy "read_data_module:inst2|shift_reg_2x:shift" File: C:/sensorbuchasv2/read_data_module.tdf Line: 29
+Info (12128): Elaborating entity "shift_reg_2x" for hierarchy "read_data_module:inst2|shift_reg_2x:shift" File: C:/SensorBuchasV2/read_data_module.tdf Line: 29
 Info (12128): Elaborating entity "adc_interface" for hierarchy "adc_interface:inst4"
-Warning (287013): Variable or input pin "clk" is defined but never used. File: C:/sensorbuchasv2/adc_interface.tdf Line: 4
-Warning (287013): Variable or input pin "adc_rvs" is defined but never used. File: C:/sensorbuchasv2/adc_interface.tdf Line: 22
+Warning (287013): Variable or input pin "clk" is defined but never used. File: C:/SensorBuchasV2/adc_interface.tdf Line: 4
+Warning (287013): Variable or input pin "adc_rvs" is defined but never used. File: C:/SensorBuchasV2/adc_interface.tdf Line: 22
 Info (12128): Elaborating entity "RAM_interface" for hierarchy "RAM_interface:inst"
-Info (12128): Elaborating entity "lpm_counter" for hierarchy "RAM_interface:inst|lpm_counter:address_counter" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 31
-Info (12130): Elaborated megafunction instantiation "RAM_interface:inst|lpm_counter:address_counter" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 31
-Info (12133): Instantiated megafunction "RAM_interface:inst|lpm_counter:address_counter" with the following parameter: File: C:/sensorbuchasv2/RAM_interface.tdf Line: 31
+Info (12128): Elaborating entity "lpm_counter" for hierarchy "RAM_interface:inst|lpm_counter:address_counter" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 31
+Info (12130): Elaborated megafunction instantiation "RAM_interface:inst|lpm_counter:address_counter" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 31
+Info (12133): Instantiated megafunction "RAM_interface:inst|lpm_counter:address_counter" with the following parameter: File: C:/SensorBuchasV2/RAM_interface.tdf Line: 31
     Info (12134): Parameter "LPM_WIDTH" = "19"
     Info (12134): Parameter "LPM_DIRECTION" = "UP"
 Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_ici.tdf
-    Info (12023): Found entity 1: cntr_ici File: C:/sensorbuchasv2/db/cntr_ici.tdf Line: 26
+    Info (12023): Found entity 1: cntr_ici File: C:/SensorBuchasV2/db/cntr_ici.tdf Line: 26
 Info (12128): Elaborating entity "cntr_ici" for hierarchy "RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated" File: c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_counter.tdf Line: 259
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "test_AM_start" is stuck at GND
-    Warning (13410): Pin "test_sm_state[2]" is stuck at GND
-    Warning (13410): Pin "test_sm_state[1]" is stuck at GND
-    Warning (13410): Pin "test_sm_state[0]" is stuck at GND
-Info (18000): Registers with preset signals will power-up high File: C:/sensorbuchasv2/shift_reg_2x.tdf Line: 14
+Info (18000): Registers with preset signals will power-up high File: C:/SensorBuchasV2/shift_reg_2x.tdf Line: 14
 Info (17016): Found the following redundant logic cells in design
-    Info (17048): Logic cell "RAM_interface:inst|driver[7]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
-    Info (17048): Logic cell "RAM_interface:inst|driver[6]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
-    Info (17048): Logic cell "RAM_interface:inst|driver[5]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
-    Info (17048): Logic cell "RAM_interface:inst|driver[4]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
-    Info (17048): Logic cell "RAM_interface:inst|driver[3]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
-    Info (17048): Logic cell "RAM_interface:inst|driver[2]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
-    Info (17048): Logic cell "RAM_interface:inst|driver[1]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
-    Info (17048): Logic cell "RAM_interface:inst|driver[0]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[7]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[6]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[5]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[4]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[3]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[2]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[1]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[0]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
 Warning (21074): Design contains 7 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "adc_rvs[5]"
     Warning (15610): No output dependent on input pin "adc_rvs[4]"
@@ -685,15 +682,15 @@ Warning (21074): Design contains 7 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "adc_rvs[1]"
     Warning (15610): No output dependent on input pin "adc_rvs[0]"
     Warning (15610): No output dependent on input pin "host_SS_n"
-Info (21057): Implemented 502 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 504 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 21 input pins
-    Info (21059): Implemented 57 output pins
+    Info (21059): Implemented 58 output pins
     Info (21060): Implemented 8 bidirectional pins
-    Info (21061): Implemented 416 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 28 warnings
-    Info: Peak virtual memory: 4706 megabytes
-    Info: Processing ended: Fri Apr 16 14:15:10 2021
-    Info: Elapsed time: 00:00:08
-    Info: Total CPU time (on all processors): 00:00:17
+    Info (21061): Implemented 417 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 25 warnings
+    Info: Peak virtual memory: 4700 megabytes
+    Info: Processing ended: Sun Apr 18 18:30:25 2021
+    Info: Elapsed time: 00:00:16
+    Info: Total CPU time (on all processors): 00:00:22
 
 
