@@ -75,7 +75,7 @@ ram_data_bus[3]              : 7         : bidir  : 3.3-V LVTTL       :         
 ram_data_bus[2]              : 8         : bidir  : 3.3-V LVTTL       :         : 1         : Y              
 VCCIO1                       : 9         : power  :                   : 3.3V    : 1         :                
 GNDIO                        : 10        : gnd    :                   :         :           :                
-test_state[0]                : 11        : output : 3.3-V LVTTL       :         : 1         : N              
+GND*                         : 11        :        :                   :         : 1         :                
 GND*                         : 12        :        :                   :         : 1         :                
 GND*                         : 13        :        :                   :         : 1         :                
 GND*                         : 14        :        :                   :         : 1         :                
@@ -109,29 +109,29 @@ GND*                         : 41        :        :                   :         
 GND*                         : 42        :        :                   :         : 4         :                
 GND*                         : 43        :        :                   :         : 4         :                
 GND*                         : 44        :        :                   :         : 4         :                
-test_state[7]                : 45        : output : 3.3-V LVTTL       :         : 4         : N              
+GND*                         : 45        :        :                   :         : 4         :                
 VCCIO4                       : 46        : power  :                   : 3.3V    : 4         :                
 GNDIO                        : 47        : gnd    :                   :         :           :                
-test_state[10]               : 48        : output : 3.3-V LVTTL       :         : 4         : N              
-test_mode[1]                 : 49        : output : 3.3-V LVTTL       :         : 4         : N              
-test_mode[0]                 : 50        : output : 3.3-V LVTTL       :         : 4         : N              
-test_state[6]                : 51        : output : 3.3-V LVTTL       :         : 4         : N              
-test_state[12]               : 52        : output : 3.3-V LVTTL       :         : 4         : N              
-test_state[8]                : 53        : output : 3.3-V LVTTL       :         : 4         : N              
+GND*                         : 48        :        :                   :         : 4         :                
+GND*                         : 49        :        :                   :         : 4         :                
+GND*                         : 50        :        :                   :         : 4         :                
+GND*                         : 51        :        :                   :         : 4         :                
+GND*                         : 52        :        :                   :         : 4         :                
+GND*                         : 53        :        :                   :         : 4         :                
 GNDINT                       : 54        : gnd    :                   :         :           :                
-test_state[9]                : 55        : output : 3.3-V LVTTL       :         : 4         : N              
+GND*                         : 55        :        :                   :         : 4         :                
 VCCINT                       : 56        : power  :                   : 2.5V/3.3V :           :                
-test_state[11]               : 57        : output : 3.3-V LVTTL       :         : 4         : N              
-GND*                         : 58        :        :                   :         : 4         :                
-GND*                         : 59        :        :                   :         : 4         :                
-GND*                         : 60        :        :                   :         : 4         :                
-GND*                         : 61        :        :                   :         : 4         :                
-GND*                         : 62        :        :                   :         : 4         :                
-GND*                         : 63        :        :                   :         : 4         :                
+GND*                         : 57        :        :                   :         : 4         :                
+test_state[1]                : 58        : output : 3.3-V LVTTL       :         : 4         : N              
+test_state[5]                : 59        : output : 3.3-V LVTTL       :         : 4         : N              
+test_state[4]                : 60        : output : 3.3-V LVTTL       :         : 4         : N              
+test_state[6]                : 61        : output : 3.3-V LVTTL       :         : 4         : N              
+test_state[0]                : 62        : output : 3.3-V LVTTL       :         : 4         : N              
+test_state[7]                : 63        : output : 3.3-V LVTTL       :         : 4         : N              
 VCCIO4                       : 64        : power  :                   : 3.3V    : 4         :                
 GNDIO                        : 65        : gnd    :                   :         :           :                
 GND*                         : 66        :        :                   :         : 4         :                
-GND*                         : 67        :        :                   :         : 4         :                
+cs_n                         : 67        : output : 3.3-V LVTTL       :         : 4         : N              
 GND*                         : 68        :        :                   :         : 4         :                
 GND*                         : 69        :        :                   :         : 4         :                
 GND*                         : 70        :        :                   :         : 4         :                
@@ -150,23 +150,23 @@ VCCIO3                       : 82        : power  :                   : 3.3V    
 GNDIO                        : 83        : gnd    :                   :         :           :                
 GND*                         : 84        :        :                   :         : 3         :                
 GND*                         : 85        :        :                   :         : 3         :                
-GND*                         : 86        :        :                   :         : 3         :                
+test_mode[1]                 : 86        : output : 3.3-V LVTTL       :         : 3         : N              
 GND*                         : 87        :        :                   :         : 3         :                
 GND*                         : 88        :        :                   :         : 3         :                
 GND*                         : 89        :        :                   :         : 3         :                
 VCCINT                       : 90        : power  :                   : 2.5V/3.3V :           :                
-cs_n                         : 91        : output : 3.3-V LVTTL       :         : 3         : Y              
+pull                         : 91        : output : 3.3-V LVTTL       :         : 3         : Y              
 GNDINT                       : 92        : gnd    :                   :         :           :                
 oe_n                         : 93        : output : 3.3-V LVTTL       :         : 3         : Y              
 we_n                         : 94        : output : 3.3-V LVTTL       :         : 3         : Y              
-GND*                         : 95        :        :                   :         : 3         :                
+test_state[3]                : 95        : output : 3.3-V LVTTL       :         : 3         : N              
 GND*                         : 96        :        :                   :         : 3         :                
 GND*                         : 97        :        :                   :         : 3         :                
-GND*                         : 98        :        :                   :         : 3         :                
+test_state[2]                : 98        : output : 3.3-V LVTTL       :         : 3         : N              
 GNDIO                        : 99        : gnd    :                   :         :           :                
 VCCIO3                       : 100       : power  :                   : 3.3V    : 3         :                
 reset                        : 101       : input  : 3.3-V LVTTL       :         : 3         : Y              
-GND*                         : 102       :        :                   :         : 3         :                
+test_mode[0]                 : 102       : output : 3.3-V LVTTL       :         : 3         : N              
 data_out[7]                  : 103       : output : 3.3-V LVTTL       :         : 3         : Y              
 data_out[6]                  : 104       : output : 3.3-V LVTTL       :         : 3         : Y              
 data_out[5]                  : 105       : output : 3.3-V LVTTL       :         : 3         : Y              
@@ -175,13 +175,13 @@ data_out[3]                  : 107       : output : 3.3-V LVTTL       :         
 data_out[2]                  : 108       : output : 3.3-V LVTTL       :         : 3         : Y              
 data_out[1]                  : 109       : output : 3.3-V LVTTL       :         : 2         : Y              
 data_out[0]                  : 110       : output : 3.3-V LVTTL       :         : 2         : Y              
-test_state[4]                : 111       : output : 3.3-V LVTTL       :         : 2         : N              
-test_state[3]                : 112       : output : 3.3-V LVTTL       :         : 2         : N              
-test_state[5]                : 113       : output : 3.3-V LVTTL       :         : 2         : N              
-test_state[13]               : 114       : output : 3.3-V LVTTL       :         : 2         : N              
+test_state[12]               : 111       : output : 3.3-V LVTTL       :         : 2         : N              
+test_state[9]                : 112       : output : 3.3-V LVTTL       :         : 2         : N              
+test_state[8]                : 113       : output : 3.3-V LVTTL       :         : 2         : N              
+test_state[10]               : 114       : output : 3.3-V LVTTL       :         : 2         : N              
 GNDIO                        : 115       : gnd    :                   :         :           :                
 VCCIO2                       : 116       : power  :                   : 3.3V    : 2         :                
-test_state[2]                : 117       : output : 3.3-V LVTTL       :         : 2         : N              
+test_state[11]               : 117       : output : 3.3-V LVTTL       :         : 2         : N              
 ram_data_bus[5]              : 118       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
 ram_data_bus[4]              : 119       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
 ram_address[14]              : 120       : output : 3.3-V LVTTL       :         : 2         : Y              
@@ -189,7 +189,7 @@ ram_address[13]              : 121       : output : 3.3-V LVTTL       :         
 ram_address[12]              : 122       : output : 3.3-V LVTTL       :         : 2         : Y              
 ram_address[11]              : 123       : output : 3.3-V LVTTL       :         : 2         : Y              
 ram_address[10]              : 124       : output : 3.3-V LVTTL       :         : 2         : Y              
-test_state[1]                : 125       : output : 3.3-V LVTTL       :         : 2         : N              
+test_state[13]               : 125       : output : 3.3-V LVTTL       :         : 2         : N              
 VCCINT                       : 126       : power  :                   : 2.5V/3.3V :           :                
 ram_data_bus[6]              : 127       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
 GNDINT                       : 128       : gnd    :                   :         :           :                

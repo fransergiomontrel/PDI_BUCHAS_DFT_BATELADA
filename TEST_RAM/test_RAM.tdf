@@ -5,6 +5,9 @@ PARAMETERS
 		N_BITS = 19
 );
 
+
+constant LAST_ADDRESS = h"FF";
+
 subdesign test_RAM(
 	clk: input;
 	reset: input;
@@ -24,6 +27,8 @@ subdesign test_RAM(
 	we_n: output;
 	oe_n: output;
 	cs_n: output;
+	
+	pull: output;
 	
 	test_mode[1..0]: output;
 )
@@ -47,6 +52,9 @@ variable
 	ff_out[7..0]: dffe;
 	sreset: node;
 	ff_rst, ff_oe, ff_we, ff_mode[1..0]: dff;
+	
+--	d:dff;
+	
 begin
 	defaults
 		ri.addr_clr = Gnd;
@@ -56,6 +64,11 @@ begin
 		ff_oe.d = Vcc;
 		ff_we.d = Vcc;
 	end defaults;
+	
+	pull = ram_we_n;
+--	clk = clock;
+--	d.d = !clk;
+--	d.clk = clk;
 	
 	we_n = ram_we_n;
 	oe_n = ram_oe_n;
@@ -82,7 +95,8 @@ begin
 	ram_cs_n = ri.ram_cs_n;
 	ram_oe_n = ri.ram_oe_n;
 	ri.changing_mode = Gnd;
-	ri.data_in[7..0] = !ri.ram_address[7..0];
+	ri.data_in[7..0] = !ri.ram_address[0..7];
+	--ri.data_in[7..0] = GND;
 	ram_data_bus[] = ri.ram_data_bus[];
 	ri.cs_n = Gnd;
 	
@@ -105,7 +119,7 @@ begin
 			sm = e2;
 
 		when e1 =>
-			if ri.ram_address[] == H"0F" then
+			if ri.ram_address[] == LAST_ADDRESS then
 				ri.addr_clr = Vcc;
 			else
 				ri.addr_inc = Vcc;
@@ -129,12 +143,12 @@ begin
 			sm = e3b;
 
 		when e3b =>
-			ff_we.d = Gnd;
+--			ff_we.d = Gnd;
 			ff_mode[].d = MODE_AQUISITION;
 			sm = e3c;
 
 		when e3c =>
-			if ri.ram_address[] == H"0F" then
+			if ri.ram_address[] == LAST_ADDRESS then
 				sm = e4;
 --				ff_oe.d = Gnd;
 			else
@@ -143,7 +157,7 @@ begin
 			ff_mode[].d = MODE_AQUISITION;
 
 		when e4 =>
-			if ri.ram_address[] == H"0F" then
+			if ri.ram_address[] == LAST_ADDRESS then
 				ri.addr_clr = Vcc;
 			else
 				ri.addr_inc = Vcc;
@@ -179,7 +193,7 @@ begin
 
 		when e7 =>
 			ri.mode[] = MODE_READ_DATA;
-			if ri.ram_address[] == H"0F" then
+			if ri.ram_address[] == LAST_ADDRESS then
 				sm = e1;
 			else
 --				ff_oe.d = Gnd;

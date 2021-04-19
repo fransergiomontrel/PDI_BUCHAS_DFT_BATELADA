@@ -1,5 +1,5 @@
 Fitter report for sensor_buchas
-Sun Apr 18 18:30:30 2021
+Mon Apr 19 14:12:11 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -58,7 +58,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------+
 ; Fitter Summary                                                      ;
 +-----------------------+---------------------------------------------+
-; Fitter Status         ; Successful - Sun Apr 18 18:30:30 2021       ;
+; Fitter Status         ; Successful - Mon Apr 19 14:12:11 2021       ;
 ; Quartus Prime Version ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name         ; sensor_buchas                               ;
 ; Top-level Entity Name ; sensor_buchas                               ;
@@ -126,22 +126,23 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 2           ;
-; Maximum allowed            ; 2           ;
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
 ;                            ;             ;
-; Average used               ; 1.01        ;
-; Maximum used               ; 2           ;
+; Average used               ; 1.02        ;
+; Maximum used               ; 4           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.8%      ;
+;     Processor 2            ;   0.9%      ;
+;     Processors 3-4         ;   0.7%      ;
 +----------------------------+-------------+
 
 
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in C:/SensorBuchasV2/output_files/sensor_buchas.pin.
+The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pin.
 
 
 +--------------------------------------------------------------------+
@@ -986,7 +987,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Fitter Messages ;
 +-----------------+
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (119006): Selected device EPM1270T144C5 for design "sensor_buchas"
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
@@ -1008,20 +1009,20 @@ Info (332111): Found 2 clocks
     Info (332111):  100.000    host_SCLK
 Info (186079): Completed User Assigned Global Signals Promotion Operation
 Info (186215): Automatically promoted signal "clk" to use Global clock in PIN 18
-Info (186215): Automatically promoted signal "switch:inst6|RDM_SCLK" to use Global clock File: C:/SensorBuchasV2/switch.tdf Line: 137
+Info (186215): Automatically promoted signal "switch:inst6|RDM_SCLK" to use Global clock File: C:/sensorbuchasv2/switch.tdf Line: 137
 Info (186216): Automatically promoted some destinations of signal "inst1" to use Global clock
-    Info (186217): Destination "read_data_module:inst2|dffes:busy_ff|ff" may be non-global or may not use global clock File: C:/SensorBuchasV2/dffes.tdf Line: 13
-    Info (186217): Destination "read_data_module:inst2|dffes:oe_n_FF|ff" may be non-global or may not use global clock File: C:/SensorBuchasV2/dffes.tdf Line: 13
-    Info (186217): Destination "host_interface:Host_interface|mode_selector:mode_sel|dffes:ready_ff|ff" may be non-global or may not use global clock File: C:/SensorBuchasV2/dffes.tdf Line: 13
-    Info (186217): Destination "host_interface:Host_interface|mode_selector:mode_sel|dffes:changing_ff|ff" may be non-global or may not use global clock File: C:/SensorBuchasV2/dffes.tdf Line: 13
-    Info (186217): Destination "acquisition_module:inst13|acquisition_store:storer|dffes:cs_n_ff|ff" may be non-global or may not use global clock File: C:/SensorBuchasV2/dffes.tdf Line: 13
-    Info (186217): Destination "acquisition_module:inst13|acquisition_store:storer|dffes:we_n_ff|ff" may be non-global or may not use global clock File: C:/SensorBuchasV2/dffes.tdf Line: 13
-    Info (186217): Destination "adc_interface:inst4|adc_convst[5]" may be non-global or may not use global clock File: C:/SensorBuchasV2/adc_interface.tdf Line: 18
-    Info (186217): Destination "adc_interface:inst4|adc_convst[4]" may be non-global or may not use global clock File: C:/SensorBuchasV2/adc_interface.tdf Line: 18
-    Info (186217): Destination "adc_interface:inst4|adc_convst[3]" may be non-global or may not use global clock File: C:/SensorBuchasV2/adc_interface.tdf Line: 18
-    Info (186217): Destination "adc_interface:inst4|adc_convst[2]" may be non-global or may not use global clock File: C:/SensorBuchasV2/adc_interface.tdf Line: 18
+    Info (186217): Destination "read_data_module:inst2|dffes:busy_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
+    Info (186217): Destination "read_data_module:inst2|dffes:oe_n_FF|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
+    Info (186217): Destination "host_interface:Host_interface|mode_selector:mode_sel|dffes:ready_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
+    Info (186217): Destination "host_interface:Host_interface|mode_selector:mode_sel|dffes:changing_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
+    Info (186217): Destination "acquisition_module:inst13|acquisition_store:storer|dffes:cs_n_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
+    Info (186217): Destination "acquisition_module:inst13|acquisition_store:storer|dffes:we_n_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
+    Info (186217): Destination "adc_interface:inst4|adc_convst[5]" may be non-global or may not use global clock File: C:/sensorbuchasv2/adc_interface.tdf Line: 18
+    Info (186217): Destination "adc_interface:inst4|adc_convst[4]" may be non-global or may not use global clock File: C:/sensorbuchasv2/adc_interface.tdf Line: 18
+    Info (186217): Destination "adc_interface:inst4|adc_convst[3]" may be non-global or may not use global clock File: C:/sensorbuchasv2/adc_interface.tdf Line: 18
+    Info (186217): Destination "adc_interface:inst4|adc_convst[2]" may be non-global or may not use global clock File: C:/sensorbuchasv2/adc_interface.tdf Line: 18
     Info (186218): Limited to 10 non-global destinations
-Info (186215): Automatically promoted signal "read_data_module:inst2|dffes:load_parallel_FF|ff" to use Global clock File: C:/SensorBuchasV2/dffes.tdf Line: 13
+Info (186215): Automatically promoted signal "read_data_module:inst2|dffes:load_parallel_FF|ff" to use Global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
 Info (186079): Completed Auto Global Promotion Operation
 Info (176234): Starting register packing
 Info (186468): Started processing fast register assignments
@@ -1036,7 +1037,7 @@ Info (176215): I/O bank details before I/O pin placement
         Info (176213): I/O bank number 2 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  30 pins available
         Info (176213): I/O bank number 3 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  30 pins available
         Info (176213): I/O bank number 4 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  30 pins available
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:00
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
 Info (170189): Fitter placement preparation operations beginning
 Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
@@ -1050,20 +1051,20 @@ Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were
     Info (170201): Optimizations that may affect the design's routability were skipped
     Info (170200): Optimizations that may affect the design's timing were skipped
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
-Info (11888): Total time spent on timing analysis during the Fitter is 0.24 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.16 seconds.
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:00
 Warning (169174): The Reserve All Unused Pins setting has not been specified, and will default to 'As output driving ground'.
-Info (144001): Generated suppressed messages file C:/SensorBuchasV2/output_files/sensor_buchas.fit.smsg
+Info (144001): Generated suppressed messages file C:/sensorbuchasv2/output_files/sensor_buchas.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 5078 megabytes
-    Info: Processing ended: Sun Apr 18 18:30:30 2021
-    Info: Elapsed time: 00:00:04
+    Info: Peak virtual memory: 5352 megabytes
+    Info: Processing ended: Mon Apr 19 14:12:11 2021
+    Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:04
 
 
 +----------------------------+
 ; Fitter Suppressed Messages ;
 +----------------------------+
-The suppressed messages can be found in C:/SensorBuchasV2/output_files/sensor_buchas.fit.smsg.
+The suppressed messages can be found in C:/sensorbuchasv2/output_files/sensor_buchas.fit.smsg.
 
 
