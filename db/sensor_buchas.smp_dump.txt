@@ -1,10 +1,14 @@
 
-State Machine - |read_data_module|sm
-Name wait_loading_n wait_loading init_buffers4 init_buffers3 init_buffers2 init_buffers1 wait_mode 
-wait_mode 0 0 0 0 0 0 0 
-init_buffers1 0 0 0 0 0 1 1 
-init_buffers2 0 0 0 0 1 0 1 
-init_buffers3 0 0 0 1 0 0 1 
-init_buffers4 0 0 1 0 0 0 1 
-wait_loading 0 1 0 0 0 0 1 
-wait_loading_n 1 0 0 0 0 0 1 
+State Machine - |rw_data_module|sm
+Name wr4 wr3 wr2 wr1 wait_loading_n wait_loading init_buffers4 init_buffers3 init_buffers2 init_buffers1 wait_mode 
+wait_mode 0 0 0 0 0 0 0 0 0 0 0 
+init_buffers1 0 0 0 0 0 0 0 0 0 1 1 
+init_buffers2 0 0 0 0 0 0 0 0 1 0 1 
+init_buffers3 0 0 0 0 0 0 0 1 0 0 1 
+init_buffers4 0 0 0 0 0 0 1 0 0 0 1 
+wait_loading 0 0 0 0 0 1 0 0 0 0 1 
+wait_loading_n 0 0 0 0 1 0 0 0 0 0 1 
+wr1 0 0 0 1 0 0 0 0 0 0 1 
+wr2 0 0 1 0 0 0 0 0 0 0 1 
+wr3 0 1 0 0 0 0 0 0 0 0 1 
+wr4 1 0 0 0 0 0 0 0 0 0 1 

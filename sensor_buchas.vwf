@@ -24,6 +24,7 @@ quit -f
 
 
 
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -42,6 +43,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 
 
 
@@ -564,6 +566,36 @@ SIGNAL("adc_sclk[0]")
 	PARENT = "adc_sclk";
 }
 
+SIGNAL("ram_cs_n")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("ram_oe_n")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("ram_we_n")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
 TRANSITION_LIST("clk")
 {
 	NODE
@@ -952,6 +984,33 @@ TRANSITION_LIST("adc_sclk[1]")
 }
 
 TRANSITION_LIST("adc_sclk[0]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 100000.0;
+	}
+}
+
+TRANSITION_LIST("ram_cs_n")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 100000.0;
+	}
+}
+
+TRANSITION_LIST("ram_oe_n")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 100000.0;
+	}
+}
+
+TRANSITION_LIST("ram_we_n")
 {
 	NODE
 	{
@@ -1434,6 +1493,33 @@ DISPLAY_LINE
 	TREE_INDEX = 47;
 	TREE_LEVEL = 1;
 	PARENT = 28;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "ram_cs_n";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 48;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "ram_oe_n";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 49;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "ram_we_n";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 50;
+	TREE_LEVEL = 0;
 }
 
 TIME_BAR

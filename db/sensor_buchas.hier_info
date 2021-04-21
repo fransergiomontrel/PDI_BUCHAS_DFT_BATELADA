@@ -1,15 +1,22 @@
-|read_data_module
+|rw_data_module
 clk => dffes:oe_n_FF.clk
+clk => dffes:cs_n_FF.clk
+clk => dffes:we_n_FF.clk
 clk => dffes:load_parallel_FF.clk
 clk => dffes:addr_inc_FF.clk
 clk => dffes:busy_ff.clk
 clk => sm.IN1
 sreset => dffes:oe_n_FF.spre
+sreset => dffes:cs_n_FF.spre
+sreset => dffes:we_n_FF.spre
 sreset => dffes:load_parallel_FF.spre
 sreset => dffes:addr_inc_FF.sclr
 sreset => dffes:busy_ff.sclr
 sreset => sm.IN1
 changing_mode => busy.IN1
+changing_mode => _.IN0
+changing_mode => _.IN0
+changing_mode => _.IN0
 mode[0] => _.IN1
 mode[0] => _.IN1
 mode[0] => _.IN1
@@ -19,30 +26,48 @@ mode[1] => _.IN0
 addr_clr <= addr_clr.DB_MAX_OUTPUT_PORT_TYPE
 addr_inc <= addr_inc.DB_MAX_OUTPUT_PORT_TYPE
 oe_n <= dffes:oe_n_FF.q
-cs_n <= dffes:oe_n_FF.q
-SCLK_ => shift_reg_2x:shift.clk
-MISO <= shift_reg_2x:shift.o
-data[0] => shift_reg_2x:shift.i[0]
-data[1] => shift_reg_2x:shift.i[1]
-data[2] => shift_reg_2x:shift.i[2]
-data[3] => shift_reg_2x:shift.i[3]
-data[4] => shift_reg_2x:shift.i[4]
-data[5] => shift_reg_2x:shift.i[5]
-data[6] => shift_reg_2x:shift.i[6]
-data[7] => shift_reg_2x:shift.i[7]
+we_n <= dffes:we_n_FF.q
+cs_n <= dffes:cs_n_FF.q
+SCLK_ => spi_shift:shift.clk
+MISO <= spi_shift:shift.miso
+MOSI => spi_shift:shift.mosi
+data_read[0] => spi_shift:shift.parallel_in[0]
+data_read[1] => spi_shift:shift.parallel_in[1]
+data_read[2] => spi_shift:shift.parallel_in[2]
+data_read[3] => spi_shift:shift.parallel_in[3]
+data_read[4] => spi_shift:shift.parallel_in[4]
+data_read[5] => spi_shift:shift.parallel_in[5]
+data_read[6] => spi_shift:shift.parallel_in[6]
+data_read[7] => spi_shift:shift.parallel_in[7]
+data_write[0] <= spi_shift:shift.parallel_out[0]
+data_write[1] <= spi_shift:shift.parallel_out[1]
+data_write[2] <= spi_shift:shift.parallel_out[2]
+data_write[3] <= spi_shift:shift.parallel_out[3]
+data_write[4] <= spi_shift:shift.parallel_out[4]
+data_write[5] <= spi_shift:shift.parallel_out[5]
+data_write[6] <= spi_shift:shift.parallel_out[6]
+data_write[7] <= spi_shift:shift.parallel_out[7]
 busy <= busy.DB_MAX_OUTPUT_PORT_TYPE
 test_async_load <= dffes:load_parallel_FF.q
-test_loading <= shift_reg_2x:shift.loading
+test_loading <= spi_shift:shift.loading
 test_state[0] <= test_state[0].DB_MAX_OUTPUT_PORT_TYPE
 test_state[1] <= test_state[1].DB_MAX_OUTPUT_PORT_TYPE
 test_state[2] <= test_state[2].DB_MAX_OUTPUT_PORT_TYPE
 test_state[3] <= test_state[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|read_data_module|shift_reg_2x:shift
+|rw_data_module|spi_shift:shift
 clk => control_shift[7].IN0
 clk => init_control.IN0
 clk => data_shift[7].IN0
+clk => parallel_ffs[7].CLK
+clk => parallel_ffs[6].CLK
+clk => parallel_ffs[5].CLK
+clk => parallel_ffs[4].CLK
+clk => parallel_ffs[3].CLK
+clk => parallel_ffs[2].CLK
+clk => parallel_ffs[1].CLK
+clk => parallel_ffs[0].CLK
 async_load => _.IN0
 async_load => _.IN0
 async_load => _.IN0
@@ -61,35 +86,45 @@ async_load => _.IN0
 async_load => _.IN0
 async_load => control_shift[7].IN0
 async_load => init_control.IN0
-o <= data_shift[7].DB_MAX_OUTPUT_PORT_TYPE
-i[0] => _.IN0
-i[0] => _.IN1
-i[0] => data_shift[0].ADATA
-i[1] => _.IN0
-i[1] => _.IN1
-i[1] => data_shift[1].ADATA
-i[2] => _.IN0
-i[2] => _.IN1
-i[2] => data_shift[2].ADATA
-i[3] => _.IN0
-i[3] => _.IN1
-i[3] => data_shift[3].ADATA
-i[4] => _.IN0
-i[4] => _.IN1
-i[4] => data_shift[4].ADATA
-i[5] => _.IN0
-i[5] => _.IN1
-i[5] => data_shift[5].ADATA
-i[6] => _.IN0
-i[6] => _.IN1
-i[6] => data_shift[6].ADATA
-i[7] => _.IN0
-i[7] => _.IN1
-i[7] => data_shift[7].ADATA
+parallel_in[0] => _.IN0
+parallel_in[0] => _.IN1
+parallel_in[0] => data_shift[0].ADATA
+parallel_in[1] => _.IN0
+parallel_in[1] => _.IN1
+parallel_in[1] => data_shift[1].ADATA
+parallel_in[2] => _.IN0
+parallel_in[2] => _.IN1
+parallel_in[2] => data_shift[2].ADATA
+parallel_in[3] => _.IN0
+parallel_in[3] => _.IN1
+parallel_in[3] => data_shift[3].ADATA
+parallel_in[4] => _.IN0
+parallel_in[4] => _.IN1
+parallel_in[4] => data_shift[4].ADATA
+parallel_in[5] => _.IN0
+parallel_in[5] => _.IN1
+parallel_in[5] => data_shift[5].ADATA
+parallel_in[6] => _.IN0
+parallel_in[6] => _.IN1
+parallel_in[6] => data_shift[6].ADATA
+parallel_in[7] => _.IN0
+parallel_in[7] => _.IN1
+parallel_in[7] => data_shift[7].ADATA
+MOSI => data_shift[0].DATAIN
+MOSI => parallel_ffs[0].DATAIN
+parallel_out[0] <= parallel_ffs[0].DB_MAX_OUTPUT_PORT_TYPE
+parallel_out[1] <= parallel_ffs[1].DB_MAX_OUTPUT_PORT_TYPE
+parallel_out[2] <= parallel_ffs[2].DB_MAX_OUTPUT_PORT_TYPE
+parallel_out[3] <= parallel_ffs[3].DB_MAX_OUTPUT_PORT_TYPE
+parallel_out[4] <= parallel_ffs[4].DB_MAX_OUTPUT_PORT_TYPE
+parallel_out[5] <= parallel_ffs[5].DB_MAX_OUTPUT_PORT_TYPE
+parallel_out[6] <= parallel_ffs[6].DB_MAX_OUTPUT_PORT_TYPE
+parallel_out[7] <= parallel_ffs[7].DB_MAX_OUTPUT_PORT_TYPE
+MISO <= data_shift[7].DB_MAX_OUTPUT_PORT_TYPE
 loading <= control_shift[7].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|read_data_module|dffes:oe_n_FF
+|rw_data_module|dffes:oe_n_FF
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -100,7 +135,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|read_data_module|dffes:load_parallel_FF
+|rw_data_module|dffes:we_n_FF
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -111,7 +146,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|read_data_module|dffes:addr_inc_FF
+|rw_data_module|dffes:cs_n_FF
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -122,7 +157,29 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|read_data_module|dffes:busy_ff
+|rw_data_module|dffes:load_parallel_FF
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|rw_data_module|dffes:addr_inc_FF
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|rw_data_module|dffes:busy_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0

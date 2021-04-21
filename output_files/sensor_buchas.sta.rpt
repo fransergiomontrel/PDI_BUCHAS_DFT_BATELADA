@@ -1,5 +1,5 @@
 Timing Analyzer report for sensor_buchas
-Tue Apr 20 19:40:57 2021
+Wed Apr 21 15:46:20 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -88,7 +88,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+--------+--------------------------+
 ; SDC File Path     ; Status ; Read at                  ;
 +-------------------+--------+--------------------------+
-; sensor_buchas.sdc ; OK     ; Tue Apr 20 19:40:56 2021 ;
+; sensor_buchas.sdc ; OK     ; Wed Apr 21 15:46:19 2021 ;
 +-------------------+--------+--------------------------+
 
 
@@ -106,7 +106,7 @@ https://fpgasoftware.intel.com/eula.
 +------------+-----------------+------------+------+
 ; Fmax       ; Restricted Fmax ; Clock Name ; Note ;
 +------------+-----------------+------------+------+
-; 221.14 MHz ; 221.14 MHz      ; clk        ;      ;
+; 148.04 MHz ; 148.04 MHz      ; clk        ;      ;
 +------------+-----------------+------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -116,7 +116,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------+-------+---------------+
 ; Clock ; Slack ; End Point TNS ;
 +-------+-------+---------------+
-; clk   ; 5.478 ; 0.000         ;
+; clk   ; 3.245 ; 0.000         ;
 +-------+-------+---------------+
 
 
@@ -125,7 +125,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------+-------+---------------+
 ; Clock ; Slack ; End Point TNS ;
 +-------+-------+---------------+
-; clk   ; 1.866 ; 0.000         ;
+; clk   ; 1.375 ; 0.000         ;
 +-------+-------+---------------+
 
 
@@ -150,62 +150,90 @@ No paths to report.
 +-------+-------+---------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------+
-; Setup: 'clk'                                                                                                             ;
-+-------+----------------+---------------------------+--------------+-------------+--------------+------------+------------+
-; Slack ; From Node      ; To Node                   ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+-------+----------------+---------------------------+--------------+-------------+--------------+------------+------------+
-; 5.478 ; wait_loading   ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 4.189      ;
-; 5.546 ; wait_loading_n ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 4.121      ;
-; 6.003 ; wait_mode      ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.664      ;
-; 6.105 ; init_buffers2  ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 10.000       ; 0.000      ; 3.562      ;
-; 6.124 ; init_buffers1  ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 10.000       ; 0.000      ; 3.543      ;
-; 6.317 ; init_buffers1  ; init_buffers2             ; clk          ; clk         ; 10.000       ; 0.000      ; 3.350      ;
-; 6.581 ; init_buffers3  ; dffes:addr_inc_FF|ff      ; clk          ; clk         ; 10.000       ; 0.000      ; 3.086      ;
-; 6.664 ; init_buffers4  ; wait_loading              ; clk          ; clk         ; 10.000       ; 0.000      ; 3.003      ;
-; 6.945 ; init_buffers2  ; init_buffers3             ; clk          ; clk         ; 10.000       ; 0.000      ; 2.722      ;
-; 7.137 ; wait_loading   ; dffes:busy_ff|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 2.530      ;
-; 7.149 ; wait_loading   ; wait_mode                 ; clk          ; clk         ; 10.000       ; 0.000      ; 2.518      ;
-; 7.211 ; wait_loading_n ; wait_mode                 ; clk          ; clk         ; 10.000       ; 0.000      ; 2.456      ;
-; 7.220 ; wait_loading_n ; dffes:busy_ff|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 2.447      ;
-; 7.221 ; wait_mode      ; init_buffers1             ; clk          ; clk         ; 10.000       ; 0.000      ; 2.446      ;
-; 7.235 ; wait_loading_n ; wait_loading_n            ; clk          ; clk         ; 10.000       ; 0.000      ; 2.432      ;
-; 7.422 ; wait_mode      ; dffes:busy_ff|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 2.245      ;
-; 7.423 ; wait_loading_n ; init_buffers1             ; clk          ; clk         ; 10.000       ; 0.000      ; 2.244      ;
-; 7.441 ; wait_mode      ; wait_mode                 ; clk          ; clk         ; 10.000       ; 0.000      ; 2.226      ;
-; 7.458 ; wait_loading   ; wait_loading_n            ; clk          ; clk         ; 10.000       ; 0.000      ; 2.209      ;
-; 7.475 ; wait_loading   ; wait_loading              ; clk          ; clk         ; 10.000       ; 0.000      ; 2.192      ;
-; 7.580 ; init_buffers3  ; init_buffers4             ; clk          ; clk         ; 10.000       ; 0.000      ; 2.087      ;
-+-------+----------------+---------------------------+--------------+-------------+--------------+------------+------------+
++-------------------------------------------------------------------------------------------------------------------------------------+
+; Setup: 'clk'                                                                                                                        ;
++-------+---------------------------+---------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                 ; To Node                   ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+---------------------------+---------------------------+--------------+-------------+--------------+------------+------------+
+; 3.245 ; init_buffers2             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 6.422      ;
+; 3.394 ; init_buffers1             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 6.273      ;
+; 3.442 ; wait_loading              ; dffes:cs_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 6.225      ;
+; 3.710 ; init_buffers4             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 5.957      ;
+; 4.220 ; init_buffers1             ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 10.000       ; 0.000      ; 5.447      ;
+; 4.582 ; wait_loading_n            ; dffes:cs_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 5.085      ;
+; 4.735 ; dffes:load_parallel_FF|ff ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 10.000       ; 0.000      ; 4.932      ;
+; 4.954 ; init_buffers3             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 4.713      ;
+; 5.023 ; wait_mode                 ; dffes:cs_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 4.644      ;
+; 5.273 ; wait_mode                 ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 10.000       ; 0.000      ; 4.394      ;
+; 5.680 ; wait_loading              ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.987      ;
+; 5.999 ; wait_loading_n            ; wr1                       ; clk          ; clk         ; 10.000       ; 0.000      ; 3.668      ;
+; 6.021 ; wait_mode                 ; dffes:busy_ff|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.646      ;
+; 6.163 ; wait_loading              ; wait_mode                 ; clk          ; clk         ; 10.000       ; 0.000      ; 3.504      ;
+; 6.249 ; wait_loading_n            ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.418      ;
+; 6.308 ; init_buffers2             ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 10.000       ; 0.000      ; 3.359      ;
+; 6.309 ; wr3                       ; dffes:we_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.358      ;
+; 6.328 ; wait_mode                 ; init_buffers1             ; clk          ; clk         ; 10.000       ; 0.000      ; 3.339      ;
+; 6.568 ; wait_loading_n            ; dffes:busy_ff|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.099      ;
+; 6.624 ; init_buffers3             ; dffes:addr_inc_FF|ff      ; clk          ; clk         ; 10.000       ; 0.000      ; 3.043      ;
+; 6.637 ; wait_loading              ; wait_loading_n            ; clk          ; clk         ; 10.000       ; 0.000      ; 3.030      ;
+; 6.667 ; wr2                       ; dffes:we_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.000      ;
+; 6.943 ; wr4                       ; init_buffers1             ; clk          ; clk         ; 10.000       ; 0.000      ; 2.724      ;
+; 6.965 ; init_buffers4             ; wait_loading              ; clk          ; clk         ; 10.000       ; 0.000      ; 2.702      ;
+; 6.965 ; init_buffers2             ; init_buffers3             ; clk          ; clk         ; 10.000       ; 0.000      ; 2.702      ;
+; 6.968 ; init_buffers1             ; init_buffers2             ; clk          ; clk         ; 10.000       ; 0.000      ; 2.699      ;
+; 7.154 ; wait_mode                 ; wait_mode                 ; clk          ; clk         ; 10.000       ; 0.000      ; 2.513      ;
+; 7.207 ; wait_loading              ; wait_loading              ; clk          ; clk         ; 10.000       ; 0.000      ; 2.460      ;
+; 7.279 ; wait_loading_n            ; wait_loading_n            ; clk          ; clk         ; 10.000       ; 0.000      ; 2.388      ;
+; 7.510 ; wait_loading              ; dffes:busy_ff|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 2.157      ;
+; 7.569 ; wr1                       ; wr2                       ; clk          ; clk         ; 10.000       ; 0.000      ; 2.098      ;
+; 7.743 ; wait_loading_n            ; wait_mode                 ; clk          ; clk         ; 10.000       ; 0.000      ; 1.924      ;
+; 7.998 ; init_buffers3             ; init_buffers4             ; clk          ; clk         ; 10.000       ; 0.000      ; 1.669      ;
+; 8.007 ; wr3                       ; wr4                       ; clk          ; clk         ; 10.000       ; 0.000      ; 1.660      ;
+; 8.071 ; wr2                       ; wr3                       ; clk          ; clk         ; 10.000       ; 0.000      ; 1.596      ;
++-------+---------------------------+---------------------------+--------------+-------------+--------------+------------+------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------+
-; Hold: 'clk'                                                                                                              ;
-+-------+----------------+---------------------------+--------------+-------------+--------------+------------+------------+
-; Slack ; From Node      ; To Node                   ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+-------+----------------+---------------------------+--------------+-------------+--------------+------------+------------+
-; 1.866 ; init_buffers3  ; init_buffers4             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.087      ;
-; 1.971 ; wait_loading   ; wait_loading              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.192      ;
-; 1.988 ; wait_loading   ; wait_loading_n            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.209      ;
-; 2.005 ; wait_mode      ; wait_mode                 ; clk          ; clk         ; 0.000        ; 0.000      ; 2.226      ;
-; 2.023 ; wait_loading_n ; init_buffers1             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.244      ;
-; 2.024 ; wait_mode      ; dffes:busy_ff|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.245      ;
-; 2.211 ; wait_loading_n ; wait_loading_n            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.432      ;
-; 2.225 ; wait_mode      ; init_buffers1             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.446      ;
-; 2.226 ; wait_loading_n ; dffes:busy_ff|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.447      ;
-; 2.235 ; wait_loading_n ; wait_mode                 ; clk          ; clk         ; 0.000        ; 0.000      ; 2.456      ;
-; 2.297 ; wait_loading   ; wait_mode                 ; clk          ; clk         ; 0.000        ; 0.000      ; 2.518      ;
-; 2.309 ; wait_loading   ; dffes:busy_ff|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.530      ;
-; 2.501 ; init_buffers2  ; init_buffers3             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.722      ;
-; 2.782 ; init_buffers4  ; wait_loading              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.003      ;
-; 2.865 ; init_buffers3  ; dffes:addr_inc_FF|ff      ; clk          ; clk         ; 0.000        ; 0.000      ; 3.086      ;
-; 3.129 ; init_buffers1  ; init_buffers2             ; clk          ; clk         ; 0.000        ; 0.000      ; 3.350      ;
-; 3.322 ; init_buffers1  ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 3.543      ;
-; 3.341 ; init_buffers2  ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 3.562      ;
-; 3.443 ; wait_mode      ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.664      ;
-; 3.900 ; wait_loading_n ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 4.121      ;
-; 3.968 ; wait_loading   ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 4.189      ;
-+-------+----------------+---------------------------+--------------+-------------+--------------+------------+------------+
++-------------------------------------------------------------------------------------------------------------------------------------+
+; Hold: 'clk'                                                                                                                         ;
++-------+---------------------------+---------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                 ; To Node                   ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+---------------------------+---------------------------+--------------+-------------+--------------+------------+------------+
+; 1.375 ; wr2                       ; wr3                       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.596      ;
+; 1.439 ; wr3                       ; wr4                       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.660      ;
+; 1.448 ; init_buffers3             ; init_buffers4             ; clk          ; clk         ; 0.000        ; 0.000      ; 1.669      ;
+; 1.703 ; wait_loading_n            ; wait_mode                 ; clk          ; clk         ; 0.000        ; 0.000      ; 1.924      ;
+; 1.877 ; wr1                       ; wr2                       ; clk          ; clk         ; 0.000        ; 0.000      ; 2.098      ;
+; 1.936 ; wait_loading              ; dffes:busy_ff|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.157      ;
+; 2.167 ; wait_loading_n            ; wait_loading_n            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.388      ;
+; 2.239 ; wait_loading              ; wait_loading              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.460      ;
+; 2.292 ; wait_mode                 ; wait_mode                 ; clk          ; clk         ; 0.000        ; 0.000      ; 2.513      ;
+; 2.478 ; init_buffers1             ; init_buffers2             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.699      ;
+; 2.481 ; init_buffers4             ; wait_loading              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.702      ;
+; 2.481 ; init_buffers2             ; init_buffers3             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.702      ;
+; 2.503 ; wr4                       ; init_buffers1             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.724      ;
+; 2.779 ; wr2                       ; dffes:we_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.000      ;
+; 2.809 ; wait_loading              ; wait_loading_n            ; clk          ; clk         ; 0.000        ; 0.000      ; 3.030      ;
+; 2.822 ; init_buffers3             ; dffes:addr_inc_FF|ff      ; clk          ; clk         ; 0.000        ; 0.000      ; 3.043      ;
+; 2.878 ; wait_loading_n            ; dffes:busy_ff|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.099      ;
+; 3.118 ; wait_mode                 ; init_buffers1             ; clk          ; clk         ; 0.000        ; 0.000      ; 3.339      ;
+; 3.125 ; dffes:load_parallel_FF|ff ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 3.346      ;
+; 3.137 ; wr3                       ; dffes:we_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.358      ;
+; 3.138 ; init_buffers2             ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 3.359      ;
+; 3.197 ; wait_loading_n            ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.418      ;
+; 3.283 ; wait_loading              ; wait_mode                 ; clk          ; clk         ; 0.000        ; 0.000      ; 3.504      ;
+; 3.425 ; wait_mode                 ; dffes:busy_ff|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.646      ;
+; 3.447 ; wait_loading_n            ; wr1                       ; clk          ; clk         ; 0.000        ; 0.000      ; 3.668      ;
+; 3.766 ; wait_loading              ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.987      ;
+; 4.173 ; wait_mode                 ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 4.394      ;
+; 4.423 ; wait_mode                 ; dffes:cs_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 4.644      ;
+; 4.492 ; init_buffers3             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 4.713      ;
+; 4.864 ; wait_loading_n            ; dffes:cs_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 5.085      ;
+; 5.226 ; init_buffers1             ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 5.447      ;
+; 5.736 ; init_buffers4             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 5.957      ;
+; 6.004 ; wait_loading              ; dffes:cs_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 6.225      ;
+; 6.052 ; init_buffers1             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 6.273      ;
+; 6.201 ; init_buffers2             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 6.422      ;
++-------+---------------------------+---------------------------+--------------+-------------+--------------+------------+------------+
 
 
 +-------------------------------------------------------------------+
@@ -213,7 +241,7 @@ No paths to report.
 +------------+----------+----------+----------+----------+----------+
 ; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 21       ; 0        ; 0        ; 0        ;
+; clk        ; clk      ; 36       ; 0        ; 0        ; 0        ;
 +------------+----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -223,7 +251,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +------------+----------+----------+----------+----------+----------+
 ; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 21       ; 0        ; 0        ; 0        ;
+; clk        ; clk      ; 36       ; 0        ; 0        ; 0        ;
 +------------+----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -247,10 +275,10 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------------------------+-------+------+
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 1     ; 1    ;
-; Unconstrained Input Ports       ; 12    ; 12   ;
-; Unconstrained Input Port Paths  ; 34    ; 34   ;
-; Unconstrained Output Ports      ; 11    ; 11   ;
-; Unconstrained Output Port Paths ; 20    ; 20   ;
+; Unconstrained Input Ports       ; 13    ; 13   ;
+; Unconstrained Input Port Paths  ; 58    ; 58   ;
+; Unconstrained Output Ports      ; 21    ; 21   ;
+; Unconstrained Output Port Paths ; 38    ; 38   ;
 +---------------------------------+-------+------+
 
 
@@ -269,15 +297,16 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------+--------------------------------------------------------------------------------------+
 ; Input Port    ; Comment                                                                              ;
 +---------------+--------------------------------------------------------------------------------------+
+; MOSI          ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; changing_mode ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[0]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[1]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[2]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[3]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[4]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[5]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[6]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[7]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[0]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[1]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[2]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[3]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[4]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[5]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[6]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[7]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; mode[0]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; mode[1]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; sreset        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
@@ -294,12 +323,22 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; addr_inc        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; busy            ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; cs_n            ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[0]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[1]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[2]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[3]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[4]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[5]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[6]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[7]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; oe_n            ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; test_async_load ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; test_loading    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; test_state[0]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; test_state[1]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; test_state[2]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_state[3]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; we_n            ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 +-----------------+---------------------------------------------------------------------------------------+
 
 
@@ -308,15 +347,16 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------+--------------------------------------------------------------------------------------+
 ; Input Port    ; Comment                                                                              ;
 +---------------+--------------------------------------------------------------------------------------+
+; MOSI          ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; changing_mode ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[0]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[1]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[2]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[3]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[4]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[5]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[6]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[7]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[0]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[1]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[2]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[3]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[4]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[5]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[6]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[7]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; mode[0]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; mode[1]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; sreset        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
@@ -333,12 +373,22 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; addr_inc        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; busy            ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; cs_n            ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[0]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[1]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[2]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[3]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[4]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[5]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[6]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[7]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; oe_n            ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; test_async_load ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; test_loading    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; test_state[0]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; test_state[1]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; test_state[2]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_state[3]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; we_n            ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 +-----------------+---------------------------------------------------------------------------------------+
 
 
@@ -348,7 +398,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Tue Apr 20 19:40:55 2021
+    Info: Processing started: Wed Apr 21 15:46:16 2021
 Info: Command: quartus_sta sensor_buchas -c sensor_buchas
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -367,17 +417,17 @@ Warning (332049): Ignored set_false_path at sensor_buchas.sdc(86): Argument <fro
 Warning (332049): Ignored set_false_path at sensor_buchas.sdc(87): Argument <to> is an empty collection File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 87
     Info (332050): set_false_path  -from  [get_clocks {clk}]  -to  [get_clocks {host_SCLK}] File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 87
 Warning (332060): Node: SCLK_ was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register shift_reg_2x:shift|data_shift[7] is being clocked by SCLK_
+    Info (13166): Register spi_shift:shift|data_shift[7] is being clocked by SCLK_
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
-Info (332146): Worst-case setup slack is 5.478
+Info (332146): Worst-case setup slack is 3.245
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     5.478               0.000 clk 
-Info (332146): Worst-case hold slack is 1.866
+    Info (332119):     3.245               0.000 clk 
+Info (332146): Worst-case hold slack is 1.375
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     1.866               0.000 clk 
+    Info (332119):     1.375               0.000 clk 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is 4.734
@@ -388,9 +438,9 @@ Info (332001): The selected device family is not supported by the report_metasta
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 7 warnings
-    Info: Peak virtual memory: 4652 megabytes
-    Info: Processing ended: Tue Apr 20 19:40:57 2021
-    Info: Elapsed time: 00:00:02
-    Info: Total CPU time (on all processors): 00:00:01
+    Info: Peak virtual memory: 4662 megabytes
+    Info: Processing ended: Wed Apr 21 15:46:20 2021
+    Info: Elapsed time: 00:00:04
+    Info: Total CPU time (on all processors): 00:00:03
 
 

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for sensor_buchas
-Tue Apr 20 19:40:42 2021
+Wed Apr 21 15:46:06 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -13,10 +13,11 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |read_data_module|sm
+  8. State Machine - |rw_data_module|sm
   9. General Register Statistics
  10. Inverted Register Statistics
- 11. Analysis & Synthesis Messages
+ 11. Parameter Settings for User Entity Instance: spi_shift:shift
+ 12. Analysis & Synthesis Messages
 
 
 
@@ -43,13 +44,13 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Tue Apr 20 19:40:42 2021       ;
+; Analysis & Synthesis Status ; Successful - Wed Apr 21 15:46:06 2021       ;
 ; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name               ; sensor_buchas                               ;
-; Top-level Entity Name       ; read_data_module                            ;
+; Top-level Entity Name       ; rw_data_module                              ;
 ; Family                      ; MAX II                                      ;
-; Total logic elements        ; 37                                          ;
-; Total pins                  ; 26                                          ;
+; Total logic elements        ; 58                                          ;
+; Total pins                  ; 36                                          ;
 ; Total virtual pins          ; 0                                           ;
 ; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
 +-----------------------------+---------------------------------------------+
@@ -61,7 +62,7 @@ https://fpgasoftware.intel.com/eula.
 ; Option                                                           ; Setting            ; Default Value      ;
 +------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                           ; EPM1270T144C5      ;                    ;
-; Top-level entity name                                            ; read_data_module   ; sensor_buchas      ;
+; Top-level entity name                                            ; rw_data_module     ; sensor_buchas      ;
 ; Family name                                                      ; MAX II             ; Cyclone V          ;
 ; Use smart compilation                                            ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
@@ -142,84 +143,90 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                         ;
-+----------------------------------+-----------------+------------------------+----------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path           ; Library ;
-+----------------------------------+-----------------+------------------------+----------------------------------------+---------+
-; modes.inc                        ; yes             ; User Unspecified File  ; C:/SensorBuchasV2/modes.inc            ;         ;
-; shift_reg_2x.tdf                 ; yes             ; User AHDL File         ; C:/SensorBuchasV2/shift_reg_2x.tdf     ;         ;
-; read_data_module.tdf             ; yes             ; User AHDL File         ; C:/SensorBuchasV2/read_data_module.tdf ;         ;
-; dffes.tdf                        ; yes             ; User AHDL File         ; C:/SensorBuchasV2/dffes.tdf            ;         ;
-; shift_reg_2x.inc                 ; yes             ; Auto-Found AHDL File   ; C:/SensorBuchasV2/shift_reg_2x.inc     ;         ;
-; counter.inc                      ; yes             ; Auto-Found AHDL File   ; C:/SensorBuchasV2/counter.inc          ;         ;
-; dffes.inc                        ; yes             ; Auto-Found AHDL File   ; C:/SensorBuchasV2/dffes.inc            ;         ;
-+----------------------------------+-----------------+------------------------+----------------------------------------+---------+
++------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                       ;
++----------------------------------+-----------------+------------------------+--------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path         ; Library ;
++----------------------------------+-----------------+------------------------+--------------------------------------+---------+
+; modes.inc                        ; yes             ; User Unspecified File  ; C:/SensorBuchasV2/modes.inc          ;         ;
+; dffes.tdf                        ; yes             ; User AHDL File         ; C:/SensorBuchasV2/dffes.tdf          ;         ;
+; spi_shift.tdf                    ; yes             ; User AHDL File         ; C:/SensorBuchasV2/spi_shift.tdf      ;         ;
+; rw_data_module.tdf               ; yes             ; User AHDL File         ; C:/SensorBuchasV2/rw_data_module.tdf ;         ;
+; dffes.inc                        ; yes             ; Auto-Found AHDL File   ; C:/SensorBuchasV2/dffes.inc          ;         ;
+; counter.inc                      ; yes             ; Auto-Found AHDL File   ; C:/SensorBuchasV2/counter.inc        ;         ;
+; spi_shift.inc                    ; yes             ; Auto-Found AHDL File   ; C:/SensorBuchasV2/spi_shift.inc      ;         ;
++----------------------------------+-----------------+------------------------+--------------------------------------+---------+
 
 
-+-------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                             ;
-+---------------------------------------------+---------------------------+
-; Resource                                    ; Usage                     ;
-+---------------------------------------------+---------------------------+
-; Total logic elements                        ; 37                        ;
-;     -- Combinational with no register       ; 9                         ;
-;     -- Register only                        ; 11                        ;
-;     -- Combinational with a register        ; 17                        ;
-;                                             ;                           ;
-; Logic element usage by number of LUT inputs ;                           ;
-;     -- 4 input functions                    ; 5                         ;
-;     -- 3 input functions                    ; 15                        ;
-;     -- 2 input functions                    ; 5                         ;
-;     -- 1 input functions                    ; 0                         ;
-;     -- 0 input functions                    ; 1                         ;
-;                                             ;                           ;
-; Logic elements by mode                      ;                           ;
-;     -- normal mode                          ; 37                        ;
-;     -- arithmetic mode                      ; 0                         ;
-;     -- qfbk mode                            ; 0                         ;
-;     -- register cascade mode                ; 0                         ;
-;     -- synchronous clear/load mode          ; 4                         ;
-;     -- asynchronous clear/load mode         ; 24                        ;
-;                                             ;                           ;
-; Total registers                             ; 28                        ;
-; I/O pins                                    ; 26                        ;
-; Maximum fan-out node                        ; dffes:load_parallel_FF|ff ;
-; Maximum fan-out                             ; 18                        ;
-; Total fan-out                               ; 153                       ;
-; Average fan-out                             ; 2.43                      ;
-+---------------------------------------------+---------------------------+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Total logic elements                        ; 58    ;
+;     -- Combinational with no register       ; 16    ;
+;     -- Register only                        ; 23    ;
+;     -- Combinational with a register        ; 19    ;
+;                                             ;       ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 13    ;
+;     -- 3 input functions                    ; 14    ;
+;     -- 2 input functions                    ; 7     ;
+;     -- 1 input functions                    ; 0     ;
+;     -- 0 input functions                    ; 1     ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 58    ;
+;     -- arithmetic mode                      ; 0     ;
+;     -- qfbk mode                            ; 0     ;
+;     -- register cascade mode                ; 0     ;
+;     -- synchronous clear/load mode          ; 6     ;
+;     -- asynchronous clear/load mode         ; 28    ;
+;                                             ;       ;
+; Total registers                             ; 42    ;
+; I/O pins                                    ; 36    ;
+; Maximum fan-out node                        ; SCLK_ ;
+; Maximum fan-out                             ; 25    ;
+; Total fan-out                               ; 236   ;
+; Average fan-out                             ; 2.51  ;
++---------------------------------------------+-------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                           ;
-+-----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------+------------------+--------------+
-; Compilation Hierarchy Node  ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                      ; Entity Name      ; Library Name ;
-+-----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------+------------------+--------------+
-; |read_data_module           ; 37 (16)     ; 28           ; 0          ; 26   ; 0            ; 9 (9)        ; 11 (3)            ; 17 (4)           ; 0 (0)           ; 0 (0)      ; |read_data_module                        ; read_data_module ; work         ;
-;    |dffes:addr_inc_FF|      ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |read_data_module|dffes:addr_inc_FF      ; dffes            ; work         ;
-;    |dffes:busy_ff|          ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |read_data_module|dffes:busy_ff          ; dffes            ; work         ;
-;    |dffes:load_parallel_FF| ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |read_data_module|dffes:load_parallel_FF ; dffes            ; work         ;
-;    |dffes:oe_n_FF|          ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |read_data_module|dffes:oe_n_FF          ; dffes            ; work         ;
-;    |shift_reg_2x:shift|     ; 17 (17)     ; 17           ; 0          ; 0    ; 0            ; 0 (0)        ; 7 (7)             ; 10 (10)          ; 0 (0)           ; 0 (0)      ; |read_data_module|shift_reg_2x:shift     ; shift_reg_2x     ; work         ;
-+-----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------+------------------+--------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                       ;
++-----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------------------+----------------+--------------+
+; Compilation Hierarchy Node  ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                    ; Entity Name    ; Library Name ;
++-----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------------------+----------------+--------------+
+; |rw_data_module             ; 58 (27)     ; 42           ; 0          ; 36   ; 0            ; 16 (16)      ; 23 (6)            ; 19 (5)           ; 0 (0)           ; 0 (0)      ; |rw_data_module                        ; rw_data_module ; work         ;
+;    |dffes:addr_inc_FF|      ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |rw_data_module|dffes:addr_inc_FF      ; dffes          ; work         ;
+;    |dffes:busy_ff|          ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |rw_data_module|dffes:busy_ff          ; dffes          ; work         ;
+;    |dffes:cs_n_FF|          ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |rw_data_module|dffes:cs_n_FF          ; dffes          ; work         ;
+;    |dffes:load_parallel_FF| ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |rw_data_module|dffes:load_parallel_FF ; dffes          ; work         ;
+;    |dffes:oe_n_FF|          ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |rw_data_module|dffes:oe_n_FF          ; dffes          ; work         ;
+;    |dffes:we_n_FF|          ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |rw_data_module|dffes:we_n_FF          ; dffes          ; work         ;
+;    |spi_shift:shift|        ; 25 (25)     ; 25           ; 0          ; 0    ; 0            ; 0 (0)        ; 15 (15)           ; 10 (10)          ; 0 (0)           ; 0 (0)      ; |rw_data_module|spi_shift:shift        ; spi_shift      ; work         ;
++-----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------------------+----------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
 Encoding Type:  One-Hot
-+----------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |read_data_module|sm                                                                                       ;
-+----------------+----------------+--------------+---------------+---------------+---------------+---------------+-----------+
-; Name           ; wait_loading_n ; wait_loading ; init_buffers4 ; init_buffers3 ; init_buffers2 ; init_buffers1 ; wait_mode ;
-+----------------+----------------+--------------+---------------+---------------+---------------+---------------+-----------+
-; wait_mode      ; 0              ; 0            ; 0             ; 0             ; 0             ; 0             ; 0         ;
-; init_buffers1  ; 0              ; 0            ; 0             ; 0             ; 0             ; 1             ; 1         ;
-; init_buffers2  ; 0              ; 0            ; 0             ; 0             ; 1             ; 0             ; 1         ;
-; init_buffers3  ; 0              ; 0            ; 0             ; 1             ; 0             ; 0             ; 1         ;
-; init_buffers4  ; 0              ; 0            ; 1             ; 0             ; 0             ; 0             ; 1         ;
-; wait_loading   ; 0              ; 1            ; 0             ; 0             ; 0             ; 0             ; 1         ;
-; wait_loading_n ; 1              ; 0            ; 0             ; 0             ; 0             ; 0             ; 1         ;
-+----------------+----------------+--------------+---------------+---------------+---------------+---------------+-----------+
++----------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |rw_data_module|sm                                                                                                                 ;
++----------------+-----+-----+-----+-----+----------------+--------------+---------------+---------------+---------------+---------------+-----------+
+; Name           ; wr4 ; wr3 ; wr2 ; wr1 ; wait_loading_n ; wait_loading ; init_buffers4 ; init_buffers3 ; init_buffers2 ; init_buffers1 ; wait_mode ;
++----------------+-----+-----+-----+-----+----------------+--------------+---------------+---------------+---------------+---------------+-----------+
+; wait_mode      ; 0   ; 0   ; 0   ; 0   ; 0              ; 0            ; 0             ; 0             ; 0             ; 0             ; 0         ;
+; init_buffers1  ; 0   ; 0   ; 0   ; 0   ; 0              ; 0            ; 0             ; 0             ; 0             ; 1             ; 1         ;
+; init_buffers2  ; 0   ; 0   ; 0   ; 0   ; 0              ; 0            ; 0             ; 0             ; 1             ; 0             ; 1         ;
+; init_buffers3  ; 0   ; 0   ; 0   ; 0   ; 0              ; 0            ; 0             ; 1             ; 0             ; 0             ; 1         ;
+; init_buffers4  ; 0   ; 0   ; 0   ; 0   ; 0              ; 0            ; 1             ; 0             ; 0             ; 0             ; 1         ;
+; wait_loading   ; 0   ; 0   ; 0   ; 0   ; 0              ; 1            ; 0             ; 0             ; 0             ; 0             ; 1         ;
+; wait_loading_n ; 0   ; 0   ; 0   ; 0   ; 1              ; 0            ; 0             ; 0             ; 0             ; 0             ; 1         ;
+; wr1            ; 0   ; 0   ; 0   ; 1   ; 0              ; 0            ; 0             ; 0             ; 0             ; 0             ; 1         ;
+; wr2            ; 0   ; 0   ; 1   ; 0   ; 0              ; 0            ; 0             ; 0             ; 0             ; 0             ; 1         ;
+; wr3            ; 0   ; 1   ; 0   ; 0   ; 0              ; 0            ; 0             ; 0             ; 0             ; 0             ; 1         ;
+; wr4            ; 1   ; 0   ; 0   ; 0   ; 0              ; 0            ; 0             ; 0             ; 0             ; 0             ; 1         ;
++----------------+-----+-----+-----+-----+----------------+--------------+---------------+---------------+---------------+---------------+-----------+
 
 
 +------------------------------------------------------+
@@ -227,12 +234,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 28    ;
+; Total registers                              ; 42    ;
 ; Number of registers using Synchronous Clear  ; 2     ;
-; Number of registers using Synchronous Load   ; 2     ;
-; Number of registers using Asynchronous Clear ; 16    ;
+; Number of registers using Synchronous Load   ; 4     ;
+; Number of registers using Asynchronous Clear ; 20    ;
 ; Number of registers using Asynchronous Load  ; 8     ;
-; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Clock Enable       ; 8     ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -242,9 +249,19 @@ Encoding Type:  One-Hot
 +----------------------------------------+---------+
 ; Inverted Register                      ; Fan out ;
 +----------------------------------------+---------+
-; shift_reg_2x:shift|init_control        ; 1       ;
+; spi_shift:shift|init_control           ; 1       ;
 ; Total number of inverted registers = 1 ;         ;
 +----------------------------------------+---------+
+
+
++--------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: spi_shift:shift ;
++----------------+-------+-------------------------------------+
+; Parameter Name ; Value ; Type                                ;
++----------------+-------+-------------------------------------+
+; N_BITS         ; 8     ; Untyped                             ;
++----------------+-------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
 +-------------------------------+
@@ -253,18 +270,15 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Tue Apr 20 19:40:25 2021
+    Info: Processing started: Wed Apr 21 15:45:42 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off sensor_buchas -c sensor_buchas
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file synchronizer.tdf
     Info (12023): Found entity 1: synchronizer File: C:/SensorBuchasV2/synchronizer.tdf Line: 7
+Warning (287004): Group name "RDM_data_write" is missing brackets ([ ]) File: C:/SensorBuchasV2/switch.tdf Line: 127
 Info (12021): Found 1 design units, including 1 entities, in source file switch.tdf
     Info (12023): Found entity 1: switch File: C:/SensorBuchasV2/switch.tdf Line: 3
-Info (12021): Found 1 design units, including 1 entities, in source file shift_reg_2x.tdf
-    Info (12023): Found entity 1: shift_reg_2x File: C:/SensorBuchasV2/shift_reg_2x.tdf Line: 3
-Info (12021): Found 1 design units, including 1 entities, in source file read_data_module.tdf
-    Info (12023): Found entity 1: read_data_module File: C:/SensorBuchasV2/read_data_module.tdf Line: 6
 Info (12021): Found 1 design units, including 1 entities, in source file ram_interface.tdf
     Info (12023): Found entity 1: RAM_interface File: C:/SensorBuchasV2/RAM_interface.tdf Line: 9
 Info (12021): Found 1 design units, including 1 entities, in source file mode_selector.tdf
@@ -288,21 +302,23 @@ Info (12021): Found 1 design units, including 1 entities, in source file acquisi
     Info (12023): Found entity 1: acquisition_ctrl File: C:/SensorBuchasV2/acquisition_ctrl.tdf Line: 22
 Info (12021): Found 1 design units, including 1 entities, in source file sensor_buchas.bdf
     Info (12023): Found entity 1: sensor_buchas
-Info (12127): Elaborating entity "read_data_module" for the top level hierarchy
-Info (12128): Elaborating entity "shift_reg_2x" for hierarchy "shift_reg_2x:shift" File: C:/SensorBuchasV2/read_data_module.tdf Line: 29
-Info (12128): Elaborating entity "dffes" for hierarchy "dffes:oe_n_FF" File: C:/SensorBuchasV2/read_data_module.tdf Line: 33
-Info (12128): Elaborating entity "dffes" for hierarchy "dffes:addr_inc_FF" File: C:/SensorBuchasV2/read_data_module.tdf Line: 33
-Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "test_state[3]" is stuck at GND File: C:/SensorBuchasV2/read_data_module.tdf Line: 26
-Info (18000): Registers with preset signals will power-up high File: C:/SensorBuchasV2/shift_reg_2x.tdf Line: 14
-Info (21057): Implemented 63 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 14 input pins
-    Info (21059): Implemented 12 output pins
-    Info (21061): Implemented 37 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 4 warnings
+Info (12021): Found 1 design units, including 1 entities, in source file spi_shift.tdf
+    Info (12023): Found entity 1: spi_shift File: C:/SensorBuchasV2/spi_shift.tdf Line: 5
+Info (12021): Found 1 design units, including 1 entities, in source file rw_data_module.tdf
+    Info (12023): Found entity 1: rw_data_module File: C:/SensorBuchasV2/rw_data_module.tdf Line: 6
+Info (12127): Elaborating entity "rw_data_module" for the top level hierarchy
+Info (12128): Elaborating entity "spi_shift" for hierarchy "spi_shift:shift" File: C:/SensorBuchasV2/rw_data_module.tdf Line: 32
+Info (12128): Elaborating entity "dffes" for hierarchy "dffes:oe_n_FF" File: C:/SensorBuchasV2/rw_data_module.tdf Line: 36
+Info (12128): Elaborating entity "dffes" for hierarchy "dffes:addr_inc_FF" File: C:/SensorBuchasV2/rw_data_module.tdf Line: 36
+Info (18000): Registers with preset signals will power-up high File: C:/SensorBuchasV2/spi_shift.tdf Line: 18
+Info (21057): Implemented 94 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 15 input pins
+    Info (21059): Implemented 21 output pins
+    Info (21061): Implemented 58 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 3 warnings
     Info: Peak virtual memory: 4692 megabytes
-    Info: Processing ended: Tue Apr 20 19:40:42 2021
-    Info: Elapsed time: 00:00:17
-    Info: Total CPU time (on all processors): 00:00:25
+    Info: Processing ended: Wed Apr 21 15:46:06 2021
+    Info: Elapsed time: 00:00:24
+    Info: Total CPU time (on all processors): 00:00:35
 
 

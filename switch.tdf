@@ -49,7 +49,7 @@ subdesign switch(
 	-- Read Data Module
 	RDM_mode[1..0]: output;
 	RDM_SCLK: output;
-	RDM_data[7..0]: output;
+	RDM_data_read[7..0]: output;
 	RDM_changing_mode: output;
 	RDM_addr_clr: input;
 	RDM_addr_inc: input;
@@ -57,6 +57,12 @@ subdesign switch(
 	RDM_cs_n: input;
 	RDM_MISO: input;
 	RDM_busy: input;
+	
+	
+	
+RDM_MOSI: output;
+RDM_we_n: input;
+RDM_data_write[7..0]: input;
 )
 begin
 	-- Modes
@@ -118,8 +124,8 @@ begin
 			-- RAM Interface
 			RI_addr_clr = RDM_addr_clr;
 			RI_addr_inc = RDM_addr_inc;
-			RI_data_in[] = Gnd;
-			RI_we_n = Vcc;
+			RI_data_in[] = RDM_data_write;
+			RI_we_n = RDM_we_n;
 			RI_oe_n = RDM_oe_n;
 			RI_cs_n = RDM_cs_n;
 			
@@ -135,7 +141,8 @@ begin
 
 			-- Read Data Module
 			RDM_SCLK = HI_SCLK;
-			RDM_data[] = RI_data_out[];
+			RDM_data_read[] = RI_data_out[];
+			RDM_MOSI = HI_MOSI;
 		
 		when others =>
 			-- Host Interface

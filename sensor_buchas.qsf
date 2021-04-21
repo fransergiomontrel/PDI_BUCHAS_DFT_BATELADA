@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "MAX II"
 set_global_assignment -name DEVICE EPM1270T144C5
-set_global_assignment -name TOP_LEVEL_ENTITY read_data_module
+set_global_assignment -name TOP_LEVEL_ENTITY rw_data_module
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:48:22  APRIL 07, 2021"
 set_global_assignment -name LAST_QUARTUS_VERSION "20.1.1 Lite Edition"
@@ -57,12 +57,11 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "NO HEAT SINK WITH STILL AIR"
+set_global_assignment -name VECTOR_WAVEFORM_FILE spi_shift.vwf
 set_global_assignment -name SDC_FILE sensor_buchas.sdc
 set_global_assignment -name INCLUDE_FILE modes.inc
 set_global_assignment -name AHDL_FILE synchronizer.tdf
 set_global_assignment -name AHDL_FILE switch.tdf
-set_global_assignment -name AHDL_FILE shift_reg_2x.tdf
-set_global_assignment -name AHDL_FILE read_data_module.tdf
 set_global_assignment -name AHDL_FILE RAM_interface.tdf
 set_global_assignment -name AHDL_FILE mode_selector.tdf
 set_global_assignment -name AHDL_FILE host_interface.tdf
@@ -74,7 +73,6 @@ set_global_assignment -name AHDL_FILE acquisition_serializer.tdf
 set_global_assignment -name AHDL_FILE acquisition_module.tdf
 set_global_assignment -name AHDL_FILE acquisition_ctrl.tdf
 set_global_assignment -name VECTOR_WAVEFORM_FILE test_synchronizer.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_shift_reg_2x.vwf
 set_global_assignment -name VECTOR_WAVEFORM_FILE test_read_data_module.vwf
 set_global_assignment -name VECTOR_WAVEFORM_FILE test_RAM_interface.vwf
 set_global_assignment -name VECTOR_WAVEFORM_FILE test_mode_selector.vwf
@@ -86,3 +84,6 @@ set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_module.vwf
 set_global_assignment -name BDF_FILE sensor_buchas.bdf
 set_global_assignment -name VECTOR_WAVEFORM_FILE sensor_buchas.vwf
 set_global_assignment -name VECTOR_WAVEFORM_FILE dffes.vwf
+set_global_assignment -name AHDL_FILE spi_shift.tdf
+set_global_assignment -name AHDL_FILE rw_data_module.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE rw_data_module.vwf

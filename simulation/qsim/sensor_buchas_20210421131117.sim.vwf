@@ -1,46 +1,3 @@
-/*<simulation_settings>
-<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="C:/SensorBuchasV2/test_shift_reg_2x.vwf" --testbench_file="C:/SensorBuchasV2/simulation/qsim/test_shift_reg_2x.vwf.vt"</ftestbench_cmd>
-<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="C:/SensorBuchasV2/test_shift_reg_2x.vwf" --testbench_file="C:/SensorBuchasV2/simulation/qsim/test_shift_reg_2x.vwf.vt"</ttestbench_cmd>
-<fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="C:/SensorBuchasV2/simulation/qsim/" sensor_buchas -c sensor_buchas</fnetlist_cmd>
-<tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="C:/SensorBuchasV2/simulation/qsim/" sensor_buchas -c sensor_buchas</tnetlist_cmd>
-<modelsim_script>onerror {exit -code 1}
-vlib work
-vlog -work work sensor_buchas.vo
-vlog -work work test_shift_reg_2x.vwf.vt
-vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.shift_reg_2x_vlg_vec_tst
-vcd file -direction sensor_buchas.msim.vcd
-vcd add -internal shift_reg_2x_vlg_vec_tst/*
-vcd add -internal shift_reg_2x_vlg_vec_tst/i1/*
-proc simTimestamp {} {
-    echo "Simulation time: $::now ps"
-    if { [string equal running [runStatus]] } {
-        after 2500 simTimestamp
-    }
-}
-after 2500 simTimestamp
-run -all
-quit -f
-</modelsim_script>
-<modelsim_script_timing>onerror {exit -code 1}
-vlib work
-vlog -work work sensor_buchas.vo
-vlog -work work test_shift_reg_2x.vwf.vt
-vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.shift_reg_2x_vlg_vec_tst
-vcd file -direction sensor_buchas.msim.vcd
-vcd add -internal shift_reg_2x_vlg_vec_tst/*
-vcd add -internal shift_reg_2x_vlg_vec_tst/i1/*
-proc simTimestamp {} {
-    echo "Simulation time: $::now ps"
-    if { [string equal running [runStatus]] } {
-        after 2500 simTimestamp
-    }
-}
-after 2500 simTimestamp
-run -all
-quit -f
-</modelsim_script_timing>
-<hdl_lang>verilog</hdl_lang>
-</simulation_settings>*/
 /*
 WARNING: Do NOT edit the input and output ports in this file in a text
 editor if you plan to continue editing the block that represents it in
@@ -186,16 +143,6 @@ SIGNAL("async_load")
 	PARENT = "";
 }
 
-SIGNAL("reset")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = INPUT;
-	PARENT = "";
-}
-
 SIGNAL("o")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
@@ -221,15 +168,87 @@ TRANSITION_LIST("clk")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 105.0;
-		LEVEL 1 FOR 25.0;
 		NODE
 		{
-			REPEAT = 37;
+			REPEAT = 1;
+			LEVEL 0 FOR 105.0;
+			LEVEL 1 FOR 25.0;
 			LEVEL 0 FOR 25.0;
 			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 20.0;
 		}
-		LEVEL 0 FOR 20.0;
 	}
 }
 
@@ -342,18 +361,13 @@ TRANSITION_LIST("async_load")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 40.0;
-		LEVEL 1 FOR 30.0;
-		LEVEL 0 FOR 1930.0;
-	}
-}
-
-TRANSITION_LIST("reset")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 2000.0;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 40.0;
+			LEVEL 1 FOR 30.0;
+			LEVEL 0 FOR 1930.0;
+		}
 	}
 }
 
@@ -371,7 +385,19 @@ TRANSITION_LIST("loading")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL X FOR 2000.0;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 430.0;
+			LEVEL 1 FOR 50.0;
+			LEVEL 0 FOR 350.0;
+			LEVEL 1 FOR 50.0;
+			LEVEL 0 FOR 350.0;
+			LEVEL 1 FOR 50.0;
+			LEVEL 0 FOR 350.0;
+			LEVEL 1 FOR 50.0;
+			LEVEL 0 FOR 320.0;
+		}
 	}
 }
 
@@ -485,7 +511,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "reset";
+	CHANNEL = "o";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 11;
@@ -494,19 +520,10 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "o";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
-	TREE_INDEX = 12;
-	TREE_LEVEL = 0;
-}
-
-DISPLAY_LINE
-{
 	CHANNEL = "loading";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 13;
+	TREE_INDEX = 12;
 	TREE_LEVEL = 0;
 }
 
