@@ -8,7 +8,7 @@ subdesign shift_reg_2x(
 	
 	loading: output;
 	
-	test_shift[7..0]: output;
+--	test_shift[7..0]: output;
 )
 variable
 	data_shift[7..0], control_shift[7..0], init_control: dffeas;
@@ -37,6 +37,6 @@ begin
 	
 	loading = control_shift[7];
 	
-	test_shift[] = control_shift[];
+--	test_shift[] = control_shift[];
 	
 end;

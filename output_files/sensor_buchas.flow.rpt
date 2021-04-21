@@ -1,5 +1,5 @@
 Flow report for sensor_buchas
-Mon Apr 19 14:12:24 2021
+Tue Apr 20 19:42:59 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -41,15 +41,15 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------+
 ; Flow Summary                                                        ;
 +-----------------------+---------------------------------------------+
-; Flow Status           ; Successful - Mon Apr 19 14:12:24 2021       ;
+; Flow Status           ; Successful - Tue Apr 20 19:42:59 2021       ;
 ; Quartus Prime Version ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name         ; sensor_buchas                               ;
-; Top-level Entity Name ; sensor_buchas                               ;
+; Top-level Entity Name ; read_data_module                            ;
 ; Family                ; MAX II                                      ;
 ; Device                ; EPM1270T144C5                               ;
 ; Timing Models         ; Final                                       ;
-; Total logic elements  ; 351 / 1,270 ( 28 % )                        ;
-; Total pins            ; 87 / 116 ( 75 % )                           ;
+; Total logic elements  ; 34 / 1,270 ( 3 % )                          ;
+; Total pins            ; 26 / 116 ( 22 % )                           ;
 ; Total virtual pins    ; 0                                           ;
 ; UFM blocks            ; 0 / 1 ( 0 % )                               ;
 +-----------------------+---------------------------------------------+
@@ -60,31 +60,32 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 04/19/2021 14:11:59 ;
+; Start date & time ; 04/20/2021 19:40:25 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; sensor_buchas       ;
 +-------------------+---------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                                   ;
-+---------------------------------+--------------------------------+---------------+-------------+-----------------------------------+
-; Assignment Name                 ; Value                          ; Default Value ; Entity Name ; Section Id                        ;
-+---------------------------------+--------------------------------+---------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID           ; 26601950883129.161885231915336 ; --            ; --          ; --                                ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST ; Off                            ; --            ; --          ; eda_board_design_timing           ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST ; Off                            ; --            ; --          ; eda_board_design_boundary_scan    ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST ; Off                            ; --            ; --          ; eda_board_design_signal_integrity ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST ; Off                            ; --            ; --          ; eda_board_design_symbol           ;
-; EDA_NETLIST_WRITER_OUTPUT_DIR   ; simulation/modelsim            ; --            ; --          ; eda_simulation                    ;
-; EDA_OUTPUT_DATA_FORMAT          ; Verilog Hdl                    ; --            ; --          ; eda_simulation                    ;
-; EDA_SIMULATION_TOOL             ; ModelSim-Altera (Verilog)      ; <None>        ; --          ; --                                ;
-; EDA_TIME_SCALE                  ; 1 ps                           ; --            ; --          ; eda_simulation                    ;
-; MAX_CORE_JUNCTION_TEMP          ; 85                             ; --            ; --          ; --                                ;
-; MIN_CORE_JUNCTION_TEMP          ; 0                              ; --            ; --          ; --                                ;
-; POWER_PRESET_COOLING_SOLUTION   ; No Heat Sink With Still Air    ; --            ; --          ; --                                ;
-; PROJECT_OUTPUT_DIRECTORY        ; output_files                   ; --            ; --          ; --                                ;
-+---------------------------------+--------------------------------+---------------+-------------+-----------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                 ;
++---------------------------------+------------------------------+---------------+-------------+-----------------------------------+
+; Assignment Name                 ; Value                        ; Default Value ; Entity Name ; Section Id                        ;
++---------------------------------+------------------------------+---------------+-------------+-----------------------------------+
+; COMPILER_SIGNATURE_ID           ; 121366581361.161895842505548 ; --            ; --          ; --                                ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST ; Off                          ; --            ; --          ; eda_board_design_timing           ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST ; Off                          ; --            ; --          ; eda_board_design_boundary_scan    ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST ; Off                          ; --            ; --          ; eda_board_design_signal_integrity ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST ; Off                          ; --            ; --          ; eda_board_design_symbol           ;
+; EDA_NETLIST_WRITER_OUTPUT_DIR   ; simulation/modelsim          ; --            ; --          ; eda_simulation                    ;
+; EDA_OUTPUT_DATA_FORMAT          ; Verilog Hdl                  ; --            ; --          ; eda_simulation                    ;
+; EDA_SIMULATION_TOOL             ; ModelSim-Altera (Verilog)    ; <None>        ; --          ; --                                ;
+; EDA_TIME_SCALE                  ; 1 ps                         ; --            ; --          ; eda_simulation                    ;
+; MAX_CORE_JUNCTION_TEMP          ; 85                           ; --            ; --          ; --                                ;
+; MIN_CORE_JUNCTION_TEMP          ; 0                            ; --            ; --          ; --                                ;
+; POWER_PRESET_COOLING_SOLUTION   ; No Heat Sink With Still Air  ; --            ; --          ; --                                ;
+; PROJECT_OUTPUT_DIRECTORY        ; output_files                 ; --            ; --          ; --                                ;
+; TOP_LEVEL_ENTITY                ; read_data_module             ; sensor_buchas ; --          ; --                                ;
++---------------------------------+------------------------------+---------------+-------------+-----------------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------+
@@ -92,14 +93,16 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:08     ; 1.0                     ; 4706 MB             ; 00:00:17                           ;
-; Fitter               ; 00:00:03     ; 1.0                     ; 5352 MB             ; 00:00:04                           ;
-; Assembler            ; 00:00:00     ; 1.0                     ; 4659 MB             ; 00:00:00                           ;
-; Timing Analyzer      ; 00:00:01     ; 1.0                     ; 4677 MB             ; 00:00:01                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4620 MB             ; 00:00:00                           ;
-; EDA Netlist Writer   ; 00:00:00     ; 1.0                     ; 4611 MB             ; 00:00:00                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4620 MB             ; 00:00:00                           ;
-; Total                ; 00:00:14     ; --                      ; --                  ; 00:00:22                           ;
+; Analysis & Synthesis ; 00:00:17     ; 1.0                     ; 4692 MB             ; 00:00:25                           ;
+; Fitter               ; 00:00:06     ; 1.0                     ; 5073 MB             ; 00:00:03                           ;
+; Assembler            ; 00:00:01     ; 1.0                     ; 4657 MB             ; 00:00:01                           ;
+; Timing Analyzer      ; 00:00:02     ; 1.0                     ; 4652 MB             ; 00:00:01                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4617 MB             ; 00:00:01                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4606 MB             ; 00:00:01                           ;
+; EDA Netlist Writer   ; 00:00:00     ; 1.0                     ; 4611 MB             ; 00:00:01                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4602 MB             ; 00:00:01                           ;
+; EDA Netlist Writer   ; 00:00:00     ; 1.0                     ; 4611 MB             ; 00:00:01                           ;
+; Total                ; 00:00:29     ; --                      ; --                  ; 00:00:35                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -108,13 +111,15 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+------------------+------------+------------+----------------+
 ; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +----------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis ; DESKTOP-RECT74T  ; Windows 10 ; 10.0       ; x86_64         ;
-; Fitter               ; DESKTOP-RECT74T  ; Windows 10 ; 10.0       ; x86_64         ;
-; Assembler            ; DESKTOP-RECT74T  ; Windows 10 ; 10.0       ; x86_64         ;
-; Timing Analyzer      ; DESKTOP-RECT74T  ; Windows 10 ; 10.0       ; x86_64         ;
-; EDA Netlist Writer   ; DESKTOP-RECT74T  ; Windows 10 ; 10.0       ; x86_64         ;
-; EDA Netlist Writer   ; DESKTOP-RECT74T  ; Windows 10 ; 10.0       ; x86_64         ;
-; EDA Netlist Writer   ; DESKTOP-RECT74T  ; Windows 10 ; 10.0       ; x86_64         ;
+; Analysis & Synthesis ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
+; Fitter               ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
+; Assembler            ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
+; Timing Analyzer      ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
+; EDA Netlist Writer   ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
+; EDA Netlist Writer   ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
+; EDA Netlist Writer   ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
+; EDA Netlist Writer   ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
+; EDA Netlist Writer   ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 
@@ -126,7 +131,9 @@ quartus_fit --read_settings_files=off --write_settings_files=off sensor_buchas -
 quartus_asm --read_settings_files=off --write_settings_files=off sensor_buchas -c sensor_buchas
 quartus_sta sensor_buchas -c sensor_buchas
 quartus_eda --read_settings_files=off --write_settings_files=off sensor_buchas -c sensor_buchas
-quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source=C:/sensorbuchasv2/sensor_buchas.vwf --testbench_file=C:/SensorBuchasV2/simulation/qsim/sensor_buchas.vwf.vt
+quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source=C:/SensorBuchasV2/test_read_data_module.vwf --testbench_file=C:/SensorBuchasV2/simulation/qsim/test_read_data_module.vwf.vt
+quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory=C:/SensorBuchasV2/simulation/qsim/ sensor_buchas -c sensor_buchas
+quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source=C:/SensorBuchasV2/test_read_data_module.vwf --testbench_file=C:/SensorBuchasV2/simulation/qsim/test_read_data_module.vwf.vt
 quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory=C:/SensorBuchasV2/simulation/qsim/ sensor_buchas -c sensor_buchas
 
 

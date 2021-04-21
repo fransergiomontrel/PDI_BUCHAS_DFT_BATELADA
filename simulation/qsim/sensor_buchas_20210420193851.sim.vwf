@@ -1,50 +1,3 @@
-/*<simulation_settings>
-<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="C:/SensorBuchasV2/test_read_data_module.vwf" --testbench_file="C:/SensorBuchasV2/simulation/qsim/test_read_data_module.vwf.vt"</ftestbench_cmd>
-<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="C:/SensorBuchasV2/test_read_data_module.vwf" --testbench_file="C:/SensorBuchasV2/simulation/qsim/test_read_data_module.vwf.vt"</ttestbench_cmd>
-<fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="C:/SensorBuchasV2/simulation/qsim/" sensor_buchas -c sensor_buchas</fnetlist_cmd>
-<tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="C:/SensorBuchasV2/simulation/qsim/" sensor_buchas -c sensor_buchas</tnetlist_cmd>
-<modelsim_script>onerror {exit -code 1}
-vlib work
-vlog -work work sensor_buchas.vo
-vlog -work work test_read_data_module.vwf.vt
-vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.read_data_module_vlg_vec_tst
-vcd file -direction sensor_buchas.msim.vcd
-vcd add -internal read_data_module_vlg_vec_tst/*
-vcd add -internal read_data_module_vlg_vec_tst/i1/*
-proc simTimestamp {} {
-    echo "Simulation time: $::now ps"
-    if { [string equal running [runStatus]] } {
-        after 2500 simTimestamp
-    }
-}
-after 2500 simTimestamp
-run -all
-quit -f
-
-
-</modelsim_script>
-<modelsim_script_timing>onerror {exit -code 1}
-vlib work
-vlog -work work sensor_buchas.vo
-vlog -work work test_read_data_module.vwf.vt
-vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.read_data_module_vlg_vec_tst
-vcd file -direction sensor_buchas.msim.vcd
-vcd add -internal read_data_module_vlg_vec_tst/*
-vcd add -internal read_data_module_vlg_vec_tst/i1/*
-proc simTimestamp {} {
-    echo "Simulation time: $::now ps"
-    if { [string equal running [runStatus]] } {
-        after 2500 simTimestamp
-    }
-}
-after 2500 simTimestamp
-run -all
-quit -f
-
-
-</modelsim_script_timing>
-<hdl_lang>verilog</hdl_lang>
-</simulation_settings>*/
 /*
 WARNING: Do NOT edit the input and output ports in this file in a text
 editor if you plan to continue editing the block that represents it in
@@ -654,90 +607,10 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "test_state";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Unsigned;
-	TREE_INDEX = 2;
-	TREE_LEVEL = 0;
-	CHILDREN = 3, 4, 5, 6;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "test_state[3]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Unsigned;
-	TREE_INDEX = 3;
-	TREE_LEVEL = 1;
-	PARENT = 2;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "test_state[2]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Unsigned;
-	TREE_INDEX = 4;
-	TREE_LEVEL = 1;
-	PARENT = 2;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "test_state[1]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Unsigned;
-	TREE_INDEX = 5;
-	TREE_LEVEL = 1;
-	PARENT = 2;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "test_state[0]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Unsigned;
-	TREE_INDEX = 6;
-	TREE_LEVEL = 1;
-	PARENT = 2;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "mode";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Unsigned;
-	TREE_INDEX = 7;
-	TREE_LEVEL = 0;
-	CHILDREN = 8, 9;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "mode[1]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Unsigned;
-	TREE_INDEX = 8;
-	TREE_LEVEL = 1;
-	PARENT = 7;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "mode[0]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Unsigned;
-	TREE_INDEX = 9;
-	TREE_LEVEL = 1;
-	PARENT = 7;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "changing_mode";
+	CHANNEL = "SCLK_";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 10;
+	TREE_INDEX = 2;
 	TREE_LEVEL = 0;
 }
 
@@ -746,9 +619,9 @@ DISPLAY_LINE
 	CHANNEL = "data";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 11;
+	TREE_INDEX = 3;
 	TREE_LEVEL = 0;
-	CHILDREN = 12, 13, 14, 15, 16, 17, 18, 19;
+	CHILDREN = 4, 5, 6, 7, 8, 9, 10, 11;
 }
 
 DISPLAY_LINE
@@ -756,9 +629,9 @@ DISPLAY_LINE
 	CHANNEL = "data[7]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 12;
+	TREE_INDEX = 4;
 	TREE_LEVEL = 1;
-	PARENT = 11;
+	PARENT = 3;
 }
 
 DISPLAY_LINE
@@ -766,9 +639,9 @@ DISPLAY_LINE
 	CHANNEL = "data[6]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 13;
+	TREE_INDEX = 5;
 	TREE_LEVEL = 1;
-	PARENT = 11;
+	PARENT = 3;
 }
 
 DISPLAY_LINE
@@ -776,9 +649,9 @@ DISPLAY_LINE
 	CHANNEL = "data[5]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 14;
+	TREE_INDEX = 6;
 	TREE_LEVEL = 1;
-	PARENT = 11;
+	PARENT = 3;
 }
 
 DISPLAY_LINE
@@ -786,9 +659,9 @@ DISPLAY_LINE
 	CHANNEL = "data[4]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 15;
+	TREE_INDEX = 7;
 	TREE_LEVEL = 1;
-	PARENT = 11;
+	PARENT = 3;
 }
 
 DISPLAY_LINE
@@ -796,9 +669,9 @@ DISPLAY_LINE
 	CHANNEL = "data[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 16;
+	TREE_INDEX = 8;
 	TREE_LEVEL = 1;
-	PARENT = 11;
+	PARENT = 3;
 }
 
 DISPLAY_LINE
@@ -806,9 +679,9 @@ DISPLAY_LINE
 	CHANNEL = "data[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 17;
+	TREE_INDEX = 9;
 	TREE_LEVEL = 1;
-	PARENT = 11;
+	PARENT = 3;
 }
 
 DISPLAY_LINE
@@ -816,9 +689,9 @@ DISPLAY_LINE
 	CHANNEL = "data[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 18;
+	TREE_INDEX = 10;
 	TREE_LEVEL = 1;
-	PARENT = 11;
+	PARENT = 3;
 }
 
 DISPLAY_LINE
@@ -826,18 +699,9 @@ DISPLAY_LINE
 	CHANNEL = "data[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 19;
+	TREE_INDEX = 11;
 	TREE_LEVEL = 1;
-	PARENT = 11;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "SCLK_";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
-	TREE_INDEX = 20;
-	TREE_LEVEL = 0;
+	PARENT = 3;
 }
 
 DISPLAY_LINE
@@ -845,8 +709,58 @@ DISPLAY_LINE
 	CHANNEL = "MISO";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 21;
+	TREE_INDEX = 12;
 	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_state";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 13;
+	TREE_LEVEL = 0;
+	CHILDREN = 14, 15, 16, 17;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_state[3]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 14;
+	TREE_LEVEL = 1;
+	PARENT = 13;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_state[2]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 15;
+	TREE_LEVEL = 1;
+	PARENT = 13;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_state[1]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 16;
+	TREE_LEVEL = 1;
+	PARENT = 13;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_state[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 17;
+	TREE_LEVEL = 1;
+	PARENT = 13;
 }
 
 DISPLAY_LINE
@@ -854,8 +768,47 @@ DISPLAY_LINE
 	CHANNEL = "oe_n";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 22;
+	TREE_INDEX = 18;
 	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "changing_mode";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 19;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "mode";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 20;
+	TREE_LEVEL = 0;
+	CHILDREN = 21, 22;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "mode[1]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 21;
+	TREE_LEVEL = 1;
+	PARENT = 20;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "mode[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 22;
+	TREE_LEVEL = 1;
+	PARENT = 20;
 }
 
 DISPLAY_LINE
