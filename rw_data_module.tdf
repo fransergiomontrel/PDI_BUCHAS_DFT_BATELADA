@@ -76,7 +76,7 @@ begin
 	
 	case sm is
 		when wait_mode =>
-			if mode[] == MODE_READ_DATA and !changing_mode then
+			if mode[] == MODE_RW_DATA and !changing_mode then
 				addr_clr = Vcc;
 				busy_ff.d = Vcc;
 				load_parallel_FF.d = Vcc;
@@ -110,7 +110,7 @@ begin
 			sm = wait_loading;
 		
 		when wait_loading =>
-			if mode[] == MODE_READ_DATA and !changing_mode then
+			if mode[] == MODE_RW_DATA and !changing_mode then
 				oe_n_FF.d = Gnd;
 				if !shift.loading then
 					sm = wait_loading;
@@ -123,7 +123,7 @@ begin
 			end if;
 
 		when wait_loading_n =>
-			if mode[] == MODE_READ_DATA and !changing_mode then
+			if mode[] == MODE_RW_DATA and !changing_mode then
 				oe_n_FF.d = Gnd;
 				if shift.loading then
 					sm = wait_loading_n;

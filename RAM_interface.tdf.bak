@@ -41,7 +41,7 @@ begin
 	ram_address[] = address_counter.q[];
 	
 	write = (mode[] == MODE_AQUISITION) and !changing_mode;
-	read = (mode[] == MODE_RW_DATA) and !changing_mode;
+	read = (mode[] == MODE_READ_DATA) and !changing_mode;
 	
 	buffer[].in = data_in[];
 	buffer[].oe = write;
