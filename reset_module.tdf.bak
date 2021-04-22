@@ -1,0 +1,30 @@
+
+parameters(
+	N_CLOCKS = 5000000
+);
+
+constant N_BITS = log2(N_CLOCKS+1);
+
+subdesign reset_module(
+	clk: input;
+	count_rst_n: input;
+	
+	reset: output; 
+)
+variable
+	ini_ff, rst_ff, cont[N_BITS-1..0]: dffe;
+	rst: node;
+begin
+	ini_ff.clk = clk;
+	ini_ff.d = !count_rst_n;
+
+	cont[].clrn = ini_ff.q;	
+	cont[].clk = clk;
+	cont[].d = cont[].q+1;
+	rst = (cont[].q == N_CLOCKS);
+	cont[].ena = !rst;
+	
+	rst_ff.clk = clk;
+	rst_ff.d = rst;
+	reset = rst_ff.q;
+end;

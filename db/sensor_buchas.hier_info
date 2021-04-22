@@ -1,13 +1,14 @@
 |sensor_buchas
 test_addr_clr <= AM_addr_clr.DB_MAX_OUTPUT_PORT_TYPE
 clk => acquisition_module:inst13.clk
-clk => inst1.CLK
+clk => reset_module:inst7.clk
 clk => host_interface:inst2.clk
 clk => switch:inst5.clk
 clk => rw_data_module:inst3.clk
 clk => adc_interface:inst4.clk
 clk => RAM_interface:inst.clk
-rst => inst1.DATAIN
+host_rst_n => reset_module:inst7.count_rst_n
+host_rst_n => host_interface:inst2.host_rst_n
 adc_rvs[0] => adc_interface:inst4.adc_rvs[0]
 adc_rvs[1] => adc_interface:inst4.adc_rvs[1]
 adc_rvs[2] => adc_interface:inst4.adc_rvs[2]
@@ -29,7 +30,6 @@ data_bus[5] <> RAM_interface:inst.ram_data_bus[5]
 data_bus[6] <> RAM_interface:inst.ram_data_bus[6]
 data_bus[7] <> RAM_interface:inst.ram_data_bus[7]
 host_convst_start => host_interface:inst2.host_convst_start
-host_rst_n => host_interface:inst2.host_rst_n
 host_SCLK => host_interface:inst2.host_SCLK
 host_MOSI => host_interface:inst2.host_MOSI
 host_mode[0] => host_interface:inst2.host_mode[0]
@@ -48,6 +48,10 @@ test_RDM_busy <= RDM_busy.DB_MAX_OUTPUT_PORT_TYPE
 test_AM_busy <= AM_busy.DB_MAX_OUTPUT_PORT_TYPE
 test_AM_changing_mode <= AM_changing_mode.DB_MAX_OUTPUT_PORT_TYPE
 test_HI_changing_mode <= HI_changing_mode.DB_MAX_OUTPUT_PORT_TYPE
+LED1 <= sreset.DB_MAX_OUTPUT_PORT_TYPE
+LED2 <= HI_mode[0].DB_MAX_OUTPUT_PORT_TYPE
+LED3 <= HI_mode[1].DB_MAX_OUTPUT_PORT_TYPE
+LED4 <= <GND>
 adc_convst[0] <= adc_interface:inst4.adc_convst[0]
 adc_convst[1] <= adc_interface:inst4.adc_convst[1]
 adc_convst[2] <= adc_interface:inst4.adc_convst[2]
@@ -1563,6 +1567,36 @@ o[0] <= ffs[0].DB_MAX_OUTPUT_PORT_TYPE
 o[1] <= ffs[1].DB_MAX_OUTPUT_PORT_TYPE
 o[2] <= ffs[2].DB_MAX_OUTPUT_PORT_TYPE
 o[3] <= ffs[3].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|reset_module:inst7
+clk => ini_ff.CLK
+clk => rst_ff.CLK
+clk => cont[22].CLK
+clk => cont[21].CLK
+clk => cont[20].CLK
+clk => cont[19].CLK
+clk => cont[18].CLK
+clk => cont[17].CLK
+clk => cont[16].CLK
+clk => cont[15].CLK
+clk => cont[14].CLK
+clk => cont[13].CLK
+clk => cont[12].CLK
+clk => cont[11].CLK
+clk => cont[10].CLK
+clk => cont[9].CLK
+clk => cont[8].CLK
+clk => cont[7].CLK
+clk => cont[6].CLK
+clk => cont[5].CLK
+clk => cont[4].CLK
+clk => cont[3].CLK
+clk => cont[2].CLK
+clk => cont[1].CLK
+clk => cont[0].CLK
+count_rst_n => ini_ff.IN0
+reset <= rst_ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |sensor_buchas|host_interface:inst2

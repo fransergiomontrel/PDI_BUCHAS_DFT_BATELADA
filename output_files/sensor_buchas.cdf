@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EPM1270T144) Path("//Mac/Home/Documents/CPLD-Sensor-Buchas-V2/output_files/") File("sensor_buchas.pof") MfrSpec(OpMask(1) SEC_Device(EPM1270T144) Child_OpMask(2 1 1));
+		Device PartName(EPM1270T144) Path("C:/sensorbuchasv2/output_files/") File("sensor_buchas.pof") MfrSpec(OpMask(1) SEC_Device(EPM1270T144) Child_OpMask(2 1 1));
 
 ChainEnd;
 

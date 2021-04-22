@@ -1,5 +1,5 @@
 Analysis & Synthesis report for sensor_buchas
-Thu Apr 22 12:45:28 2021
+Thu Apr 22 15:37:48 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -26,11 +26,12 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
  18. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_serializer:serializer
  19. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_serializer:serializer|counter:count
  20. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_store:storer|counter:channel_counter
- 21. Parameter Settings for User Entity Instance: host_interface:inst2|mode_selector:mode_sel|synchronizer:sync
- 22. Parameter Settings for User Entity Instance: rw_data_module:inst3|spi_shift:shift
- 23. Parameter Settings for User Entity Instance: RAM_interface:inst
- 24. Parameter Settings for User Entity Instance: RAM_interface:inst|lpm_counter:address_counter
- 25. Analysis & Synthesis Messages
+ 21. Parameter Settings for User Entity Instance: reset_module:inst7
+ 22. Parameter Settings for User Entity Instance: host_interface:inst2|mode_selector:mode_sel|synchronizer:sync
+ 23. Parameter Settings for User Entity Instance: rw_data_module:inst3|spi_shift:shift
+ 24. Parameter Settings for User Entity Instance: RAM_interface:inst
+ 25. Parameter Settings for User Entity Instance: RAM_interface:inst|lpm_counter:address_counter
+ 26. Analysis & Synthesis Messages
 
 
 
@@ -57,13 +58,13 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Thu Apr 22 12:45:28 2021       ;
+; Analysis & Synthesis Status ; Successful - Thu Apr 22 15:37:47 2021       ;
 ; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name               ; sensor_buchas                               ;
 ; Top-level Entity Name       ; sensor_buchas                               ;
 ; Family                      ; MAX II                                      ;
-; Total logic elements        ; 434                                         ;
-; Total pins                  ; 86                                          ;
+; Total logic elements        ; 466                                         ;
+; Total pins                  ; 89                                          ;
 ; Total virtual pins          ; 0                                           ;
 ; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
 +-----------------------------+---------------------------------------------+
@@ -145,8 +146,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 2           ;
-; Maximum allowed            ; 2           ;
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
 ; Maximum used               ; 1           ;
@@ -161,31 +162,32 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                                   ; Library ;
 +----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------------+---------+
-; modes.inc                        ; yes             ; User Unspecified File              ; C:/SensorBuchasV2/modes.inc                                                    ;         ;
-; synchronizer.tdf                 ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/synchronizer.tdf                                             ;         ;
-; switch.tdf                       ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/switch.tdf                                                   ;         ;
-; RAM_interface.tdf                ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/RAM_interface.tdf                                            ;         ;
-; mode_selector.tdf                ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/mode_selector.tdf                                            ;         ;
-; host_interface.tdf               ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/host_interface.tdf                                           ;         ;
-; dffes.tdf                        ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/dffes.tdf                                                    ;         ;
-; counter.tdf                      ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/counter.tdf                                                  ;         ;
-; adc_interface.tdf                ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/adc_interface.tdf                                            ;         ;
-; acquisition_store.tdf            ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/acquisition_store.tdf                                        ;         ;
-; acquisition_serializer.tdf       ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/acquisition_serializer.tdf                                   ;         ;
-; acquisition_module.tdf           ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/acquisition_module.tdf                                       ;         ;
-; acquisition_ctrl.tdf             ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/acquisition_ctrl.tdf                                         ;         ;
-; sensor_buchas.bdf                ; yes             ; User Block Diagram/Schematic File  ; C:/SensorBuchasV2/sensor_buchas.bdf                                            ;         ;
-; spi_shift.tdf                    ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/spi_shift.tdf                                                ;         ;
-; rw_data_module.tdf               ; yes             ; User AHDL File                     ; C:/SensorBuchasV2/rw_data_module.tdf                                           ;         ;
+; reset_module.tdf                 ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/reset_module.tdf                                             ;         ;
+; modes.inc                        ; yes             ; User Unspecified File              ; C:/sensorbuchasv2/modes.inc                                                    ;         ;
+; synchronizer.tdf                 ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/synchronizer.tdf                                             ;         ;
+; switch.tdf                       ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/switch.tdf                                                   ;         ;
+; RAM_interface.tdf                ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/RAM_interface.tdf                                            ;         ;
+; mode_selector.tdf                ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/mode_selector.tdf                                            ;         ;
+; host_interface.tdf               ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/host_interface.tdf                                           ;         ;
+; dffes.tdf                        ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/dffes.tdf                                                    ;         ;
+; counter.tdf                      ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/counter.tdf                                                  ;         ;
+; adc_interface.tdf                ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/adc_interface.tdf                                            ;         ;
+; acquisition_store.tdf            ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/acquisition_store.tdf                                        ;         ;
+; acquisition_serializer.tdf       ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/acquisition_serializer.tdf                                   ;         ;
+; acquisition_module.tdf           ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/acquisition_module.tdf                                       ;         ;
+; acquisition_ctrl.tdf             ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/acquisition_ctrl.tdf                                         ;         ;
+; sensor_buchas.bdf                ; yes             ; User Block Diagram/Schematic File  ; C:/sensorbuchasv2/sensor_buchas.bdf                                            ;         ;
+; spi_shift.tdf                    ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/spi_shift.tdf                                                ;         ;
+; rw_data_module.tdf               ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/rw_data_module.tdf                                           ;         ;
 ; lpm_counter.inc                  ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_counter.inc         ;         ;
-; synchronizer.inc                 ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/synchronizer.inc                                             ;         ;
-; dffes.inc                        ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/dffes.inc                                                    ;         ;
-; mode_selector.inc                ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/mode_selector.inc                                            ;         ;
-; counter.inc                      ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/counter.inc                                                  ;         ;
-; acquisition_ctrl.inc             ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/acquisition_ctrl.inc                                         ;         ;
-; acquisition_serializer.inc       ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/acquisition_serializer.inc                                   ;         ;
-; acquisition_store.inc            ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/acquisition_store.inc                                        ;         ;
-; spi_shift.inc                    ; yes             ; Auto-Found AHDL File               ; C:/SensorBuchasV2/spi_shift.inc                                                ;         ;
+; synchronizer.inc                 ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/synchronizer.inc                                             ;         ;
+; dffes.inc                        ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/dffes.inc                                                    ;         ;
+; mode_selector.inc                ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/mode_selector.inc                                            ;         ;
+; counter.inc                      ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/counter.inc                                                  ;         ;
+; acquisition_ctrl.inc             ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/acquisition_ctrl.inc                                         ;         ;
+; acquisition_serializer.inc       ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/acquisition_serializer.inc                                   ;         ;
+; acquisition_store.inc            ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/acquisition_store.inc                                        ;         ;
+; spi_shift.inc                    ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/spi_shift.inc                                                ;         ;
 ; lpm_counter.tdf                  ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_counter.tdf         ;         ;
 ; lpm_constant.inc                 ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_constant.inc        ;         ;
 ; lpm_decode.inc                   ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_decode.inc          ;         ;
@@ -195,7 +197,7 @@ https://fpgasoftware.intel.com/eula.
 ; dffeea.inc                       ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/dffeea.inc              ;         ;
 ; alt_counter_stratix.inc          ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/alt_counter_stratix.inc ;         ;
 ; aglobal201.inc                   ; yes             ; Megafunction                       ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/aglobal201.inc          ;         ;
-; db/cntr_ici.tdf                  ; yes             ; Auto-Generated Megafunction        ; C:/SensorBuchasV2/db/cntr_ici.tdf                                              ;         ;
+; db/cntr_ici.tdf                  ; yes             ; Auto-Generated Megafunction        ; C:/sensorbuchasv2/db/cntr_ici.tdf                                              ;         ;
 +----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------------+---------+
 
 
@@ -204,33 +206,33 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Total logic elements                        ; 434   ;
-;     -- Combinational with no register       ; 217   ;
-;     -- Register only                        ; 139   ;
-;     -- Combinational with a register        ; 78    ;
+; Total logic elements                        ; 466   ;
+;     -- Combinational with no register       ; 225   ;
+;     -- Register only                        ; 138   ;
+;     -- Combinational with a register        ; 103   ;
 ;                                             ;       ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 143   ;
-;     -- 3 input functions                    ; 103   ;
-;     -- 2 input functions                    ; 38    ;
-;     -- 1 input functions                    ; 10    ;
+;     -- 4 input functions                    ; 151   ;
+;     -- 3 input functions                    ; 101   ;
+;     -- 2 input functions                    ; 63    ;
+;     -- 1 input functions                    ; 12    ;
 ;     -- 0 input functions                    ; 1     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 406   ;
-;     -- arithmetic mode                      ; 28    ;
+;     -- normal mode                          ; 417   ;
+;     -- arithmetic mode                      ; 49    ;
 ;     -- qfbk mode                            ; 0     ;
 ;     -- register cascade mode                ; 0     ;
 ;     -- synchronous clear/load mode          ; 41    ;
-;     -- asynchronous clear/load mode         ; 47    ;
+;     -- asynchronous clear/load mode         ; 70    ;
 ;                                             ;       ;
-; Total registers                             ; 217   ;
-; Total logic cells in carry chains           ; 31    ;
-; I/O pins                                    ; 86    ;
+; Total registers                             ; 241   ;
+; Total logic cells in carry chains           ; 53    ;
+; I/O pins                                    ; 89    ;
 ; Maximum fan-out node                        ; clk   ;
-; Maximum fan-out                             ; 192   ;
-; Total fan-out                               ; 1607  ;
-; Average fan-out                             ; 3.09  ;
+; Maximum fan-out                             ; 216   ;
+; Total fan-out                               ; 1756  ;
+; Average fan-out                             ; 3.16  ;
 +---------------------------------------------+-------+
 
 
@@ -239,7 +241,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------------------------------------------+------------------------+--------------+
 ; Compilation Hierarchy Node                ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                                 ; Entity Name            ; Library Name ;
 +-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------------------------------------------+------------------------+--------------+
-; |sensor_buchas                            ; 434 (1)     ; 217          ; 0          ; 86   ; 0            ; 217 (0)      ; 139 (1)           ; 78 (0)           ; 31 (0)          ; 0 (0)      ; |sensor_buchas                                                                                      ; sensor_buchas          ; work         ;
+; |sensor_buchas                            ; 466 (0)     ; 241          ; 0          ; 89   ; 0            ; 225 (0)      ; 138 (0)           ; 103 (0)          ; 53 (0)          ; 0 (0)      ; |sensor_buchas                                                                                      ; sensor_buchas          ; work         ;
 ;    |RAM_interface:inst|                   ; 34 (15)     ; 19           ; 0          ; 0    ; 0            ; 15 (15)      ; 0 (0)             ; 19 (0)           ; 19 (0)          ; 0 (0)      ; |sensor_buchas|RAM_interface:inst                                                                   ; RAM_interface          ; work         ;
 ;       |lpm_counter:address_counter|       ; 19 (0)      ; 19           ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 19 (0)           ; 19 (0)          ; 0 (0)      ; |sensor_buchas|RAM_interface:inst|lpm_counter:address_counter                                       ; lpm_counter            ; work         ;
 ;          |cntr_ici:auto_generated|        ; 19 (19)     ; 19           ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 19 (19)          ; 19 (19)         ; 0 (0)      ; |sensor_buchas|RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated               ; cntr_ici               ; work         ;
@@ -364,6 +366,7 @@ https://fpgasoftware.intel.com/eula.
 ;          |dffes:mode_out_ff[1]|           ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:inst2|mode_selector:mode_sel|dffes:mode_out_ff[1]                     ; dffes                  ; work         ;
 ;          |dffes:ready_ff|                 ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:inst2|mode_selector:mode_sel|dffes:ready_ff                           ; dffes                  ; work         ;
 ;          |synchronizer:sync|              ; 10 (10)     ; 8            ; 0          ; 0    ; 0            ; 2 (2)        ; 8 (8)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:inst2|mode_selector:mode_sel|synchronizer:sync                        ; synchronizer           ; work         ;
+;    |reset_module:inst7|                   ; 33 (33)     ; 25           ; 0          ; 0    ; 0            ; 8 (8)        ; 0 (0)             ; 25 (25)          ; 22 (22)         ; 0 (0)      ; |sensor_buchas|reset_module:inst7                                                                   ; reset_module           ; work         ;
 ;    |rw_data_module:inst3|                 ; 59 (21)     ; 41           ; 0          ; 0    ; 0            ; 18 (10)      ; 30 (6)            ; 11 (5)           ; 0 (0)           ; 0 (0)      ; |sensor_buchas|rw_data_module:inst3                                                                 ; rw_data_module         ; work         ;
 ;       |dffes:addr_inc_FF|                 ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|rw_data_module:inst3|dffes:addr_inc_FF                                               ; dffes                  ; work         ;
 ;       |dffes:busy_ff|                     ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|rw_data_module:inst3|dffes:busy_ff                                                   ; dffes                  ; work         ;
@@ -447,12 +450,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 217   ;
+; Total registers                              ; 241   ;
 ; Number of registers using Synchronous Clear  ; 35    ;
 ; Number of registers using Synchronous Load   ; 6     ;
-; Number of registers using Asynchronous Clear ; 39    ;
+; Number of registers using Asynchronous Clear ; 62    ;
 ; Number of registers using Asynchronous Load  ; 8     ;
-; Number of registers using Clock Enable       ; 115   ;
+; Number of registers using Clock Enable       ; 137   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -539,6 +542,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++-----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: reset_module:inst7 ;
++----------------+---------+--------------------------------------+
+; Parameter Name ; Value   ; Type                                 ;
++----------------+---------+--------------------------------------+
+; N_CLOCKS       ; 5000000 ; Untyped                              ;
++----------------+---------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +------------------------------------------------------------------------------------------------------------+
 ; Parameter Settings for User Entity Instance: host_interface:inst2|mode_selector:mode_sel|synchronizer:sync ;
 +----------------+-------+-----------------------------------------------------------------------------------+
@@ -602,94 +615,99 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Thu Apr 22 12:45:08 2021
+    Info: Processing started: Thu Apr 22 15:37:40 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off sensor_buchas -c sensor_buchas
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file reset_module.tdf
+    Info (12023): Found entity 1: reset_module File: C:/sensorbuchasv2/reset_module.tdf Line: 8
 Info (12021): Found 1 design units, including 1 entities, in source file synchronizer.tdf
-    Info (12023): Found entity 1: synchronizer File: C:/SensorBuchasV2/synchronizer.tdf Line: 7
-Warning (287004): Group name "RDM_data_write" is missing brackets ([ ]) File: C:/SensorBuchasV2/switch.tdf Line: 126
+    Info (12023): Found entity 1: synchronizer File: C:/sensorbuchasv2/synchronizer.tdf Line: 7
+Warning (287004): Group name "RDM_data_write" is missing brackets ([ ]) File: C:/sensorbuchasv2/switch.tdf Line: 126
 Info (12021): Found 1 design units, including 1 entities, in source file switch.tdf
-    Info (12023): Found entity 1: switch File: C:/SensorBuchasV2/switch.tdf Line: 3
+    Info (12023): Found entity 1: switch File: C:/sensorbuchasv2/switch.tdf Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file ram_interface.tdf
-    Info (12023): Found entity 1: RAM_interface File: C:/SensorBuchasV2/RAM_interface.tdf Line: 9
+    Info (12023): Found entity 1: RAM_interface File: C:/sensorbuchasv2/RAM_interface.tdf Line: 9
 Info (12021): Found 1 design units, including 1 entities, in source file mode_selector.tdf
-    Info (12023): Found entity 1: mode_selector File: C:/SensorBuchasV2/mode_selector.tdf Line: 4
+    Info (12023): Found entity 1: mode_selector File: C:/sensorbuchasv2/mode_selector.tdf Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file host_interface.tdf
-    Info (12023): Found entity 1: host_interface File: C:/SensorBuchasV2/host_interface.tdf Line: 3
+    Info (12023): Found entity 1: host_interface File: C:/sensorbuchasv2/host_interface.tdf Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file dffes.tdf
-    Info (12023): Found entity 1: dffes File: C:/SensorBuchasV2/dffes.tdf Line: 3
+    Info (12023): Found entity 1: dffes File: C:/sensorbuchasv2/dffes.tdf Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file counter.tdf
-    Info (12023): Found entity 1: counter File: C:/SensorBuchasV2/counter.tdf Line: 10
+    Info (12023): Found entity 1: counter File: C:/sensorbuchasv2/counter.tdf Line: 10
 Info (12021): Found 1 design units, including 1 entities, in source file adc_interface.tdf
-    Info (12023): Found entity 1: adc_interface File: C:/SensorBuchasV2/adc_interface.tdf Line: 3
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/counter.inc Line: 26
+    Info (12023): Found entity 1: adc_interface File: C:/sensorbuchasv2/adc_interface.tdf Line: 3
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/counter.inc Line: 26
 Info (12021): Found 1 design units, including 1 entities, in source file acquisition_store.tdf
-    Info (12023): Found entity 1: acquisition_store File: C:/SensorBuchasV2/acquisition_store.tdf Line: 4
+    Info (12023): Found entity 1: acquisition_store File: C:/sensorbuchasv2/acquisition_store.tdf Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file acquisition_serializer.tdf
-    Info (12023): Found entity 1: acquisition_serializer File: C:/SensorBuchasV2/acquisition_serializer.tdf Line: 9
+    Info (12023): Found entity 1: acquisition_serializer File: C:/sensorbuchasv2/acquisition_serializer.tdf Line: 9
 Info (12021): Found 1 design units, including 1 entities, in source file acquisition_module.tdf
-    Info (12023): Found entity 1: acquisition_module File: C:/SensorBuchasV2/acquisition_module.tdf Line: 12
+    Info (12023): Found entity 1: acquisition_module File: C:/sensorbuchasv2/acquisition_module.tdf Line: 12
 Info (12021): Found 1 design units, including 1 entities, in source file acquisition_ctrl.tdf
-    Info (12023): Found entity 1: acquisition_ctrl File: C:/SensorBuchasV2/acquisition_ctrl.tdf Line: 22
+    Info (12023): Found entity 1: acquisition_ctrl File: C:/sensorbuchasv2/acquisition_ctrl.tdf Line: 22
 Info (12021): Found 1 design units, including 1 entities, in source file sensor_buchas.bdf
     Info (12023): Found entity 1: sensor_buchas
 Info (12021): Found 1 design units, including 1 entities, in source file spi_shift.tdf
-    Info (12023): Found entity 1: spi_shift File: C:/SensorBuchasV2/spi_shift.tdf Line: 5
+    Info (12023): Found entity 1: spi_shift File: C:/sensorbuchasv2/spi_shift.tdf Line: 5
 Info (12021): Found 1 design units, including 1 entities, in source file rw_data_module.tdf
-    Info (12023): Found entity 1: rw_data_module File: C:/SensorBuchasV2/rw_data_module.tdf Line: 6
+    Info (12023): Found entity 1: rw_data_module File: C:/sensorbuchasv2/rw_data_module.tdf Line: 6
 Info (12127): Elaborating entity "sensor_buchas" for the top level hierarchy
 Info (12128): Elaborating entity "acquisition_module" for hierarchy "acquisition_module:inst13"
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/acquisition_ctrl.inc Line: 26
-Info (12128): Elaborating entity "dffes" for hierarchy "acquisition_module:inst13|dffes:start_ff" File: C:/SensorBuchasV2/acquisition_module.tdf Line: 32
-Info (12128): Elaborating entity "acquisition_ctrl" for hierarchy "acquisition_module:inst13|acquisition_ctrl:ctrl" File: C:/SensorBuchasV2/acquisition_module.tdf Line: 33
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/acquisition_ctrl.tdf Line: 20
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/acquisition_ctrl.tdf Line: 40
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/counter.inc Line: 26
-Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst13|acquisition_ctrl:ctrl|counter:clock_counter" File: C:/SensorBuchasV2/acquisition_ctrl.tdf Line: 46
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/counter.tdf Line: 8
-Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst13|acquisition_ctrl:ctrl|counter:samples_counter" File: C:/SensorBuchasV2/acquisition_ctrl.tdf Line: 47
-Info (12128): Elaborating entity "dffes" for hierarchy "acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:convst_ff" File: C:/SensorBuchasV2/acquisition_ctrl.tdf Line: 48
-Info (12128): Elaborating entity "acquisition_serializer" for hierarchy "acquisition_module:inst13|acquisition_serializer:serializer" File: C:/SensorBuchasV2/acquisition_module.tdf Line: 34
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/counter.inc Line: 26
-Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst13|acquisition_serializer:serializer|counter:count" File: C:/SensorBuchasV2/acquisition_serializer.tdf Line: 24
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/counter.tdf Line: 8
-Info (12128): Elaborating entity "acquisition_store" for hierarchy "acquisition_module:inst13|acquisition_store:storer" File: C:/SensorBuchasV2/acquisition_module.tdf Line: 35
-Info (12128): Elaborating entity "dffes" for hierarchy "acquisition_module:inst13|acquisition_store:storer|dffes:cs_n_ff" File: C:/SensorBuchasV2/acquisition_store.tdf Line: 19
-Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst13|acquisition_store:storer|counter:channel_counter" File: C:/SensorBuchasV2/acquisition_store.tdf Line: 21
-Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/SensorBuchasV2/counter.tdf Line: 8
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/acquisition_ctrl.inc Line: 26
+Info (12128): Elaborating entity "dffes" for hierarchy "acquisition_module:inst13|dffes:start_ff" File: C:/sensorbuchasv2/acquisition_module.tdf Line: 32
+Info (12128): Elaborating entity "acquisition_ctrl" for hierarchy "acquisition_module:inst13|acquisition_ctrl:ctrl" File: C:/sensorbuchasv2/acquisition_module.tdf Line: 33
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/acquisition_ctrl.tdf Line: 20
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/acquisition_ctrl.tdf Line: 40
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/counter.inc Line: 26
+Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst13|acquisition_ctrl:ctrl|counter:clock_counter" File: C:/sensorbuchasv2/acquisition_ctrl.tdf Line: 46
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/counter.tdf Line: 8
+Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst13|acquisition_ctrl:ctrl|counter:samples_counter" File: C:/sensorbuchasv2/acquisition_ctrl.tdf Line: 47
+Info (12128): Elaborating entity "dffes" for hierarchy "acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:convst_ff" File: C:/sensorbuchasv2/acquisition_ctrl.tdf Line: 48
+Info (12128): Elaborating entity "acquisition_serializer" for hierarchy "acquisition_module:inst13|acquisition_serializer:serializer" File: C:/sensorbuchasv2/acquisition_module.tdf Line: 34
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/counter.inc Line: 26
+Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst13|acquisition_serializer:serializer|counter:count" File: C:/sensorbuchasv2/acquisition_serializer.tdf Line: 24
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/counter.tdf Line: 8
+Info (12128): Elaborating entity "acquisition_store" for hierarchy "acquisition_module:inst13|acquisition_store:storer" File: C:/sensorbuchasv2/acquisition_module.tdf Line: 35
+Info (12128): Elaborating entity "dffes" for hierarchy "acquisition_module:inst13|acquisition_store:storer|dffes:cs_n_ff" File: C:/sensorbuchasv2/acquisition_store.tdf Line: 19
+Info (12128): Elaborating entity "counter" for hierarchy "acquisition_module:inst13|acquisition_store:storer|counter:channel_counter" File: C:/sensorbuchasv2/acquisition_store.tdf Line: 21
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/counter.tdf Line: 8
+Info (12128): Elaborating entity "reset_module" for hierarchy "reset_module:inst7"
+Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/reset_module.tdf Line: 6
 Info (12128): Elaborating entity "host_interface" for hierarchy "host_interface:inst2"
-Info (12128): Elaborating entity "mode_selector" for hierarchy "host_interface:inst2|mode_selector:mode_sel" File: C:/SensorBuchasV2/host_interface.tdf Line: 26
-Info (12128): Elaborating entity "synchronizer" for hierarchy "host_interface:inst2|mode_selector:mode_sel|synchronizer:sync" File: C:/SensorBuchasV2/mode_selector.tdf Line: 19
+Info (12128): Elaborating entity "mode_selector" for hierarchy "host_interface:inst2|mode_selector:mode_sel" File: C:/sensorbuchasv2/host_interface.tdf Line: 26
+Info (12128): Elaborating entity "synchronizer" for hierarchy "host_interface:inst2|mode_selector:mode_sel|synchronizer:sync" File: C:/sensorbuchasv2/mode_selector.tdf Line: 19
 Info (12128): Elaborating entity "switch" for hierarchy "switch:inst5"
-Warning (287013): Variable or input pin "clk" is defined but never used. File: C:/SensorBuchasV2/switch.tdf Line: 4
-Warning (287013): Variable or input pin "sreset" is defined but never used. File: C:/SensorBuchasV2/switch.tdf Line: 5
+Warning (287013): Variable or input pin "clk" is defined but never used. File: C:/sensorbuchasv2/switch.tdf Line: 4
+Warning (287013): Variable or input pin "sreset" is defined but never used. File: C:/sensorbuchasv2/switch.tdf Line: 5
 Info (12128): Elaborating entity "rw_data_module" for hierarchy "rw_data_module:inst3"
-Info (12128): Elaborating entity "spi_shift" for hierarchy "rw_data_module:inst3|spi_shift:shift" File: C:/SensorBuchasV2/rw_data_module.tdf Line: 32
+Info (12128): Elaborating entity "spi_shift" for hierarchy "rw_data_module:inst3|spi_shift:shift" File: C:/sensorbuchasv2/rw_data_module.tdf Line: 32
 Info (12128): Elaborating entity "adc_interface" for hierarchy "adc_interface:inst4"
-Warning (287013): Variable or input pin "clk" is defined but never used. File: C:/SensorBuchasV2/adc_interface.tdf Line: 4
-Warning (287013): Variable or input pin "adc_rvs" is defined but never used. File: C:/SensorBuchasV2/adc_interface.tdf Line: 22
+Warning (287013): Variable or input pin "clk" is defined but never used. File: C:/sensorbuchasv2/adc_interface.tdf Line: 4
+Warning (287013): Variable or input pin "adc_rvs" is defined but never used. File: C:/sensorbuchasv2/adc_interface.tdf Line: 22
 Info (12128): Elaborating entity "RAM_interface" for hierarchy "RAM_interface:inst"
-Info (12128): Elaborating entity "lpm_counter" for hierarchy "RAM_interface:inst|lpm_counter:address_counter" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 31
-Info (12130): Elaborated megafunction instantiation "RAM_interface:inst|lpm_counter:address_counter" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 31
-Info (12133): Instantiated megafunction "RAM_interface:inst|lpm_counter:address_counter" with the following parameter: File: C:/SensorBuchasV2/RAM_interface.tdf Line: 31
+Info (12128): Elaborating entity "lpm_counter" for hierarchy "RAM_interface:inst|lpm_counter:address_counter" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 31
+Info (12130): Elaborated megafunction instantiation "RAM_interface:inst|lpm_counter:address_counter" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 31
+Info (12133): Instantiated megafunction "RAM_interface:inst|lpm_counter:address_counter" with the following parameter: File: C:/sensorbuchasv2/RAM_interface.tdf Line: 31
     Info (12134): Parameter "LPM_WIDTH" = "19"
     Info (12134): Parameter "LPM_DIRECTION" = "UP"
 Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_ici.tdf
-    Info (12023): Found entity 1: cntr_ici File: C:/SensorBuchasV2/db/cntr_ici.tdf Line: 26
+    Info (12023): Found entity 1: cntr_ici File: C:/sensorbuchasv2/db/cntr_ici.tdf Line: 26
 Info (12128): Elaborating entity "cntr_ici" for hierarchy "RAM_interface:inst|lpm_counter:address_counter|cntr_ici:auto_generated" File: c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_counter.tdf Line: 259
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "test_AM_start" is stuck at GND
-Info (18000): Registers with preset signals will power-up high File: C:/SensorBuchasV2/spi_shift.tdf Line: 18
+    Warning (13410): Pin "LED4" is stuck at GND
+Info (18000): Registers with preset signals will power-up high File: C:/sensorbuchasv2/spi_shift.tdf Line: 18
 Info (17016): Found the following redundant logic cells in design
-    Info (17048): Logic cell "RAM_interface:inst|driver[7]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
-    Info (17048): Logic cell "RAM_interface:inst|driver[6]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
-    Info (17048): Logic cell "RAM_interface:inst|driver[5]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
-    Info (17048): Logic cell "RAM_interface:inst|driver[4]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
-    Info (17048): Logic cell "RAM_interface:inst|driver[3]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
-    Info (17048): Logic cell "RAM_interface:inst|driver[2]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
-    Info (17048): Logic cell "RAM_interface:inst|driver[1]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
-    Info (17048): Logic cell "RAM_interface:inst|driver[0]" File: C:/SensorBuchasV2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[7]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[6]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[5]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[4]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[3]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[2]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[1]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
+    Info (17048): Logic cell "RAM_interface:inst|driver[0]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 35
 Warning (21074): Design contains 6 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "adc_rvs[5]"
     Warning (15610): No output dependent on input pin "adc_rvs[4]"
@@ -697,15 +715,15 @@ Warning (21074): Design contains 6 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "adc_rvs[2]"
     Warning (15610): No output dependent on input pin "adc_rvs[1]"
     Warning (15610): No output dependent on input pin "adc_rvs[0]"
-Info (21057): Implemented 520 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 20 input pins
-    Info (21059): Implemented 58 output pins
+Info (21057): Implemented 555 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 19 input pins
+    Info (21059): Implemented 62 output pins
     Info (21060): Implemented 8 bidirectional pins
-    Info (21061): Implemented 434 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 24 warnings
-    Info: Peak virtual memory: 4698 megabytes
-    Info: Processing ended: Thu Apr 22 12:45:28 2021
-    Info: Elapsed time: 00:00:20
-    Info: Total CPU time (on all processors): 00:00:19
+    Info (21061): Implemented 466 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 26 warnings
+    Info: Peak virtual memory: 4707 megabytes
+    Info: Processing ended: Thu Apr 22 15:37:48 2021
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:17
 
 

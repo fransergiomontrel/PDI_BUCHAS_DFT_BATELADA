@@ -19,58 +19,28 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "04/21/2021 15:46:42"
+// Generated on "04/22/2021 15:27:33"
                                                                                 
-// Verilog Test Bench (with test vectors) for design :                          rw_data_module
+// Verilog Test Bench (with test vectors) for design :                          reset_module
 // 
 // Simulation tool : 3rd Party
 // 
 
 `timescale 1 ps/ 1 ps
-module rw_data_module_vlg_vec_tst();
+module reset_module_vlg_vec_tst();
 // constants                                           
 // general purpose registers
-reg changing_mode;
 reg clk;
-reg [7:0] data_read;
-reg [1:0] mode;
-reg MOSI;
-reg SCLK_;
-reg sreset;
+reg count_rst_n;
 // wires                                               
-wire addr_clr;
-wire addr_inc;
-wire busy;
-wire cs_n;
-wire [7:0] data_write;
-wire MISO;
-wire oe_n;
-wire test_async_load;
-wire test_loading;
-wire [3:0] test_state;
-wire we_n;
+wire reset;
 
 // assign statements (if any)                          
-rw_data_module i1 (
+reset_module i1 (
 // port map - connection between master ports and signals/registers   
-	.addr_clr(addr_clr),
-	.addr_inc(addr_inc),
-	.busy(busy),
-	.changing_mode(changing_mode),
 	.clk(clk),
-	.cs_n(cs_n),
-	.data_read(data_read),
-	.data_write(data_write),
-	.MISO(MISO),
-	.mode(mode),
-	.MOSI(MOSI),
-	.oe_n(oe_n),
-	.SCLK_(SCLK_),
-	.sreset(sreset),
-	.test_async_load(test_async_load),
-	.test_loading(test_loading),
-	.test_state(test_state),
-	.we_n(we_n)
+	.count_rst_n(count_rst_n),
+	.reset(reset)
 );
 initial 
 begin 
@@ -83,136 +53,6 @@ begin
 	clk = 1'b0;
 	clk = #5000 1'b1;
 	#5000;
-end 
-
-// sreset
-initial
-begin
-	sreset = 1'b1;
-	sreset = #40000 1'b0;
-	sreset = #5000000 1'b1;
-end 
-// mode[ 1 ]
-initial
-begin
-	mode[1] = 1'b0;
-	mode[1] = #225000 1'b1;
-	mode[1] = #3775000 1'b0;
-	mode[1] = #416000 1'b1;
-	mode[1] = #2944000 1'b0;
-end 
-// mode[ 0 ]
-initial
-begin
-	mode[0] = 1'b0;
-	mode[0] = #225000 1'b1;
-	mode[0] = #3775000 1'b0;
-	mode[0] = #416000 1'b1;
-	mode[0] = #2944000 1'b0;
-end 
-
-// changing_mode
-initial
-begin
-	changing_mode = 1'b0;
-	changing_mode = #210000 1'b1;
-	changing_mode = #30000 1'b0;
-	changing_mode = #3750000 1'b1;
-	changing_mode = #20000 1'b0;
-	changing_mode = #400000 1'b1;
-	changing_mode = #10000 1'b0;
-end 
-// data_read[ 7 ]
-initial
-begin
-	data_read[7] = 1'b0;
-	data_read[7] = #260000 1'b1;
-	data_read[7] = #30000 1'b0;
-end 
-// data_read[ 6 ]
-initial
-begin
-	data_read[6] = 1'b0;
-	data_read[6] = #290000 1'b1;
-	data_read[6] = #2150000 1'b0;
-end 
-// data_read[ 5 ]
-initial
-begin
-	data_read[5] = 1'b0;
-	data_read[5] = #260000 1'b1;
-	data_read[5] = #30000 1'b0;
-end 
-// data_read[ 4 ]
-initial
-begin
-	data_read[4] = 1'b0;
-	data_read[4] = #290000 1'b1;
-	data_read[4] = #2150000 1'b0;
-end 
-// data_read[ 3 ]
-initial
-begin
-	data_read[3] = 1'b0;
-	data_read[3] = #290000 1'b1;
-	data_read[3] = #2150000 1'b0;
-end 
-// data_read[ 2 ]
-initial
-begin
-	data_read[2] = 1'b0;
-	data_read[2] = #260000 1'b1;
-	data_read[2] = #30000 1'b0;
-end 
-// data_read[ 1 ]
-initial
-begin
-	data_read[1] = 1'b0;
-	data_read[1] = #290000 1'b1;
-	data_read[1] = #2150000 1'b0;
-end 
-// data_read[ 0 ]
-initial
-begin
-	data_read[0] = 1'b0;
-	data_read[0] = #260000 1'b1;
-	data_read[0] = #30000 1'b0;
-end 
-
-// SCLK_
-initial
-begin
-	SCLK_ = 1'b0;
-	SCLK_ = #14000 1'b1;
-	# 10000;
-	repeat(10)
-	begin
-		SCLK_ = 1'b0;
-		SCLK_ = #10000 1'b1;
-		# 10000;
-	end
-	SCLK_ = 1'b0;
-	SCLK_ = #1346000 1'b1;
-	# 50000;
-	repeat(53)
-	begin
-		SCLK_ = 1'b0;
-		SCLK_ = #50000 1'b1;
-		# 50000;
-	end
-	SCLK_ = 1'b0;
-end 
-
-// MOSI
-initial
-begin
-	MOSI = 1'b0;
-	MOSI = #1530000 1'b1;
-	MOSI = #90000 1'b0;
-	MOSI = #100000 1'b1;
-	MOSI = #200000 1'b0;
-	MOSI = #200000 1'b1;
-	MOSI = #100000 1'b0;
 end 
 endmodule
 

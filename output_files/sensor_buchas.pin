@@ -65,147 +65,147 @@ CHIP  "sensor_buchas"  ASSIGNED TO AN: EPM1270T144C5
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
 -------------------------------------------------------------------------------------------------------------
-GND*                         : 1         :        :                   :         : 1         :                
-GND*                         : 2         :        :                   :         : 1         :                
-GND*                         : 3         :        :                   :         : 1         :                
-adc_convst[0]                : 4         : output : 3.3-V LVTTL       :         : 1         : N              
-GND*                         : 5         :        :                   :         : 1         :                
-host_rst_n                   : 6         : input  : 3.3-V LVTTL       :         : 1         : N              
-host_busy                    : 7         : output : 3.3-V LVTTL       :         : 1         : N              
-adc_rvs[5]                   : 8         : input  : 3.3-V LVTTL       :         : 1         : N              
+ram_address[9]               : 1         : output : 3.3-V LVTTL       :         : 1         : Y              
+ram_address[8]               : 2         : output : 3.3-V LVTTL       :         : 1         : Y              
+ram_address[7]               : 3         : output : 3.3-V LVTTL       :         : 1         : Y              
+ram_address[6]               : 4         : output : 3.3-V LVTTL       :         : 1         : Y              
+ram_address[5]               : 5         : output : 3.3-V LVTTL       :         : 1         : Y              
+ram_we_n                     : 6         : output : 3.3-V LVTTL       :         : 1         : Y              
+data_bus[3]                  : 7         : bidir  : 3.3-V LVTTL       :         : 1         : Y              
+data_bus[2]                  : 8         : bidir  : 3.3-V LVTTL       :         : 1         : Y              
 VCCIO1                       : 9         : power  :                   : 3.3V    : 1         :                
 GNDIO                        : 10        : gnd    :                   :         :           :                
 GND*                         : 11        :        :                   :         : 1         :                
-test_AM_busy                 : 12        : output : 3.3-V LVTTL       :         : 1         : N              
-GND*                         : 13        :        :                   :         : 1         :                
-test_running                 : 14        : output : 3.3-V LVTTL       :         : 1         : N              
-adc_convst[1]                : 15        : output : 3.3-V LVTTL       :         : 1         : N              
+LED1                         : 12        : output : 3.3-V LVTTL       :         : 1         : Y              
+LED2                         : 13        : output : 3.3-V LVTTL       :         : 1         : Y              
+LED3                         : 14        : output : 3.3-V LVTTL       :         : 1         : Y              
+LED4                         : 15        : output : 3.3-V LVTTL       :         : 1         : Y              
 GND*                         : 16        :        :                   :         : 1         :                
 GNDINT                       : 17        : gnd    :                   :         :           :                
-clk                          : 18        : input  : 3.3-V LVTTL       :         : 1         : N              
+clk                          : 18        : input  : 3.3-V LVTTL       :         : 1         : Y              
 VCCINT                       : 19        : power  :                   : 2.5V/3.3V :           :                
-GND*                         : 20        :        :                   :         : 1         :                
-ram_address[8]               : 21        : output : 3.3-V LVTTL       :         : 1         : N              
-adc_rvs[0]                   : 22        : input  : 3.3-V LVTTL       :         : 1         : N              
-test_AM_start                : 23        : output : 3.3-V LVTTL       :         : 1         : N              
-test_AM_adc_convst           : 24        : output : 3.3-V LVTTL       :         : 1         : N              
+adc_rvs[5]                   : 20        : input  : 3.3-V LVTTL       :         : 1         : N              
+adc_rvs[1]                   : 21        : input  : 3.3-V LVTTL       :         : 1         : N              
+GND*                         : 22        :        :                   :         : 1         :                
+GND*                         : 23        :        :                   :         : 1         :                
+GND*                         : 24        :        :                   :         : 1         :                
 VCCIO1                       : 25        : power  :                   : 3.3V    : 1         :                
 GNDIO                        : 26        : gnd    :                   :         :           :                
-adc_sdi[4]                   : 27        : input  : 3.3-V LVTTL       :         : 1         : N              
-adc_rst_n[0]                 : 28        : output : 3.3-V LVTTL       :         : 1         : N              
-adc_sdo[3]                   : 29        : output : 3.3-V LVTTL       :         : 1         : N              
-host_MOSI                    : 30        : input  : 3.3-V LVTTL       :         : 1         : N              
-adc_rst_n[2]                 : 31        : output : 3.3-V LVTTL       :         : 1         : N              
-adc_convst[4]                : 32        : output : 3.3-V LVTTL       :         : 1         : N              
+GND*                         : 27        :        :                   :         : 1         :                
+test_AM_start                : 28        : output : 3.3-V LVTTL       :         : 1         : N              
+adc_rvs[0]                   : 29        : input  : 3.3-V LVTTL       :         : 1         : N              
+GND*                         : 30        :        :                   :         : 1         :                
+GND*                         : 31        :        :                   :         : 1         :                
+GND*                         : 32        :        :                   :         : 1         :                
 TMS                          : 33        : input  :                   :         : 1         :                
 TDI                          : 34        : input  :                   :         : 1         :                
 TCK                          : 35        : input  :                   :         : 1         :                
 TDO                          : 36        : output :                   :         : 1         :                
 GND*                         : 37        :        :                   :         : 4         :                
 GND*                         : 38        :        :                   :         : 4         :                
-GND*                         : 39        :        :                   :         : 4         :                
-adc_rst_n[1]                 : 40        : output : 3.3-V LVTTL       :         : 4         : N              
-adc_convst[5]                : 41        : output : 3.3-V LVTTL       :         : 4         : N              
-adc_rst_n[5]                 : 42        : output : 3.3-V LVTTL       :         : 4         : N              
-adc_sdi[3]                   : 43        : input  : 3.3-V LVTTL       :         : 4         : N              
-ram_oe_n                     : 44        : output : 3.3-V LVTTL       :         : 4         : N              
-adc_sdo[5]                   : 45        : output : 3.3-V LVTTL       :         : 4         : N              
+adc_rvs[4]                   : 39        : input  : 3.3-V LVTTL       :         : 4         : N              
+GND*                         : 40        :        :                   :         : 4         :                
+GND*                         : 41        :        :                   :         : 4         :                
+adc_sdi[3]                   : 42        : input  : 3.3-V LVTTL       :         : 4         : N              
+adc_sdo[4]                   : 43        : output : 3.3-V LVTTL       :         : 4         : N              
+adc_sdo[3]                   : 44        : output : 3.3-V LVTTL       :         : 4         : N              
+adc_sdi[2]                   : 45        : input  : 3.3-V LVTTL       :         : 4         : N              
 VCCIO4                       : 46        : power  :                   : 3.3V    : 4         :                
 GNDIO                        : 47        : gnd    :                   :         :           :                
-adc_sdo[4]                   : 48        : output : 3.3-V LVTTL       :         : 4         : N              
-adc_sdi[2]                   : 49        : input  : 3.3-V LVTTL       :         : 4         : N              
-data_bus[0]                  : 50        : bidir  : 3.3-V LVTTL       :         : 4         : N              
-data_bus[1]                  : 51        : bidir  : 3.3-V LVTTL       :         : 4         : N              
-adc_rst_n[3]                 : 52        : output : 3.3-V LVTTL       :         : 4         : N              
-adc_rst_n[4]                 : 53        : output : 3.3-V LVTTL       :         : 4         : N              
+adc_sdo[2]                   : 48        : output : 3.3-V LVTTL       :         : 4         : N              
+adc_sdo[1]                   : 49        : output : 3.3-V LVTTL       :         : 4         : N              
+adc_sdi[0]                   : 50        : input  : 3.3-V LVTTL       :         : 4         : N              
+adc_sdi[1]                   : 51        : input  : 3.3-V LVTTL       :         : 4         : N              
+adc_rst_n[4]                 : 52        : output : 3.3-V LVTTL       :         : 4         : N              
+adc_rst_n[1]                 : 53        : output : 3.3-V LVTTL       :         : 4         : N              
 GNDINT                       : 54        : gnd    :                   :         :           :                
-host_convst_start            : 55        : input  : 3.3-V LVTTL       :         : 4         : N              
+adc_sdo[0]                   : 55        : output : 3.3-V LVTTL       :         : 4         : N              
 VCCINT                       : 56        : power  :                   : 2.5V/3.3V :           :                
-test_addr_clr                : 57        : output : 3.3-V LVTTL       :         : 4         : N              
-ram_address[2]               : 58        : output : 3.3-V LVTTL       :         : 4         : N              
-ram_address[0]               : 59        : output : 3.3-V LVTTL       :         : 4         : N              
-ram_address[4]               : 60        : output : 3.3-V LVTTL       :         : 4         : N              
-ram_address[6]               : 61        : output : 3.3-V LVTTL       :         : 4         : N              
-ram_address[7]               : 62        : output : 3.3-V LVTTL       :         : 4         : N              
-ram_address[17]              : 63        : output : 3.3-V LVTTL       :         : 4         : N              
+adc_rst_n[0]                 : 57        : output : 3.3-V LVTTL       :         : 4         : N              
+adc_rst_n[3]                 : 58        : output : 3.3-V LVTTL       :         : 4         : N              
+adc_rst_n[5]                 : 59        : output : 3.3-V LVTTL       :         : 4         : N              
+adc_rst_n[2]                 : 60        : output : 3.3-V LVTTL       :         : 4         : N              
+test_RDM_busy                : 61        : output : 3.3-V LVTTL       :         : 4         : N              
+test_addr_inc                : 62        : output : 3.3-V LVTTL       :         : 4         : N              
+host_busy                    : 63        : output : 3.3-V LVTTL       :         : 4         : N              
 VCCIO4                       : 64        : power  :                   : 3.3V    : 4         :                
 GNDIO                        : 65        : gnd    :                   :         :           :                
 GND*                         : 66        :        :                   :         : 4         :                
-ram_address[10]              : 67        : output : 3.3-V LVTTL       :         : 4         : N              
-GND*                         : 68        :        :                   :         : 4         :                
-adc_sclk[0]                  : 69        : output : 3.3-V LVTTL       :         : 4         : N              
+GND*                         : 67        :        :                   :         : 4         :                
+adc_rvs[2]                   : 68        : input  : 3.3-V LVTTL       :         : 4         : N              
+GND*                         : 69        :        :                   :         : 4         :                
 GND*                         : 70        :        :                   :         : 4         :                
 GND*                         : 71        :        :                   :         : 4         :                
 GND*                         : 72        :        :                   :         : 4         :                
 GND*                         : 73        :        :                   :         : 3         :                
-ram_address[12]              : 74        : output : 3.3-V LVTTL       :         : 3         : N              
-GND*                         : 75        :        :                   :         : 3         :                
+GND*                         : 74        :        :                   :         : 3         :                
+adc_rvs[3]                   : 75        : input  : 3.3-V LVTTL       :         : 3         : N              
 GND*                         : 76        :        :                   :         : 3         :                
 GND*                         : 77        :        :                   :         : 3         :                
-GND*                         : 78        :        :                   :         : 3         :                
-adc_sdo[0]                   : 79        : output : 3.3-V LVTTL       :         : 3         : N              
-GND*                         : 80        :        :                   :         : 3         :                
-ram_address[13]              : 81        : output : 3.3-V LVTTL       :         : 3         : N              
+test_running                 : 78        : output : 3.3-V LVTTL       :         : 3         : N              
+adc_sclk[2]                  : 79        : output : 3.3-V LVTTL       :         : 3         : N              
+test_AM_busy                 : 80        : output : 3.3-V LVTTL       :         : 3         : N              
+adc_sclk[0]                  : 81        : output : 3.3-V LVTTL       :         : 3         : N              
 VCCIO3                       : 82        : power  :                   : 3.3V    : 3         :                
 GNDIO                        : 83        : gnd    :                   :         :           :                
-ram_address[3]               : 84        : output : 3.3-V LVTTL       :         : 3         : N              
-ram_address[14]              : 85        : output : 3.3-V LVTTL       :         : 3         : N              
-ram_address[5]               : 86        : output : 3.3-V LVTTL       :         : 3         : N              
-ram_address[18]              : 87        : output : 3.3-V LVTTL       :         : 3         : N              
-ram_address[1]               : 88        : output : 3.3-V LVTTL       :         : 3         : N              
-test_AM_changing_mode        : 89        : output : 3.3-V LVTTL       :         : 3         : N              
+adc_sclk[3]                  : 84        : output : 3.3-V LVTTL       :         : 3         : N              
+test_AM_changing_mode        : 85        : output : 3.3-V LVTTL       :         : 3         : N              
+adc_sclk[5]                  : 86        : output : 3.3-V LVTTL       :         : 3         : N              
+adc_sclk[1]                  : 87        : output : 3.3-V LVTTL       :         : 3         : N              
+test_HI_changing_mode        : 88        : output : 3.3-V LVTTL       :         : 3         : N              
+adc_sclk[4]                  : 89        : output : 3.3-V LVTTL       :         : 3         : N              
 VCCINT                       : 90        : power  :                   : 2.5V/3.3V :           :                
-ram_address[9]               : 91        : output : 3.3-V LVTTL       :         : 3         : N              
+host_rst_n                   : 91        : input  : 3.3-V LVTTL       :         : 3         : Y              
 GNDINT                       : 92        : gnd    :                   :         :           :                
-adc_sclk[2]                  : 93        : output : 3.3-V LVTTL       :         : 3         : N              
-adc_sclk[5]                  : 94        : output : 3.3-V LVTTL       :         : 3         : N              
-adc_sclk[3]                  : 95        : output : 3.3-V LVTTL       :         : 3         : N              
-adc_sclk[1]                  : 96        : output : 3.3-V LVTTL       :         : 3         : N              
-ram_address[16]              : 97        : output : 3.3-V LVTTL       :         : 3         : N              
-ram_address[15]              : 98        : output : 3.3-V LVTTL       :         : 3         : N              
+test_AM_adc_sclk             : 93        : output : 3.3-V LVTTL       :         : 3         : N              
+host_MOSI                    : 94        : input  : 3.3-V LVTTL       :         : 3         : Y              
+host_MISO                    : 95        : output : 3.3-V LVTTL       :         : 3         : Y              
+host_SCLK                    : 96        : input  : 3.3-V LVTTL       :         : 3         : Y              
+adc_convst[1]                : 97        : output : 3.3-V LVTTL       :         : 3         : N              
+host_mode[0]                 : 98        : input  : 3.3-V LVTTL       :         : 3         : Y              
 GNDIO                        : 99        : gnd    :                   :         :           :                
 VCCIO3                       : 100       : power  :                   : 3.3V    : 3         :                
-adc_sdi[0]                   : 101       : input  : 3.3-V LVTTL       :         : 3         : N              
-adc_sdi[1]                   : 102       : input  : 3.3-V LVTTL       :         : 3         : N              
-GND*                         : 103       :        :                   :         : 3         :                
-GND*                         : 104       :        :                   :         : 3         :                
-adc_rvs[4]                   : 105       : input  : 3.3-V LVTTL       :         : 3         : N              
-test_HI_changing_mode        : 106       : output : 3.3-V LVTTL       :         : 3         : N              
-GND*                         : 107       :        :                   :         : 3         :                
-GND*                         : 108       :        :                   :         : 3         :                
-adc_rvs[1]                   : 109       : input  : 3.3-V LVTTL       :         : 2         : N              
+host_mode[1]                 : 101       : input  : 3.3-V LVTTL       :         : 3         : Y              
+adc_convst[2]                : 102       : output : 3.3-V LVTTL       :         : 3         : N              
+host_convst_start            : 103       : input  : 3.3-V LVTTL       :         : 3         : N              
+test_AM_adc_convst           : 104       : output : 3.3-V LVTTL       :         : 3         : N              
+adc_convst[3]                : 105       : output : 3.3-V LVTTL       :         : 3         : N              
+adc_convst[0]                : 106       : output : 3.3-V LVTTL       :         : 3         : N              
+adc_convst[4]                : 107       : output : 3.3-V LVTTL       :         : 3         : N              
+adc_convst[5]                : 108       : output : 3.3-V LVTTL       :         : 3         : N              
+GND*                         : 109       :        :                   :         : 2         :                
 GND*                         : 110       :        :                   :         : 2         :                
 GND*                         : 111       :        :                   :         : 2         :                
-GND*                         : 112       :        :                   :         : 2         :                
-ram_we_n                     : 113       : output : 3.3-V LVTTL       :         : 2         : N              
-adc_sdo[2]                   : 114       : output : 3.3-V LVTTL       :         : 2         : N              
+test_addr_clr                : 112       : output : 3.3-V LVTTL       :         : 2         : N              
+GND*                         : 113       :        :                   :         : 2         :                
+adc_sdo[5]                   : 114       : output : 3.3-V LVTTL       :         : 2         : N              
 GNDIO                        : 115       : gnd    :                   :         :           :                
 VCCIO2                       : 116       : power  :                   : 3.3V    : 2         :                
-adc_sdo[1]                   : 117       : output : 3.3-V LVTTL       :         : 2         : N              
-test_addr_inc                : 118       : output : 3.3-V LVTTL       :         : 2         : N              
-rst                          : 119       : input  : 3.3-V LVTTL       :         : 2         : N              
-adc_sclk[4]                  : 120       : output : 3.3-V LVTTL       :         : 2         : N              
-ram_cs_n                     : 121       : output : 3.3-V LVTTL       :         : 2         : N              
-host_SCLK                    : 122       : input  : 3.3-V LVTTL       :         : 2         : N              
-test_AM_adc_sclk             : 123       : output : 3.3-V LVTTL       :         : 2         : N              
-host_mode[1]                 : 124       : input  : 3.3-V LVTTL       :         : 2         : N              
-host_mode[0]                 : 125       : input  : 3.3-V LVTTL       :         : 2         : N              
+adc_sdi[4]                   : 117       : input  : 3.3-V LVTTL       :         : 2         : N              
+data_bus[5]                  : 118       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
+data_bus[4]                  : 119       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
+ram_address[14]              : 120       : output : 3.3-V LVTTL       :         : 2         : Y              
+ram_address[13]              : 121       : output : 3.3-V LVTTL       :         : 2         : Y              
+ram_address[12]              : 122       : output : 3.3-V LVTTL       :         : 2         : Y              
+ram_address[11]              : 123       : output : 3.3-V LVTTL       :         : 2         : Y              
+ram_address[10]              : 124       : output : 3.3-V LVTTL       :         : 2         : Y              
+adc_sdi[5]                   : 125       : input  : 3.3-V LVTTL       :         : 2         : N              
 VCCINT                       : 126       : power  :                   : 2.5V/3.3V :           :                
-host_MISO                    : 127       : output : 3.3-V LVTTL       :         : 2         : N              
+data_bus[6]                  : 127       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
 GNDINT                       : 128       : gnd    :                   :         :           :                
-data_bus[7]                  : 129       : bidir  : 3.3-V LVTTL       :         : 2         : N              
-data_bus[6]                  : 130       : bidir  : 3.3-V LVTTL       :         : 2         : N              
-data_bus[4]                  : 131       : bidir  : 3.3-V LVTTL       :         : 2         : N              
-data_bus[2]                  : 132       : bidir  : 3.3-V LVTTL       :         : 2         : N              
-ram_address[11]              : 133       : output : 3.3-V LVTTL       :         : 2         : N              
-data_bus[5]                  : 134       : bidir  : 3.3-V LVTTL       :         : 2         : N              
+data_bus[7]                  : 129       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
+ram_oe_n                     : 130       : output : 3.3-V LVTTL       :         : 2         : Y              
+ram_address[15]              : 131       : output : 3.3-V LVTTL       :         : 2         : Y              
+ram_address[16]              : 132       : output : 3.3-V LVTTL       :         : 2         : Y              
+ram_address[17]              : 133       : output : 3.3-V LVTTL       :         : 2         : Y              
+ram_address[18]              : 134       : output : 3.3-V LVTTL       :         : 2         : Y              
 GNDIO                        : 135       : gnd    :                   :         :           :                
 VCCIO2                       : 136       : power  :                   : 3.3V    : 2         :                
-data_bus[3]                  : 137       : bidir  : 3.3-V LVTTL       :         : 2         : N              
-adc_convst[3]                : 138       : output : 3.3-V LVTTL       :         : 2         : N              
-adc_sdi[5]                   : 139       : input  : 3.3-V LVTTL       :         : 2         : N              
-test_RDM_busy                : 140       : output : 3.3-V LVTTL       :         : 2         : N              
-adc_convst[2]                : 141       : output : 3.3-V LVTTL       :         : 2         : N              
-GND*                         : 142       :        :                   :         : 2         :                
-adc_rvs[3]                   : 143       : input  : 3.3-V LVTTL       :         : 2         : N              
-adc_rvs[2]                   : 144       : input  : 3.3-V LVTTL       :         : 2         : N              
+ram_address[0]               : 137       : output : 3.3-V LVTTL       :         : 2         : Y              
+ram_address[1]               : 138       : output : 3.3-V LVTTL       :         : 2         : Y              
+ram_address[2]               : 139       : output : 3.3-V LVTTL       :         : 2         : Y              
+ram_address[3]               : 140       : output : 3.3-V LVTTL       :         : 2         : Y              
+ram_address[4]               : 141       : output : 3.3-V LVTTL       :         : 2         : Y              
+ram_cs_n                     : 142       : output : 3.3-V LVTTL       :         : 2         : Y              
+data_bus[0]                  : 143       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
+data_bus[1]                  : 144       : bidir  : 3.3-V LVTTL       :         : 2         : Y              

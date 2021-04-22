@@ -57,6 +57,45 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "NO HEAT SINK WITH STILL AIR"
+set_location_assignment PIN_18 -to clk
+set_location_assignment PIN_143 -to data_bus[0]
+set_location_assignment PIN_144 -to data_bus[1]
+set_location_assignment PIN_8 -to data_bus[2]
+set_location_assignment PIN_7 -to data_bus[3]
+set_location_assignment PIN_119 -to data_bus[4]
+set_location_assignment PIN_118 -to data_bus[5]
+set_location_assignment PIN_127 -to data_bus[6]
+set_location_assignment PIN_129 -to data_bus[7]
+set_location_assignment PIN_137 -to ram_address[0]
+set_location_assignment PIN_138 -to ram_address[1]
+set_location_assignment PIN_139 -to ram_address[2]
+set_location_assignment PIN_140 -to ram_address[3]
+set_location_assignment PIN_141 -to ram_address[4]
+set_location_assignment PIN_5 -to ram_address[5]
+set_location_assignment PIN_4 -to ram_address[6]
+set_location_assignment PIN_3 -to ram_address[7]
+set_location_assignment PIN_2 -to ram_address[8]
+set_location_assignment PIN_1 -to ram_address[9]
+set_location_assignment PIN_124 -to ram_address[10]
+set_location_assignment PIN_123 -to ram_address[11]
+set_location_assignment PIN_122 -to ram_address[12]
+set_location_assignment PIN_121 -to ram_address[13]
+set_location_assignment PIN_120 -to ram_address[14]
+set_location_assignment PIN_131 -to ram_address[15]
+set_location_assignment PIN_132 -to ram_address[16]
+set_location_assignment PIN_133 -to ram_address[17]
+set_location_assignment PIN_134 -to ram_address[18]
+set_location_assignment PIN_142 -to ram_cs_n
+set_location_assignment PIN_130 -to ram_oe_n
+set_location_assignment PIN_6 -to ram_we_n
+set_location_assignment PIN_94 -to host_MOSI
+set_location_assignment PIN_95 -to host_MISO
+set_location_assignment PIN_96 -to host_SCLK
+set_location_assignment PIN_101 -to host_mode[1]
+set_location_assignment PIN_98 -to host_mode[0]
+set_location_assignment PIN_91 -to host_rst_n
+set_global_assignment -name VECTOR_WAVEFORM_FILE reset_module.vwf
+set_global_assignment -name AHDL_FILE reset_module.tdf
 set_global_assignment -name VECTOR_WAVEFORM_FILE spi_shift.vwf
 set_global_assignment -name SDC_FILE sensor_buchas.sdc
 set_global_assignment -name INCLUDE_FILE modes.inc
@@ -87,3 +126,7 @@ set_global_assignment -name VECTOR_WAVEFORM_FILE dffes.vwf
 set_global_assignment -name AHDL_FILE spi_shift.tdf
 set_global_assignment -name AHDL_FILE rw_data_module.tdf
 set_global_assignment -name VECTOR_WAVEFORM_FILE rw_data_module.vwf
+set_location_assignment PIN_12 -to LED1
+set_location_assignment PIN_13 -to LED2
+set_location_assignment PIN_14 -to LED3
+set_location_assignment PIN_15 -to LED4
