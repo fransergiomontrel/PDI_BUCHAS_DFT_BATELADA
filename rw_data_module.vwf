@@ -1,16 +1,16 @@
 /*<simulation_settings>
-<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="C:/sensorbuchasv2/rw_data_module.vwf" --testbench_file="C:/sensorbuchasv2/simulation/qsim/rw_data_module.vwf.vt"</ftestbench_cmd>
-<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="C:/sensorbuchasv2/rw_data_module.vwf" --testbench_file="C:/sensorbuchasv2/simulation/qsim/rw_data_module.vwf.vt"</ttestbench_cmd>
-<fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="C:/sensorbuchasv2/simulation/qsim/" sensor_buchas -c sensor_buchas</fnetlist_cmd>
-<tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="C:/sensorbuchasv2/simulation/qsim/" sensor_buchas -c sensor_buchas</tnetlist_cmd>
+<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="C:/SensorBuchasV2/rw_data_module.vwf" --testbench_file="C:/SensorBuchasV2/simulation/qsim/rw_data_module.vwf.vt"</ftestbench_cmd>
+<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="C:/SensorBuchasV2/rw_data_module.vwf" --testbench_file="C:/SensorBuchasV2/simulation/qsim/rw_data_module.vwf.vt"</ttestbench_cmd>
+<fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="C:/SensorBuchasV2/simulation/qsim/" sensor_buchas -c sensor_buchas</fnetlist_cmd>
+<tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="C:/SensorBuchasV2/simulation/qsim/" sensor_buchas -c sensor_buchas</tnetlist_cmd>
 <modelsim_script>onerror {exit -code 1}
 vlib work
 vlog -work work sensor_buchas.vo
 vlog -work work rw_data_module.vwf.vt
-vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.reset_module_vlg_vec_tst
+vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.rw_data_module_vlg_vec_tst
 vcd file -direction sensor_buchas.msim.vcd
-vcd add -internal reset_module_vlg_vec_tst/*
-vcd add -internal reset_module_vlg_vec_tst/i1/*
+vcd add -internal rw_data_module_vlg_vec_tst/*
+vcd add -internal rw_data_module_vlg_vec_tst/i1/*
 proc simTimestamp {} {
     echo "Simulation time: $::now ps"
     if { [string equal running [runStatus]] } {
@@ -20,15 +20,17 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
 vlog -work work sensor_buchas.vo
 vlog -work work rw_data_module.vwf.vt
-vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.reset_module_vlg_vec_tst
+vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.rw_data_module_vlg_vec_tst
 vcd file -direction sensor_buchas.msim.vcd
-vcd add -internal reset_module_vlg_vec_tst/*
-vcd add -internal reset_module_vlg_vec_tst/i1/*
+vcd add -internal rw_data_module_vlg_vec_tst/*
+vcd add -internal rw_data_module_vlg_vec_tst/i1/*
 proc simTimestamp {} {
     echo "Simulation time: $::now ps"
     if { [string equal running [runStatus]] } {
@@ -38,6 +40,8 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
+
 </modelsim_script_timing>
 <hdl_lang>verilog</hdl_lang>
 </simulation_settings>*/
@@ -476,6 +480,16 @@ SIGNAL("cs_n")
 	PARENT = "";
 }
 
+SIGNAL("data_bus_out")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
 TRANSITION_LIST("clk")
 {
 	NODE
@@ -671,8 +685,8 @@ TRANSITION_LIST("data_read[7]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 260.0;
-		LEVEL 1 FOR 30.0;
+		LEVEL 0 FOR 250.0;
+		LEVEL 1 FOR 40.0;
 		LEVEL 0 FOR 9710.0;
 	}
 }
@@ -693,8 +707,8 @@ TRANSITION_LIST("data_read[5]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 260.0;
-		LEVEL 1 FOR 30.0;
+		LEVEL 0 FOR 250.0;
+		LEVEL 1 FOR 40.0;
 		LEVEL 0 FOR 9710.0;
 	}
 }
@@ -726,8 +740,8 @@ TRANSITION_LIST("data_read[2]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 260.0;
-		LEVEL 1 FOR 30.0;
+		LEVEL 0 FOR 250.0;
+		LEVEL 1 FOR 40.0;
 		LEVEL 0 FOR 9710.0;
 	}
 }
@@ -748,8 +762,8 @@ TRANSITION_LIST("data_read[0]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 260.0;
-		LEVEL 1 FOR 30.0;
+		LEVEL 0 FOR 250.0;
+		LEVEL 1 FOR 40.0;
 		LEVEL 0 FOR 9710.0;
 	}
 }
@@ -851,6 +865,15 @@ TRANSITION_LIST("we_n")
 }
 
 TRANSITION_LIST("cs_n")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 10000.0;
+	}
+}
+
+TRANSITION_LIST("data_bus_out")
 {
 	NODE
 	{
@@ -1242,6 +1265,15 @@ DISPLAY_LINE
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 39;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "data_bus_out";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 40;
 	TREE_LEVEL = 0;
 }
 

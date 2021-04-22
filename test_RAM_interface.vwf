@@ -20,6 +20,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -38,6 +39,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 </modelsim_script_timing>
 <hdl_lang>verilog</hdl_lang>
 </simulation_settings>*/
@@ -686,6 +688,16 @@ SIGNAL("oe_n")
 	PARENT = "";
 }
 
+SIGNAL("data_bus_out")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
 TRANSITION_LIST("clk")
 {
 	NODE
@@ -716,7 +728,9 @@ TRANSITION_LIST("data_in[7]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 1000.0;
+		LEVEL 0 FOR 370.0;
+		LEVEL 1 FOR 70.0;
+		LEVEL 0 FOR 560.0;
 	}
 }
 
@@ -725,7 +739,9 @@ TRANSITION_LIST("data_in[6]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 1000.0;
+		LEVEL 0 FOR 370.0;
+		LEVEL 1 FOR 70.0;
+		LEVEL 0 FOR 560.0;
 	}
 }
 
@@ -734,7 +750,9 @@ TRANSITION_LIST("data_in[5]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 1000.0;
+		LEVEL 0 FOR 370.0;
+		LEVEL 1 FOR 70.0;
+		LEVEL 0 FOR 560.0;
 	}
 }
 
@@ -752,7 +770,9 @@ TRANSITION_LIST("data_in[3]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 1000.0;
+		LEVEL 0 FOR 370.0;
+		LEVEL 1 FOR 70.0;
+		LEVEL 0 FOR 560.0;
 	}
 }
 
@@ -770,7 +790,9 @@ TRANSITION_LIST("data_in[1]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 1000.0;
+		LEVEL 0 FOR 370.0;
+		LEVEL 1 FOR 70.0;
+		LEVEL 0 FOR 560.0;
 	}
 }
 
@@ -1131,9 +1153,9 @@ TRANSITION_LIST("ram_data_bus[7]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 350.0;
-		LEVEL 0 FOR 40.0;
-		LEVEL Z FOR 610.0;
+		LEVEL Z FOR 320.0;
+		LEVEL 0 FOR 30.0;
+		LEVEL Z FOR 650.0;
 	}
 }
 
@@ -1142,9 +1164,9 @@ TRANSITION_LIST("ram_data_bus[6]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 350.0;
-		LEVEL 0 FOR 40.0;
-		LEVEL Z FOR 610.0;
+		LEVEL Z FOR 320.0;
+		LEVEL 0 FOR 30.0;
+		LEVEL Z FOR 650.0;
 	}
 }
 
@@ -1153,9 +1175,9 @@ TRANSITION_LIST("ram_data_bus[5]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 350.0;
-		LEVEL 0 FOR 40.0;
-		LEVEL Z FOR 610.0;
+		LEVEL Z FOR 320.0;
+		LEVEL 0 FOR 30.0;
+		LEVEL Z FOR 650.0;
 	}
 }
 
@@ -1164,9 +1186,9 @@ TRANSITION_LIST("ram_data_bus[4]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 350.0;
-		LEVEL 0 FOR 40.0;
-		LEVEL Z FOR 610.0;
+		LEVEL Z FOR 320.0;
+		LEVEL 0 FOR 30.0;
+		LEVEL Z FOR 650.0;
 	}
 }
 
@@ -1175,9 +1197,9 @@ TRANSITION_LIST("ram_data_bus[3]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 350.0;
-		LEVEL 0 FOR 40.0;
-		LEVEL Z FOR 610.0;
+		LEVEL Z FOR 320.0;
+		LEVEL 0 FOR 30.0;
+		LEVEL Z FOR 650.0;
 	}
 }
 
@@ -1186,9 +1208,9 @@ TRANSITION_LIST("ram_data_bus[2]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 350.0;
-		LEVEL 1 FOR 40.0;
-		LEVEL Z FOR 610.0;
+		LEVEL Z FOR 320.0;
+		LEVEL 1 FOR 30.0;
+		LEVEL Z FOR 650.0;
 	}
 }
 
@@ -1197,9 +1219,9 @@ TRANSITION_LIST("ram_data_bus[1]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 350.0;
-		LEVEL 0 FOR 40.0;
-		LEVEL Z FOR 610.0;
+		LEVEL Z FOR 320.0;
+		LEVEL 0 FOR 30.0;
+		LEVEL Z FOR 650.0;
 	}
 }
 
@@ -1208,9 +1230,9 @@ TRANSITION_LIST("ram_data_bus[0]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 350.0;
-		LEVEL 1 FOR 40.0;
-		LEVEL Z FOR 610.0;
+		LEVEL Z FOR 320.0;
+		LEVEL 1 FOR 30.0;
+		LEVEL Z FOR 650.0;
 	}
 }
 
@@ -1236,6 +1258,17 @@ TRANSITION_LIST("oe_n")
 			LEVEL 0 FOR 20.0;
 			LEVEL 1 FOR 20.0;
 		}
+	}
+}
+
+TRANSITION_LIST("data_bus_out")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 410.0;
+		LEVEL 1 FOR 30.0;
+		LEVEL 0 FOR 560.0;
 	}
 }
 
@@ -1836,6 +1869,15 @@ DISPLAY_LINE
 	TREE_INDEX = 60;
 	TREE_LEVEL = 1;
 	PARENT = 52;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "data_bus_out";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 61;
+	TREE_LEVEL = 0;
 }
 
 TIME_BAR

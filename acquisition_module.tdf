@@ -26,6 +26,7 @@ subdesign acquisition_module(
 	we_n: output;
 	cs_n: output;
 	data[7..0]: output;
+	data_bus_out: output;
 
 )
 variable
@@ -68,6 +69,7 @@ begin
 	we_n = storer.we_n;
 	addr_inc = storer.addr_inc;
 	data[] = serializer.data[];
+	data_bus_out = storer.data_bus_out;
 
 end;
 

@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "04/18/2021 16:30:29"
+// Generated on "04/22/2021 19:34:30"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          RAM_interface
 // 
@@ -35,6 +35,7 @@ reg addr_inc;
 reg changing_mode;
 reg clk;
 reg cs_n;
+reg data_bus_out;
 reg [7:0] data_in;
 reg [1:0] mode;
 reg oe_n;
@@ -58,6 +59,7 @@ RAM_interface i1 (
 	.changing_mode(changing_mode),
 	.clk(clk),
 	.cs_n(cs_n),
+	.data_bus_out(data_bus_out),
 	.data_in(data_in),
 	.data_out(data_out),
 	.mode(mode),
@@ -94,16 +96,22 @@ end
 initial
 begin
 	data_in[7] = 1'b0;
+	data_in[7] = #370000 1'b1;
+	data_in[7] = #70000 1'b0;
 end 
 // data_in[ 6 ]
 initial
 begin
 	data_in[6] = 1'b0;
+	data_in[6] = #370000 1'b1;
+	data_in[6] = #70000 1'b0;
 end 
 // data_in[ 5 ]
 initial
 begin
 	data_in[5] = 1'b0;
+	data_in[5] = #370000 1'b1;
+	data_in[5] = #70000 1'b0;
 end 
 // data_in[ 4 ]
 initial
@@ -114,6 +122,8 @@ end
 initial
 begin
 	data_in[3] = 1'b0;
+	data_in[3] = #370000 1'b1;
+	data_in[3] = #70000 1'b0;
 end 
 // data_in[ 2 ]
 initial
@@ -124,6 +134,8 @@ end
 initial
 begin
 	data_in[1] = 1'b0;
+	data_in[1] = #370000 1'b1;
+	data_in[1] = #70000 1'b0;
 end 
 // data_in[ 0 ]
 initial
@@ -192,57 +204,65 @@ end
 initial
 begin
 	treg_ram_data_bus[7] = 1'bZ;
-	treg_ram_data_bus[7] = #350000 1'b0;
-	treg_ram_data_bus[7] = #40000 1'bZ;
+	treg_ram_data_bus[7] = #320000 1'b0;
+	treg_ram_data_bus[7] = #30000 1'bZ;
 end 
 // ram_data_bus[ 6 ]
 initial
 begin
 	treg_ram_data_bus[6] = 1'bZ;
-	treg_ram_data_bus[6] = #350000 1'b0;
-	treg_ram_data_bus[6] = #40000 1'bZ;
+	treg_ram_data_bus[6] = #320000 1'b0;
+	treg_ram_data_bus[6] = #30000 1'bZ;
 end 
 // ram_data_bus[ 5 ]
 initial
 begin
 	treg_ram_data_bus[5] = 1'bZ;
-	treg_ram_data_bus[5] = #350000 1'b0;
-	treg_ram_data_bus[5] = #40000 1'bZ;
+	treg_ram_data_bus[5] = #320000 1'b0;
+	treg_ram_data_bus[5] = #30000 1'bZ;
 end 
 // ram_data_bus[ 4 ]
 initial
 begin
 	treg_ram_data_bus[4] = 1'bZ;
-	treg_ram_data_bus[4] = #350000 1'b0;
-	treg_ram_data_bus[4] = #40000 1'bZ;
+	treg_ram_data_bus[4] = #320000 1'b0;
+	treg_ram_data_bus[4] = #30000 1'bZ;
 end 
 // ram_data_bus[ 3 ]
 initial
 begin
 	treg_ram_data_bus[3] = 1'bZ;
-	treg_ram_data_bus[3] = #350000 1'b0;
-	treg_ram_data_bus[3] = #40000 1'bZ;
+	treg_ram_data_bus[3] = #320000 1'b0;
+	treg_ram_data_bus[3] = #30000 1'bZ;
 end 
 // ram_data_bus[ 2 ]
 initial
 begin
 	treg_ram_data_bus[2] = 1'bZ;
-	treg_ram_data_bus[2] = #350000 1'b1;
-	treg_ram_data_bus[2] = #40000 1'bZ;
+	treg_ram_data_bus[2] = #320000 1'b1;
+	treg_ram_data_bus[2] = #30000 1'bZ;
 end 
 // ram_data_bus[ 1 ]
 initial
 begin
 	treg_ram_data_bus[1] = 1'bZ;
-	treg_ram_data_bus[1] = #350000 1'b0;
-	treg_ram_data_bus[1] = #40000 1'bZ;
+	treg_ram_data_bus[1] = #320000 1'b0;
+	treg_ram_data_bus[1] = #30000 1'bZ;
 end 
 // ram_data_bus[ 0 ]
 initial
 begin
 	treg_ram_data_bus[0] = 1'bZ;
-	treg_ram_data_bus[0] = #350000 1'b1;
-	treg_ram_data_bus[0] = #40000 1'bZ;
+	treg_ram_data_bus[0] = #320000 1'b1;
+	treg_ram_data_bus[0] = #30000 1'bZ;
+end 
+
+// data_bus_out
+initial
+begin
+	data_bus_out = 1'b0;
+	data_bus_out = #410000 1'b1;
+	data_bus_out = #30000 1'b0;
 end 
 endmodule
 

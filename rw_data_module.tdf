@@ -24,6 +24,8 @@ subdesign rw_data_module(
 	
 	busy: output;
 	
+	data_bus_out: output;
+	
 	test_async_load: output;
 	test_loading: output;
 	test_state[3..0]: output;
@@ -31,9 +33,9 @@ subdesign rw_data_module(
 variable
 	shift: spi_shift with (N_BITS=8);
 	
-	sm: machine with states(wait_mode, init_buffers1, init_buffers2, init_buffers3, init_buffers4, wait_loading, wait_loading_n, wr1, wr2, wr3, wr4);
+	sm: machine with states(wait_mode, init_buffers1, init_buffers2, init_buffers3, init_buffers4, wait_loading, wait_loading_n, wr1, wr2, wr3, wr4, wr5, wr6);
 	
-	oe_n_FF, we_n_FF, cs_n_FF, load_parallel_FF, addr_inc_FF, busy_ff: dffes;
+	oe_n_FF, we_n_FF, cs_n_FF, load_parallel_FF, addr_inc_FF, busy_ff, data_bus_out_ff: dffes;
 begin
 	defaults
 		addr_clr = Gnd;
@@ -44,6 +46,7 @@ begin
 		load_parallel_FF.d = Gnd;
 		addr_inc_FF.d = GND;
 		busy_ff.d = Gnd;
+		data_bus_out_ff.d = Gnd;
 	end defaults;
 	
 	shift.clk = SCLK_;
@@ -52,12 +55,18 @@ begin
 	oe_n_FF.clk = clk;
 	oe_n = oe_n_FF.q;
 	oe_n_FF.spre = sreset;
+
 	cs_n_FF.clk = clk;
 	cs_n = cs_n_FF.q;
 	cs_n_FF.spre = sreset;
+
 	we_n_FF.clk = clk;
 	we_n = we_n_FF.q;
 	we_n_FF.spre = sreset;
+
+	data_bus_out_ff.clk = clk;
+	data_bus_out = data_bus_out_ff.q;
+	data_bus_out_ff.sclr = sreset;
 
 	load_parallel_FF.clk = clk;
 	shift.async_load = load_parallel_FF.q;
@@ -80,6 +89,7 @@ begin
 				addr_clr = Vcc;
 				busy_ff.d = Vcc;
 				load_parallel_FF.d = Vcc;
+				oe_n_FF.d = Gnd;
 				sm = init_buffers1;
 			else
 				cs_n_FF.d = Vcc;
@@ -100,7 +110,6 @@ begin
 
 		when init_buffers3 =>
 			oe_n_FF.d = Gnd;
-			addr_inc_FF.d = Vcc;
 			busy_ff.d = Vcc;
 			sm = init_buffers4;
 
@@ -140,17 +149,31 @@ begin
 			sm = wr2;
 
 		when wr2 =>
-			we_n_FF.d = Gnd;
 			busy_ff.d = Vcc;
+			data_bus_out_ff.d = Vcc;
 			sm = wr3;
 
 		when wr3 =>
 			we_n_FF.d = Gnd;
 			busy_ff.d = Vcc;
+			data_bus_out_ff.d = Vcc;
 			sm = wr4;
-			
+
 		when wr4 =>
+			we_n_FF.d = Gnd;
 			busy_ff.d = Vcc;
+			data_bus_out_ff.d = Vcc;
+			sm = wr5;
+
+		when wr5 =>
+			busy_ff.d = Vcc;
+			data_bus_out_ff.d = Vcc;
+			addr_inc_FF.d = Vcc;
+			sm = wr6;
+
+		when wr6 =>
+			busy_ff.d = Vcc;
+			oe_n_FF.d = Gnd;
 			sm = init_buffers1;
 	end case;
 	
@@ -176,5 +199,7 @@ begin
 		wr2				=>	8;
 		wr3				=>	9;
 		wr4				=>	10;
+		wr5				=>	11;
+		wr6				=>	12;
 	END TABLE;
 end;

@@ -24,6 +24,7 @@ subdesign switch(
 	RI_cs_n: output;
 	RI_mode[1..0]: output;
 	RI_changing_mode: output;
+	RI_data_bus_out: output;
 	
 	-- ADC Interface
 	AI_sdi[5..0]: input;
@@ -44,6 +45,7 @@ subdesign switch(
 	AM_data[7..0]: input;
 	AM_adc_sdi[5..0]: output;
 	AM_changing_mode: output;
+	AM_data_bus_out: input;
 	
 	-- Read Data Module
 	RDM_mode[1..0]: output;
@@ -56,12 +58,10 @@ subdesign switch(
 	RDM_cs_n: input;
 	RDM_MISO: input;
 	RDM_busy: input;
-	
-	
-	
-RDM_MOSI: output;
-RDM_we_n: input;
-RDM_data_write[7..0]: input;
+	RDM_MOSI: output;
+	RDM_we_n: input;
+	RDM_data_write[7..0]: input;
+	RDM_data_bus_out: input;
 )
 begin
 	-- Modes
@@ -85,6 +85,7 @@ begin
 			RI_we_n = Vcc;
 			RI_oe_n = Vcc;
 			RI_cs_n = Vcc;
+			RI_data_bus_out = Gnd;
 			
 			-- ADC Interface
 			AI_rst_n = HI_rst_n;
@@ -106,6 +107,7 @@ begin
 			RI_we_n = AM_we_n;
 			RI_oe_n = Vcc;
 			RI_cs_n = AM_cs_n;
+			RI_data_bus_out = AM_data_bus_out;
 			
 			-- ADC Interface
 			AI_rst_n = Vcc;
@@ -127,6 +129,8 @@ begin
 			RI_we_n = RDM_we_n;
 			RI_oe_n = RDM_oe_n;
 			RI_cs_n = RDM_cs_n;
+			RI_data_bus_out = RDM_data_bus_out;
+
 			
 			-- ADC Interface
 			AI_rst_n = Vcc;
@@ -153,6 +157,7 @@ begin
 			RI_we_n = Vcc;
 			RI_oe_n = Vcc;
 			RI_cs_n = Vcc;
+			RI_data_bus_out = Gnd;
 			
 			-- ADC Interface
 			AI_rst_n = Vcc;
