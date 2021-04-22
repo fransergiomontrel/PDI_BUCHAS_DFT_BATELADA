@@ -12,7 +12,6 @@ subdesign host_interface(
 
 	host_SCLK: input;
 	host_MOSI: input;
-	host_SS_n: input;
 	
 	mode[1..0]: output;
 	changing_mode: output;
@@ -20,7 +19,6 @@ subdesign host_interface(
 	rst_n: output;
 	SCLK_: output;
 	MOSI: output;
-	SS_n: output;
 	host_busy: output;
 	host_MISO: output;
 )
@@ -42,5 +40,4 @@ begin
 	SCLK_ = host_SCLK;
 	MOSI = host_MOSI;
 	host_MISO = MISO;
-	SS_n = host_SS_n;
 end;
