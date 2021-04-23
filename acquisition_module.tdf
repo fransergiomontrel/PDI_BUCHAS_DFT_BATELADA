@@ -1,6 +1,7 @@
 include "acquisition_ctrl.inc";
 include "acquisition_serializer.inc";
 include "acquisition_store.inc";
+include "acquisition_store_crc.inc";
 include "modes.inc";
 include "dffes.inc";
 include "crc16.inc";
@@ -37,6 +38,7 @@ variable
 	ctrl: acquisition_ctrl with (active_period = 68, period = 463, samples = samples);
 	serializer: acquisition_serializer with (little_endian = 1);
 	storer: acquisition_store;
+	storer_crc: acquisition_store_crc;
 	crc: crc16;
 begin
 	-- START
@@ -58,6 +60,11 @@ begin
 	serializer.msb = storer.msb;
 	serializer.channel[] = storer.channel[];
 	serializer.adc_sdi[] = sdi[];
+
+	-- STORE
+	storer.clk = clk;
+	storer.sreset = sreset;
+	storer.store = ctrl.store;
 	
 	-- CRC16
 	crc.clk = clk;
@@ -65,25 +72,28 @@ begin
 	crc.data_in[] = serializer.data[];
 	crc.crc_en = storer.crc_enable;
 	test_crc16[] = crc.crc_out[];
-	
-	-- STORE
-	storer.clk = clk;
-	storer.sreset = sreset;
-	storer.store = ctrl.store;
-	
-	-- STORE CRC
-	ctrl.store_crc_ok = ctrl.store_crc;			-- <---- INCLUIR STORE CRC
+	crc.msb = storer_crc.msb;
+
+	-- STORE_CRC
+	storer_crc.clk = clk;
+	storer_crc.sreset = sreset;
+	storer_crc.store_crc = ctrl.store_crc;
+	ctrl.store_crc_ok = storer_crc.store_crc_ok;
 	
 	-- OUTPUTS	
 	convst = ctrl.convst;
 	addr_clr = ctrl.addr_clr;
 	busy = ctrl.busy or changing_mode;
 	sclk_ = serializer.adc_sclk;
-	cs_n = storer.cs_n;
-	we_n = storer.we_n;
+	cs_n = storer.cs_n and storer_crc.cs_n;
+	we_n = storer.we_n and storer_crc.we_n;
 	addr_inc = storer.addr_inc;
-	data[] = serializer.data[];
-	data_bus_out = storer.data_bus_out;
+	if ctrl.store_crc then
+		data[] = crc.crc_out_byte[];
+	else
+		data[] = serializer.data[];
+	end if;
+	data_bus_out = storer.data_bus_out or storer_crc.data_bus_out;
 
 end;
 

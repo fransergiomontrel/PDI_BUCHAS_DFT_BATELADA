@@ -21,6 +21,7 @@ after 2500 simTimestamp
 run -all
 quit -f
 
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -39,6 +40,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 
 </modelsim_script_timing>
 <hdl_lang>verilog</hdl_lang>
@@ -548,6 +550,16 @@ SIGNAL("test_crc16[0]")
 	PARENT = "test_crc16";
 }
 
+SIGNAL("data_bus_out")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
 TRANSITION_LIST("clk")
 {
 	NODE
@@ -952,6 +964,15 @@ TRANSITION_LIST("test_crc16[1]")
 }
 
 TRANSITION_LIST("test_crc16[0]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("data_bus_out")
 {
 	NODE
 	{
@@ -1417,6 +1438,15 @@ DISPLAY_LINE
 	TREE_INDEX = 46;
 	TREE_LEVEL = 1;
 	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "data_bus_out";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 47;
+	TREE_LEVEL = 0;
 }
 
 TIME_BAR

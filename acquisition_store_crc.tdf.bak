@@ -1,0 +1,120 @@
+include "counter.inc";
+include "dffes.inc";
+
+subdesign acquisition_store(
+	clk: input;
+	sreset: input;
+	store: input;
+	
+	we_n: output;
+	cs_n: output;
+	channel[2..0]: output;
+	addr_inc: output;
+	store_ok: output;
+	msb: output;
+	data_bus_out: output;
+	crc_enable: output;
+	
+	test_sm[2..0]: output;
+)
+variable	
+	cs_n_ff, we_n_ff, data_bus_out_ff: dffes;
+	
+	channel_counter: counter with (MAX_VALUE = 12);
+	
+	sm: MACHINE WITH STATES(WAIT_STORE, CS1a, CS0a, CS0b, CS1b, INC_CHANNEL, WAIT_END);
+begin
+	defaults
+		cs_n_ff.d = Gnd;
+		we_n_ff.d = Vcc;
+		data_bus_out_ff.d = Gnd;
+		addr_inc = Gnd;
+		store_ok = Gnd;
+
+		channel_counter.inc = Gnd;
+		channel_counter.clr = Gnd;
+		
+		crc_enable = Gnd;
+	end defaults;
+	
+	-- sresets
+	channel_counter.sreset = sreset;
+	sm.reset = sreset;
+	cs_n_ff.spre = sreset;
+	we_n_ff.spre = sreset;
+	data_bus_out_ff.sclr = sreset;
+	
+	-- Sync data
+	cs_n_ff.clk = clk;
+	we_n_ff.clk = clk;
+	data_bus_out_ff.clk = clk;
+	channel_counter.clk = clk;
+	sm.clk = clk;
+
+	case sm IS
+		WHEN WAIT_STORE =>
+test_sm[] = 0;
+			if store then
+				data_bus_out_ff.d = Vcc;
+				sm = CS1a;
+			else
+				cs_n_ff.d = Vcc;
+				channel_counter.clr = Vcc;
+				sm = WAIT_STORE;
+			end if;
+			
+		WHEN CS1a =>
+test_sm[] = 1;
+			data_bus_out_ff.d = Vcc;
+			we_n_ff.d = Gnd;
+			sm = CS0a;
+			
+		WHEN CS0a =>
+test_sm[] = 2;
+			data_bus_out_ff.d = Vcc;
+			we_n_ff.d = Gnd;
+			crc_enable = Vcc;
+			sm = CS0b;
+
+		WHEN CS0b =>
+test_sm[] = 3;
+			data_bus_out_ff.d = Vcc;
+			sm = CS1b;
+			
+		WHEN CS1b =>
+test_sm[] = 4;
+			channel_counter.inc = Vcc;
+			addr_inc = Vcc;
+			sm = INC_CHANNEL;
+		
+		WHEN INC_CHANNEL =>
+test_sm[] = 5;
+			if channel_counter.o[] == 12 then
+				cs_n_ff.d = Vcc;
+				store_ok = Vcc;
+				sm = WAIT_END;				
+			else
+				data_bus_out_ff.d = Vcc;
+				sm = CS1a;
+			
+			end if;
+		WHEN WAIT_END =>
+test_sm[] = 6;
+			if store then
+				cs_n_ff.d = Vcc;
+				store_ok = Vcc;
+			else
+				cs_n_ff.d = Vcc;
+				channel_counter.clr = Vcc;
+				sm = WAIT_STORE;
+				
+			end if;
+	END CASE;
+
+	-- Sync outs
+	cs_n = cs_n_ff.q;
+	we_n = we_n_ff.q;
+	data_bus_out = data_bus_out_ff.q;
+	channel[] = channel_counter.o[3..1];
+	msb = channel_counter.o[0];
+end;

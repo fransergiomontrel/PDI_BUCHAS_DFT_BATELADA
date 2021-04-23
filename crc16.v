@@ -19,12 +19,17 @@ module crc16(
   input [7:0] data_in,
   input crc_en,
   output [15:0] crc_out,
+  output [7:0] crc_out_byte,
   input rst,
-  input clk);
+  input clk,
+  input msb
+);
 
   reg [15:0] lfsr_q,lfsr_c;
+  reg [7:0] byte_out;
 
   assign crc_out = lfsr_q;
+  assign crc_out_byte = byte_out;
 
   always @(*) begin
     lfsr_c[0] = lfsr_q[8] ^ lfsr_q[12] ^ data_in[0] ^ data_in[4];
@@ -44,6 +49,13 @@ module crc16(
     lfsr_c[14] = lfsr_q[6] ^ lfsr_q[10] ^ lfsr_q[14] ^ data_in[2] ^ data_in[6];
     lfsr_c[15] = lfsr_q[7] ^ lfsr_q[11] ^ lfsr_q[15] ^ data_in[3] ^ data_in[7];
 
+	 if(msb) begin
+		byte_out = lfsr_q[15:8];
+	 end
+	 else begin
+		byte_out = lfsr_q[7:0];
+	 end
+		
   end // always
 
   always @(posedge clk, posedge rst) begin
