@@ -87,7 +87,7 @@ begin
 	sclk_ = serializer.adc_sclk;
 	cs_n = storer.cs_n and storer_crc.cs_n;
 	we_n = storer.we_n and storer_crc.we_n;
-	addr_inc = storer.addr_inc;
+	addr_inc = storer.addr_inc or storer_crc.addr_inc;
 	if ctrl.store_crc then
 		data[] = crc.crc_out_byte[];
 	else

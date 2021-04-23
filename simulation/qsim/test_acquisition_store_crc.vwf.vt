@@ -19,53 +19,41 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "04/23/2021 13:23:34"
+// Generated on "04/23/2021 15:05:02"
                                                                                 
-// Verilog Test Bench (with test vectors) for design :                          acquisition_module
+// Verilog Test Bench (with test vectors) for design :                          acquisition_store_crc
 // 
 // Simulation tool : 3rd Party
 // 
 
 `timescale 1 ps/ 1 ps
-module acquisition_module_vlg_vec_tst();
+module acquisition_store_crc_vlg_vec_tst();
 // constants                                           
 // general purpose registers
-reg changing_mode;
 reg clk;
-reg [1:0] mode;
-reg [5:0] sdi;
 reg sreset;
-reg start;
+reg store_crc;
 // wires                                               
-wire addr_clr;
 wire addr_inc;
-wire busy;
-wire convst;
 wire cs_n;
-wire [7:0] data;
 wire data_bus_out;
-wire sclk_;
-wire [15:0] test_crc16;
+wire msb;
+wire store_crc_ok;
+wire [3:0] test_sm;
 wire we_n;
 
 // assign statements (if any)                          
-acquisition_module i1 (
+acquisition_store_crc i1 (
 // port map - connection between master ports and signals/registers   
-	.addr_clr(addr_clr),
 	.addr_inc(addr_inc),
-	.busy(busy),
-	.changing_mode(changing_mode),
 	.clk(clk),
-	.convst(convst),
 	.cs_n(cs_n),
-	.data(data),
 	.data_bus_out(data_bus_out),
-	.mode(mode),
-	.sclk_(sclk_),
-	.sdi(sdi),
+	.msb(msb),
 	.sreset(sreset),
-	.start(start),
-	.test_crc16(test_crc16),
+	.store_crc(store_crc),
+	.store_crc_ok(store_crc_ok),
+	.test_sm(test_sm),
 	.we_n(we_n)
 );
 initial 
@@ -86,6 +74,14 @@ initial
 begin
 	sreset = 1'b1;
 	sreset = #20000 1'b0;
+end 
+
+// store_crc
+initial
+begin
+	store_crc = 1'b0;
+	store_crc = #40000 1'b1;
+	store_crc = #240000 1'b0;
 end 
 endmodule
 

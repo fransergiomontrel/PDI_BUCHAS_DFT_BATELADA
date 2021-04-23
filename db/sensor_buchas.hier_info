@@ -1,1480 +1,165 @@
-|acquisition_module
-clk => dffes:start_ff.clk
-clk => acquisition_ctrl:ctrl.clk
-clk => acquisition_serializer:serializer.clk
-clk => acquisition_store:storer.clk
-clk => crc16:crc.clk
-clk => acquisition_store_crc:storer_crc.clk
-sreset => _.IN0
-sreset => acquisition_serializer:serializer.sreset
-sreset => acquisition_store:storer.sreset
-sreset => acquisition_store_crc:storer_crc.sreset
-start => dffes:start_ff.d
-mode[0] => _.IN0
-mode[1] => _.IN0
-sdi[0] => acquisition_serializer:serializer.adc_sdi[0]
-sdi[1] => acquisition_serializer:serializer.adc_sdi[1]
-sdi[2] => acquisition_serializer:serializer.adc_sdi[2]
-sdi[3] => acquisition_serializer:serializer.adc_sdi[3]
-sdi[4] => acquisition_serializer:serializer.adc_sdi[4]
-sdi[5] => acquisition_serializer:serializer.adc_sdi[5]
-changing_mode => _.IN0
-changing_mode => _.IN1
-changing_mode => busy.IN1
-sclk_ <= acquisition_serializer:serializer.adc_sclk
-convst <= acquisition_ctrl:ctrl.convst
-addr_inc <= acquisition_store:storer.addr_inc
-addr_clr <= acquisition_ctrl:ctrl.addr_clr
-busy <= busy.DB_MAX_OUTPUT_PORT_TYPE
-we_n <= we_n.DB_MAX_OUTPUT_PORT_TYPE
-cs_n <= cs_n.DB_MAX_OUTPUT_PORT_TYPE
-data[0] <= data[0].DB_MAX_OUTPUT_PORT_TYPE
-data[1] <= data[1].DB_MAX_OUTPUT_PORT_TYPE
-data[2] <= data[2].DB_MAX_OUTPUT_PORT_TYPE
-data[3] <= data[3].DB_MAX_OUTPUT_PORT_TYPE
-data[4] <= data[4].DB_MAX_OUTPUT_PORT_TYPE
-data[5] <= data[5].DB_MAX_OUTPUT_PORT_TYPE
-data[6] <= data[6].DB_MAX_OUTPUT_PORT_TYPE
-data[7] <= data[7].DB_MAX_OUTPUT_PORT_TYPE
-data_bus_out <= data_bus_out.DB_MAX_OUTPUT_PORT_TYPE
-test_crc16[0] <= crc16:crc.crc_out[0]
-test_crc16[1] <= crc16:crc.crc_out[1]
-test_crc16[2] <= crc16:crc.crc_out[2]
-test_crc16[3] <= crc16:crc.crc_out[3]
-test_crc16[4] <= crc16:crc.crc_out[4]
-test_crc16[5] <= crc16:crc.crc_out[5]
-test_crc16[6] <= crc16:crc.crc_out[6]
-test_crc16[7] <= crc16:crc.crc_out[7]
-test_crc16[8] <= crc16:crc.crc_out[8]
-test_crc16[9] <= crc16:crc.crc_out[9]
-test_crc16[10] <= crc16:crc.crc_out[10]
-test_crc16[11] <= crc16:crc.crc_out[11]
-test_crc16[12] <= crc16:crc.crc_out[12]
-test_crc16[13] <= crc16:crc.crc_out[13]
-test_crc16[14] <= crc16:crc.crc_out[14]
-test_crc16[15] <= crc16:crc.crc_out[15]
-
-
-|acquisition_module|dffes:start_ff
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_ctrl:ctrl
-clk => counter:clock_counter.clk
-clk => counter:samples_counter.clk
-clk => dffes:convst_ff.clk
-clk => dffes:serialize_ff.clk
-clk => dffes:store_ff.clk
-clk => dffes:store_crc_ff.clk
+|rw_data_module
+clk => dffes:SCLK_ff.clk
+clk => dffes:MOSI_ff.clk
+clk => dffes:oe_n_FF.clk
+clk => dffes:cs_n_FF.clk
+clk => dffes:we_n_FF.clk
+clk => dffes:data_bus_out_ff.clk
+clk => dffes:load_parallel_FF.clk
+clk => dffes:addr_inc_FF.clk
 clk => dffes:busy_ff.clk
 clk => sm.IN1
-start => _.IN0
-start => addr_clr~0.IN1
-start => _.IN0
-sreset => counter:clock_counter.sreset
-sreset => counter:samples_counter.sreset
-sreset => dffes:convst_ff.sclr
-sreset => dffes:serialize_ff.sclr
-sreset => dffes:store_ff.sclr
-sreset => dffes:store_crc_ff.sclr
+sreset => dffes:oe_n_FF.spre
+sreset => dffes:cs_n_FF.spre
+sreset => dffes:we_n_FF.spre
+sreset => dffes:data_bus_out_ff.sclr
+sreset => dffes:load_parallel_FF.spre
+sreset => dffes:addr_inc_FF.sclr
 sreset => dffes:busy_ff.sclr
 sreset => sm.IN1
-convst <= dffes:convst_ff.q
-serialize <= dffes:serialize_ff.q
-serialize_ok => _.IN1
-serialize_ok => _.IN0
-store <= dffes:store_ff.q
-store_ok => _.IN1
-store_ok => _.IN0
-store_crc <= dffes:store_crc_ff.q
-store_crc_ok => _.IN1
-store_crc_ok => _.IN0
+changing_mode => busy.IN1
+changing_mode => _.IN0
+changing_mode => _.IN0
+changing_mode => _.IN0
+mode[0] => _.IN1
+mode[0] => _.IN1
+mode[0] => _.IN1
+mode[1] => _.IN0
+mode[1] => _.IN0
+mode[1] => _.IN0
 addr_clr <= addr_clr.DB_MAX_OUTPUT_PORT_TYPE
-busy <= dffes:busy_ff.q
-crc_clr <= crc_clr.DB_MAX_OUTPUT_PORT_TYPE
-test_clock_counter[0] <= counter:clock_counter.o[0]
-test_clock_counter[1] <= counter:clock_counter.o[1]
-test_clock_counter[2] <= counter:clock_counter.o[2]
-test_clock_counter[3] <= counter:clock_counter.o[3]
-test_clock_counter[4] <= counter:clock_counter.o[4]
-test_clock_counter[5] <= counter:clock_counter.o[5]
-test_clock_counter[6] <= counter:clock_counter.o[6]
-test_clock_counter[7] <= counter:clock_counter.o[7]
-test_clock_counter[8] <= counter:clock_counter.o[8]
-test_sm_state[0] <= test_sm_state[0].DB_MAX_OUTPUT_PORT_TYPE
-test_sm_state[1] <= test_sm_state[1].DB_MAX_OUTPUT_PORT_TYPE
-test_sm_state[2] <= test_sm_state[2].DB_MAX_OUTPUT_PORT_TYPE
-test_samples_counter[0] <= counter:samples_counter.o[0]
-test_samples_counter[1] <= counter:samples_counter.o[1]
-
-
-|acquisition_module|acquisition_ctrl:ctrl|counter:clock_counter
-clk => ffs[8].CLK
-clk => ffs[7].CLK
-clk => ffs[6].CLK
-clk => ffs[5].CLK
-clk => ffs[4].CLK
-clk => ffs[3].CLK
-clk => ffs[2].CLK
-clk => ffs[1].CLK
-clk => ffs[0].CLK
-sreset => _.IN1
-clr => _.IN0
-inc => _.IN1
-inc => _.IN0
-o[0] <= ffs[0].DB_MAX_OUTPUT_PORT_TYPE
-o[1] <= ffs[1].DB_MAX_OUTPUT_PORT_TYPE
-o[2] <= ffs[2].DB_MAX_OUTPUT_PORT_TYPE
-o[3] <= ffs[3].DB_MAX_OUTPUT_PORT_TYPE
-o[4] <= ffs[4].DB_MAX_OUTPUT_PORT_TYPE
-o[5] <= ffs[5].DB_MAX_OUTPUT_PORT_TYPE
-o[6] <= ffs[6].DB_MAX_OUTPUT_PORT_TYPE
-o[7] <= ffs[7].DB_MAX_OUTPUT_PORT_TYPE
-o[8] <= ffs[8].DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_ctrl:ctrl|counter:samples_counter
-clk => ffs[1].CLK
-clk => ffs[0].CLK
-sreset => _.IN1
-clr => _.IN0
-inc => _.IN1
-inc => _.IN0
-o[0] <= ffs[0].DB_MAX_OUTPUT_PORT_TYPE
-o[1] <= ffs[1].DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_ctrl:ctrl|dffes:convst_ff
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_ctrl:ctrl|dffes:serialize_ff
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_ctrl:ctrl|dffes:store_ff
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_ctrl:ctrl|dffes:store_crc_ff
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_ctrl:ctrl|dffes:busy_ff
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer
-sreset => dffes:serialize_ok_ff.sclr
-sreset => counter:count.sreset
-clk => dffes:div2_clock.clk
-clk => dffes:serialize_ok_ff.clk
-clk => counter:count.clk
-clk => dffes:data_buffer[5][15].clk
-clk => dffes:data_buffer[5][14].clk
-clk => dffes:data_buffer[5][13].clk
-clk => dffes:data_buffer[5][12].clk
-clk => dffes:data_buffer[5][11].clk
-clk => dffes:data_buffer[5][10].clk
-clk => dffes:data_buffer[5][9].clk
-clk => dffes:data_buffer[5][8].clk
-clk => dffes:data_buffer[5][7].clk
-clk => dffes:data_buffer[5][6].clk
-clk => dffes:data_buffer[5][5].clk
-clk => dffes:data_buffer[5][4].clk
-clk => dffes:data_buffer[5][3].clk
-clk => dffes:data_buffer[5][2].clk
-clk => dffes:data_buffer[5][1].clk
-clk => dffes:data_buffer[5][0].clk
-clk => dffes:data_buffer[4][15].clk
-clk => dffes:data_buffer[4][14].clk
-clk => dffes:data_buffer[4][13].clk
-clk => dffes:data_buffer[4][12].clk
-clk => dffes:data_buffer[4][11].clk
-clk => dffes:data_buffer[4][10].clk
-clk => dffes:data_buffer[4][9].clk
-clk => dffes:data_buffer[4][8].clk
-clk => dffes:data_buffer[4][7].clk
-clk => dffes:data_buffer[4][6].clk
-clk => dffes:data_buffer[4][5].clk
-clk => dffes:data_buffer[4][4].clk
-clk => dffes:data_buffer[4][3].clk
-clk => dffes:data_buffer[4][2].clk
-clk => dffes:data_buffer[4][1].clk
-clk => dffes:data_buffer[4][0].clk
-clk => dffes:data_buffer[3][15].clk
-clk => dffes:data_buffer[3][14].clk
-clk => dffes:data_buffer[3][13].clk
-clk => dffes:data_buffer[3][12].clk
-clk => dffes:data_buffer[3][11].clk
-clk => dffes:data_buffer[3][10].clk
-clk => dffes:data_buffer[3][9].clk
-clk => dffes:data_buffer[3][8].clk
-clk => dffes:data_buffer[3][7].clk
-clk => dffes:data_buffer[3][6].clk
-clk => dffes:data_buffer[3][5].clk
-clk => dffes:data_buffer[3][4].clk
-clk => dffes:data_buffer[3][3].clk
-clk => dffes:data_buffer[3][2].clk
-clk => dffes:data_buffer[3][1].clk
-clk => dffes:data_buffer[3][0].clk
-clk => dffes:data_buffer[2][15].clk
-clk => dffes:data_buffer[2][14].clk
-clk => dffes:data_buffer[2][13].clk
-clk => dffes:data_buffer[2][12].clk
-clk => dffes:data_buffer[2][11].clk
-clk => dffes:data_buffer[2][10].clk
-clk => dffes:data_buffer[2][9].clk
-clk => dffes:data_buffer[2][8].clk
-clk => dffes:data_buffer[2][7].clk
-clk => dffes:data_buffer[2][6].clk
-clk => dffes:data_buffer[2][5].clk
-clk => dffes:data_buffer[2][4].clk
-clk => dffes:data_buffer[2][3].clk
-clk => dffes:data_buffer[2][2].clk
-clk => dffes:data_buffer[2][1].clk
-clk => dffes:data_buffer[2][0].clk
-clk => dffes:data_buffer[1][15].clk
-clk => dffes:data_buffer[1][14].clk
-clk => dffes:data_buffer[1][13].clk
-clk => dffes:data_buffer[1][12].clk
-clk => dffes:data_buffer[1][11].clk
-clk => dffes:data_buffer[1][10].clk
-clk => dffes:data_buffer[1][9].clk
-clk => dffes:data_buffer[1][8].clk
-clk => dffes:data_buffer[1][7].clk
-clk => dffes:data_buffer[1][6].clk
-clk => dffes:data_buffer[1][5].clk
-clk => dffes:data_buffer[1][4].clk
-clk => dffes:data_buffer[1][3].clk
-clk => dffes:data_buffer[1][2].clk
-clk => dffes:data_buffer[1][1].clk
-clk => dffes:data_buffer[1][0].clk
-clk => dffes:data_buffer[0][15].clk
-clk => dffes:data_buffer[0][14].clk
-clk => dffes:data_buffer[0][13].clk
-clk => dffes:data_buffer[0][12].clk
-clk => dffes:data_buffer[0][11].clk
-clk => dffes:data_buffer[0][10].clk
-clk => dffes:data_buffer[0][9].clk
-clk => dffes:data_buffer[0][8].clk
-clk => dffes:data_buffer[0][7].clk
-clk => dffes:data_buffer[0][6].clk
-clk => dffes:data_buffer[0][5].clk
-clk => dffes:data_buffer[0][4].clk
-clk => dffes:data_buffer[0][3].clk
-clk => dffes:data_buffer[0][2].clk
-clk => dffes:data_buffer[0][1].clk
-clk => dffes:data_buffer[0][0].clk
-serialize => _.IN0
-serialize => _.IN0
-serialize => _.IN0
-serialize => _.IN0
-msb => _.IN0
-channel[0] => _.IN0
-channel[0] => _.IN2
-channel[0] => _.IN0
-channel[0] => _.IN2
-channel[0] => _.IN0
-channel[0] => _.IN2
-channel[1] => _.IN0
-channel[1] => _.IN0
-channel[1] => _.IN1
-channel[1] => _.IN1
-channel[1] => _.IN0
-channel[1] => _.IN0
-channel[2] => _.IN0
-channel[2] => _.IN0
-channel[2] => _.IN0
-channel[2] => _.IN0
-channel[2] => _.IN0
-channel[2] => _.IN0
-data[0] <= data[0].DB_MAX_OUTPUT_PORT_TYPE
-data[1] <= data[1].DB_MAX_OUTPUT_PORT_TYPE
-data[2] <= data[2].DB_MAX_OUTPUT_PORT_TYPE
-data[3] <= data[3].DB_MAX_OUTPUT_PORT_TYPE
-data[4] <= data[4].DB_MAX_OUTPUT_PORT_TYPE
-data[5] <= data[5].DB_MAX_OUTPUT_PORT_TYPE
-data[6] <= data[6].DB_MAX_OUTPUT_PORT_TYPE
-data[7] <= data[7].DB_MAX_OUTPUT_PORT_TYPE
-serialize_ok <= dffes:serialize_ok_ff.q
-adc_sdi[0] => dffes:data_buffer[0][0].d
-adc_sdi[1] => dffes:data_buffer[1][0].d
-adc_sdi[2] => dffes:data_buffer[2][0].d
-adc_sdi[3] => dffes:data_buffer[3][0].d
-adc_sdi[4] => dffes:data_buffer[4][0].d
-adc_sdi[5] => dffes:data_buffer[5][0].d
-adc_sclk <= dffes:div2_clock.q
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][15]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][14]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][13]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][12]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][11]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][10]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][9]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][8]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][7]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][6]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][5]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][4]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][3]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][2]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][1]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[5][0]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][15]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][14]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][13]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][12]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][11]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][10]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][9]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][8]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][7]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][6]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][5]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][4]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][3]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][2]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][1]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[4][0]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][15]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][14]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][13]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][12]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][11]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][10]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][9]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][8]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][7]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][6]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][5]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][4]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][3]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][2]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][1]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[3][0]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][15]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][14]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][13]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][12]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][11]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][10]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][9]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][8]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][7]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][6]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][5]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][4]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][3]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][2]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][1]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[2][0]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][15]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][14]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][13]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][12]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][11]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][10]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][9]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][8]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][7]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][6]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][5]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][4]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][3]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][2]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][1]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[1][0]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][15]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][14]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][13]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][12]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][11]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][10]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][9]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][8]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][7]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][6]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][5]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][4]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][3]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][2]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][1]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:data_buffer[0][0]
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|counter:count
-clk => ffs[4].CLK
-clk => ffs[3].CLK
-clk => ffs[2].CLK
-clk => ffs[1].CLK
-clk => ffs[0].CLK
-sreset => _.IN1
-clr => _.IN0
-inc => _.IN1
-inc => _.IN0
-o[0] <= ffs[0].DB_MAX_OUTPUT_PORT_TYPE
-o[1] <= ffs[1].DB_MAX_OUTPUT_PORT_TYPE
-o[2] <= ffs[2].DB_MAX_OUTPUT_PORT_TYPE
-o[3] <= ffs[3].DB_MAX_OUTPUT_PORT_TYPE
-o[4] <= ffs[4].DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:div2_clock
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_serializer:serializer|dffes:serialize_ok_ff
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_store:storer
-clk => dffes:cs_n_ff.clk
-clk => dffes:we_n_ff.clk
-clk => dffes:data_bus_out_ff.clk
-clk => counter:channel_counter.clk
-clk => sm.IN1
-sreset => counter:channel_counter.sreset
-sreset => dffes:cs_n_ff.spre
-sreset => dffes:we_n_ff.spre
-sreset => dffes:data_bus_out_ff.sclr
-sreset => sm.IN1
-store => _.IN1
-store => _.IN0
-store => store_ok~1.IN1
-store => _.IN0
-we_n <= dffes:we_n_ff.q
-cs_n <= dffes:cs_n_ff.q
-channel[0] <= counter:channel_counter.o[1]
-channel[1] <= counter:channel_counter.o[2]
-channel[2] <= counter:channel_counter.o[3]
 addr_inc <= addr_inc.DB_MAX_OUTPUT_PORT_TYPE
-store_ok <= store_ok.DB_MAX_OUTPUT_PORT_TYPE
-msb <= counter:channel_counter.o[0]
+oe_n <= dffes:oe_n_FF.q
+we_n <= dffes:we_n_FF.q
+cs_n <= dffes:cs_n_FF.q
+SCLK_ => dffes:SCLK_ff.d
+MISO <= spi_shift:shift.miso
+MOSI => dffes:MOSI_ff.d
+data_read[0] => spi_shift:shift.parallel_in[0]
+data_read[1] => spi_shift:shift.parallel_in[1]
+data_read[2] => spi_shift:shift.parallel_in[2]
+data_read[3] => spi_shift:shift.parallel_in[3]
+data_read[4] => spi_shift:shift.parallel_in[4]
+data_read[5] => spi_shift:shift.parallel_in[5]
+data_read[6] => spi_shift:shift.parallel_in[6]
+data_read[7] => spi_shift:shift.parallel_in[7]
+data_write[0] <= spi_shift:shift.parallel_out[0]
+data_write[1] <= spi_shift:shift.parallel_out[1]
+data_write[2] <= spi_shift:shift.parallel_out[2]
+data_write[3] <= spi_shift:shift.parallel_out[3]
+data_write[4] <= spi_shift:shift.parallel_out[4]
+data_write[5] <= spi_shift:shift.parallel_out[5]
+data_write[6] <= spi_shift:shift.parallel_out[6]
+data_write[7] <= spi_shift:shift.parallel_out[7]
+busy <= busy.DB_MAX_OUTPUT_PORT_TYPE
 data_bus_out <= dffes:data_bus_out_ff.q
-crc_enable <= crc_enable.DB_MAX_OUTPUT_PORT_TYPE
-test_sm[0] <= test_sm[0].DB_MAX_OUTPUT_PORT_TYPE
-test_sm[1] <= test_sm[1].DB_MAX_OUTPUT_PORT_TYPE
-test_sm[2] <= test_sm[2].DB_MAX_OUTPUT_PORT_TYPE
+test_async_load <= dffes:load_parallel_FF.q
+test_loading <= spi_shift:shift.loading
+test_state[0] <= test_state[0].DB_MAX_OUTPUT_PORT_TYPE
+test_state[1] <= test_state[1].DB_MAX_OUTPUT_PORT_TYPE
+test_state[2] <= test_state[2].DB_MAX_OUTPUT_PORT_TYPE
+test_state[3] <= test_state[3].DB_MAX_OUTPUT_PORT_TYPE
+test_data_shift[0] <= spi_shift:shift.test_data_shift[0]
+test_data_shift[1] <= spi_shift:shift.test_data_shift[1]
+test_data_shift[2] <= spi_shift:shift.test_data_shift[2]
+test_data_shift[3] <= spi_shift:shift.test_data_shift[3]
+test_data_shift[4] <= spi_shift:shift.test_data_shift[4]
+test_data_shift[5] <= spi_shift:shift.test_data_shift[5]
+test_data_shift[6] <= spi_shift:shift.test_data_shift[6]
+test_data_shift[7] <= spi_shift:shift.test_data_shift[7]
 
 
-|acquisition_module|acquisition_store:storer|dffes:cs_n_ff
+|rw_data_module|spi_shift:shift
+clk => init_control.IN0
+clk => data_shift[7].CLK
+clk => data_shift[6].CLK
+clk => data_shift[5].CLK
+clk => data_shift[4].CLK
+clk => data_shift[3].CLK
+clk => data_shift[2].CLK
+clk => data_shift[1].CLK
+clk => data_shift[0].CLK
+clk => control_shift[7].CLK
+clk => control_shift[6].CLK
+clk => control_shift[5].CLK
+clk => control_shift[4].CLK
+clk => control_shift[3].CLK
+clk => control_shift[2].CLK
+clk => control_shift[1].CLK
+clk => control_shift[0].CLK
+clk => parallel_ffs[7].CLK
+clk => parallel_ffs[6].CLK
+clk => parallel_ffs[5].CLK
+clk => parallel_ffs[4].CLK
+clk => parallel_ffs[3].CLK
+clk => parallel_ffs[2].CLK
+clk => parallel_ffs[1].CLK
+clk => parallel_ffs[0].CLK
+async_load => _.IN0
+async_load => _.IN0
+async_load => _.IN0
+async_load => _.IN0
+async_load => _.IN0
+async_load => _.IN0
+async_load => _.IN0
+async_load => _.IN0
+async_load => _.IN0
+async_load => _.IN0
+async_load => _.IN0
+async_load => _.IN0
+async_load => _.IN0
+async_load => _.IN0
+async_load => _.IN0
+async_load => _.IN0
+async_load => control_shift[7].IN0
+async_load => init_control.IN0
+parallel_in[0] => _.IN0
+parallel_in[0] => _.IN1
+parallel_in[0] => data_shift[0].ADATA
+parallel_in[1] => _.IN0
+parallel_in[1] => _.IN1
+parallel_in[1] => data_shift[1].ADATA
+parallel_in[2] => _.IN0
+parallel_in[2] => _.IN1
+parallel_in[2] => data_shift[2].ADATA
+parallel_in[3] => _.IN0
+parallel_in[3] => _.IN1
+parallel_in[3] => data_shift[3].ADATA
+parallel_in[4] => _.IN0
+parallel_in[4] => _.IN1
+parallel_in[4] => data_shift[4].ADATA
+parallel_in[5] => _.IN0
+parallel_in[5] => _.IN1
+parallel_in[5] => data_shift[5].ADATA
+parallel_in[6] => _.IN0
+parallel_in[6] => _.IN1
+parallel_in[6] => data_shift[6].ADATA
+parallel_in[7] => _.IN0
+parallel_in[7] => _.IN1
+parallel_in[7] => data_shift[7].ADATA
+MOSI => data_shift[0].DATAIN
+MOSI => parallel_ffs[0].DATAIN
+parallel_out[0] <= parallel_ffs[0].DB_MAX_OUTPUT_PORT_TYPE
+parallel_out[1] <= parallel_ffs[1].DB_MAX_OUTPUT_PORT_TYPE
+parallel_out[2] <= parallel_ffs[2].DB_MAX_OUTPUT_PORT_TYPE
+parallel_out[3] <= parallel_ffs[3].DB_MAX_OUTPUT_PORT_TYPE
+parallel_out[4] <= parallel_ffs[4].DB_MAX_OUTPUT_PORT_TYPE
+parallel_out[5] <= parallel_ffs[5].DB_MAX_OUTPUT_PORT_TYPE
+parallel_out[6] <= parallel_ffs[6].DB_MAX_OUTPUT_PORT_TYPE
+parallel_out[7] <= parallel_ffs[7].DB_MAX_OUTPUT_PORT_TYPE
+MISO <= data_shift[7].DB_MAX_OUTPUT_PORT_TYPE
+loading <= control_shift[7].DB_MAX_OUTPUT_PORT_TYPE
+test_data_shift[0] <= data_shift[0].DB_MAX_OUTPUT_PORT_TYPE
+test_data_shift[1] <= data_shift[1].DB_MAX_OUTPUT_PORT_TYPE
+test_data_shift[2] <= data_shift[2].DB_MAX_OUTPUT_PORT_TYPE
+test_data_shift[3] <= data_shift[3].DB_MAX_OUTPUT_PORT_TYPE
+test_data_shift[4] <= data_shift[4].DB_MAX_OUTPUT_PORT_TYPE
+test_data_shift[5] <= data_shift[5].DB_MAX_OUTPUT_PORT_TYPE
+test_data_shift[6] <= data_shift[6].DB_MAX_OUTPUT_PORT_TYPE
+test_data_shift[7] <= data_shift[7].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|rw_data_module|dffes:oe_n_FF
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1485,7 +170,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|acquisition_module|acquisition_store:storer|dffes:we_n_ff
+|rw_data_module|dffes:we_n_FF
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1496,7 +181,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|acquisition_module|acquisition_store:storer|dffes:data_bus_out_ff
+|rw_data_module|dffes:cs_n_FF
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1507,49 +192,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|acquisition_module|acquisition_store:storer|counter:channel_counter
-clk => ffs[3].CLK
-clk => ffs[2].CLK
-clk => ffs[1].CLK
-clk => ffs[0].CLK
-sreset => _.IN1
-clr => _.IN0
-inc => _.IN1
-inc => _.IN0
-o[0] <= ffs[0].DB_MAX_OUTPUT_PORT_TYPE
-o[1] <= ffs[1].DB_MAX_OUTPUT_PORT_TYPE
-o[2] <= ffs[2].DB_MAX_OUTPUT_PORT_TYPE
-o[3] <= ffs[3].DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_store_crc:storer_crc
-clk => dffes:cs_n_ff.clk
-clk => dffes:we_n_ff.clk
-clk => dffes:data_bus_out_ff.clk
-clk => dffes:msb_ff.clk
-clk => sm.IN1
-sreset => dffes:cs_n_ff.spre
-sreset => dffes:we_n_ff.spre
-sreset => dffes:data_bus_out_ff.sclr
-sreset => dffes:msb_ff.sclr
-sreset => sm.IN1
-store_crc => _.IN1
-store_crc => _.IN0
-store_crc => _.IN1
-store_crc => _.IN0
-we_n <= dffes:we_n_ff.q
-cs_n <= dffes:cs_n_ff.q
-addr_inc <= addr_inc.DB_MAX_OUTPUT_PORT_TYPE
-store_crc_ok <= store_crc_ok.DB_MAX_OUTPUT_PORT_TYPE
-msb <= dffes:msb_ff.q
-data_bus_out <= dffes:data_bus_out_ff.q
-test_sm[0] <= test_sm[0].DB_MAX_OUTPUT_PORT_TYPE
-test_sm[1] <= test_sm[1].DB_MAX_OUTPUT_PORT_TYPE
-test_sm[2] <= test_sm[2].DB_MAX_OUTPUT_PORT_TYPE
-test_sm[3] <= test_sm[3].DB_MAX_OUTPUT_PORT_TYPE
-
-
-|acquisition_module|acquisition_store_crc:storer_crc|dffes:cs_n_ff
+|rw_data_module|dffes:load_parallel_FF
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1560,7 +203,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|acquisition_module|acquisition_store_crc:storer_crc|dffes:we_n_ff
+|rw_data_module|dffes:addr_inc_FF
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1571,7 +214,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|acquisition_module|acquisition_store_crc:storer_crc|dffes:data_bus_out_ff
+|rw_data_module|dffes:busy_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1582,7 +225,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|acquisition_module|acquisition_store_crc:storer_crc|dffes:msb_ff
+|rw_data_module|dffes:data_bus_out_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -1593,118 +236,25 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|acquisition_module|crc16:crc
-data_in[0] => lfsr_c.IN1
-data_in[0] => lfsr_c.IN1
-data_in[0] => lfsr_c.IN1
-data_in[1] => lfsr_c.IN1
-data_in[1] => lfsr_c.IN1
-data_in[1] => lfsr_c.IN1
-data_in[2] => lfsr_c.IN1
-data_in[2] => lfsr_c.IN1
-data_in[2] => lfsr_c.IN1
-data_in[3] => lfsr_c.IN1
-data_in[3] => lfsr_c.IN1
-data_in[3] => lfsr_c.IN1
-data_in[4] => lfsr_c[0].IN1
-data_in[4] => lfsr_c[4].IN1
-data_in[4] => lfsr_c.IN1
-data_in[4] => lfsr_c[9].IN1
-data_in[4] => lfsr_c.IN1
-data_in[5] => lfsr_c[1].IN1
-data_in[5] => lfsr_c[5].IN1
-data_in[5] => lfsr_c.IN1
-data_in[5] => lfsr_c[10].IN1
-data_in[5] => lfsr_c[13].IN1
-data_in[6] => lfsr_c[2].IN1
-data_in[6] => lfsr_c[6].IN1
-data_in[6] => lfsr_c.IN1
-data_in[6] => lfsr_c[11].IN1
-data_in[6] => lfsr_c[14].IN1
-data_in[7] => lfsr_c[3].IN1
-data_in[7] => lfsr_c[7].IN1
-data_in[7] => lfsr_c[8].IN1
-data_in[7] => lfsr_c[12].IN1
-data_in[7] => lfsr_c[15].IN1
-crc_en => lfsr_q[0].ENA
-crc_en => lfsr_q[15].ENA
-crc_en => lfsr_q[14].ENA
-crc_en => lfsr_q[13].ENA
-crc_en => lfsr_q[12].ENA
-crc_en => lfsr_q[11].ENA
-crc_en => lfsr_q[10].ENA
-crc_en => lfsr_q[9].ENA
-crc_en => lfsr_q[8].ENA
-crc_en => lfsr_q[7].ENA
-crc_en => lfsr_q[6].ENA
-crc_en => lfsr_q[5].ENA
-crc_en => lfsr_q[4].ENA
-crc_en => lfsr_q[3].ENA
-crc_en => lfsr_q[2].ENA
-crc_en => lfsr_q[1].ENA
-crc_out[0] <= lfsr_q[0].DB_MAX_OUTPUT_PORT_TYPE
-crc_out[1] <= lfsr_q[1].DB_MAX_OUTPUT_PORT_TYPE
-crc_out[2] <= lfsr_q[2].DB_MAX_OUTPUT_PORT_TYPE
-crc_out[3] <= lfsr_q[3].DB_MAX_OUTPUT_PORT_TYPE
-crc_out[4] <= lfsr_q[4].DB_MAX_OUTPUT_PORT_TYPE
-crc_out[5] <= lfsr_q[5].DB_MAX_OUTPUT_PORT_TYPE
-crc_out[6] <= lfsr_q[6].DB_MAX_OUTPUT_PORT_TYPE
-crc_out[7] <= lfsr_q[7].DB_MAX_OUTPUT_PORT_TYPE
-crc_out[8] <= lfsr_q[8].DB_MAX_OUTPUT_PORT_TYPE
-crc_out[9] <= lfsr_q[9].DB_MAX_OUTPUT_PORT_TYPE
-crc_out[10] <= lfsr_q[10].DB_MAX_OUTPUT_PORT_TYPE
-crc_out[11] <= lfsr_q[11].DB_MAX_OUTPUT_PORT_TYPE
-crc_out[12] <= lfsr_q[12].DB_MAX_OUTPUT_PORT_TYPE
-crc_out[13] <= lfsr_q[13].DB_MAX_OUTPUT_PORT_TYPE
-crc_out[14] <= lfsr_q[14].DB_MAX_OUTPUT_PORT_TYPE
-crc_out[15] <= lfsr_q[15].DB_MAX_OUTPUT_PORT_TYPE
-crc_out_byte[0] <= byte_out.DB_MAX_OUTPUT_PORT_TYPE
-crc_out_byte[1] <= byte_out.DB_MAX_OUTPUT_PORT_TYPE
-crc_out_byte[2] <= byte_out.DB_MAX_OUTPUT_PORT_TYPE
-crc_out_byte[3] <= byte_out.DB_MAX_OUTPUT_PORT_TYPE
-crc_out_byte[4] <= byte_out.DB_MAX_OUTPUT_PORT_TYPE
-crc_out_byte[5] <= byte_out.DB_MAX_OUTPUT_PORT_TYPE
-crc_out_byte[6] <= byte_out.DB_MAX_OUTPUT_PORT_TYPE
-crc_out_byte[7] <= byte_out.DB_MAX_OUTPUT_PORT_TYPE
-rst => lfsr_q[0].PRESET
-rst => lfsr_q[1].PRESET
-rst => lfsr_q[2].PRESET
-rst => lfsr_q[3].PRESET
-rst => lfsr_q[4].PRESET
-rst => lfsr_q[5].PRESET
-rst => lfsr_q[6].PRESET
-rst => lfsr_q[7].PRESET
-rst => lfsr_q[8].PRESET
-rst => lfsr_q[9].PRESET
-rst => lfsr_q[10].PRESET
-rst => lfsr_q[11].PRESET
-rst => lfsr_q[12].PRESET
-rst => lfsr_q[13].PRESET
-rst => lfsr_q[14].PRESET
-rst => lfsr_q[15].PRESET
-clk => lfsr_q[0].CLK
-clk => lfsr_q[1].CLK
-clk => lfsr_q[2].CLK
-clk => lfsr_q[3].CLK
-clk => lfsr_q[4].CLK
-clk => lfsr_q[5].CLK
-clk => lfsr_q[6].CLK
-clk => lfsr_q[7].CLK
-clk => lfsr_q[8].CLK
-clk => lfsr_q[9].CLK
-clk => lfsr_q[10].CLK
-clk => lfsr_q[11].CLK
-clk => lfsr_q[12].CLK
-clk => lfsr_q[13].CLK
-clk => lfsr_q[14].CLK
-clk => lfsr_q[15].CLK
-msb => byte_out.OUTPUTSELECT
-msb => byte_out.OUTPUTSELECT
-msb => byte_out.OUTPUTSELECT
-msb => byte_out.OUTPUTSELECT
-msb => byte_out.OUTPUTSELECT
-msb => byte_out.OUTPUTSELECT
-msb => byte_out.OUTPUTSELECT
-msb => byte_out.OUTPUTSELECT
+|rw_data_module|dffes:SCLK_ff
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|rw_data_module|dffes:MOSI_ff
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 

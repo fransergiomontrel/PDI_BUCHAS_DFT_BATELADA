@@ -13,6 +13,7 @@ subdesign spi_shift(
 	loading: output;
 	
 --	test_shift[N_BITS-1..0]: output;
+	test_data_shift[N_BITS-1..0]: output;
 )
 variable
 	data_shift[N_BITS-1..0], control_shift[N_BITS-1..0], init_control: dffeas;
@@ -34,9 +35,9 @@ begin
 	data_shift[].asdata = parallel_in[];
 	data_shift[].sload = control_shift[7];
 
-	control_shift[].clk = !clk;
+	control_shift[].clk = clk;
 	init_control.clk = !clk;
-	data_shift[].clk = !clk;
+	data_shift[].clk = clk;
 	
 	MISO = data_shift[7].q;
 	
@@ -48,6 +49,8 @@ begin
 	parallel_ffs[0].d = MOSI;
 	
 	parallel_out[] = parallel_ffs[].q;
+	
+	test_data_shift[] = data_shift[].q;
 	
 --	test_shift[] = control_shift[];
 	

@@ -1,5 +1,5 @@
 Timing Analyzer report for sensor_buchas
-Fri Apr 23 13:23:26 2021
+Fri Apr 23 17:07:31 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -19,21 +19,17 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
  11. Minimum Pulse Width Summary
  12. Setup: 'clk'
  13. Hold: 'clk'
- 14. Recovery: 'clk'
- 15. Removal: 'clk'
- 16. Setup Transfers
- 17. Hold Transfers
- 18. Recovery Transfers
- 19. Removal Transfers
- 20. Report TCCS
- 21. Report RSKM
- 22. Unconstrained Paths Summary
- 23. Clock Status Summary
- 24. Unconstrained Input Ports
- 25. Unconstrained Output Ports
- 26. Unconstrained Input Ports
- 27. Unconstrained Output Ports
- 28. Timing Analyzer Messages
+ 14. Setup Transfers
+ 15. Hold Transfers
+ 16. Report TCCS
+ 17. Report RSKM
+ 18. Unconstrained Paths Summary
+ 19. Clock Status Summary
+ 20. Unconstrained Input Ports
+ 21. Unconstrained Output Ports
+ 22. Unconstrained Input Ports
+ 23. Unconstrained Output Ports
+ 24. Timing Analyzer Messages
 
 
 
@@ -76,14 +72,15 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 2           ;
-; Maximum allowed            ; 2           ;
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
+; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -92,7 +89,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+--------+--------------------------+
 ; SDC File Path     ; Status ; Read at                  ;
 +-------------------+--------+--------------------------+
-; sensor_buchas.sdc ; OK     ; Fri Apr 23 13:23:25 2021 ;
+; sensor_buchas.sdc ; OK     ; Fri Apr 23 17:07:31 2021 ;
 +-------------------+--------+--------------------------+
 
 
@@ -105,23 +102,23 @@ https://fpgasoftware.intel.com/eula.
 +------------+------+--------+-----------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
 
 
-+-------------------------------------------------+
-; Fmax Summary                                    ;
-+-----------+-----------------+------------+------+
-; Fmax      ; Restricted Fmax ; Clock Name ; Note ;
-+-----------+-----------------+------------+------+
-; 86.26 MHz ; 86.26 MHz       ; clk        ;      ;
-+-----------+-----------------+------------+------+
++--------------------------------------------------+
+; Fmax Summary                                     ;
++------------+-----------------+------------+------+
+; Fmax       ; Restricted Fmax ; Clock Name ; Note ;
++------------+-----------------+------------+------+
+; 143.35 MHz ; 143.35 MHz      ; clk        ;      ;
++------------+-----------------+------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
 
-+--------------------------------+
-; Setup Summary                  ;
-+-------+--------+---------------+
-; Clock ; Slack  ; End Point TNS ;
-+-------+--------+---------------+
-; clk   ; -1.593 ; -14.015       ;
-+-------+--------+---------------+
++-------------------------------+
+; Setup Summary                 ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; clk   ; 3.024 ; 0.000         ;
++-------+-------+---------------+
 
 
 +-------------------------------+
@@ -129,26 +126,20 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------+-------+---------------+
 ; Clock ; Slack ; End Point TNS ;
 +-------+-------+---------------+
-; clk   ; 1.377 ; 0.000         ;
+; clk   ; 1.396 ; 0.000         ;
 +-------+-------+---------------+
 
 
-+-------------------------------+
-; Recovery Summary              ;
-+-------+-------+---------------+
-; Clock ; Slack ; End Point TNS ;
-+-------+-------+---------------+
-; clk   ; 3.257 ; 0.000         ;
-+-------+-------+---------------+
+--------------------
+; Recovery Summary ;
+--------------------
+No paths to report.
 
 
-+-------------------------------+
-; Removal Summary               ;
-+-------+-------+---------------+
-; Clock ; Slack ; End Point TNS ;
-+-------+-------+---------------+
-; clk   ; 5.582 ; 0.000         ;
-+-------+-------+---------------+
+-------------------
+; Removal Summary ;
+-------------------
+No paths to report.
 
 
 +-------------------------------+
@@ -160,300 +151,106 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------+-------+---------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Setup: 'clk'                                                                                                                                                                                           ;
-+--------+---------------------------------------------------------------+---------------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; Slack  ; From Node                                                     ; To Node                                                 ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+--------+---------------------------------------------------------------+---------------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; -1.593 ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[7]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 11.260     ;
-; -1.437 ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[5]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 11.104     ;
-; -1.437 ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[12]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 11.104     ;
-; -1.411 ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[7]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 11.078     ;
-; -1.310 ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; crc16:crc|lfsr_q[7]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.977     ;
-; -1.294 ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[7]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.961     ;
-; -1.257 ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[8]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.924     ;
-; -1.256 ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[15]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 10.923     ;
-; -1.255 ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[5]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.922     ;
-; -1.255 ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[12]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 10.922     ;
-; -1.195 ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[14]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 10.862     ;
-; -1.154 ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; crc16:crc|lfsr_q[5]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.821     ;
-; -1.154 ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; crc16:crc|lfsr_q[12]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 10.821     ;
-; -1.138 ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[5]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.805     ;
-; -1.138 ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[12]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 10.805     ;
-; -1.119 ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[8]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.786     ;
-; -1.118 ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[15]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 10.785     ;
-; -1.013 ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[14]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 10.680     ;
-; -0.999 ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[1]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.666     ;
-; -0.994 ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[13]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 10.661     ;
-; -0.986 ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[0]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.653     ;
-; -0.912 ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; crc16:crc|lfsr_q[14]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 10.579     ;
-; -0.899 ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[6]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.566     ;
-; -0.896 ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[14]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 10.563     ;
-; -0.848 ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[1]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.515     ;
-; -0.843 ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[13]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 10.510     ;
-; -0.804 ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[0]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.471     ;
-; -0.775 ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[2]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.442     ;
-; -0.717 ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[8]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.384     ;
-; -0.717 ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[6]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.384     ;
-; -0.716 ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[15]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 10.383     ;
-; -0.703 ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; crc16:crc|lfsr_q[0]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.370     ;
-; -0.687 ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[0]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.354     ;
-; -0.616 ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; crc16:crc|lfsr_q[6]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.283     ;
-; -0.600 ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[6]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.267     ;
-; -0.593 ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[2]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.260     ;
-; -0.586 ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[9]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.253     ;
-; -0.564 ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[3]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.231     ;
-; -0.492 ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; crc16:crc|lfsr_q[2]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.159     ;
-; -0.476 ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[2]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.143     ;
-; -0.455 ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[1]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.122     ;
-; -0.450 ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[13]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 10.117     ;
-; -0.426 ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[3]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.093     ;
-; -0.404 ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[9]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 10.071     ;
-; -0.303 ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; crc16:crc|lfsr_q[9]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 9.970      ;
-; -0.287 ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[9]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 9.954      ;
-; -0.037 ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[11]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 9.704      ;
-; -0.024 ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[3]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 9.691      ;
-; 0.007  ; acquisition_serializer:serializer|dffes:data_buffer[2][5]|ff  ; crc16:crc|lfsr_q[1]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 9.660      ;
-; 0.012  ; acquisition_serializer:serializer|dffes:data_buffer[2][5]|ff  ; crc16:crc|lfsr_q[13]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 9.655      ;
-; 0.061  ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[4]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 9.606      ;
-; 0.145  ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; crc16:crc|lfsr_q[1]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 9.522      ;
-; 0.145  ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[11]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 9.522      ;
-; 0.150  ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; crc16:crc|lfsr_q[13]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 9.517      ;
-; 0.242  ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; crc16:crc|lfsr_q[8]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 9.425      ;
-; 0.243  ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; crc16:crc|lfsr_q[15]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 9.424      ;
-; 0.243  ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[4]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 9.424      ;
-; 0.246  ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; crc16:crc|lfsr_q[11]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 9.421      ;
-; 0.262  ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[11]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 9.405      ;
-; 0.340  ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; acquisition_store:storer|counter:channel_counter|ffs[3] ; clk          ; clk         ; 10.000       ; 0.000      ; 9.327      ;
-; 0.344  ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; crc16:crc|lfsr_q[4]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 9.323      ;
-; 0.360  ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[4]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 9.307      ;
-; 0.437  ; acquisition_serializer:serializer|dffes:data_buffer[2][5]|ff  ; crc16:crc|lfsr_q[6]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 9.230      ;
-; 0.443  ; acquisition_serializer:serializer|dffes:data_buffer[2][5]|ff  ; crc16:crc|lfsr_q[5]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 9.224      ;
-; 0.491  ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; crc16:crc|lfsr_q[10]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 9.176      ;
-; 0.642  ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; crc16:crc|lfsr_q[10]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 9.025      ;
-; 0.644  ; acquisition_serializer:serializer|dffes:data_buffer[1][6]|ff  ; crc16:crc|lfsr_q[7]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 9.023      ;
-; 0.829  ; acquisition_serializer:serializer|dffes:data_buffer[1][4]|ff  ; crc16:crc|lfsr_q[5]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 8.838      ;
-; 0.829  ; acquisition_serializer:serializer|dffes:data_buffer[1][4]|ff  ; crc16:crc|lfsr_q[12]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 8.838      ;
-; 0.864  ; acquisition_serializer:serializer|dffes:data_buffer[1][3]|ff  ; crc16:crc|lfsr_q[8]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 8.803      ;
-; 0.865  ; acquisition_serializer:serializer|dffes:data_buffer[1][3]|ff  ; crc16:crc|lfsr_q[15]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 8.802      ;
-; 0.915  ; acquisition_serializer:serializer|dffes:data_buffer[0][4]|ff  ; crc16:crc|lfsr_q[5]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 8.752      ;
-; 0.915  ; acquisition_serializer:serializer|dffes:data_buffer[0][4]|ff  ; crc16:crc|lfsr_q[12]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 8.752      ;
-; 0.932  ; acquisition_serializer:serializer|dffes:data_buffer[2][6]|ff  ; crc16:crc|lfsr_q[7]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 8.735      ;
-; 0.935  ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; crc16:crc|lfsr_q[3]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 8.732      ;
-; 0.994  ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; acquisition_ctrl:ctrl|WAITING_END_OF_CYCLE              ; clk          ; clk         ; 10.000       ; 0.000      ; 8.673      ;
-; 0.995  ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; acquisition_ctrl:ctrl|counter:samples_counter|ffs[0]    ; clk          ; clk         ; 10.000       ; 0.000      ; 8.672      ;
-; 1.028  ; acquisition_serializer:serializer|dffes:data_buffer[2][7]|ff  ; crc16:crc|lfsr_q[8]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 8.639      ;
-; 1.029  ; acquisition_serializer:serializer|dffes:data_buffer[2][7]|ff  ; crc16:crc|lfsr_q[15]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 8.638      ;
-; 1.031  ; acquisition_store:storer|counter:channel_counter|ffs[3]       ; acquisition_store:storer|counter:channel_counter|ffs[3] ; clk          ; clk         ; 10.000       ; 0.000      ; 8.636      ;
-; 1.035  ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; crc16:crc|lfsr_q[10]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 8.632      ;
-; 1.040  ; acquisition_serializer:serializer|dffes:data_buffer[1][5]|ff  ; crc16:crc|lfsr_q[1]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 8.627      ;
-; 1.042  ; acquisition_serializer:serializer|dffes:data_buffer[1][6]|ff  ; crc16:crc|lfsr_q[14]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 8.625      ;
-; 1.045  ; acquisition_serializer:serializer|dffes:data_buffer[1][5]|ff  ; crc16:crc|lfsr_q[13]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 8.622      ;
-; 1.056  ; acquisition_serializer:serializer|dffes:data_buffer[0][5]|ff  ; crc16:crc|lfsr_q[1]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 8.611      ;
-; 1.061  ; acquisition_serializer:serializer|dffes:data_buffer[0][5]|ff  ; crc16:crc|lfsr_q[13]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 8.606      ;
-; 1.116  ; acquisition_serializer:serializer|dffes:data_buffer[4][14]|ff ; crc16:crc|lfsr_q[7]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 8.551      ;
-; 1.150  ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; acquisition_store:storer|dffes:cs_n_ff|ff               ; clk          ; clk         ; 10.000       ; 0.000      ; 8.517      ;
-; 1.161  ; acquisition_serializer:serializer|dffes:data_buffer[1][7]|ff  ; crc16:crc|lfsr_q[8]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 8.506      ;
-; 1.162  ; acquisition_serializer:serializer|dffes:data_buffer[1][7]|ff  ; crc16:crc|lfsr_q[15]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 8.505      ;
-; 1.171  ; acquisition_store:storer|counter:channel_counter|ffs[2]       ; acquisition_store:storer|counter:channel_counter|ffs[3] ; clk          ; clk         ; 10.000       ; 0.000      ; 8.496      ;
-; 1.272  ; acquisition_serializer:serializer|dffes:data_buffer[4][3]|ff  ; crc16:crc|lfsr_q[8]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 8.395      ;
-; 1.273  ; acquisition_serializer:serializer|dffes:data_buffer[4][3]|ff  ; crc16:crc|lfsr_q[15]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 8.394      ;
-; 1.280  ; acquisition_serializer:serializer|dffes:data_buffer[1][4]|ff  ; crc16:crc|lfsr_q[0]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 8.387      ;
-; 1.292  ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; acquisition_ctrl:ctrl|counter:samples_counter|ffs[1]    ; clk          ; clk         ; 10.000       ; 0.000      ; 8.375      ;
-; 1.319  ; acquisition_serializer:serializer|dffes:data_buffer[2][7]|ff  ; crc16:crc|lfsr_q[12]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 8.348      ;
-; 1.330  ; acquisition_serializer:serializer|dffes:data_buffer[2][6]|ff  ; crc16:crc|lfsr_q[14]                                    ; clk          ; clk         ; 10.000       ; 0.000      ; 8.337      ;
-; 1.338  ; acquisition_serializer:serializer|dffes:data_buffer[1][6]|ff  ; crc16:crc|lfsr_q[6]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 8.329      ;
-; 1.366  ; acquisition_serializer:serializer|dffes:data_buffer[0][6]|ff  ; crc16:crc|lfsr_q[7]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 8.301      ;
-; 1.366  ; acquisition_serializer:serializer|dffes:data_buffer[0][4]|ff  ; crc16:crc|lfsr_q[0]                                     ; clk          ; clk         ; 10.000       ; 0.000      ; 8.301      ;
-+--------+---------------------------------------------------------------+---------------------------------------------------------+--------------+-------------+--------------+------------+------------+
++-------------------------------------------------------------------------------------------------------------------------------------+
+; Setup: 'clk'                                                                                                                        ;
++-------+---------------------------+---------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                 ; To Node                   ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+---------------------------+---------------------------+--------------+-------------+--------------+------------+------------+
+; 3.024 ; dffes:load_parallel_FF|ff ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 10.000       ; 0.000      ; 6.643      ;
+; 3.425 ; wait_mode                 ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 10.000       ; 0.000      ; 6.242      ;
+; 3.982 ; init_buffers1             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 5.685      ;
+; 4.095 ; init_buffers4             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 5.572      ;
+; 4.619 ; init_buffers2             ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 10.000       ; 0.000      ; 5.048      ;
+; 5.013 ; wait_mode                 ; dffes:cs_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 4.654      ;
+; 5.053 ; wr5                       ; dffes:data_bus_out_ff|ff  ; clk          ; clk         ; 10.000       ; 0.000      ; 4.614      ;
+; 5.070 ; init_buffers2             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 4.597      ;
+; 5.140 ; wait_mode                 ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 4.527      ;
+; 5.204 ; wait_mode                 ; init_buffers1             ; clk          ; clk         ; 10.000       ; 0.000      ; 4.463      ;
+; 5.516 ; wr5                       ; dffes:addr_inc_FF|ff      ; clk          ; clk         ; 10.000       ; 0.000      ; 4.151      ;
+; 5.670 ; wr6                       ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.997      ;
+; 5.734 ; wr6                       ; init_buffers1             ; clk          ; clk         ; 10.000       ; 0.000      ; 3.933      ;
+; 5.771 ; init_buffers2             ; init_buffers3             ; clk          ; clk         ; 10.000       ; 0.000      ; 3.896      ;
+; 5.781 ; wait_loading              ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.886      ;
+; 5.799 ; wr4                       ; dffes:data_bus_out_ff|ff  ; clk          ; clk         ; 10.000       ; 0.000      ; 3.868      ;
+; 5.814 ; wait_loading              ; dffes:cs_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.853      ;
+; 5.885 ; wait_loading_n            ; dffes:cs_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.782      ;
+; 5.964 ; wait_loading_n            ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.703      ;
+; 5.985 ; wait_loading_n            ; dffes:busy_ff|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.682      ;
+; 5.995 ; wait_loading_n            ; wr1                       ; clk          ; clk         ; 10.000       ; 0.000      ; 3.672      ;
+; 5.998 ; wait_loading_n            ; wait_mode                 ; clk          ; clk         ; 10.000       ; 0.000      ; 3.669      ;
+; 6.046 ; init_buffers4             ; wait_loading              ; clk          ; clk         ; 10.000       ; 0.000      ; 3.621      ;
+; 6.047 ; wr2                       ; dffes:data_bus_out_ff|ff  ; clk          ; clk         ; 10.000       ; 0.000      ; 3.620      ;
+; 6.135 ; init_buffers3             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.532      ;
+; 6.251 ; wait_loading              ; dffes:busy_ff|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.416      ;
+; 6.263 ; wr4                       ; dffes:we_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.404      ;
+; 6.464 ; wait_loading              ; wait_mode                 ; clk          ; clk         ; 10.000       ; 0.000      ; 3.203      ;
+; 6.510 ; wr3                       ; dffes:data_bus_out_ff|ff  ; clk          ; clk         ; 10.000       ; 0.000      ; 3.157      ;
+; 6.569 ; wait_mode                 ; dffes:busy_ff|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.098      ;
+; 6.575 ; wr3                       ; dffes:we_n_FF|ff          ; clk          ; clk         ; 10.000       ; 0.000      ; 3.092      ;
+; 6.854 ; init_buffers3             ; init_buffers4             ; clk          ; clk         ; 10.000       ; 0.000      ; 2.813      ;
+; 6.936 ; init_buffers1             ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 10.000       ; 0.000      ; 2.731      ;
+; 6.949 ; wr1                       ; wr2                       ; clk          ; clk         ; 10.000       ; 0.000      ; 2.718      ;
+; 7.110 ; init_buffers1             ; init_buffers2             ; clk          ; clk         ; 10.000       ; 0.000      ; 2.557      ;
+; 7.205 ; wait_mode                 ; wait_mode                 ; clk          ; clk         ; 10.000       ; 0.000      ; 2.462      ;
+; 7.265 ; wait_loading              ; wait_loading_n            ; clk          ; clk         ; 10.000       ; 0.000      ; 2.402      ;
+; 7.281 ; wait_loading              ; wait_loading              ; clk          ; clk         ; 10.000       ; 0.000      ; 2.386      ;
+; 7.486 ; wait_loading_n            ; wait_loading_n            ; clk          ; clk         ; 10.000       ; 0.000      ; 2.181      ;
+; 7.583 ; wr5                       ; wr6                       ; clk          ; clk         ; 10.000       ; 0.000      ; 2.084      ;
+; 7.655 ; wr2                       ; wr3                       ; clk          ; clk         ; 10.000       ; 0.000      ; 2.012      ;
+; 8.039 ; wr3                       ; wr4                       ; clk          ; clk         ; 10.000       ; 0.000      ; 1.628      ;
+; 8.050 ; wr4                       ; wr5                       ; clk          ; clk         ; 10.000       ; 0.000      ; 1.617      ;
++-------+---------------------------+---------------------------+--------------+-------------+--------------+------------+------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Hold: 'clk'                                                                                                                                                                                                 ;
-+-------+---------------------------------------------------------------+---------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; Slack ; From Node                                                     ; To Node                                                       ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+-------+---------------------------------------------------------------+---------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; 1.377 ; acquisition_serializer:serializer|dffes:data_buffer[1][9]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[1][10]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 1.598      ;
-; 1.377 ; acquisition_store_crc:storer_crc|WE1_CS0_LSBb                 ; acquisition_store_crc:storer_crc|WE1_CS0_MSBa                 ; clk          ; clk         ; 0.000        ; 0.000      ; 1.598      ;
-; 1.381 ; acquisition_serializer:serializer|dffes:data_buffer[0][0]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[0][1]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.602      ;
-; 1.386 ; acquisition_serializer:serializer|dffes:data_buffer[1][6]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[1][7]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.607      ;
-; 1.388 ; acquisition_store_crc:storer_crc|WE0_CS0_LSBb                 ; acquisition_store_crc:storer_crc|WE1_CS0_LSBb                 ; clk          ; clk         ; 0.000        ; 0.000      ; 1.609      ;
-; 1.389 ; acquisition_serializer:serializer|dffes:data_buffer[0][8]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[0][9]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.610      ;
-; 1.389 ; acquisition_store_crc:storer_crc|WE0_CS0_LSBa                 ; acquisition_store_crc:storer_crc|WE0_CS0_LSBb                 ; clk          ; clk         ; 0.000        ; 0.000      ; 1.610      ;
-; 1.390 ; acquisition_serializer:serializer|dffes:data_buffer[1][2]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[1][3]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.611      ;
-; 1.391 ; acquisition_serializer:serializer|dffes:data_buffer[2][3]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[2][4]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.612      ;
-; 1.392 ; acquisition_serializer:serializer|dffes:data_buffer[0][10]|ff ; acquisition_serializer:serializer|dffes:data_buffer[0][11]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 1.613      ;
-; 1.392 ; acquisition_serializer:serializer|dffes:data_buffer[1][5]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[1][6]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.613      ;
-; 1.393 ; acquisition_serializer:serializer|dffes:data_buffer[0][14]|ff ; acquisition_serializer:serializer|dffes:data_buffer[0][15]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 1.614      ;
-; 1.399 ; acquisition_serializer:serializer|dffes:data_buffer[1][8]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[1][9]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.620      ;
-; 1.399 ; acquisition_serializer:serializer|dffes:data_buffer[0][2]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[0][3]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.620      ;
-; 1.399 ; acquisition_serializer:serializer|dffes:data_buffer[0][3]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[0][4]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.620      ;
-; 1.402 ; acquisition_serializer:serializer|dffes:data_buffer[0][4]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[0][5]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.623      ;
-; 1.403 ; acquisition_serializer:serializer|dffes:data_buffer[1][14]|ff ; acquisition_serializer:serializer|dffes:data_buffer[1][15]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 1.624      ;
-; 1.640 ; acquisition_serializer:serializer|dffes:data_buffer[4][8]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[4][9]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.861      ;
-; 1.646 ; acquisition_serializer:serializer|dffes:data_buffer[2][4]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[2][5]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.867      ;
-; 1.652 ; acquisition_serializer:serializer|dffes:data_buffer[0][1]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[0][2]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.873      ;
-; 1.656 ; acquisition_serializer:serializer|dffes:data_buffer[0][5]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[0][6]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.877      ;
-; 1.660 ; acquisition_store_crc:storer_crc|WE1_CS0_MSBa                 ; acquisition_store_crc:storer_crc|WE0_CS0_MSBa                 ; clk          ; clk         ; 0.000        ; 0.000      ; 1.881      ;
-; 1.680 ; acquisition_ctrl:ctrl|AQUISITIONING                           ; acquisition_ctrl:ctrl|WAIT_STATE                              ; clk          ; clk         ; 0.000        ; 0.000      ; 1.901      ;
-; 1.684 ; acquisition_serializer:serializer|dffes:data_buffer[4][12]|ff ; acquisition_serializer:serializer|dffes:data_buffer[4][13]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 1.905      ;
-; 1.745 ; acquisition_ctrl:ctrl|WAITING_START_LOW                       ; acquisition_ctrl:ctrl|WAITING_START_HIGH                      ; clk          ; clk         ; 0.000        ; 0.000      ; 1.966      ;
-; 1.749 ; acquisition_serializer:serializer|dffes:data_buffer[1][11]|ff ; acquisition_serializer:serializer|dffes:data_buffer[1][12]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 1.970      ;
-; 1.787 ; acquisition_serializer:serializer|dffes:data_buffer[3][3]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[3][4]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.008      ;
-; 1.799 ; acquisition_serializer:serializer|dffes:data_buffer[1][1]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[1][2]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.020      ;
-; 1.804 ; acquisition_serializer:serializer|dffes:data_buffer[0][12]|ff ; acquisition_serializer:serializer|dffes:data_buffer[0][13]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 2.025      ;
-; 1.847 ; acquisition_serializer:serializer|dffes:data_buffer[1][7]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[1][8]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.068      ;
-; 1.860 ; acquisition_store:storer|CS1b                                 ; acquisition_store:storer|INC_CHANNEL                          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.081      ;
-; 1.901 ; acquisition_store_crc:storer_crc|WE0_CS0_MSBb                 ; acquisition_store_crc:storer_crc|dffes:msb_ff|ff              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.122      ;
-; 1.921 ; crc16:crc|lfsr_q[12]                                          ; crc16:crc|lfsr_q[4]                                           ; clk          ; clk         ; 0.000        ; 0.000      ; 2.142      ;
-; 1.935 ; acquisition_serializer:serializer|counter:count|ffs[0]        ; acquisition_serializer:serializer|counter:count|ffs[0]        ; clk          ; clk         ; 0.000        ; 0.000      ; 2.156      ;
-; 1.938 ; acquisition_store:storer|CS1a                                 ; acquisition_store:storer|CS0a                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 2.159      ;
-; 1.938 ; acquisition_store:storer|CS0a                                 ; acquisition_store:storer|CS0b                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 2.159      ;
-; 1.940 ; acquisition_store:storer|CS0a                                 ; acquisition_store:storer|dffes:data_bus_out_ff|ff             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.161      ;
-; 1.955 ; acquisition_ctrl:ctrl|counter:samples_counter|ffs[1]          ; acquisition_ctrl:ctrl|counter:samples_counter|ffs[1]          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.176      ;
-; 2.043 ; acquisition_store_crc:storer_crc|WE0_CS0_MSBb                 ; acquisition_store_crc:storer_crc|WE1_CS0_MSBb                 ; clk          ; clk         ; 0.000        ; 0.000      ; 2.264      ;
-; 2.061 ; acquisition_serializer:serializer|dffes:data_buffer[1][3]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[1][4]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.282      ;
-; 2.068 ; acquisition_serializer:serializer|dffes:data_buffer[0][6]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[0][7]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.289      ;
-; 2.107 ; acquisition_serializer:serializer|dffes:data_buffer[1][0]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[1][1]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.328      ;
-; 2.110 ; crc16:crc|lfsr_q[12]                                          ; crc16:crc|lfsr_q[9]                                           ; clk          ; clk         ; 0.000        ; 0.000      ; 2.331      ;
-; 2.117 ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[2]            ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[2]            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.338      ;
-; 2.117 ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[3]            ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[3]            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.338      ;
-; 2.118 ; crc16:crc|lfsr_q[4]                                           ; crc16:crc|lfsr_q[12]                                          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.339      ;
-; 2.127 ; acquisition_store_crc:storer_crc|WE1_CS0_MSBb                 ; acquisition_store_crc:storer_crc|WAIT_END                     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.348      ;
-; 2.127 ; acquisition_store_crc:storer_crc|WAIT_STORE_CRC               ; acquisition_store_crc:storer_crc|WAIT_STORE_CRC               ; clk          ; clk         ; 0.000        ; 0.000      ; 2.348      ;
-; 2.127 ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[8]            ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[8]            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.348      ;
-; 2.129 ; acquisition_store_crc:storer_crc|WAIT_STORE_CRC               ; acquisition_store_crc:storer_crc|dffes:cs_n_ff|ff             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.350      ;
-; 2.130 ; acquisition_store_crc:storer_crc|WE1_CS0_MSBb                 ; acquisition_store_crc:storer_crc|dffes:data_bus_out_ff|ff     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.351      ;
-; 2.133 ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[1]            ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[1]            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.354      ;
-; 2.145 ; acquisition_store:storer|WAIT_END                             ; acquisition_store:storer|WAIT_STORE                           ; clk          ; clk         ; 0.000        ; 0.000      ; 2.366      ;
-; 2.147 ; acquisition_store:storer|CS1a                                 ; acquisition_store:storer|dffes:data_bus_out_ff|ff             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.368      ;
-; 2.159 ; acquisition_ctrl:ctrl|SERIALIZING                             ; acquisition_ctrl:ctrl|SERIALIZING                             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.380      ;
-; 2.171 ; acquisition_ctrl:ctrl|SERIALIZING                             ; acquisition_ctrl:ctrl|dffes:serialize_ff|ff                   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.392      ;
-; 2.173 ; acquisition_ctrl:ctrl|SERIALIZING                             ; acquisition_ctrl:ctrl|STORING                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 2.394      ;
-; 2.181 ; acquisition_serializer:serializer|dffes:div2_clock|ff         ; acquisition_serializer:serializer|dffes:div2_clock|ff         ; clk          ; clk         ; 0.000        ; 0.000      ; 2.402      ;
-; 2.206 ; acquisition_ctrl:ctrl|WAITING_START_HIGH                      ; acquisition_ctrl:ctrl|WAITING_START_HIGH                      ; clk          ; clk         ; 0.000        ; 0.000      ; 2.427      ;
-; 2.209 ; acquisition_ctrl:ctrl|WAITING_START_LOW                       ; acquisition_ctrl:ctrl|WAITING_START_LOW                       ; clk          ; clk         ; 0.000        ; 0.000      ; 2.430      ;
-; 2.211 ; acquisition_ctrl:ctrl|STORING                                 ; acquisition_ctrl:ctrl|STORING                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 2.432      ;
-; 2.222 ; acquisition_ctrl:ctrl|counter:samples_counter|ffs[0]          ; acquisition_ctrl:ctrl|counter:samples_counter|ffs[0]          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.443      ;
-; 2.229 ; acquisition_ctrl:ctrl|counter:samples_counter|ffs[0]          ; acquisition_ctrl:ctrl|counter:samples_counter|ffs[1]          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.450      ;
-; 2.232 ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[4]            ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[4]            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.453      ;
-; 2.238 ; acquisition_ctrl:ctrl|dffes:store_ff|ff                       ; acquisition_store:storer|WAIT_STORE                           ; clk          ; clk         ; 0.000        ; 0.000      ; 2.459      ;
-; 2.241 ; acquisition_store:storer|CS0b                                 ; acquisition_store:storer|dffes:data_bus_out_ff|ff             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.462      ;
-; 2.242 ; crc16:crc|lfsr_q[13]                                          ; crc16:crc|lfsr_q[10]                                          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.463      ;
-; 2.249 ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[7]            ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[7]            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.470      ;
-; 2.252 ; dffes:start_ff|ff                                             ; acquisition_ctrl:ctrl|WAITING_START_HIGH                      ; clk          ; clk         ; 0.000        ; 0.000      ; 2.473      ;
-; 2.252 ; dffes:start_ff|ff                                             ; acquisition_ctrl:ctrl|WAITING_START_LOW                       ; clk          ; clk         ; 0.000        ; 0.000      ; 2.473      ;
-; 2.254 ; acquisition_ctrl:ctrl|STORING_CRC                             ; acquisition_ctrl:ctrl|STORING_CRC                             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.475      ;
-; 2.259 ; acquisition_ctrl:ctrl|STORING_CRC                             ; acquisition_ctrl:ctrl|dffes:busy_ff|ff                        ; clk          ; clk         ; 0.000        ; 0.000      ; 2.480      ;
-; 2.261 ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[5]            ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[5]            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.482      ;
-; 2.261 ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[6]            ; acquisition_ctrl:ctrl|counter:clock_counter|ffs[6]            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.482      ;
-; 2.264 ; acquisition_ctrl:ctrl|STORING_CRC                             ; acquisition_ctrl:ctrl|dffes:store_crc_ff|ff                   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.485      ;
-; 2.312 ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; clk          ; clk         ; 0.000        ; 0.000      ; 2.533      ;
-; 2.317 ; acquisition_store:storer|counter:channel_counter|ffs[0]       ; acquisition_store:storer|counter:channel_counter|ffs[1]       ; clk          ; clk         ; 0.000        ; 0.000      ; 2.538      ;
-; 2.338 ; acquisition_store:storer|INC_CHANNEL                          ; acquisition_store:storer|WAIT_END                             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.559      ;
-; 2.344 ; acquisition_store_crc:storer_crc|WAIT_END                     ; acquisition_store_crc:storer_crc|WAIT_END                     ; clk          ; clk         ; 0.000        ; 0.000      ; 2.565      ;
-; 2.354 ; crc16:crc|lfsr_q[5]                                           ; crc16:crc|lfsr_q[13]                                          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.575      ;
-; 2.376 ; acquisition_serializer:serializer|dffes:data_buffer[3][4]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[3][5]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.597      ;
-; 2.380 ; acquisition_serializer:serializer|dffes:data_buffer[3][13]|ff ; crc16:crc|lfsr_q[10]                                          ; clk          ; clk         ; 0.000        ; 0.000      ; 2.601      ;
-; 2.446 ; acquisition_serializer:serializer|dffes:data_buffer[1][12]|ff ; acquisition_serializer:serializer|dffes:data_buffer[1][13]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 2.667      ;
-; 2.454 ; acquisition_serializer:serializer|dffes:data_buffer[5][1]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[5][2]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.675      ;
-; 2.461 ; acquisition_serializer:serializer|dffes:data_buffer[0][9]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[0][10]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 2.682      ;
-; 2.468 ; acquisition_serializer:serializer|dffes:data_buffer[1][4]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[1][5]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.689      ;
-; 2.470 ; acquisition_serializer:serializer|dffes:data_buffer[5][2]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[5][3]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.691      ;
-; 2.471 ; acquisition_serializer:serializer|dffes:data_buffer[2][1]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[2][2]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.692      ;
-; 2.491 ; acquisition_serializer:serializer|dffes:data_buffer[4][5]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[4][6]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.712      ;
-; 2.495 ; acquisition_serializer:serializer|dffes:data_buffer[2][12]|ff ; acquisition_serializer:serializer|dffes:data_buffer[2][13]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 2.716      ;
-; 2.497 ; acquisition_serializer:serializer|dffes:data_buffer[3][14]|ff ; acquisition_serializer:serializer|dffes:data_buffer[3][15]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 2.718      ;
-; 2.498 ; acquisition_serializer:serializer|dffes:data_buffer[4][2]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[4][3]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.719      ;
-; 2.508 ; acquisition_serializer:serializer|dffes:data_buffer[5][0]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[5][1]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.729      ;
-; 2.516 ; acquisition_serializer:serializer|dffes:data_buffer[3][8]|ff  ; acquisition_serializer:serializer|dffes:data_buffer[3][9]|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 2.737      ;
-; 2.517 ; acquisition_serializer:serializer|dffes:data_buffer[3][12]|ff ; acquisition_serializer:serializer|dffes:data_buffer[3][13]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 2.738      ;
-; 2.517 ; acquisition_serializer:serializer|dffes:data_buffer[0][13]|ff ; acquisition_serializer:serializer|dffes:data_buffer[0][14]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 2.738      ;
-; 2.530 ; acquisition_serializer:serializer|dffes:data_buffer[1][13]|ff ; acquisition_serializer:serializer|dffes:data_buffer[1][14]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 2.751      ;
-; 2.547 ; acquisition_serializer:serializer|dffes:data_buffer[2][11]|ff ; acquisition_serializer:serializer|dffes:data_buffer[2][12]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 2.768      ;
-; 2.550 ; acquisition_serializer:serializer|dffes:data_buffer[1][10]|ff ; acquisition_serializer:serializer|dffes:data_buffer[1][11]|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 2.771      ;
-; 2.590 ; acquisition_serializer:serializer|dffes:div2_clock|ff         ; acquisition_serializer:serializer|counter:count|ffs[0]        ; clk          ; clk         ; 0.000        ; 0.000      ; 2.811      ;
-+-------+---------------------------------------------------------------+---------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
-
-
-+-----------------------------------------------------------------------------------------------------------------------------------------------+
-; Recovery: 'clk'                                                                                                                               ;
-+-------+------------------------------------------+----------------------+--------------+-------------+--------------+------------+------------+
-; Slack ; From Node                                ; To Node              ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+-------+------------------------------------------+----------------------+--------------+-------------+--------------+------------+------------+
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[0]  ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[8]  ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[1]  ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[4]  ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[3]  ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[5]  ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[13] ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[6]  ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[14] ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[11] ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[2]  ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[10] ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[7]  ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[15] ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[12] ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.257 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[9]  ; clk          ; clk         ; 10.000       ; 0.000      ; 6.410      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[0]  ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[8]  ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[1]  ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[4]  ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[3]  ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[5]  ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[13] ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[6]  ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[14] ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[11] ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[2]  ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[10] ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[7]  ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[15] ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[12] ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-; 3.864 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[9]  ; clk          ; clk         ; 10.000       ; 0.000      ; 5.803      ;
-+-------+------------------------------------------+----------------------+--------------+-------------+--------------+------------+------------+
-
-
-+-----------------------------------------------------------------------------------------------------------------------------------------------+
-; Removal: 'clk'                                                                                                                                ;
-+-------+------------------------------------------+----------------------+--------------+-------------+--------------+------------+------------+
-; Slack ; From Node                                ; To Node              ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+-------+------------------------------------------+----------------------+--------------+-------------+--------------+------------+------------+
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[0]  ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[8]  ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[1]  ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[4]  ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[3]  ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[5]  ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[13] ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[6]  ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[14] ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[11] ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[2]  ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[10] ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[7]  ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[15] ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[12] ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 5.582 ; dffes:start_ff|ff                        ; crc16:crc|lfsr_q[9]  ; clk          ; clk         ; 0.000        ; 0.000      ; 5.803      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[0]  ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[8]  ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[1]  ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[4]  ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[3]  ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[5]  ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[13] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[6]  ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[14] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[11] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[2]  ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[10] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[7]  ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[15] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[12] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-; 6.189 ; acquisition_ctrl:ctrl|WAITING_START_HIGH ; crc16:crc|lfsr_q[9]  ; clk          ; clk         ; 0.000        ; 0.000      ; 6.410      ;
-+-------+------------------------------------------+----------------------+--------------+-------------+--------------+------------+------------+
++-------------------------------------------------------------------------------------------------------------------------------------+
+; Hold: 'clk'                                                                                                                         ;
++-------+---------------------------+---------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                 ; To Node                   ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+---------------------------+---------------------------+--------------+-------------+--------------+------------+------------+
+; 1.396 ; wr4                       ; wr5                       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.617      ;
+; 1.407 ; wr3                       ; wr4                       ; clk          ; clk         ; 0.000        ; 0.000      ; 1.628      ;
+; 1.791 ; wr2                       ; wr3                       ; clk          ; clk         ; 0.000        ; 0.000      ; 2.012      ;
+; 1.863 ; wr5                       ; wr6                       ; clk          ; clk         ; 0.000        ; 0.000      ; 2.084      ;
+; 1.960 ; wait_loading_n            ; wait_loading_n            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.181      ;
+; 2.165 ; wait_loading              ; wait_loading              ; clk          ; clk         ; 0.000        ; 0.000      ; 2.386      ;
+; 2.181 ; wait_loading              ; wait_loading_n            ; clk          ; clk         ; 0.000        ; 0.000      ; 2.402      ;
+; 2.241 ; wait_mode                 ; wait_mode                 ; clk          ; clk         ; 0.000        ; 0.000      ; 2.462      ;
+; 2.336 ; init_buffers1             ; init_buffers2             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.557      ;
+; 2.497 ; wr1                       ; wr2                       ; clk          ; clk         ; 0.000        ; 0.000      ; 2.718      ;
+; 2.510 ; init_buffers1             ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 2.731      ;
+; 2.592 ; init_buffers3             ; init_buffers4             ; clk          ; clk         ; 0.000        ; 0.000      ; 2.813      ;
+; 2.839 ; dffes:load_parallel_FF|ff ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 3.060      ;
+; 2.871 ; wr3                       ; dffes:we_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.092      ;
+; 2.877 ; wait_mode                 ; dffes:busy_ff|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.098      ;
+; 2.936 ; wr3                       ; dffes:data_bus_out_ff|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.157      ;
+; 2.982 ; wait_loading              ; wait_mode                 ; clk          ; clk         ; 0.000        ; 0.000      ; 3.203      ;
+; 3.183 ; wr4                       ; dffes:we_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.404      ;
+; 3.195 ; wait_loading              ; dffes:busy_ff|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.416      ;
+; 3.311 ; init_buffers3             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.532      ;
+; 3.399 ; wr2                       ; dffes:data_bus_out_ff|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.620      ;
+; 3.400 ; init_buffers4             ; wait_loading              ; clk          ; clk         ; 0.000        ; 0.000      ; 3.621      ;
+; 3.448 ; wait_loading_n            ; wait_mode                 ; clk          ; clk         ; 0.000        ; 0.000      ; 3.669      ;
+; 3.451 ; wait_loading_n            ; wr1                       ; clk          ; clk         ; 0.000        ; 0.000      ; 3.672      ;
+; 3.461 ; wait_loading_n            ; dffes:busy_ff|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.682      ;
+; 3.482 ; wait_loading_n            ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.703      ;
+; 3.561 ; wait_loading_n            ; dffes:cs_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.782      ;
+; 3.632 ; wait_loading              ; dffes:cs_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.853      ;
+; 3.647 ; wr4                       ; dffes:data_bus_out_ff|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 3.868      ;
+; 3.665 ; wait_loading              ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.886      ;
+; 3.675 ; init_buffers2             ; init_buffers3             ; clk          ; clk         ; 0.000        ; 0.000      ; 3.896      ;
+; 3.712 ; wr6                       ; init_buffers1             ; clk          ; clk         ; 0.000        ; 0.000      ; 3.933      ;
+; 3.776 ; wr6                       ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 3.997      ;
+; 3.930 ; wr5                       ; dffes:addr_inc_FF|ff      ; clk          ; clk         ; 0.000        ; 0.000      ; 4.151      ;
+; 4.242 ; wait_mode                 ; init_buffers1             ; clk          ; clk         ; 0.000        ; 0.000      ; 4.463      ;
+; 4.306 ; wait_mode                 ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 4.527      ;
+; 4.376 ; init_buffers2             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 4.597      ;
+; 4.393 ; wr5                       ; dffes:data_bus_out_ff|ff  ; clk          ; clk         ; 0.000        ; 0.000      ; 4.614      ;
+; 4.433 ; wait_mode                 ; dffes:cs_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 4.654      ;
+; 4.827 ; init_buffers2             ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 5.048      ;
+; 5.351 ; init_buffers4             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 5.572      ;
+; 5.464 ; init_buffers1             ; dffes:oe_n_FF|ff          ; clk          ; clk         ; 0.000        ; 0.000      ; 5.685      ;
+; 6.021 ; wait_mode                 ; dffes:load_parallel_FF|ff ; clk          ; clk         ; 0.000        ; 0.000      ; 6.242      ;
++-------+---------------------------+---------------------------+--------------+-------------+--------------+------------+------------+
 
 
 +-------------------------------------------------------------------+
@@ -461,7 +258,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +------------+----------+----------+----------+----------+----------+
 ; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 2851     ; 0        ; 0        ; 0        ;
+; clk        ; clk      ; 44       ; 0        ; 0        ; 0        ;
 +------------+----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -471,27 +268,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +------------+----------+----------+----------+----------+----------+
 ; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 2851     ; 0        ; 0        ; 0        ;
-+------------+----------+----------+----------+----------+----------+
-Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
-
-
-+-------------------------------------------------------------------+
-; Recovery Transfers                                                ;
-+------------+----------+----------+----------+----------+----------+
-; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
-+------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 32       ; 0        ; 0        ; 0        ;
-+------------+----------+----------+----------+----------+----------+
-Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
-
-
-+-------------------------------------------------------------------+
-; Removal Transfers                                                 ;
-+------------+----------+----------+----------+----------+----------+
-; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
-+------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 32       ; 0        ; 0        ; 0        ;
+; clk        ; clk      ; 44       ; 0        ; 0        ; 0        ;
 +------------+----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -514,21 +291,22 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; Property                        ; Setup ; Hold ;
 +---------------------------------+-------+------+
 ; Illegal Clocks                  ; 0     ; 0    ;
-; Unconstrained Clocks            ; 0     ; 0    ;
-; Unconstrained Input Ports       ; 11    ; 11   ;
-; Unconstrained Input Port Paths  ; 93    ; 93   ;
-; Unconstrained Output Ports      ; 32    ; 32   ;
-; Unconstrained Output Port Paths ; 189   ; 189  ;
+; Unconstrained Clocks            ; 1     ; 1    ;
+; Unconstrained Input Ports       ; 14    ; 14   ;
+; Unconstrained Input Port Paths  ; 61    ; 61   ;
+; Unconstrained Output Ports      ; 30    ; 30   ;
+; Unconstrained Output Port Paths ; 52    ; 52   ;
 +---------------------------------+-------+------+
 
 
-+-------------------------------------+
-; Clock Status Summary                ;
-+--------+-------+------+-------------+
-; Target ; Clock ; Type ; Status      ;
-+--------+-------+------+-------------+
-; clk    ; clk   ; Base ; Constrained ;
-+--------+-------+------+-------------+
++-------------------------------------------------+
+; Clock Status Summary                            ;
++------------------+-------+------+---------------+
+; Target           ; Clock ; Type ; Status        ;
++------------------+-------+------+---------------+
+; clk              ; clk   ; Base ; Constrained   ;
+; dffes:SCLK_ff|ff ;       ; Base ; Unconstrained ;
++------------------+-------+------+---------------+
 
 
 +------------------------------------------------------------------------------------------------------+
@@ -536,58 +314,59 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------+--------------------------------------------------------------------------------------+
 ; Input Port    ; Comment                                                                              ;
 +---------------+--------------------------------------------------------------------------------------+
+; MOSI          ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SCLK_         ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; changing_mode ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[0]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[1]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[2]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[3]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[4]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[5]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[6]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[7]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; mode[0]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; mode[1]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; sdi[0]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; sdi[1]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; sdi[2]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; sdi[3]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; sdi[4]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; sdi[5]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; sreset        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; start         ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 +---------------+--------------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Unconstrained Output Ports                                                                             ;
-+----------------+---------------------------------------------------------------------------------------+
-; Output Port    ; Comment                                                                               ;
-+----------------+---------------------------------------------------------------------------------------+
-; addr_clr       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; addr_inc       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; busy           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; convst         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; cs_n           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[0]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[1]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[2]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[3]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[4]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[5]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[6]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[7]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus_out   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; sclk_          ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[0]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[1]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[2]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[3]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[4]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[5]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[6]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[7]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[8]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[9]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[10] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[11] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[12] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[13] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[14] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[15] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; we_n           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+----------------+---------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                                 ;
++--------------------+---------------------------------------------------------------------------------------+
+; Output Port        ; Comment                                                                               ;
++--------------------+---------------------------------------------------------------------------------------+
+; MISO               ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; addr_clr           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; addr_inc           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; busy               ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; cs_n               ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus_out       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[0]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[1]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[2]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[3]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[4]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[5]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[6]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[7]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; oe_n               ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_async_load    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[0] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[1] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[2] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[3] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[4] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[5] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[6] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[7] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_loading       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_state[0]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_state[1]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_state[2]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_state[3]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; we_n               ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++--------------------+---------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------------------------------------------------------+
@@ -595,58 +374,59 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------+--------------------------------------------------------------------------------------+
 ; Input Port    ; Comment                                                                              ;
 +---------------+--------------------------------------------------------------------------------------+
+; MOSI          ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SCLK_         ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; changing_mode ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[0]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[1]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[2]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[3]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[4]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[5]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[6]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_read[7]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; mode[0]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; mode[1]       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; sdi[0]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; sdi[1]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; sdi[2]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; sdi[3]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; sdi[4]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; sdi[5]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; sreset        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; start         ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 +---------------+--------------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Unconstrained Output Ports                                                                             ;
-+----------------+---------------------------------------------------------------------------------------+
-; Output Port    ; Comment                                                                               ;
-+----------------+---------------------------------------------------------------------------------------+
-; addr_clr       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; addr_inc       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; busy           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; convst         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; cs_n           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[0]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[1]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[2]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[3]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[4]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[5]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[6]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data[7]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; data_bus_out   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; sclk_          ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[0]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[1]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[2]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[3]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[4]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[5]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[6]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[7]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[8]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[9]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[10] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[11] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[12] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[13] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[14] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; test_crc16[15] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; we_n           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+----------------+---------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                                 ;
++--------------------+---------------------------------------------------------------------------------------+
+; Output Port        ; Comment                                                                               ;
++--------------------+---------------------------------------------------------------------------------------+
+; MISO               ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; addr_clr           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; addr_inc           ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; busy               ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; cs_n               ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_bus_out       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[0]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[1]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[2]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[3]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[4]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[5]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[6]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; data_write[7]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; oe_n               ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_async_load    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[0] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[1] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[2] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[3] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[4] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[5] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[6] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_data_shift[7] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_loading       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_state[0]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_state[1]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_state[2]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; test_state[3]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; we_n               ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++--------------------+---------------------------------------------------------------------------------------+
 
 
 +--------------------------+
@@ -655,11 +435,11 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Fri Apr 23 13:23:24 2021
+    Info: Processing started: Fri Apr 23 17:07:31 2021
 Info: Command: quartus_sta sensor_buchas -c sensor_buchas
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
 Info (334003): Started post-fitting delay annotation
@@ -673,25 +453,20 @@ Warning (332049): Ignored set_false_path at sensor_buchas.sdc(86): Argument <fro
     Info (332050): set_false_path  -from  [get_clocks {host_SCLK}]  -to  [get_clocks {clk}] File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 86
 Warning (332049): Ignored set_false_path at sensor_buchas.sdc(87): Argument <to> is an empty collection File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 87
     Info (332050): set_false_path  -from  [get_clocks {clk}]  -to  [get_clocks {host_SCLK}] File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 87
+Warning (332060): Node: dffes:SCLK_ff|ff was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register spi_shift:shift|data_shift[7] is being clocked by dffes:SCLK_ff|ff
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
-Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -1.593
+Info (332146): Worst-case setup slack is 3.024
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -1.593             -14.015 clk 
-Info (332146): Worst-case hold slack is 1.377
+    Info (332119):     3.024               0.000 clk 
+Info (332146): Worst-case hold slack is 1.396
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     1.377               0.000 clk 
-Info (332146): Worst-case recovery slack is 3.257
-    Info (332119):     Slack       End Point TNS Clock 
-    Info (332119): ========= =================== =====================
-    Info (332119):     3.257               0.000 clk 
-Info (332146): Worst-case removal slack is 5.582
-    Info (332119):     Slack       End Point TNS Clock 
-    Info (332119): ========= =================== =====================
-    Info (332119):     5.582               0.000 clk 
+    Info (332119):     1.396               0.000 clk 
+Info (332140): No Recovery paths to report
+Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is 4.734
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
@@ -700,9 +475,9 @@ Info (332001): The selected device family is not supported by the report_metasta
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 7 warnings
-    Info: Peak virtual memory: 4655 megabytes
-    Info: Processing ended: Fri Apr 23 13:23:26 2021
-    Info: Elapsed time: 00:00:02
+    Info: Peak virtual memory: 4678 megabytes
+    Info: Processing ended: Fri Apr 23 17:07:31 2021
+    Info: Elapsed time: 00:00:00
     Info: Total CPU time (on all processors): 00:00:01
 
 

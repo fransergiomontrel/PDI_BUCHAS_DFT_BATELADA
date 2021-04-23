@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "04/21/2021 13:26:02"
+// Generated on "04/23/2021 16:14:33"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          spi_shift
 // 
@@ -32,12 +32,12 @@ module spi_shift_vlg_vec_tst();
 // general purpose registers
 reg async_load;
 reg clk;
+reg MOSI;
 reg [7:0] parallel_in;
-reg serial_in;
 // wires                                               
 wire loading;
+wire MISO;
 wire [7:0] parallel_out;
-wire serial_out;
 
 // assign statements (if any)                          
 spi_shift i1 (
@@ -45,10 +45,10 @@ spi_shift i1 (
 	.async_load(async_load),
 	.clk(clk),
 	.loading(loading),
+	.MISO(MISO),
+	.MOSI(MOSI),
 	.parallel_in(parallel_in),
-	.parallel_out(parallel_out),
-	.serial_in(serial_in),
-	.serial_out(serial_out)
+	.parallel_out(parallel_out)
 );
 initial 
 begin 
@@ -136,16 +136,12 @@ begin
 	parallel_in[0] = #140000 1'b0;
 end 
 
-// serial_in
+// MOSI
 initial
 begin
-	serial_in = 1'b0;
-	serial_in = #140000 1'b1;
-	serial_in = #40000 1'b0;
-	serial_in = #60000 1'b1;
-	serial_in = #90000 1'b0;
-	serial_in = #50000 1'b1;
-	serial_in = #150000 1'b0;
+	MOSI = 1'b0;
+	MOSI = #330000 1'b1;
+	MOSI = #50000 1'b0;
 end 
 endmodule
 

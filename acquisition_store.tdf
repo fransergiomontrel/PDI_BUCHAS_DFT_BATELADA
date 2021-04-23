@@ -19,10 +19,18 @@ subdesign acquisition_store(
 )
 variable	
 	cs_n_ff, we_n_ff, data_bus_out_ff: dffes;
-	
 	channel_counter: counter with (MAX_VALUE = 12);
+	last_channel: node;
 	
-	sm: MACHINE WITH STATES(WAIT_STORE, CS1a, CS0a, CS0b, CS1b, INC_CHANNEL, WAIT_END);
+	sm: MACHINE OF BITS (state_bits[6..0])
+		WITH STATES(
+			WAIT_STORE 	= B"0000001",
+			CS1a			= B"0000010",
+			CS0a 			= B"0000100",
+			CS0b			= B"0001000",
+			CS1b			= B"0010000",
+			INC_CHANNEL	= B"0100000",
+			WAIT_END		= B"1000000");
 begin
 	defaults
 		cs_n_ff.d = Gnd;
@@ -50,6 +58,8 @@ begin
 	data_bus_out_ff.clk = clk;
 	channel_counter.clk = clk;
 	sm.clk = clk;
+	
+	last_channel = (channel_counter.o[] == 12);
 
 	case sm IS
 		WHEN WAIT_STORE =>
@@ -89,7 +99,7 @@ test_sm[] = 4;
 		
 		WHEN INC_CHANNEL =>
 test_sm[] = 5;
-			if channel_counter.o[] == 12 then
+			if last_channel then
 				cs_n_ff.d = Vcc;
 				store_ok = Vcc;
 				sm = WAIT_END;				

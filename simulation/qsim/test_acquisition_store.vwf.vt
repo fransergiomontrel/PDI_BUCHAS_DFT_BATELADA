@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "04/22/2021 21:03:59"
+// Generated on "04/23/2021 15:13:52"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          acquisition_store
 // 
@@ -78,15 +78,15 @@ initial
 begin
 	sreset = 1'b0;
 	sreset = #60000 1'b1;
-	sreset = #40000 1'b0;
+	sreset = #120000 1'b0;
 end 
 
 // store
 initial
 begin
 	store = 1'b0;
-	store = #270000 1'b1;
-	store = #20000 1'b0;
+	store = #250000 1'b1;
+	store = #40000 1'b0;
 	store = #830000 1'b1;
 end 
 endmodule

@@ -21,6 +21,8 @@ after 2500 simTimestamp
 run -all
 quit -f
 
+
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -39,6 +41,8 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
+
 
 </modelsim_script_timing>
 <hdl_lang>verilog</hdl_lang>
@@ -278,8 +282,8 @@ TRANSITION_LIST("sreset")
 	{
 		REPEAT = 1;
 		LEVEL 0 FOR 60.0;
-		LEVEL 1 FOR 40.0;
-		LEVEL 0 FOR 1900.0;
+		LEVEL 1 FOR 120.0;
+		LEVEL 0 FOR 1820.0;
 	}
 }
 
@@ -288,8 +292,8 @@ TRANSITION_LIST("store")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 270.0;
-		LEVEL 1 FOR 20.0;
+		LEVEL 0 FOR 250.0;
+		LEVEL 1 FOR 40.0;
 		LEVEL 0 FOR 830.0;
 		LEVEL 1 FOR 880.0;
 	}

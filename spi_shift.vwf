@@ -20,6 +20,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -38,6 +39,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 </modelsim_script_timing>
 <hdl_lang>verilog</hdl_lang>
 </simulation_settings>*/
@@ -106,7 +108,7 @@ SIGNAL("loading")
 	PARENT = "";
 }
 
-SIGNAL("serial_out")
+SIGNAL("MISO")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
@@ -116,7 +118,7 @@ SIGNAL("serial_out")
 	PARENT = "";
 }
 
-SIGNAL("serial_in")
+SIGNAL("MOSI")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
@@ -343,7 +345,7 @@ TRANSITION_LIST("loading")
 	}
 }
 
-TRANSITION_LIST("serial_out")
+TRANSITION_LIST("MISO")
 {
 	NODE
 	{
@@ -352,18 +354,14 @@ TRANSITION_LIST("serial_out")
 	}
 }
 
-TRANSITION_LIST("serial_in")
+TRANSITION_LIST("MOSI")
 {
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 140.0;
-		LEVEL 1 FOR 40.0;
-		LEVEL 0 FOR 60.0;
-		LEVEL 1 FOR 90.0;
-		LEVEL 0 FOR 50.0;
-		LEVEL 1 FOR 150.0;
-		LEVEL 0 FOR 1470.0;
+		LEVEL 0 FOR 330.0;
+		LEVEL 1 FOR 50.0;
+		LEVEL 0 FOR 1620.0;
 	}
 }
 
@@ -639,7 +637,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "serial_out";
+	CHANNEL = "MISO";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 11;
@@ -648,7 +646,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "serial_in";
+	CHANNEL = "MOSI";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 12;
