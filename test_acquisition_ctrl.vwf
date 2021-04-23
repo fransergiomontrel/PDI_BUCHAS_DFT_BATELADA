@@ -20,6 +20,9 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
+
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -38,6 +41,9 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
+
+
 </modelsim_script_timing>
 <hdl_lang>verilog</hdl_lang>
 </simulation_settings>*/
@@ -306,6 +312,36 @@ SIGNAL("busy")
 	PARENT = "";
 }
 
+SIGNAL("crc_clr")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("store_crc")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("store_crc_ok")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
 TRANSITION_LIST("sreset")
 {
 	NODE
@@ -525,6 +561,35 @@ TRANSITION_LIST("busy")
 	}
 }
 
+TRANSITION_LIST("crc_clr")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 3000.0;
+	}
+}
+
+TRANSITION_LIST("store_crc")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 3000.0;
+	}
+}
+
+TRANSITION_LIST("store_crc_ok")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 1250.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 1740.0;
+	}
+}
+
 DISPLAY_LINE
 {
 	CHANNEL = "sreset";
@@ -639,12 +704,30 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
+	CHANNEL = "store_crc";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 12;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "store_crc_ok";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 13;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
 	CHANNEL = "test_samples_counter";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
-	TREE_INDEX = 12;
+	TREE_INDEX = 14;
 	TREE_LEVEL = 0;
-	CHILDREN = 13, 14;
+	CHILDREN = 15, 16;
 }
 
 DISPLAY_LINE
@@ -652,9 +735,9 @@ DISPLAY_LINE
 	CHANNEL = "test_samples_counter[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
-	TREE_INDEX = 13;
+	TREE_INDEX = 15;
 	TREE_LEVEL = 1;
-	PARENT = 12;
+	PARENT = 14;
 }
 
 DISPLAY_LINE
@@ -662,9 +745,9 @@ DISPLAY_LINE
 	CHANNEL = "test_samples_counter[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
-	TREE_INDEX = 14;
+	TREE_INDEX = 16;
 	TREE_LEVEL = 1;
-	PARENT = 12;
+	PARENT = 14;
 }
 
 DISPLAY_LINE
@@ -672,9 +755,9 @@ DISPLAY_LINE
 	CHANNEL = "test_clock_counter";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
-	TREE_INDEX = 15;
+	TREE_INDEX = 17;
 	TREE_LEVEL = 0;
-	CHILDREN = 16, 17, 18, 19, 20, 21;
+	CHILDREN = 18, 19, 20, 21, 22, 23;
 }
 
 DISPLAY_LINE
@@ -682,9 +765,9 @@ DISPLAY_LINE
 	CHANNEL = "test_clock_counter[5]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
-	TREE_INDEX = 16;
+	TREE_INDEX = 18;
 	TREE_LEVEL = 1;
-	PARENT = 15;
+	PARENT = 17;
 }
 
 DISPLAY_LINE
@@ -692,9 +775,9 @@ DISPLAY_LINE
 	CHANNEL = "test_clock_counter[4]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
-	TREE_INDEX = 17;
+	TREE_INDEX = 19;
 	TREE_LEVEL = 1;
-	PARENT = 15;
+	PARENT = 17;
 }
 
 DISPLAY_LINE
@@ -702,9 +785,9 @@ DISPLAY_LINE
 	CHANNEL = "test_clock_counter[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
-	TREE_INDEX = 18;
+	TREE_INDEX = 20;
 	TREE_LEVEL = 1;
-	PARENT = 15;
+	PARENT = 17;
 }
 
 DISPLAY_LINE
@@ -712,9 +795,9 @@ DISPLAY_LINE
 	CHANNEL = "test_clock_counter[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
-	TREE_INDEX = 19;
+	TREE_INDEX = 21;
 	TREE_LEVEL = 1;
-	PARENT = 15;
+	PARENT = 17;
 }
 
 DISPLAY_LINE
@@ -722,9 +805,9 @@ DISPLAY_LINE
 	CHANNEL = "test_clock_counter[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
-	TREE_INDEX = 20;
+	TREE_INDEX = 22;
 	TREE_LEVEL = 1;
-	PARENT = 15;
+	PARENT = 17;
 }
 
 DISPLAY_LINE
@@ -732,9 +815,9 @@ DISPLAY_LINE
 	CHANNEL = "test_clock_counter[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
-	TREE_INDEX = 21;
+	TREE_INDEX = 23;
 	TREE_LEVEL = 1;
-	PARENT = 15;
+	PARENT = 17;
 }
 
 DISPLAY_LINE
@@ -742,7 +825,16 @@ DISPLAY_LINE
 	CHANNEL = "busy";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 22;
+	TREE_INDEX = 24;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "crc_clr";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 25;
 	TREE_LEVEL = 0;
 }
 

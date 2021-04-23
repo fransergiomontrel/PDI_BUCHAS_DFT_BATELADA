@@ -20,6 +20,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -38,6 +39,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 </modelsim_script_timing>
 <hdl_lang>verilog</hdl_lang>
 </simulation_settings>*/
@@ -376,6 +378,176 @@ SIGNAL("addr_inc")
 	PARENT = "";
 }
 
+SIGNAL("test_crc16")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 16;
+	LSB_INDEX = 0;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("test_crc16[15]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
+SIGNAL("test_crc16[14]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
+SIGNAL("test_crc16[13]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
+SIGNAL("test_crc16[12]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
+SIGNAL("test_crc16[11]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
+SIGNAL("test_crc16[10]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
+SIGNAL("test_crc16[9]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
+SIGNAL("test_crc16[8]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
+SIGNAL("test_crc16[7]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
+SIGNAL("test_crc16[6]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
+SIGNAL("test_crc16[5]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
+SIGNAL("test_crc16[4]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
+SIGNAL("test_crc16[3]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
+SIGNAL("test_crc16[2]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
+SIGNAL("test_crc16[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
+SIGNAL("test_crc16[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_crc16";
+}
+
 TRANSITION_LIST("clk")
 {
 	NODE
@@ -437,7 +609,9 @@ TRANSITION_LIST("start")
 		REPEAT = 1;
 		LEVEL 0 FOR 840.0;
 		LEVEL 1 FOR 190.0;
-		LEVEL 0 FOR 28970.0;
+		LEVEL 0 FOR 11980.0;
+		LEVEL 1 FOR 20.0;
+		LEVEL 0 FOR 16970.0;
 	}
 }
 
@@ -634,6 +808,150 @@ TRANSITION_LIST("addr_clr")
 }
 
 TRANSITION_LIST("addr_inc")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[15]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[14]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[13]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[12]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[11]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[10]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[9]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[8]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[7]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[6]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[5]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[4]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[3]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[2]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 30000.0;
+	}
+}
+
+TRANSITION_LIST("test_crc16[0]")
 {
 	NODE
 	{
@@ -929,6 +1247,176 @@ DISPLAY_LINE
 	RADIX = Binary;
 	TREE_INDEX = 29;
 	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 30;
+	TREE_LEVEL = 0;
+	CHILDREN = 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[15]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 31;
+	TREE_LEVEL = 1;
+	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[14]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 32;
+	TREE_LEVEL = 1;
+	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[13]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 33;
+	TREE_LEVEL = 1;
+	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[12]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 34;
+	TREE_LEVEL = 1;
+	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[11]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 35;
+	TREE_LEVEL = 1;
+	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[10]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 36;
+	TREE_LEVEL = 1;
+	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[9]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 37;
+	TREE_LEVEL = 1;
+	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[8]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 38;
+	TREE_LEVEL = 1;
+	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[7]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 39;
+	TREE_LEVEL = 1;
+	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[6]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 40;
+	TREE_LEVEL = 1;
+	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[5]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 41;
+	TREE_LEVEL = 1;
+	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[4]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 42;
+	TREE_LEVEL = 1;
+	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[3]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 43;
+	TREE_LEVEL = 1;
+	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[2]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 44;
+	TREE_LEVEL = 1;
+	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[1]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 45;
+	TREE_LEVEL = 1;
+	PARENT = 30;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_crc16[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 46;
+	TREE_LEVEL = 1;
+	PARENT = 30;
 }
 
 TIME_BAR

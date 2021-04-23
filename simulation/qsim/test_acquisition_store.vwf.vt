@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "04/22/2021 20:11:31"
+// Generated on "04/22/2021 21:03:59"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          acquisition_store
 // 
@@ -36,6 +36,7 @@ reg store;
 // wires                                               
 wire addr_inc;
 wire [2:0] channel;
+wire crc_enable;
 wire cs_n;
 wire data_bus_out;
 wire msb;
@@ -49,6 +50,7 @@ acquisition_store i1 (
 	.addr_inc(addr_inc),
 	.channel(channel),
 	.clk(clk),
+	.crc_enable(crc_enable),
 	.cs_n(cs_n),
 	.data_bus_out(data_bus_out),
 	.msb(msb),

@@ -3,6 +3,7 @@ include "acquisition_serializer.inc";
 include "acquisition_store.inc";
 include "modes.inc";
 include "dffes.inc";
+include "crc16.inc";
 
 parameters(
 	samples = 3
@@ -27,6 +28,8 @@ subdesign acquisition_module(
 	cs_n: output;
 	data[7..0]: output;
 	data_bus_out: output;
+	
+	test_crc16[15..0]: output;
 
 )
 variable
@@ -34,6 +37,7 @@ variable
 	ctrl: acquisition_ctrl with (active_period = 68, period = 463, samples = samples);
 	serializer: acquisition_serializer with (little_endian = 1);
 	storer: acquisition_store;
+	crc: crc16;
 begin
 	-- START
 	start_ff.d = start;
@@ -55,11 +59,21 @@ begin
 	serializer.channel[] = storer.channel[];
 	serializer.adc_sdi[] = sdi[];
 	
+	-- CRC16
+	crc.clk = clk;
+	crc.rst = ctrl.crc_clr;
+	crc.data_in[] = serializer.data[];
+	crc.crc_en = storer.crc_enable;
+	test_crc16[] = crc.crc_out[];
+	
 	-- STORE
 	storer.clk = clk;
 	storer.sreset = sreset;
 	storer.store = ctrl.store;
-		
+	
+	-- STORE CRC
+	ctrl.store_crc_ok = ctrl.store_crc;			-- <---- INCLUIR STORE CRC
+	
 	-- OUTPUTS	
 	convst = ctrl.convst;
 	addr_clr = ctrl.addr_clr;

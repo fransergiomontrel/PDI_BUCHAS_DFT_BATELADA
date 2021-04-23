@@ -13,6 +13,7 @@ subdesign acquisition_store(
 	store_ok: output;
 	msb: output;
 	data_bus_out: output;
+	crc_enable: output;
 	
 	test_sm[2..0]: output;
 )
@@ -32,6 +33,8 @@ begin
 
 		channel_counter.inc = Gnd;
 		channel_counter.clr = Gnd;
+		
+		crc_enable = Gnd;
 	end defaults;
 	
 	-- sresets
@@ -70,6 +73,7 @@ test_sm[] = 1;
 test_sm[] = 2;
 			data_bus_out_ff.d = Vcc;
 			we_n_ff.d = Gnd;
+			crc_enable = Vcc;
 			sm = CS0b;
 
 		WHEN CS0b =>

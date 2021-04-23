@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "MAX II"
 set_global_assignment -name DEVICE EPM1270T144C5
-set_global_assignment -name TOP_LEVEL_ENTITY sensor_buchas
+set_global_assignment -name TOP_LEVEL_ENTITY acquisition_module
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:48:22  APRIL 07, 2021"
 set_global_assignment -name LAST_QUARTUS_VERSION "20.1.1 Lite Edition"
@@ -94,6 +94,11 @@ set_location_assignment PIN_96 -to host_SCLK
 set_location_assignment PIN_101 -to host_mode[1]
 set_location_assignment PIN_98 -to host_mode[0]
 set_location_assignment PIN_91 -to host_rst_n
+set_location_assignment PIN_12 -to LED1
+set_location_assignment PIN_13 -to LED2
+set_location_assignment PIN_14 -to LED3
+set_location_assignment PIN_15 -to LED4
+set_global_assignment -name VERILOG_FILE crc16.v
 set_global_assignment -name VECTOR_WAVEFORM_FILE reset_module.vwf
 set_global_assignment -name AHDL_FILE reset_module.tdf
 set_global_assignment -name VECTOR_WAVEFORM_FILE spi_shift.vwf
@@ -126,7 +131,3 @@ set_global_assignment -name VECTOR_WAVEFORM_FILE dffes.vwf
 set_global_assignment -name AHDL_FILE spi_shift.tdf
 set_global_assignment -name AHDL_FILE rw_data_module.tdf
 set_global_assignment -name VECTOR_WAVEFORM_FILE rw_data_module.vwf
-set_location_assignment PIN_12 -to LED1
-set_location_assignment PIN_13 -to LED2
-set_location_assignment PIN_14 -to LED3
-set_location_assignment PIN_15 -to LED4

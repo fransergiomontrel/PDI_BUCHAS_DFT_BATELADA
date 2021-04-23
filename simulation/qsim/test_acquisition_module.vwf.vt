@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "04/18/2021 16:53:35"
+// Generated on "04/22/2021 22:02:24"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          acquisition_module
 // 
@@ -43,7 +43,9 @@ wire busy;
 wire convst;
 wire cs_n;
 wire [7:0] data;
+wire data_bus_out;
 wire sclk_;
+wire [15:0] test_crc16;
 wire we_n;
 
 // assign statements (if any)                          
@@ -57,11 +59,13 @@ acquisition_module i1 (
 	.convst(convst),
 	.cs_n(cs_n),
 	.data(data),
+	.data_bus_out(data_bus_out),
 	.mode(mode),
 	.sclk_(sclk_),
 	.sdi(sdi),
 	.sreset(sreset),
 	.start(start),
+	.test_crc16(test_crc16),
 	.we_n(we_n)
 );
 initial 
@@ -109,6 +113,8 @@ begin
 	start = 1'b0;
 	start = #840000 1'b1;
 	start = #190000 1'b0;
+	start = #11980000 1'b1;
+	start = #20000 1'b0;
 end 
 // sdi[ 5 ]
 initial
