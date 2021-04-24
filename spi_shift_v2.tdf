@@ -1,0 +1,72 @@
+parameters(
+	N_BITS = 8
+);
+
+subdesign spi_shift_v2(
+	clk: input;
+	async_load: input;
+	parallel_in[N_BITS-1..0]: input;
+	MOSI: input;
+	parallel_out[N_BITS-1..0]: output;
+	MISO: output;
+	
+	loading_rx: output;
+	loading_tx: output;
+	
+--	test_shift[N_BITS-1..0]: output;
+	test_shift_rx[N_BITS-2..0]: output;
+	test_shift_tx[N_BITS-1..0]: output;
+	test_count_rx[2..0]: output;
+	test_count_tx[2..0]: output;
+)
+variable
+	parallel_rx[N_BITS-1..0]: dffe;
+	shift_tx[N_BITS-1..0]: dffeas;
+	shift_rx[N_BITS-2..0]: dff;	count_tx[2..0], count_rx[2..0]: dff;
+	ltx_ff: dff;
+	ltx, lrx: node;
+begin
+	-- RX (Rampa ascendente)
+	shift_rx[N_BITS-2..1].d = shift_rx[N_BITS-3..0].q;
+	shift_rx[0].d = MOSI;
+	shift_rx[].clk = clk;
+	parallel_rx[].d = (shift_rx[N_BITS-2..0].q, MOSI);
+	parallel_rx[].ena = lrx;
+	parallel_rx[].clk = clk;
+
+	count_rx[].d = count_rx[].q+1;
+	count_rx[].clrn = !async_load;
+	count_rx[].clk = !clk;
+	
+	lrx = (count_rx[].q == b"111");
+	loading_rx = lrx;
+
+	parallel_out[] = parallel_rx[].q;
+	
+	-- TX (Rampa descendente)
+	shift_tx[].clrn = !(async_load and !parallel_in[]);
+	shift_tx[].prn  = !(async_load and  parallel_in[]);
+	shift_tx[].clk = !clk;
+	shift_tx[].d = (shift_tx[N_BITS-2..0].q, Gnd);
+	shift_tx[].asdata = parallel_in[];
+	shift_tx[].sload = ltx;
+	
+	count_tx[].d = count_tx[].q+1;
+	count_tx[].clrn = !async_load;
+	count_tx[].clk = clk;
+	
+	MISO = shift_tx[7].q;
+	
+	ltx_ff.clk = clk;
+	ltx_ff.d = (count_tx[].q == b"111");
+	ltx_ff.clrn = !async_load;
+	ltx = ltx_ff.q;
+	loading_tx = ltx;
+
+	-- TESTS
+	test_shift_rx[] = shift_rx[].q;
+	test_shift_tx[] = shift_tx[].q;	
+	test_count_rx[] = count_rx[].q;
+	test_count_tx[] = count_tx[].q;
+	
+end;

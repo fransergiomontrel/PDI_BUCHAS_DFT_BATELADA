@@ -31,6 +31,8 @@ quit -f
 
 
 
+
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -49,6 +51,8 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
+
 
 
 
@@ -1220,15 +1224,15 @@ TRANSITION_LIST("host_SCLK")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 38220.0;
+		LEVEL 0 FOR 38340.0;
 		LEVEL 1 FOR 100.0;
 		NODE
 		{
-			REPEAT = 7;
+			REPEAT = 23;
 			LEVEL 0 FOR 100.0;
 			LEVEL 1 FOR 100.0;
 		}
-		LEVEL 0 FOR 60280.0;
+		LEVEL 0 FOR 56960.0;
 	}
 }
 
@@ -1237,11 +1241,13 @@ TRANSITION_LIST("host_MOSI")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 38120.0;
-		LEVEL 1 FOR 200.0;
+		LEVEL 0 FOR 38280.0;
+		LEVEL 1 FOR 160.0;
+		LEVEL 0 FOR 200.0;
+		LEVEL 1 FOR 400.0;
 		LEVEL 0 FOR 400.0;
 		LEVEL 1 FOR 200.0;
-		LEVEL 0 FOR 61080.0;
+		LEVEL 0 FOR 60360.0;
 	}
 }
 
@@ -1259,9 +1265,7 @@ TRANSITION_LIST("data_bus[7]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 37850.0;
-		LEVEL 1 FOR 150.0;
-		LEVEL Z FOR 62000.0;
+		LEVEL Z FOR 100000.0;
 	}
 }
 
@@ -1270,9 +1274,7 @@ TRANSITION_LIST("data_bus[6]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 37850.0;
-		LEVEL 1 FOR 150.0;
-		LEVEL Z FOR 62000.0;
+		LEVEL Z FOR 100000.0;
 	}
 }
 
@@ -1281,9 +1283,7 @@ TRANSITION_LIST("data_bus[5]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 37850.0;
-		LEVEL 0 FOR 150.0;
-		LEVEL Z FOR 62000.0;
+		LEVEL Z FOR 100000.0;
 	}
 }
 
@@ -1292,9 +1292,7 @@ TRANSITION_LIST("data_bus[4]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 37850.0;
-		LEVEL 0 FOR 150.0;
-		LEVEL Z FOR 62000.0;
+		LEVEL Z FOR 100000.0;
 	}
 }
 
@@ -1303,9 +1301,7 @@ TRANSITION_LIST("data_bus[3]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 37850.0;
-		LEVEL 1 FOR 150.0;
-		LEVEL Z FOR 62000.0;
+		LEVEL Z FOR 100000.0;
 	}
 }
 
@@ -1314,9 +1310,7 @@ TRANSITION_LIST("data_bus[2]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 37850.0;
-		LEVEL 0 FOR 150.0;
-		LEVEL Z FOR 62000.0;
+		LEVEL Z FOR 100000.0;
 	}
 }
 
@@ -1325,9 +1319,7 @@ TRANSITION_LIST("data_bus[1]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 37850.0;
-		LEVEL 1 FOR 150.0;
-		LEVEL Z FOR 62000.0;
+		LEVEL Z FOR 100000.0;
 	}
 }
 
@@ -1336,9 +1328,7 @@ TRANSITION_LIST("data_bus[0]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 37850.0;
-		LEVEL 0 FOR 150.0;
-		LEVEL Z FOR 62000.0;
+		LEVEL Z FOR 100000.0;
 	}
 }
 

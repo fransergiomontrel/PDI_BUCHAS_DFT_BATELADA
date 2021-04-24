@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "04/23/2021 17:07:38"
+// Generated on "04/23/2021 21:35:05"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          rw_data_module
 // 
@@ -39,7 +39,8 @@ reg SCLK_;
 reg sreset;
 // wires                                               
 wire addr_clr;
-wire addr_inc;
+wire addr_inc_read;
+wire addr_inc_write;
 wire busy;
 wire cs_n;
 wire data_bus_out;
@@ -56,7 +57,8 @@ wire we_n;
 rw_data_module i1 (
 // port map - connection between master ports and signals/registers   
 	.addr_clr(addr_clr),
-	.addr_inc(addr_inc),
+	.addr_inc_read(addr_inc_read),
+	.addr_inc_write(addr_inc_write),
 	.busy(busy),
 	.changing_mode(changing_mode),
 	.clk(clk),

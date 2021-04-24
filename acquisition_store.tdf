@@ -9,7 +9,7 @@ subdesign acquisition_store(
 	we_n: output;
 	cs_n: output;
 	channel[2..0]: output;
-	addr_inc: output;
+	addr_inc_write: output;
 	store_ok: output;
 	msb: output;
 	data_bus_out: output;
@@ -36,7 +36,7 @@ begin
 		cs_n_ff.d = Gnd;
 		we_n_ff.d = Vcc;
 		data_bus_out_ff.d = Gnd;
-		addr_inc = Gnd;
+		addr_inc_write = Gnd;
 		store_ok = Gnd;
 
 		channel_counter.inc = Gnd;
@@ -94,7 +94,7 @@ test_sm[] = 3;
 		WHEN CS1b =>
 test_sm[] = 4;
 			channel_counter.inc = Vcc;
-			addr_inc = Vcc;
+			addr_inc_write = Vcc;
 			sm = INC_CHANNEL;
 		
 		WHEN INC_CHANNEL =>

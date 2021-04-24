@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "04/22/2021 19:34:30"
+// Generated on "04/23/2021 21:55:59"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          RAM_interface
 // 
@@ -31,7 +31,8 @@ module RAM_interface_vlg_vec_tst();
 // constants                                           
 // general purpose registers
 reg addr_clr;
-reg addr_inc;
+reg addr_inc_read;
+reg addr_inc_write;
 reg changing_mode;
 reg clk;
 reg cs_n;
@@ -55,7 +56,8 @@ assign ram_data_bus = treg_ram_data_bus;
 RAM_interface i1 (
 // port map - connection between master ports and signals/registers   
 	.addr_clr(addr_clr),
-	.addr_inc(addr_inc),
+	.addr_inc_read(addr_inc_read),
+	.addr_inc_write(addr_inc_write),
 	.changing_mode(changing_mode),
 	.clk(clk),
 	.cs_n(cs_n),
@@ -97,21 +99,21 @@ initial
 begin
 	data_in[7] = 1'b0;
 	data_in[7] = #370000 1'b1;
-	data_in[7] = #70000 1'b0;
+	data_in[7] = #100000 1'b0;
 end 
 // data_in[ 6 ]
 initial
 begin
 	data_in[6] = 1'b0;
 	data_in[6] = #370000 1'b1;
-	data_in[6] = #70000 1'b0;
+	data_in[6] = #100000 1'b0;
 end 
 // data_in[ 5 ]
 initial
 begin
 	data_in[5] = 1'b0;
 	data_in[5] = #370000 1'b1;
-	data_in[5] = #70000 1'b0;
+	data_in[5] = #100000 1'b0;
 end 
 // data_in[ 4 ]
 initial
@@ -123,7 +125,7 @@ initial
 begin
 	data_in[3] = 1'b0;
 	data_in[3] = #370000 1'b1;
-	data_in[3] = #70000 1'b0;
+	data_in[3] = #100000 1'b0;
 end 
 // data_in[ 2 ]
 initial
@@ -135,7 +137,7 @@ initial
 begin
 	data_in[1] = 1'b0;
 	data_in[1] = #370000 1'b1;
-	data_in[1] = #70000 1'b0;
+	data_in[1] = #100000 1'b0;
 end 
 // data_in[ 0 ]
 initial
@@ -151,12 +153,20 @@ begin
 	addr_clr = #20000 1'b0;
 end 
 
-// addr_inc
+// addr_inc_write
 initial
 begin
-	addr_inc = 1'b0;
-	addr_inc = #20000 1'b1;
-	addr_inc = #130000 1'b0;
+	addr_inc_write = 1'b0;
+	addr_inc_write = #20000 1'b1;
+	addr_inc_write = #130000 1'b0;
+end 
+
+// addr_inc_read
+initial
+begin
+	addr_inc_read = 1'b0;
+	addr_inc_read = #140000 1'b1;
+	addr_inc_read = #30000 1'b0;
 end 
 // mode[ 1 ]
 initial

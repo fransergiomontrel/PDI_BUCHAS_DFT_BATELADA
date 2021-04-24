@@ -35,7 +35,7 @@ begin
 	data_shift[].asdata = parallel_in[];
 	data_shift[].sload = control_shift[7];
 
-	control_shift[].clk = clk;
+	control_shift[].clk = !clk;
 	init_control.clk = !clk;
 	data_shift[].clk = clk;
 	
@@ -44,7 +44,7 @@ begin
 	loading = control_shift[7];
 	
 	parallel_ffs[].clk = clk;
-	parallel_ffs[].ena = control_shift[N_BITS-1];
+	parallel_ffs[].ena = control_shift[N_BITS-2];
 	parallel_ffs[N_BITS-1..1].d = data_shift[N_BITS-2..0].q;
 	parallel_ffs[0].d = MOSI;
 	

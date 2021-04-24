@@ -22,6 +22,7 @@ run -all
 quit -f
 
 
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -40,6 +41,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 
 
 </modelsim_script_timing>
@@ -220,7 +222,7 @@ SIGNAL("addr_clr")
 	PARENT = "";
 }
 
-SIGNAL("addr_inc")
+SIGNAL("addr_inc_read")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
@@ -490,6 +492,16 @@ SIGNAL("data_bus_out")
 	PARENT = "";
 }
 
+SIGNAL("addr_inc_write")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
 TRANSITION_LIST("clk")
 {
 	NODE
@@ -629,7 +641,7 @@ TRANSITION_LIST("addr_clr")
 	}
 }
 
-TRANSITION_LIST("addr_inc")
+TRANSITION_LIST("addr_inc_read")
 {
 	NODE
 	{
@@ -882,6 +894,15 @@ TRANSITION_LIST("data_bus_out")
 	}
 }
 
+TRANSITION_LIST("addr_inc_write")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 10000.0;
+	}
+}
+
 DISPLAY_LINE
 {
 	CHANNEL = "clk";
@@ -1108,7 +1129,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "addr_inc";
+	CHANNEL = "addr_inc_read";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 23;
@@ -1117,7 +1138,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "test_async_load";
+	CHANNEL = "addr_inc_write";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 24;
@@ -1126,7 +1147,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "test_loading";
+	CHANNEL = "test_async_load";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 25;
@@ -1135,7 +1156,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "busy";
+	CHANNEL = "test_loading";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 26;
@@ -1144,7 +1165,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "MOSI";
+	CHANNEL = "busy";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 27;
@@ -1153,12 +1174,21 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "data_write";
+	CHANNEL = "MOSI";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 28;
 	TREE_LEVEL = 0;
-	CHILDREN = 29, 30, 31, 32, 33, 34, 35, 36;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "data_write";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 29;
+	TREE_LEVEL = 0;
+	CHILDREN = 30, 31, 32, 33, 34, 35, 36, 37;
 }
 
 DISPLAY_LINE
@@ -1166,9 +1196,9 @@ DISPLAY_LINE
 	CHANNEL = "data_write[7]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 29;
+	TREE_INDEX = 30;
 	TREE_LEVEL = 1;
-	PARENT = 28;
+	PARENT = 29;
 }
 
 DISPLAY_LINE
@@ -1176,9 +1206,9 @@ DISPLAY_LINE
 	CHANNEL = "data_write[6]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 30;
+	TREE_INDEX = 31;
 	TREE_LEVEL = 1;
-	PARENT = 28;
+	PARENT = 29;
 }
 
 DISPLAY_LINE
@@ -1186,9 +1216,9 @@ DISPLAY_LINE
 	CHANNEL = "data_write[5]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 31;
+	TREE_INDEX = 32;
 	TREE_LEVEL = 1;
-	PARENT = 28;
+	PARENT = 29;
 }
 
 DISPLAY_LINE
@@ -1196,9 +1226,9 @@ DISPLAY_LINE
 	CHANNEL = "data_write[4]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 32;
+	TREE_INDEX = 33;
 	TREE_LEVEL = 1;
-	PARENT = 28;
+	PARENT = 29;
 }
 
 DISPLAY_LINE
@@ -1206,9 +1236,9 @@ DISPLAY_LINE
 	CHANNEL = "data_write[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 33;
+	TREE_INDEX = 34;
 	TREE_LEVEL = 1;
-	PARENT = 28;
+	PARENT = 29;
 }
 
 DISPLAY_LINE
@@ -1216,9 +1246,9 @@ DISPLAY_LINE
 	CHANNEL = "data_write[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 34;
+	TREE_INDEX = 35;
 	TREE_LEVEL = 1;
-	PARENT = 28;
+	PARENT = 29;
 }
 
 DISPLAY_LINE
@@ -1226,9 +1256,9 @@ DISPLAY_LINE
 	CHANNEL = "data_write[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 35;
+	TREE_INDEX = 36;
 	TREE_LEVEL = 1;
-	PARENT = 28;
+	PARENT = 29;
 }
 
 DISPLAY_LINE
@@ -1236,23 +1266,14 @@ DISPLAY_LINE
 	CHANNEL = "data_write[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 36;
+	TREE_INDEX = 37;
 	TREE_LEVEL = 1;
-	PARENT = 28;
+	PARENT = 29;
 }
 
 DISPLAY_LINE
 {
 	CHANNEL = "oe_n";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
-	TREE_INDEX = 37;
-	TREE_LEVEL = 0;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "we_n";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 38;
@@ -1261,7 +1282,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "cs_n";
+	CHANNEL = "we_n";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 39;
@@ -1270,10 +1291,19 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "data_bus_out";
+	CHANNEL = "cs_n";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 40;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "data_bus_out";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 41;
 	TREE_LEVEL = 0;
 }
 

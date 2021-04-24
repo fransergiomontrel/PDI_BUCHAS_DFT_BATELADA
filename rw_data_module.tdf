@@ -1,4 +1,4 @@
-include "spi_shift.inc";
+include "spi_shift_v2.inc";
 include "counter.inc";
 include "modes.inc";
 include "dffes.inc";
@@ -10,7 +10,8 @@ subdesign rw_data_module(
 	changing_mode: input;
 	mode[1..0]: input;
 	addr_clr: output;
-	addr_inc: output;
+	addr_inc_read: output;
+	addr_inc_write: output;
 	oe_n: output;
 	we_n: output;
 	cs_n: output;
@@ -32,20 +33,20 @@ subdesign rw_data_module(
 	test_data_shift[7..0]: output;
 )
 variable
-	shift: spi_shift with (N_BITS=8);
+	shift: spi_shift_v2 with (N_BITS=8);
 	
 	sm: machine with states(wait_mode, init_buffers1, init_buffers2, init_buffers3, init_buffers4, wait_loading, wait_loading_n, wr1, wr2, wr3, wr4, wr5, wr6);
 	
-	oe_n_FF, we_n_FF, cs_n_FF, load_parallel_FF, addr_inc_FF, busy_ff, data_bus_out_ff, SCLK_ff, MOSI_ff: dffes;
+	oe_n_FF, we_n_FF, cs_n_FF, load_parallel_FF, busy_ff, data_bus_out_ff, SCLK_ff, MOSI_ff: dffes;
 begin
 	defaults
 		addr_clr = Gnd;
-		addr_inc = Gnd;
+		addr_inc_read = Gnd;
+		addr_inc_write = Gnd;
 		cs_n_FF.d = Gnd;
 		oe_n_FF.d = Vcc;
 		we_n_FF.d = Vcc;
 		load_parallel_FF.d = Gnd;
-		addr_inc_FF.d = GND;
 		busy_ff.d = Gnd;
 		data_bus_out_ff.d = Gnd;
 	end defaults;
@@ -79,10 +80,6 @@ begin
 	load_parallel_FF.clk = clk;
 	shift.async_load = load_parallel_FF.q;
 	load_parallel_FF.spre = sreset;
-	
-	addr_inc_FF.clk = clk;
-	addr_inc = addr_inc_FF.q;
-	addr_inc_FF.sclr = sreset;
 	
 	busy_ff.clk = clk;
 	busy = busy_ff.q or changing_mode;
@@ -122,6 +119,7 @@ begin
 			sm = init_buffers4;
 
 		when init_buffers4 =>
+			addr_inc_read = Vcc;
 			busy_ff.d = Vcc;
 			oe_n_FF.d = Gnd;
 			sm = wait_loading;
@@ -129,7 +127,7 @@ begin
 		when wait_loading =>
 			if mode[] == MODE_RW_DATA and !changing_mode then
 				oe_n_FF.d = Gnd;
-				if !shift.loading then
+				if !shift.loading_tx then
 					sm = wait_loading;
 				else
 					sm = wait_loading_n;
@@ -142,7 +140,7 @@ begin
 		when wait_loading_n =>
 			if mode[] == MODE_RW_DATA and !changing_mode then
 				oe_n_FF.d = Gnd;
-				if shift.loading then
+				if shift.loading_tx then
 					sm = wait_loading_n;
 				else
 					sm = wr1;
@@ -176,12 +174,12 @@ begin
 		when wr5 =>
 			busy_ff.d = Vcc;
 			data_bus_out_ff.d = Vcc;
-			addr_inc_FF.d = Vcc;
 			sm = wr6;
 
 		when wr6 =>
 			busy_ff.d = Vcc;
 			oe_n_FF.d = Gnd;
+			addr_inc_write = Vcc;
 			sm = init_buffers1;
 	end case;
 	
@@ -193,8 +191,8 @@ begin
 	
 	-- TESTS
 	test_async_load = load_parallel_FF.q;
-	test_loading = shift.loading;
-	test_data_shift[] = shift.test_data_shift[];
+	test_loading = shift.loading_tx;
+	test_data_shift[] = shift.test_shift_tx[];
 	
 	TABLE
 		sm					=> test_state[];

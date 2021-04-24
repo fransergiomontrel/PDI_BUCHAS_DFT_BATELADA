@@ -8,7 +8,7 @@ subdesign acquisition_store_crc(
 	
 	we_n: output;
 	cs_n: output;
-	addr_inc: output;
+	addr_inc_write: output;
 	store_crc_ok: output;
 	msb: output;
 	data_bus_out: output;
@@ -24,7 +24,7 @@ begin
 		cs_n_ff.d = Gnd;
 		we_n_ff.d = Vcc;
 		data_bus_out_ff.d = Gnd;
-		addr_inc = Gnd;
+		addr_inc_write = Gnd;
 		store_crc_ok = Gnd;
 		msb_ff.d = Gnd;
 	end defaults;
@@ -77,7 +77,7 @@ test_sm[] = 3;
 		WHEN WE1_CS0_LSBb =>
 			-- WE=1, CS=0, MSB=0
 test_sm[] = 4;
-			addr_inc = Vcc;
+			addr_inc_write = Vcc;
 			msb_ff.d = Vcc;
 			data_bus_out_ff.d = Vcc;
 			sm = WE1_CS0_MSBa;
@@ -109,7 +109,7 @@ test_sm[] = 7;
 		WHEN WE1_CS0_MSBb =>
 			-- WE=1, CS=0, MSB=1
 test_sm[] = 8;
-			addr_inc = Vcc;
+			addr_inc_write = Vcc;
 			sm = WAIT_END;
 
 		WHEN WAIT_END =>

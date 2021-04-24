@@ -1,4 +1,3 @@
-include "lpm_counter.inc";
 include "modes.inc";
 
 PARAMETERS
@@ -10,7 +9,8 @@ subdesign RAM_interface(
 	clk: input;
 	sreset: input;
 	addr_clr: input;
-	addr_inc: input;
+	addr_inc_read: input;
+	addr_inc_write: input;
 	data_in[7..0]: input;
 	we_n: input;
 	oe_n: input;
@@ -29,17 +29,28 @@ subdesign RAM_interface(
 	data_out[7..0]: output;
 )
 variable
-	address_counter: lpm_counter with(LPM_DIRECTION="UP", LPM_WIDTH = N_BITS);
+	address_counter_read[N_BITS-1..0]: dffe;
+	address_counter_write[N_BITS-1..0]: dffe;
 	tsn[7..0]: TRI_STATE_NODE;
 	buffer[7..0]: TRI;
 	write, read: node;
 	driver[7..0]: lcell;
 begin
-	address_counter.clock = clk;
-	address_counter.sclr = addr_clr or sreset;
-	address_counter.cnt_en = addr_inc;
+	address_counter_read[].clk = clk;
+	address_counter_read[].d = address_counter_read[].q+1;
+	address_counter_read[].clrn = !(addr_clr or sreset);
+	address_counter_read[].ena = addr_inc_read;
 	
-	ram_address[] = address_counter.q[];
+	address_counter_write[].clk = clk;
+	address_counter_write[].d = address_counter_write[].q+1;
+	address_counter_write[].clrn = !(addr_clr or sreset);
+	address_counter_write[].ena = addr_inc_write;
+
+	if data_bus_out then
+		ram_address[] = address_counter_write[].q;
+	else
+		ram_address[] = address_counter_read[].q;
+	end if;
 	
 	buffer[].in = data_in[];
 	buffer[].oe = data_bus_out;

@@ -17,7 +17,8 @@ subdesign switch(
 	-- RAM Interface
 	RI_data_out[7..0]: input;
 	RI_addr_clr: output;
-	RI_addr_inc: output;
+	RI_addr_inc_read: output;
+	RI_addr_inc_write: output;
 	RI_data_in[7..0]: output;
 	RI_we_n: output;
 	RI_oe_n: output;
@@ -37,7 +38,7 @@ subdesign switch(
 	-- Acquisition Module
 	AM_adc_sclk: input;
 	AM_adc_convst: input;
-	AM_addr_inc: input;
+	AM_addr_inc_write: input;
 	AM_addr_clr: input;
 	AM_busy: input;
 	AM_we_n: input;
@@ -53,7 +54,8 @@ subdesign switch(
 	RDM_data_read[7..0]: output;
 	RDM_changing_mode: output;
 	RDM_addr_clr: input;
-	RDM_addr_inc: input;
+	RDM_addr_inc_read: input;
+	RDM_addr_inc_write: input;
 	RDM_oe_n: input;
 	RDM_cs_n: input;
 	RDM_MISO: input;
@@ -80,7 +82,8 @@ begin
 			
 			-- RAM Interface
 			RI_addr_clr = Gnd;
-			RI_addr_inc = Gnd;
+			RI_addr_inc_read = Gnd;
+			RI_addr_inc_write = Gnd;
 			RI_data_in[] = Gnd;
 			RI_we_n = Vcc;
 			RI_oe_n = Vcc;
@@ -102,7 +105,8 @@ begin
 			
 			-- RAM Interface
 			RI_addr_clr = AM_addr_clr;
-			RI_addr_inc = AM_addr_inc;
+			RI_addr_inc_read = Gnd;
+			RI_addr_inc_write = AM_addr_inc_write;
 			RI_data_in[] = AM_data[];
 			RI_we_n = AM_we_n;
 			RI_oe_n = Vcc;
@@ -124,7 +128,8 @@ begin
 			
 			-- RAM Interface
 			RI_addr_clr = RDM_addr_clr;
-			RI_addr_inc = RDM_addr_inc;
+			RI_addr_inc_read = RDM_addr_inc_read;
+			RI_addr_inc_write = RDM_addr_inc_write;
 			RI_data_in[] = RDM_data_write;
 			RI_we_n = RDM_we_n;
 			RI_oe_n = RDM_oe_n;
@@ -152,7 +157,8 @@ begin
 			
 			-- RAM Interface
 			RI_addr_clr = Gnd;
-			RI_addr_inc = Gnd;
+			RI_addr_inc_read = Gnd;
+			RI_addr_inc_write = Gnd;
 			RI_data_in[] = Gnd;
 			RI_we_n = Vcc;
 			RI_oe_n = Vcc;
