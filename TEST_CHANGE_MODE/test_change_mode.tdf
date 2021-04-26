@@ -27,7 +27,7 @@
 -- adc_rst_n[0]	-> para ter certeza que nenhum pulso de reset é gerado nos ADCs
 
 include "counter.inc";
-include "sensor_buchas_CPLD.inc";
+include "sensor_buchas.inc";
 include "modes.inc";
 include "divfreq.inc";
 
@@ -49,7 +49,7 @@ subdesign test_change_mode(
 	run_test: output;
 )
 variable
-	s: sensor_buchas_CPLD;
+	s: sensor_buchas;
 	state[3..0]: dffe;
 	pause: counter with (MAX_VALUE = 1000);
 	mode[1..0]: node;
@@ -69,10 +69,9 @@ begin
 	c[].clrn = !rst;
 
 	s.clk = clk;
-	s.rst = rst;
 	host_busy = s.host_busy;
 	s.host_convst_start = c[1].q and mode_ff[].q == MODE_CONFIGURATION;
-	s.host_rst_n = c[1].q;
+	s.host_rst_n = c[1].q and !rst;
 	RAM_cs_n = s.RAM_cs_n;
 	RAM_we_n = s.RAM_we_n;
 	adc_convst = s.adc_convst[0];
@@ -110,15 +109,15 @@ begin
 		2,				10					=> 	3,					MODE_NONE;
 		3,				10					=> 	4,					MODE_AQUISITION;
 		4,				10					=> 	5,					MODE_NONE;
-		5,				10					=> 	6,					MODE_READ_DATA;
+		5,				10					=> 	6,					MODE_RW_DATA;
 		6,				15					=> 	7,					MODE_NONE;
 		7,				10					=> 	8,					MODE_CONFIGURATION;
 		8,				10					=> 	9,					MODE_AQUISITION;
 		9,				10					=> 	10,				MODE_CONFIGURATION;
-		10,			10					=> 	11,				MODE_READ_DATA;
+		10,			10					=> 	11,				MODE_RW_DATA;
 		11,			15					=> 	12,				MODE_CONFIGURATION;
 		12,			10					=> 	13,				MODE_AQUISITION;
-		13,			10					=> 	14,				MODE_READ_DATA;
+		13,			10					=> 	14,				MODE_RW_DATA;
 		14,			15					=> 	0,					MODE_AQUISITION;
 	END TABLE;
 

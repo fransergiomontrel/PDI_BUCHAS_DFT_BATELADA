@@ -23,6 +23,7 @@ quit -f
 
 
 
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -41,6 +42,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 
 
 
@@ -242,7 +244,7 @@ SIGNAL("data_bus_out")
 	PARENT = "";
 }
 
-SIGNAL("addr_inc")
+SIGNAL("addr_inc_write")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
@@ -398,7 +400,7 @@ TRANSITION_LIST("data_bus_out")
 	}
 }
 
-TRANSITION_LIST("addr_inc")
+TRANSITION_LIST("addr_inc_write")
 {
 	NODE
 	{
@@ -570,7 +572,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "addr_inc";
+	CHANNEL = "addr_inc_write";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 16;

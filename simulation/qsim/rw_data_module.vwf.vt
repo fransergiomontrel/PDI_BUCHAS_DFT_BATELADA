@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "04/23/2021 21:35:05"
+// Generated on "04/26/2021 13:04:50"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          rw_data_module
 // 
@@ -50,7 +50,8 @@ wire oe_n;
 wire test_async_load;
 wire [7:0] test_data_shift;
 wire test_loading;
-wire [3:0] test_state;
+wire [6:0] test_shift_rx;
+wire [5:0] test_state;
 wire we_n;
 
 // assign statements (if any)                          
@@ -75,6 +76,7 @@ rw_data_module i1 (
 	.test_async_load(test_async_load),
 	.test_data_shift(test_data_shift),
 	.test_loading(test_loading),
+	.test_shift_rx(test_shift_rx),
 	.test_state(test_state),
 	.we_n(we_n)
 );
@@ -140,7 +142,7 @@ initial
 begin
 	data_read[6] = 1'b0;
 	data_read[6] = #290000 1'b1;
-	data_read[6] = #2150000 1'b0;
+	data_read[6] = #2060000 1'b0;
 end 
 // data_read[ 5 ]
 initial
@@ -154,14 +156,14 @@ initial
 begin
 	data_read[4] = 1'b0;
 	data_read[4] = #290000 1'b1;
-	data_read[4] = #2150000 1'b0;
+	data_read[4] = #2060000 1'b0;
 end 
 // data_read[ 3 ]
 initial
 begin
 	data_read[3] = 1'b0;
 	data_read[3] = #290000 1'b1;
-	data_read[3] = #2150000 1'b0;
+	data_read[3] = #2060000 1'b0;
 end 
 // data_read[ 2 ]
 initial
@@ -175,7 +177,7 @@ initial
 begin
 	data_read[1] = 1'b0;
 	data_read[1] = #290000 1'b1;
-	data_read[1] = #2150000 1'b0;
+	data_read[1] = #2060000 1'b0;
 end 
 // data_read[ 0 ]
 initial
@@ -198,9 +200,20 @@ begin
 		# 10000;
 	end
 	SCLK_ = 1'b0;
-	SCLK_ = #1346000 1'b1;
+	SCLK_ = #1356000 1'b1;
 	# 50000;
-	repeat(53)
+	repeat(14)
+	begin
+		SCLK_ = 1'b0;
+		SCLK_ = #50000 1'b1;
+		# 50000;
+	end
+	SCLK_ = 1'b0;
+	SCLK_ = #50000 1'b1;
+	SCLK_ = #40000 1'b0;
+	SCLK_ = #1350000 1'b1;
+	# 50000;
+	repeat(24)
 	begin
 		SCLK_ = 1'b0;
 		SCLK_ = #50000 1'b1;
@@ -218,6 +231,10 @@ begin
 	MOSI = #100000 1'b1;
 	MOSI = #200000 1'b0;
 	MOSI = #200000 1'b1;
+	MOSI = #100000 1'b0;
+	MOSI = #200000 1'b1;
+	MOSI = #100000 1'b0;
+	MOSI = #500000 1'b1;
 	MOSI = #100000 1'b0;
 end 
 endmodule

@@ -29,15 +29,17 @@ subdesign rw_data_module(
 	
 	test_async_load: output;
 	test_loading: output;
-	test_state[3..0]: output;
+	test_state[5..0]: output;
 	test_data_shift[7..0]: output;
+	test_shift_rx[6..0]: output;
 )
 variable
 	shift: spi_shift_v2 with (N_BITS=8);
 	
-	sm: machine with states(wait_mode, init_buffers1, init_buffers2, init_buffers3, init_buffers4, wait_loading, wait_loading_n, wr1, wr2, wr3, wr4, wr5, wr6);
+	sm: machine with states(wait_mode, init_buffers1, init_buffers2, init_buffers3, init_buffers4, load_sync1, load_sync2, load_sync3, load_sync4, wait_loading, wr1, wr2, wr3, wr4, wr5, wr6, wait_loading_n);
 	
 	oe_n_FF, we_n_FF, cs_n_FF, load_parallel_FF, busy_ff, data_bus_out_ff, SCLK_ff, MOSI_ff: dffes;
+	buffer_parallel_in[7..0]: dffe;
 begin
 	defaults
 		addr_clr = Gnd;
@@ -49,6 +51,7 @@ begin
 		load_parallel_FF.d = Gnd;
 		busy_ff.d = Gnd;
 		data_bus_out_ff.d = Gnd;
+		buffer_parallel_in[].ena = Gnd;
 	end defaults;
 	
 	SCLK_ff.clk = clk;
@@ -58,7 +61,7 @@ begin
 	MOSI_ff.d = MOSI;
 	
 	shift.clk = SCLK_ff.q;
-	shift.parallel_in[] = data_read[];
+	shift.parallel_in[] = buffer_parallel_in[].q;
 	shift.MOSI = MOSI_ff.q;
 
 	oe_n_FF.clk = clk;
@@ -76,6 +79,12 @@ begin
 	data_bus_out_ff.clk = clk;
 	data_bus_out = data_bus_out_ff.q;
 	data_bus_out_ff.sclr = sreset;
+	
+	buffer_parallel_in[].clk = clk;
+	buffer_parallel_in[].d = data_read[];
+	buffer_parallel_in[].clrn = !(load_parallel_FF.q and !data_read[]);
+	buffer_parallel_in[].prn  = !(load_parallel_FF.q and  data_read[]);
+
 
 	load_parallel_FF.clk = clk;
 	shift.async_load = load_parallel_FF.q;
@@ -114,11 +123,33 @@ begin
 			sm = init_buffers3;
 
 		when init_buffers3 =>
-			oe_n_FF.d = Gnd;
 			busy_ff.d = Vcc;
+			oe_n_FF.d = Gnd;
 			sm = init_buffers4;
 
 		when init_buffers4 =>
+			addr_inc_read = Vcc;
+			busy_ff.d = Vcc;
+			oe_n_FF.d = Gnd;
+			sm = load_sync1;			
+			
+		when load_sync1 =>					-- 4 estados para dar temporização suficiente da leitura da RAM (taa)
+			busy_ff.d = Vcc;
+			oe_n_FF.d = Gnd;
+			sm = load_sync2;
+
+		when load_sync2 =>
+			busy_ff.d = Vcc;
+			oe_n_FF.d = Gnd;
+			sm = load_sync3;
+
+		when load_sync3 =>
+			busy_ff.d = Vcc;
+			oe_n_FF.d = Gnd;
+			buffer_parallel_in[].ena = Vcc;
+			sm = load_sync4;
+
+		when load_sync4 =>
 			addr_inc_read = Vcc;
 			busy_ff.d = Vcc;
 			oe_n_FF.d = Gnd;
@@ -129,19 +160,6 @@ begin
 				oe_n_FF.d = Gnd;
 				if !shift.loading_tx then
 					sm = wait_loading;
-				else
-					sm = wait_loading_n;
-				end if;
-			else
-				cs_n_FF.d = Vcc;
-				sm = wait_mode;
-			end if;
-
-		when wait_loading_n =>
-			if mode[] == MODE_RW_DATA and !changing_mode then
-				oe_n_FF.d = Gnd;
-				if shift.loading_tx then
-					sm = wait_loading_n;
 				else
 					sm = wr1;
 				end if;
@@ -180,7 +198,21 @@ begin
 			busy_ff.d = Vcc;
 			oe_n_FF.d = Gnd;
 			addr_inc_write = Vcc;
-			sm = init_buffers1;
+			sm = wait_loading_n;
+
+		when wait_loading_n =>
+			if mode[] == MODE_RW_DATA and !changing_mode then
+				oe_n_FF.d = Gnd;
+				if shift.loading_tx then
+					sm = wait_loading_n;
+				else
+					sm = load_sync1;
+				end if;
+			else
+				cs_n_FF.d = Vcc;
+				sm = wait_mode;
+			end if;
+
 	end case;
 	
 	MISO = shift.MISO;
@@ -193,6 +225,7 @@ begin
 	test_async_load = load_parallel_FF.q;
 	test_loading = shift.loading_tx;
 	test_data_shift[] = shift.test_shift_tx[];
+	test_shift_rx[] = shift.test_shift_rx[];
 	
 	TABLE
 		sm					=> test_state[];
@@ -201,13 +234,17 @@ begin
 		init_buffers2 	=>	2;
 		init_buffers3 	=>	3;
 		init_buffers4 	=>	4;
-		wait_loading 	=>	5;
-		wait_loading_n	=>	6;
-		wr1				=>	7;
-		wr2				=>	8;
-		wr3				=>	9;
-		wr4				=>	10;
-		wr5				=>	11;
-		wr6				=>	12;
+		load_sync1		=> 5;
+		load_sync2		=> 6;
+		load_sync3		=> 7;
+		load_sync4		=> 8;
+		wait_loading 	=>	9;
+		wr1				=>	10;
+		wr2				=>	11;
+		wr3				=>	12;
+		wr4				=>	13;
+		wr5				=>	14;
+		wr6				=>	15;
+		wait_loading_n	=>	16;
 	END TABLE;
 end;

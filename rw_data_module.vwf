@@ -23,6 +23,9 @@ quit -f
 
 
 
+
+
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -41,6 +44,9 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
+
+
 
 
 
@@ -502,6 +508,86 @@ SIGNAL("addr_inc_write")
 	PARENT = "";
 }
 
+SIGNAL("test_shift_rx")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 7;
+	LSB_INDEX = 0;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("test_shift_rx[6]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_shift_rx";
+}
+
+SIGNAL("test_shift_rx[5]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_shift_rx";
+}
+
+SIGNAL("test_shift_rx[4]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_shift_rx";
+}
+
+SIGNAL("test_shift_rx[3]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_shift_rx";
+}
+
+SIGNAL("test_shift_rx[2]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_shift_rx";
+}
+
+SIGNAL("test_shift_rx[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_shift_rx";
+}
+
+SIGNAL("test_shift_rx[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "test_shift_rx";
+}
+
 TRANSITION_LIST("clk")
 {
 	NODE
@@ -540,11 +626,21 @@ TRANSITION_LIST("SCLK_")
 			LEVEL 0 FOR 10.0;
 			LEVEL 1 FOR 10.0;
 		}
-		LEVEL 0 FOR 1346.0;
+		LEVEL 0 FOR 1356.0;
 		LEVEL 1 FOR 50.0;
 		NODE
 		{
-			REPEAT = 53;
+			REPEAT = 14;
+			LEVEL 0 FOR 50.0;
+			LEVEL 1 FOR 50.0;
+		}
+		LEVEL 0 FOR 50.0;
+		LEVEL 1 FOR 40.0;
+		LEVEL 0 FOR 1350.0;
+		LEVEL 1 FOR 50.0;
+		NODE
+		{
+			REPEAT = 24;
 			LEVEL 0 FOR 50.0;
 			LEVEL 1 FOR 50.0;
 		}
@@ -709,8 +805,8 @@ TRANSITION_LIST("data_read[6]")
 	{
 		REPEAT = 1;
 		LEVEL 0 FOR 290.0;
-		LEVEL 1 FOR 2150.0;
-		LEVEL 0 FOR 7560.0;
+		LEVEL 1 FOR 2060.0;
+		LEVEL 0 FOR 7650.0;
 	}
 }
 
@@ -731,8 +827,8 @@ TRANSITION_LIST("data_read[4]")
 	{
 		REPEAT = 1;
 		LEVEL 0 FOR 290.0;
-		LEVEL 1 FOR 2150.0;
-		LEVEL 0 FOR 7560.0;
+		LEVEL 1 FOR 2060.0;
+		LEVEL 0 FOR 7650.0;
 	}
 }
 
@@ -742,8 +838,8 @@ TRANSITION_LIST("data_read[3]")
 	{
 		REPEAT = 1;
 		LEVEL 0 FOR 290.0;
-		LEVEL 1 FOR 2150.0;
-		LEVEL 0 FOR 7560.0;
+		LEVEL 1 FOR 2060.0;
+		LEVEL 0 FOR 7650.0;
 	}
 }
 
@@ -764,8 +860,8 @@ TRANSITION_LIST("data_read[1]")
 	{
 		REPEAT = 1;
 		LEVEL 0 FOR 290.0;
-		LEVEL 1 FOR 2150.0;
-		LEVEL 0 FOR 7560.0;
+		LEVEL 1 FOR 2060.0;
+		LEVEL 0 FOR 7650.0;
 	}
 }
 
@@ -863,7 +959,11 @@ TRANSITION_LIST("MOSI")
 		LEVEL 1 FOR 200.0;
 		LEVEL 0 FOR 200.0;
 		LEVEL 1 FOR 100.0;
-		LEVEL 0 FOR 7780.0;
+		LEVEL 0 FOR 200.0;
+		LEVEL 1 FOR 100.0;
+		LEVEL 0 FOR 500.0;
+		LEVEL 1 FOR 100.0;
+		LEVEL 0 FOR 6880.0;
 	}
 }
 
@@ -895,6 +995,69 @@ TRANSITION_LIST("data_bus_out")
 }
 
 TRANSITION_LIST("addr_inc_write")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 10000.0;
+	}
+}
+
+TRANSITION_LIST("test_shift_rx[6]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 10000.0;
+	}
+}
+
+TRANSITION_LIST("test_shift_rx[5]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 10000.0;
+	}
+}
+
+TRANSITION_LIST("test_shift_rx[4]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 10000.0;
+	}
+}
+
+TRANSITION_LIST("test_shift_rx[3]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 10000.0;
+	}
+}
+
+TRANSITION_LIST("test_shift_rx[2]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 10000.0;
+	}
+}
+
+TRANSITION_LIST("test_shift_rx[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 10000.0;
+	}
+}
+
+TRANSITION_LIST("test_shift_rx[0]")
 {
 	NODE
 	{
@@ -1111,7 +1274,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "MISO";
+	CHANNEL = "MOSI";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 21;
@@ -1120,7 +1283,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "addr_clr";
+	CHANNEL = "MISO";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 22;
@@ -1129,7 +1292,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "addr_inc_read";
+	CHANNEL = "addr_clr";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 23;
@@ -1138,7 +1301,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "addr_inc_write";
+	CHANNEL = "addr_inc_read";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 24;
@@ -1147,7 +1310,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "test_async_load";
+	CHANNEL = "addr_inc_write";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 25;
@@ -1156,7 +1319,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "test_loading";
+	CHANNEL = "test_async_load";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 26;
@@ -1165,7 +1328,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "busy";
+	CHANNEL = "test_loading";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 27;
@@ -1174,7 +1337,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "MOSI";
+	CHANNEL = "busy";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 28;
@@ -1305,6 +1468,86 @@ DISPLAY_LINE
 	RADIX = Binary;
 	TREE_INDEX = 41;
 	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_shift_rx";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 42;
+	TREE_LEVEL = 0;
+	CHILDREN = 43, 44, 45, 46, 47, 48, 49;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_shift_rx[6]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 43;
+	TREE_LEVEL = 1;
+	PARENT = 42;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_shift_rx[5]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 44;
+	TREE_LEVEL = 1;
+	PARENT = 42;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_shift_rx[4]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 45;
+	TREE_LEVEL = 1;
+	PARENT = 42;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_shift_rx[3]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 46;
+	TREE_LEVEL = 1;
+	PARENT = 42;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_shift_rx[2]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 47;
+	TREE_LEVEL = 1;
+	PARENT = 42;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_shift_rx[1]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 48;
+	TREE_LEVEL = 1;
+	PARENT = 42;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "test_shift_rx[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 49;
+	TREE_LEVEL = 1;
+	PARENT = 42;
 }
 
 TIME_BAR
