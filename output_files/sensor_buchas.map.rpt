@@ -1,5 +1,5 @@
 Analysis & Synthesis report for sensor_buchas
-Mon Apr 26 15:17:33 2021
+Mon Apr 26 16:55:11 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -60,13 +60,13 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Mon Apr 26 15:17:33 2021       ;
+; Analysis & Synthesis Status ; Successful - Mon Apr 26 16:55:11 2021       ;
 ; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name               ; sensor_buchas                               ;
 ; Top-level Entity Name       ; sensor_buchas                               ;
 ; Family                      ; MAX V                                       ;
 ; Total logic elements        ; 610                                         ;
-; Total pins                  ; 100                                         ;
+; Total pins                  ; 101                                         ;
 ; Total virtual pins          ; 0                                           ;
 ; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
 +-----------------------------+---------------------------------------------+
@@ -223,10 +223,10 @@ https://fpgasoftware.intel.com/eula.
 ;                                             ;       ;
 ; Total registers                             ; 317   ;
 ; Total logic cells in carry chains           ; 70    ;
-; I/O pins                                    ; 100   ;
+; I/O pins                                    ; 101   ;
 ; Maximum fan-out node                        ; clk   ;
 ; Maximum fan-out                             ; 287   ;
-; Total fan-out                               ; 2356  ;
+; Total fan-out                               ; 2357  ;
 ; Average fan-out                             ; 3.32  ;
 +---------------------------------------------+-------+
 
@@ -236,7 +236,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------------------------------------------+------------------------+--------------+
 ; Compilation Hierarchy Node                ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                                 ; Entity Name            ; Library Name ;
 +-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------------------------------------------+------------------------+--------------+
-; |sensor_buchas                            ; 610 (0)     ; 317          ; 0          ; 100  ; 0            ; 293 (0)      ; 147 (0)           ; 170 (0)          ; 70 (0)          ; 0 (0)      ; |sensor_buchas                                                                                      ; sensor_buchas          ; work         ;
+; |sensor_buchas                            ; 610 (0)     ; 317          ; 0          ; 101  ; 0            ; 293 (0)      ; 147 (0)           ; 170 (0)          ; 70 (0)          ; 0 (0)      ; |sensor_buchas                                                                                      ; sensor_buchas          ; work         ;
 ;    |RAM_interface:inst11|                 ; 71 (71)     ; 38           ; 0          ; 0    ; 0            ; 33 (33)      ; 0 (0)             ; 38 (38)          ; 36 (36)         ; 0 (0)      ; |sensor_buchas|RAM_interface:inst11                                                                 ; RAM_interface          ; work         ;
 ;    |acquisition_module:inst13|            ; 300 (1)     ; 174          ; 0          ; 0    ; 0            ; 126 (1)      ; 107 (0)           ; 67 (0)           ; 12 (0)          ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13                                                            ; acquisition_module     ; work         ;
 ;       |acquisition_ctrl:ctrl|             ; 38 (20)     ; 24           ; 0          ; 0    ; 0            ; 14 (12)      ; 0 (0)             ; 24 (8)           ; 8 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl                                      ; acquisition_ctrl       ; work         ;
@@ -656,7 +656,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Mon Apr 26 15:17:26 2021
+    Info: Processing started: Mon Apr 26 16:55:04 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off sensor_buchas -c sensor_buchas
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -768,14 +768,14 @@ Warning (21074): Design contains 6 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "adc_rvs[2]"
     Warning (15610): No output dependent on input pin "adc_rvs[1]"
     Warning (15610): No output dependent on input pin "adc_rvs[0]"
-Info (21057): Implemented 710 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 711 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 19 input pins
-    Info (21059): Implemented 73 output pins
+    Info (21059): Implemented 74 output pins
     Info (21060): Implemented 8 bidirectional pins
     Info (21061): Implemented 610 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 38 warnings
-    Info: Peak virtual memory: 4697 megabytes
-    Info: Processing ended: Mon Apr 26 15:17:33 2021
+    Info: Peak virtual memory: 4703 megabytes
+    Info: Processing ended: Mon Apr 26 16:55:11 2021
     Info: Elapsed time: 00:00:07
     Info: Total CPU time (on all processors): 00:00:16
 
