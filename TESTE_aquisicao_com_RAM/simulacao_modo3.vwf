@@ -1,12 +1,12 @@
 /*<simulation_settings>
-<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off teste_aquisicao_com_ram -c teste_aquisicao_com_ram --vector_source="C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/simulacao1.vwf" --testbench_file="C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/simulation/qsim/simulacao1.vwf.vt"</ftestbench_cmd>
-<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off teste_aquisicao_com_ram -c teste_aquisicao_com_ram --vector_source="C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/simulacao1.vwf" --testbench_file="C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/simulation/qsim/simulacao1.vwf.vt"</ttestbench_cmd>
+<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off teste_aquisicao_com_ram -c teste_aquisicao_com_ram --vector_source="C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/simulacao_modo3.vwf" --testbench_file="C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/simulation/qsim/simulacao_modo3.vwf.vt"</ftestbench_cmd>
+<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off teste_aquisicao_com_ram -c teste_aquisicao_com_ram --vector_source="C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/simulacao_modo3.vwf" --testbench_file="C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/simulation/qsim/simulacao_modo3.vwf.vt"</ttestbench_cmd>
 <fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/simulation/qsim/" teste_aquisicao_com_ram -c teste_aquisicao_com_ram</fnetlist_cmd>
 <tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/simulation/qsim/" teste_aquisicao_com_ram -c teste_aquisicao_com_ram</tnetlist_cmd>
 <modelsim_script>onerror {exit -code 1}
 vlib work
 vlog -work work teste_aquisicao_com_ram.vo
-vlog -work work simulacao1.vwf.vt
+vlog -work work simulacao_modo3.vwf.vt
 vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.teste_aquisicao_com_ram_vlg_vec_tst
 vcd file -direction teste_aquisicao_com_ram.msim.vcd
 vcd add -internal teste_aquisicao_com_ram_vlg_vec_tst/*
@@ -20,20 +20,11 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
-
-
-
-
-
-
-
-
-
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
 vlog -work work teste_aquisicao_com_ram.vo
-vlog -work work simulacao1.vwf.vt
+vlog -work work simulacao_modo3.vwf.vt
 vsim -c -t 1ps -L maxii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.teste_aquisicao_com_ram_vlg_vec_tst
 vcd file -direction teste_aquisicao_com_ram.msim.vcd
 vcd add -internal teste_aquisicao_com_ram_vlg_vec_tst/*
@@ -47,15 +38,6 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
-
-
-
-
-
-
-
-
-
 </modelsim_script_timing>
 <hdl_lang>verilog</hdl_lang>
 </simulation_settings>*/

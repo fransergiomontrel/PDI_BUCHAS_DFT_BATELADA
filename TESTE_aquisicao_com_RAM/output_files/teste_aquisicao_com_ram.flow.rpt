@@ -1,5 +1,5 @@
 Flow report for teste_aquisicao_com_ram
-Mon Apr 26 13:56:20 2021
+Wed Apr 28 18:13:34 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -41,13 +41,13 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------+
 ; Flow Summary                                                        ;
 +-----------------------+---------------------------------------------+
-; Flow Status           ; Successful - Mon Apr 26 13:56:20 2021       ;
+; Flow Status           ; Successful - Wed Apr 28 18:13:34 2021       ;
 ; Quartus Prime Version ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name         ; teste_aquisicao_com_ram                     ;
 ; Top-level Entity Name ; teste_aquisicao_com_ram                     ;
 ; Family                ; MAX II                                      ;
-; Total logic elements  ; 972 / 2,210 ( 44 % )                        ;
-; Total pins            ; 58 / 204 ( 28 % )                           ;
+; Total logic elements  ; 1,193 / 2,210 ( 54 % )                      ;
+; Total pins            ; 53 / 204 ( 26 % )                           ;
 ; Total virtual pins    ; 0                                           ;
 ; UFM blocks            ; 0 / 1 ( 0 % )                               ;
 ; Device                ; EPM2210F256C3                               ;
@@ -60,7 +60,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+-------------------------+
 ; Option            ; Setting                 ;
 +-------------------+-------------------------+
-; Start date & time ; 04/26/2021 13:55:52     ;
+; Start date & time ; 04/28/2021 18:05:05     ;
 ; Main task         ; Compilation             ;
 ; Revision Name     ; teste_aquisicao_com_ram ;
 +-------------------+-------------------------+
@@ -71,7 +71,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------+------------------------------+---------------+-------------+-----------------------------------+
 ; Assignment Name                 ; Value                        ; Default Value ; Entity Name ; Section Id                        ;
 +---------------------------------+------------------------------+---------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID           ; 121366581361.161945615204736 ; --            ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID           ; 121366581361.161964390501260 ; --            ; --          ; --                                ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST ; Off                          ; --            ; --          ; eda_board_design_timing           ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST ; Off                          ; --            ; --          ; eda_board_design_boundary_scan    ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST ; Off                          ; --            ; --          ; eda_board_design_signal_integrity ;
@@ -89,12 +89,16 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:12     ; 1.0                     ; 4699 MB             ; 00:00:18                           ;
-; Fitter               ; 00:00:08     ; 1.0                     ; 5087 MB             ; 00:00:11                           ;
-; Assembler            ; 00:00:01     ; 1.0                     ; 4661 MB             ; 00:00:01                           ;
-; Timing Analyzer      ; 00:00:03     ; 1.0                     ; 4661 MB             ; 00:00:02                           ;
-; EDA Netlist Writer   ; 00:00:00     ; 1.0                     ; 4616 MB             ; 00:00:01                           ;
-; Total                ; 00:00:24     ; --                      ; --                  ; 00:00:33                           ;
+; Analysis & Synthesis ; 00:00:14     ; 1.0                     ; 4704 MB             ; 00:00:20                           ;
+; Fitter               ; 00:00:09     ; 1.0                     ; 5089 MB             ; 00:00:13                           ;
+; Assembler            ; 00:00:00     ; 1.0                     ; 4662 MB             ; 00:00:01                           ;
+; Timing Analyzer      ; 00:00:03     ; 1.0                     ; 4673 MB             ; 00:00:02                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4618 MB             ; 00:00:01                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4610 MB             ; 00:00:01                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4619 MB             ; 00:00:01                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4610 MB             ; 00:00:01                           ;
+; EDA Netlist Writer   ; 00:00:00     ; 1.0                     ; 4619 MB             ; 00:00:01                           ;
+; Total                ; 00:00:30     ; --                      ; --                  ; 00:00:41                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -108,6 +112,10 @@ https://fpgasoftware.intel.com/eula.
 ; Assembler            ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
 ; Timing Analyzer      ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
 ; EDA Netlist Writer   ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
+; EDA Netlist Writer   ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
+; EDA Netlist Writer   ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
+; EDA Netlist Writer   ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
+; EDA Netlist Writer   ; AFONSOMIGUE8FFE  ; Windows 10 ; 10.0       ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 
@@ -119,6 +127,10 @@ quartus_fit --read_settings_files=off --write_settings_files=off teste_aquisicao
 quartus_asm --read_settings_files=off --write_settings_files=off teste_aquisicao_com_ram -c teste_aquisicao_com_ram
 quartus_sta teste_aquisicao_com_ram -c teste_aquisicao_com_ram
 quartus_eda --read_settings_files=off --write_settings_files=off teste_aquisicao_com_ram -c teste_aquisicao_com_ram
+quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off teste_aquisicao_com_ram -c teste_aquisicao_com_ram --vector_source=C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/teste_modo_2.vwf --testbench_file=C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/simulation/qsim/teste_modo_2.vwf.vt
+quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory=C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/simulation/qsim/ teste_aquisicao_com_ram -c teste_aquisicao_com_ram
+quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off teste_aquisicao_com_ram -c teste_aquisicao_com_ram --vector_source=C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/teste_modo_2.vwf --testbench_file=C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/simulation/qsim/teste_modo_2.vwf.vt
+quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory=C:/sensorbuchasv2/TESTE_aquisicao_com_RAM/simulation/qsim/ teste_aquisicao_com_ram -c teste_aquisicao_com_ram
 
 
 

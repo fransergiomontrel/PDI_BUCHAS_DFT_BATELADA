@@ -3,38 +3,70 @@ Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Setup 'clk'
-Slack : -7.703
-TNS   : -4007.516
+Slack : -7.290
+TNS   : -4125.129
 
 Type  : Setup 'sensor_buchas:inst2|rw_data_module:inst14|dffes:SCLK_ff|ff'
-Slack : -2.430
-TNS   : -37.445
+Slack : -2.471
+TNS   : -39.145
+
+Type  : Setup 'SCLK_'
+Slack : -2.215
+TNS   : -118.886
+
+Type  : Setup 'convst_start'
+Slack : -0.825
+TNS   : -3.758
+
+Type  : Hold 'SCLK_'
+Slack : 0.092
+TNS   : 0.000
 
 Type  : Hold 'clk'
 Slack : 0.674
 TNS   : 0.000
 
 Type  : Hold 'sensor_buchas:inst2|rw_data_module:inst14|dffes:SCLK_ff|ff'
-Slack : 0.752
+Slack : 0.865
+TNS   : 0.000
+
+Type  : Hold 'convst_start'
+Slack : 1.073
 TNS   : 0.000
 
 Type  : Recovery 'clk'
-Slack : -5.514
-TNS   : -479.031
+Slack : -4.897
+TNS   : -424.462
+
+Type  : Recovery 'SCLK_'
+Slack : -2.870
+TNS   : -189.777
 
 Type  : Recovery 'sensor_buchas:inst2|rw_data_module:inst14|dffes:SCLK_ff|ff'
-Slack : -2.044
-TNS   : -27.841
+Slack : -2.377
+TNS   : -28.505
 
-Type  : Removal 'clk'
-Slack : 1.877
-TNS   : 0.000
+Type  : Removal 'SCLK_'
+Slack : -0.678
+TNS   : -3.156
 
 Type  : Removal 'sensor_buchas:inst2|rw_data_module:inst14|dffes:SCLK_ff|ff'
-Slack : 1.985
+Slack : 1.748
 TNS   : 0.000
 
+Type  : Removal 'clk'
+Slack : 1.866
+TNS   : 0.000
+
+Type  : Minimum Pulse Width 'SCLK_'
+Slack : -2.289
+TNS   : -2.289
+
 Type  : Minimum Pulse Width 'clk'
+Slack : -2.289
+TNS   : -2.289
+
+Type  : Minimum Pulse Width 'convst_start'
 Slack : -2.289
 TNS   : -2.289
 
