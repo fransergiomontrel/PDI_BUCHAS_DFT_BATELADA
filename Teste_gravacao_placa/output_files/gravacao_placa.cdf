@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EPM1270T144) Path("C:/Users/CISEI/Documents/CPLD-Sensor-Buchas-V2/Teste_gravacao_placa/output_files/") File("gravacao_placa.pof") MfrSpec(OpMask(1) SEC_Device(EPM1270T144) Child_OpMask(2 1 1));
+		Device PartName(5M1270ZT144) Path("C:/sensorbuchasv2_/Teste_gravacao_placa/output_files/") File("gravacao_placa.pof") MfrSpec(OpMask(7) SEC_Device(5M1270ZT144) Child_OpMask(2 7 7));
 
 ChainEnd;
 
