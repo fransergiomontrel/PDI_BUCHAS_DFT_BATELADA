@@ -1,5 +1,5 @@
 Analysis & Synthesis report for sensor_buchas
-Wed Apr 28 18:23:25 2021
+Sat May 01 10:47:15 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -60,12 +60,12 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Wed Apr 28 18:23:25 2021       ;
+; Analysis & Synthesis Status ; Successful - Sat May 01 10:47:15 2021       ;
 ; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name               ; sensor_buchas                               ;
 ; Top-level Entity Name       ; sensor_buchas                               ;
 ; Family                      ; MAX V                                       ;
-; Total logic elements        ; 610                                         ;
+; Total logic elements        ; 615                                         ;
 ; Total pins                  ; 101                                         ;
 ; Total virtual pins          ; 0                                           ;
 ; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
@@ -201,33 +201,33 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Total logic elements                        ; 610   ;
-;     -- Combinational with no register       ; 293   ;
-;     -- Register only                        ; 147   ;
-;     -- Combinational with a register        ; 170   ;
+; Total logic elements                        ; 615   ;
+;     -- Combinational with no register       ; 296   ;
+;     -- Register only                        ; 150   ;
+;     -- Combinational with a register        ; 169   ;
 ;                                             ;       ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 185   ;
-;     -- 3 input functions                    ; 147   ;
-;     -- 2 input functions                    ; 109   ;
+;     -- 4 input functions                    ; 183   ;
+;     -- 3 input functions                    ; 152   ;
+;     -- 2 input functions                    ; 108   ;
 ;     -- 1 input functions                    ; 22    ;
 ;     -- 0 input functions                    ; 0     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 545   ;
+;     -- normal mode                          ; 550   ;
 ;     -- arithmetic mode                      ; 65    ;
 ;     -- qfbk mode                            ; 0     ;
 ;     -- register cascade mode                ; 0     ;
 ;     -- synchronous clear/load mode          ; 29    ;
-;     -- asynchronous clear/load mode         ; 148   ;
+;     -- asynchronous clear/load mode         ; 150   ;
 ;                                             ;       ;
-; Total registers                             ; 317   ;
+; Total registers                             ; 319   ;
 ; Total logic cells in carry chains           ; 70    ;
 ; I/O pins                                    ; 101   ;
 ; Maximum fan-out node                        ; clk   ;
-; Maximum fan-out                             ; 287   ;
-; Total fan-out                               ; 2357  ;
-; Average fan-out                             ; 3.32  ;
+; Maximum fan-out                             ; 289   ;
+; Total fan-out                               ; 2369  ;
+; Average fan-out                             ; 3.31  ;
 +---------------------------------------------+-------+
 
 
@@ -236,9 +236,9 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------------------------------------------+------------------------+--------------+
 ; Compilation Hierarchy Node                ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                                 ; Entity Name            ; Library Name ;
 +-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------------------------------------------------------------------------------+------------------------+--------------+
-; |sensor_buchas                            ; 610 (0)     ; 317          ; 0          ; 101  ; 0            ; 293 (0)      ; 147 (0)           ; 170 (0)          ; 70 (0)          ; 0 (0)      ; |sensor_buchas                                                                                      ; sensor_buchas          ; work         ;
+; |sensor_buchas                            ; 615 (0)     ; 319          ; 0          ; 101  ; 0            ; 296 (0)      ; 150 (0)           ; 169 (0)          ; 70 (0)          ; 0 (0)      ; |sensor_buchas                                                                                      ; sensor_buchas          ; work         ;
 ;    |RAM_interface:inst11|                 ; 71 (71)     ; 38           ; 0          ; 0    ; 0            ; 33 (33)      ; 0 (0)             ; 38 (38)          ; 36 (36)         ; 0 (0)      ; |sensor_buchas|RAM_interface:inst11                                                                 ; RAM_interface          ; work         ;
-;    |acquisition_module:inst13|            ; 300 (1)     ; 174          ; 0          ; 0    ; 0            ; 126 (1)      ; 107 (0)           ; 67 (0)           ; 12 (0)          ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13                                                            ; acquisition_module     ; work         ;
+;    |acquisition_module:inst13|            ; 305 (1)     ; 176          ; 0          ; 0    ; 0            ; 129 (1)      ; 110 (0)           ; 66 (0)           ; 12 (0)          ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13                                                            ; acquisition_module     ; work         ;
 ;       |acquisition_ctrl:ctrl|             ; 38 (20)     ; 24           ; 0          ; 0    ; 0            ; 14 (12)      ; 0 (0)             ; 24 (8)           ; 8 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl                                      ; acquisition_ctrl       ; work         ;
 ;          |counter:clock_counter|          ; 10 (10)     ; 9            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 9 (9)            ; 8 (8)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|counter:clock_counter                ; counter                ; work         ;
 ;          |counter:samples_counter|        ; 3 (3)       ; 2            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 2 (2)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|counter:samples_counter              ; counter                ; work         ;
@@ -247,7 +247,7 @@ https://fpgasoftware.intel.com/eula.
 ;          |dffes:serialize_ff|             ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:serialize_ff                   ; dffes                  ; work         ;
 ;          |dffes:store_crc_ff|             ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:store_crc_ff                   ; dffes                  ; work         ;
 ;          |dffes:store_ff|                 ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:store_ff                       ; dffes                  ; work         ;
-;       |acquisition_serializer:serializer| ; 196 (83)    ; 103          ; 0          ; 0    ; 0            ; 93 (83)      ; 90 (0)            ; 13 (0)           ; 4 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer                          ; acquisition_serializer ; work         ;
+;       |acquisition_serializer:serializer| ; 197 (84)    ; 103          ; 0          ; 0    ; 0            ; 94 (84)      ; 90 (0)            ; 13 (0)           ; 4 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer                          ; acquisition_serializer ; work         ;
 ;          |counter:count|                  ; 15 (15)     ; 5            ; 0          ; 0    ; 0            ; 10 (10)      ; 0 (0)             ; 5 (5)            ; 4 (4)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|counter:count            ; counter                ; work         ;
 ;          |dffes:data_buffer[0][0]|        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][0]  ; dffes                  ; work         ;
 ;          |dffes:data_buffer[0][10]|       ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][10] ; dffes                  ; work         ;
@@ -353,10 +353,10 @@ https://fpgasoftware.intel.com/eula.
 ;          |dffes:cs_n_ff|                  ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store:storer|dffes:cs_n_ff                     ; dffes                  ; work         ;
 ;          |dffes:data_bus_out_ff|          ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store:storer|dffes:data_bus_out_ff             ; dffes                  ; work         ;
 ;          |dffes:we_n_ff|                  ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store:storer|dffes:we_n_ff                     ; dffes                  ; work         ;
-;       |acquisition_store_crc:storer_crc|  ; 15 (11)     ; 14           ; 0          ; 0    ; 0            ; 1 (1)        ; 8 (7)             ; 6 (3)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store_crc:storer_crc                           ; acquisition_store_crc  ; work         ;
+;       |acquisition_store_crc:storer_crc|  ; 19 (15)     ; 16           ; 0          ; 0    ; 0            ; 3 (3)        ; 11 (9)            ; 5 (3)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store_crc:storer_crc                           ; acquisition_store_crc  ; work         ;
 ;          |dffes:cs_n_ff|                  ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store_crc:storer_crc|dffes:cs_n_ff             ; dffes                  ; work         ;
 ;          |dffes:data_bus_out_ff|          ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store_crc:storer_crc|dffes:data_bus_out_ff     ; dffes                  ; work         ;
-;          |dffes:msb_ff|                   ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store_crc:storer_crc|dffes:msb_ff              ; dffes                  ; work         ;
+;          |dffes:msb_ff|                   ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store_crc:storer_crc|dffes:msb_ff              ; dffes                  ; work         ;
 ;          |dffes:we_n_ff|                  ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store_crc:storer_crc|dffes:we_n_ff             ; dffes                  ; work         ;
 ;       |crc16:crc|                         ; 21 (21)     ; 16           ; 0          ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 16 (16)          ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|crc16:crc                                                  ; crc16                  ; work         ;
 ;       |dffes:start_ff|                    ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|dffes:start_ff                                             ; dffes                  ; work         ;
@@ -411,22 +411,24 @@ Encoding Type:  One-Hot
 
 
 Encoding Type:  One-Hot
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_store_crc:storer_crc|sm                                                                       ;
-+----------------+----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+----------------+
-; Name           ; WAIT_END ; WE1_CS0_MSBb ; WE0_CS0_MSBb ; WE0_CS0_MSBa ; WE1_CS0_MSBa ; WE1_CS0_LSBb ; WE0_CS0_LSBb ; WE0_CS0_LSBa ; WE1_CS0_LSBa ; WAIT_STORE_CRC ;
-+----------------+----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+----------------+
-; WAIT_STORE_CRC ; 0        ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0              ;
-; WE1_CS0_LSBa   ; 0        ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1            ; 1              ;
-; WE0_CS0_LSBa   ; 0        ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1            ; 0            ; 1              ;
-; WE0_CS0_LSBb   ; 0        ; 0            ; 0            ; 0            ; 0            ; 0            ; 1            ; 0            ; 0            ; 1              ;
-; WE1_CS0_LSBb   ; 0        ; 0            ; 0            ; 0            ; 0            ; 1            ; 0            ; 0            ; 0            ; 1              ;
-; WE1_CS0_MSBa   ; 0        ; 0            ; 0            ; 0            ; 1            ; 0            ; 0            ; 0            ; 0            ; 1              ;
-; WE0_CS0_MSBa   ; 0        ; 0            ; 0            ; 1            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1              ;
-; WE0_CS0_MSBb   ; 0        ; 0            ; 1            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1              ;
-; WE1_CS0_MSBb   ; 0        ; 1            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1              ;
-; WAIT_END       ; 1        ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1              ;
-+----------------+----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+----------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_store_crc:storer_crc|sm                                                                                                     ;
++----------------+----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+----------------+
+; Name           ; WAIT_END ; WE1_CS0_MSBb ; WE0_CS0_MSBc ; WE0_CS0_MSBb ; WE0_CS0_MSBa ; WE1_CS0_MSBa ; WE1_CS0_LSBb ; WE0_CS0_LSBc ; WE0_CS0_LSBb ; WE0_CS0_LSBa ; WE1_CS0_LSBa ; WAIT_STORE_CRC ;
++----------------+----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+----------------+
+; WAIT_STORE_CRC ; 0        ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0              ;
+; WE1_CS0_LSBa   ; 0        ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1            ; 1              ;
+; WE0_CS0_LSBa   ; 0        ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1            ; 0            ; 1              ;
+; WE0_CS0_LSBb   ; 0        ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1            ; 0            ; 0            ; 1              ;
+; WE0_CS0_LSBc   ; 0        ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1            ; 0            ; 0            ; 0            ; 1              ;
+; WE1_CS0_LSBb   ; 0        ; 0            ; 0            ; 0            ; 0            ; 0            ; 1            ; 0            ; 0            ; 0            ; 0            ; 1              ;
+; WE1_CS0_MSBa   ; 0        ; 0            ; 0            ; 0            ; 0            ; 1            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1              ;
+; WE0_CS0_MSBa   ; 0        ; 0            ; 0            ; 0            ; 1            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1              ;
+; WE0_CS0_MSBb   ; 0        ; 0            ; 0            ; 1            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1              ;
+; WE0_CS0_MSBc   ; 0        ; 0            ; 1            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1              ;
+; WE1_CS0_MSBb   ; 0        ; 1            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1              ;
+; WAIT_END       ; 1        ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 1              ;
++----------------+----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+----------------+
 
 
 Encoding Type:  One-Hot
@@ -493,10 +495,10 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 317   ;
+; Total registers                              ; 319   ;
 ; Number of registers using Synchronous Clear  ; 20    ;
 ; Number of registers using Synchronous Load   ; 9     ;
-; Number of registers using Asynchronous Clear ; 140   ;
+; Number of registers using Asynchronous Clear ; 142   ;
 ; Number of registers using Asynchronous Load  ; 16    ;
 ; Number of registers using Clock Enable       ; 199   ;
 ; Number of registers using Preset             ; 0     ;
@@ -656,7 +658,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Wed Apr 28 18:23:13 2021
+    Info: Processing started: Sat May 01 10:47:02 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off sensor_buchas -c sensor_buchas
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -768,15 +770,15 @@ Warning (21074): Design contains 6 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "adc_rvs[2]"
     Warning (15610): No output dependent on input pin "adc_rvs[1]"
     Warning (15610): No output dependent on input pin "adc_rvs[0]"
-Info (21057): Implemented 711 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 716 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 19 input pins
     Info (21059): Implemented 74 output pins
     Info (21060): Implemented 8 bidirectional pins
-    Info (21061): Implemented 610 logic cells
+    Info (21061): Implemented 615 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 38 warnings
-    Info: Peak virtual memory: 4693 megabytes
-    Info: Processing ended: Wed Apr 28 18:23:25 2021
-    Info: Elapsed time: 00:00:12
-    Info: Total CPU time (on all processors): 00:00:19
+    Info: Peak virtual memory: 4703 megabytes
+    Info: Processing ended: Sat May 01 10:47:15 2021
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:20
 
 

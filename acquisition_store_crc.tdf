@@ -18,7 +18,7 @@ subdesign acquisition_store_crc(
 variable	
 	cs_n_ff, we_n_ff, data_bus_out_ff, msb_ff: dffes;
 	
-	sm: MACHINE WITH STATES(WAIT_STORE_CRC, WE1_CS0_LSBa, WE0_CS0_LSBa, WE0_CS0_LSBb, WE1_CS0_LSBb, WE1_CS0_MSBa, WE0_CS0_MSBa, WE0_CS0_MSBb, WE1_CS0_MSBb, WAIT_END);
+	sm: MACHINE WITH STATES(WAIT_STORE_CRC, WE1_CS0_LSBa, WE0_CS0_LSBa, WE0_CS0_LSBb, WE0_CS0_LSBc, WE1_CS0_LSBb, WE1_CS0_MSBa, WE0_CS0_MSBa, WE0_CS0_MSBb, WE0_CS0_MSBc, WE1_CS0_MSBb, WAIT_END);
 begin
 	defaults
 		cs_n_ff.d = Gnd;
@@ -71,12 +71,19 @@ test_sm[] = 2;
 		WHEN WE0_CS0_LSBb =>
 			-- WE=0, CS=0, MSB=0
 test_sm[] = 3;
+			we_n_ff.d = Gnd;
+			data_bus_out_ff.d = Vcc;
+			sm = WE0_CS0_LSBc;
+			
+		WHEN WE0_CS0_LSBc =>
+			-- WE=0, CS=0, MSB=0
+test_sm[] = 4;
 			data_bus_out_ff.d = Vcc;
 			sm = WE1_CS0_LSBb;
 			
 		WHEN WE1_CS0_LSBb =>
 			-- WE=1, CS=0, MSB=0
-test_sm[] = 4;
+test_sm[] = 5;
 			addr_inc_write = Vcc;
 			msb_ff.d = Vcc;
 			data_bus_out_ff.d = Vcc;
@@ -85,7 +92,7 @@ test_sm[] = 4;
 -- 
 		WHEN WE1_CS0_MSBa =>
 			-- WE=1, CS=0, MSB=1
-test_sm[] = 5;
+test_sm[] = 6;
 			data_bus_out_ff.d = Vcc;
 			we_n_ff.d = Gnd;
 			msb_ff.d = Vcc;
@@ -93,7 +100,7 @@ test_sm[] = 5;
 			
 		WHEN WE0_CS0_MSBa =>
 			-- WE=0, CS=0, MSB=1
-test_sm[] = 6;
+test_sm[] = 7;
 			data_bus_out_ff.d = Vcc;
 			we_n_ff.d = Gnd;
 			msb_ff.d = Vcc;
@@ -101,19 +108,27 @@ test_sm[] = 6;
 
 		WHEN WE0_CS0_MSBb =>
 			-- WE=0, CS=0, MSB=1
-test_sm[] = 7;
+test_sm[] = 8;
+			data_bus_out_ff.d = Vcc;
+			we_n_ff.d = Gnd;
+			msb_ff.d = Vcc;
+			sm = WE0_CS0_MSBc;
+			
+		WHEN WE0_CS0_MSBc =>
+			-- WE=0, CS=0, MSB=1
+test_sm[] = 9;
 			data_bus_out_ff.d = Vcc;
 			msb_ff.d = Vcc;
 			sm = WE1_CS0_MSBb;
 			
 		WHEN WE1_CS0_MSBb =>
 			-- WE=1, CS=0, MSB=1
-test_sm[] = 8;
+test_sm[] = 10;
 			addr_inc_write = Vcc;
 			sm = WAIT_END;
 
 		WHEN WAIT_END =>
-test_sm[] = 9;
+test_sm[] = 11;
 			store_crc_ok = Vcc;
 			if store_crc then
 				cs_n_ff.d = Vcc;
