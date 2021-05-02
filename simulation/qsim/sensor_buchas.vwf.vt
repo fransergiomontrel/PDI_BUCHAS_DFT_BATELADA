@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "05/01/2021 10:47:39"
+// Generated on "05/01/2021 21:04:23"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          sensor_buchas
 // 
@@ -133,6 +133,8 @@ begin
 	host_convst_start = 1'b0;
 	host_convst_start = #7040000 1'b1;
 	host_convst_start = #1920000 1'b0;
+	host_convst_start = #11520000 1'b1;
+	host_convst_start = #120000 1'b0;
 end 
 // host_mode[ 1 ]
 initial
@@ -205,6 +207,46 @@ end
 initial
 begin
 	adc_sdi[0] = 1'b0;
+end 
+// ram_data_bus[ 7 ]
+initial
+begin
+	treg_ram_data_bus[7] = 1'bZ;
+end 
+// ram_data_bus[ 6 ]
+initial
+begin
+	treg_ram_data_bus[6] = 1'bZ;
+end 
+// ram_data_bus[ 5 ]
+initial
+begin
+	treg_ram_data_bus[5] = 1'bZ;
+end 
+// ram_data_bus[ 4 ]
+initial
+begin
+	treg_ram_data_bus[4] = 1'bZ;
+end 
+// ram_data_bus[ 3 ]
+initial
+begin
+	treg_ram_data_bus[3] = 1'bZ;
+end 
+// ram_data_bus[ 2 ]
+initial
+begin
+	treg_ram_data_bus[2] = 1'bZ;
+end 
+// ram_data_bus[ 1 ]
+initial
+begin
+	treg_ram_data_bus[1] = 1'bZ;
+end 
+// ram_data_bus[ 0 ]
+initial
+begin
+	treg_ram_data_bus[0] = 1'bZ;
 end 
 
 // host_rst_n

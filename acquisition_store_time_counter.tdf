@@ -1,0 +1,120 @@
+include "counter.inc";
+include "dffes.inc";
+
+subdesign acquisition_store_time_counter(
+	clk: input;
+	sreset: input;
+	store_time_counter: input;
+	
+	we_n: output;
+	cs_n: output;
+	addr_inc_write: output;
+	store_time_counter_ok:output;
+	channel[2..0]: output;
+	data_bus_out: output;
+	crc_enable: output;
+
+	test_sm[3..0]: output;
+)
+variable	
+	cs_n_ff, we_n_ff, data_bus_out_ff, crc_enable_ff: dffes;
+	channel_counter: counter with (MAX_VALUE = 5);
+	sm: MACHINE WITH STATES(WAIT_STORE_TIME_COUNTER, WE1_CS0_LSBa, WE0_CS0_LSBa, WE0_CS0_LSBb, WE0_CS0_LSBc, WE1_CS0_LSBb, WAIT_END);
+begin
+	defaults
+		cs_n_ff.d = Gnd;
+		we_n_ff.d = Vcc;
+		data_bus_out_ff.d = Gnd;
+		addr_inc_write = Gnd;
+		store_time_counter_ok = Gnd;
+		channel_counter.clr = Gnd;
+		channel_counter.inc = Gnd;
+		crc_enable_ff.d = Gnd;
+	end defaults;
+	
+	-- sresets
+	sm.reset = sreset;
+	cs_n_ff.spre = sreset;
+	we_n_ff.spre = sreset;
+	data_bus_out_ff.sclr = sreset;
+	channel_counter.sreset = sreset;
+	
+	-- Sync data
+	cs_n_ff.clk = clk;
+	we_n_ff.clk = clk;
+	data_bus_out_ff.clk = clk;
+	sm.clk = clk;
+	channel_counter.clk = clk;
+	crc_enable_ff.clk = clk;
+
+	case sm IS
+		WHEN WAIT_STORE_TIME_COUNTER =>
+test_sm[] = 0;
+			channel_counter.clr = Vcc;
+			if store_time_counter then
+				data_bus_out_ff.d = Vcc;
+				sm = WE1_CS0_LSBa;
+			else
+				cs_n_ff.d = Vcc;
+				sm = WAIT_STORE_TIME_COUNTER;
+			end if;
+			
+		WHEN WE1_CS0_LSBa =>
+			-- WE=1, CS=0, MSB=0
+test_sm[] = 1;
+			data_bus_out_ff.d = Vcc;
+			we_n_ff.d = Gnd;
+			sm = WE0_CS0_LSBa;
+			
+		WHEN WE0_CS0_LSBa =>
+			-- WE=0, CS=0, MSB=0
+test_sm[] = 2;
+			data_bus_out_ff.d = Vcc;
+			we_n_ff.d = Gnd;
+			sm = WE0_CS0_LSBb;
+
+		WHEN WE0_CS0_LSBb =>
+			-- WE=0, CS=0, MSB=0
+test_sm[] = 3;
+			we_n_ff.d = Gnd;
+			data_bus_out_ff.d = Vcc;
+			sm = WE0_CS0_LSBc;
+			
+		WHEN WE0_CS0_LSBc =>
+			-- WE=0, CS=0, MSB=0
+test_sm[] = 4;
+			data_bus_out_ff.d = Vcc;
+			crc_enable_ff.d = Vcc;
+			sm = WE1_CS0_LSBb;
+			
+		WHEN WE1_CS0_LSBb =>
+			-- WE=1, CS=0, MSB=0
+test_sm[] = 5;
+			addr_inc_write = Vcc;
+			data_bus_out_ff.d = Vcc;
+			if channel_counter.o[] == 5 then
+				sm = WAIT_END;
+			else
+				channel_counter.inc = Vcc;
+				sm = WE1_CS0_LSBa;
+			end if;
+
+		WHEN WAIT_END =>
+test_sm[] = 6;
+			store_time_counter_ok = Vcc;
+			if store_time_counter then
+				cs_n_ff.d = Vcc;
+				sm = WAIT_END;
+			else
+				cs_n_ff.d = Vcc;
+				sm = WAIT_STORE_TIME_COUNTER;
+			end if;
+	END CASE;
+
+	-- Sync outs
+	cs_n = cs_n_ff.q;
+	we_n = we_n_ff.q;
+	data_bus_out = data_bus_out_ff.q;
+	channel[] = channel_counter.o[];
+	crc_enable = crc_enable_ff.q;
+end;

@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "04/22/2021 21:56:45"
+// Generated on "05/01/2021 19:17:37"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          acquisition_ctrl
 // 
@@ -36,6 +36,7 @@ reg sreset;
 reg start;
 reg store_crc_ok;
 reg store_ok;
+reg store_time_counter_ok;
 // wires                                               
 wire addr_clr;
 wire busy;
@@ -44,9 +45,11 @@ wire crc_clr;
 wire serialize;
 wire store;
 wire store_crc;
+wire store_time_counter;
 wire [3:0] test_clock_counter;
 wire [1:0] test_samples_counter;
-wire [2:0] test_sm_state;
+wire [3:0] test_sm_state;
+wire time_counter_restart;
 
 // assign statements (if any)                          
 acquisition_ctrl i1 (
@@ -64,9 +67,12 @@ acquisition_ctrl i1 (
 	.store_crc(store_crc),
 	.store_crc_ok(store_crc_ok),
 	.store_ok(store_ok),
+	.store_time_counter(store_time_counter),
+	.store_time_counter_ok(store_time_counter_ok),
 	.test_clock_counter(test_clock_counter),
 	.test_samples_counter(test_samples_counter),
-	.test_sm_state(test_sm_state)
+	.test_sm_state(test_sm_state),
+	.time_counter_restart(time_counter_restart)
 );
 initial 
 begin 
@@ -97,6 +103,8 @@ begin
 	start = #140000 1'b1;
 	start = #220000 1'b0;
 	start = #130000 1'b1;
+	start = #1020000 1'b0;
+	start = #100000 1'b1;
 end 
 
 // serialize_ok
@@ -127,8 +135,16 @@ end
 initial
 begin
 	store_crc_ok = 1'b0;
-	store_crc_ok = #1250000 1'b1;
-	store_crc_ok = #10000 1'b0;
+	store_crc_ok = #1460000 1'b1;
+	store_crc_ok = #20000 1'b0;
+end 
+
+// store_time_counter_ok
+initial
+begin
+	store_time_counter_ok = 1'b0;
+	store_time_counter_ok = #1360000 1'b1;
+	store_time_counter_ok = #20000 1'b0;
 end 
 endmodule
 

@@ -1,0 +1,45 @@
+include "counter.inc";
+
+subdesign acquisition_time_counter(
+	clk: input;
+	sreset: input;
+	byte_number[2..0]:input;
+	restart: input;
+	
+	o[7..0]: output;
+)
+variable
+	counter_enabled: dffe;
+	counter_between_acquisitions: counter with(MAX_VALUE = ((2^48)-1));
+	ns_between_acquisitions[47..0]: dffe;
+begin
+	counter_enabled.clrn = !sreset;
+	counter_enabled.d = Vcc;
+	counter_enabled.clk = clk;
+	counter_enabled.ena = restart;
+
+	-- COUNTER BETWEEN ACQUISITIONS
+	counter_between_acquisitions.clk = clk;
+	counter_between_acquisitions.inc = counter_enabled.q;
+	counter_between_acquisitions.clr = restart;
+	
+	ns_between_acquisitions[].clk = clk;
+	ns_between_acquisitions[].d = counter_between_acquisitions.o[];
+	ns_between_acquisitions[].ena = restart;
+	
+	case byte_number[] is
+		when 0 =>
+			o[] = ns_between_acquisitions[7..0].q;
+		when 1 =>
+			o[] = ns_between_acquisitions[15..8].q;
+		when 2 =>
+			o[] = ns_between_acquisitions[23..16].q;
+		when 3 =>
+			o[] = ns_between_acquisitions[31..24].q;
+		when 4 =>
+			o[] = ns_between_acquisitions[39..32].q;
+		when 5 =>
+			o[] = ns_between_acquisitions[47..40].q;
+	end case;
+	
+end;

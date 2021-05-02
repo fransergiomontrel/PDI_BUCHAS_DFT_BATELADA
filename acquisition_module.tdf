@@ -2,9 +2,12 @@ include "acquisition_ctrl.inc";
 include "acquisition_serializer.inc";
 include "acquisition_store.inc";
 include "acquisition_store_crc.inc";
+include "acquisition_store_time_counter.inc";
 include "modes.inc";
 include "dffes.inc";
 include "crc16.inc";
+include "acquisition_time_counter.inc";
+
 
 parameters(
 	samples = 3
@@ -40,7 +43,16 @@ variable
 	storer: acquisition_store;
 	storer_crc: acquisition_store_crc;
 	crc: crc16;
+	atc: acquisition_time_counter;
+	storer_time_counter: acquisition_store_time_counter;
+
 begin
+	-- ACQUISITION_TIME_COUNTER
+	atc.clk = clk;
+	atc.sreset = sreset;
+	atc.restart = ctrl.time_counter_restart;
+	atc.byte_number[] = storer_time_counter.channel[];
+	
 	-- START
 	start_ff.d = start;
 	start_ff.clk = clk;
@@ -69,8 +81,7 @@ begin
 	-- CRC16
 	crc.clk = clk;
 	crc.rst = ctrl.crc_clr;
-	crc.data_in[] = serializer.data[];
-	crc.crc_en = storer.crc_enable;
+	crc.crc_en = storer.crc_enable or storer_time_counter.crc_enable;
 	test_crc16[] = crc.crc_out[];
 	crc.msb = storer_crc.msb;
 
@@ -80,20 +91,45 @@ begin
 	storer_crc.store_crc = ctrl.store_crc;
 	ctrl.store_crc_ok = storer_crc.store_crc_ok;
 	
+	-- STORE_TIME_COUNTER
+	storer_time_counter.clk = clk;
+	storer_time_counter.sreset = sreset;
+	storer_time_counter.store_time_counter = ctrl.store_time_counter;
+	ctrl.store_time_counter_ok = storer_time_counter.store_time_counter_ok;
+	
 	-- OUTPUTS	
 	convst = ctrl.convst;
 	addr_clr = ctrl.addr_clr;
 	busy = ctrl.busy or changing_mode;
 	sclk_ = serializer.adc_sclk;
-	cs_n = storer.cs_n and storer_crc.cs_n;
-	we_n = storer.we_n and storer_crc.we_n;
-	addr_inc_write = storer.addr_inc_write or storer_crc.addr_inc_write;
-	if ctrl.store_crc then
-		data[] = crc.crc_out_byte[];
-	else
-		data[] = serializer.data[];
-	end if;
-	data_bus_out = storer.data_bus_out or storer_crc.data_bus_out;
+	cs_n = storer.cs_n and storer_crc.cs_n and storer_time_counter.cs_n;
+	we_n = storer.we_n and storer_crc.we_n and storer_time_counter.we_n;
+	addr_inc_write = storer.addr_inc_write or storer_crc.addr_inc_write or storer_time_counter.addr_inc_write;
+	data_bus_out = storer.data_bus_out or storer_crc.data_bus_out or storer_time_counter.data_bus_out;
+--	if ctrl.store_crc then
+--		data[] = crc.crc_out_byte[];
+--	else
+--		data[] = serializer.data[];
+--	end if;
 
+	case (ctrl.store_crc,ctrl.store_time_counter) is
+		when b"00"=>
+			crc.data_in[] = serializer.data[];
+			data[] = serializer.data[];
+		when b"01"=>
+			crc.data_in[] = atc.o[];
+			data[] = atc.o[];
+		when b"10"=>
+			data[] = crc.crc_out_byte[];
+	end case;
+
+--	TABLE
+--		ctrl.store_crc,	ctrl.store_time_counter		=> data[];
+--		0,						0									=>	serializer.data[];
+--		1,						0									=> crc.crc_out_byte[];
+--		0,						1									=> atc.o[];
+--	END TABLE;
+
+	
 end;
 
