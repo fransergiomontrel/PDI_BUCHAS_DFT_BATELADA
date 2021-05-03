@@ -1,5 +1,5 @@
 Fitter report for sensor_buchas
-Sat May 01 21:00:39 2021
+Mon May 03 17:57:45 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -58,14 +58,14 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------+
 ; Fitter Summary                                                      ;
 +-----------------------+---------------------------------------------+
-; Fitter Status         ; Successful - Sat May 01 21:00:39 2021       ;
+; Fitter Status         ; Successful - Mon May 03 17:57:45 2021       ;
 ; Quartus Prime Version ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name         ; sensor_buchas                               ;
 ; Top-level Entity Name ; sensor_buchas                               ;
 ; Family                ; MAX V                                       ;
 ; Device                ; 5M1270ZT144C4                               ;
 ; Timing Models         ; Final                                       ;
-; Total logic elements  ; 738 / 1,270 ( 58 % )                        ;
+; Total logic elements  ; 748 / 1,270 ( 59 % )                        ;
 ; Total pins            ; 101 / 114 ( 89 % )                          ;
 ; Total virtual pins    ; 0                                           ;
 ; UFM blocks            ; 0 / 1 ( 0 % )                               ;
@@ -126,15 +126,17 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 2           ;
-; Maximum allowed            ; 2           ;
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
 ;                            ;             ;
-; Average used               ; 1.01        ;
-; Maximum used               ; 2           ;
+; Average used               ; 1.04        ;
+; Maximum used               ; 4           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   1.3%      ;
+;     Processor 2            ;   1.6%      ;
+;     Processor 3            ;   1.3%      ;
+;     Processor 4            ;   1.2%      ;
 +----------------------------+-------------+
 
 
@@ -149,32 +151,32 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 +---------------------------------------------+-----------------------+
 ; Resource                                    ; Usage                 ;
 +---------------------------------------------+-----------------------+
-; Total logic elements                        ; 738 / 1,270 ( 58 % )  ;
-;     -- Combinational with no register       ; 305                   ;
+; Total logic elements                        ; 748 / 1,270 ( 59 % )  ;
+;     -- Combinational with no register       ; 308                   ;
 ;     -- Register only                        ; 89                    ;
-;     -- Combinational with a register        ; 344                   ;
+;     -- Combinational with a register        ; 351                   ;
 ;                                             ;                       ;
 ; Logic element usage by number of LUT inputs ;                       ;
-;     -- 4 input functions                    ; 251                   ;
-;     -- 3 input functions                    ; 169                   ;
-;     -- 2 input functions                    ; 206                   ;
+;     -- 4 input functions                    ; 263                   ;
+;     -- 3 input functions                    ; 161                   ;
+;     -- 2 input functions                    ; 212                   ;
 ;     -- 1 input functions                    ; 22                    ;
 ;     -- 0 input functions                    ; 1                     ;
 ;                                             ;                       ;
 ; Logic elements by mode                      ;                       ;
-;     -- normal mode                          ; 627                   ;
-;     -- arithmetic mode                      ; 111                   ;
+;     -- normal mode                          ; 632                   ;
+;     -- arithmetic mode                      ; 116                   ;
 ;     -- qfbk mode                            ; 113                   ;
 ;     -- register cascade mode                ; 0                     ;
-;     -- synchronous clear/load mode          ; 225                   ;
+;     -- synchronous clear/load mode          ; 236                   ;
 ;     -- asynchronous clear/load mode         ; 159                   ;
 ;                                             ;                       ;
-; Total registers                             ; 433 / 1,270 ( 34 % )  ;
-; Total LABs                                  ; 86 / 127 ( 68 % )     ;
-; Logic elements in carry chains              ; 117                   ;
+; Total registers                             ; 440 / 1,270 ( 35 % )  ;
+; Total LABs                                  ; 92 / 127 ( 72 % )     ;
+; Logic elements in carry chains              ; 123                   ;
 ; Virtual pins                                ; 0                     ;
 ; I/O pins                                    ; 101 / 114 ( 89 % )    ;
-;     -- Clock pins                           ; 3 / 4 ( 75 % )        ;
+;     -- Clock pins                           ; 4 / 4 ( 100 % )       ;
 ;                                             ;                       ;
 ; UFM blocks                                  ; 0 / 1 ( 0 % )         ;
 ;                                             ;                       ;
@@ -184,12 +186,12 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; Global signals                              ; 4                     ;
 ;     -- Global clocks                        ; 4 / 4 ( 100 % )       ;
 ; JTAGs                                       ; 0 / 1 ( 0 % )         ;
-; Average interconnect usage (total/H/V)      ; 21.9% / 23.8% / 19.9% ;
-; Peak interconnect usage (total/H/V)         ; 25.4% / 28.4% / 22.4% ;
-; Maximum fan-out                             ; 403                   ;
+; Average interconnect usage (total/H/V)      ; 22.3% / 22.7% / 21.9% ;
+; Peak interconnect usage (total/H/V)         ; 28.4% / 29.2% / 27.5% ;
+; Maximum fan-out                             ; 410                   ;
 ; Highest non-global fan-out                  ; 115                   ;
-; Total fan-out                               ; 3164                  ;
-; Average fan-out                             ; 3.77                  ;
+; Total fan-out                               ; 3216                  ;
+; Average fan-out                             ; 3.79                  ;
 +---------------------------------------------+-----------------------+
 
 
@@ -204,13 +206,13 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; adc_rvs[3]        ; 62    ; 4        ; 10           ; 3            ; 2           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 ; adc_rvs[4]        ; 70    ; 4        ; 15           ; 0            ; 2           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 ; adc_rvs[5]        ; 77    ; 3        ; 17           ; 2            ; 0           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
-; adc_sdi[0]        ; 39    ; 4        ; 2            ; 3            ; 0           ; 2                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
+; adc_sdi[0]        ; 39    ; 4        ; 2            ; 3            ; 0           ; 3                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 ; adc_sdi[1]        ; 48    ; 4        ; 7            ; 3            ; 3           ; 2                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 ; adc_sdi[2]        ; 57    ; 4        ; 8            ; 3            ; 0           ; 2                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 ; adc_sdi[3]        ; 32    ; 1        ; 0            ; 4            ; 5           ; 2                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 ; adc_sdi[4]        ; 72    ; 4        ; 16           ; 0            ; 0           ; 2                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 ; adc_sdi[5]        ; 80    ; 3        ; 17           ; 3            ; 0           ; 3                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
-; clk               ; 18    ; 1        ; 0            ; 7            ; 5           ; 403                   ; 0                  ; yes    ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
+; clk               ; 18    ; 1        ; 0            ; 7            ; 5           ; 410                   ; 0                  ; yes    ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 ; host_MOSI         ; 94    ; 3        ; 17           ; 6            ; 4           ; 2                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 ; host_SCLK         ; 96    ; 3        ; 17           ; 6            ; 2           ; 7                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 ; host_convst_start ; 93    ; 3        ; 17           ; 6            ; 5           ; 7                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
@@ -237,10 +239,10 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; LED2              ; 13    ; 1        ; 0            ; 7            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; LED3              ; 14    ; 1        ; 0            ; 7            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; LED4              ; 15    ; 1        ; 0            ; 7            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; RDM_test_loading  ; 102   ; 3        ; 17           ; 7            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; RDM_test_state[0] ; 87    ; 3        ; 17           ; 5            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; RDM_test_state[1] ; 97    ; 3        ; 17           ; 6            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; RDM_test_state[2] ; 88    ; 3        ; 17           ; 5            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; RDM_test_loading  ; 113   ; 2        ; 13           ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; RDM_test_state[0] ; 114   ; 2        ; 12           ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; RDM_test_state[1] ; 102   ; 3        ; 17           ; 7            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; RDM_test_state[2] ; 63    ; 4        ; 10           ; 3            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
 ; RDM_test_state[3] ; 89    ; 3        ; 17           ; 5            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
 ; RI_addr_inc       ; 38    ; 4        ; 2            ; 3            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
 ; RI_data_bus_out   ; 27    ; 1        ; 0            ; 6            ; 5           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
@@ -252,7 +254,7 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; adc_convst[5]     ; 84    ; 3        ; 17           ; 4            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; adc_rst_n[0]      ; 43    ; 4        ; 5            ; 3            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; adc_rst_n[1]      ; 52    ; 4        ; 8            ; 3            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; adc_rst_n[2]      ; 61    ; 4        ; 10           ; 3            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; adc_rst_n[2]      ; 61    ; 4        ; 10           ; 3            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; yes                    ; User                 ; 10 pF ; -                    ; -                   ;
 ; adc_rst_n[3]      ; 69    ; 4        ; 14           ; 0            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; adc_rst_n[4]      ; 76    ; 3        ; 17           ; 2            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; adc_rst_n[5]      ; 86    ; 3        ; 17           ; 5            ; 4           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
@@ -269,7 +271,7 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; adc_sdo[4]        ; 75    ; 3        ; 17           ; 1            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; adc_sdo[5]        ; 85    ; 3        ; 17           ; 5            ; 5           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; host_MISO         ; 95    ; 3        ; 17           ; 6            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; host_busy         ; 63    ; 4        ; 10           ; 3            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; host_busy         ; 79    ; 3        ; 17           ; 3            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
 ; ram_address[0]    ; 137   ; 2        ; 6            ; 11           ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_address[10]   ; 124   ; 2        ; 9            ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; yes                    ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_address[11]   ; 123   ; 2        ; 9            ; 11           ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; yes                    ; User                 ; 10 pF ; -                    ; -                   ;
@@ -282,8 +284,8 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; ram_address[18]   ; 134   ; 2        ; 7            ; 11           ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_address[1]    ; 138   ; 2        ; 5            ; 11           ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_address[2]    ; 139   ; 2        ; 5            ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; ram_address[3]    ; 140   ; 2        ; 4            ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; ram_address[4]    ; 141   ; 2        ; 4            ; 11           ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; ram_address[3]    ; 140   ; 2        ; 4            ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; yes                    ; User                 ; 10 pF ; -                    ; -                   ;
+; ram_address[4]    ; 141   ; 2        ; 4            ; 11           ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; yes                    ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_address[5]    ; 5     ; 1        ; 0            ; 9            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_address[6]    ; 4     ; 1        ; 0            ; 9            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_address[7]    ; 3     ; 1        ; 0            ; 10           ; 5           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
@@ -292,13 +294,13 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; ram_cs_n          ; 142   ; 2        ; 3            ; 11           ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_oe_n          ; 130   ; 2        ; 8            ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_we_n          ; 6     ; 1        ; 0            ; 9            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; test_PROBEA       ; 117   ; 2        ; 11           ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; teste_PROBE[0]    ; 112   ; 2        ; 14           ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; teste_PROBE[1]    ; 113   ; 2        ; 13           ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; teste_PROBE[2]    ; 111   ; 2        ; 15           ; 11           ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; tst_address[0]    ; 114   ; 2        ; 12           ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; tst_address[1]    ; 125   ; 2        ; 9            ; 11           ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; tst_address[2]    ; 45    ; 4        ; 6            ; 3            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; test_PROBEA       ; 55    ; 4        ; 8            ; 3            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; teste_PROBE[0]    ; 111   ; 2        ; 15           ; 11           ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; teste_PROBE[1]    ; 112   ; 2        ; 14           ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; teste_PROBE[2]    ; 97    ; 3        ; 17           ; 6            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; tst_address[0]    ; 125   ; 2        ; 9            ; 11           ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; tst_address[1]    ; 20    ; 1        ; 0            ; 7            ; 6           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; tst_address[2]    ; 117   ; 2        ; 11           ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
 +-------------------+-------+----------+--------------+--------------+-------------+-----------------+----------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+------------------------+----------------------+-------+----------------------+---------------------+
 
 
@@ -323,9 +325,9 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 +----------+-------------------+---------------+--------------+
 ; I/O Bank ; Usage             ; VCCIO Voltage ; VREF Voltage ;
 +----------+-------------------+---------------+--------------+
-; 1        ; 15 / 25 ( 60 % )  ; 3.3V          ; --           ;
+; 1        ; 16 / 25 ( 64 % )  ; 3.3V          ; --           ;
 ; 2        ; 30 / 30 ( 100 % ) ; 3.3V          ; --           ;
-; 3        ; 28 / 29 ( 97 % )  ; 3.3V          ; --           ;
+; 3        ; 27 / 29 ( 93 % )  ; 3.3V          ; --           ;
 ; 4        ; 28 / 30 ( 93 % )  ; 3.3V          ; --           ;
 +----------+-------------------+---------------+--------------+
 
@@ -354,7 +356,7 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 17       ;            ;          ; GNDINT            ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 18       ; 26         ; 1        ; clk               ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 19       ;            ;          ; VCCINT            ; power  ;              ; 1.8V    ; --         ;                 ; --       ; --           ;
-; 20       ; 27         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 20       ; 27         ; 1        ; tst_address[1]    ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; 21       ; 28         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 22       ; 29         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 23       ; 30         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
@@ -379,7 +381,7 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 42       ; 67         ; 4        ; adc_sdo[0]        ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 43       ; 68         ; 4        ; adc_rst_n[0]      ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 44       ; 69         ; 4        ; adc_rvs[1]        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
-; 45       ; 74         ; 4        ; tst_address[2]    ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
+; 45       ; 74         ; 4        ; GND*              ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 46       ;            ; 4        ; VCCIO4            ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; 47       ;            ;          ; GNDIO             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 48       ; 75         ; 4        ; adc_sdi[1]        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
@@ -389,7 +391,7 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 52       ; 79         ; 4        ; adc_rst_n[1]      ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 53       ; 80         ; 4        ; adc_rvs[2]        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 54       ;            ;          ; GNDINT            ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; 55       ; 81         ; 4        ; GND*              ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 55       ; 81         ; 4        ; test_PROBEA       ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
 ; 56       ;            ;          ; VCCINT            ; power  ;              ; 1.8V    ; --         ;                 ; --       ; --           ;
 ; 57       ; 82         ; 4        ; adc_sdi[2]        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 58       ; 83         ; 4        ; adc_sclk[2]       ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
@@ -397,7 +399,7 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 60       ; 85         ; 4        ; adc_sdo[2]        ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 61       ; 86         ; 4        ; adc_rst_n[2]      ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 62       ; 87         ; 4        ; adc_rvs[3]        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
-; 63       ; 88         ; 4        ; host_busy         ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
+; 63       ; 88         ; 4        ; RDM_test_state[2] ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
 ; 64       ;            ; 4        ; VCCIO4            ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; 65       ;            ;          ; GNDIO             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 66       ; 91         ; 4        ; adc_sclk[3]       ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
@@ -413,7 +415,7 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 76       ; 115        ; 3        ; adc_rst_n[4]      ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 77       ; 118        ; 3        ; adc_rvs[5]        ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 78       ;            ;          ; GNDIO             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; 79       ; 123        ; 3        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 79       ; 123        ; 3        ; host_busy         ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; 80       ; 124        ; 3        ; adc_sdi[5]        ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 81       ; 127        ; 3        ; adc_sclk[5]       ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 82       ;            ; 3        ; VCCIO3            ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
@@ -421,8 +423,8 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 84       ; 129        ; 3        ; adc_convst[5]     ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 85       ; 130        ; 3        ; adc_sdo[5]        ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 86       ; 131        ; 3        ; adc_rst_n[5]      ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
-; 87       ; 132        ; 3        ; RDM_test_state[0] ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; Off          ;
-; 88       ; 133        ; 3        ; RDM_test_state[2] ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; Off          ;
+; 87       ; 132        ; 3        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 88       ; 133        ; 3        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 89       ; 134        ; 3        ; RDM_test_state[3] ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; 90       ;            ;          ; VCCINT            ; power  ;              ; 1.8V    ; --         ;                 ; --       ; --           ;
 ; 91       ; 135        ; 3        ; host_rst_n        ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
@@ -431,12 +433,12 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 94       ; 137        ; 3        ; host_MOSI         ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 95       ; 138        ; 3        ; host_MISO         ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 96       ; 139        ; 3        ; host_SCLK         ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
-; 97       ; 140        ; 3        ; RDM_test_state[1] ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; Off          ;
+; 97       ; 140        ; 3        ; teste_PROBE[2]    ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; 98       ; 141        ; 3        ; host_mode[0]      ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 99       ;            ;          ; GNDIO             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 100      ;            ; 3        ; VCCIO3            ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; 101      ; 142        ; 3        ; host_mode[1]      ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
-; 102      ; 146        ; 3        ; RDM_test_loading  ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; Off          ;
+; 102      ; 146        ; 3        ; RDM_test_state[1] ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; 103      ; 147        ; 3        ; HD8               ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 104      ; 151        ; 3        ; HD7               ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 105      ; 152        ; 3        ; HD6               ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
@@ -445,13 +447,13 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 108      ; 158        ; 3        ; HD3               ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 109      ; 164        ; 2        ; HD2               ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 110      ; 165        ; 2        ; HD1               ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
-; 111      ; 166        ; 2        ; teste_PROBE[2]    ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
-; 112      ; 171        ; 2        ; teste_PROBE[0]    ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
-; 113      ; 174        ; 2        ; teste_PROBE[1]    ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
-; 114      ; 177        ; 2        ; tst_address[0]    ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
+; 111      ; 166        ; 2        ; teste_PROBE[0]    ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
+; 112      ; 171        ; 2        ; teste_PROBE[1]    ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
+; 113      ; 174        ; 2        ; RDM_test_loading  ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
+; 114      ; 177        ; 2        ; RDM_test_state[0] ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
 ; 115      ;            ;          ; GNDIO             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 116      ;            ; 2        ; VCCIO2            ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
-; 117      ; 180        ; 2        ; test_PROBEA       ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
+; 117      ; 180        ; 2        ; tst_address[2]    ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
 ; 118      ; 181        ; 2        ; ram_data_bus[5]   ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 119      ; 182        ; 2        ; ram_data_bus[4]   ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 120      ; 183        ; 2        ; ram_address[14]   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
@@ -459,7 +461,7 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 122      ; 185        ; 2        ; ram_address[12]   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 123      ; 186        ; 2        ; ram_address[11]   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 124      ; 187        ; 2        ; ram_address[10]   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
-; 125      ; 188        ; 2        ; tst_address[1]    ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
+; 125      ; 188        ; 2        ; tst_address[0]    ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
 ; 126      ;            ;          ; VCCINT            ; power  ;              ; 1.8V    ; --         ;                 ; --       ; --           ;
 ; 127      ; 189        ; 2        ; ram_data_bus[6]   ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 128      ;            ;          ; GNDINT            ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
@@ -531,118 +533,120 @@ Note: User assignments will override these defaults. The user specified values a
 +------------------------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------------------------------------------------------------------------------------+--------------------------------+--------------+
 ; Compilation Hierarchy Node                                 ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                                                 ; Entity Name                    ; Library Name ;
 +------------------------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------------------------------------------------------------------------------------+--------------------------------+--------------+
-; |sensor_buchas                                             ; 738 (0)     ; 433          ; 0          ; 101  ; 0            ; 305 (0)      ; 89 (0)            ; 344 (0)          ; 117 (0)         ; 112 (0)    ; |sensor_buchas                                                                                                      ; sensor_buchas                  ; work         ;
+; |sensor_buchas                                             ; 748 (0)     ; 440          ; 0          ; 101  ; 0            ; 308 (0)      ; 89 (0)            ; 351 (0)          ; 123 (0)         ; 112 (0)    ; |sensor_buchas                                                                                                      ; sensor_buchas                  ; work         ;
 ;    |RAM_interface:inst11|                                  ; 70 (70)     ; 38           ; 0          ; 0    ; 0            ; 32 (32)      ; 0 (0)             ; 38 (38)          ; 36 (36)         ; 0 (0)      ; |sensor_buchas|RAM_interface:inst11                                                                                 ; RAM_interface                  ; work         ;
-;    |acquisition_module:inst13|                             ; 445 (8)     ; 290          ; 0          ; 0    ; 0            ; 155 (8)      ; 75 (0)            ; 215 (0)          ; 59 (0)          ; 86 (1)     ; |sensor_buchas|acquisition_module:inst13                                                                            ; acquisition_module             ; work         ;
-;       |acquisition_ctrl:ctrl|                              ; 40 (20)     ; 27           ; 0          ; 0    ; 0            ; 13 (10)      ; 0 (0)             ; 27 (10)          ; 8 (0)           ; 1 (1)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl                                                      ; acquisition_ctrl               ; work         ;
+;    |acquisition_module:inst13|                             ; 455 (8)     ; 297          ; 0          ; 0    ; 0            ; 158 (8)      ; 75 (0)            ; 222 (0)          ; 65 (0)          ; 86 (1)     ; |sensor_buchas|acquisition_module:inst13                                                                            ; acquisition_module             ; work         ;
+;       |acquisition_ctrl:ctrl|                              ; 58 (21)     ; 32           ; 0          ; 0    ; 0            ; 26 (11)      ; 0 (0)             ; 32 (10)          ; 14 (0)          ; 1 (1)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl                                                      ; acquisition_ctrl               ; work         ;
 ;          |counter:clock_counter|                           ; 10 (10)     ; 9            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 9 (9)            ; 8 (8)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|counter:clock_counter                                ; counter                        ; work         ;
-;          |counter:samples_counter|                         ; 4 (4)       ; 2            ; 0          ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 2 (2)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|counter:samples_counter                              ; counter                        ; work         ;
+;          |counter:samples_counter|                         ; 21 (21)     ; 7            ; 0          ; 0    ; 0            ; 14 (14)      ; 0 (0)             ; 7 (7)            ; 6 (6)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|counter:samples_counter                              ; counter                        ; work         ;
 ;          |dffes:busy_ff|                                   ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:busy_ff                                        ; dffes                          ; work         ;
 ;          |dffes:convst_ff|                                 ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:convst_ff                                      ; dffes                          ; work         ;
 ;          |dffes:serialize_ff|                              ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:serialize_ff                                   ; dffes                          ; work         ;
 ;          |dffes:store_crc_ff|                              ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:store_crc_ff                                   ; dffes                          ; work         ;
 ;          |dffes:store_ff|                                  ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:store_ff                                       ; dffes                          ; work         ;
 ;          |dffes:store_time_counter_ff|                     ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:store_time_counter_ff                          ; dffes                          ; work         ;
-;       |acquisition_serializer:serializer|                  ; 143 (30)    ; 103          ; 0          ; 0    ; 0            ; 40 (30)      ; 36 (0)            ; 67 (0)           ; 4 (0)           ; 54 (54)    ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer                                          ; acquisition_serializer         ; work         ;
-;          |counter:count|                                   ; 15 (15)     ; 5            ; 0          ; 0    ; 0            ; 10 (10)      ; 0 (0)             ; 5 (5)            ; 4 (4)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|counter:count                            ; counter                        ; work         ;
-;          |dffes:data_buffer[0][0]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][0]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[0][10]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][10]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[0][11]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][11]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[0][12]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][12]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[0][13]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][13]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[0][14]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][14]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[0][15]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][15]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[0][1]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][1]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[0][2]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][2]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[0][3]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][3]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[0][4]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][4]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[0][5]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][5]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[0][6]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][6]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[0][7]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][7]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[0][8]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][8]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[0][9]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[0][9]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][0]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][0]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][10]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][10]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][11]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][11]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][12]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][12]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][13]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][13]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][14]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][14]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][15]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][15]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][1]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][1]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][2]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][2]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][3]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][3]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][4]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][4]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][5]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][5]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][6]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][6]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][7]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][7]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][8]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][8]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[1][9]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[1][9]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][0]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][0]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][10]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][10]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][11]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][11]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][12]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][12]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][13]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][13]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][14]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][14]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][15]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][15]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][1]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][1]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][2]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][2]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][3]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][3]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][4]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][4]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][5]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][5]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][6]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][6]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][7]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][7]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][8]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][8]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[2][9]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[2][9]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][0]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][0]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][10]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][10]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][11]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][11]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][12]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][12]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][13]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][13]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][14]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][14]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][15]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][15]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][1]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][1]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][2]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][2]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][3]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][3]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][4]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][4]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][5]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][5]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][6]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][6]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][7]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][7]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][8]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][8]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[3][9]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[3][9]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][0]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][0]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][10]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][10]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][11]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][11]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][12]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][12]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][13]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][13]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][14]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][14]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][15]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][15]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][1]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][1]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][2]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][2]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][3]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][3]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][4]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][4]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][5]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][5]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][6]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][6]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][7]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][7]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][8]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][8]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[4][9]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[4][9]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][0]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][0]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][10]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][10]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][11]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][11]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][12]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][12]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][13]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][13]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][14]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][14]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][15]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][15]                 ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][1]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][1]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][2]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][2]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][3]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][3]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][4]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][4]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][5]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][5]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][6]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][6]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][7]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][7]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][8]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][8]                  ; dffes                          ; work         ;
-;          |dffes:data_buffer[5][9]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:data_buffer[5][9]                  ; dffes                          ; work         ;
-;          |dffes:div2_clock|                                ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:div2_clock                         ; dffes                          ; work         ;
-;          |dffes:serialize_ok_ff|                           ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer:serializer|dffes:serialize_ok_ff                    ; dffes                          ; work         ;
+;       |acquisition_serializer_v2:serializer|               ; 135 (30)    ; 105          ; 0          ; 0    ; 0            ; 30 (30)      ; 36 (0)            ; 69 (0)           ; 4 (0)           ; 54 (54)    ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer                                       ; acquisition_serializer_v2      ; work         ;
+;          |counter:count|                                   ; 5 (5)       ; 5            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 5 (5)            ; 4 (4)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|counter:count                         ; counter                        ; work         ;
+;          |dffes:data_buffer[0][0]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][0]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[0][10]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][10]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[0][11]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][11]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[0][12]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][12]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[0][13]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][13]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[0][14]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][14]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[0][15]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][15]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[0][1]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][1]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[0][2]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][2]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[0][3]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][3]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[0][4]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][4]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[0][5]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][5]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[0][6]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][6]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[0][7]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][7]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[0][8]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][8]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[0][9]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[0][9]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][0]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][0]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][10]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][10]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][11]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][11]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][12]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][12]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][13]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][13]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][14]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][14]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][15]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][15]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][1]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][1]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][2]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][2]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][3]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][3]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][4]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][4]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][5]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][5]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][6]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][6]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][7]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][7]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][8]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][8]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[1][9]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[1][9]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][0]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][0]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][10]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][10]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][11]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][11]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][12]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][12]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][13]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][13]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][14]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][14]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][15]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][15]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][1]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][1]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][2]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][2]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][3]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][3]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][4]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][4]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][5]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][5]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][6]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][6]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][7]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][7]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][8]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][8]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[2][9]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[2][9]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][0]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][0]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][10]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][10]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][11]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][11]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][12]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][12]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][13]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][13]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][14]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][14]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][15]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][15]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][1]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][1]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][2]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][2]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][3]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][3]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][4]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][4]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][5]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][5]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][6]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][6]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][7]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][7]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][8]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][8]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[3][9]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[3][9]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][0]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][0]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][10]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][10]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][11]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][11]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][12]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][12]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][13]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][13]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][14]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][14]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][15]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][15]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][1]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][1]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][2]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][2]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][3]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][3]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][4]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][4]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][5]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][5]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][6]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][6]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][7]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][7]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][8]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][8]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[4][9]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[4][9]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][0]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][0]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][10]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][10]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][11]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][11]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][12]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][12]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][13]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][13]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][14]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][14]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][15]|                        ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][15]              ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][1]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][1]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][2]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][2]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][3]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][3]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][4]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][4]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][5]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][5]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][6]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][6]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][7]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][7]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][8]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][8]               ; dffes                          ; work         ;
+;          |dffes:data_buffer[5][9]|                         ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:data_buffer[5][9]               ; dffes                          ; work         ;
+;          |dffes:div_clock[0]|                              ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:div_clock[0]                    ; dffes                          ; work         ;
+;          |dffes:div_clock[1]|                              ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:div_clock[1]                    ; dffes                          ; work         ;
+;          |dffes:div_clock[2]|                              ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:div_clock[2]                    ; dffes                          ; work         ;
+;          |dffes:serialize_ok_ff|                           ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v2:serializer|dffes:serialize_ok_ff                 ; dffes                          ; work         ;
 ;       |acquisition_store:storer|                           ; 24 (13)     ; 16           ; 0          ; 0    ; 0            ; 8 (5)        ; 3 (2)             ; 13 (6)           ; 0 (0)           ; 3 (2)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store:storer                                                   ; acquisition_store              ; work         ;
 ;          |counter:channel_counter|                         ; 7 (7)       ; 4            ; 0          ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 4 (4)            ; 0 (0)           ; 1 (1)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store:storer|counter:channel_counter                           ; counter                        ; work         ;
 ;          |dffes:crc_enable_ff|                             ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_store:storer|dffes:crc_enable_ff                               ; dffes                          ; work         ;
@@ -713,25 +717,25 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; test_PROBEA       ; Output   ; --            ;
 ; RDM_test_loading  ; Output   ; --            ;
 ; HD1               ; Output   ; --            ;
-; adc_sdo[5]        ; Output   ; --            ;
-; adc_sdo[4]        ; Output   ; --            ;
-; adc_sdo[3]        ; Output   ; --            ;
-; adc_sdo[2]        ; Output   ; --            ;
-; adc_sdo[1]        ; Output   ; --            ;
-; adc_sdo[0]        ; Output   ; --            ;
-; HD2               ; Output   ; --            ;
-; HD3               ; Output   ; --            ;
-; HD4               ; Output   ; --            ;
-; HD5               ; Output   ; --            ;
-; HD6               ; Output   ; --            ;
-; HD7               ; Output   ; --            ;
-; HD8               ; Output   ; --            ;
 ; adc_sclk[5]       ; Output   ; --            ;
 ; adc_sclk[4]       ; Output   ; --            ;
 ; adc_sclk[3]       ; Output   ; --            ;
 ; adc_sclk[2]       ; Output   ; --            ;
 ; adc_sclk[1]       ; Output   ; --            ;
 ; adc_sclk[0]       ; Output   ; --            ;
+; HD2               ; Output   ; --            ;
+; HD3               ; Output   ; --            ;
+; adc_sdo[5]        ; Output   ; --            ;
+; adc_sdo[4]        ; Output   ; --            ;
+; adc_sdo[3]        ; Output   ; --            ;
+; adc_sdo[2]        ; Output   ; --            ;
+; adc_sdo[1]        ; Output   ; --            ;
+; adc_sdo[0]        ; Output   ; --            ;
+; HD4               ; Output   ; --            ;
+; HD5               ; Output   ; --            ;
+; HD6               ; Output   ; --            ;
+; HD7               ; Output   ; --            ;
+; HD8               ; Output   ; --            ;
 ; adc_convst[5]     ; Output   ; --            ;
 ; adc_convst[4]     ; Output   ; --            ;
 ; adc_convst[3]     ; Output   ; --            ;
@@ -782,14 +786,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; ram_data_bus[1]   ; Bidir    ; (1)           ;
 ; ram_data_bus[0]   ; Bidir    ; (1)           ;
 ; adc_sdi[5]        ; Input    ; (1)           ;
+; adc_sdi[0]        ; Input    ; (1)           ;
 ; clk               ; Input    ; (0)           ;
-; host_MOSI         ; Input    ; (1)           ;
+; host_SCLK         ; Input    ; (1)           ;
+; adc_sdi[1]        ; Input    ; (1)           ;
 ; adc_sdi[4]        ; Input    ; (1)           ;
 ; adc_sdi[3]        ; Input    ; (1)           ;
 ; adc_sdi[2]        ; Input    ; (1)           ;
-; adc_sdi[1]        ; Input    ; (1)           ;
-; adc_sdi[0]        ; Input    ; (1)           ;
-; host_SCLK         ; Input    ; (1)           ;
+; host_MOSI         ; Input    ; (1)           ;
 ; host_convst_start ; Input    ; (1)           ;
 ; host_rst_n        ; Input    ; (1)           ;
 ; host_mode[1]      ; Input    ; (1)           ;
@@ -803,43 +807,44 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name                                                                                               ; Location     ; Fan-Out ; Usage                                   ; Global ; Global Resource Used ; Global Line Name ;
 +----------------------------------------------------------------------------------------------------+--------------+---------+-----------------------------------------+--------+----------------------+------------------+
 ; RAM_interface:inst11|_~0                                                                           ; LC_X12_Y3_N9 ; 38      ; Async. clear                            ; yes    ; Global Clock         ; GCLK1            ;
-; acquisition_module:inst13|_~0                                                                      ; LC_X15_Y3_N6 ; 1       ; Clock enable                            ; no     ; --                   ; --               ;
-; acquisition_module:inst13|_~4                                                                      ; LC_X2_Y6_N5  ; 16      ; Clock enable                            ; no     ; --                   ; --               ;
+; acquisition_module:inst13|_~0                                                                      ; LC_X11_Y5_N8 ; 1       ; Clock enable                            ; no     ; --                   ; --               ;
+; acquisition_module:inst13|_~4                                                                      ; LC_X7_Y6_N6  ; 16      ; Clock enable                            ; no     ; --                   ; --               ;
 ; acquisition_module:inst13|acquisition_ctrl:ctrl|addr_clr~1                                         ; LC_X12_Y3_N1 ; 115     ; Async. clear, Clock enable, Sync. clear ; no     ; --                   ; --               ;
 ; acquisition_module:inst13|acquisition_ctrl:ctrl|counter:clock_counter|_~0                          ; LC_X13_Y2_N9 ; 8       ; Sync. clear                             ; no     ; --                   ; --               ;
-; acquisition_module:inst13|acquisition_serializer:serializer|_~8                                    ; LC_X13_Y4_N8 ; 96      ; Clock enable                            ; no     ; --                   ; --               ;
-; acquisition_module:inst13|acquisition_time_counter:atc|counter:counter_between_acquisitions|op_1~5 ; LC_X9_Y4_N4  ; 47      ; Clock enable                            ; no     ; --                   ; --               ;
-; adc_interface:inst4|disable_output                                                                 ; LC_X12_Y5_N6 ; 15      ; Async. clear, Sync. clear               ; no     ; --                   ; --               ;
-; clk                                                                                                ; PIN_18       ; 403     ; Clock                                   ; yes    ; Global Clock         ; GCLK0            ;
-; host_interface:inst2|mode_selector:mode_sel|_~3                                                    ; LC_X13_Y3_N0 ; 6       ; Clock enable                            ; no     ; --                   ; --               ;
-; host_interface:inst2|mode_selector:mode_sel|sNoticeChanging                                        ; LC_X13_Y3_N7 ; 4       ; Clock enable                            ; no     ; --                   ; --               ;
-; host_interface:inst2|mode_selector:mode_sel|synchronizer:sync|stable~1                             ; LC_X14_Y3_N6 ; 2       ; Clock enable                            ; no     ; --                   ; --               ;
-; reset_module:inst7|ini_ff                                                                          ; LC_X15_Y3_N5 ; 23      ; Async. clear                            ; no     ; --                   ; --               ;
-; reset_module:inst7|rst                                                                             ; LC_X16_Y2_N8 ; 24      ; Clock enable                            ; no     ; --                   ; --               ;
-; reset_module:inst7|rst_ff                                                                          ; LC_X13_Y3_N2 ; 101     ; Async. clear, Sync. clear, Sync. load   ; yes    ; Global Clock         ; GCLK3            ;
-; rw_data_module:inst14|_~10                                                                         ; LC_X12_Y6_N3 ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst14|_~11                                                                         ; LC_X12_Y6_N2 ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst14|_~12                                                                         ; LC_X6_Y8_N5  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst14|_~13                                                                         ; LC_X6_Y8_N2  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst14|_~14                                                                         ; LC_X15_Y7_N5 ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst14|_~15                                                                         ; LC_X15_Y7_N6 ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst14|_~16                                                                         ; LC_X13_Y6_N0 ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst14|_~17                                                                         ; LC_X13_Y6_N9 ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst14|_~18                                                                         ; LC_X14_Y7_N8 ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst14|_~19                                                                         ; LC_X14_Y7_N9 ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst14|_~20                                                                         ; LC_X15_Y8_N8 ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst14|_~21                                                                         ; LC_X15_Y8_N1 ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst14|_~22                                                                         ; LC_X8_Y6_N4  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst14|_~23                                                                         ; LC_X8_Y6_N6  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst14|_~6                                                                          ; LC_X8_Y8_N9  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst14|_~7                                                                          ; LC_X8_Y8_N8  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst14|dffes:SCLK_ff|ff                                                             ; LC_X12_Y3_N6 ; 30      ; Clock                                   ; yes    ; Global Clock         ; GCLK2            ;
-; rw_data_module:inst14|dffes:load_parallel_FF|ff                                                    ; LC_X15_Y7_N3 ; 33      ; Async. clear, Async. load               ; no     ; --                   ; --               ;
-; rw_data_module:inst14|load_sync3                                                                   ; LC_X14_Y6_N5 ; 9       ; Clock enable                            ; no     ; --                   ; --               ;
-; rw_data_module:inst14|spi_shift_v2:shift|lrx                                                       ; LC_X15_Y6_N2 ; 8       ; Clock enable                            ; no     ; --                   ; --               ;
-; switch:inst|RI_addr_inc_read~1                                                                     ; LC_X13_Y6_N8 ; 19      ; Clock enable                            ; no     ; --                   ; --               ;
-; switch:inst|RI_addr_inc_write~3                                                                    ; LC_X8_Y6_N5  ; 19      ; Clock enable                            ; no     ; --                   ; --               ;
-; switch:inst|RI_data_bus_out~3                                                                      ; LC_X10_Y6_N4 ; 29      ; Output enable                           ; no     ; --                   ; --               ;
+; acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:serialize_ff|ff                              ; LC_X12_Y5_N5 ; 8       ; Sync. clear                             ; no     ; --                   ; --               ;
+; acquisition_module:inst13|acquisition_serializer_v2:serializer|shift_signal~0                      ; LC_X14_Y6_N6 ; 101     ; Clock enable, Sync. load                ; no     ; --                   ; --               ;
+; acquisition_module:inst13|acquisition_time_counter:atc|counter:counter_between_acquisitions|op_1~5 ; LC_X12_Y3_N0 ; 47      ; Clock enable                            ; no     ; --                   ; --               ;
+; adc_interface:inst4|disable_output                                                                 ; LC_X12_Y5_N0 ; 15      ; Async. clear, Sync. clear               ; no     ; --                   ; --               ;
+; clk                                                                                                ; PIN_18       ; 410     ; Clock                                   ; yes    ; Global Clock         ; GCLK0            ;
+; host_interface:inst2|mode_selector:mode_sel|_~3                                                    ; LC_X13_Y3_N7 ; 6       ; Clock enable                            ; no     ; --                   ; --               ;
+; host_interface:inst2|mode_selector:mode_sel|sNoticeChanging                                        ; LC_X13_Y3_N4 ; 4       ; Clock enable                            ; no     ; --                   ; --               ;
+; host_interface:inst2|mode_selector:mode_sel|synchronizer:sync|stable~1                             ; LC_X14_Y3_N3 ; 2       ; Clock enable                            ; no     ; --                   ; --               ;
+; reset_module:inst7|ini_ff                                                                          ; LC_X10_Y5_N2 ; 23      ; Async. clear                            ; no     ; --                   ; --               ;
+; reset_module:inst7|rst                                                                             ; LC_X9_Y5_N7  ; 24      ; Clock enable                            ; no     ; --                   ; --               ;
+; reset_module:inst7|rst_ff                                                                          ; LC_X12_Y5_N2 ; 100     ; Async. clear, Sync. clear, Sync. load   ; yes    ; Global Clock         ; GCLK3            ;
+; rw_data_module:inst14|_~10                                                                         ; LC_X8_Y8_N3  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst14|_~11                                                                         ; LC_X8_Y8_N8  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst14|_~12                                                                         ; LC_X10_Y5_N9 ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst14|_~13                                                                         ; LC_X10_Y5_N1 ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst14|_~14                                                                         ; LC_X6_Y5_N8  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst14|_~15                                                                         ; LC_X6_Y5_N6  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst14|_~16                                                                         ; LC_X11_Y5_N1 ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst14|_~17                                                                         ; LC_X11_Y5_N3 ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst14|_~18                                                                         ; LC_X11_Y6_N7 ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst14|_~19                                                                         ; LC_X11_Y6_N1 ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst14|_~20                                                                         ; LC_X14_Y7_N6 ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst14|_~21                                                                         ; LC_X14_Y7_N4 ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst14|_~22                                                                         ; LC_X15_Y8_N2 ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst14|_~23                                                                         ; LC_X15_Y8_N5 ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst14|_~6                                                                          ; LC_X15_Y7_N2 ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst14|_~7                                                                          ; LC_X15_Y7_N5 ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst14|dffes:SCLK_ff|ff                                                             ; LC_X12_Y3_N7 ; 30      ; Clock                                   ; yes    ; Global Clock         ; GCLK2            ;
+; rw_data_module:inst14|dffes:load_parallel_FF|ff                                                    ; LC_X14_Y7_N8 ; 33      ; Async. clear, Async. load               ; no     ; --                   ; --               ;
+; rw_data_module:inst14|load_sync3                                                                   ; LC_X12_Y7_N1 ; 9       ; Clock enable                            ; no     ; --                   ; --               ;
+; rw_data_module:inst14|spi_shift_v2:shift|lrx                                                       ; LC_X13_Y9_N9 ; 8       ; Clock enable                            ; no     ; --                   ; --               ;
+; switch:inst|RI_addr_inc_read~1                                                                     ; LC_X11_Y6_N4 ; 19      ; Clock enable                            ; no     ; --                   ; --               ;
+; switch:inst|RI_addr_inc_write~3                                                                    ; LC_X8_Y8_N1  ; 19      ; Clock enable                            ; no     ; --                   ; --               ;
+; switch:inst|RI_data_bus_out~3                                                                      ; LC_X9_Y6_N9  ; 29      ; Output enable                           ; no     ; --                   ; --               ;
 +----------------------------------------------------------------------------------------------------+--------------+---------+-----------------------------------------+--------+----------------------+------------------+
 
 
@@ -849,9 +854,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name                                   ; Location     ; Fan-Out ; Global Resource Used ; Global Line Name ;
 +----------------------------------------+--------------+---------+----------------------+------------------+
 ; RAM_interface:inst11|_~0               ; LC_X12_Y3_N9 ; 38      ; Global Clock         ; GCLK1            ;
-; clk                                    ; PIN_18       ; 403     ; Global Clock         ; GCLK0            ;
-; reset_module:inst7|rst_ff              ; LC_X13_Y3_N2 ; 101     ; Global Clock         ; GCLK3            ;
-; rw_data_module:inst14|dffes:SCLK_ff|ff ; LC_X12_Y3_N6 ; 30      ; Global Clock         ; GCLK2            ;
+; clk                                    ; PIN_18       ; 410     ; Global Clock         ; GCLK0            ;
+; reset_module:inst7|rst_ff              ; LC_X12_Y5_N2 ; 100     ; Global Clock         ; GCLK3            ;
+; rw_data_module:inst14|dffes:SCLK_ff|ff ; LC_X12_Y3_N7 ; 30      ; Global Clock         ; GCLK2            ;
 +----------------------------------------+--------------+---------+----------------------+------------------+
 
 
@@ -860,128 +865,130 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+------------------------+
 ; Routing Resource Type ; Usage                  ;
 +-----------------------+------------------------+
-; C4s                   ; 497 / 2,870 ( 17 % )   ;
-; Direct links          ; 173 / 3,938 ( 4 % )    ;
+; C4s                   ; 513 / 2,870 ( 18 % )   ;
+; Direct links          ; 149 / 3,938 ( 4 % )    ;
 ; Global clocks         ; 4 / 4 ( 100 % )        ;
-; LAB clocks            ; 32 / 72 ( 44 % )       ;
-; LUT chains            ; 29 / 1,143 ( 3 % )     ;
-; Local interconnects   ; 1,003 / 3,938 ( 25 % ) ;
-; R4s                   ; 576 / 2,832 ( 20 % )   ;
+; LAB clocks            ; 30 / 72 ( 42 % )       ;
+; LUT chains            ; 30 / 1,143 ( 3 % )     ;
+; Local interconnects   ; 1,006 / 3,938 ( 26 % ) ;
+; R4s                   ; 546 / 2,832 ( 19 % )   ;
 +-----------------------+------------------------+
 
 
 +---------------------------------------------------------------------------+
 ; LAB Logic Elements                                                        ;
 +--------------------------------------------+------------------------------+
-; Number of Logic Elements  (Average = 8.58) ; Number of LABs  (Total = 86) ;
+; Number of Logic Elements  (Average = 8.13) ; Number of LABs  (Total = 92) ;
 +--------------------------------------------+------------------------------+
 ; 1                                          ; 3                            ;
-; 2                                          ; 0                            ;
-; 3                                          ; 0                            ;
-; 4                                          ; 4                            ;
-; 5                                          ; 5                            ;
-; 6                                          ; 6                            ;
-; 7                                          ; 0                            ;
-; 8                                          ; 7                            ;
-; 9                                          ; 8                            ;
-; 10                                         ; 53                           ;
+; 2                                          ; 2                            ;
+; 3                                          ; 2                            ;
+; 4                                          ; 5                            ;
+; 5                                          ; 3                            ;
+; 6                                          ; 7                            ;
+; 7                                          ; 5                            ;
+; 8                                          ; 9                            ;
+; 9                                          ; 9                            ;
+; 10                                         ; 47                           ;
 +--------------------------------------------+------------------------------+
 
 
 +-------------------------------------------------------------------+
 ; LAB-wide Signals                                                  ;
 +------------------------------------+------------------------------+
-; LAB-wide Signals  (Average = 1.93) ; Number of LABs  (Total = 86) ;
+; LAB-wide Signals  (Average = 2.03) ; Number of LABs  (Total = 92) ;
 +------------------------------------+------------------------------+
-; 1 Async. clear                     ; 22                           ;
+; 1 Async. clear                     ; 27                           ;
 ; 1 Async. load                      ; 1                            ;
-; 1 Clock                            ; 73                           ;
-; 1 Clock enable                     ; 43                           ;
-; 1 Sync. clear                      ; 15                           ;
+; 1 Clock                            ; 80                           ;
+; 1 Clock enable                     ; 49                           ;
+; 1 Sync. clear                      ; 17                           ;
 ; 1 Sync. load                       ; 6                            ;
-; 2 Clock enables                    ; 6                            ;
+; 2 Clock enables                    ; 5                            ;
+; 2 Clocks                           ; 2                            ;
 +------------------------------------+------------------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                        ;
 +---------------------------------------------+------------------------------+
-; Number of Signals Sourced  (Average = 9.45) ; Number of LABs  (Total = 86) ;
+; Number of Signals Sourced  (Average = 8.96) ; Number of LABs  (Total = 92) ;
 +---------------------------------------------+------------------------------+
 ; 0                                           ; 0                            ;
-; 1                                           ; 3                            ;
-; 2                                           ; 0                            ;
-; 3                                           ; 0                            ;
+; 1                                           ; 2                            ;
+; 2                                           ; 3                            ;
+; 3                                           ; 2                            ;
 ; 4                                           ; 4                            ;
 ; 5                                           ; 4                            ;
-; 6                                           ; 6                            ;
-; 7                                           ; 0                            ;
+; 6                                           ; 5                            ;
+; 7                                           ; 4                            ;
 ; 8                                           ; 6                            ;
-; 9                                           ; 9                            ;
-; 10                                          ; 37                           ;
-; 11                                          ; 3                            ;
+; 9                                           ; 11                           ;
+; 10                                          ; 38                           ;
+; 11                                          ; 0                            ;
 ; 12                                          ; 2                            ;
 ; 13                                          ; 2                            ;
 ; 14                                          ; 4                            ;
-; 15                                          ; 1                            ;
-; 16                                          ; 1                            ;
-; 17                                          ; 3                            ;
+; 15                                          ; 3                            ;
+; 16                                          ; 0                            ;
+; 17                                          ; 0                            ;
 ; 18                                          ; 1                            ;
+; 19                                          ; 0                            ;
+; 20                                          ; 1                            ;
 +---------------------------------------------+------------------------------+
 
 
 +--------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                        ;
 +-------------------------------------------------+------------------------------+
-; Number of Signals Sourced Out  (Average = 6.21) ; Number of LABs  (Total = 86) ;
+; Number of Signals Sourced Out  (Average = 5.62) ; Number of LABs  (Total = 92) ;
 +-------------------------------------------------+------------------------------+
 ; 0                                               ; 0                            ;
-; 1                                               ; 6                            ;
-; 2                                               ; 5                            ;
-; 3                                               ; 5                            ;
-; 4                                               ; 4                            ;
-; 5                                               ; 14                           ;
-; 6                                               ; 14                           ;
-; 7                                               ; 10                           ;
-; 8                                               ; 4                            ;
-; 9                                               ; 12                           ;
-; 10                                              ; 10                           ;
+; 1                                               ; 5                            ;
+; 2                                               ; 6                            ;
+; 3                                               ; 8                            ;
+; 4                                               ; 16                           ;
+; 5                                               ; 11                           ;
+; 6                                               ; 17                           ;
+; 7                                               ; 7                            ;
+; 8                                               ; 5                            ;
+; 9                                               ; 8                            ;
+; 10                                              ; 7                            ;
 ; 11                                              ; 1                            ;
-; 12                                              ; 1                            ;
+; 12                                              ; 0                            ;
+; 13                                              ; 1                            ;
 +-------------------------------------------------+------------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Distinct Inputs  (Average = 10.87) ; Number of LABs  (Total = 86) ;
+; Number of Distinct Inputs  (Average = 10.26) ; Number of LABs  (Total = 92) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
-; 1                                            ; 1                            ;
+; 1                                            ; 0                            ;
 ; 2                                            ; 1                            ;
-; 3                                            ; 3                            ;
-; 4                                            ; 7                            ;
-; 5                                            ; 1                            ;
-; 6                                            ; 9                            ;
+; 3                                            ; 2                            ;
+; 4                                            ; 6                            ;
+; 5                                            ; 6                            ;
+; 6                                            ; 13                           ;
 ; 7                                            ; 4                            ;
-; 8                                            ; 5                            ;
-; 9                                            ; 8                            ;
-; 10                                           ; 3                            ;
+; 8                                            ; 3                            ;
+; 9                                            ; 9                            ;
+; 10                                           ; 7                            ;
 ; 11                                           ; 10                           ;
-; 12                                           ; 2                            ;
-; 13                                           ; 7                            ;
-; 14                                           ; 5                            ;
-; 15                                           ; 2                            ;
-; 16                                           ; 3                            ;
-; 17                                           ; 5                            ;
-; 18                                           ; 1                            ;
-; 19                                           ; 2                            ;
-; 20                                           ; 4                            ;
-; 21                                           ; 0                            ;
-; 22                                           ; 0                            ;
+; 12                                           ; 4                            ;
+; 13                                           ; 3                            ;
+; 14                                           ; 4                            ;
+; 15                                           ; 5                            ;
+; 16                                           ; 6                            ;
+; 17                                           ; 2                            ;
+; 18                                           ; 0                            ;
+; 19                                           ; 3                            ;
+; 20                                           ; 1                            ;
+; 21                                           ; 1                            ;
+; 22                                           ; 1                            ;
 ; 23                                           ; 1                            ;
-; 24                                           ; 1                            ;
-; 25                                           ; 1                            ;
 +----------------------------------------------+------------------------------+
 
 
@@ -1003,7 +1010,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Fitter Messages ;
 +-----------------+
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (119006): Selected device 5M1270ZT144C4 for design "sensor_buchas"
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
@@ -1054,29 +1061,29 @@ Info (176215): I/O bank details before I/O pin placement
         Info (176213): I/O bank number 2 does not use VREF pins and has 3.3V VCCIO pins. 24 total pin(s) used --  6 pins available
         Info (176213): I/O bank number 3 does not use VREF pins and has 3.3V VCCIO pins. 23 total pin(s) used --  6 pins available
         Info (176213): I/O bank number 4 does not use VREF pins and has 3.3V VCCIO pins. 25 total pin(s) used --  5 pins available
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:00
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
 Info (170189): Fitter placement preparation operations beginning
-Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:01
+Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
 Info (170191): Fitter placement operations beginning
 Info (170137): Fitter placement was successful
-Info (170192): Fitter placement operations ending: elapsed time is 00:00:03
+Info (170192): Fitter placement operations ending: elapsed time is 00:00:01
 Info (170193): Fitter routing operations beginning
-Info (170195): Router estimated average interconnect usage is 19% of the available device resources
-    Info (170196): Router estimated peak interconnect usage is 23% of the available device resources in the region that extends from location X0_Y0 to location X8_Y11
+Info (170195): Router estimated average interconnect usage is 18% of the available device resources
+    Info (170196): Router estimated peak interconnect usage is 24% of the available device resources in the region that extends from location X0_Y0 to location X8_Y11
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
     Info (170200): Optimizations that may affect the design's timing were skipped
-Info (170194): Fitter routing operations ending: elapsed time is 00:00:01
-Info (11888): Total time spent on timing analysis during the Fitter is 0.57 seconds.
+Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
+Info (11888): Total time spent on timing analysis during the Fitter is 0.33 seconds.
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:00
 Warning (169174): The Reserve All Unused Pins setting has not been specified, and will default to 'As output driving ground'.
 Info (144001): Generated suppressed messages file C:/sensorbuchasv2/output_files/sensor_buchas.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 5083 megabytes
-    Info: Processing ended: Sat May 01 21:00:39 2021
-    Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:08
+    Info: Peak virtual memory: 5357 megabytes
+    Info: Processing ended: Mon May 03 17:57:45 2021
+    Info: Elapsed time: 00:00:03
+    Info: Total CPU time (on all processors): 00:00:06
 
 
 +----------------------------+

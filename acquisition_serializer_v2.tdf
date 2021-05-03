@@ -1,0 +1,101 @@
+include "counter.inc";
+include "dffes.inc";
+
+PARAMETERS
+(
+		little_endian = 1,
+		bits_div_freq = 3
+);
+
+subdesign acquisition_serializer_v2(
+	sreset: input;
+	clk: input;
+	serialize: input;
+	msb: input;
+	channel[2..0]: input;
+	
+	data[7..0]: output;
+	serialize_ok: output;
+	
+	adc_sdi[5..0]: input;
+	adc_sclk: output;
+	
+	
+	test_cont[4..0]: output;
+	test_shift_signal: output;
+	test_data[15..0]: output;
+)
+variable
+	data_buffer[5..0][15..0]: dffes;
+	count: counter with (MAX_VALUE = 16);
+	div_clock[bits_div_freq-1..0]: dffes;
+	serialize_ok_ff: dffes;
+	bus_bits[15..0]: node;
+	shift_signal: node;
+	running: node;
+begin
+	defaults
+		count.inc = Gnd;
+		count.clr = Gnd;
+		data_buffer[][].ena = Gnd;
+		serialize_ok = Gnd;
+	end defaults;
+	
+	div_clock[].clk = clk;
+	count.clk = clk;
+	shift_signal = (div_clock[bits_div_freq-1].q == Gnd) and (!(div_clock[bits_div_freq-2..0].q)==0);
+	
+	running = count.o[] != 16;
+
+	if serialize and running then
+		div_clock[].d = div_clock[].q+1;
+		count.inc = shift_signal;
+	else
+		div_clock[].d = 0;
+	end if;
+
+	data_buffer[][].ena = shift_signal;
+
+	serialize_ok_ff.d = !running;
+	count.clr = !serialize;
+
+	-- serialize_ok serializado
+	serialize_ok_ff.clk = clk;
+	serialize_ok_ff.sclr = sreset;
+	serialize_ok = serialize_ok_ff.q;
+	
+	-- Serial cloc
+	adc_sclk = div_clock[bits_div_freq-1].q;
+
+	-- Buffer de saida
+	CASE channel[] IS
+		WHEN 0 =>
+			bus_bits[] = data_buffer[0][].q;
+		WHEN 1 =>
+			bus_bits[] = data_buffer[1][].q;
+		WHEN 2 =>
+			bus_bits[] = data_buffer[2][].q;
+		WHEN 3 =>
+			bus_bits[] = data_buffer[3][].q;
+		WHEN 4 =>
+			bus_bits[] = data_buffer[4][].q;
+		WHEN 5 =>
+			bus_bits[] = data_buffer[5][].q;
+	END CASE;
+	
+	-- Shift register
+	data_buffer[][15..1].d = data_buffer[][14..0].q;
+	data_buffer[][0].d = adc_sdi[];
+	data_buffer[][].clk = clk;
+
+	-- Seleciona o Endian
+	if msb $ little_endian then
+		data[] = bus_bits[7..0];
+	else
+		data[] = bus_bits[15..8];
+	end if;
+
+	test_cont[] = count.o[];
+	test_shift_signal = shift_signal;
+	test_data[] = data_buffer[0][].q;
+end;
