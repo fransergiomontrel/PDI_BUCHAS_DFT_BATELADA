@@ -26,9 +26,11 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Mon May 03 17:59:06 2021
+    Info: Processing started: Tue May 04 09:47:39 2021
 Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source=C:/sensorbuchasv2/sensor_buchas.vwf --testbench_file=C:/sensorbuchasv2/simulation/qsim/sensor_buchas.vwf.vt
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+
+address[13]" in vector source file when writing test bench files
 
 Completed successfully. 
 
@@ -55,13 +57,13 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Mon May 03 17:59:06 2021
+    Info: Processing started: Tue May 04 09:47:39 2021
 Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory=C:/sensorbuchasv2/simulation/qsim/ sensor_buchas -c sensor_buchas
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (204019): Generated file sensor_buchas.vo in folder "C:/sensorbuchasv2/simulation/qsim//" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 4623 megabytes
-    Info: Processing ended: Mon May 03 17:59:07 2021
+    Info: Processing ended: Tue May 04 09:47:40 2021
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 
@@ -85,7 +87,7 @@ Reading pref.tcl
 
 # ** Warning: (vlib-34) Library already exists at "work".
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 17:59:08 on May 03,2021
+# Start time: 09:47:41 on May 04,2021
 # vlog -work work sensor_buchas.vo 
 
 # -- Compiling module sensor_buchas
@@ -93,22 +95,21 @@ Reading pref.tcl
 # 
 # Top level modules:
 # 	sensor_buchas
-# End time: 17:59:08 on May 03,2021, Elapsed time: 0:00:00
+# End time: 09:47:41 on May 04,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 17:59:08 on May 03,2021
+# Start time: 09:47:41 on May 04,2021
 # vlog -work work sensor_buchas.vwf.vt 
 
 # -- Compiling module sensor_buchas_vlg_vec_tst
-
 # 
 # Top level modules:
 # 	sensor_buchas_vlg_vec_tst
-# End time: 17:59:08 on May 03,2021, Elapsed time: 0:00:00
+# End time: 09:47:41 on May 04,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 
 # vsim -c -t 1ps -L maxv_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.sensor_buchas_vlg_vec_tst 
-# Start time: 17:59:08 on May 03,2021
+# Start time: 09:47:41 on May 04,2021
 # Loading work.sensor_buchas_vlg_vec_tst
 # Loading work.sensor_buchas
 # Loading maxv_ver.maxv_io
@@ -119,7 +120,7 @@ Reading pref.tcl
 
 # ** Note: $finish    : sensor_buchas.vwf.vt(119)
 #    Time: 100 us  Iteration: 0  Instance: /sensor_buchas_vlg_vec_tst
-# End time: 17:59:10 on May 03,2021, Elapsed time: 0:00:02
+# End time: 09:47:43 on May 04,2021, Elapsed time: 0:00:02
 # Errors: 0, Warnings: 0
 
 Completed successfully. 
@@ -148,7 +149,7 @@ Warning: test_shift_rx[1] - signal not found in VCD.
 
 Warning: test_shift_rx[0] - signal not found in VCD.
 
-Writing the resulting VWF to C:/sensorbuchasv2/simulation/qsim/sensor_buchas_20210503175910.sim.vwf
+Writing the resulting VWF to C:/sensorbuchasv2/simulation/qsim/sensor_buchas_20210504094743.sim.vwf
 
 Finished VCD to VWF conversion.
 
