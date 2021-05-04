@@ -552,7 +552,7 @@ q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 |sensor_buchas|acquisition_module:inst13
 clk => acquisition_time_counter:atc.clk
 clk => dffes:start_ff.clk
-clk => acquisition_ctrl:ctrl.clk
+clk => acquisition_pipeline0_ctrl:ctrl.clk
 clk => acquisition_serializer_v3:serializer.clk
 clk => acquisition_store:storer.clk
 clk => crc16:crc.clk
@@ -577,20 +577,20 @@ changing_mode => _.IN0
 changing_mode => _.IN1
 changing_mode => busy.IN1
 sclk_ <= acquisition_serializer_v3:serializer.adc_sclk
-convst <= acquisition_ctrl:ctrl.convst
+convst <= acquisition_pipeline0_ctrl:ctrl.convst
 addr_inc_write <= addr_inc_write.DB_MAX_OUTPUT_PORT_TYPE
-addr_clr <= acquisition_ctrl:ctrl.addr_clr
+addr_clr <= acquisition_pipeline0_ctrl:ctrl.addr_clr
 busy <= busy.DB_MAX_OUTPUT_PORT_TYPE
 we_n <= we_n.DB_MAX_OUTPUT_PORT_TYPE
 cs_n <= cs_n.DB_MAX_OUTPUT_PORT_TYPE
-data[0] <= data[0].DB_MAX_OUTPUT_PORT_TYPE
-data[1] <= data[1].DB_MAX_OUTPUT_PORT_TYPE
-data[2] <= data[2].DB_MAX_OUTPUT_PORT_TYPE
-data[3] <= data[3].DB_MAX_OUTPUT_PORT_TYPE
-data[4] <= data[4].DB_MAX_OUTPUT_PORT_TYPE
-data[5] <= data[5].DB_MAX_OUTPUT_PORT_TYPE
-data[6] <= data[6].DB_MAX_OUTPUT_PORT_TYPE
-data[7] <= data[7].DB_MAX_OUTPUT_PORT_TYPE
+data[0] <= <UNC>
+data[1] <= <UNC>
+data[2] <= <UNC>
+data[3] <= <UNC>
+data[4] <= <UNC>
+data[5] <= <UNC>
+data[6] <= <UNC>
+data[7] <= <UNC>
 data_bus_out <= data_bus_out.DB_MAX_OUTPUT_PORT_TYPE
 test_crc16[0] <= crc16:crc.crc_out[0]
 test_crc16[1] <= crc16:crc.crc_out[1]
@@ -621,14 +621,12 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl
+|sensor_buchas|acquisition_module:inst13|acquisition_pipeline0_ctrl:ctrl
 clk => counter:clock_counter.clk
 clk => counter:samples_counter.clk
 clk => dffes:convst_ff.clk
 clk => dffes:serialize_ff.clk
 clk => dffes:store_ff.clk
-clk => dffes:store_crc_ff.clk
-clk => dffes:store_time_counter_ff.clk
 clk => dffes:busy_ff.clk
 clk => start_sync.CLK
 clk => sm.IN1
@@ -638,8 +636,6 @@ sreset => counter:samples_counter.sreset
 sreset => dffes:convst_ff.sclr
 sreset => dffes:serialize_ff.sclr
 sreset => dffes:store_ff.sclr
-sreset => dffes:store_crc_ff.sclr
-sreset => dffes:store_time_counter_ff.sclr
 sreset => dffes:busy_ff.sclr
 sreset => sm.IN1
 convst <= dffes:convst_ff.q
@@ -647,14 +643,7 @@ serialize <= dffes:serialize_ff.q
 serialize_ok => _.IN1
 serialize_ok => _.IN0
 store <= dffes:store_ff.q
-store_ok => _.IN1
-store_ok => _.IN0
-store_crc <= dffes:store_crc_ff.q
-store_crc_ok => _.IN1
-store_crc_ok => _.IN0
-store_time_counter <= dffes:store_time_counter_ff.q
-store_time_counter_ok => _.IN1
-store_time_counter_ok => _.IN0
+store_ok => ~NO_FANOUT~
 addr_clr <= addr_clr.DB_MAX_OUTPUT_PORT_TYPE
 busy <= dffes:busy_ff.q
 crc_clr <= crc_clr.DB_MAX_OUTPUT_PORT_TYPE
@@ -681,7 +670,7 @@ test_samples_counter[5] <= counter:samples_counter.o[5]
 test_samples_counter[6] <= counter:samples_counter.o[6]
 
 
-|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|counter:clock_counter
+|sensor_buchas|acquisition_module:inst13|acquisition_pipeline0_ctrl:ctrl|counter:clock_counter
 clk => ffs[8].CLK
 clk => ffs[7].CLK
 clk => ffs[6].CLK
@@ -706,7 +695,7 @@ o[7] <= ffs[7].DB_MAX_OUTPUT_PORT_TYPE
 o[8] <= ffs[8].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|counter:samples_counter
+|sensor_buchas|acquisition_module:inst13|acquisition_pipeline0_ctrl:ctrl|counter:samples_counter
 clk => ffs[6].CLK
 clk => ffs[5].CLK
 clk => ffs[4].CLK
@@ -727,7 +716,7 @@ o[5] <= ffs[5].DB_MAX_OUTPUT_PORT_TYPE
 o[6] <= ffs[6].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:convst_ff
+|sensor_buchas|acquisition_module:inst13|acquisition_pipeline0_ctrl:ctrl|dffes:convst_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -738,7 +727,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:serialize_ff
+|sensor_buchas|acquisition_module:inst13|acquisition_pipeline0_ctrl:ctrl|dffes:serialize_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -749,7 +738,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:store_ff
+|sensor_buchas|acquisition_module:inst13|acquisition_pipeline0_ctrl:ctrl|dffes:store_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -760,29 +749,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:store_crc_ff
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:store_time_counter_ff
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|sensor_buchas|acquisition_module:inst13|acquisition_ctrl:ctrl|dffes:busy_ff
+|sensor_buchas|acquisition_module:inst13|acquisition_pipeline0_ctrl:ctrl|dffes:busy_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -895,6 +862,102 @@ clk => dffes:data_buffer[0][3].clk
 clk => dffes:data_buffer[0][2].clk
 clk => dffes:data_buffer[0][1].clk
 clk => dffes:data_buffer[0][0].clk
+clk => dffes:data_output_buffer[5][15].clk
+clk => dffes:data_output_buffer[5][14].clk
+clk => dffes:data_output_buffer[5][13].clk
+clk => dffes:data_output_buffer[5][12].clk
+clk => dffes:data_output_buffer[5][11].clk
+clk => dffes:data_output_buffer[5][10].clk
+clk => dffes:data_output_buffer[5][9].clk
+clk => dffes:data_output_buffer[5][8].clk
+clk => dffes:data_output_buffer[5][7].clk
+clk => dffes:data_output_buffer[5][6].clk
+clk => dffes:data_output_buffer[5][5].clk
+clk => dffes:data_output_buffer[5][4].clk
+clk => dffes:data_output_buffer[5][3].clk
+clk => dffes:data_output_buffer[5][2].clk
+clk => dffes:data_output_buffer[5][1].clk
+clk => dffes:data_output_buffer[5][0].clk
+clk => dffes:data_output_buffer[4][15].clk
+clk => dffes:data_output_buffer[4][14].clk
+clk => dffes:data_output_buffer[4][13].clk
+clk => dffes:data_output_buffer[4][12].clk
+clk => dffes:data_output_buffer[4][11].clk
+clk => dffes:data_output_buffer[4][10].clk
+clk => dffes:data_output_buffer[4][9].clk
+clk => dffes:data_output_buffer[4][8].clk
+clk => dffes:data_output_buffer[4][7].clk
+clk => dffes:data_output_buffer[4][6].clk
+clk => dffes:data_output_buffer[4][5].clk
+clk => dffes:data_output_buffer[4][4].clk
+clk => dffes:data_output_buffer[4][3].clk
+clk => dffes:data_output_buffer[4][2].clk
+clk => dffes:data_output_buffer[4][1].clk
+clk => dffes:data_output_buffer[4][0].clk
+clk => dffes:data_output_buffer[3][15].clk
+clk => dffes:data_output_buffer[3][14].clk
+clk => dffes:data_output_buffer[3][13].clk
+clk => dffes:data_output_buffer[3][12].clk
+clk => dffes:data_output_buffer[3][11].clk
+clk => dffes:data_output_buffer[3][10].clk
+clk => dffes:data_output_buffer[3][9].clk
+clk => dffes:data_output_buffer[3][8].clk
+clk => dffes:data_output_buffer[3][7].clk
+clk => dffes:data_output_buffer[3][6].clk
+clk => dffes:data_output_buffer[3][5].clk
+clk => dffes:data_output_buffer[3][4].clk
+clk => dffes:data_output_buffer[3][3].clk
+clk => dffes:data_output_buffer[3][2].clk
+clk => dffes:data_output_buffer[3][1].clk
+clk => dffes:data_output_buffer[3][0].clk
+clk => dffes:data_output_buffer[2][15].clk
+clk => dffes:data_output_buffer[2][14].clk
+clk => dffes:data_output_buffer[2][13].clk
+clk => dffes:data_output_buffer[2][12].clk
+clk => dffes:data_output_buffer[2][11].clk
+clk => dffes:data_output_buffer[2][10].clk
+clk => dffes:data_output_buffer[2][9].clk
+clk => dffes:data_output_buffer[2][8].clk
+clk => dffes:data_output_buffer[2][7].clk
+clk => dffes:data_output_buffer[2][6].clk
+clk => dffes:data_output_buffer[2][5].clk
+clk => dffes:data_output_buffer[2][4].clk
+clk => dffes:data_output_buffer[2][3].clk
+clk => dffes:data_output_buffer[2][2].clk
+clk => dffes:data_output_buffer[2][1].clk
+clk => dffes:data_output_buffer[2][0].clk
+clk => dffes:data_output_buffer[1][15].clk
+clk => dffes:data_output_buffer[1][14].clk
+clk => dffes:data_output_buffer[1][13].clk
+clk => dffes:data_output_buffer[1][12].clk
+clk => dffes:data_output_buffer[1][11].clk
+clk => dffes:data_output_buffer[1][10].clk
+clk => dffes:data_output_buffer[1][9].clk
+clk => dffes:data_output_buffer[1][8].clk
+clk => dffes:data_output_buffer[1][7].clk
+clk => dffes:data_output_buffer[1][6].clk
+clk => dffes:data_output_buffer[1][5].clk
+clk => dffes:data_output_buffer[1][4].clk
+clk => dffes:data_output_buffer[1][3].clk
+clk => dffes:data_output_buffer[1][2].clk
+clk => dffes:data_output_buffer[1][1].clk
+clk => dffes:data_output_buffer[1][0].clk
+clk => dffes:data_output_buffer[0][15].clk
+clk => dffes:data_output_buffer[0][14].clk
+clk => dffes:data_output_buffer[0][13].clk
+clk => dffes:data_output_buffer[0][12].clk
+clk => dffes:data_output_buffer[0][11].clk
+clk => dffes:data_output_buffer[0][10].clk
+clk => dffes:data_output_buffer[0][9].clk
+clk => dffes:data_output_buffer[0][8].clk
+clk => dffes:data_output_buffer[0][7].clk
+clk => dffes:data_output_buffer[0][6].clk
+clk => dffes:data_output_buffer[0][5].clk
+clk => dffes:data_output_buffer[0][4].clk
+clk => dffes:data_output_buffer[0][3].clk
+clk => dffes:data_output_buffer[0][2].clk
+clk => dffes:data_output_buffer[0][1].clk
+clk => dffes:data_output_buffer[0][0].clk
 clk => sclk_ff.CLK
 clk => sm.IN1
 serialize => _.IN1
@@ -2007,6 +2070,1062 @@ q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_buffer[0][0]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][15]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][14]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][13]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][12]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][11]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][10]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][9]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][8]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][7]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][6]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][5]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][4]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][3]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][2]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][1]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[5][0]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][15]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][14]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][13]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][12]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][11]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][10]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][9]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][8]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][7]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][6]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][5]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][4]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][3]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][2]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][1]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[4][0]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][15]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][14]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][13]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][12]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][11]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][10]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][9]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][8]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][7]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][6]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][5]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][4]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][3]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][2]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][1]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[3][0]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][15]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][14]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][13]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][12]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][11]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][10]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][9]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][8]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][7]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][6]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][5]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][4]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][3]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][2]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][1]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[2][0]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][15]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][14]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][13]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][12]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][11]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][10]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][9]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][8]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][7]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][6]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][5]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][4]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][3]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][2]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][1]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[1][0]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][15]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][14]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][13]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][12]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][11]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][10]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][9]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][8]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][7]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][6]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][5]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][4]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][3]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][2]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][1]
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|dffes:data_output_buffer[0][0]
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
