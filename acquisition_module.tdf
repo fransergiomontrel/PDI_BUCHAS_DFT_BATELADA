@@ -1,5 +1,5 @@
 include "acquisition_ctrl.inc";
-include "acquisition_serializer_v2.inc";
+include "acquisition_serializer_v3.inc";
 include "acquisition_store.inc";
 include "acquisition_store_crc.inc";
 include "acquisition_store_time_counter.inc";
@@ -39,7 +39,7 @@ subdesign acquisition_module(
 variable
 	start_ff: dffes;
 	ctrl: acquisition_ctrl with (active_period = 68, period = 463, samples = samples);
-	serializer: acquisition_serializer_v2 with (little_endian = 1, bits_div_freq = 3);
+	serializer: acquisition_serializer_v3 with (little_endian = 1, wait_states = 3);
 	storer: acquisition_store;
 	storer_crc: acquisition_store_crc;
 	crc: crc16;

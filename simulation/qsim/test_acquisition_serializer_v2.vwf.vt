@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "05/03/2021 17:55:29"
+// Generated on "05/04/2021 15:09:03"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          acquisition_serializer_v2
 // 
@@ -42,6 +42,8 @@ wire [7:0] data;
 wire serialize_ok;
 wire [4:0] test_cont;
 wire [15:0] test_data;
+wire [2:0] test_div_clock;
+wire test_running;
 wire test_shift_signal;
 
 // assign statements (if any)                          
@@ -58,6 +60,8 @@ acquisition_serializer_v2 i1 (
 	.sreset(sreset),
 	.test_cont(test_cont),
 	.test_data(test_data),
+	.test_div_clock(test_div_clock),
+	.test_running(test_running),
 	.test_shift_signal(test_shift_signal)
 );
 initial 

@@ -24,6 +24,8 @@ subdesign acquisition_serializer_v2(
 	test_cont[4..0]: output;
 	test_shift_signal: output;
 	test_data[15..0]: output;
+	test_div_clock[bits_div_freq-1..0]: output;
+	test_running: output;
 )
 variable
 	data_buffer[5..0][15..0]: dffes;
@@ -32,6 +34,7 @@ variable
 	serialize_ok_ff: dffes;
 	bus_bits[15..0]: node;
 	shift_signal: node;
+	running_ff: dff;
 	running: node;
 begin
 	defaults
@@ -43,9 +46,13 @@ begin
 	
 	div_clock[].clk = clk;
 	count.clk = clk;
+	running_ff.clk = clk;
+	
+	running_ff.prn = (count.o[] == 0) and serialize;
+	
 	shift_signal = (div_clock[bits_div_freq-1].q == Gnd) and (!(div_clock[bits_div_freq-2..0].q)==0);
 	
-	running = count.o[] != 16;
+	running = (count.o[] != 16) or (div_clock[].q != 2);
 
 	if serialize and running then
 		div_clock[].d = div_clock[].q+1;
@@ -98,4 +105,8 @@ begin
 	test_cont[] = count.o[];
 	test_shift_signal = shift_signal;
 	test_data[] = data_buffer[0][].q;
+	
+	test_div_clock[] = div_clock[].q;
+	
+	test_running = running_ff.q;
 end;

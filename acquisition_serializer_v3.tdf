@@ -1,0 +1,145 @@
+include "counter.inc";
+include "dffes.inc";
+
+PARAMETERS
+(
+		little_endian = 1,
+		wait_states = 3
+);
+
+subdesign acquisition_serializer_v3(
+	sreset: input;
+	clk: input;
+	serialize: input;
+	msb: input;
+	channel[2..0]: input;
+	
+	data[7..0]: output;
+	serialize_ok: output;
+	
+	adc_sdi[5..0]: input;
+	adc_sclk: output;
+	
+--	
+	test_cont[4..0]: output;
+	test_data[15..0]: output;
+	test_div_clock[1..0]: output;
+)
+variable
+	data_buffer[5..0][15..0]: dffes;
+	count: counter with (MAX_VALUE = 16);
+	divclock: counter with (MAX_VALUE = wait_states);
+	serialize_ok_ff: dffes;
+	bus_bits[15..0]: node;
+	sclk_ff: dff;
+	
+	
+	sm: machine with states(WAIT_SERIALIZE,SERIALIZING_SCLK0,SERIALIZING_SCLK1,FINISH);
+	
+begin
+	defaults
+		count.inc = Gnd;
+		count.clr = Gnd;
+		divclock.inc=Vcc;
+		divclock.clr = Gnd;
+		data_buffer[][].ena = Gnd;
+		serialize_ok_ff.d = Gnd;
+		data_buffer[][].ena = Gnd;
+	end defaults;
+	
+	-- CLOCKS
+	sclk_ff.clk = clk;
+	sm.clk= clk;
+	divclock.clk = clk;
+	count.clk = clk;
+	serialize_ok_ff.clk = clk;
+	
+	-- RESETs
+	serialize_ok_ff.sclr = sreset;
+	sm.reset = sreset;
+	
+	case sm is
+		when WAIT_SERIALIZE =>
+			sclk_ff.d = Gnd;
+			if serialize then
+				sm = SERIALIZING_SCLK0;
+			else
+				count.clr = Vcc;
+				divclock.clr = Vcc;
+				sm = WAIT_SERIALIZE;
+			end if;
+
+		when SERIALIZING_SCLK0 =>
+			if divclock.o[] == wait_states then
+				divclock.clr = Vcc;
+				sclk_ff.d = Vcc;
+				data_buffer[][].ena = Vcc;
+				sm = SERIALIZING_SCLK1;
+			else
+				sm = SERIALIZING_SCLK0;
+			end if;
+
+		when SERIALIZING_SCLK1 =>
+			if divclock.o[] == wait_states then
+				divclock.clr = Vcc;
+				sclk_ff.d = Gnd;
+				if count.o[] == 15 then
+					serialize_ok_ff.d = Vcc;
+					sm = FINISH;
+				else
+					count.inc = Vcc;
+					sm = SERIALIZING_SCLK0;
+				end if;
+			else
+				sclk_ff.d = Vcc;
+				sm = SERIALIZING_SCLK1;
+			end if;
+		when FINISH =>
+			sclk_ff.d = Gnd;
+			if serialize then
+				serialize_ok_ff.d = Vcc;
+				sm = FINISH;
+			else
+				count.clr = Vcc;
+				divclock.clr = Vcc;
+				sm = WAIT_SERIALIZE;
+			end if;
+	end case;
+
+
+	-- SAIDAS
+	serialize_ok = serialize_ok_ff.q;
+	adc_sclk = sclk_ff.q;
+
+	-- Buffer de saida
+	CASE channel[] IS
+		WHEN 0 =>
+			bus_bits[] = data_buffer[0][].q;
+		WHEN 1 =>
+			bus_bits[] = data_buffer[1][].q;
+		WHEN 2 =>
+			bus_bits[] = data_buffer[2][].q;
+		WHEN 3 =>
+			bus_bits[] = data_buffer[3][].q;
+		WHEN 4 =>
+			bus_bits[] = data_buffer[4][].q;
+		WHEN 5 =>
+			bus_bits[] = data_buffer[5][].q;
+	END CASE;
+	
+	-- Shift register
+	data_buffer[][15..1].d = data_buffer[][14..0].q;
+	data_buffer[][0].d = adc_sdi[];
+	data_buffer[][].clk = clk;
+
+	-- Seleciona o Endian
+	if msb $ little_endian then
+		data[] = bus_bits[7..0];
+	else
+		data[] = bus_bits[15..8];
+	end if;
+
+	test_cont[] = count.o[];
+	test_data[] = data_buffer[0][].q;
+	test_div_clock[] = divclock.o[];
+end;
