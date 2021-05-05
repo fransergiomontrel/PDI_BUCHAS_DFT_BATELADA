@@ -21,6 +21,7 @@ after 2500 simTimestamp
 run -all
 quit -f
 
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -39,6 +40,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 
 </modelsim_script_timing>
 <hdl_lang>verilog</hdl_lang>
@@ -933,7 +935,9 @@ TRANSITION_LIST("host_convst_start")
 		LEVEL 1 FOR 1920.0;
 		LEVEL 0 FOR 11520.0;
 		LEVEL 1 FOR 120.0;
-		LEVEL 0 FOR 79400.0;
+		LEVEL 0 FOR 40840.0;
+		LEVEL 1 FOR 640.0;
+		LEVEL 0 FOR 37920.0;
 	}
 }
 

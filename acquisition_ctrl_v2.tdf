@@ -1,0 +1,259 @@
+PARAMETERS
+(
+--		active_period = 68,
+--		period = 463,
+--		samples = 7200
+		active_period = 4,
+		period = 7,
+		samples = 3
+);
+
+
+include "counter.inc";
+include "dffes.inc";
+
+ASSERT active_period < period
+	REPORT		"'active_period'(%) deve ser maior que 'period' (%)" active_period, period
+	SEVERITY	ERROR;
+
+CONSTANT MAX_VALUE = period-1;	
+CONSTANT N_BITS = LOG2(period);	
+
+subdesign acquisition_ctrl_v2(
+	clk: INPUT;				-- Clock principal
+	start: input;
+	sreset: input;
+	
+	convst: output;
+	
+	serialize:output;
+	serialize_ok:input;
+	
+	store:output;
+	store_ok:input;
+
+	store_crc:output;
+	store_crc_ok:input;
+	
+	store_time_counter: output;
+	store_time_counter_ok:input;
+	
+	addr_clr: output;
+	
+	busy: output;
+
+	crc_clr: output;
+	
+	time_counter_restart: output;
+	--
+	test_clock_counter[log2(period+1)-1..0]: output;
+	test_sm_pipeline1_state[3..0]: output;
+	test_sm_pipeline2_state[3..0]: output;
+	test_samples_counter[log2(samples+1)-1..0]: output;
+	test_finish_store: output;
+)
+variable
+	sm_pipeline1: MACHINE WITH STATES (WAITING_START_LOW, WAITING_START_HIGH, AQUISITIONING, WAIT_STATE, SERIALIZING, WAITING_END_OF_CYCLE);
+	sm_pipeline2: MACHINE WITH STATES (WAITING_STORE, STORING, CHECK_STORE_END, STORING_TIME_COUNTER, STORING_CRC);
+	clock_counter: counter with (MAX_VALUE = MAX_VALUE);
+	samples_counter: counter with (MAX_VALUE = samples);
+	convst_ff, serialize_ff, store_ff, store_crc_ff, store_time_counter_ff, busy_ff: dffes;
+	start_pipeline2_ff, finish_store_ff: srff;
+	busy_d: node;
+	start_sync: dff;
+begin
+	defaults
+		convst_ff.d = Gnd;
+		serialize_ff.d = Gnd;
+		store_ff.d = Gnd;
+		store_crc_ff.d = Gnd;
+		store_time_counter_ff.d = Gnd;
+		busy_d = Vcc;
+		crc_clr = Gnd;
+		
+		clock_counter.clr = Gnd;
+		clock_counter.inc = Vcc;
+
+		samples_counter.clr = Gnd;
+		samples_counter.inc = Gnd;
+		
+		addr_clr = Gnd;
+		
+		time_counter_restart = Gnd;
+		
+		start_pipeline2_ff.s = Gnd;
+		start_pipeline2_ff.r = Gnd;
+		
+		finish_store_ff.s = Gnd;
+		finish_store_ff.r = Gnd;
+end defaults;
+
+	start_sync.clk = clk;
+	start_sync.d = start;
+	
+	clock_counter.clk = clk;
+	clock_counter.sreset = sreset;
+
+	samples_counter.clk = clk;
+	samples_counter.sreset = sreset;
+	
+	convst_ff.clk = clk;
+	serialize_ff.clk = clk;
+	store_ff.clk = clk;
+	store_crc_ff.clk = clk;
+	store_time_counter_ff.clk = clk;
+	busy_ff.clk = clk;
+	start_pipeline2_ff.clk = clk;
+	finish_store_ff.clk = clk;
+
+	sm_pipeline1.clk = clk;
+	sm_pipeline1.reset = sreset;
+	sm_pipeline2.clk = clk;
+	sm_pipeline2.reset = sreset;
+	convst_ff.sclr = sreset;
+	serialize_ff.sclr = sreset;
+	store_ff.sclr = sreset;
+	store_crc_ff.sclr = sreset;
+	store_time_counter_ff.sclr = sreset;
+	busy_ff.sclr = sreset;
+	start_pipeline2_ff.clrn = !sreset;
+	finish_store_ff.clrn = !sreset;
+	
+	case sm_pipeline1 is
+		when WAITING_START_LOW =>
+test_sm_pipeline1_state[] = 0;
+			samples_counter.clr = Vcc;
+			clock_counter.clr = Vcc;	-- Contador parado enquanto não há start
+			busy_d = Gnd;
+			if !start_sync.q then
+				sm_pipeline1 = WAITING_START_HIGH;
+			else
+				sm_pipeline1 = WAITING_START_LOW;
+			end if;
+		when WAITING_START_HIGH =>
+test_sm_pipeline1_state[] = 1;
+			samples_counter.clr = Vcc;
+			clock_counter.clr = Vcc;	-- Contador parado enquanto não há start
+			if start_sync.q then
+				convst_ff.d = Vcc;
+				addr_clr = Vcc;
+				crc_clr = Vcc;
+				time_counter_restart = Vcc;
+				sm_pipeline1 = AQUISITIONING;
+			else
+				busy_d = Gnd;
+				sm_pipeline1 = WAITING_START_HIGH;
+			end if;
+
+		when AQUISITIONING =>
+test_sm_pipeline1_state[] = 2;
+			clock_counter.inc = Vcc;
+			if clock_counter.o[] == active_period-1 then
+				sm_pipeline1 = WAIT_STATE;
+			else
+				convst_ff.d = Vcc;
+				sm_pipeline1 = AQUISITIONING;
+			end if;
+			
+		when WAIT_STATE =>
+test_sm_pipeline1_state[] = 3;
+			clock_counter.inc = Vcc;
+			sm_pipeline1 = SERIALIZING;
+			serialize_ff.d = Vcc;
+			
+		when SERIALIZING =>
+test_sm_pipeline1_state[] = 4;
+			if serialize_ok then
+				samples_counter.inc = Vcc;
+				start_pipeline2_ff.s = Vcc;
+				sm_pipeline1 = WAITING_END_OF_CYCLE;
+			else
+				serialize_ff.d = Vcc;
+				sm_pipeline1 = SERIALIZING;
+			end if;
+			
+		when WAITING_END_OF_CYCLE =>
+test_sm_pipeline1_state[] = 5;
+			if samples_counter.o[] == samples then
+				samples_counter.clr = Vcc; -- Zera o contador de amostras
+				clock_counter.clr = Vcc;	-- Reinicia o contador
+				finish_store_ff.s = Vcc;
+				sm_pipeline1 = WAITING_START_LOW;
+			else
+				if clock_counter.o[] == MAX_VALUE then
+					clock_counter.clr = Vcc;	-- Reinicia o contador
+					convst_ff.d = Vcc; -- Liga o convst
+					sm_pipeline1 = AQUISITIONING;
+				end if;
+			end if;
+	end case;
+	
+
+	case sm_pipeline2 is
+		when WAITING_STORE =>
+test_sm_pipeline2_state[] = 0;
+			if start_pipeline2_ff.q then
+				store_ff.d = Vcc;
+				start_pipeline2_ff.r = Vcc;
+				sm_pipeline2 = STORING;
+			else
+				store_ff.d = Gnd;
+				sm_pipeline2 = WAITING_STORE;
+			end if;
+		
+		when STORING =>
+test_sm_pipeline2_state[] = 1;
+			if store_ok then
+				sm_pipeline2 = CHECK_STORE_END;
+			else
+				store_ff.d = Vcc;
+				sm_pipeline2 = STORING;
+			end if;
+
+		when CHECK_STORE_END =>
+test_sm_pipeline2_state[] = 2;
+			if finish_store_ff.q then
+				finish_store_ff.r = Vcc;
+				store_time_counter_ff.d = Vcc;
+				sm_pipeline2 = STORING_TIME_COUNTER;
+			else
+				sm_pipeline2 = WAITING_STORE;
+			end if;
+
+		when STORING_TIME_COUNTER =>
+test_sm_pipeline2_state[] = 3;
+			if store_time_counter_ok then
+				store_crc_ff.d = Vcc;
+				sm_pipeline2 = STORING_CRC;
+			else
+				store_time_counter_ff.d = Vcc;
+				sm_pipeline2 = STORING_TIME_COUNTER;
+			end if;
+			
+		when STORING_CRC =>
+test_sm_pipeline2_state[] = 4;
+			if store_crc_ok then
+				busy_d = Gnd;
+				sm_pipeline2 = WAITING_STORE;
+			else
+				store_crc_ff.d = Vcc;
+				sm_pipeline2 = STORING_CRC;
+			end if;
+
+	end case;
+	
+	convst = convst_ff.q;
+	serialize = serialize_ff.q;
+	store = store_ff.q;
+	busy_ff.d = busy_d;
+	busy = busy_ff.q;
+	store_crc = store_crc_ff.q;
+	store_time_counter = store_time_counter_ff.q;
+
+-- TESTES ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	test_clock_counter[] = clock_counter.o[];
+	test_samples_counter[] = samples_counter.o[];
+	test_finish_store = finish_store_ff.q;
+end;
+
+

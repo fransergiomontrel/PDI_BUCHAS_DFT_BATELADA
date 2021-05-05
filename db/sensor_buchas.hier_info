@@ -552,7 +552,7 @@ q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 |sensor_buchas|acquisition_module:inst13
 clk => acquisition_time_counter:atc.clk
 clk => dffes:start_ff.clk
-clk => acquisition_pipeline0_ctrl:ctrl.clk
+clk => acquisition_ctrl_v2:ctrl.clk
 clk => acquisition_serializer_v3:serializer.clk
 clk => acquisition_store:storer.clk
 clk => crc16:crc.clk
@@ -577,20 +577,20 @@ changing_mode => _.IN0
 changing_mode => _.IN1
 changing_mode => busy.IN1
 sclk_ <= acquisition_serializer_v3:serializer.adc_sclk
-convst <= acquisition_pipeline0_ctrl:ctrl.convst
+convst <= acquisition_ctrl_v2:ctrl.convst
 addr_inc_write <= addr_inc_write.DB_MAX_OUTPUT_PORT_TYPE
-addr_clr <= acquisition_pipeline0_ctrl:ctrl.addr_clr
+addr_clr <= acquisition_ctrl_v2:ctrl.addr_clr
 busy <= busy.DB_MAX_OUTPUT_PORT_TYPE
 we_n <= we_n.DB_MAX_OUTPUT_PORT_TYPE
 cs_n <= cs_n.DB_MAX_OUTPUT_PORT_TYPE
-data[0] <= <UNC>
-data[1] <= <UNC>
-data[2] <= <UNC>
-data[3] <= <UNC>
-data[4] <= <UNC>
-data[5] <= <UNC>
-data[6] <= <UNC>
-data[7] <= <UNC>
+data[0] <= data[0].DB_MAX_OUTPUT_PORT_TYPE
+data[1] <= data[1].DB_MAX_OUTPUT_PORT_TYPE
+data[2] <= data[2].DB_MAX_OUTPUT_PORT_TYPE
+data[3] <= data[3].DB_MAX_OUTPUT_PORT_TYPE
+data[4] <= data[4].DB_MAX_OUTPUT_PORT_TYPE
+data[5] <= data[5].DB_MAX_OUTPUT_PORT_TYPE
+data[6] <= data[6].DB_MAX_OUTPUT_PORT_TYPE
+data[7] <= data[7].DB_MAX_OUTPUT_PORT_TYPE
 data_bus_out <= data_bus_out.DB_MAX_OUTPUT_PORT_TYPE
 test_crc16[0] <= crc16:crc.crc_out[0]
 test_crc16[1] <= crc16:crc.crc_out[1]
@@ -621,29 +621,46 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|acquisition_module:inst13|acquisition_pipeline0_ctrl:ctrl
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl
 clk => counter:clock_counter.clk
 clk => counter:samples_counter.clk
 clk => dffes:convst_ff.clk
 clk => dffes:serialize_ff.clk
 clk => dffes:store_ff.clk
+clk => dffes:store_crc_ff.clk
+clk => dffes:store_time_counter_ff.clk
 clk => dffes:busy_ff.clk
+clk => start_pipeline2_ff.CLK
+clk => finish_store_ff.CLK
 clk => start_sync.CLK
-clk => sm.IN1
+clk => sm_pipeline1.IN1
+clk => sm_pipeline2.IN1
 start => start_sync.DATAIN
 sreset => counter:clock_counter.sreset
 sreset => counter:samples_counter.sreset
 sreset => dffes:convst_ff.sclr
 sreset => dffes:serialize_ff.sclr
 sreset => dffes:store_ff.sclr
+sreset => dffes:store_crc_ff.sclr
+sreset => dffes:store_time_counter_ff.sclr
 sreset => dffes:busy_ff.sclr
-sreset => sm.IN1
+sreset => start_pipeline2_ff.IN0
+sreset => finish_store_ff.IN0
+sreset => sm_pipeline1.IN1
+sreset => sm_pipeline2.IN1
 convst <= dffes:convst_ff.q
 serialize <= dffes:serialize_ff.q
 serialize_ok => _.IN1
 serialize_ok => _.IN0
 store <= dffes:store_ff.q
-store_ok => ~NO_FANOUT~
+store_ok => _.IN1
+store_ok => _.IN0
+store_crc <= dffes:store_crc_ff.q
+store_crc_ok => _.IN1
+store_crc_ok => _.IN0
+store_time_counter <= dffes:store_time_counter_ff.q
+store_time_counter_ok => _.IN1
+store_time_counter_ok => _.IN0
 addr_clr <= addr_clr.DB_MAX_OUTPUT_PORT_TYPE
 busy <= dffes:busy_ff.q
 crc_clr <= crc_clr.DB_MAX_OUTPUT_PORT_TYPE
@@ -656,11 +673,14 @@ test_clock_counter[4] <= counter:clock_counter.o[4]
 test_clock_counter[5] <= counter:clock_counter.o[5]
 test_clock_counter[6] <= counter:clock_counter.o[6]
 test_clock_counter[7] <= counter:clock_counter.o[7]
-test_clock_counter[8] <= counter:clock_counter.o[8]
-test_sm_state[0] <= test_sm_state[0].DB_MAX_OUTPUT_PORT_TYPE
-test_sm_state[1] <= test_sm_state[1].DB_MAX_OUTPUT_PORT_TYPE
-test_sm_state[2] <= test_sm_state[2].DB_MAX_OUTPUT_PORT_TYPE
-test_sm_state[3] <= test_sm_state[3].DB_MAX_OUTPUT_PORT_TYPE
+test_sm_pipeline1_state[0] <= test_sm_pipeline1_state[0].DB_MAX_OUTPUT_PORT_TYPE
+test_sm_pipeline1_state[1] <= test_sm_pipeline1_state[1].DB_MAX_OUTPUT_PORT_TYPE
+test_sm_pipeline1_state[2] <= test_sm_pipeline1_state[2].DB_MAX_OUTPUT_PORT_TYPE
+test_sm_pipeline1_state[3] <= test_sm_pipeline1_state[3].DB_MAX_OUTPUT_PORT_TYPE
+test_sm_pipeline2_state[0] <= test_sm_pipeline2_state[0].DB_MAX_OUTPUT_PORT_TYPE
+test_sm_pipeline2_state[1] <= test_sm_pipeline2_state[1].DB_MAX_OUTPUT_PORT_TYPE
+test_sm_pipeline2_state[2] <= test_sm_pipeline2_state[2].DB_MAX_OUTPUT_PORT_TYPE
+test_sm_pipeline2_state[3] <= test_sm_pipeline2_state[3].DB_MAX_OUTPUT_PORT_TYPE
 test_samples_counter[0] <= counter:samples_counter.o[0]
 test_samples_counter[1] <= counter:samples_counter.o[1]
 test_samples_counter[2] <= counter:samples_counter.o[2]
@@ -668,10 +688,10 @@ test_samples_counter[3] <= counter:samples_counter.o[3]
 test_samples_counter[4] <= counter:samples_counter.o[4]
 test_samples_counter[5] <= counter:samples_counter.o[5]
 test_samples_counter[6] <= counter:samples_counter.o[6]
+test_finish_store <= finish_store_ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|acquisition_module:inst13|acquisition_pipeline0_ctrl:ctrl|counter:clock_counter
-clk => ffs[8].CLK
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|counter:clock_counter
 clk => ffs[7].CLK
 clk => ffs[6].CLK
 clk => ffs[5].CLK
@@ -692,10 +712,9 @@ o[4] <= ffs[4].DB_MAX_OUTPUT_PORT_TYPE
 o[5] <= ffs[5].DB_MAX_OUTPUT_PORT_TYPE
 o[6] <= ffs[6].DB_MAX_OUTPUT_PORT_TYPE
 o[7] <= ffs[7].DB_MAX_OUTPUT_PORT_TYPE
-o[8] <= ffs[8].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|acquisition_module:inst13|acquisition_pipeline0_ctrl:ctrl|counter:samples_counter
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|counter:samples_counter
 clk => ffs[6].CLK
 clk => ffs[5].CLK
 clk => ffs[4].CLK
@@ -716,7 +735,7 @@ o[5] <= ffs[5].DB_MAX_OUTPUT_PORT_TYPE
 o[6] <= ffs[6].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|acquisition_module:inst13|acquisition_pipeline0_ctrl:ctrl|dffes:convst_ff
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|dffes:convst_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -727,7 +746,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|acquisition_module:inst13|acquisition_pipeline0_ctrl:ctrl|dffes:serialize_ff
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|dffes:serialize_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -738,7 +757,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|acquisition_module:inst13|acquisition_pipeline0_ctrl:ctrl|dffes:store_ff
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|dffes:store_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0
@@ -749,7 +768,29 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|acquisition_module:inst13|acquisition_pipeline0_ctrl:ctrl|dffes:busy_ff
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|dffes:store_crc_ff
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|dffes:store_time_counter_ff
+d => ff.DATAIN
+clk => ff.CLK
+ena => _.IN0
+sclr => _.IN1
+sclr => ff.SCLR
+spre => ff.IN1
+spre => ff.SLOAD
+q <= ff.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|dffes:busy_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0

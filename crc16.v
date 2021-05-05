@@ -69,36 +69,6 @@ module crc16(
 endmodule // crc
 
 
-//// C CODE: https://gist.github.com/tijnkooijmans/10981093
-
-//#include <stdio.h>
-//#include <stdint.h>
-//
-//uint16_t w_Crc;
-//
-//void crc16_init(){
-//    w_Crc = 0xffff;
-//}
-//
-//uint16_t crc16_data(uint8_t value){
-//    uint8_t i;
-//    w_Crc ^= value << 8;
-//    for (i=0; i < 8; i++)
-//        w_Crc = w_Crc & 0x8000 ? (w_Crc << 1) ^ 0x1021 : w_Crc << 1;
-//    return w_Crc & 0xffff;
-//}
-//
-//int main()
-//{
-//    crc16_init();
-//    printf("CRC-16/CCITT-FALSE -> %X\n", crc16_data(0x38));   
-//    printf("CRC-16/CCITT-FALSE -> %X\n", crc16_data(0x39));   
-//    printf("CRC-16/CCITT-FALSE -> %X\n", crc16_data(0x3A));   
-//    printf("CRC-16/CCITT-FALSE -> %X\n", crc16_data(0x3B));   
-//
-//    return 0;
-//}
-// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //#include <stdio.h>
 //#include <stdint.h>
 //
@@ -117,9 +87,10 @@ endmodule // crc
 //}
 //
 //
-//uint8_t data[36] = {0x34,0x12,0xBC,0x9A,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-//                    0xBC,0x9A,0x45,0x23,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-//                    0x45,0x23,0xCD,0xAB,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+//uint8_t data[42] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+//                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+//                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+//                    0x3F,0x05,0x00,0x00,0x00,0x00
 //};
 //
 //int main()
@@ -132,16 +103,10 @@ endmodule // crc
 //    
 //    crc16_init();
 //    uint16_t resp;
-//    for (int x=0;x<36;x++)
+//    for (int x=0;x<sizeof(data);x++)
 //        resp = crc16_data(data[x]);
 //        
 //    printf("CRC-16/CCITT-FALSE -> Resultado = %X\n", resp);
 // 
 //    return 0;
 //}
-// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//CRC-16/CCITT-FALSE -> 56AB                                                                                                                                  
-//CRC-16/CCITT-FALSE -> 3649                                                                                                                                  
-//CRC-16/CCITT-FALSE -> 888C                                                                                                                                  
-//CRC-16/CCITT-FALSE -> 1BB8                                                                                                                                  
-//CRC-16/CCITT-FALSE -> Resultado = AD44 
