@@ -64,6 +64,12 @@ subdesign switch(
 	RDM_we_n: input;
 	RDM_data_write[7..0]: input;
 	RDM_data_bus_out: input;
+	
+	-- CONFIG CPLD Module
+	CM_MISO: input;
+	CM_MOSI: output;
+	CM_SCLK: output;
+	
 )
 begin
 	-- Modes
@@ -76,6 +82,33 @@ begin
 	HI_busy = RDM_busy or AM_busy;
 
 	case HI_mode[] is
+		when MODE_CONFIG_CPLD =>
+			-- Host Interface
+			
+			-- RAM Interface
+			RI_addr_clr = Gnd;
+			RI_addr_inc_read = Gnd;
+			RI_addr_inc_write = Gnd;
+			RI_data_in[] = Gnd;
+			RI_we_n = Vcc;
+			RI_oe_n = Vcc;
+			RI_cs_n = Vcc;
+			RI_data_bus_out = Gnd;
+			
+			-- ADC Interface
+			AI_rst_n = Vcc;
+			AI_convst = Gnd;
+			AI_sclk = Gnd;
+			AI_sdo[] = Gnd;
+			
+			-- Acquisition Module
+			AM_adc_sdi[] = Gnd;
+
+			-- Configuration CPLD Module
+			CM_MOSI = HI_MOSI;
+			CM_SCLK = HI_SCLK;
+			HI_MISO = CM_MISO;
+
 		when MODE_CONFIGURATION =>
 			-- Host Interface
 			HI_MISO = AI_sdi[5];
@@ -100,6 +133,11 @@ begin
 			-- Acquisition Module
 			AM_adc_sdi[] = Gnd;
 						
+			-- Configuration CPLD Module
+			CM_MOSI = Gnd;
+			CM_SCLK = Gnd;
+			HI_MISO = Gnd;
+
 		when MODE_AQUISITION =>
 			-- Host Interface
 			
@@ -121,6 +159,11 @@ begin
 			
 			-- Acquisition Module
 			AM_adc_sdi[] = AI_sdi[];
+			
+			-- Configuration CPLD Module
+			CM_MOSI = Gnd;
+			CM_SCLK = Gnd;
+			HI_MISO = Gnd;
 
 		when MODE_RW_DATA =>
 			-- Host Interface		
@@ -130,7 +173,7 @@ begin
 			RI_addr_clr = RDM_addr_clr;
 			RI_addr_inc_read = RDM_addr_inc_read;
 			RI_addr_inc_write = RDM_addr_inc_write;
-			RI_data_in[] = RDM_data_write;
+			RI_data_in[] = RDM_data_write[];
 			RI_we_n = RDM_we_n;
 			RI_oe_n = RDM_oe_n;
 			RI_cs_n = RDM_cs_n;
@@ -151,28 +194,11 @@ begin
 			RDM_SCLK = HI_SCLK;
 			RDM_data_read[] = RI_data_out[];
 			RDM_MOSI = HI_MOSI;
-		
-		when others =>
-			-- Host Interface
-			
-			-- RAM Interface
-			RI_addr_clr = Gnd;
-			RI_addr_inc_read = Gnd;
-			RI_addr_inc_write = Gnd;
-			RI_data_in[] = Gnd;
-			RI_we_n = Vcc;
-			RI_oe_n = Vcc;
-			RI_cs_n = Vcc;
-			RI_data_bus_out = Gnd;
-			
-			-- ADC Interface
-			AI_rst_n = Vcc;
-			AI_convst = Gnd;
-			AI_sclk = Gnd;
-			AI_sdo[] = Gnd;
-			
-			-- Acquisition Module
-			AM_adc_sdi[] = Gnd;
+
+			-- Configuration CPLD Module
+			CM_MOSI = Gnd;
+			CM_SCLK = Gnd;
+			HI_MISO = Gnd;
 
 		end case;
 end;

@@ -1,4 +1,13 @@
 
+State Machine - |sensor_buchas|conf_cpld_module:inst1|sm
+Name FINISH CHECK_PASSWORD WAIT_NOT_LOADING_RX WAIT_LOADING_RX LOAD_ASYNC WAIT_MODE 
+WAIT_MODE 0 0 0 0 0 0 
+LOAD_ASYNC 0 0 0 0 1 1 
+WAIT_LOADING_RX 0 0 0 1 0 1 
+WAIT_NOT_LOADING_RX 0 0 1 0 0 1 
+CHECK_PASSWORD 0 1 0 0 0 1 
+FINISH 1 0 0 0 0 1 
+
 State Machine - |sensor_buchas|rw_data_module:inst14|sm
 Name wait_loading_n wr6 wr5 wr4 wr3 wr2 wr1 wait_loading load_sync4 load_sync3 load_sync2 load_sync1 init_buffers4 init_buffers3 init_buffers2 init_buffers1 wait_mode 
 wait_mode 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 

@@ -1,0 +1,54 @@
+
+constant WRITE_ENABLE_BIT = 4;
+
+subdesign conf_cpld_module(
+	clk: input;
+	sreset: input;
+	mode[1..0]: input;
+	changing_mode: input;
+	MOSI: input;
+	sclk_: input;
+
+	MISO: output;
+	write_enable: output;
+	
+	test_state[2..0]: output;
+)
+variable
+	regs[31..0]: dffe;
+	spi: spi_shift_v2 with (N_BITS = 32s);
+	sm: machine with states (WAIT_MODE, LOAD_ASYNC);
+begin
+	defaults
+		regs[].ena = Gnd;
+		spi.async_load = Gnd;
+	end defaults;
+	
+	-- REGISTER
+	regs[].clk = clk;
+	regs[].d = spi.parallel_out[];
+
+	-- SPI
+	spi.clk = sclk_;
+	spi.MOSI = MOSI;
+	MISO = spi.MISO;
+	spi.parallel_in = regs[].q;
+	
+	-- STATE MACHINE
+	sm.clk = clk;
+	sm.reset = sreset;
+	case sm is
+		when WAIT_MODE =>
+test_state[] = 0;
+			if (mode[] == MODE_CONFIG_CPLD) and (changing_mode == Gnd) then
+				regs[].ena = Vcc;
+				sm = LOAD_ASYNC;
+			else
+				sm = WAIT_MODE;
+			end if;
+		when LOAD_ASYNC =>
+test_state[] = 1;
+			sm = LOAD_ASYNC;
+	ens case;
+
+end;

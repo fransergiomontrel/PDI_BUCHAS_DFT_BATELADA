@@ -1,0 +1,102 @@
+include "spi_shift_v2.inc";
+include "modes.inc";
+
+constant WRITE_KEY = h"AC";
+constant WRITE_ENABLE_BIT = 0;
+
+subdesign conf_cpld_module(
+	clk: input;
+	sreset: input;
+	mode[1..0]: input;
+	changing_mode: input;
+	MOSI: input;
+	sclk_: input;
+
+	MISO: output;
+	write_enable: output;
+	
+	test_state[2..0]: output;
+	test_enable_update_reg: output;
+	test_shift_rx[30..0]: output;
+	test_loading_rx: output;
+	test_parallel_out[31..0]: output;
+)
+variable
+	regs[23..0]: dffe;
+	spi: spi_shift_v2 with (N_BITS = 32);
+	sm: machine with states (WAIT_MODE, LOAD_ASYNC, WAIT_LOADING_RX, WAIT_NOT_LOADING_RX, CHECK_PASSWORD, FINISH);
+	update_reg, key_ok: node;
+begin
+	defaults
+		regs[].ena = Gnd;
+		spi.async_load = Gnd;
+		update_reg = Gnd;
+		spi.parallel_in[] = Gnd;
+	end defaults;
+	
+	-- REGISTER
+	regs[].clk = clk;
+	regs[23..0].clrn = !sreset;
+	regs[].d = spi.parallel_out[23..0];
+
+	-- SPI
+	spi.clk = sclk_;
+	spi.MOSI = MOSI;
+	MISO = spi.MISO;
+	
+	-- KEY_ok
+	key_ok = (spi.parallel_out[31..24] == WRITE_KEY);
+	
+	-- STATE MACHINE
+	sm.clk = clk;
+	sm.reset = sreset or (mode[] != MODE_CONFIG_CPLD) or changing_mode;
+	case sm is
+		when WAIT_MODE =>
+test_state[] = 0;
+			sm = LOAD_ASYNC;
+			
+		when LOAD_ASYNC =>
+test_state[] = 1;
+			spi.async_load = Vcc;
+			spi.parallel_in[23..0] = regs[].q;
+			sm = WAIT_LOADING_RX;
+
+		when WAIT_LOADING_RX =>
+test_state[] = 2;
+			if spi.loading_rx then
+				sm = WAIT_NOT_LOADING_RX;
+			else
+				sm = WAIT_LOADING_RX;
+			end if;
+
+		when WAIT_NOT_LOADING_RX =>
+test_state[] = 3;
+			if !spi.loading_rx then
+				sm = CHECK_PASSWORD;
+			else
+				sm = WAIT_NOT_LOADING_RX;
+			end if;
+
+		when CHECK_PASSWORD =>
+test_state[] = 4;
+			if key_ok then
+				update_reg = Vcc;
+			end if;
+			sm = FINISH;
+			
+		when FINISH =>
+test_state[] = 5;
+				sm = FINISH;
+
+	end case;
+	
+	-- OUTPUTS
+	write_enable = regs[WRITE_ENABLE_BIT].q;
+	regs[].ena = update_reg;
+
+	-- TESTS
+	test_enable_update_reg = update_reg;
+	test_shift_rx[] = spi.test_shift_rx[];
+	test_loading_rx = spi.loading_rx;
+	test_parallel_out[] = spi.parallel_out[];
+end;

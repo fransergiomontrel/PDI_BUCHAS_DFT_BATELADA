@@ -1,5 +1,5 @@
 Analysis & Synthesis report for sensor_buchas
-Tue May 04 20:30:44 2021
+Wed May 05 16:20:39 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -13,32 +13,34 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |sensor_buchas|rw_data_module:inst14|sm
-  9. State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_store_time_counter:storer_time_counter|sm
- 10. State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_store_crc:storer_crc|sm
- 11. State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_store:storer|sm
- 12. State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|sm
- 13. State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|sm_pipeline1
- 14. State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|sm_pipeline2
- 15. State Machine - |sensor_buchas|host_interface:inst2|mode_selector:mode_sel|sm
- 16. Registers Removed During Synthesis
- 17. General Register Statistics
- 18. Inverted Register Statistics
- 19. Parameter Settings for User Entity Instance: RAM_interface:inst11
- 20. Parameter Settings for User Entity Instance: reset_module:inst7
- 21. Parameter Settings for User Entity Instance: host_interface:inst2|mode_selector:mode_sel|synchronizer:sync
- 22. Parameter Settings for User Entity Instance: acquisition_module:inst13
- 23. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_ctrl_v2:ctrl
- 24. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_ctrl_v2:ctrl|counter:clock_counter
- 25. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_ctrl_v2:ctrl|counter:samples_counter
- 26. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_serializer_v3:serializer
- 27. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_serializer_v3:serializer|counter:count
- 28. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_serializer_v3:serializer|counter:divclock
- 29. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_store:storer|counter:channel_counter
- 30. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_time_counter:atc|counter:counter_between_acquisitions
- 31. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_store_time_counter:storer_time_counter|counter:channel_counter
- 32. Parameter Settings for User Entity Instance: rw_data_module:inst14|spi_shift_v2:shift
- 33. Analysis & Synthesis Messages
+  8. State Machine - |sensor_buchas|conf_cpld_module:inst1|sm
+  9. State Machine - |sensor_buchas|rw_data_module:inst14|sm
+ 10. State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_store_time_counter:storer_time_counter|sm
+ 11. State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_store_crc:storer_crc|sm
+ 12. State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_store:storer|sm
+ 13. State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_serializer_v3:serializer|sm
+ 14. State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|sm_pipeline1
+ 15. State Machine - |sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|sm_pipeline2
+ 16. State Machine - |sensor_buchas|host_interface:inst2|mode_selector:mode_sel|sm
+ 17. Registers Removed During Synthesis
+ 18. General Register Statistics
+ 19. Inverted Register Statistics
+ 20. Parameter Settings for User Entity Instance: RAM_interface:inst11
+ 21. Parameter Settings for User Entity Instance: reset_module:inst7
+ 22. Parameter Settings for User Entity Instance: host_interface:inst2|mode_selector:mode_sel|synchronizer:sync
+ 23. Parameter Settings for User Entity Instance: acquisition_module:inst13
+ 24. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_ctrl_v2:ctrl
+ 25. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_ctrl_v2:ctrl|counter:clock_counter
+ 26. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_ctrl_v2:ctrl|counter:samples_counter
+ 27. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_serializer_v3:serializer
+ 28. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_serializer_v3:serializer|counter:count
+ 29. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_serializer_v3:serializer|counter:divclock
+ 30. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_store:storer|counter:channel_counter
+ 31. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_time_counter:atc|counter:counter_between_acquisitions
+ 32. Parameter Settings for User Entity Instance: acquisition_module:inst13|acquisition_store_time_counter:storer_time_counter|counter:channel_counter
+ 33. Parameter Settings for User Entity Instance: rw_data_module:inst14|spi_shift_v2:shift
+ 34. Parameter Settings for User Entity Instance: conf_cpld_module:inst1|spi_shift_v2:spi
+ 35. Analysis & Synthesis Messages
 
 
 
@@ -65,12 +67,12 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Tue May 04 20:30:44 2021       ;
+; Analysis & Synthesis Status ; Successful - Wed May 05 16:20:39 2021       ;
 ; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name               ; sensor_buchas                               ;
 ; Top-level Entity Name       ; sensor_buchas                               ;
 ; Family                      ; MAX V                                       ;
-; Total logic elements        ; 982                                         ;
+; Total logic elements        ; 1,127                                       ;
 ; Total pins                  ; 101                                         ;
 ; Total virtual pins          ; 0                                           ;
 ; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
@@ -153,8 +155,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 2           ;
-; Maximum allowed            ; 2           ;
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
 ; Maximum used               ; 1           ;
@@ -190,6 +192,7 @@ https://fpgasoftware.intel.com/eula.
 ; acquisition_store_time_counter.tdf ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/acquisition_store_time_counter.tdf ;         ;
 ; acquisition_serializer_v3.tdf      ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/acquisition_serializer_v3.tdf      ;         ;
 ; acquisition_ctrl_v2.tdf            ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/acquisition_ctrl_v2.tdf            ;         ;
+; conf_cpld_module.tdf               ; yes             ; User AHDL File                     ; C:/sensorbuchasv2/conf_cpld_module.tdf               ;         ;
 ; synchronizer.inc                   ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/synchronizer.inc                   ;         ;
 ; dffes.inc                          ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/dffes.inc                          ;         ;
 ; mode_selector.inc                  ; yes             ; Auto-Found AHDL File               ; C:/sensorbuchasv2/mode_selector.inc                  ;         ;
@@ -210,33 +213,33 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Total logic elements                        ; 982   ;
-;     -- Combinational with no register       ; 439   ;
-;     -- Register only                        ; 302   ;
-;     -- Combinational with a register        ; 241   ;
+; Total logic elements                        ; 1127  ;
+;     -- Combinational with no register       ; 449   ;
+;     -- Register only                        ; 397   ;
+;     -- Combinational with a register        ; 281   ;
 ;                                             ;       ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 270   ;
-;     -- 3 input functions                    ; 165   ;
-;     -- 2 input functions                    ; 221   ;
-;     -- 1 input functions                    ; 23    ;
-;     -- 0 input functions                    ; 1     ;
+;     -- 4 input functions                    ; 291   ;
+;     -- 3 input functions                    ; 163   ;
+;     -- 2 input functions                    ; 246   ;
+;     -- 1 input functions                    ; 26    ;
+;     -- 0 input functions                    ; 4     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 867   ;
-;     -- arithmetic mode                      ; 115   ;
+;     -- normal mode                          ; 1006  ;
+;     -- arithmetic mode                      ; 121   ;
 ;     -- qfbk mode                            ; 0     ;
 ;     -- register cascade mode                ; 0     ;
-;     -- synchronous clear/load mode          ; 79    ;
-;     -- asynchronous clear/load mode         ; 167   ;
+;     -- synchronous clear/load mode          ; 87    ;
+;     -- asynchronous clear/load mode         ; 239   ;
 ;                                             ;       ;
-; Total registers                             ; 543   ;
-; Total logic cells in carry chains           ; 122   ;
+; Total registers                             ; 678   ;
+; Total logic cells in carry chains           ; 130   ;
 ; I/O pins                                    ; 101   ;
 ; Maximum fan-out node                        ; clk   ;
-; Maximum fan-out                             ; 513   ;
-; Total fan-out                               ; 3618  ;
-; Average fan-out                             ; 3.34  ;
+; Maximum fan-out                             ; 542   ;
+; Total fan-out                               ; 4147  ;
+; Average fan-out                             ; 3.38  ;
 +---------------------------------------------+-------+
 
 
@@ -245,12 +248,12 @@ https://fpgasoftware.intel.com/eula.
 +------------------------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------------------------------------------------------------------------------------+--------------------------------+--------------+
 ; Compilation Hierarchy Node                                 ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                                                 ; Entity Name                    ; Library Name ;
 +------------------------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------------------------------------------------------------------------------------+--------------------------------+--------------+
-; |sensor_buchas                                             ; 982 (0)     ; 543          ; 0          ; 101  ; 0            ; 439 (0)      ; 302 (0)           ; 241 (0)          ; 122 (0)         ; 0 (0)      ; |sensor_buchas                                                                                                      ; sensor_buchas                  ; work         ;
-;    |RAM_interface:inst11|                                  ; 70 (70)     ; 38           ; 0          ; 0    ; 0            ; 32 (32)      ; 0 (0)             ; 38 (38)          ; 36 (36)         ; 0 (0)      ; |sensor_buchas|RAM_interface:inst11                                                                                 ; RAM_interface                  ; work         ;
+; |sensor_buchas                                             ; 1127 (1)    ; 678          ; 0          ; 101  ; 0            ; 449 (1)      ; 397 (0)           ; 281 (0)          ; 130 (0)         ; 0 (0)      ; |sensor_buchas                                                                                                      ; sensor_buchas                  ; work         ;
+;    |RAM_interface:inst11|                                  ; 73 (73)     ; 38           ; 0          ; 0    ; 0            ; 35 (35)      ; 0 (0)             ; 38 (38)          ; 36 (36)         ; 0 (0)      ; |sensor_buchas|RAM_interface:inst11                                                                                 ; RAM_interface                  ; work         ;
 ;    |acquisition_module:inst13|                             ; 662 (9)     ; 400          ; 0          ; 0    ; 0            ; 262 (9)      ; 262 (0)           ; 138 (0)          ; 64 (0)          ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13                                                                            ; acquisition_module             ; work         ;
-;       |acquisition_ctrl_v2:ctrl|                           ; 63 (28)     ; 35           ; 0          ; 0    ; 0            ; 28 (14)      ; 1 (1)             ; 34 (13)          ; 13 (0)          ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl                                                   ; acquisition_ctrl_v2            ; work         ;
+;       |acquisition_ctrl_v2:ctrl|                           ; 63 (27)     ; 35           ; 0          ; 0    ; 0            ; 28 (13)      ; 1 (1)             ; 34 (13)          ; 13 (0)          ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl                                                   ; acquisition_ctrl_v2            ; work         ;
 ;          |counter:clock_counter|                           ; 9 (9)       ; 8            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 8 (8)            ; 7 (7)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|counter:clock_counter                             ; counter                        ; work         ;
-;          |counter:samples_counter|                         ; 20 (20)     ; 7            ; 0          ; 0    ; 0            ; 13 (13)      ; 0 (0)             ; 7 (7)            ; 6 (6)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|counter:samples_counter                           ; counter                        ; work         ;
+;          |counter:samples_counter|                         ; 21 (21)     ; 7            ; 0          ; 0    ; 0            ; 14 (14)      ; 0 (0)             ; 7 (7)            ; 6 (6)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|counter:samples_counter                           ; counter                        ; work         ;
 ;          |dffes:busy_ff|                                   ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|dffes:busy_ff                                     ; dffes                          ; work         ;
 ;          |dffes:convst_ff|                                 ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|dffes:convst_ff                                   ; dffes                          ; work         ;
 ;          |dffes:serialize_ff|                              ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_ctrl_v2:ctrl|dffes:serialize_ff                                ; dffes                          ; work         ;
@@ -474,7 +477,9 @@ https://fpgasoftware.intel.com/eula.
 ;          |counter:counter_between_acquisitions|            ; 112 (112)   ; 48           ; 0          ; 0    ; 0            ; 64 (64)      ; 0 (0)             ; 48 (48)          ; 47 (47)         ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|acquisition_time_counter:atc|counter:counter_between_acquisitions          ; counter                        ; work         ;
 ;       |crc16:crc|                                          ; 23 (23)     ; 16           ; 0          ; 0    ; 0            ; 7 (7)        ; 0 (0)             ; 16 (16)          ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|crc16:crc                                                                  ; crc16                          ; work         ;
 ;       |dffes:start_ff|                                     ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst13|dffes:start_ff                                                             ; dffes                          ; work         ;
-;    |adc_interface:inst4|                                   ; 49 (49)     ; 0            ; 0          ; 0    ; 0            ; 49 (49)      ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|adc_interface:inst4                                                                                  ; adc_interface                  ; work         ;
+;    |adc_interface:inst4|                                   ; 48 (48)     ; 0            ; 0          ; 0    ; 0            ; 48 (48)      ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|adc_interface:inst4                                                                                  ; adc_interface                  ; work         ;
+;    |conf_cpld_module:inst1|                                ; 143 (34)    ; 135          ; 0          ; 0    ; 0            ; 8 (5)        ; 95 (24)           ; 40 (5)           ; 8 (0)           ; 0 (0)      ; |sensor_buchas|conf_cpld_module:inst1                                                                               ; conf_cpld_module               ; work         ;
+;       |spi_shift_v2:spi|                                   ; 109 (109)   ; 106          ; 0          ; 0    ; 0            ; 3 (3)        ; 71 (71)           ; 35 (35)          ; 8 (8)           ; 0 (0)      ; |sensor_buchas|conf_cpld_module:inst1|spi_shift_v2:spi                                                              ; spi_shift_v2                   ; work         ;
 ;    |host_interface:inst2|                                  ; 23 (1)      ; 17           ; 0          ; 0    ; 0            ; 6 (1)        ; 12 (0)            ; 5 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:inst2                                                                                 ; host_interface                 ; work         ;
 ;       |mode_selector:mode_sel|                             ; 22 (8)      ; 17           ; 0          ; 0    ; 0            ; 5 (3)        ; 12 (2)            ; 5 (3)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:inst2|mode_selector:mode_sel                                                          ; mode_selector                  ; work         ;
 ;          |dffes:changing_ff|                               ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:inst2|mode_selector:mode_sel|dffes:changing_ff                                        ; dffes                          ; work         ;
@@ -483,7 +488,7 @@ https://fpgasoftware.intel.com/eula.
 ;          |dffes:ready_ff|                                  ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:inst2|mode_selector:mode_sel|dffes:ready_ff                                           ; dffes                          ; work         ;
 ;          |synchronizer:sync|                               ; 10 (10)     ; 8            ; 0          ; 0    ; 0            ; 2 (2)        ; 8 (8)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:inst2|mode_selector:mode_sel|synchronizer:sync                                        ; synchronizer                   ; work         ;
 ;    |reset_module:inst7|                                    ; 33 (33)     ; 25           ; 0          ; 0    ; 0            ; 8 (8)        ; 0 (0)             ; 25 (25)          ; 22 (22)         ; 0 (0)      ; |sensor_buchas|reset_module:inst7                                                                                   ; reset_module                   ; work         ;
-;    |rw_data_module:inst14|                                 ; 99 (60)     ; 63           ; 0          ; 0    ; 0            ; 36 (35)      ; 28 (12)           ; 35 (13)          ; 0 (0)           ; 0 (0)      ; |sensor_buchas|rw_data_module:inst14                                                                                ; rw_data_module                 ; work         ;
+;    |rw_data_module:inst14|                                 ; 98 (59)     ; 63           ; 0          ; 0    ; 0            ; 35 (34)      ; 28 (12)           ; 35 (13)          ; 0 (0)           ; 0 (0)      ; |sensor_buchas|rw_data_module:inst14                                                                                ; rw_data_module                 ; work         ;
 ;       |dffes:MOSI_ff|                                      ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|rw_data_module:inst14|dffes:MOSI_ff                                                                  ; dffes                          ; work         ;
 ;       |dffes:SCLK_ff|                                      ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|rw_data_module:inst14|dffes:SCLK_ff                                                                  ; dffes                          ; work         ;
 ;       |dffes:busy_ff|                                      ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|rw_data_module:inst14|dffes:busy_ff                                                                  ; dffes                          ; work         ;
@@ -496,6 +501,21 @@ https://fpgasoftware.intel.com/eula.
 ;    |switch:inst|                                           ; 46 (46)     ; 0            ; 0          ; 0    ; 0            ; 46 (46)      ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|switch:inst                                                                                          ; switch                         ; work         ;
 +------------------------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------------------------------------------------------------------------------------+--------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------------------------+
+; State Machine - |sensor_buchas|conf_cpld_module:inst1|sm                                                       ;
++---------------------+--------+----------------+---------------------+-----------------+------------+-----------+
+; Name                ; FINISH ; CHECK_PASSWORD ; WAIT_NOT_LOADING_RX ; WAIT_LOADING_RX ; LOAD_ASYNC ; WAIT_MODE ;
++---------------------+--------+----------------+---------------------+-----------------+------------+-----------+
+; WAIT_MODE           ; 0      ; 0              ; 0                   ; 0               ; 0          ; 0         ;
+; LOAD_ASYNC          ; 0      ; 0              ; 0                   ; 0               ; 1          ; 1         ;
+; WAIT_LOADING_RX     ; 0      ; 0              ; 0                   ; 1               ; 0          ; 1         ;
+; WAIT_NOT_LOADING_RX ; 0      ; 0              ; 1                   ; 0               ; 0          ; 1         ;
+; CHECK_PASSWORD      ; 0      ; 1              ; 0                   ; 0               ; 0          ; 1         ;
+; FINISH              ; 1      ; 0              ; 0                   ; 0               ; 0          ; 1         ;
++---------------------+--------+----------------+---------------------+-----------------+------------+-----------+
 
 
 Encoding Type:  One-Hot
@@ -641,7 +661,8 @@ Encoding Type:  One-Hot
 +------------------------------------------------------------------+--------------------+
 ; acquisition_module:inst13|acquisition_store:storer|state_bits[6] ; Lost fanout        ;
 ; acquisition_module:inst13|acquisition_store:storer|sm~0          ; Lost fanout        ;
-; Total Number of Removed Registers = 2                            ;                    ;
+; conf_cpld_module:inst1|FINISH                                    ; Lost fanout        ;
+; Total Number of Removed Registers = 3                            ;                    ;
 +------------------------------------------------------------------+--------------------+
 
 
@@ -650,12 +671,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 543   ;
+; Total registers                              ; 678   ;
 ; Number of registers using Synchronous Clear  ; 68    ;
-; Number of registers using Synchronous Load   ; 11    ;
-; Number of registers using Asynchronous Clear ; 159   ;
-; Number of registers using Asynchronous Load  ; 16    ;
-; Number of registers using Clock Enable       ; 391   ;
+; Number of registers using Synchronous Load   ; 19    ;
+; Number of registers using Asynchronous Clear ; 207   ;
+; Number of registers using Asynchronous Load  ; 40    ;
+; Number of registers using Clock Enable       ; 447   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -829,23 +850,32 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++--------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: conf_cpld_module:inst1|spi_shift_v2:spi ;
++----------------+-------+-------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                        ;
++----------------+-------+-------------------------------------------------------------+
+; N_BITS         ; 32    ; Untyped                                                     ;
++----------------+-------+-------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Tue May 04 20:30:31 2021
+    Info: Processing started: Wed May 05 16:20:31 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off sensor_buchas -c sensor_buchas
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file crc16.v
     Info (12023): Found entity 1: crc16 File: C:/sensorbuchasv2/crc16.v Line: 18
 Info (12021): Found 1 design units, including 1 entities, in source file reset_module.tdf
     Info (12023): Found entity 1: reset_module File: C:/sensorbuchasv2/reset_module.tdf Line: 8
 Info (12021): Found 1 design units, including 1 entities, in source file synchronizer.tdf
     Info (12023): Found entity 1: synchronizer File: C:/sensorbuchasv2/synchronizer.tdf Line: 7
-Warning (287004): Group name "RDM_data_write" is missing brackets ([ ]) File: C:/sensorbuchasv2/switch.tdf Line: 133
 Info (12021): Found 1 design units, including 1 entities, in source file switch.tdf
     Info (12023): Found entity 1: switch File: C:/sensorbuchasv2/switch.tdf Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file ram_interface.tdf
@@ -895,11 +925,13 @@ Info (12021): Found 1 design units, including 1 entities, in source file acquisi
     Info (12023): Found entity 1: acquisition_serializer_v3 File: C:/sensorbuchasv2/acquisition_serializer_v3.tdf Line: 10
 Info (12021): Found 1 design units, including 1 entities, in source file acquisition_ctrl_v2.tdf
     Info (12023): Found entity 1: acquisition_ctrl_v2 File: C:/sensorbuchasv2/acquisition_ctrl_v2.tdf Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file conf_cpld_module.tdf
+    Info (12023): Found entity 1: conf_cpld_module File: C:/sensorbuchasv2/conf_cpld_module.tdf Line: 7
 Info (12127): Elaborating entity "sensor_buchas" for the top level hierarchy
 Warning (275043): Pin "RI_addr_inc" is missing source
 Info (12128): Elaborating entity "RAM_interface" for hierarchy "RAM_interface:inst11"
-Warning (287013): Variable or input pin "write" is defined but never used. File: C:/sensorbuchasv2/RAM_interface.tdf Line: 36
-Warning (287013): Variable or input pin "read" is defined but never used. File: C:/sensorbuchasv2/RAM_interface.tdf Line: 36
+Warning (287013): Variable or input pin "write" is defined but never used. File: C:/sensorbuchasv2/RAM_interface.tdf Line: 38
+Warning (287013): Variable or input pin "read" is defined but never used. File: C:/sensorbuchasv2/RAM_interface.tdf Line: 38
 Warning (287013): Variable or input pin "mode" is defined but never used. File: C:/sensorbuchasv2/RAM_interface.tdf Line: 20
 Info (12128): Elaborating entity "reset_module" for hierarchy "reset_module:inst7"
 Warning (287009): Result of LOG2 is not an integer -- rounded result to next whole number File: C:/sensorbuchasv2/reset_module.tdf Line: 6
@@ -950,6 +982,8 @@ Warning (287009): Result of LOG2 is not an integer -- rounded result to next who
 Info (287000): Assertion information: Valor maximo = (5) Numero de bits = (3) File: C:/sensorbuchasv2/counter.tdf Line: 10
 Info (12128): Elaborating entity "rw_data_module" for hierarchy "rw_data_module:inst14"
 Info (12128): Elaborating entity "spi_shift_v2" for hierarchy "rw_data_module:inst14|spi_shift_v2:shift" File: C:/sensorbuchasv2/rw_data_module.tdf Line: 37
+Info (12128): Elaborating entity "conf_cpld_module" for hierarchy "conf_cpld_module:inst1"
+Info (12128): Elaborating entity "spi_shift_v2" for hierarchy "conf_cpld_module:inst1|spi_shift_v2:spi" File: C:/sensorbuchasv2/conf_cpld_module.tdf Line: 26
 Info (12128): Elaborating entity "adc_interface" for hierarchy "adc_interface:inst4"
 Warning (287013): Variable or input pin "clk" is defined but never used. File: C:/sensorbuchasv2/adc_interface.tdf Line: 4
 Warning (287013): Variable or input pin "adc_rvs" is defined but never used. File: C:/sensorbuchasv2/adc_interface.tdf Line: 22
@@ -958,16 +992,16 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "LED4" is stuck at GND
     Warning (13410): Pin "RI_addr_inc" is stuck at GND
 Info (18000): Registers with preset signals will power-up high File: C:/sensorbuchasv2/acquisition_store.tdf Line: 25
-Info (17049): 2 registers lost all their fanouts during netlist optimizations.
+Info (17049): 3 registers lost all their fanouts during netlist optimizations.
 Info (17016): Found the following redundant logic cells in design
-    Info (17048): Logic cell "RAM_interface:inst11|driver[7]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 37
-    Info (17048): Logic cell "RAM_interface:inst11|driver[2]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 37
-    Info (17048): Logic cell "RAM_interface:inst11|driver[1]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 37
-    Info (17048): Logic cell "RAM_interface:inst11|driver[0]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 37
-    Info (17048): Logic cell "RAM_interface:inst11|driver[6]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 37
-    Info (17048): Logic cell "RAM_interface:inst11|driver[5]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 37
-    Info (17048): Logic cell "RAM_interface:inst11|driver[4]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 37
-    Info (17048): Logic cell "RAM_interface:inst11|driver[3]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 37
+    Info (17048): Logic cell "RAM_interface:inst11|driver[7]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 39
+    Info (17048): Logic cell "RAM_interface:inst11|driver[2]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 39
+    Info (17048): Logic cell "RAM_interface:inst11|driver[1]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 39
+    Info (17048): Logic cell "RAM_interface:inst11|driver[0]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 39
+    Info (17048): Logic cell "RAM_interface:inst11|driver[6]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 39
+    Info (17048): Logic cell "RAM_interface:inst11|driver[5]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 39
+    Info (17048): Logic cell "RAM_interface:inst11|driver[4]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 39
+    Info (17048): Logic cell "RAM_interface:inst11|driver[3]" File: C:/sensorbuchasv2/RAM_interface.tdf Line: 39
 Warning (21074): Design contains 6 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "adc_rvs[5]"
     Warning (15610): No output dependent on input pin "adc_rvs[4]"
@@ -975,15 +1009,15 @@ Warning (21074): Design contains 6 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "adc_rvs[2]"
     Warning (15610): No output dependent on input pin "adc_rvs[1]"
     Warning (15610): No output dependent on input pin "adc_rvs[0]"
-Info (21057): Implemented 1083 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1228 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 19 input pins
     Info (21059): Implemented 74 output pins
     Info (21060): Implemented 8 bidirectional pins
-    Info (21061): Implemented 982 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 44 warnings
-    Info: Peak virtual memory: 4706 megabytes
-    Info: Processing ended: Tue May 04 20:30:45 2021
-    Info: Elapsed time: 00:00:14
-    Info: Total CPU time (on all processors): 00:00:20
+    Info (21061): Implemented 1127 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 43 warnings
+    Info: Peak virtual memory: 4707 megabytes
+    Info: Processing ended: Wed May 05 16:20:39 2021
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:17
 
 
