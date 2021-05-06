@@ -1,0 +1,118 @@
+%implements "chartSource" "C"
+%function ChartConfig(block, system) void
+  %createrecord chartConfiguration { ...
+          executeAtInitialization  1 ...
+  }
+  %return chartConfiguration
+%endfunction
+%function ChartDataMap(block, system) void
+  %createrecord ChartDataElements {\
+    NumChartData   14 \
+    ChartDataDefaults {\
+      RecordType   "ChartData"\
+      Dimensions   []\
+      IsTestPoint  0\
+    }\
+    ChartData {\
+      Name         "is_c3_mode_design"\
+      Description  "StateActiveChild"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "mode_buffer1"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "mode_buffer1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "mode_buffer2"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "mode_buffer2"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "sdiLoggedStatesBuffer"\
+      Description  ""\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+      Dimensions   [5]\
+    }\
+    ChartData {\
+      Name         "sdiLoggedDataBuffer"\
+      Description  ""\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+      Dimensions   [5]\
+    }\
+    ChartData {\
+      Name         "sdiBlockInfo"\
+      Description  ""\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "SignalExportProp"\
+      Description  ""\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "SignalExportProp"\
+      Description  ""\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "SignalExportProp"\
+      Description  ""\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "SignalExportProp"\
+      Description  ""\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "SignalExportProp"\
+      Description  ""\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "SignalExportProp"\
+      Description  ""\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "SignalExportProp"\
+      Description  ""\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "SignalExportProp"\
+      Description  ""\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+  }
+  %return ChartDataElements
+%endfunction
