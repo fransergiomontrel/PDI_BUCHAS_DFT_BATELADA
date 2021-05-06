@@ -278,7 +278,7 @@ sreset => _.IN0
 sreset => _.IN0
 sreset => _.IN0
 sreset => _.IN0
-busy => ~NO_FANOUT~
+busy => host_busy.IN1
 MISO => host_MISO.DATAIN
 host_mode[0] => mode_selector:mode_sel.mode_in[0]
 host_mode[1] => mode_selector:mode_sel.mode_in[1]
@@ -301,7 +301,7 @@ sreset_mode0 <= sreset_mode0.DB_MAX_OUTPUT_PORT_TYPE
 sreset_mode1 <= sreset_mode1.DB_MAX_OUTPUT_PORT_TYPE
 sreset_mode2 <= sreset_mode2.DB_MAX_OUTPUT_PORT_TYPE
 sreset_mode3 <= sreset_mode3.DB_MAX_OUTPUT_PORT_TYPE
-host_busy <= busy_flag.DB_MAX_OUTPUT_PORT_TYPE
+host_busy <= host_busy.DB_MAX_OUTPUT_PORT_TYPE
 host_MISO <= MISO.DB_MAX_OUTPUT_PORT_TYPE
 
 
@@ -544,6 +544,7 @@ RDM_data_bus_out => RI_data_bus_out~1.IN1
 CM_MISO => HI_MISO~0.IN1
 CM_MOSI <= CM_MOSI.DB_MAX_OUTPUT_PORT_TYPE
 CM_SCLK <= CM_SCLK.DB_MAX_OUTPUT_PORT_TYPE
+ready <= <VCC>
 
 
 |sensor_buchas|acquisition_module:inst5
@@ -607,11 +608,11 @@ clk => dffes:serialize_ff.clk
 clk => dffes:store_ff.clk
 clk => dffes:store_crc_ff.clk
 clk => dffes:store_time_counter_ff.clk
-clk => dffes:busy_ff.clk
 clk => start_pipeline2_ff.CLK
 clk => finish_store_ff.CLK
 clk => start_sync.CLK
 clk => ready_ff.CLK
+clk => busy_ff.CLK
 clk => sm_pipeline1.IN1
 clk => sm_pipeline2.IN1
 start => start_sync.DATAIN
@@ -622,7 +623,6 @@ sreset => dffes:serialize_ff.sclr
 sreset => dffes:store_ff.sclr
 sreset => dffes:store_crc_ff.sclr
 sreset => dffes:store_time_counter_ff.sclr
-sreset => dffes:busy_ff.sclr
 sreset => start_pipeline2_ff.IN0
 sreset => finish_store_ff.IN0
 sreset => sm_pipeline1.IN1
@@ -641,7 +641,7 @@ store_time_counter <= dffes:store_time_counter_ff.q
 store_time_counter_ok => _.IN1
 store_time_counter_ok => _.IN0
 addr_clr <= addr_clr.DB_MAX_OUTPUT_PORT_TYPE
-busy <= dffes:busy_ff.q
+busy <= busy_ff.DB_MAX_OUTPUT_PORT_TYPE
 crc_clr <= crc_clr.DB_MAX_OUTPUT_PORT_TYPE
 time_counter_restart <= time_counter_restart.DB_MAX_OUTPUT_PORT_TYPE
 ready <= ready_ff.DB_MAX_OUTPUT_PORT_TYPE
@@ -745,17 +745,6 @@ q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |sensor_buchas|acquisition_module:inst5|acquisition_ctrl_v2:ctrl|dffes:store_time_counter_ff
-d => ff.DATAIN
-clk => ff.CLK
-ena => _.IN0
-sclr => _.IN1
-sclr => ff.SCLR
-spre => ff.IN1
-spre => ff.SLOAD
-q <= ff.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|sensor_buchas|acquisition_module:inst5|acquisition_ctrl_v2:ctrl|dffes:busy_ff
 d => ff.DATAIN
 clk => ff.CLK
 ena => _.IN0

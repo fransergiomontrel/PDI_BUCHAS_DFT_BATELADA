@@ -64,6 +64,8 @@ subdesign switch(
 	CM_MOSI: output;
 	CM_SCLK: output;
 	
+	ready: output;
+	
 )
 begin
 	-- 
@@ -189,4 +191,6 @@ begin
 			HI_MISO = Gnd;
 
 		end case;
+		
+		ready = Vcc;
 end;

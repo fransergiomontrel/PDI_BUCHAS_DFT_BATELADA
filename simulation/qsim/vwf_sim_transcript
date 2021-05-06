@@ -7,7 +7,7 @@ Note: if both ModelSim-Altera and ModelSim executables are available, ModelSim-A
 
 **** Generating the ModelSim Testbench ****
 
-quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="C:/sensorbuchasv2/test_sensor_buchas_conf_cpld_module.vwf" --testbench_file="C:/sensorbuchasv2/simulation/qsim/test_sensor_buchas_conf_cpld_module.vwf.vt"
+quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source="C:/sensorbuchasv2/sensor_buchas.vwf" --testbench_file="C:/sensorbuchasv2/simulation/qsim/sensor_buchas.vwf.vt"
 
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
@@ -26,11 +26,11 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Thu May 06 16:37:06 2021
-Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source=C:/sensorbuchasv2/test_sensor_buchas_conf_cpld_module.vwf --testbench_file=C:/sensorbuchasv2/simulation/qsim/test_sensor_buchas_conf_cpld_module.vwf.vt
+    Info: Processing started: Thu May 06 17:07:22 2021
+Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off sensor_buchas -c sensor_buchas --vector_source=C:/sensorbuchasv2/sensor_buchas.vwf --testbench_file=C:/sensorbuchasv2/simulation/qsim/sensor_buchas.vwf.vt
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 
-ing output pin "test_parallel_out[16]" in vector source file when writing test bench files
+address[13]" in vector source file when writing test bench files
 
 Completed successfully. 
 
@@ -57,13 +57,13 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Thu May 06 16:37:07 2021
+    Info: Processing started: Thu May 06 17:07:23 2021
 Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory=C:/sensorbuchasv2/simulation/qsim/ sensor_buchas -c sensor_buchas
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (204019): Generated file sensor_buchas.vo in folder "C:/sensorbuchasv2/simulation/qsim//" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 4624 megabytes
-    Info: Processing ended: Thu May 06 16:37:08 2021
+    Info: Processing ended: Thu May 06 17:07:24 2021
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 
@@ -84,10 +84,10 @@ Reading pref.tcl
 # 2020.1
 
 # do sensor_buchas.do
-# ** Warning: (vlib-34) Library already exists at "work".
 
+# ** Warning: (vlib-34) Library already exists at "work".
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 16:37:08 on May 06,2021
+# Start time: 17:07:24 on May 06,2021
 # vlog -work work sensor_buchas.vo 
 
 # -- Compiling module sensor_buchas
@@ -95,21 +95,22 @@ Reading pref.tcl
 # 
 # Top level modules:
 # 	sensor_buchas
-# End time: 16:37:09 on May 06,2021, Elapsed time: 0:00:01
+# End time: 17:07:25 on May 06,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 16:37:09 on May 06,2021
-# vlog -work work test_sensor_buchas_conf_cpld_module.vwf.vt 
+# Start time: 17:07:25 on May 06,2021
+# vlog -work work sensor_buchas.vwf.vt 
+
 # -- Compiling module sensor_buchas_vlg_vec_tst
 # 
 # Top level modules:
 # 	sensor_buchas_vlg_vec_tst
-# End time: 16:37:09 on May 06,2021, Elapsed time: 0:00:00
+# End time: 17:07:25 on May 06,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 
 # vsim -c -t 1ps -L maxv_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.sensor_buchas_vlg_vec_tst 
-# Start time: 16:37:09 on May 06,2021
+# Start time: 17:07:25 on May 06,2021
 # Loading work.sensor_buchas_vlg_vec_tst
 # Loading work.sensor_buchas
 # Loading maxv_ver.maxv_io
@@ -118,80 +119,32 @@ Reading pref.tcl
 # Loading maxv_ver.maxv_lcell_register
 # after#25
 
-# ** Note: $finish    : test_sensor_buchas_conf_cpld_module.vwf.vt(113)
-#    Time: 50 us  Iteration: 0  Instance: /sensor_buchas_vlg_vec_tst
-# End time: 16:37:10 on May 06,2021, Elapsed time: 0:00:01
+# ** Note: $finish    : sensor_buchas.vwf.vt(113)
+#    Time: 100 us  Iteration: 0  Instance: /sensor_buchas_vlg_vec_tst
+# End time: 17:07:27 on May 06,2021, Elapsed time: 0:00:02
 # Errors: 0, Warnings: 0
 
 Completed successfully. 
 
 **** Converting ModelSim VCD to vector waveform ****
 
-Reading C:/sensorbuchasv2/test_sensor_buchas_conf_cpld_module.vwf...
+Reading C:/sensorbuchasv2/sensor_buchas.vwf...
 
 Reading C:/sensorbuchasv2/simulation/qsim/sensor_buchas.msim.vcd...
 
 Processing channel transitions... 
 
-Warning: sreset - signal not found in VCD.
+Warning: rst - signal not found in VCD.
 
-Warning: test_state[2] - signal not found in VCD.
+Warning: RDM_test_state[3] - signal not found in VCD.
 
-Warning: test_state[1] - signal not found in VCD.
+Warning: RDM_test_state[2] - signal not found in VCD.
 
-Warning: test_state[0] - signal not found in VCD.
+Warning: RDM_test_state[1] - signal not found in VCD.
 
-Warning: write_enable - signal not found in VCD.
+Warning: RDM_test_state[0] - signal not found in VCD.
 
-Warning: test_enable_update_reg - signal not found in VCD.
-
-Warning: test_shift_rx[30] - signal not found in VCD.
-
-Warning: test_shift_rx[29] - signal not found in VCD.
-
-Warning: test_shift_rx[28] - signal not found in VCD.
-
-Warning: test_shift_rx[27] - signal not found in VCD.
-
-Warning: test_shift_rx[26] - signal not found in VCD.
-
-Warning: test_shift_rx[25] - signal not found in VCD.
-
-Warning: test_shift_rx[24] - signal not found in VCD.
-
-Warning: test_shift_rx[23] - signal not found in VCD.
-
-Warning: test_shift_rx[22] - signal not found in VCD.
-
-Warning: test_shift_rx[21] - signal not found in VCD.
-
-Warning: test_shift_rx[20] - signal not found in VCD.
-
-Warning: test_shift_rx[19] - signal not found in VCD.
-
-Warning: test_shift_rx[18] - signal not found in VCD.
-
-Warning: test_shift_rx[17] - signal not found in VCD.
-
-Warning: test_shift_rx[16] - signal not found in VCD.
-
-Warning: test_shift_rx[15] - signal not found in VCD.
-
-Warning: test_shift_rx[14] - signal not found in VCD.
-
-Warning: test_shift_rx[13] - signal not found in VCD.
-
-Warning: test_shift_rx[12] - signal not found in VCD.
-
-Warning: test_shift_rx[11] - signal not found in VCD.
-
-Warning: test_shift_rx[10] - signal not found in VCD.
-
-Warning: test_shift_rx[9] - signal not found in VCD.
-
-Warning: test_shift_rx[8] - signal not found in VCD.
-
-Warning: test_shift_rx[7] - signal not found in VCD.
+Warning: RI_addr_inc - signal not found in VCD.
 
 Warning: test_shift_rx[6] - signal not found in VCD.
 
@@ -207,77 +160,9 @@ Warning: test_shift_rx[1] - signal not found in VCD.
 
 Warning: test_shift_rx[0] - signal not found in VCD.
 
-Warning: test_loading_rx - signal not found in VCD.
+Warning: RDM_test_loading - signal not found in VCD.
 
-Warning: test_parallel_out[31] - signal not found in VCD.
-
-Warning: test_parallel_out[30] - signal not found in VCD.
-
-Warning: test_parallel_out[29] - signal not found in VCD.
-
-Warning: test_parallel_out[28] - signal not found in VCD.
-
-Warning: test_parallel_out[27] - signal not found in VCD.
-
-Warning: test_parallel_out[26] - signal not found in VCD.
-
-Warning: test_parallel_out[25] - signal not found in VCD.
-
-Warning: test_parallel_out[24] - signal not found in VCD.
-
-Warning: test_parallel_out[23] - signal not found in VCD.
-
-Warning: test_parallel_out[22] - signal not found in VCD.
-
-Warning: test_parallel_out[21] - signal not found in VCD.
-
-Warning: test_parallel_out[20] - signal not found in VCD.
-
-Warning: test_parallel_out[19] - signal not found in VCD.
-
-Warning: test_parallel_out[18] - signal not found in VCD.
-
-Warning: test_parallel_out[17] - signal not found in VCD.
-
-Warning: test_parallel_out[16] - signal not found in VCD.
-
-Warning: test_parallel_out[15] - signal not found in VCD.
-
-Warning: test_parallel_out[14] - signal not found in VCD.
-
-Warning: test_parallel_out[13] - signal not found in VCD.
-
-Warning: test_parallel_out[12] - signal not found in VCD.
-
-Warning: test_parallel_out[11] - signal not found in VCD.
-
-Warning: test_parallel_out[10] - signal not found in VCD.
-
-Warning: test_parallel_out[9] - signal not found in VCD.
-
-Warning: test_parallel_out[8] - signal not found in VCD.
-
-Warning: test_parallel_out[7] - signal not found in VCD.
-
-Warning: test_parallel_out[6] - signal not found in VCD.
-
-Warning: test_parallel_out[5] - signal not found in VCD.
-
-Warning: test_parallel_out[4] - signal not found in VCD.
-
-Warning: test_parallel_out[3] - signal not found in VCD.
-
-Warning: test_parallel_out[2] - signal not found in VCD.
-
-Warning: test_parallel_out[1] - signal not found in VCD.
-
-Warning: test_parallel_out[0] - signal not found in VCD.
-
-Warning: eur - signal not found in VCD.
-
-Warning: CM_write_enable - signal not found in VCD.
-
-Writing the resulting VWF to C:/sensorbuchasv2/simulation/qsim/sensor_buchas_20210506163710.sim.vwf
+Writing the resulting VWF to C:/sensorbuchasv2/simulation/qsim/sensor_buchas_20210506170728.sim.vwf
 
 Finished VCD to VWF conversion.
 

@@ -59,11 +59,11 @@ variable
 	sm_pipeline2: MACHINE WITH STATES (WAITING_STORE, STORING, CHECK_STORE_END, STORING_TIME_COUNTER, STORING_CRC);
 	clock_counter: counter with (MAX_VALUE = MAX_VALUE);
 	samples_counter: counter with (MAX_VALUE = samples);
-	convst_ff, serialize_ff, store_ff, store_crc_ff, store_time_counter_ff, busy_ff: dffes;
+	convst_ff, serialize_ff, store_ff, store_crc_ff, store_time_counter_ff: dffes;
 	start_pipeline2_ff, finish_store_ff: srff;
-	busy_d: node;
 	start_sync: dff;
 	ready_ff: srff;
+	busy_ff: srff;
 begin
 	defaults
 		convst_ff.d = Gnd;
@@ -71,7 +71,6 @@ begin
 		store_ff.d = Gnd;
 		store_crc_ff.d = Gnd;
 		store_time_counter_ff.d = Gnd;
-		busy_d = Vcc;
 		crc_clr = Gnd;
 		
 		clock_counter.clr = Gnd;
@@ -92,6 +91,9 @@ begin
 
 		ready_ff.s = Gnd;
 		ready_ff.r = Gnd;
+		
+		busy_ff.s = Gnd;
+		busy_ff.r =Gnd;
 end defaults;
 
 	ready_ff.clk = clk;
@@ -124,21 +126,23 @@ end defaults;
 	store_ff.sclr = sreset;
 	store_crc_ff.sclr = sreset;
 	store_time_counter_ff.sclr = sreset;
-	busy_ff.sclr = sreset;
 	start_pipeline2_ff.clrn = !sreset;
 	finish_store_ff.clrn = !sreset;
 	
 	case sm_pipeline1 is
 		when RST =>
+test_sm_pipeline1_state[] = 0;
 			ready_ff.r = Vcc;
+			samples_counter.clr = Vcc;
+			clock_counter.clr = Vcc;	-- Contador parado enquanto não há start
+			busy_ff.r = Vcc;
 			sm_pipeline1 = WAITING_START_LOW;
 		
 		when WAITING_START_LOW =>
-test_sm_pipeline1_state[] = 0;
+test_sm_pipeline1_state[] = 1;
 			ready_ff.s = Vcc;
 			samples_counter.clr = Vcc;
 			clock_counter.clr = Vcc;	-- Contador parado enquanto não há start
-			busy_d = Gnd;
 			if !start_sync.q then
 				sm_pipeline1 = WAITING_START_HIGH;
 			else
@@ -146,22 +150,22 @@ test_sm_pipeline1_state[] = 0;
 			end if;
 			
 		when WAITING_START_HIGH =>
-test_sm_pipeline1_state[] = 1;
+test_sm_pipeline1_state[] = 2;
 			samples_counter.clr = Vcc;
 			clock_counter.clr = Vcc;	-- Contador parado enquanto não há start
 			if start_sync.q then
+				busy_ff.s = Vcc;
 				convst_ff.d = Vcc;
 				addr_clr = Vcc;
 				crc_clr = Vcc;
 				time_counter_restart = Vcc;
 				sm_pipeline1 = AQUISITIONING;
 			else
-				busy_d = Gnd;
 				sm_pipeline1 = WAITING_START_HIGH;
 			end if;
 
 		when AQUISITIONING =>
-test_sm_pipeline1_state[] = 2;
+test_sm_pipeline1_state[] = 3;
 			clock_counter.inc = Vcc;
 			if clock_counter.o[] == active_period-1 then
 				sm_pipeline1 = WAIT_STATE;
@@ -171,13 +175,13 @@ test_sm_pipeline1_state[] = 2;
 			end if;
 			
 		when WAIT_STATE =>
-test_sm_pipeline1_state[] = 3;
+test_sm_pipeline1_state[] = 4;
 			clock_counter.inc = Vcc;
 			sm_pipeline1 = SERIALIZING;
 			serialize_ff.d = Vcc;
 			
 		when SERIALIZING =>
-test_sm_pipeline1_state[] = 4;
+test_sm_pipeline1_state[] = 5;
 			if serialize_ok then
 				samples_counter.inc = Vcc;
 				start_pipeline2_ff.s = Vcc;
@@ -188,7 +192,7 @@ test_sm_pipeline1_state[] = 4;
 			end if;
 			
 		when WAITING_END_OF_CYCLE =>
-test_sm_pipeline1_state[] = 5;
+test_sm_pipeline1_state[] = 6;
 			if samples_counter.o[] == samples then
 				samples_counter.clr = Vcc; -- Zera o contador de amostras
 				clock_counter.clr = Vcc;	-- Reinicia o contador
@@ -248,7 +252,7 @@ test_sm_pipeline2_state[] = 3;
 		when STORING_CRC =>
 test_sm_pipeline2_state[] = 4;
 			if store_crc_ok then
-				busy_d = Gnd;
+				busy_ff.r = Vcc;
 				sm_pipeline2 = WAITING_STORE;
 			else
 				store_crc_ff.d = Vcc;
@@ -260,7 +264,6 @@ test_sm_pipeline2_state[] = 4;
 	convst = convst_ff.q;
 	serialize = serialize_ff.q;
 	store = store_ff.q;
-	busy_ff.d = busy_d;
 	busy = busy_ff.q;
 	store_crc = store_crc_ff.q;
 	store_time_counter = store_time_counter_ff.q;

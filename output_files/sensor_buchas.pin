@@ -80,11 +80,11 @@ LED1                         : 12        : output : 3.3-V LVTTL       :         
 LED2                         : 13        : output : 3.3-V LVTTL       :         : 1         : Y              
 LED3                         : 14        : output : 3.3-V LVTTL       :         : 1         : Y              
 LED4                         : 15        : output : 3.3-V LVTTL       :         : 1         : Y              
-HI_mode[1]                   : 16        : output : 3.3-V LVTTL       :         : 1         : N              
+HI_mode[0]                   : 16        : output : 3.3-V LVTTL       :         : 1         : N              
 GNDINT                       : 17        : gnd    :                   :         :           :                
 clk                          : 18        : input  : 3.3-V LVTTL       :         : 1         : Y              
 VCCINT                       : 19        : power  :                   : 1.8V    :           :                
-HI_mode[0]                   : 20        : output : 3.3-V LVTTL       :         : 1         : N              
+HI_mode[1]                   : 20        : output : 3.3-V LVTTL       :         : 1         : N              
 GND*                         : 21        :        :                   :         : 1         :                
 GND*                         : 22        :        :                   :         : 1         :                
 GND*                         : 23        :        :                   :         : 1         :                
@@ -127,7 +127,7 @@ adc_convst[2]                : 59        : output : 3.3-V LVTTL       :         
 adc_sdo[2]                   : 60        : output : 3.3-V LVTTL       :         : 4         : Y              
 adc_rst_n[2]                 : 61        : output : 3.3-V LVTTL       :         : 4         : Y              
 adc_rvs[3]                   : 62        : input  : 3.3-V LVTTL       :         : 4         : Y              
-host_busy                    : 63        : output : 3.3-V LVTTL       :         : 4         : N              
+HI_changing_mode             : 63        : output : 3.3-V LVTTL       :         : 4         : N              
 VCCIO4                       : 64        : power  :                   : 3.3V    : 4         :                
 GNDIO                        : 65        : gnd    :                   :         :           :                
 adc_sclk[3]                  : 66        : output : 3.3-V LVTTL       :         : 4         : Y              
@@ -153,7 +153,7 @@ adc_sdo[5]                   : 85        : output : 3.3-V LVTTL       :         
 adc_rst_n[5]                 : 86        : output : 3.3-V LVTTL       :         : 3         : Y              
 GND*                         : 87        :        :                   :         : 3         :                
 GND*                         : 88        :        :                   :         : 3         :                
-ready_mode0                  : 89        : output : 3.3-V LVTTL       :         : 3         : N              
+GND*                         : 89        :        :                   :         : 3         :                
 VCCINT                       : 90        : power  :                   : 1.8V    :           :                
 host_rst_n                   : 91        : input  : 3.3-V LVTTL       :         : 3         : Y              
 GNDINT                       : 92        : gnd    :                   :         :           :                
@@ -161,12 +161,12 @@ host_convst_start            : 93        : input  : 3.3-V LVTTL       :         
 host_MOSI                    : 94        : input  : 3.3-V LVTTL       :         : 3         : Y              
 host_MISO                    : 95        : output : 3.3-V LVTTL       :         : 3         : Y              
 host_SCLK                    : 96        : input  : 3.3-V LVTTL       :         : 3         : Y              
-HI_changing_mode             : 97        : output : 3.3-V LVTTL       :         : 3         : N              
+GND*                         : 97        :        :                   :         : 3         :                
 host_mode[0]                 : 98        : input  : 3.3-V LVTTL       :         : 3         : Y              
 GNDIO                        : 99        : gnd    :                   :         :           :                
 VCCIO3                       : 100       : power  :                   : 3.3V    : 3         :                
 host_mode[1]                 : 101       : input  : 3.3-V LVTTL       :         : 3         : Y              
-sreset_mode0                 : 102       : output : 3.3-V LVTTL       :         : 3         : N              
+GND*                         : 102       :        :                   :         : 3         :                
 HD8                          : 103       : output : 3.3-V LVTTL       :         : 3         : Y              
 HD7                          : 104       : output : 3.3-V LVTTL       :         : 3         : Y              
 HD6                          : 105       : output : 3.3-V LVTTL       :         : 3         : Y              
@@ -177,11 +177,11 @@ HD2                          : 109       : output : 3.3-V LVTTL       :         
 HD1                          : 110       : output : 3.3-V LVTTL       :         : 2         : Y              
 GND*                         : 111       :        :                   :         : 2         :                
 GND*                         : 112       :        :                   :         : 2         :                
-GND*                         : 113       :        :                   :         : 2         :                
-GND*                         : 114       :        :                   :         : 2         :                
+ready_mode0                  : 113       : output : 3.3-V LVTTL       :         : 2         : N              
+host_busy                    : 114       : output : 3.3-V LVTTL       :         : 2         : N              
 GNDIO                        : 115       : gnd    :                   :         :           :                
 VCCIO2                       : 116       : power  :                   : 3.3V    : 2         :                
-GND*                         : 117       :        :                   :         : 2         :                
+sreset_mode0                 : 117       : output : 3.3-V LVTTL       :         : 2         : N              
 ram_data_bus[5]              : 118       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
 ram_data_bus[4]              : 119       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
 ram_address[14]              : 120       : output : 3.3-V LVTTL       :         : 2         : Y              

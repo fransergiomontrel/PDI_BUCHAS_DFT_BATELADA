@@ -72,6 +72,6 @@ begin
 		when 3 =>
 			busy_flag.r = ready_mode3;
 	end case;
-	host_busy = busy_flag.q;
+	host_busy = busy_flag.q or busy;
 	
 end;
