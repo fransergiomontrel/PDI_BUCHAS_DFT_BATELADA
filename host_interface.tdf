@@ -19,6 +19,12 @@ subdesign host_interface(
 	rst_n: output;
 	SCLK_: output;
 	MOSI: output;
+		
+	sreset_mode0: output;
+	sreset_mode1: output;
+	sreset_mode2: output;
+	sreset_mode3: output;
+	
 	host_busy: output;
 	host_MISO: output;
 )
@@ -40,4 +46,9 @@ begin
 	SCLK_ = host_SCLK;
 	MOSI = host_MOSI;
 	host_MISO = MISO;
+	
+	sreset_mode0 = sreset or mode_sel.changing or (mode_sel.mode_out[]!=0);
+	sreset_mode1 = sreset or mode_sel.changing or (mode_sel.mode_out[]!=1);
+	sreset_mode2 = sreset or mode_sel.changing or (mode_sel.mode_out[]!=2);
+	sreset_mode3 = sreset or mode_sel.changing or (mode_sel.mode_out[]!=3);
 end;

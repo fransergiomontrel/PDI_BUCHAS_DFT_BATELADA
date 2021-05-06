@@ -3,7 +3,6 @@ include "acquisition_serializer_v3.inc";
 include "acquisition_store.inc";
 include "acquisition_store_crc.inc";
 include "acquisition_store_time_counter.inc";
-include "modes.inc";
 include "dffes.inc";
 include "crc16.inc";
 include "acquisition_time_counter.inc";
@@ -18,9 +17,7 @@ subdesign acquisition_module(
 	clk: input;
 	sreset: input;
 	start: input;
-	mode[1..0]: input;
 	sdi[5..0]: input;
-	changing_mode: input;
 	
 
 	sclk_: output;	
@@ -33,7 +30,7 @@ subdesign acquisition_module(
 	data[7..0]: output;
 	data_bus_out: output;
 	
-	test_crc16[15..0]: output;
+--	test_crc16[15..0]: output;
 
 )
 variable
@@ -57,11 +54,11 @@ begin
 	-- START
 	start_ff.d = start;
 	start_ff.clk = clk;
-	start_ff.ena = !changing_mode and mode[] == MODE_AQUISITION;
+	start_ff.sclr = sreset;
 
 	-- CTRL
 	ctrl.clk = clk;
-	ctrl.sreset = sreset or changing_mode;
+	ctrl.sreset = sreset;
 	ctrl.start = start_ff.q;
 	ctrl.serialize_ok = serializer.serialize_ok;
 	ctrl.store_ok = storer.store_ok;
@@ -83,7 +80,7 @@ begin
 	crc.clk = clk;
 	crc.rst = ctrl.crc_clr;
 	crc.crc_en = storer.crc_enable or storer_time_counter.crc_enable;
-	test_crc16[] = crc.crc_out[];
+--	test_crc16[] = crc.crc_out[];
 	crc.msb = storer_crc.msb;
 
 	-- STORE_CRC
@@ -101,7 +98,7 @@ begin
 	-- OUTPUTS	
 	convst = ctrl.convst;
 	addr_clr = ctrl.addr_clr;
-	busy = ctrl.busy or changing_mode;
+	busy = ctrl.busy;
 	sclk_ = serializer.adc_sclk;
 	cs_n = storer.cs_n and storer_crc.cs_n and storer_time_counter.cs_n;
 	we_n = storer.we_n and storer_crc.we_n and storer_time_counter.we_n;

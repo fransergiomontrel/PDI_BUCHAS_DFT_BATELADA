@@ -17,9 +17,6 @@ subdesign RAM_interface(
 	cs_n: input;
 	data_bus_out: input;
 	
-	mode[1..0]: input;
-	changing_mode: input;
-	
 	write_enable: input;
 	
 	ram_address[N_BITS-1..0]: output;
@@ -59,9 +56,9 @@ begin
 	tsn[] = buffer[].out;
 	ram_data_bus[] = tsn[];
 	
-	ram_we_n = we_n or !data_bus_out or changing_mode or !write_enable;
-	ram_cs_n = cs_n or changing_mode;
-	ram_oe_n = oe_n or data_bus_out or changing_mode;
+	ram_we_n = we_n or !data_bus_out or sreset or !write_enable;
+	ram_cs_n = cs_n or sreset;
+	ram_oe_n = oe_n or data_bus_out or sreset;
 	
 	driver[].in = tsn[];
 	data_out[] = driver[].out;

@@ -4,8 +4,6 @@ subdesign adc_interface(
 	clk: input;
 	sreset: input;
 	
-	changing_mode: input;
-
 	-- Interface serial visão interna
 	rst_n: input;	
 	convst: input;
@@ -22,9 +20,8 @@ subdesign adc_interface(
 	adc_rvs[5..0]: input;	-- RVS não é usado
 )
 variable
-	-- lcells são adicionadas para fazer separação e evitar otimizações nos circuitos de saída que possam comprometer a temporização durante o changing_mode
+	-- lcells são adicionadas para fazer separação e evitar otimizações nos circuitos de saída que possam comprometer a temporização durante o reset
 	adc_rst_n_cell[5..0], adc_convst_cell[5..0], adc_sclk_cell[5..0], adc_sdo_cell[5..0]: lcell;
-	disable_output: node;
 begin
 	adc_rst_n_cell[].in = rst_n;
 	adc_convst_cell[].in = convst;
@@ -32,10 +29,8 @@ begin
 	adc_sdo_cell[].in = sdo[];
 	sdi[] = adc_sdi[];
 	
-	disable_output = changing_mode or sreset;
-
-	adc_rst_n[5..0] = adc_rst_n_cell[5..0].out or disable_output;		-- Seta se está mudando o estado ou está em sreset
-	adc_convst[5..0] = adc_convst_cell[5..0].out and !disable_output;	-- Zera se está mudando o estado ou está em sreset
-	adc_sclk[5..0] = adc_sclk_cell[5..0].out and !disable_output;		-- Zera se está mudando o estado ou está em sreset
-	adc_sdo[5..0] = adc_sdo_cell[5..0].out and !disable_output;			-- Zera se está mudando o estado ou está em sreset
+	adc_rst_n[5..0] = adc_rst_n_cell[5..0].out or sreset;		-- Seta se está mudando o estado ou está em sreset
+	adc_convst[5..0] = adc_convst_cell[5..0].out and !sreset;	-- Zera se está mudando o estado ou está em sreset
+	adc_sclk[5..0] = adc_sclk_cell[5..0].out and !sreset;		-- Zera se está mudando o estado ou está em sreset
+	adc_sdo[5..0] = adc_sdo_cell[5..0].out and !sreset;			-- Zera se está mudando o estado ou está em sreset
 end;

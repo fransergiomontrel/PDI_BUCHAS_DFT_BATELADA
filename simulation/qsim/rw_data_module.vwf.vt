@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "04/26/2021 13:04:50"
+// Generated on "05/06/2021 11:02:59"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          rw_data_module
 // 
@@ -30,10 +30,8 @@
 module rw_data_module_vlg_vec_tst();
 // constants                                           
 // general purpose registers
-reg changing_mode;
 reg clk;
 reg [7:0] data_read;
-reg [1:0] mode;
 reg MOSI;
 reg SCLK_;
 reg sreset;
@@ -61,14 +59,12 @@ rw_data_module i1 (
 	.addr_inc_read(addr_inc_read),
 	.addr_inc_write(addr_inc_write),
 	.busy(busy),
-	.changing_mode(changing_mode),
 	.clk(clk),
 	.cs_n(cs_n),
 	.data_bus_out(data_bus_out),
 	.data_read(data_read),
 	.data_write(data_write),
 	.MISO(MISO),
-	.mode(mode),
 	.MOSI(MOSI),
 	.oe_n(oe_n),
 	.SCLK_(SCLK_),
@@ -97,38 +93,10 @@ end
 initial
 begin
 	sreset = 1'b1;
-	sreset = #40000 1'b0;
-	sreset = #5000000 1'b1;
-end 
-// mode[ 1 ]
-initial
-begin
-	mode[1] = 1'b0;
-	mode[1] = #225000 1'b1;
-	mode[1] = #3775000 1'b0;
-	mode[1] = #416000 1'b1;
-	mode[1] = #2944000 1'b0;
-end 
-// mode[ 0 ]
-initial
-begin
-	mode[0] = 1'b0;
-	mode[0] = #225000 1'b1;
-	mode[0] = #3775000 1'b0;
-	mode[0] = #416000 1'b1;
-	mode[0] = #2944000 1'b0;
-end 
-
-// changing_mode
-initial
-begin
-	changing_mode = 1'b0;
-	changing_mode = #210000 1'b1;
-	changing_mode = #30000 1'b0;
-	changing_mode = #3750000 1'b1;
-	changing_mode = #20000 1'b0;
-	changing_mode = #400000 1'b1;
-	changing_mode = #10000 1'b0;
+	sreset = #240000 1'b0;
+	sreset = #3760000 1'b1;
+	sreset = #420000 1'b0;
+	sreset = #620000 1'b1;
 end 
 // data_read[ 7 ]
 initial

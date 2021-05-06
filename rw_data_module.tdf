@@ -7,8 +7,6 @@ subdesign rw_data_module(
 	clk: input;
 	sreset: input;
 	
-	changing_mode: input;
-	mode[1..0]: input;
 	addr_clr: output;
 	addr_inc_read: output;
 	addr_inc_write: output;
@@ -36,7 +34,7 @@ subdesign rw_data_module(
 variable
 	shift: spi_shift_v2 with (N_BITS=8);
 	
-	sm: machine with states(wait_mode, init_buffers1, init_buffers2, init_buffers3, init_buffers4, load_sync1, load_sync2, load_sync3, load_sync4, wait_loading, wr1, wr2, wr3, wr4, wr5, wr6, wait_loading_n);
+	sm: machine with states(rst, init, init_buffers1, init_buffers2, init_buffers3, init_buffers4, load_sync1, load_sync2, load_sync3, load_sync4, wait_loading, wr1, wr2, wr3, wr4, wr5, wr6, wait_loading_n);
 	
 	oe_n_FF, we_n_FF, cs_n_FF, load_parallel_FF, busy_ff, data_bus_out_ff, SCLK_ff, MOSI_ff: dffes;
 	buffer_parallel_in[7..0]: dffe;
@@ -91,25 +89,24 @@ begin
 	load_parallel_FF.spre = sreset;
 	
 	busy_ff.clk = clk;
-	busy = busy_ff.q or changing_mode;
+	busy = busy_ff.q;
 	busy_ff.sclr = sreset;
 
 	sm.reset = sreset;
 	sm.clk = clk;
 	
 	case sm is
-		when wait_mode =>
-			if mode[] == MODE_RW_DATA and !changing_mode then
-				addr_clr = Vcc;
-				busy_ff.d = Vcc;
-				load_parallel_FF.d = Vcc;
-				oe_n_FF.d = Gnd;
-				sm = init_buffers1;
-			else
-				cs_n_FF.d = Vcc;
-				sm = wait_mode;
-			end if;
-
+		when rst =>
+			cs_n_FF.d = Vcc;
+			sm = init;
+			
+		when init =>
+			addr_clr = Vcc;
+			busy_ff.d = Vcc;
+			load_parallel_FF.d = Vcc;
+			oe_n_FF.d = Gnd;
+			sm = init_buffers1;
+		
 		when init_buffers1 =>					-- 4 estados para dar temporização suficiente da leitura da RAM (taa)
 			load_parallel_FF.d = load_parallel_FF.q;
 			busy_ff.d = Vcc;
@@ -156,16 +153,11 @@ begin
 			sm = wait_loading;
 		
 		when wait_loading =>
-			if mode[] == MODE_RW_DATA and !changing_mode then
-				oe_n_FF.d = Gnd;
-				if !shift.loading_tx then
-					sm = wait_loading;
-				else
-					sm = wr1;
-				end if;
+			oe_n_FF.d = Gnd;
+			if !shift.loading_tx then
+				sm = wait_loading;
 			else
-				cs_n_FF.d = Vcc;
-				sm = wait_mode;
+				sm = wr1;
 			end if;
 
 		when wr1 =>
@@ -201,18 +193,12 @@ begin
 			sm = wait_loading_n;
 
 		when wait_loading_n =>
-			if mode[] == MODE_RW_DATA and !changing_mode then
-				oe_n_FF.d = Gnd;
-				if shift.loading_tx then
-					sm = wait_loading_n;
-				else
-					sm = load_sync1;
-				end if;
+			oe_n_FF.d = Gnd;
+			if shift.loading_tx then
+				sm = wait_loading_n;
 			else
-				cs_n_FF.d = Vcc;
-				sm = wait_mode;
+				sm = load_sync1;
 			end if;
-
 	end case;
 	
 	MISO = shift.MISO;
@@ -229,22 +215,23 @@ begin
 	
 	TABLE
 		sm					=> test_state[];
-		wait_mode 		=>	0;
-		init_buffers1 	=>	1;
-		init_buffers2 	=>	2;
-		init_buffers3 	=>	3;
-		init_buffers4 	=>	4;
-		load_sync1		=> 5;
-		load_sync2		=> 6;
-		load_sync3		=> 7;
-		load_sync4		=> 8;
-		wait_loading 	=>	9;
-		wr1				=>	10;
-		wr2				=>	11;
-		wr3				=>	12;
-		wr4				=>	13;
-		wr5				=>	14;
-		wr6				=>	15;
-		wait_loading_n	=>	16;
+		rst 				=>	0;
+		init 				=>	1;
+		init_buffers1 	=>	2;
+		init_buffers2 	=>	3;
+		init_buffers3 	=>	4;
+		init_buffers4 	=>	5;
+		load_sync1		=> 6;
+		load_sync2		=> 7;
+		load_sync3		=> 8;
+		load_sync4		=> 9;
+		wait_loading 	=>	10;
+		wr1				=>	11;
+		wr2				=>	12;
+		wr3				=>	13;
+		wr4				=>	14;
+		wr5				=>	15;
+		wr6				=>	16;
+		wait_loading_n	=>	17;
 	END TABLE;
 end;

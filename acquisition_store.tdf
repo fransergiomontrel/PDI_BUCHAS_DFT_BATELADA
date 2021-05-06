@@ -22,16 +22,7 @@ variable
 	channel_counter: counter with (MAX_VALUE = 12);
 	last_channel: node;
 	
-	sm: MACHINE OF BITS (state_bits[6..0])
-		WITH STATES(
-			WAIT_STORE 	= B"00000001",
-			CS1a			= B"00000010",
-			CS0a1			= B"00000100",
-			CS0a2			= B"00001000",
-			CS0b			= B"00010000",
-			CS1b			= B"00100000",
-			INC_CHANNEL	= B"01000000",
-			WAIT_END		= B"1000000");
+	sm: MACHINE WITH STATES(WAIT_STORE, CS1a,	CS0a1, CS0a2, CS0b, CS1b ,	INC_CHANNEL, WAIT_END);
 begin
 	defaults
 		cs_n_ff.d = Gnd;
