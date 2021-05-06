@@ -21,9 +21,9 @@ https://fpgasoftware.intel.com/eula.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 256 256)
+	(rect 16 16 256 288)
 	(text "host_interface" (rect 5 0 61 12)(font "Arial" ))
-	(text "inst" (rect 8 224 20 236)(font "Arial" ))
+	(text "inst" (rect 8 256 20 268)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -86,6 +86,34 @@ https://fpgasoftware.intel.com/eula.
 		(text "host_MOSI" (rect 0 0 46 12)(font "Arial" ))
 		(text "host_MOSI" (rect 21 155 67 167)(font "Arial" ))
 		(line (pt 0 160)(pt 16 160)(line_width 1))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "ready_mode0" (rect 0 0 56 12)(font "Arial" ))
+		(text "ready_mode0" (rect 21 171 77 183)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176)(line_width 1))
+	)
+	(port
+		(pt 0 192)
+		(input)
+		(text "ready_mode1" (rect 0 0 55 12)(font "Arial" ))
+		(text "ready_mode1" (rect 21 187 76 199)(font "Arial" ))
+		(line (pt 0 192)(pt 16 192)(line_width 1))
+	)
+	(port
+		(pt 0 208)
+		(input)
+		(text "ready_mode2" (rect 0 0 56 12)(font "Arial" ))
+		(text "ready_mode2" (rect 21 203 77 215)(font "Arial" ))
+		(line (pt 0 208)(pt 16 208)(line_width 1))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "ready_mode3" (rect 0 0 56 12)(font "Arial" ))
+		(text "ready_mode3" (rect 21 219 77 231)(font "Arial" ))
+		(line (pt 0 224)(pt 16 224)(line_width 1))
 	)
 	(port
 		(pt 240 32)
@@ -172,6 +200,6 @@ https://fpgasoftware.intel.com/eula.
 		(line (pt 240 208)(pt 224 208)(line_width 1))
 	)
 	(drawing
-		(rectangle (rect 16 16 224 224)(line_width 1))
+		(rectangle (rect 16 16 224 256)(line_width 1))
 	)
 )

@@ -13,6 +13,7 @@ subdesign conf_cpld_module(
 
 	MISO: output;
 	write_enable: output;
+	ready: output;
 	
 --	test_state[2..0]: output;
 	test_enable_update_reg: output;
@@ -31,6 +32,7 @@ begin
 		spi.async_load = Gnd;
 		update_reg = Gnd;
 		spi.parallel_in[] = Gnd;
+		ready = Vcc;
 	end defaults;
 	
 	-- REGISTER
@@ -52,12 +54,14 @@ begin
 	case sm is
 		when WAIT_MODE =>
 --test_state[] = 0;
+			ready = Gnd;
 			sm = LOAD_ASYNC;
 			
 		when LOAD_ASYNC =>
 --test_state[] = 1;
 			spi.async_load = Vcc;
 			spi.parallel_in[23..0] = regs[].q;
+			ready = Gnd;
 			sm = WAIT_LOADING_RX;
 
 		when WAIT_LOADING_RX =>

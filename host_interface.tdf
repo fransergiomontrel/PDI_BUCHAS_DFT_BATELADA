@@ -13,6 +13,11 @@ subdesign host_interface(
 	host_SCLK: input;
 	host_MOSI: input;
 	
+	ready_mode0: input;
+	ready_mode1: input;
+	ready_mode2: input;
+	ready_mode3: input;
+	
 	mode[1..0]: output;
 	changing_mode: output;
 	convst_start: output;
@@ -30,13 +35,14 @@ subdesign host_interface(
 )
 variable
 	mode_sel: mode_selector;
+	busy_flag: srff;
+	rm0, rm1, rm2, rm3: node;
 begin
 	-- Mode selector
 	mode_sel.clk = clk;
 	mode_sel.sreset = sreset;
 	mode_sel.mode_in[] = host_mode[];
 	mode[] = mode_sel.mode_out[];
-	host_busy = busy or !mode_sel.ready or mode_sel.changing;
 	changing_mode = mode_sel.changing;
 	mode_sel.change_ok = Vcc;		-- TODO: ainda não há um critério para evitar a mudança de estado
 	
@@ -46,9 +52,26 @@ begin
 	SCLK_ = host_SCLK;
 	MOSI = host_MOSI;
 	host_MISO = MISO;
-	
+
 	sreset_mode0 = sreset or mode_sel.changing or (mode_sel.mode_out[]!=0);
 	sreset_mode1 = sreset or mode_sel.changing or (mode_sel.mode_out[]!=1);
 	sreset_mode2 = sreset or mode_sel.changing or (mode_sel.mode_out[]!=2);
 	sreset_mode3 = sreset or mode_sel.changing or (mode_sel.mode_out[]!=3);
+	
+	-- BUSY FLAG
+	busy_flag.clk = clk;
+	busy_flag.prn = !(sreset or mode_sel.changing);
+	busy_flag.s = Gnd;
+	case mode_sel.mode_out[] is
+		when 0 =>
+			busy_flag.r = ready_mode0;
+		when 1 =>
+			busy_flag.r = ready_mode1;
+		when 2 =>
+			busy_flag.r = ready_mode2;
+		when 3 =>
+			busy_flag.r = ready_mode3;
+	end case;
+	host_busy = busy_flag.q;
+	
 end;

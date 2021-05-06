@@ -20,6 +20,9 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
+
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -38,6 +41,9 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
+
+
 </modelsim_script_timing>
 <hdl_lang>verilog</hdl_lang>
 </simulation_settings>*/
@@ -906,6 +912,66 @@ SIGNAL("CM_write_enable")
 	PARENT = "";
 }
 
+SIGNAL("host_busy")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("ready_mode0")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("HI_changing_mode")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("HI_mode")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 2;
+	LSB_INDEX = 0;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("HI_mode[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "HI_mode";
+}
+
+SIGNAL("HI_mode[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "HI_mode";
+}
+
 TRANSITION_LIST("clk")
 {
 	NODE
@@ -1626,10 +1692,14 @@ TRANSITION_LIST("host_mode[1]")
 	{
 		REPEAT = 1;
 		LEVEL 0 FOR 300.0;
-		LEVEL 1 FOR 110.0;
-		LEVEL 0 FOR 5670.0;
+		LEVEL 1 FOR 280.0;
+		LEVEL 0 FOR 5500.0;
 		LEVEL 1 FOR 480.0;
-		LEVEL 0 FOR 43440.0;
+		LEVEL 0 FOR 12000.0;
+		LEVEL 1 FOR 4160.0;
+		LEVEL 0 FOR 6400.0;
+		LEVEL 1 FOR 5440.0;
+		LEVEL 0 FOR 15440.0;
 	}
 }
 
@@ -1638,12 +1708,13 @@ TRANSITION_LIST("host_mode[0]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 1 FOR 160.0;
-		LEVEL 0 FOR 140.0;
-		LEVEL 1 FOR 110.0;
-		LEVEL 0 FOR 5670.0;
+		LEVEL 0 FOR 300.0;
+		LEVEL 1 FOR 280.0;
+		LEVEL 0 FOR 5500.0;
 		LEVEL 1 FOR 480.0;
-		LEVEL 0 FOR 43440.0;
+		LEVEL 0 FOR 22560.0;
+		LEVEL 1 FOR 5440.0;
+		LEVEL 0 FOR 15440.0;
 	}
 }
 
@@ -1733,6 +1804,51 @@ TRANSITION_LIST("eur")
 }
 
 TRANSITION_LIST("CM_write_enable")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 50000.0;
+	}
+}
+
+TRANSITION_LIST("host_busy")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 50000.0;
+	}
+}
+
+TRANSITION_LIST("ready_mode0")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 50000.0;
+	}
+}
+
+TRANSITION_LIST("HI_changing_mode")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 50000.0;
+	}
+}
+
+TRANSITION_LIST("HI_mode[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 50000.0;
+	}
+}
+
+TRANSITION_LIST("HI_mode[0]")
 {
 	NODE
 	{
@@ -2558,6 +2674,63 @@ DISPLAY_LINE
 	RADIX = Binary;
 	TREE_INDEX = 82;
 	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "host_busy";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 83;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "ready_mode0";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 84;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "HI_changing_mode";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 85;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "HI_mode";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 86;
+	TREE_LEVEL = 0;
+	CHILDREN = 87, 88;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "HI_mode[1]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 87;
+	TREE_LEVEL = 1;
+	PARENT = 86;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "HI_mode[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 88;
+	TREE_LEVEL = 1;
+	PARENT = 86;
 }
 
 TIME_BAR

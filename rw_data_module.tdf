@@ -24,6 +24,7 @@ subdesign rw_data_module(
 	busy: output;
 	
 	data_bus_out: output;
+	ready: output;
 	
 	test_async_load: output;
 	test_loading: output;
@@ -38,6 +39,7 @@ variable
 	
 	oe_n_FF, we_n_FF, cs_n_FF, load_parallel_FF, busy_ff, data_bus_out_ff, SCLK_ff, MOSI_ff: dffes;
 	buffer_parallel_in[7..0]: dffe;
+	ready_ff: srff;
 begin
 	defaults
 		addr_clr = Gnd;
@@ -50,7 +52,13 @@ begin
 		busy_ff.d = Gnd;
 		data_bus_out_ff.d = Gnd;
 		buffer_parallel_in[].ena = Gnd;
+		ready_ff.s = Gnd;
+		ready_ff.r = Gnd;
 	end defaults;
+	
+	ready_ff.clk = clk;
+	ready = ready_ff.q;
+	ready_ff.clrn = !sreset;
 	
 	SCLK_ff.clk = clk;
 	SCLK_ff.d = SCLK_;
@@ -98,6 +106,7 @@ begin
 	case sm is
 		when rst =>
 			cs_n_FF.d = Vcc;
+			ready_ff.r = Vcc;
 			sm = init;
 			
 		when init =>
@@ -153,6 +162,7 @@ begin
 			sm = wait_loading;
 		
 		when wait_loading =>
+			ready_ff.s = Vcc;
 			oe_n_FF.d = Gnd;
 			if !shift.loading_tx then
 				sm = wait_loading;

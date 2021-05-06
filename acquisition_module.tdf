@@ -30,6 +30,8 @@ subdesign acquisition_module(
 	data[7..0]: output;
 	data_bus_out: output;
 	
+	ready: output;
+	
 --	test_crc16[15..0]: output;
 
 )
@@ -45,6 +47,7 @@ variable
 	storer_time_counter: acquisition_store_time_counter;
 
 begin
+	
 	-- ACQUISITION_TIME_COUNTER
 	atc.clk = clk;
 	atc.sreset = sreset;
@@ -94,6 +97,9 @@ begin
 	storer_time_counter.sreset = sreset;
 	storer_time_counter.store_time_counter = ctrl.store_time_counter;
 	ctrl.store_time_counter_ok = storer_time_counter.store_time_counter_ok;
+	
+	-- READY
+	ready = ctrl.ready;
 	
 	-- OUTPUTS	
 	convst = ctrl.convst;

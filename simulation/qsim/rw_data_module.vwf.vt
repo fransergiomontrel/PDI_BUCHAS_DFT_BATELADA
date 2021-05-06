@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "05/06/2021 11:02:59"
+// Generated on "05/06/2021 16:15:58"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          rw_data_module
 // 
@@ -45,6 +45,7 @@ wire data_bus_out;
 wire [7:0] data_write;
 wire MISO;
 wire oe_n;
+wire ready;
 wire test_async_load;
 wire [7:0] test_data_shift;
 wire test_loading;
@@ -67,6 +68,7 @@ rw_data_module i1 (
 	.MISO(MISO),
 	.MOSI(MOSI),
 	.oe_n(oe_n),
+	.ready(ready),
 	.SCLK_(SCLK_),
 	.sreset(sreset),
 	.test_async_load(test_async_load),
