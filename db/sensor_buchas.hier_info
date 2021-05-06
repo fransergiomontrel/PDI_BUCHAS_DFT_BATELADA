@@ -6,10 +6,11 @@ clk => reset_module:inst7.clk
 clk => switch:inst20.clk
 clk => acquisition_module:inst9.clk
 clk => rw_data_module:inst10.clk
-clk => conf_cpld_module:inst6.clk
+clk => conf_cpld_module:inst.clk
 clk => adc_interface:inst17.clk
 host_rst_n => reset_module:inst7.count_rst_n
 host_rst_n => host_interface:inst3.host_rst_n
+sreset_mode0 <= host_interface:inst3.sreset_mode0
 adc_rvs[0] => adc_interface:inst17.adc_rvs[0]
 adc_rvs[1] => adc_interface:inst17.adc_rvs[1]
 adc_rvs[2] => adc_interface:inst17.adc_rvs[2]
@@ -29,6 +30,7 @@ host_SCLK => host_interface:inst3.host_SCLK
 host_MOSI => host_interface:inst3.host_MOSI
 host_mode[0] => host_interface:inst3.host_mode[0]
 host_mode[1] => host_interface:inst3.host_mode[1]
+CM_write_enable <= conf_cpld_module:inst.write_enable
 ram_data_bus[0] <> RAM_interface:inst15.ram_data_bus[0]
 ram_data_bus[1] <> RAM_interface:inst15.ram_data_bus[1]
 ram_data_bus[2] <> RAM_interface:inst15.ram_data_bus[2]
@@ -65,6 +67,7 @@ HD5 <= adc_interface:inst17.adc_sdo[4]
 HD6 <= adc_interface:inst17.adc_sdo[5]
 HD7 <= adc_sdi[5].DB_MAX_OUTPUT_PORT_TYPE
 HD8 <= adc_interface:inst17.adc_sclk[0]
+eur <= conf_cpld_module:inst.test_enable_update_reg
 adc_convst[0] <= adc_interface:inst17.adc_convst[0]
 adc_convst[1] <= adc_interface:inst17.adc_convst[1]
 adc_convst[2] <= adc_interface:inst17.adc_convst[2]
@@ -4061,7 +4064,7 @@ spre => ff.SLOAD
 q <= ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|conf_cpld_module:inst6
+|sensor_buchas|conf_cpld_module:inst
 clk => regs[23].CLK
 clk => regs[22].CLK
 clk => regs[21].CLK
@@ -4088,14 +4091,15 @@ clk => regs[1].CLK
 clk => regs[0].CLK
 clk => sm.IN1
 sreset => regs[23].IN0
-sreset => sm.IN1
+sreset_mode => sm.IN1
 MOSI => spi_shift_v2:spi.mosi
 sclk_ => spi_shift_v2:spi.clk
 MISO <= spi_shift_v2:spi.miso
 write_enable <= regs[0].DB_MAX_OUTPUT_PORT_TYPE
+test_enable_update_reg <= update_reg.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|conf_cpld_module:inst6|spi_shift_v2:spi
+|sensor_buchas|conf_cpld_module:inst|spi_shift_v2:spi
 clk => count_rx[4].IN0
 clk => shift_tx[31].IN0
 clk => parallel_rx[31].CLK

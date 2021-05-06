@@ -1,5 +1,5 @@
 Analysis & Synthesis report for sensor_buchas
-Thu May 06 12:36:14 2021
+Thu May 06 15:10:07 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -13,7 +13,7 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |sensor_buchas|conf_cpld_module:inst6|sm
+  8. State Machine - |sensor_buchas|conf_cpld_module:inst|sm
   9. State Machine - |sensor_buchas|rw_data_module:inst10|sm
  10. State Machine - |sensor_buchas|acquisition_module:inst9|acquisition_store_time_counter:storer_time_counter|sm
  11. State Machine - |sensor_buchas|acquisition_module:inst9|acquisition_store_crc:storer_crc|sm
@@ -39,7 +39,7 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
  31. Parameter Settings for User Entity Instance: acquisition_module:inst9|acquisition_time_counter:atc|counter:counter_between_acquisitions
  32. Parameter Settings for User Entity Instance: acquisition_module:inst9|acquisition_store_time_counter:storer_time_counter|counter:channel_counter
  33. Parameter Settings for User Entity Instance: rw_data_module:inst10|spi_shift_v2:shift
- 34. Parameter Settings for User Entity Instance: conf_cpld_module:inst6|spi_shift_v2:spi
+ 34. Parameter Settings for User Entity Instance: conf_cpld_module:inst|spi_shift_v2:spi
  35. Analysis & Synthesis Messages
 
 
@@ -67,13 +67,13 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Thu May 06 12:36:14 2021       ;
+; Analysis & Synthesis Status ; Successful - Thu May 06 15:10:07 2021       ;
 ; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name               ; sensor_buchas                               ;
 ; Top-level Entity Name       ; sensor_buchas                               ;
 ; Family                      ; MAX V                                       ;
 ; Total logic elements        ; 1,115                                       ;
-; Total pins                  ; 87                                          ;
+; Total pins                  ; 90                                          ;
 ; Total virtual pins          ; 0                                           ;
 ; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
 +-----------------------------+---------------------------------------------+
@@ -155,8 +155,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 2           ;
-; Maximum allowed            ; 2           ;
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
 ; Maximum used               ; 1           ;
@@ -235,11 +235,11 @@ https://fpgasoftware.intel.com/eula.
 ;                                             ;       ;
 ; Total registers                             ; 679   ;
 ; Total logic cells in carry chains           ; 130   ;
-; I/O pins                                    ; 87    ;
+; I/O pins                                    ; 90    ;
 ; Maximum fan-out node                        ; clk   ;
 ; Maximum fan-out                             ; 543   ;
-; Total fan-out                               ; 4082  ;
-; Average fan-out                             ; 3.40  ;
+; Total fan-out                               ; 4085  ;
+; Average fan-out                             ; 3.39  ;
 +---------------------------------------------+-------+
 
 
@@ -248,7 +248,7 @@ https://fpgasoftware.intel.com/eula.
 +------------------------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+--------------------------------------------------------------------------------------------------------------------+--------------------------------+--------------+
 ; Compilation Hierarchy Node                                 ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                                                ; Entity Name                    ; Library Name ;
 +------------------------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+--------------------------------------------------------------------------------------------------------------------+--------------------------------+--------------+
-; |sensor_buchas                                             ; 1115 (1)    ; 679          ; 0          ; 87   ; 0            ; 436 (1)      ; 397 (0)           ; 282 (0)          ; 130 (0)         ; 0 (0)      ; |sensor_buchas                                                                                                     ; sensor_buchas                  ; work         ;
+; |sensor_buchas                                             ; 1115 (1)    ; 679          ; 0          ; 90   ; 0            ; 436 (1)      ; 397 (0)           ; 282 (0)          ; 130 (0)         ; 0 (0)      ; |sensor_buchas                                                                                                     ; sensor_buchas                  ; work         ;
 ;    |RAM_interface:inst15|                                  ; 74 (74)     ; 38           ; 0          ; 0    ; 0            ; 36 (36)      ; 0 (0)             ; 38 (38)          ; 36 (36)         ; 0 (0)      ; |sensor_buchas|RAM_interface:inst15                                                                                ; RAM_interface                  ; work         ;
 ;    |acquisition_module:inst9|                              ; 661 (8)     ; 400          ; 0          ; 0    ; 0            ; 261 (8)      ; 262 (0)           ; 138 (0)          ; 64 (0)          ; 0 (0)      ; |sensor_buchas|acquisition_module:inst9                                                                            ; acquisition_module             ; work         ;
 ;       |acquisition_ctrl_v2:ctrl|                           ; 63 (28)     ; 35           ; 0          ; 0    ; 0            ; 28 (14)      ; 1 (1)             ; 34 (13)          ; 13 (0)          ; 0 (0)      ; |sensor_buchas|acquisition_module:inst9|acquisition_ctrl_v2:ctrl                                                   ; acquisition_ctrl_v2            ; work         ;
@@ -478,8 +478,8 @@ https://fpgasoftware.intel.com/eula.
 ;       |crc16:crc|                                          ; 23 (23)     ; 16           ; 0          ; 0    ; 0            ; 7 (7)        ; 0 (0)             ; 16 (16)          ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst9|crc16:crc                                                                  ; crc16                          ; work         ;
 ;       |dffes:start_ff|                                     ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|acquisition_module:inst9|dffes:start_ff                                                             ; dffes                          ; work         ;
 ;    |adc_interface:inst17|                                  ; 48 (48)     ; 0            ; 0          ; 0    ; 0            ; 48 (48)      ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|adc_interface:inst17                                                                                ; adc_interface                  ; work         ;
-;    |conf_cpld_module:inst6|                                ; 141 (32)    ; 135          ; 0          ; 0    ; 0            ; 6 (3)        ; 95 (24)           ; 40 (5)           ; 8 (0)           ; 0 (0)      ; |sensor_buchas|conf_cpld_module:inst6                                                                              ; conf_cpld_module               ; work         ;
-;       |spi_shift_v2:spi|                                   ; 109 (109)   ; 106          ; 0          ; 0    ; 0            ; 3 (3)        ; 71 (71)           ; 35 (35)          ; 8 (8)           ; 0 (0)      ; |sensor_buchas|conf_cpld_module:inst6|spi_shift_v2:spi                                                             ; spi_shift_v2                   ; work         ;
+;    |conf_cpld_module:inst|                                 ; 141 (32)    ; 135          ; 0          ; 0    ; 0            ; 6 (3)        ; 95 (24)           ; 40 (5)           ; 8 (0)           ; 0 (0)      ; |sensor_buchas|conf_cpld_module:inst                                                                               ; conf_cpld_module               ; work         ;
+;       |spi_shift_v2:spi|                                   ; 109 (109)   ; 106          ; 0          ; 0    ; 0            ; 3 (3)        ; 71 (71)           ; 35 (35)          ; 8 (8)           ; 0 (0)      ; |sensor_buchas|conf_cpld_module:inst|spi_shift_v2:spi                                                              ; spi_shift_v2                   ; work         ;
 ;    |host_interface:inst3|                                  ; 27 (5)      ; 17           ; 0          ; 0    ; 0            ; 10 (5)       ; 12 (0)            ; 5 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:inst3                                                                                ; host_interface                 ; work         ;
 ;       |mode_selector:mode_sel|                             ; 22 (8)      ; 17           ; 0          ; 0    ; 0            ; 5 (3)        ; 12 (2)            ; 5 (3)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:inst3|mode_selector:mode_sel                                                         ; mode_selector                  ; work         ;
 ;          |dffes:changing_ff|                               ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:inst3|mode_selector:mode_sel|dffes:changing_ff                                       ; dffes                          ; work         ;
@@ -505,7 +505,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 Encoding Type:  One-Hot
 +----------------------------------------------------------------------------------------------------------------+
-; State Machine - |sensor_buchas|conf_cpld_module:inst6|sm                                                       ;
+; State Machine - |sensor_buchas|conf_cpld_module:inst|sm                                                        ;
 +---------------------+--------+----------------+---------------------+-----------------+------------+-----------+
 ; Name                ; FINISH ; CHECK_PASSWORD ; WAIT_NOT_LOADING_RX ; WAIT_LOADING_RX ; LOAD_ASYNC ; WAIT_MODE ;
 +---------------------+--------+----------------+---------------------+-----------------+------------+-----------+
@@ -660,7 +660,7 @@ Encoding Type:  One-Hot
 +---------------------------------------+--------------------+
 ; Register name                         ; Reason for Removal ;
 +---------------------------------------+--------------------+
-; conf_cpld_module:inst6|FINISH         ; Lost fanout        ;
+; conf_cpld_module:inst|FINISH          ; Lost fanout        ;
 ; Total Number of Removed Registers = 1 ;                    ;
 +---------------------------------------+--------------------+
 
@@ -848,13 +848,13 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+--------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: conf_cpld_module:inst6|spi_shift_v2:spi ;
-+----------------+-------+-------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                        ;
-+----------------+-------+-------------------------------------------------------------+
-; N_BITS         ; 32    ; Untyped                                                     ;
-+----------------+-------+-------------------------------------------------------------+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: conf_cpld_module:inst|spi_shift_v2:spi ;
++----------------+-------+------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                       ;
++----------------+-------+------------------------------------------------------------+
+; N_BITS         ; 32    ; Untyped                                                    ;
++----------------+-------+------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -864,10 +864,10 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Thu May 06 12:36:01 2021
+    Info: Processing started: Thu May 06 15:09:59 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off sensor_buchas -c sensor_buchas
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file crc16.v
     Info (12023): Found entity 1: crc16 File: C:/sensorbuchasv2/crc16.v Line: 18
 Info (12021): Found 1 design units, including 1 entities, in source file reset_module.tdf
@@ -972,8 +972,8 @@ Warning (287009): Result of LOG2 is not an integer -- rounded result to next who
 Info (287000): Assertion information: Valor maximo = (5) Numero de bits = (3) File: C:/sensorbuchasv2/counter.tdf Line: 10
 Info (12128): Elaborating entity "rw_data_module" for hierarchy "rw_data_module:inst10"
 Info (12128): Elaborating entity "spi_shift_v2" for hierarchy "rw_data_module:inst10|spi_shift_v2:shift" File: C:/sensorbuchasv2/rw_data_module.tdf Line: 35
-Info (12128): Elaborating entity "conf_cpld_module" for hierarchy "conf_cpld_module:inst6"
-Info (12128): Elaborating entity "spi_shift_v2" for hierarchy "conf_cpld_module:inst6|spi_shift_v2:spi" File: C:/sensorbuchasv2/conf_cpld_module.tdf Line: 24
+Info (12128): Elaborating entity "conf_cpld_module" for hierarchy "conf_cpld_module:inst"
+Info (12128): Elaborating entity "spi_shift_v2" for hierarchy "conf_cpld_module:inst|spi_shift_v2:spi" File: C:/sensorbuchasv2/conf_cpld_module.tdf Line: 25
 Info (12128): Elaborating entity "adc_interface" for hierarchy "adc_interface:inst17"
 Warning (287013): Variable or input pin "clk" is defined but never used. File: C:/sensorbuchasv2/adc_interface.tdf Line: 4
 Warning (287013): Variable or input pin "adc_rvs" is defined but never used. File: C:/sensorbuchasv2/adc_interface.tdf Line: 20
@@ -997,15 +997,15 @@ Warning (21074): Design contains 6 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "adc_rvs[2]"
     Warning (15610): No output dependent on input pin "adc_rvs[1]"
     Warning (15610): No output dependent on input pin "adc_rvs[0]"
-Info (21057): Implemented 1202 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1205 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 19 input pins
-    Info (21059): Implemented 60 output pins
+    Info (21059): Implemented 63 output pins
     Info (21060): Implemented 8 bidirectional pins
     Info (21061): Implemented 1115 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 33 warnings
     Info: Peak virtual memory: 4705 megabytes
-    Info: Processing ended: Thu May 06 12:36:14 2021
-    Info: Elapsed time: 00:00:13
-    Info: Total CPU time (on all processors): 00:00:20
+    Info: Processing ended: Thu May 06 15:10:07 2021
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:17
 
 

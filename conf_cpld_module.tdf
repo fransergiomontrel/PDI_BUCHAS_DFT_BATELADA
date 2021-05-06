@@ -7,6 +7,7 @@ constant WRITE_ENABLE_BIT = 0;
 subdesign conf_cpld_module(
 	clk: input;
 	sreset: input;
+	sreset_mode: input;
 	MOSI: input;
 	sclk_: input;
 
@@ -14,7 +15,7 @@ subdesign conf_cpld_module(
 	write_enable: output;
 	
 --	test_state[2..0]: output;
---	test_enable_update_reg: output;
+	test_enable_update_reg: output;
 --	test_shift_rx[30..0]: output;
 --	test_loading_rx: output;
 --	test_parallel_out[31..0]: output;
@@ -47,7 +48,7 @@ begin
 	
 	-- STATE MACHINE
 	sm.clk = clk;
-	sm.reset = sreset;
+	sm.reset = sreset_mode;
 	case sm is
 		when WAIT_MODE =>
 --test_state[] = 0;
@@ -93,7 +94,7 @@ begin
 	regs[].ena = update_reg;
 
 	-- TESTS
---	test_enable_update_reg = update_reg;
+	test_enable_update_reg = update_reg;
 --	test_shift_rx[] = spi.test_shift_rx[];
 --	test_loading_rx = spi.loading_rx;
 --	test_parallel_out[] = spi.parallel_out[];
