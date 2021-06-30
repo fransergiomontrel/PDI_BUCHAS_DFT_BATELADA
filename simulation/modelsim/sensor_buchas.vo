@@ -17,7 +17,7 @@
 // PROGRAM "Quartus Prime"
 // VERSION "Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition"
 
-// DATE "05/06/2021 17:07:20"
+// DATE "06/30/2021 19:47:53"
 
 // 
 // Device: Altera 5M1270ZT144C4 Package TQFP144
@@ -35,9 +35,9 @@ module sensor_buchas (
 	host_rst_n,
 	HI_changing_mode,
 	sreset_mode0,
+	HI_mode,
 	adc_rvs,
 	adc_sdi,
-	HI_mode,
 	host_convst_start,
 	host_SCLK,
 	host_MOSI,
@@ -70,9 +70,9 @@ input 	clk;
 input 	host_rst_n;
 output 	HI_changing_mode;
 output 	sreset_mode0;
+output 	[1:0] HI_mode;
 input 	[5:0] adc_rvs;
 input 	[5:0] adc_sdi;
-output 	[1:0] HI_mode;
 input 	host_convst_start;
 input 	host_SCLK;
 input 	host_MOSI;
@@ -1013,16 +1013,17 @@ wire \inst20|RI_data_in[0]~48_combout ;
 wire \inst20|RI_data_in[0]~49 ;
 wire \inst20|RI_data_in[0]~47_combout ;
 wire \inst20|RI_data_in[0]~50_combout ;
-wire [2:0] \inst5|storer_time_counter|channel_counter|ffs ;
-wire [5:0] \inst17|adc_rst_n ;
 wire [23:0] \inst|regs ;
 wire [5:0] \adc_sdi~combout ;
 wire [5:0] \inst17|adc_convst ;
 wire [5:0] \inst17|adc_sdo ;
+wire [1:0] \inst5|ctrl|samples_counter|ffs ;
 wire [31:0] \inst|spi|shift_tx ;
 wire [7:0] \inst10|shift|shift_tx ;
+wire [2:0] \inst5|storer_time_counter|channel_counter|ffs ;
 wire [5:0] \inst17|adc_sclk ;
 wire [18:0] \inst15|address_counter_write ;
+wire [5:0] \inst17|adc_rst_n ;
 wire [22:0] \inst7|cont ;
 wire [18:0] \inst15|address_counter_read ;
 wire [3:0] \inst5|storer|channel_counter|ffs ;
@@ -1041,7 +1042,6 @@ wire [4:0] \inst|spi|count_tx ;
 wire [2:0] \inst10|shift|count_tx ;
 wire [1:0] \inst5|serializer|divclock|ffs ;
 wire [7:0] \inst5|ctrl|clock_counter|ffs ;
-wire [1:0] \inst5|ctrl|samples_counter|ffs ;
 wire [7:0] \inst10|shift|parallel_rx ;
 wire [47:0] \inst5|atc|ns_between_acquisitions ;
 wire [15:0] \inst5|crc|lfsr_q ;
@@ -10757,7 +10757,7 @@ defparam \inst|update_reg~2 .synch_mode = "off";
 // Location: LC_X13_Y8_N5
 maxv_lcell \inst|regs[0] (
 // Equation(s):
-// \inst15|ram_we_n~1  = (B1_regs[0] & ((\inst1|mode_sel|mode_out_ff[0]|ff~regout  & (!\inst10|we_n_FF|ff~regout )) # (!\inst1|mode_sel|mode_out_ff[0]|ff~regout  & ((!\inst15|ram_we_n~0_combout )))))
+// \inst15|ram_we_n~1  = (\inst1|mode_sel|mode_out_ff[0]|ff~regout  & ((\inst10|we_n_FF|ff~regout ) # ((!B1_regs[0])))) # (!\inst1|mode_sel|mode_out_ff[0]|ff~regout  & (((\inst15|ram_we_n~0_combout ))))
 // \inst|regs [0] = DFFEAS(\inst15|ram_we_n~1 , GLOBAL(\clk~combout ), !\inst7|rst_ff~regout , , \inst|update_reg~2_combout , \inst|spi|parallel_rx [0], , , VCC)
 
 	.clk(\clk~combout ),
@@ -10783,7 +10783,7 @@ maxv_lcell \inst|regs[0] (
 	.cout0(),
 	.cout1());
 // synopsys translate_off
-defparam \inst|regs[0] .lut_mask = "4070";
+defparam \inst|regs[0] .lut_mask = "bf8c";
 defparam \inst|regs[0] .operation_mode = "normal";
 defparam \inst|regs[0] .output_mode = "reg_and_comb";
 defparam \inst|regs[0] .register_cascade_mode = "off";
@@ -10794,7 +10794,7 @@ defparam \inst|regs[0] .synch_mode = "on";
 // Location: LC_X9_Y8_N2
 maxv_lcell \inst15|ram_we_n~2 (
 // Equation(s):
-// \inst15|ram_we_n~2_combout  = ((\inst1|_~0_combout ) # ((!\inst15|ram_we_n~1 ) # (!\inst1|mode_sel|mode_out_ff[1]|ff~regout ))) # (!\inst20|RI_data_bus_out~3_combout )
+// \inst15|ram_we_n~2_combout  = ((\inst1|_~0_combout ) # ((\inst15|ram_we_n~1 ) # (!\inst1|mode_sel|mode_out_ff[1]|ff~regout ))) # (!\inst20|RI_data_bus_out~3_combout )
 
 	.clk(gnd),
 	.dataa(\inst20|RI_data_bus_out~3_combout ),
@@ -10819,7 +10819,7 @@ maxv_lcell \inst15|ram_we_n~2 (
 	.cout0(),
 	.cout1());
 // synopsys translate_off
-defparam \inst15|ram_we_n~2 .lut_mask = "dfff";
+defparam \inst15|ram_we_n~2 .lut_mask = "ffdf";
 defparam \inst15|ram_we_n~2 .operation_mode = "normal";
 defparam \inst15|ram_we_n~2 .output_mode = "comb_only";
 defparam \inst15|ram_we_n~2 .register_cascade_mode = "off";
@@ -37484,6 +37484,26 @@ maxv_io \sreset_mode0~I (
 defparam \sreset_mode0~I .operation_mode = "output";
 // synopsys translate_on
 
+// Location: PIN_20,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+maxv_io \HI_mode[1]~I (
+	.datain(\inst1|mode_sel|mode_out_ff[1]|ff~regout ),
+	.oe(vcc),
+	.combout(),
+	.padio(HI_mode[1]));
+// synopsys translate_off
+defparam \HI_mode[1]~I .operation_mode = "output";
+// synopsys translate_on
+
+// Location: PIN_16,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+maxv_io \HI_mode[0]~I (
+	.datain(\inst1|mode_sel|mode_out_ff[0]|ff~regout ),
+	.oe(vcc),
+	.combout(),
+	.padio(HI_mode[0]));
+// synopsys translate_off
+defparam \HI_mode[0]~I .operation_mode = "output";
+// synopsys translate_on
+
 // Location: PIN_77,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
 maxv_io \adc_rvs[5]~I (
 	.datain(gnd),
@@ -37542,26 +37562,6 @@ maxv_io \adc_rvs[0]~I (
 	.padio(adc_rvs[0]));
 // synopsys translate_off
 defparam \adc_rvs[0]~I .operation_mode = "input";
-// synopsys translate_on
-
-// Location: PIN_20,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-maxv_io \HI_mode[1]~I (
-	.datain(\inst1|mode_sel|mode_out_ff[1]|ff~regout ),
-	.oe(vcc),
-	.combout(),
-	.padio(HI_mode[1]));
-// synopsys translate_off
-defparam \HI_mode[1]~I .operation_mode = "output";
-// synopsys translate_on
-
-// Location: PIN_16,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-maxv_io \HI_mode[0]~I (
-	.datain(\inst1|mode_sel|mode_out_ff[0]|ff~regout ),
-	.oe(vcc),
-	.combout(),
-	.padio(HI_mode[0]));
-// synopsys translate_off
-defparam \HI_mode[0]~I .operation_mode = "output";
 // synopsys translate_on
 
 // Location: PIN_113,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA

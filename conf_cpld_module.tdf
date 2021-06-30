@@ -10,6 +10,7 @@ subdesign conf_cpld_module(
 	sreset_mode: input;
 	MOSI: input;
 	sclk_: input;
+	mode[1..0]: input;
 
 	MISO: output;
 	write_enable: output;
@@ -94,7 +95,7 @@ begin
 	end case;
 	
 	-- OUTPUTS
-	write_enable = regs[WRITE_ENABLE_BIT].q;
+	write_enable = regs[WRITE_ENABLE_BIT].q or (mode[] != MODE_RW_DATA);
 	regs[].ena = update_reg;
 
 	-- TESTS
