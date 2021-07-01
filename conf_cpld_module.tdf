@@ -95,7 +95,7 @@ begin
 	end case;
 	
 	-- OUTPUTS
-	write_enable = regs[WRITE_ENABLE_BIT].q or (mode[] != MODE_RW_DATA);
+	write_enable = regs[WRITE_ENABLE_BIT].q or (mode[] == MODE_AQUISITION);
 	regs[].ena = update_reg;
 
 	-- TESTS
