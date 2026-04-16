@@ -1,0 +1,205 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 2020  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details, at
+# https://fpgasoftware.intel.com/eula.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus Prime
+# Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+# Date created = 17:48:22  April 07, 2021
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		sensor_buchas_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus Prime software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "MAX II"
+set_global_assignment -name DEVICE EPM1270T144C5
+set_global_assignment -name TOP_LEVEL_ENTITY sensor_buchas
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:48:22  APRIL 07, 2021"
+set_global_assignment -name LAST_QUARTUS_VERSION "20.1.1 Lite Edition"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR "-1"
+#set_global_assignment -name POWER_EXT_SUPPLY_VOLTAGE_TO_REGULATOR 3.3V
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
+set_global_assignment -name EDA_NETLIST_WRITER_OUTPUT_DIR simulation/modelsim -section_id eda_simulation
+set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_timing
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "NO HEAT SINK WITH STILL AIR"
+set_global_assignment -name VERILOG_FILE crc16.v
+set_global_assignment -name VECTOR_WAVEFORM_FILE reset_module.vwf
+set_global_assignment -name AHDL_FILE reset_module.tdf
+set_global_assignment -name SDC_FILE sensor_buchas.sdc
+set_global_assignment -name INCLUDE_FILE modes.inc
+set_global_assignment -name AHDL_FILE synchronizer.tdf
+set_global_assignment -name AHDL_FILE switch.tdf
+set_global_assignment -name AHDL_FILE RAM_interface.tdf
+set_global_assignment -name AHDL_FILE mode_selector.tdf
+set_global_assignment -name AHDL_FILE host_interface.tdf
+set_global_assignment -name AHDL_FILE dffes.tdf
+set_global_assignment -name AHDL_FILE counter.tdf
+set_global_assignment -name AHDL_FILE adc_interface.tdf
+set_global_assignment -name AHDL_FILE acquisition_store.tdf
+set_global_assignment -name AHDL_FILE acquisition_serializer.tdf
+set_global_assignment -name AHDL_FILE acquisition_module.tdf
+set_global_assignment -name AHDL_FILE acquisition_ctrl.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_synchronizer.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_read_data_module.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_RAM_interface.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_mode_selector.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_counter.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_store.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_serializer.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_ctrl.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_module.vwf
+set_global_assignment -name BDF_FILE sensor_buchas.bdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE sensor_buchas.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE dffes.vwf
+set_global_assignment -name AHDL_FILE rw_data_module.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE rw_data_module.vwf
+set_global_assignment -name AHDL_FILE acquisition_store_crc.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_store_crc.vwf
+set_global_assignment -name AHDL_FILE spi_shift_v2.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE spi_shift_v2.vwf
+
+set_global_assignment -name AHDL_FILE acquisition_time_counter.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_time_counter.vwf
+set_global_assignment -name AHDL_FILE acquisition_store_time_counter.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_store_time_counter.vwf
+set_global_assignment -name AHDL_FILE acquisition_serializer_v2.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_serializer_v2.vwf
+set_global_assignment -name AHDL_FILE acquisition_serializer_v3.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_serializer_v3.vwf
+set_global_assignment -name AHDL_FILE acquisition_ctrl_v2.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_ctrl_v2.vwf
+set_global_assignment -name AHDL_FILE conf_cpld_module.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_conf_cpld_module.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_host_interface.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_sensor_buchas_conf_cpld_module.vwf
+
+set_global_assignment -name DEVICE_FILTER_PACKAGE TQFP
+set_global_assignment -name DEVICE_FILTER_PIN_COUNT 144
+
+
+set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 5
+
+set_location_assignment PIN_18 -to clk
+set_location_assignment PIN_143 -to ram_data_bus[0]
+set_location_assignment PIN_144 -to ram_data_bus[1]
+set_location_assignment PIN_8 -to ram_data_bus[2]
+set_location_assignment PIN_7 -to ram_data_bus[3]
+set_location_assignment PIN_120 -to ram_data_bus[4]
+set_location_assignment PIN_119 -to ram_data_bus[5]
+set_location_assignment PIN_127 -to ram_data_bus[6]
+set_location_assignment PIN_129 -to ram_data_bus[7]
+set_location_assignment PIN_137 -to ram_address[0]
+set_location_assignment PIN_138 -to ram_address[1]
+set_location_assignment PIN_139 -to ram_address[2]
+set_location_assignment PIN_140 -to ram_address[3]
+set_location_assignment PIN_141 -to ram_address[4]
+set_location_assignment PIN_5 -to ram_address[5]
+set_location_assignment PIN_4 -to ram_address[6]
+set_location_assignment PIN_3 -to ram_address[7]
+set_location_assignment PIN_2 -to ram_address[8]
+set_location_assignment PIN_1 -to ram_address[9]
+set_location_assignment PIN_125 -to ram_address[10]
+set_location_assignment PIN_124 -to ram_address[11]
+set_location_assignment PIN_123 -to ram_address[12]
+set_location_assignment PIN_122 -to ram_address[13]
+set_location_assignment PIN_121 -to ram_address[14]
+set_location_assignment PIN_131 -to ram_address[15]
+set_location_assignment PIN_132 -to ram_address[16]
+set_location_assignment PIN_133 -to ram_address[17]
+set_location_assignment PIN_134 -to ram_address[18]
+set_location_assignment PIN_142 -to ram_cs_n
+set_location_assignment PIN_130 -to ram_oe_n
+set_location_assignment PIN_6 -to ram_we_n
+set_location_assignment PIN_94 -to host_MOSI
+set_location_assignment PIN_95 -to host_MISO
+set_location_assignment PIN_96 -to host_SCLK
+set_location_assignment PIN_101 -to host_mode[1]
+set_location_assignment PIN_98 -to host_mode[0]
+set_location_assignment PIN_91 -to host_rst_n
+set_location_assignment PIN_12 -to LED1
+set_location_assignment PIN_13 -to LED2
+set_location_assignment PIN_14 -to LED3
+set_location_assignment PIN_15 -to LED4
+
+set_location_assignment PIN_37 -to adc_rvs[0]
+set_location_assignment PIN_44 -to adc_rvs[1]
+set_location_assignment PIN_53 -to adc_rvs[2]
+set_location_assignment PIN_62 -to adc_rvs[3]
+set_location_assignment PIN_71 -to adc_rvs[4]
+set_location_assignment PIN_79 -to adc_rvs[5]
+set_location_assignment PIN_42 -to adc_sdo[0]
+set_location_assignment PIN_51 -to adc_sdo[1]
+set_location_assignment PIN_60 -to adc_sdo[2]
+set_location_assignment PIN_69 -to adc_sdo[3]
+set_location_assignment PIN_76 -to adc_sdo[4]
+set_location_assignment PIN_86 -to adc_sdo[5]
+set_location_assignment PIN_40 -to adc_sclk[0]
+set_location_assignment PIN_49 -to adc_sclk[1]
+set_location_assignment PIN_58 -to adc_sclk[2]
+set_location_assignment PIN_67 -to adc_sclk[3]
+set_location_assignment PIN_74 -to adc_sclk[4]
+set_location_assignment PIN_84 -to adc_sclk[5]
+set_location_assignment PIN_41 -to adc_convst[0]
+set_location_assignment PIN_50 -to adc_convst[1]
+set_location_assignment PIN_59 -to adc_convst[2]
+set_location_assignment PIN_68 -to adc_convst[3]
+set_location_assignment PIN_75 -to adc_convst[4]
+set_location_assignment PIN_85 -to adc_convst[5]
+set_location_assignment PIN_39 -to adc_sdi[0]
+set_location_assignment PIN_48 -to adc_sdi[1]
+set_location_assignment PIN_57 -to adc_sdi[2]
+set_location_assignment PIN_66 -to adc_sdi[3]
+set_location_assignment PIN_73 -to adc_sdi[4]
+set_location_assignment PIN_81 -to adc_sdi[5]
+set_location_assignment PIN_43 -to adc_rst_n[0]
+set_location_assignment PIN_52 -to adc_rst_n[1]
+set_location_assignment PIN_61 -to adc_rst_n[2]
+set_location_assignment PIN_70 -to adc_rst_n[3]
+set_location_assignment PIN_77 -to adc_rst_n[4]
+set_location_assignment PIN_87 -to adc_rst_n[5]
+set_location_assignment PIN_93 -to host_convst_start
+set_location_assignment PIN_110 -to HD1
+set_location_assignment PIN_109 -to HD2
+set_location_assignment PIN_108 -to HD3
+set_location_assignment PIN_107 -to HD4
+set_location_assignment PIN_106 -to HD5
+set_location_assignment PIN_105 -to HD6
+set_location_assignment PIN_104 -to HD7
+set_location_assignment PIN_103 -to HD8
+set_location_assignment PIN_118 -to start_conv
+set_location_assignment PIN_117 -to sync_debug

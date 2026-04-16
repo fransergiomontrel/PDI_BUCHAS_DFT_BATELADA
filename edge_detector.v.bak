@@ -1,0 +1,21 @@
+
+module edge_detector(
+  input current_read_pulse,
+  input clk,
+  output reg rising_edge,
+  input rst
+);
+reg previous_read_pulse;
+  
+
+  always @(posedge clk, posedge rst) begin
+    if(rst) begin
+      rising_edge = 1'b0;
+    end
+    else begin
+      previous_read_pulse <=;
+    end
+  end // always
+endmodule // crc
+
+

@@ -1,5 +1,5 @@
 Flow report for gravacao_placa
-Fri Apr 30 13:22:04 2021
+Thu Mar 10 16:41:20 2022
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -41,15 +41,15 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------+
 ; Flow Summary                                                        ;
 +-----------------------+---------------------------------------------+
-; Flow Status           ; Successful - Fri Apr 30 13:22:04 2021       ;
+; Flow Status           ; Successful - Thu Mar 10 16:41:20 2022       ;
 ; Quartus Prime Version ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name         ; gravacao_placa                              ;
 ; Top-level Entity Name ; gravacao_placa                              ;
-; Family                ; MAX V                                       ;
-; Device                ; 5M1270ZT144C4                               ;
+; Family                ; MAX II                                      ;
+; Device                ; EPM1270T144C5                               ;
 ; Timing Models         ; Final                                       ;
 ; Total logic elements  ; 27 / 1,270 ( 2 % )                          ;
-; Total pins            ; 9 / 114 ( 8 % )                             ;
+; Total pins            ; 9 / 116 ( 8 % )                             ;
 ; Total virtual pins    ; 0                                           ;
 ; UFM blocks            ; 0 / 1 ( 0 % )                               ;
 +-----------------------+---------------------------------------------+
@@ -60,32 +60,31 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 04/30/2021 13:21:53 ;
+; Start date & time ; 03/10/2022 16:41:08 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; gravacao_placa      ;
 +-------------------+---------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                                                         ;
-+---------------------------------------+------------------------------------------------+---------------+-------------+-----------------------------------+
-; Assignment Name                       ; Value                                          ; Default Value ; Entity Name ; Section Id                        ;
-+---------------------------------------+------------------------------------------------+---------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID                 ; 26601950883129.161979971311176                 ; --            ; --          ; --                                ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST       ; Off                                            ; --            ; --          ; eda_board_design_timing           ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST       ; Off                                            ; --            ; --          ; eda_board_design_boundary_scan    ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST       ; Off                                            ; --            ; --          ; eda_board_design_signal_integrity ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST       ; Off                                            ; --            ; --          ; eda_board_design_symbol           ;
-; EDA_OUTPUT_DATA_FORMAT                ; Verilog Hdl                                    ; --            ; --          ; eda_simulation                    ;
-; EDA_SIMULATION_TOOL                   ; ModelSim-Altera (Verilog)                      ; <None>        ; --          ; --                                ;
-; EDA_TIME_SCALE                        ; 1 ps                                           ; --            ; --          ; eda_simulation                    ;
-; MAX_CORE_JUNCTION_TEMP                ; 85                                             ; --            ; --          ; --                                ;
-; MIN_CORE_JUNCTION_TEMP                ; 0                                              ; --            ; --          ; --                                ;
-; POWER_EXT_SUPPLY_VOLTAGE_TO_REGULATOR ; 1.8V                                           ; --            ; --          ; --                                ;
-; POWER_PRESET_COOLING_SOLUTION         ; No Heat Sink With Still Air                    ; --            ; --          ; --                                ;
-; PROJECT_OUTPUT_DIRECTORY              ; output_files                                   ; --            ; --          ; --                                ;
-; SEARCH_PATH                           ; c:\users\cisei\documents\cpld-sensor-buchas-v2 ; --            ; --          ; --                                ;
-+---------------------------------------+------------------------------------------------+---------------+-------------+-----------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                   ;
++---------------------------------+------------------------------------------------+---------------+-------------+-----------------------------------+
+; Assignment Name                 ; Value                                          ; Default Value ; Entity Name ; Section Id                        ;
++---------------------------------+------------------------------------------------+---------------+-------------+-----------------------------------+
+; COMPILER_SIGNATURE_ID           ; 26601950883129.164694126807196                 ; --            ; --          ; --                                ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST ; Off                                            ; --            ; --          ; eda_board_design_timing           ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST ; Off                                            ; --            ; --          ; eda_board_design_boundary_scan    ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST ; Off                                            ; --            ; --          ; eda_board_design_signal_integrity ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST ; Off                                            ; --            ; --          ; eda_board_design_symbol           ;
+; EDA_OUTPUT_DATA_FORMAT          ; Verilog Hdl                                    ; --            ; --          ; eda_simulation                    ;
+; EDA_SIMULATION_TOOL             ; ModelSim-Altera (Verilog)                      ; <None>        ; --          ; --                                ;
+; EDA_TIME_SCALE                  ; 1 ps                                           ; --            ; --          ; eda_simulation                    ;
+; MAX_CORE_JUNCTION_TEMP          ; 85                                             ; --            ; --          ; --                                ;
+; MIN_CORE_JUNCTION_TEMP          ; 0                                              ; --            ; --          ; --                                ;
+; POWER_PRESET_COOLING_SOLUTION   ; No Heat Sink With Still Air                    ; --            ; --          ; --                                ;
+; PROJECT_OUTPUT_DIRECTORY        ; output_files                                   ; --            ; --          ; --                                ;
+; SEARCH_PATH                     ; c:\users\cisei\documents\cpld-sensor-buchas-v2 ; --            ; --          ; --                                ;
++---------------------------------+------------------------------------------------+---------------+-------------+-----------------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------+
@@ -93,12 +92,12 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:07     ; 1.0                     ; 4699 MB             ; 00:00:15                           ;
-; Fitter               ; 00:00:00     ; 1.0                     ; 5329 MB             ; 00:00:01                           ;
-; Assembler            ; 00:00:01     ; 1.0                     ; 4657 MB             ; 00:00:00                           ;
-; Timing Analyzer      ; 00:00:01     ; 1.0                     ; 4677 MB             ; 00:00:01                           ;
-; EDA Netlist Writer   ; 00:00:00     ; 1.0                     ; 4612 MB             ; 00:00:00                           ;
-; Total                ; 00:00:09     ; --                      ; --                  ; 00:00:17                           ;
+; Analysis & Synthesis ; 00:00:06     ; 1.0                     ; 4699 MB             ; 00:00:16                           ;
+; Fitter               ; 00:00:01     ; 1.0                     ; 5327 MB             ; 00:00:01                           ;
+; Assembler            ; 00:00:00     ; 1.0                     ; 4658 MB             ; 00:00:00                           ;
+; Timing Analyzer      ; 00:00:01     ; 1.0                     ; 4675 MB             ; 00:00:01                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4614 MB             ; 00:00:00                           ;
+; Total                ; 00:00:09     ; --                      ; --                  ; 00:00:18                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

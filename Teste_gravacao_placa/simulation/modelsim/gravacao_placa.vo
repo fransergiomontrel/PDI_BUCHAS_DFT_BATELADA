@@ -17,10 +17,10 @@
 // PROGRAM "Quartus Prime"
 // VERSION "Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition"
 
-// DATE "04/30/2021 13:22:04"
+// DATE "03/10/2022 16:41:20"
 
 // 
-// Device: Altera 5M1270ZT144C4 Package TQFP144
+// Device: Altera EPM1270T144C5 Package TQFP144
 // 
 
 // 
@@ -101,7 +101,7 @@ wire [26:0] ffs;
 
 
 // Location: PIN_18,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-maxv_io \clk~I (
+maxii_io \clk~I (
 	.datain(gnd),
 	.oe(gnd),
 	.combout(\clk~combout ),
@@ -110,8 +110,8 @@ maxv_io \clk~I (
 defparam \clk~I .operation_mode = "input";
 // synopsys translate_on
 
-// Location: LC_X12_Y1_N1
-maxv_lcell \ffs[0] (
+// Location: LC_X1_Y6_N1
+maxii_lcell \ffs[0] (
 // Equation(s):
 // ffs[0] = DFFEAS((((!ffs[0]))), GLOBAL(\clk~combout ), VCC, , , , , , )
 
@@ -146,8 +146,8 @@ defparam \ffs[0] .sum_lutc_input = "datac";
 defparam \ffs[0] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X12_Y1_N2
-maxv_lcell \ffs[1] (
+// Location: LC_X1_Y6_N2
+maxii_lcell \ffs[1] (
 // Equation(s):
 // ffs[1] = DFFEAS(ffs[1] $ ((ffs[0])), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[1]~9  = CARRY((ffs[1] & (ffs[0])))
@@ -184,8 +184,8 @@ defparam \ffs[1] .sum_lutc_input = "datac";
 defparam \ffs[1] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X12_Y1_N3
-maxv_lcell \ffs[2] (
+// Location: LC_X1_Y6_N3
+maxii_lcell \ffs[2] (
 // Equation(s):
 // ffs[2] = DFFEAS(ffs[2] $ ((((\ffs[1]~9 )))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[2]~11  = CARRY(((!\ffs[1]~9 )) # (!ffs[2]))
@@ -224,8 +224,8 @@ defparam \ffs[2] .sum_lutc_input = "cin";
 defparam \ffs[2] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X12_Y1_N4
-maxv_lcell \ffs[3] (
+// Location: LC_X1_Y6_N4
+maxii_lcell \ffs[3] (
 // Equation(s):
 // ffs[3] = DFFEAS(ffs[3] $ ((((!\ffs[2]~11 )))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[3]~13  = CARRY((ffs[3] & ((!\ffs[2]~11COUT1_55 ))))
@@ -263,8 +263,8 @@ defparam \ffs[3] .sum_lutc_input = "cin";
 defparam \ffs[3] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X12_Y1_N5
-maxv_lcell \ffs[4] (
+// Location: LC_X1_Y6_N5
+maxii_lcell \ffs[4] (
 // Equation(s):
 // ffs[4] = DFFEAS(ffs[4] $ ((((\ffs[3]~13 )))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[4]~51  = CARRY(((!\ffs[3]~13 )) # (!ffs[4]))
@@ -302,8 +302,8 @@ defparam \ffs[4] .sum_lutc_input = "cin";
 defparam \ffs[4] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X12_Y1_N6
-maxv_lcell \ffs[5] (
+// Location: LC_X1_Y6_N6
+maxii_lcell \ffs[5] (
 // Equation(s):
 // ffs[5] = DFFEAS(ffs[5] $ ((((!(!\ffs[3]~13  & \ffs[4]~51 ) # (\ffs[3]~13  & \ffs[4]~51COUT1_56 ))))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[5]~49  = CARRY((ffs[5] & ((!\ffs[4]~51 ))))
@@ -343,8 +343,8 @@ defparam \ffs[5] .sum_lutc_input = "cin";
 defparam \ffs[5] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X12_Y1_N7
-maxv_lcell \ffs[6] (
+// Location: LC_X1_Y6_N7
+maxii_lcell \ffs[6] (
 // Equation(s):
 // ffs[6] = DFFEAS((ffs[6] $ (((!\ffs[3]~13  & \ffs[5]~49 ) # (\ffs[3]~13  & \ffs[5]~49COUT1_57 )))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[6]~47  = CARRY(((!\ffs[5]~49 ) # (!ffs[6])))
@@ -384,8 +384,8 @@ defparam \ffs[6] .sum_lutc_input = "cin";
 defparam \ffs[6] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X12_Y1_N8
-maxv_lcell \ffs[7] (
+// Location: LC_X1_Y6_N8
+maxii_lcell \ffs[7] (
 // Equation(s):
 // ffs[7] = DFFEAS(ffs[7] $ ((((!(!\ffs[3]~13  & \ffs[6]~47 ) # (\ffs[3]~13  & \ffs[6]~47COUT1_58 ))))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[7]~45  = CARRY((ffs[7] & ((!\ffs[6]~47 ))))
@@ -425,8 +425,8 @@ defparam \ffs[7] .sum_lutc_input = "cin";
 defparam \ffs[7] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X12_Y1_N9
-maxv_lcell \ffs[8] (
+// Location: LC_X1_Y6_N9
+maxii_lcell \ffs[8] (
 // Equation(s):
 // ffs[8] = DFFEAS((ffs[8] $ (((!\ffs[3]~13  & \ffs[7]~45 ) # (\ffs[3]~13  & \ffs[7]~45COUT1_59 )))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[8]~43  = CARRY(((!\ffs[7]~45COUT1_59 ) # (!ffs[8])))
@@ -465,8 +465,8 @@ defparam \ffs[8] .sum_lutc_input = "cin";
 defparam \ffs[8] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X13_Y1_N0
-maxv_lcell \ffs[9] (
+// Location: LC_X2_Y6_N0
+maxii_lcell \ffs[9] (
 // Equation(s):
 // ffs[9] = DFFEAS((ffs[9] $ ((!\ffs[8]~43 ))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[9]~41  = CARRY(((ffs[9] & !\ffs[8]~43 )))
@@ -504,8 +504,8 @@ defparam \ffs[9] .sum_lutc_input = "cin";
 defparam \ffs[9] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X13_Y1_N1
-maxv_lcell \ffs[10] (
+// Location: LC_X2_Y6_N1
+maxii_lcell \ffs[10] (
 // Equation(s):
 // ffs[10] = DFFEAS((ffs[10] $ (((!\ffs[8]~43  & \ffs[9]~41 ) # (\ffs[8]~43  & \ffs[9]~41COUT1_60 )))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[10]~39  = CARRY(((!\ffs[9]~41 ) # (!ffs[10])))
@@ -545,8 +545,8 @@ defparam \ffs[10] .sum_lutc_input = "cin";
 defparam \ffs[10] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X13_Y1_N2
-maxv_lcell \ffs[11] (
+// Location: LC_X2_Y6_N2
+maxii_lcell \ffs[11] (
 // Equation(s):
 // ffs[11] = DFFEAS((ffs[11] $ ((!(!\ffs[8]~43  & \ffs[10]~39 ) # (\ffs[8]~43  & \ffs[10]~39COUT1_61 )))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[11]~37  = CARRY(((ffs[11] & !\ffs[10]~39 )))
@@ -586,8 +586,8 @@ defparam \ffs[11] .sum_lutc_input = "cin";
 defparam \ffs[11] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X13_Y1_N3
-maxv_lcell \ffs[12] (
+// Location: LC_X2_Y6_N3
+maxii_lcell \ffs[12] (
 // Equation(s):
 // ffs[12] = DFFEAS(ffs[12] $ (((((!\ffs[8]~43  & \ffs[11]~37 ) # (\ffs[8]~43  & \ffs[11]~37COUT1_62 ))))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[12]~35  = CARRY(((!\ffs[11]~37 )) # (!ffs[12]))
@@ -627,8 +627,8 @@ defparam \ffs[12] .sum_lutc_input = "cin";
 defparam \ffs[12] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X13_Y1_N4
-maxv_lcell \ffs[13] (
+// Location: LC_X2_Y6_N4
+maxii_lcell \ffs[13] (
 // Equation(s):
 // ffs[13] = DFFEAS(ffs[13] $ ((((!(!\ffs[8]~43  & \ffs[12]~35 ) # (\ffs[8]~43  & \ffs[12]~35COUT1_63 ))))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[13]~33  = CARRY((ffs[13] & ((!\ffs[12]~35COUT1_63 ))))
@@ -667,8 +667,8 @@ defparam \ffs[13] .sum_lutc_input = "cin";
 defparam \ffs[13] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X13_Y1_N5
-maxv_lcell \ffs[14] (
+// Location: LC_X2_Y6_N5
+maxii_lcell \ffs[14] (
 // Equation(s):
 // ffs[14] = DFFEAS(ffs[14] $ ((((\ffs[13]~33 )))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[14]~31  = CARRY(((!\ffs[13]~33 )) # (!ffs[14]))
@@ -706,8 +706,8 @@ defparam \ffs[14] .sum_lutc_input = "cin";
 defparam \ffs[14] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X13_Y1_N6
-maxv_lcell \ffs[15] (
+// Location: LC_X2_Y6_N6
+maxii_lcell \ffs[15] (
 // Equation(s):
 // ffs[15] = DFFEAS(ffs[15] $ ((((!(!\ffs[13]~33  & \ffs[14]~31 ) # (\ffs[13]~33  & \ffs[14]~31COUT1_64 ))))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[15]~29  = CARRY((ffs[15] & ((!\ffs[14]~31 ))))
@@ -747,8 +747,8 @@ defparam \ffs[15] .sum_lutc_input = "cin";
 defparam \ffs[15] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X13_Y1_N7
-maxv_lcell \ffs[16] (
+// Location: LC_X2_Y6_N7
+maxii_lcell \ffs[16] (
 // Equation(s):
 // ffs[16] = DFFEAS((ffs[16] $ (((!\ffs[13]~33  & \ffs[15]~29 ) # (\ffs[13]~33  & \ffs[15]~29COUT1_65 )))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[16]~27  = CARRY(((!\ffs[15]~29 ) # (!ffs[16])))
@@ -788,8 +788,8 @@ defparam \ffs[16] .sum_lutc_input = "cin";
 defparam \ffs[16] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X13_Y1_N8
-maxv_lcell \ffs[17] (
+// Location: LC_X2_Y6_N8
+maxii_lcell \ffs[17] (
 // Equation(s):
 // ffs[17] = DFFEAS(ffs[17] $ ((((!(!\ffs[13]~33  & \ffs[16]~27 ) # (\ffs[13]~33  & \ffs[16]~27COUT1_66 ))))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[17]~25  = CARRY((ffs[17] & ((!\ffs[16]~27 ))))
@@ -829,8 +829,8 @@ defparam \ffs[17] .sum_lutc_input = "cin";
 defparam \ffs[17] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X13_Y1_N9
-maxv_lcell \ffs[18] (
+// Location: LC_X2_Y6_N9
+maxii_lcell \ffs[18] (
 // Equation(s):
 // ffs[18] = DFFEAS((ffs[18] $ (((!\ffs[13]~33  & \ffs[17]~25 ) # (\ffs[13]~33  & \ffs[17]~25COUT1_67 )))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[18]~23  = CARRY(((!\ffs[17]~25COUT1_67 ) # (!ffs[18])))
@@ -869,8 +869,8 @@ defparam \ffs[18] .sum_lutc_input = "cin";
 defparam \ffs[18] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X14_Y1_N0
-maxv_lcell \ffs[19] (
+// Location: LC_X3_Y6_N0
+maxii_lcell \ffs[19] (
 // Equation(s):
 // ffs[19] = DFFEAS((ffs[19] $ ((!\ffs[18]~23 ))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[19]~21  = CARRY(((ffs[19] & !\ffs[18]~23 )))
@@ -908,8 +908,8 @@ defparam \ffs[19] .sum_lutc_input = "cin";
 defparam \ffs[19] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X14_Y1_N1
-maxv_lcell \ffs[20] (
+// Location: LC_X3_Y6_N1
+maxii_lcell \ffs[20] (
 // Equation(s):
 // ffs[20] = DFFEAS((ffs[20] $ (((!\ffs[18]~23  & \ffs[19]~21 ) # (\ffs[18]~23  & \ffs[19]~21COUT1_68 )))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[20]~19  = CARRY(((!\ffs[19]~21 ) # (!ffs[20])))
@@ -949,8 +949,8 @@ defparam \ffs[20] .sum_lutc_input = "cin";
 defparam \ffs[20] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X14_Y1_N2
-maxv_lcell \ffs[21] (
+// Location: LC_X3_Y6_N2
+maxii_lcell \ffs[21] (
 // Equation(s):
 // ffs[21] = DFFEAS((ffs[21] $ ((!(!\ffs[18]~23  & \ffs[20]~19 ) # (\ffs[18]~23  & \ffs[20]~19COUT1_69 )))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[21]~17  = CARRY(((ffs[21] & !\ffs[20]~19 )))
@@ -990,8 +990,8 @@ defparam \ffs[21] .sum_lutc_input = "cin";
 defparam \ffs[21] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X14_Y1_N3
-maxv_lcell \ffs[22] (
+// Location: LC_X3_Y6_N3
+maxii_lcell \ffs[22] (
 // Equation(s):
 // ffs[22] = DFFEAS(ffs[22] $ (((((!\ffs[18]~23  & \ffs[21]~17 ) # (\ffs[18]~23  & \ffs[21]~17COUT1_70 ))))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[22]~15  = CARRY(((!\ffs[21]~17 )) # (!ffs[22]))
@@ -1031,8 +1031,8 @@ defparam \ffs[22] .sum_lutc_input = "cin";
 defparam \ffs[22] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X14_Y1_N4
-maxv_lcell \ffs[23] (
+// Location: LC_X3_Y6_N4
+maxii_lcell \ffs[23] (
 // Equation(s):
 // ffs[23] = DFFEAS(ffs[23] $ ((((!(!\ffs[18]~23  & \ffs[22]~15 ) # (\ffs[18]~23  & \ffs[22]~15COUT1_71 ))))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[23]~1  = CARRY((ffs[23] & ((!\ffs[22]~15COUT1_71 ))))
@@ -1071,8 +1071,8 @@ defparam \ffs[23] .sum_lutc_input = "cin";
 defparam \ffs[23] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X14_Y1_N5
-maxv_lcell \ffs[24] (
+// Location: LC_X3_Y6_N5
+maxii_lcell \ffs[24] (
 // Equation(s):
 // ffs[24] = DFFEAS(ffs[24] $ ((((\ffs[23]~1 )))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[24]~3  = CARRY(((!\ffs[23]~1 )) # (!ffs[24]))
@@ -1110,8 +1110,8 @@ defparam \ffs[24] .sum_lutc_input = "cin";
 defparam \ffs[24] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X14_Y1_N6
-maxv_lcell \ffs[25] (
+// Location: LC_X3_Y6_N6
+maxii_lcell \ffs[25] (
 // Equation(s):
 // ffs[25] = DFFEAS(ffs[25] $ ((((!(!\ffs[23]~1  & \ffs[24]~3 ) # (\ffs[23]~1  & \ffs[24]~3COUT1_72 ))))), GLOBAL(\clk~combout ), VCC, , , , , , )
 // \ffs[25]~5  = CARRY((ffs[25] & ((!\ffs[24]~3 ))))
@@ -1151,8 +1151,8 @@ defparam \ffs[25] .sum_lutc_input = "cin";
 defparam \ffs[25] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: LC_X14_Y1_N7
-maxv_lcell \ffs[26] (
+// Location: LC_X3_Y6_N7
+maxii_lcell \ffs[26] (
 // Equation(s):
 // ffs[26] = DFFEAS((ffs[26] $ (((!\ffs[23]~1  & \ffs[25]~5 ) # (\ffs[23]~1  & \ffs[25]~5COUT1_73 )))), GLOBAL(\clk~combout ), VCC, , , , , , )
 
@@ -1190,8 +1190,8 @@ defparam \ffs[26] .sum_lutc_input = "cin";
 defparam \ffs[26] .synch_mode = "off";
 // synopsys translate_on
 
-// Location: PIN_69,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-maxv_io \LEDS[0]~I (
+// Location: PIN_12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+maxii_io \LEDS[0]~I (
 	.datain(ffs[23]),
 	.oe(vcc),
 	.combout(),
@@ -1200,8 +1200,8 @@ maxv_io \LEDS[0]~I (
 defparam \LEDS[0]~I .operation_mode = "output";
 // synopsys translate_on
 
-// Location: PIN_74,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-maxv_io \LEDS[1]~I (
+// Location: PIN_13,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+maxii_io \LEDS[1]~I (
 	.datain(ffs[24]),
 	.oe(vcc),
 	.combout(),
@@ -1210,8 +1210,8 @@ maxv_io \LEDS[1]~I (
 defparam \LEDS[1]~I .operation_mode = "output";
 // synopsys translate_on
 
-// Location: PIN_75,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-maxv_io \LEDS[2]~I (
+// Location: PIN_14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+maxii_io \LEDS[2]~I (
 	.datain(ffs[25]),
 	.oe(vcc),
 	.combout(),
@@ -1220,8 +1220,8 @@ maxv_io \LEDS[2]~I (
 defparam \LEDS[2]~I .operation_mode = "output";
 // synopsys translate_on
 
-// Location: PIN_70,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-maxv_io \LEDS[3]~I (
+// Location: PIN_15,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+maxii_io \LEDS[3]~I (
 	.datain(ffs[26]),
 	.oe(vcc),
 	.combout(),
@@ -1230,8 +1230,8 @@ maxv_io \LEDS[3]~I (
 defparam \LEDS[3]~I .operation_mode = "output";
 // synopsys translate_on
 
-// Location: PIN_73,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-maxv_io \o_test[0]~I (
+// Location: PIN_22,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+maxii_io \o_test[0]~I (
 	.datain(ffs[0]),
 	.oe(vcc),
 	.combout(),
@@ -1240,8 +1240,8 @@ maxv_io \o_test[0]~I (
 defparam \o_test[0]~I .operation_mode = "output";
 // synopsys translate_on
 
-// Location: PIN_67,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-maxv_io \o_test[1]~I (
+// Location: PIN_23,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+maxii_io \o_test[1]~I (
 	.datain(ffs[1]),
 	.oe(vcc),
 	.combout(),
@@ -1250,8 +1250,8 @@ maxv_io \o_test[1]~I (
 defparam \o_test[1]~I .operation_mode = "output";
 // synopsys translate_on
 
-// Location: PIN_66,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-maxv_io \o_test[2]~I (
+// Location: PIN_24,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+maxii_io \o_test[2]~I (
 	.datain(ffs[2]),
 	.oe(vcc),
 	.combout(),
@@ -1260,8 +1260,8 @@ maxv_io \o_test[2]~I (
 defparam \o_test[2]~I .operation_mode = "output";
 // synopsys translate_on
 
-// Location: PIN_68,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-maxv_io \o_test[3]~I (
+// Location: PIN_21,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+maxii_io \o_test[3]~I (
 	.datain(ffs[3]),
 	.oe(vcc),
 	.combout(),

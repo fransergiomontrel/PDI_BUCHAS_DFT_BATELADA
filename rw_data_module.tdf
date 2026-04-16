@@ -2,10 +2,15 @@ include "spi_shift_v2.inc";
 include "counter.inc";
 include "modes.inc";
 include "dffes.inc";
+include "dft_locale.inc";
+include "dft_locale_others.inc";
+
 
 subdesign rw_data_module(
 	clk: input;
 	sreset: input;
+	done_tx: input;
+	start_tx: output;
 	
 	addr_clr: output;
 	addr_inc_read: output;
@@ -31,6 +36,9 @@ subdesign rw_data_module(
 	test_state[5..0]: output;
 	test_data_shift[7..0]: output;
 	test_shift_rx[6..0]: output;
+	
+	acc_sin_1[31..0]: output;
+	acc_cos_1[31..0]: output;
 )
 variable
 	shift: spi_shift_v2 with (N_BITS=8);
@@ -40,9 +48,15 @@ variable
 	oe_n_FF, we_n_FF, cs_n_FF, load_parallel_FF, busy_ff, data_bus_out_ff, SCLK_ff, MOSI_ff: dffes;
 	buffer_parallel_in[7..0]: dffe;
 	ready_ff: srff;
+	--Teste dft_locale1
+	dft_caller1 : dft_locale;
+	--Teste others dft_locale
+	dft_caller2, dft_caller3, dft_caller4, dft_caller5, dft_caller6: dft_locale_others; 
+	
+	
 begin
 	defaults
-		addr_clr = Gnd;
+  		addr_clr = Gnd;
 		addr_inc_read = Gnd;
 		addr_inc_write = Gnd;
 		cs_n_FF.d = Gnd;
@@ -55,6 +69,67 @@ begin
 		ready_ff.s = Gnd;
 		ready_ff.r = Gnd;
 	end defaults;
+	
+	--Conections of dft_locale 1
+	dft_caller1.clk = clk;
+	dft_caller1.sreset = sreset;
+	dft_caller1.byte_channel[] = data_read[];
+	dft_caller1.new_byte = addr_inc_read;
+	dft_caller1.enable_read = oe_n;
+	dft_caller1.end_tx = done_tx;
+	start_tx = dft_caller1.start_tx;
+	
+	acc_sin_1[] = dft_caller1.sin_out[];
+	acc_cos_1[] = dft_caller1.cos_out[];
+	
+	--Conections of dft_locale 2
+	dft_caller2.clk = clk;
+	dft_caller2.sreset = sreset;
+	dft_caller2.byte_channel[] = data_read[];
+	dft_caller2.new_byte = addr_inc_read;
+	dft_caller2.enable_read = oe_n;
+	dft_caller2.end_tx = done_tx;
+	
+	--Conections of dft_locale 3
+	dft_caller3.clk = clk;
+	dft_caller3.sreset = sreset;
+	dft_caller3.byte_channel[] = data_read[];
+	dft_caller3.new_byte = addr_inc_read;
+	dft_caller3.enable_read = oe_n;
+	dft_caller3.end_tx = done_tx;
+	
+	--Conections of dft_locale 4
+	dft_caller4.clk = clk;
+	dft_caller4.sreset = sreset;
+	dft_caller4.byte_channel[] = data_read[];
+	dft_caller4.new_byte = addr_inc_read;
+	dft_caller4.enable_read = oe_n;
+	dft_caller4.end_tx = done_tx;
+	
+	--Conections of dft_locale 5
+	dft_caller5.clk = clk;
+	dft_caller5.sreset = sreset;
+	dft_caller5.byte_channel[] = data_read[];
+	dft_caller5.new_byte = addr_inc_read;
+	dft_caller5.enable_read = oe_n;
+	dft_caller5.end_tx = done_tx;
+	
+	--Conections of dft_locales 6
+	dft_caller6.clk = clk;
+	dft_caller6.sreset = sreset;
+	dft_caller6.byte_channel[] = data_read[];
+	dft_caller6.new_byte = addr_inc_read;
+	dft_caller6.enable_read = oe_n;
+	dft_caller6.end_tx = done_tx;
+	
+	--Conections between dft_locales to calculate dft only at right memory position
+	dft_caller1.mychannel_now = dft_caller6.next_channel;
+	dft_caller2.mychannel_now = dft_caller1.next_channel;
+	dft_caller3.mychannel_now = dft_caller2.next_channel;
+	dft_caller4.mychannel_now = dft_caller3.next_channel;
+	dft_caller5.mychannel_now = dft_caller4.next_channel;
+	dft_caller6.mychannel_now = dft_caller5.next_channel;
+			
 	
 	ready_ff.clk = clk;
 	ready = ready_ff.q;

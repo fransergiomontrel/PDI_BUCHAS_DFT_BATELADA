@@ -1,6 +1,6 @@
 Fitter report for sensor_buchas
-Thu Jul 08 14:06:29 2021
-Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Wed Apr 15 08:12:31 2026
+Quartus Prime Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
 
 
 ---------------------
@@ -18,58 +18,57 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
  10. I/O Bank Usage
  11. All Package Pins
  12. Output Pin Default Load For Reported TCO
- 13. I/O Assignment Warnings
- 14. Fitter Resource Utilization by Entity
- 15. Delay Chain Summary
- 16. Control Signals
- 17. Global & Other Fast Signals
- 18. Routing Usage Summary
- 19. LAB Logic Elements
- 20. LAB-wide Signals
- 21. LAB Signals Sourced
- 22. LAB Signals Sourced Out
- 23. LAB Distinct Inputs
- 24. Fitter Device Options
- 25. Fitter Messages
- 26. Fitter Suppressed Messages
+ 13. Fitter Resource Utilization by Entity
+ 14. Delay Chain Summary
+ 15. Control Signals
+ 16. Global & Other Fast Signals
+ 17. Routing Usage Summary
+ 18. LAB Logic Elements
+ 19. LAB-wide Signals
+ 20. LAB Signals Sourced
+ 21. LAB Signals Sourced Out
+ 22. LAB Distinct Inputs
+ 23. Fitter Device Options
+ 24. Fitter Messages
+ 25. Fitter Suppressed Messages
 
 
 
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 2020  Intel Corporation. All rights reserved.
-Your use of Intel Corporation's design tools, logic functions 
+Copyright (C) 2025  Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and any partner logic 
 functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
-to the terms and conditions of the Intel Program License 
-Subscription Agreement, the Intel Quartus Prime License Agreement,
-the Intel FPGA IP License Agreement, or other applicable license
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera IP License Agreement, or other applicable license
 agreement, including, without limitation, that your use is for
 the sole purpose of programming logic devices manufactured by
-Intel and sold by Intel or its authorized distributors.  Please
-refer to the applicable agreement for further details, at
-https://fpgasoftware.intel.com/eula.
+Altera and sold by Altera or its authorized distributors.  Please
+refer to the Altera Software License Subscription Agreements 
+on the Quartus Prime software download page.
 
 
 
-+---------------------------------------------------------------------+
-; Fitter Summary                                                      ;
-+-----------------------+---------------------------------------------+
-; Fitter Status         ; Successful - Thu Jul 08 14:06:28 2021       ;
-; Quartus Prime Version ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
-; Revision Name         ; sensor_buchas                               ;
-; Top-level Entity Name ; sensor_buchas                               ;
-; Family                ; MAX V                                       ;
-; Device                ; 5M1270ZT144C4                               ;
-; Timing Models         ; Final                                       ;
-; Total logic elements  ; 1,023 / 1,270 ( 81 % )                      ;
-; Total pins            ; 92 / 114 ( 81 % )                           ;
-; Total virtual pins    ; 0                                           ;
-; UFM blocks            ; 0 / 1 ( 0 % )                               ;
-+-----------------------+---------------------------------------------+
++-------------------------------------------------------------------------+
+; Fitter Summary                                                          ;
++-----------------------+-------------------------------------------------+
+; Fitter Status         ; Successful - Wed Apr 15 08:12:31 2026           ;
+; Quartus Prime Version ; 24.1std.0 Build 1077 03/04/2025 SC Lite Edition ;
+; Revision Name         ; sensor_buchas                                   ;
+; Top-level Entity Name ; sensor_buchas                                   ;
+; Family                ; MAX V                                           ;
+; Device                ; 5M1270ZT144C5                                   ;
+; Timing Models         ; Final                                           ;
+; Total logic elements  ; 1,023 / 1,270 ( 81 % )                          ;
+; Total pins            ; 86 / 114 ( 75 % )                               ;
+; Total virtual pins    ; 0                                               ;
+; UFM blocks            ; 0 / 1 ( 0 % )                                   ;
++-----------------------+-------------------------------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------+
@@ -77,7 +76,7 @@ https://fpgasoftware.intel.com/eula.
 +--------------------------------------------------------------------+--------------------------------+--------------------------------+
 ; Option                                                             ; Setting                        ; Default Value                  ;
 +--------------------------------------------------------------------+--------------------------------+--------------------------------+
-; Device                                                             ; 5M1270ZT144C4                  ;                                ;
+; Device                                                             ; 5M1270ZT144C5                  ;                                ;
 ; Minimum Core Junction Temperature                                  ; 0                              ;                                ;
 ; Maximum Core Junction Temperature                                  ; 85                             ;                                ;
 ; Fit Attempts to Skip                                               ; 0                              ; 0.0                            ;
@@ -126,24 +125,22 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 8           ;
-; Maximum allowed            ; 4           ;
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 2           ;
 ;                            ;             ;
-; Average used               ; 1.04        ;
-; Maximum used               ; 4           ;
+; Average used               ; 1.01        ;
+; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   1.5%      ;
-;     Processor 3            ;   1.2%      ;
-;     Processor 4            ;   1.2%      ;
+;     Processor 2            ;   1.4%      ;
 +----------------------------+-------------+
 
 
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pin.
+The pin-out file can be found in /home/montrel/QUARTUS_TESTE/output_files/sensor_buchas.pin.
 
 
 +----------------------------------------------------------------------+
@@ -168,14 +165,14 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ;     -- arithmetic mode                      ; 127                    ;
 ;     -- qfbk mode                            ; 113                    ;
 ;     -- register cascade mode                ; 0                      ;
-;     -- synchronous clear/load mode          ; 368                    ;
+;     -- synchronous clear/load mode          ; 352                    ;
 ;     -- asynchronous clear/load mode         ; 243                    ;
 ;                                             ;                        ;
 ; Total registers                             ; 688 / 1,270 ( 54 % )   ;
-; Total LABs                                  ; 114 / 127 ( 90 % )     ;
+; Total LABs                                  ; 115 / 127 ( 91 % )     ;
 ; Logic elements in carry chains              ; 136                    ;
 ; Virtual pins                                ; 0                      ;
-; I/O pins                                    ; 92 / 114 ( 81 % )      ;
+; I/O pins                                    ; 86 / 114 ( 75 % )      ;
 ;     -- Clock pins                           ; 3 / 4 ( 75 % )         ;
 ;                                             ;                        ;
 ; UFM blocks                                  ; 0 / 1 ( 0 % )          ;
@@ -186,12 +183,12 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; Global signals                              ; 4                      ;
 ;     -- Global clocks                        ; 4 / 4 ( 100 % )        ;
 ; JTAGs                                       ; 0 / 1 ( 0 % )          ;
-; Average interconnect usage (total/H/V)      ; 30.8% / 30.3% / 31.3%  ;
-; Peak interconnect usage (total/H/V)         ; 39.7% / 41.8% / 37.5%  ;
+; Average interconnect usage (total/H/V)      ; 32.5% / 32.4% / 32.6%  ;
+; Peak interconnect usage (total/H/V)         ; 34.3% / 34.7% / 33.9%  ;
 ; Maximum fan-out                             ; 552                    ;
 ; Highest non-global fan-out                  ; 116                    ;
-; Total fan-out                               ; 4123                   ;
-; Average fan-out                             ; 3.70                   ;
+; Total fan-out                               ; 4120                   ;
+; Average fan-out                             ; 3.72                   ;
 +---------------------------------------------+------------------------+
 
 
@@ -200,12 +197,6 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 +-------------------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+-----------------+----------+--------------+--------------+----------------------+----------------+
 ; Name              ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Combinational Fan-Out ; Registered Fan-Out ; Global ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Location assigned by ; Slow Slew Rate ;
 +-------------------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+-----------------+----------+--------------+--------------+----------------------+----------------+
-; adc_rvs[0]        ; 37    ; 4        ; 1            ; 3            ; 0           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
-; adc_rvs[1]        ; 44    ; 4        ; 5            ; 3            ; 2           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
-; adc_rvs[2]        ; 53    ; 4        ; 8            ; 3            ; 2           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
-; adc_rvs[3]        ; 62    ; 4        ; 10           ; 3            ; 2           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
-; adc_rvs[4]        ; 71    ; 4        ; 16           ; 0            ; 3           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
-; adc_rvs[5]        ; 79    ; 3        ; 17           ; 3            ; 1           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 ; adc_sdi[0]        ; 39    ; 4        ; 2            ; 3            ; 0           ; 3                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 ; adc_sdi[1]        ; 48    ; 4        ; 7            ; 3            ; 3           ; 2                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 ; adc_sdi[2]        ; 57    ; 4        ; 8            ; 3            ; 0           ; 2                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
@@ -219,6 +210,8 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; host_mode[0]      ; 98    ; 3        ; 17           ; 6            ; 0           ; 1                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 ; host_mode[1]      ; 101   ; 3        ; 17           ; 7            ; 4           ; 1                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 ; host_rst_n        ; 91    ; 3        ; 17           ; 5            ; 0           ; 7                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
+; start_conv        ; 118   ; 2        ; 11           ; 11           ; 2           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
+; sync_debug        ; 117   ; 2        ; 11           ; 11           ; 1           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 +-------------------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+-----------------+----------+--------------+--------------+----------------------+----------------+
 
 
@@ -235,13 +228,9 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; HD6              ; 105   ; 3        ; 17           ; 8            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; HD7              ; 104   ; 3        ; 17           ; 8            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; HD8              ; 103   ; 3        ; 17           ; 8            ; 5           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; HI_changing_mode ; 63    ; 4        ; 10           ; 3            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; HI_mode[0]       ; 38    ; 4        ; 2            ; 3            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; HI_mode[1]       ; 20    ; 1        ; 0            ; 7            ; 6           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; LED1             ; 12    ; 1        ; 0            ; 7            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; LED2             ; 13    ; 1        ; 0            ; 7            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; LED3             ; 14    ; 1        ; 0            ; 7            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; LED4             ; 15    ; 1        ; 0            ; 7            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; HI_changing_mode ; 63    ; 4        ; 10           ; 3            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; HI_mode[0]       ; 20    ; 1        ; 0            ; 7            ; 6           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; HI_mode[1]       ; 16    ; 1        ; 0            ; 7            ; 4           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; adc_convst[0]    ; 41    ; 4        ; 3            ; 3            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; adc_convst[1]    ; 50    ; 4        ; 7            ; 3            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; adc_convst[2]    ; 59    ; 4        ; 9            ; 3            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
@@ -257,7 +246,7 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; adc_sclk[0]      ; 40    ; 4        ; 3            ; 3            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; adc_sclk[1]      ; 49    ; 4        ; 7            ; 3            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; adc_sclk[2]      ; 58    ; 4        ; 9            ; 3            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; adc_sclk[3]      ; 67    ; 4        ; 12           ; 0            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; yes                    ; User                 ; 10 pF ; -                    ; -                   ;
+; adc_sclk[3]      ; 67    ; 4        ; 12           ; 0            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; adc_sclk[4]      ; 74    ; 3        ; 17           ; 1            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; adc_sclk[5]      ; 84    ; 3        ; 17           ; 4            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; adc_sdo[0]       ; 42    ; 4        ; 4            ; 3            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
@@ -267,7 +256,7 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; adc_sdo[4]       ; 76    ; 3        ; 17           ; 2            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; adc_sdo[5]       ; 86    ; 3        ; 17           ; 5            ; 4           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; host_MISO        ; 95    ; 3        ; 17           ; 6            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; host_busy        ; 55    ; 4        ; 8            ; 3            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; host_busy        ; 45    ; 4        ; 6            ; 3            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_address[0]   ; 137   ; 2        ; 6            ; 11           ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_address[10]  ; 125   ; 2        ; 9            ; 11           ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_address[11]  ; 124   ; 2        ; 9            ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
@@ -290,8 +279,10 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; ram_cs_n         ; 142   ; 2        ; 3            ; 11           ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_oe_n         ; 130   ; 2        ; 8            ; 11           ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ram_we_n         ; 6     ; 1        ; 0            ; 9            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; ready_mode0      ; 80    ; 3        ; 17           ; 3            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
-; sreset_mode0     ; 102   ; 3        ; 17           ; 7            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; Fitter               ; 10 pF ; -                    ; -                   ;
+; ready_mode0      ; 21    ; 1        ; 0            ; 6            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; sreset_mode0     ; 22    ; 1        ; 0            ; 6            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; tx_cos           ; 28    ; 1        ; 0            ; 5            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; tx_sin           ; 27    ; 1        ; 0            ; 6            ; 5           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 +------------------+-------+----------+--------------+--------------+-------------+-----------------+----------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+------------------------+----------------------+-------+----------------------+---------------------+
 
 
@@ -316,10 +307,10 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 +----------+------------------+---------------+--------------+
 ; I/O Bank ; Usage            ; VCCIO Voltage ; VREF Voltage ;
 +----------+------------------+---------------+--------------+
-; 1        ; 14 / 25 ( 56 % ) ; 3.3V          ; --           ;
-; 2        ; 24 / 30 ( 80 % ) ; 3.3V          ; --           ;
-; 3        ; 26 / 29 ( 90 % ) ; 3.3V          ; --           ;
-; 4        ; 28 / 30 ( 93 % ) ; 3.3V          ; --           ;
+; 1        ; 15 / 25 ( 60 % ) ; 3.3V          ; --           ;
+; 2        ; 26 / 30 ( 87 % ) ; 3.3V          ; --           ;
+; 3        ; 23 / 29 ( 79 % ) ; 3.3V          ; --           ;
+; 4        ; 22 / 30 ( 73 % ) ; 3.3V          ; --           ;
 +----------+------------------+---------------+--------------+
 
 
@@ -339,23 +330,23 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 9        ;            ; 1        ; VCCIO1            ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; 10       ;            ;          ; GNDIO             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 11       ;            ;          ; GNDIO             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; 12       ; 21         ; 1        ; LED1              ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
-; 13       ; 22         ; 1        ; LED2              ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
-; 14       ; 23         ; 1        ; LED3              ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
-; 15       ; 24         ; 1        ; LED4              ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
-; 16       ; 25         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 12       ; 21         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 13       ; 22         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 14       ; 23         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 15       ; 24         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 16       ; 25         ; 1        ; HI_mode[1]        ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 17       ;            ;          ; GNDINT            ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 18       ; 26         ; 1        ; clk               ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 19       ;            ;          ; VCCINT            ; power  ;              ; 1.8V    ; --         ;                 ; --       ; --           ;
-; 20       ; 27         ; 1        ; HI_mode[1]        ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; Off          ;
-; 21       ; 28         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
-; 22       ; 29         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 20       ; 27         ; 1        ; HI_mode[0]        ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 21       ; 28         ; 1        ; ready_mode0       ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 22       ; 29         ; 1        ; sreset_mode0      ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 23       ; 30         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 24       ; 31         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 25       ;            ; 1        ; VCCIO1            ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; 26       ;            ;          ; GNDIO             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; 27       ; 33         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
-; 28       ; 36         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 27       ; 33         ; 1        ; tx_sin            ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 28       ; 36         ; 1        ; tx_cos            ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 29       ; 37         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 30       ; 41         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 31       ; 44         ; 1        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
@@ -364,15 +355,15 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 34       ; 51         ; 1        ; #TDI              ; input  ;              ;         ; --         ;                 ; --       ; --           ;
 ; 35       ; 52         ; 1        ; #TCK              ; input  ;              ;         ; --         ;                 ; --       ; --           ;
 ; 36       ; 53         ; 1        ; #TDO              ; output ;              ;         ; --         ;                 ; --       ; --           ;
-; 37       ; 56         ; 4        ; adc_rvs[0]        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
-; 38       ; 57         ; 4        ; HI_mode[0]        ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
+; 37       ; 56         ; 4        ; GND*              ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 38       ; 57         ; 4        ; GND*              ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 39       ; 60         ; 4        ; adc_sdi[0]        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 40       ; 62         ; 4        ; adc_sclk[0]       ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 41       ; 63         ; 4        ; adc_convst[0]     ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 42       ; 67         ; 4        ; adc_sdo[0]        ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 43       ; 68         ; 4        ; adc_rst_n[0]      ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
-; 44       ; 69         ; 4        ; adc_rvs[1]        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
-; 45       ; 74         ; 4        ; GND*              ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 44       ; 69         ; 4        ; GND*              ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 45       ; 74         ; 4        ; host_busy         ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 46       ;            ; 4        ; VCCIO4            ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; 47       ;            ;          ; GNDIO             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 48       ; 75         ; 4        ; adc_sdi[1]        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
@@ -380,17 +371,17 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 50       ; 77         ; 4        ; adc_convst[1]     ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 51       ; 78         ; 4        ; adc_sdo[1]        ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 52       ; 79         ; 4        ; adc_rst_n[1]      ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
-; 53       ; 80         ; 4        ; adc_rvs[2]        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 53       ; 80         ; 4        ; GND*              ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 54       ;            ;          ; GNDINT            ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; 55       ; 81         ; 4        ; host_busy         ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
+; 55       ; 81         ; 4        ; GND*              ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 56       ;            ;          ; VCCINT            ; power  ;              ; 1.8V    ; --         ;                 ; --       ; --           ;
 ; 57       ; 82         ; 4        ; adc_sdi[2]        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 58       ; 83         ; 4        ; adc_sclk[2]       ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 59       ; 84         ; 4        ; adc_convst[2]     ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 60       ; 85         ; 4        ; adc_sdo[2]        ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 61       ; 86         ; 4        ; adc_rst_n[2]      ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
-; 62       ; 87         ; 4        ; adc_rvs[3]        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
-; 63       ; 88         ; 4        ; HI_changing_mode  ; output ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
+; 62       ; 87         ; 4        ; GND*              ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 63       ; 88         ; 4        ; HI_changing_mode  ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 64       ;            ; 4        ; VCCIO4            ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; 65       ;            ;          ; GNDIO             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 66       ; 91         ; 4        ; adc_sdi[3]        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
@@ -398,7 +389,7 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 68       ; 95         ; 4        ; adc_convst[3]     ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 69       ; 98         ; 4        ; adc_sdo[3]        ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 70       ; 101        ; 4        ; adc_rst_n[3]      ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
-; 71       ; 104        ; 4        ; adc_rvs[4]        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 71       ; 104        ; 4        ; GND*              ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 72       ; 107        ; 4        ; GND*              ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 73       ; 111        ; 3        ; adc_sdi[4]        ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 74       ; 112        ; 3        ; adc_sclk[4]       ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
@@ -406,8 +397,8 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 76       ; 115        ; 3        ; adc_sdo[4]        ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 77       ; 118        ; 3        ; adc_rst_n[4]      ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 78       ;            ;          ; GNDIO             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; 79       ; 123        ; 3        ; adc_rvs[5]        ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
-; 80       ; 124        ; 3        ; ready_mode0       ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; Off          ;
+; 79       ; 123        ; 3        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 80       ; 124        ; 3        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 81       ; 127        ; 3        ; adc_sdi[5]        ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 82       ;            ; 3        ; VCCIO3            ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; 83       ;            ;          ; GNDIO             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
@@ -429,7 +420,7 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 99       ;            ;          ; GNDIO             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 100      ;            ; 3        ; VCCIO3            ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; 101      ; 142        ; 3        ; host_mode[1]      ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
-; 102      ; 146        ; 3        ; sreset_mode0      ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; Off          ;
+; 102      ; 146        ; 3        ; GND*              ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 103      ; 147        ; 3        ; HD8               ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 104      ; 151        ; 3        ; HD7               ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 105      ; 152        ; 3        ; HD6               ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
@@ -444,8 +435,8 @@ The pin-out file can be found in C:/sensorbuchasv2/output_files/sensor_buchas.pi
 ; 114      ; 177        ; 2        ; GND*              ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 115      ;            ;          ; GNDIO             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 116      ;            ; 2        ; VCCIO2            ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
-; 117      ; 180        ; 2        ; GND*              ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 118      ; 181        ; 2        ; GND*              ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 117      ; 180        ; 2        ; sync_debug        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 118      ; 181        ; 2        ; start_conv        ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 119      ; 182        ; 2        ; ram_data_bus[5]   ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 120      ; 183        ; 2        ; ram_data_bus[4]   ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 121      ; 184        ; 2        ; ram_address[14]   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
@@ -496,26 +487,12 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 Note: User assignments will override these defaults. The user specified values are listed in the Output Pins and Bidir Pins tables.
 
 
-+------------------------------------------------+
-; I/O Assignment Warnings                        ;
-+------------------+-----------------------------+
-; Pin Name         ; Reason                      ;
-+------------------+-----------------------------+
-; HI_changing_mode ; Missing location assignment ;
-; sreset_mode0     ; Missing location assignment ;
-; HI_mode[1]       ; Missing location assignment ;
-; HI_mode[0]       ; Missing location assignment ;
-; ready_mode0      ; Missing location assignment ;
-; host_busy        ; Missing location assignment ;
-+------------------+-----------------------------+
-
-
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Fitter Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                                                ;
 +------------------------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+--------------------------------------------------------------------------------------------------------------------+--------------------------------+--------------+
 ; Compilation Hierarchy Node                                 ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                                                ; Entity Name                    ; Library Name ;
 +------------------------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+--------------------------------------------------------------------------------------------------------------------+--------------------------------+--------------+
-; |sensor_buchas                                             ; 1023 (1)    ; 688          ; 0          ; 92   ; 0            ; 335 (1)      ; 279 (0)           ; 409 (0)          ; 136 (0)         ; 113 (0)    ; |sensor_buchas                                                                                                     ; sensor_buchas                  ; work         ;
+; |sensor_buchas                                             ; 1023 (1)    ; 688          ; 0          ; 86   ; 0            ; 335 (1)      ; 279 (0)           ; 409 (0)          ; 136 (0)         ; 113 (0)    ; |sensor_buchas                                                                                                     ; sensor_buchas                  ; work         ;
 ;    |RAM_interface:inst15|                                  ; 72 (72)     ; 38           ; 0          ; 0    ; 0            ; 34 (34)      ; 0 (0)             ; 38 (38)          ; 36 (36)         ; 2 (2)      ; |sensor_buchas|RAM_interface:inst15                                                                                ; RAM_interface                  ; work         ;
 ;    |acquisition_module:inst5|                              ; 591 (7)     ; 408          ; 0          ; 0    ; 0            ; 183 (7)      ; 169 (0)           ; 239 (0)          ; 70 (0)          ; 89 (1)     ; |sensor_buchas|acquisition_module:inst5                                                                            ; acquisition_module             ; work         ;
 ;       |acquisition_ctrl_v2:ctrl|                           ; 84 (32)     ; 43           ; 0          ; 0    ; 0            ; 41 (15)      ; 0 (0)             ; 43 (17)          ; 19 (0)          ; 1 (1)      ; |sensor_buchas|acquisition_module:inst5|acquisition_ctrl_v2:ctrl                                                   ; acquisition_ctrl_v2            ; work         ;
@@ -746,7 +723,7 @@ Note: User assignments will override these defaults. The user specified values a
 ;    |adc_interface:inst17|                                  ; 48 (48)     ; 0            ; 0          ; 0    ; 0            ; 48 (48)      ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|adc_interface:inst17                                                                                ; adc_interface                  ; work         ;
 ;    |conf_cpld_module:inst|                                 ; 140 (31)    ; 135          ; 0          ; 0    ; 0            ; 5 (2)        ; 91 (23)           ; 44 (6)           ; 8 (0)           ; 2 (2)      ; |sensor_buchas|conf_cpld_module:inst                                                                               ; conf_cpld_module               ; work         ;
 ;       |spi_shift_v2:spi|                                   ; 109 (109)   ; 106          ; 0          ; 0    ; 0            ; 3 (3)        ; 68 (68)           ; 38 (38)          ; 8 (8)           ; 0 (0)      ; |sensor_buchas|conf_cpld_module:inst|spi_shift_v2:spi                                                              ; spi_shift_v2                   ; work         ;
-;    |host_interface:inst1|                                  ; 24 (8)      ; 17           ; 0          ; 0    ; 0            ; 7 (7)        ; 5 (0)             ; 12 (1)           ; 0 (0)           ; 5 (0)      ; |sensor_buchas|host_interface:inst1                                                                                ; host_interface                 ; work         ;
+;    |host_interface:inst1|                                  ; 25 (9)      ; 17           ; 0          ; 0    ; 0            ; 8 (8)        ; 5 (0)             ; 12 (1)           ; 0 (0)           ; 5 (0)      ; |sensor_buchas|host_interface:inst1                                                                                ; host_interface                 ; work         ;
 ;       |mode_selector:mode_sel|                             ; 16 (5)      ; 16           ; 0          ; 0    ; 0            ; 0 (0)        ; 5 (1)             ; 11 (4)           ; 0 (0)           ; 5 (3)      ; |sensor_buchas|host_interface:inst1|mode_selector:mode_sel                                                         ; mode_selector                  ; work         ;
 ;          |dffes:changing_ff|                               ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:inst1|mode_selector:mode_sel|dffes:changing_ff                                       ; dffes                          ; work         ;
 ;          |dffes:mode_out_ff[0]|                            ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|host_interface:inst1|mode_selector:mode_sel|dffes:mode_out_ff[0]                                    ; dffes                          ; work         ;
@@ -763,7 +740,7 @@ Note: User assignments will override these defaults. The user specified values a
 ;       |dffes:oe_n_FF|                                      ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|rw_data_module:inst10|dffes:oe_n_FF                                                                 ; dffes                          ; work         ;
 ;       |dffes:we_n_FF|                                      ; 1 (1)       ; 1            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; 0 (0)           ; 0 (0)      ; |sensor_buchas|rw_data_module:inst10|dffes:we_n_FF                                                                 ; dffes                          ; work         ;
 ;       |spi_shift_v2:shift|                                 ; 31 (31)     ; 30           ; 0          ; 0    ; 0            ; 1 (1)        ; 7 (7)             ; 23 (23)          ; 0 (0)           ; 0 (0)      ; |sensor_buchas|rw_data_module:inst10|spi_shift_v2:shift                                                            ; spi_shift_v2                   ; work         ;
-;    |switch:inst20|                                         ; 33 (33)     ; 0            ; 0          ; 0    ; 0            ; 33 (33)      ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 11 (11)    ; |sensor_buchas|switch:inst20                                                                                       ; switch                         ; work         ;
+;    |switch:inst20|                                         ; 32 (32)     ; 0            ; 0          ; 0    ; 0            ; 32 (32)      ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 11 (11)    ; |sensor_buchas|switch:inst20                                                                                       ; switch                         ; work         ;
 +------------------------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+--------------------------------------------------------------------------------------------------------------------+--------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -778,21 +755,11 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; sreset_mode0      ; Output   ; --            ;
 ; HI_mode[1]        ; Output   ; --            ;
 ; HI_mode[0]        ; Output   ; --            ;
-; adc_rvs[5]        ; Input    ; (0)           ;
-; adc_rvs[4]        ; Input    ; (0)           ;
-; adc_rvs[3]        ; Input    ; (0)           ;
-; adc_rvs[2]        ; Input    ; (0)           ;
-; adc_rvs[1]        ; Input    ; (0)           ;
-; adc_rvs[0]        ; Input    ; (0)           ;
 ; ready_mode0       ; Output   ; --            ;
 ; ram_cs_n          ; Output   ; --            ;
 ; ram_oe_n          ; Output   ; --            ;
 ; host_MISO         ; Output   ; --            ;
 ; host_busy         ; Output   ; --            ;
-; LED1              ; Output   ; --            ;
-; LED2              ; Output   ; --            ;
-; LED3              ; Output   ; --            ;
-; LED4              ; Output   ; --            ;
 ; HD1               ; Output   ; --            ;
 ; adc_sclk[5]       ; Output   ; --            ;
 ; adc_sclk[4]       ; Output   ; --            ;
@@ -813,6 +780,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; HD6               ; Output   ; --            ;
 ; HD7               ; Output   ; --            ;
 ; HD8               ; Output   ; --            ;
+; tx_sin            ; Output   ; --            ;
+; tx_cos            ; Output   ; --            ;
 ; adc_convst[5]     ; Output   ; --            ;
 ; adc_convst[4]     ; Output   ; --            ;
 ; adc_convst[3]     ; Output   ; --            ;
@@ -844,6 +813,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; ram_address[2]    ; Output   ; --            ;
 ; ram_address[1]    ; Output   ; --            ;
 ; ram_address[0]    ; Output   ; --            ;
+; start_conv        ; Input    ; (0)           ;
+; sync_debug        ; Input    ; (0)           ;
 ; ram_data_bus[7]   ; Bidir    ; (1)           ;
 ; ram_data_bus[6]   ; Bidir    ; (1)           ;
 ; ram_data_bus[5]   ; Bidir    ; (1)           ;
@@ -868,58 +839,58 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------+----------+---------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Control Signals                                                                                                                                                                                                          ;
-+---------------------------------------------------------------------------------------------------+---------------+---------+-----------------------------------------+--------+----------------------+------------------+
-; Name                                                                                              ; Location      ; Fan-Out ; Usage                                   ; Global ; Global Resource Used ; Global Line Name ;
-+---------------------------------------------------------------------------------------------------+---------------+---------+-----------------------------------------+--------+----------------------+------------------+
-; RAM_interface:inst15|_~1                                                                          ; LC_X12_Y3_N0  ; 38      ; Async. clear                            ; no     ; --                   ; --               ;
-; acquisition_module:inst5|_~3                                                                      ; LC_X7_Y6_N7   ; 16      ; Clock enable                            ; no     ; --                   ; --               ;
-; acquisition_module:inst5|acquisition_ctrl_v2:ctrl|addr_clr~1                                      ; LC_X12_Y4_N5  ; 116     ; Async. clear, Clock enable, Sync. clear ; no     ; --                   ; --               ;
-; acquisition_module:inst5|acquisition_ctrl_v2:ctrl|counter:clock_counter|_~0                       ; LC_X11_Y4_N0  ; 7       ; Sync. clear                             ; no     ; --                   ; --               ;
-; acquisition_module:inst5|acquisition_serializer_v3:serializer|_~11                                ; LC_X6_Y4_N4   ; 96      ; Clock enable                            ; no     ; --                   ; --               ;
-; acquisition_module:inst5|acquisition_serializer_v3:serializer|_~9                                 ; LC_X6_Y4_N7   ; 96      ; Clock enable                            ; no     ; --                   ; --               ;
-; acquisition_module:inst5|acquisition_time_counter:atc|counter:counter_between_acquisitions|op_1~5 ; LC_X12_Y4_N1  ; 47      ; Clock enable                            ; no     ; --                   ; --               ;
-; clk                                                                                               ; PIN_18        ; 552     ; Clock                                   ; yes    ; Global Clock         ; GCLK0            ;
-; conf_cpld_module:inst|LOAD_ASYNC                                                                  ; LC_X15_Y4_N8  ; 46      ; Async. clear, Async. load               ; no     ; --                   ; --               ;
-; conf_cpld_module:inst|spi_shift_v2:spi|lrx                                                        ; LC_X14_Y8_N5  ; 35      ; Clock enable                            ; no     ; --                   ; --               ;
-; conf_cpld_module:inst|spi_shift_v2:spi|ltx_ff                                                     ; LC_X16_Y2_N4  ; 31      ; Sync. load                              ; no     ; --                   ; --               ;
-; conf_cpld_module:inst|update_reg~2                                                                ; LC_X16_Y5_N8  ; 24      ; Clock enable                            ; no     ; --                   ; --               ;
-; host_interface:inst1|_~0                                                                          ; LC_X13_Y3_N1  ; 27      ; Async. clear                            ; no     ; --                   ; --               ;
-; host_interface:inst1|mode_selector:mode_sel|_~3                                                   ; LC_X14_Y3_N5  ; 7       ; Clock enable                            ; no     ; --                   ; --               ;
-; host_interface:inst1|mode_selector:mode_sel|sNoticeChanging                                       ; LC_X13_Y3_N4  ; 4       ; Clock enable                            ; no     ; --                   ; --               ;
-; host_interface:inst1|mode_selector:mode_sel|synchronizer:sync|stable~1                            ; LC_X14_Y3_N4  ; 2       ; Clock enable                            ; no     ; --                   ; --               ;
-; host_interface:inst1|sreset_mode0                                                                 ; LC_X13_Y3_N5  ; 6       ; Async. clear                            ; no     ; --                   ; --               ;
-; host_interface:inst1|sreset_mode2                                                                 ; LC_X12_Y3_N2  ; 67      ; Async. clear, Sync. clear, Sync. load   ; yes    ; Global Clock         ; GCLK3            ;
-; host_interface:inst1|sreset_mode3                                                                 ; LC_X12_Y3_N6  ; 25      ; Async. clear, Sync. clear, Sync. load   ; no     ; --                   ; --               ;
-; reset_module:inst7|ini_ff                                                                         ; LC_X14_Y2_N7  ; 23      ; Async. clear                            ; no     ; --                   ; --               ;
-; reset_module:inst7|rst                                                                            ; LC_X15_Y1_N7  ; 24      ; Clock enable                            ; no     ; --                   ; --               ;
-; reset_module:inst7|rst_ff                                                                         ; LC_X13_Y3_N8  ; 36      ; Async. clear, Sync. load                ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~10                                                                        ; LC_X14_Y7_N4  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~11                                                                        ; LC_X14_Y7_N2  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~12                                                                        ; LC_X15_Y4_N3  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~13                                                                        ; LC_X15_Y4_N6  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~14                                                                        ; LC_X15_Y3_N5  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~15                                                                        ; LC_X15_Y3_N6  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~16                                                                        ; LC_X14_Y6_N4  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~17                                                                        ; LC_X14_Y6_N7  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~18                                                                        ; LC_X14_Y2_N8  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~19                                                                        ; LC_X14_Y2_N4  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~2                                                                         ; LC_X12_Y5_N0  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~3                                                                         ; LC_X12_Y3_N5  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~6                                                                         ; LC_X10_Y6_N8  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~7                                                                         ; LC_X10_Y6_N2  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~8                                                                         ; LC_X11_Y5_N5  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
-; rw_data_module:inst10|_~9                                                                         ; LC_X11_Y5_N4  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
-; rw_data_module:inst10|dffes:SCLK_ff|ff                                                            ; LC_X12_Y3_N1  ; 30      ; Clock                                   ; yes    ; Global Clock         ; GCLK2            ;
-; rw_data_module:inst10|dffes:load_parallel_FF|ff                                                   ; LC_X12_Y7_N0  ; 33      ; Async. clear, Async. load               ; no     ; --                   ; --               ;
-; rw_data_module:inst10|load_sync3                                                                  ; LC_X10_Y6_N4  ; 9       ; Clock enable                            ; no     ; --                   ; --               ;
-; rw_data_module:inst10|spi_shift_v2:shift|lrx                                                      ; LC_X13_Y10_N4 ; 8       ; Clock enable                            ; no     ; --                   ; --               ;
-; switch:inst20|CM_SCLK~1                                                                           ; LC_X12_Y3_N4  ; 106     ; Clock                                   ; yes    ; Global Clock         ; GCLK1            ;
-; switch:inst20|RI_addr_inc_read~1                                                                  ; LC_X10_Y6_N9  ; 19      ; Clock enable                            ; no     ; --                   ; --               ;
-; switch:inst20|RI_addr_inc_write~3                                                                 ; LC_X10_Y6_N1  ; 19      ; Clock enable                            ; no     ; --                   ; --               ;
-; switch:inst20|RI_data_bus_out~3                                                                   ; LC_X11_Y5_N2  ; 28      ; Output enable                           ; no     ; --                   ; --               ;
-+---------------------------------------------------------------------------------------------------+---------------+---------+-----------------------------------------+--------+----------------------+------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Control Signals                                                                                                                                                                                                         ;
++---------------------------------------------------------------------------------------------------+--------------+---------+-----------------------------------------+--------+----------------------+------------------+
+; Name                                                                                              ; Location     ; Fan-Out ; Usage                                   ; Global ; Global Resource Used ; Global Line Name ;
++---------------------------------------------------------------------------------------------------+--------------+---------+-----------------------------------------+--------+----------------------+------------------+
+; RAM_interface:inst15|_~1                                                                          ; LC_X9_Y5_N6  ; 38      ; Async. clear                            ; no     ; --                   ; --               ;
+; acquisition_module:inst5|_~3                                                                      ; LC_X9_Y10_N1 ; 16      ; Clock enable                            ; no     ; --                   ; --               ;
+; acquisition_module:inst5|acquisition_ctrl_v2:ctrl|addr_clr~1                                      ; LC_X4_Y5_N0  ; 116     ; Async. clear, Clock enable, Sync. clear ; no     ; --                   ; --               ;
+; acquisition_module:inst5|acquisition_ctrl_v2:ctrl|counter:clock_counter|_~0                       ; LC_X3_Y8_N9  ; 7       ; Sync. clear                             ; no     ; --                   ; --               ;
+; acquisition_module:inst5|acquisition_serializer_v3:serializer|_~11                                ; LC_X4_Y9_N8  ; 96      ; Clock enable                            ; no     ; --                   ; --               ;
+; acquisition_module:inst5|acquisition_serializer_v3:serializer|_~9                                 ; LC_X4_Y9_N9  ; 96      ; Clock enable                            ; no     ; --                   ; --               ;
+; acquisition_module:inst5|acquisition_time_counter:atc|counter:counter_between_acquisitions|op_1~5 ; LC_X5_Y7_N3  ; 47      ; Clock enable                            ; no     ; --                   ; --               ;
+; clk                                                                                               ; PIN_18       ; 552     ; Clock                                   ; yes    ; Global Clock         ; GCLK0            ;
+; conf_cpld_module:inst|LOAD_ASYNC                                                                  ; LC_X4_Y4_N8  ; 46      ; Async. clear, Async. load               ; no     ; --                   ; --               ;
+; conf_cpld_module:inst|spi_shift_v2:spi|lrx                                                        ; LC_X13_Y3_N0 ; 35      ; Clock enable                            ; no     ; --                   ; --               ;
+; conf_cpld_module:inst|spi_shift_v2:spi|ltx_ff                                                     ; LC_X16_Y2_N8 ; 31      ; Sync. load                              ; no     ; --                   ; --               ;
+; conf_cpld_module:inst|update_reg~2                                                                ; LC_X15_Y1_N2 ; 24      ; Clock enable                            ; no     ; --                   ; --               ;
+; host_interface:inst1|_~0                                                                          ; LC_X9_Y5_N8  ; 27      ; Async. clear                            ; no     ; --                   ; --               ;
+; host_interface:inst1|mode_selector:mode_sel|_~3                                                   ; LC_X13_Y4_N6 ; 7       ; Clock enable                            ; no     ; --                   ; --               ;
+; host_interface:inst1|mode_selector:mode_sel|sNoticeChanging                                       ; LC_X13_Y4_N4 ; 4       ; Clock enable                            ; no     ; --                   ; --               ;
+; host_interface:inst1|mode_selector:mode_sel|synchronizer:sync|stable~1                            ; LC_X12_Y4_N6 ; 2       ; Clock enable                            ; no     ; --                   ; --               ;
+; host_interface:inst1|sreset_mode0                                                                 ; LC_X9_Y5_N0  ; 6       ; Async. clear                            ; no     ; --                   ; --               ;
+; host_interface:inst1|sreset_mode2                                                                 ; LC_X10_Y5_N8 ; 67      ; Async. clear, Sync. clear, Sync. load   ; yes    ; Global Clock         ; GCLK3            ;
+; host_interface:inst1|sreset_mode3                                                                 ; LC_X9_Y5_N5  ; 25      ; Async. clear, Sync. clear, Sync. load   ; no     ; --                   ; --               ;
+; reset_module:inst7|ini_ff                                                                         ; LC_X11_Y6_N4 ; 23      ; Async. clear                            ; no     ; --                   ; --               ;
+; reset_module:inst7|rst                                                                            ; LC_X3_Y6_N6  ; 24      ; Clock enable                            ; no     ; --                   ; --               ;
+; reset_module:inst7|rst_ff                                                                         ; LC_X9_Y5_N1  ; 35      ; Async. clear, Sync. load                ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~10                                                                        ; LC_X10_Y6_N7 ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~11                                                                        ; LC_X10_Y6_N3 ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~12                                                                        ; LC_X4_Y4_N9  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~13                                                                        ; LC_X4_Y4_N4  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~14                                                                        ; LC_X9_Y6_N9  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~15                                                                        ; LC_X9_Y6_N6  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~16                                                                        ; LC_X8_Y6_N9  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~17                                                                        ; LC_X8_Y6_N7  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~18                                                                        ; LC_X12_Y5_N7 ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~19                                                                        ; LC_X12_Y5_N4 ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~2                                                                         ; LC_X11_Y5_N5 ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~3                                                                         ; LC_X9_Y5_N4  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~6                                                                         ; LC_X8_Y4_N6  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~7                                                                         ; LC_X8_Y4_N8  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~8                                                                         ; LC_X7_Y4_N2  ; 1       ; Async. clear                            ; no     ; --                   ; --               ;
+; rw_data_module:inst10|_~9                                                                         ; LC_X7_Y4_N1  ; 1       ; Async. load                             ; no     ; --                   ; --               ;
+; rw_data_module:inst10|dffes:SCLK_ff|ff                                                            ; LC_X12_Y3_N9 ; 30      ; Clock                                   ; yes    ; Global Clock         ; GCLK2            ;
+; rw_data_module:inst10|dffes:load_parallel_FF|ff                                                   ; LC_X9_Y6_N5  ; 33      ; Async. clear, Async. load               ; no     ; --                   ; --               ;
+; rw_data_module:inst10|load_sync3                                                                  ; LC_X7_Y4_N5  ; 9       ; Clock enable                            ; no     ; --                   ; --               ;
+; rw_data_module:inst10|spi_shift_v2:shift|lrx                                                      ; LC_X4_Y8_N4  ; 8       ; Clock enable                            ; no     ; --                   ; --               ;
+; switch:inst20|CM_SCLK~1                                                                           ; LC_X12_Y3_N2 ; 106     ; Clock                                   ; yes    ; Global Clock         ; GCLK1            ;
+; switch:inst20|RI_addr_inc_read~1                                                                  ; LC_X7_Y4_N0  ; 19      ; Clock enable                            ; no     ; --                   ; --               ;
+; switch:inst20|RI_addr_inc_write~3                                                                 ; LC_X8_Y6_N8  ; 19      ; Clock enable                            ; no     ; --                   ; --               ;
+; switch:inst20|RI_data_bus_out~3                                                                   ; LC_X5_Y7_N1  ; 28      ; Output enable                           ; no     ; --                   ; --               ;
++---------------------------------------------------------------------------------------------------+--------------+---------+-----------------------------------------+--------+----------------------+------------------+
 
 
 +-----------------------------------------------------------------------------------------------------------+
@@ -928,9 +899,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name                                   ; Location     ; Fan-Out ; Global Resource Used ; Global Line Name ;
 +----------------------------------------+--------------+---------+----------------------+------------------+
 ; clk                                    ; PIN_18       ; 552     ; Global Clock         ; GCLK0            ;
-; host_interface:inst1|sreset_mode2      ; LC_X12_Y3_N2 ; 67      ; Global Clock         ; GCLK3            ;
-; rw_data_module:inst10|dffes:SCLK_ff|ff ; LC_X12_Y3_N1 ; 30      ; Global Clock         ; GCLK2            ;
-; switch:inst20|CM_SCLK~1                ; LC_X12_Y3_N4 ; 106     ; Global Clock         ; GCLK1            ;
+; host_interface:inst1|sreset_mode2      ; LC_X10_Y5_N8 ; 67      ; Global Clock         ; GCLK3            ;
+; rw_data_module:inst10|dffes:SCLK_ff|ff ; LC_X12_Y3_N9 ; 30      ; Global Clock         ; GCLK2            ;
+; switch:inst20|CM_SCLK~1                ; LC_X12_Y3_N2 ; 106     ; Global Clock         ; GCLK1            ;
 +----------------------------------------+--------------+---------+----------------------+------------------+
 
 
@@ -939,125 +910,125 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+------------------------+
 ; Routing Resource Type ; Usage                  ;
 +-----------------------+------------------------+
-; C4s                   ; 722 / 2,870 ( 25 % )   ;
-; Direct links          ; 173 / 3,938 ( 4 % )    ;
+; C4s                   ; 780 / 2,870 ( 27 % )   ;
+; Direct links          ; 169 / 3,938 ( 4 % )    ;
 ; Global clocks         ; 4 / 4 ( 100 % )        ;
-; LAB clocks            ; 30 / 72 ( 42 % )       ;
-; LUT chains            ; 45 / 1,143 ( 4 % )     ;
-; Local interconnects   ; 1,219 / 3,938 ( 31 % ) ;
-; R4s                   ; 669 / 2,832 ( 24 % )   ;
+; LAB clocks            ; 32 / 72 ( 44 % )       ;
+; LUT chains            ; 60 / 1,143 ( 5 % )     ;
+; Local interconnects   ; 1,250 / 3,938 ( 32 % ) ;
+; R4s                   ; 787 / 2,832 ( 28 % )   ;
 +-----------------------+------------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Logic Elements                                                         ;
 +--------------------------------------------+-------------------------------+
-; Number of Logic Elements  (Average = 8.97) ; Number of LABs  (Total = 114) ;
+; Number of Logic Elements  (Average = 8.90) ; Number of LABs  (Total = 115) ;
 +--------------------------------------------+-------------------------------+
 ; 1                                          ; 1                             ;
-; 2                                          ; 2                             ;
-; 3                                          ; 2                             ;
-; 4                                          ; 3                             ;
-; 5                                          ; 0                             ;
-; 6                                          ; 5                             ;
+; 2                                          ; 0                             ;
+; 3                                          ; 3                             ;
+; 4                                          ; 4                             ;
+; 5                                          ; 4                             ;
+; 6                                          ; 4                             ;
 ; 7                                          ; 4                             ;
-; 8                                          ; 7                             ;
-; 9                                          ; 14                            ;
-; 10                                         ; 76                            ;
+; 8                                          ; 10                            ;
+; 9                                          ; 5                             ;
+; 10                                         ; 80                            ;
 +--------------------------------------------+-------------------------------+
 
 
 +--------------------------------------------------------------------+
 ; LAB-wide Signals                                                   ;
 +------------------------------------+-------------------------------+
-; LAB-wide Signals  (Average = 2.06) ; Number of LABs  (Total = 114) ;
+; LAB-wide Signals  (Average = 2.07) ; Number of LABs  (Total = 115) ;
 +------------------------------------+-------------------------------+
-; 1 Async. clear                     ; 31                            ;
-; 1 Async. load                      ; 7                             ;
-; 1 Clock                            ; 97                            ;
+; 1 Async. clear                     ; 34                            ;
+; 1 Async. load                      ; 6                             ;
+; 1 Clock                            ; 98                            ;
 ; 1 Clock enable                     ; 54                            ;
-; 1 Sync. clear                      ; 14                            ;
-; 1 Sync. load                       ; 5                             ;
-; 2 Async. clears                    ; 1                             ;
-; 2 Clock enables                    ; 19                            ;
-; 2 Clocks                           ; 7                             ;
+; 1 Sync. clear                      ; 11                            ;
+; 1 Sync. load                       ; 6                             ;
+; 2 Async. clears                    ; 2                             ;
+; 2 Clock enables                    ; 21                            ;
+; 2 Clocks                           ; 6                             ;
 +------------------------------------+-------------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                         ;
 +---------------------------------------------+-------------------------------+
-; Number of Signals Sourced  (Average = 9.18) ; Number of LABs  (Total = 114) ;
+; Number of Signals Sourced  (Average = 9.10) ; Number of LABs  (Total = 115) ;
 +---------------------------------------------+-------------------------------+
 ; 0                                           ; 0                             ;
-; 1                                           ; 1                             ;
-; 2                                           ; 2                             ;
-; 3                                           ; 2                             ;
+; 1                                           ; 0                             ;
+; 2                                           ; 1                             ;
+; 3                                           ; 3                             ;
 ; 4                                           ; 3                             ;
-; 5                                           ; 0                             ;
+; 5                                           ; 5                             ;
 ; 6                                           ; 4                             ;
-; 7                                           ; 4                             ;
-; 8                                           ; 7                             ;
-; 9                                           ; 12                            ;
-; 10                                          ; 69                            ;
-; 11                                          ; 4                             ;
-; 12                                          ; 5                             ;
-; 13                                          ; 1                             ;
+; 7                                           ; 3                             ;
+; 8                                           ; 9                             ;
+; 9                                           ; 6                             ;
+; 10                                          ; 71                            ;
+; 11                                          ; 5                             ;
+; 12                                          ; 3                             ;
+; 13                                          ; 2                             ;
 +---------------------------------------------+-------------------------------+
 
 
 +---------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                         ;
 +-------------------------------------------------+-------------------------------+
-; Number of Signals Sourced Out  (Average = 5.89) ; Number of LABs  (Total = 114) ;
+; Number of Signals Sourced Out  (Average = 5.98) ; Number of LABs  (Total = 115) ;
 +-------------------------------------------------+-------------------------------+
 ; 0                                               ; 0                             ;
-; 1                                               ; 13                            ;
-; 2                                               ; 8                             ;
-; 3                                               ; 8                             ;
-; 4                                               ; 8                             ;
-; 5                                               ; 16                            ;
-; 6                                               ; 13                            ;
-; 7                                               ; 11                            ;
-; 8                                               ; 6                             ;
-; 9                                               ; 10                            ;
-; 10                                              ; 19                            ;
+; 1                                               ; 8                             ;
+; 2                                               ; 12                            ;
+; 3                                               ; 9                             ;
+; 4                                               ; 9                             ;
+; 5                                               ; 13                            ;
+; 6                                               ; 15                            ;
+; 7                                               ; 8                             ;
+; 8                                               ; 9                             ;
+; 9                                               ; 11                            ;
+; 10                                              ; 20                            ;
 ; 11                                              ; 1                             ;
-; 12                                              ; 1                             ;
 +-------------------------------------------------+-------------------------------+
 
 
 +------------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                          ;
 +----------------------------------------------+-------------------------------+
-; Number of Distinct Inputs  (Average = 10.56) ; Number of LABs  (Total = 114) ;
+; Number of Distinct Inputs  (Average = 10.61) ; Number of LABs  (Total = 115) ;
 +----------------------------------------------+-------------------------------+
 ; 0                                            ; 0                             ;
 ; 1                                            ; 0                             ;
-; 2                                            ; 2                             ;
+; 2                                            ; 1                             ;
 ; 3                                            ; 9                             ;
-; 4                                            ; 10                            ;
-; 5                                            ; 9                             ;
-; 6                                            ; 8                             ;
-; 7                                            ; 5                             ;
-; 8                                            ; 6                             ;
-; 9                                            ; 7                             ;
-; 10                                           ; 7                             ;
-; 11                                           ; 10                            ;
-; 12                                           ; 7                             ;
-; 13                                           ; 5                             ;
-; 14                                           ; 2                             ;
-; 15                                           ; 3                             ;
-; 16                                           ; 3                             ;
-; 17                                           ; 1                             ;
+; 4                                            ; 6                             ;
+; 5                                            ; 11                            ;
+; 6                                            ; 9                             ;
+; 7                                            ; 9                             ;
+; 8                                            ; 3                             ;
+; 9                                            ; 9                             ;
+; 10                                           ; 5                             ;
+; 11                                           ; 8                             ;
+; 12                                           ; 12                            ;
+; 13                                           ; 3                             ;
+; 14                                           ; 5                             ;
+; 15                                           ; 1                             ;
+; 16                                           ; 2                             ;
+; 17                                           ; 5                             ;
 ; 18                                           ; 0                             ;
-; 19                                           ; 7                             ;
-; 20                                           ; 3                             ;
+; 19                                           ; 3                             ;
+; 20                                           ; 5                             ;
 ; 21                                           ; 1                             ;
-; 22                                           ; 2                             ;
+; 22                                           ; 3                             ;
 ; 23                                           ; 1                             ;
-; 24                                           ; 4                             ;
+; 24                                           ; 1                             ;
 ; 25                                           ; 2                             ;
+; 26                                           ; 1                             ;
 +----------------------------------------------+-------------------------------+
 
 
@@ -1079,147 +1050,149 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Fitter Messages ;
 +-----------------+
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
-Info (119006): Selected device 5M1270ZT144C4 for design "sensor_buchas"
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (119006): Selected device 5M1270ZT144C5 for design "sensor_buchas"
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
 Info (171003): Fitter is performing an Auto Fit compilation, which may decrease Fitter effort to reduce compilation time
 Warning (292013): Feature LogicLock is only available with a valid subscription license. You can purchase a software subscription to gain full access to this feature.
 Info (176444): Device migration not selected. If you intend to use device migration later, you may need to change the pin assignments as they may be incompatible with other devices
-    Info (176445): Device 5M240ZT144C4 is compatible
-    Info (176445): Device 5M570ZT144C4 is compatible
-Critical Warning (169085): No exact pin location assignment(s) for 6 pins of 92 total pins. For the list of pins please refer to the I/O Assignment Warnings table in the fitter report.
+    Info (176445): Device 5M240ZT144C5 is compatible
+    Info (176445): Device 5M240ZT144I5 is compatible
+    Info (176445): Device 5M570ZT144C5 is compatible
+    Info (176445): Device 5M570ZT144I5 is compatible
+    Info (176445): Device 5M1270ZT144I5 is compatible
 Info (332104): Reading SDC File: 'sensor_buchas.sdc'
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|storer|channel_counter|ffs[0] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|storer|channel_counter|ffs[1] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|storer|channel_counter|ffs[2] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|storer|channel_counter|ffs[2]~3 could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|storer|channel_counter|ffs[3] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|storer|channel_counter|ffs[3]~1 could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[0] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[10] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[11] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[12] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[13] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[14] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[15] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[1] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[2] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[3] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[4] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[5] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[6] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[7] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[8] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[9] could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(95): Argument <from> is an empty collection File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-    Info (332050): set_multicycle_path -setup -end -from [get_cells {inst9|storer|channel_counter|ffs[0] inst9|storer|channel_counter|ffs[1] inst9|storer|channel_counter|ffs[2] inst9|storer|channel_counter|ffs[2]~3 inst9|storer|channel_counter|ffs[3] inst9|storer|channel_counter|ffs[3]~1}] -to [get_cells {inst9|crc|lfsr_q[0] inst9|crc|lfsr_q[1] inst9|crc|lfsr_q[2] inst9|crc|lfsr_q[3] inst9|crc|lfsr_q[4] inst9|crc|lfsr_q[5] inst9|crc|lfsr_q[6] inst9|crc|lfsr_q[7] inst9|crc|lfsr_q[8] inst9|crc|lfsr_q[9] inst9|crc|lfsr_q[10] inst9|crc|lfsr_q[11] inst9|crc|lfsr_q[12] inst9|crc|lfsr_q[13] inst9|crc|lfsr_q[14] inst9|crc|lfsr_q[15]}] 2 File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(95): Argument <to> is an empty collection File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 95
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][0]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][10]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][11]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][12]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][13]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][14]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][15]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][1]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][2]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][3]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][4]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][5]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][6]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][7]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][8]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][9]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][0]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][10]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][11]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][12]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][13]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][14]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][15]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][1]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][2]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][3]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][4]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][5]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][6]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][7]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][8]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][9]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][0]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][10]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][11]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][12]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][13]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][14]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][15]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][1]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][2]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][3]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][4]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][5]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][6]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][7]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][8]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][9]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][0]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][10]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][11]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][12]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][13]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][14]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][15]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][1]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][2]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][3]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][4]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][5]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][6]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][7]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][8]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][9]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][0]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][10]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][11]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][12]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][13]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][14]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][15]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][1]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][2]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][3]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][4]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][5]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][6]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][7]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][8]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][9]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][0]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][10]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][11]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][12]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][13]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][14]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][15]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][1]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][2]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][3]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][4]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][5]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][6]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][7]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][8]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][9]|ff could not be matched with a cell File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(96): Argument <from> is an empty collection File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-    Info (332050): set_multicycle_path -setup -end -from [get_cells {inst9|serializer|data_buffer[0][0]|ff inst9|serializer|data_buffer[0][1]|ff inst9|serializer|data_buffer[0][2]|ff inst9|serializer|data_buffer[0][3]|ff inst9|serializer|data_buffer[0][4]|ff inst9|serializer|data_buffer[0][5]|ff inst9|serializer|data_buffer[0][6]|ff inst9|serializer|data_buffer[0][7]|ff inst9|serializer|data_buffer[0][8]|ff inst9|serializer|data_buffer[0][9]|ff inst9|serializer|data_buffer[0][10]|ff inst9|serializer|data_buffer[0][11]|ff inst9|serializer|data_buffer[0][12]|ff inst9|serializer|data_buffer[0][13]|ff inst9|serializer|data_buffer[0][14]|ff inst9|serializer|data_buffer[0][15]|ff inst9|serializer|data_buffer[1][0]|ff inst9|serializer|data_buffer[1][1]|ff inst9|serializer|data_buffer[1][2]|ff inst9|serializer|data_buffer[1][3]|ff inst9|serializer|data_buffer[1][4]|ff inst9|serializer|data_buffer[1][5]|ff inst9|serializer|data_buffer[1][6]|ff inst9|serializer|data_buffer[1][7]|ff inst9|serializer|data_buffer[1][8]|ff inst9|serializer|data_buffer[1][9]|ff inst9|serializer|data_buffer[1][10]|ff inst9|serializer|data_buffer[1][11]|ff inst9|serializer|data_buffer[1][12]|ff inst9|serializer|data_buffer[1][13]|ff inst9|serializer|data_buffer[1][14]|ff inst9|serializer|data_buffer[1][15]|ff inst9|serializer|data_buffer[2][0]|ff inst9|serializer|data_buffer[2][1]|ff inst9|serializer|data_buffer[2][2]|ff inst9|serializer|data_buffer[2][3]|ff inst9|serializer|data_buffer[2][4]|ff inst9|serializer|data_buffer[2][5]|ff inst9|serializer|data_buffer[2][6]|ff inst9|serializer|data_buffer[2][7]|ff inst9|serializer|data_buffer[2][8]|ff inst9|serializer|data_buffer[2][9]|ff inst9|serializer|data_buffer[2][10]|ff inst9|serializer|data_buffer[2][11]|ff inst9|serializer|data_buffer[2][12]|ff inst9|serializer|data_buffer[2][13]|ff inst9|serializer|data_buffer[2][14]|ff inst9|serializer|data_buffer[2][15]|ff inst9|serializer|data_buffer[3][0]|ff inst9|serializer|data_buffer[3][1]|ff inst9|serializer|data_buffer[3][2]|ff inst9|serializer|data_buffer[3][3]|ff inst9|serializer|data_buffer[3][4]|ff inst9|serializer|data_buffer[3][5]|ff inst9|serializer|data_buffer[3][6]|ff inst9|serializer|data_buffer[3][7]|ff inst9|serializer|data_buffer[3][8]|ff inst9|serializer|data_buffer[3][9]|ff inst9|serializer|data_buffer[3][10]|ff inst9|serializer|data_buffer[3][11]|ff inst9|serializer|data_buffer[3][12]|ff inst9|serializer|data_buffer[3][13]|ff inst9|serializer|data_buffer[3][14]|ff inst9|serializer|data_buffer[3][15]|ff inst9|serializer|data_buffer[4][0]|ff inst9|serializer|data_buffer[4][1]|ff inst9|serializer|data_buffer[4][2]|ff inst9|serializer|data_buffer[4][3]|ff inst9|serializer|data_buffer[4][4]|ff inst9|serializer|data_buffer[4][5]|ff inst9|serializer|data_buffer[4][6]|ff inst9|serializer|data_buffer[4][7]|ff inst9|serializer|data_buffer[4][8]|ff inst9|serializer|data_buffer[4][9]|ff inst9|serializer|data_buffer[4][10]|ff inst9|serializer|data_buffer[4][11]|ff inst9|serializer|data_buffer[4][12]|ff inst9|serializer|data_buffer[4][13]|ff inst9|serializer|data_buffer[4][14]|ff inst9|serializer|data_buffer[4][15]|ff inst9|serializer|data_buffer[5][0]|ff inst9|serializer|data_buffer[5][1]|ff inst9|serializer|data_buffer[5][2]|ff inst9|serializer|data_buffer[5][3]|ff inst9|serializer|data_buffer[5][4]|ff inst9|serializer|data_buffer[5][5]|ff inst9|serializer|data_buffer[5][6]|ff inst9|serializer|data_buffer[5][7]|ff inst9|serializer|data_buffer[5][8]|ff inst9|serializer|data_buffer[5][9]|ff inst9|serializer|data_buffer[5][10]|ff inst9|serializer|data_buffer[5][11]|ff inst9|serializer|data_buffer[5][12]|ff inst9|serializer|data_buffer[5][13]|ff inst9|serializer|data_buffer[5][14]|ff inst9|serializer|data_buffer[5][15]|ff}] -to [get_cells {inst9|crc|lfsr_q[0] inst9|crc|lfsr_q[1] inst9|crc|lfsr_q[2] inst9|crc|lfsr_q[3] inst9|crc|lfsr_q[4] inst9|crc|lfsr_q[5] inst9|crc|lfsr_q[6] inst9|crc|lfsr_q[7] inst9|crc|lfsr_q[8] inst9|crc|lfsr_q[9] inst9|crc|lfsr_q[10] inst9|crc|lfsr_q[11] inst9|crc|lfsr_q[12] inst9|crc|lfsr_q[13] inst9|crc|lfsr_q[14] inst9|crc|lfsr_q[15]}] 2 File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(96): Argument <to> is an empty collection File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 96
-Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(97): Argument <from> is an empty collection File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 97
-    Info (332050): set_multicycle_path -hold -end -from [get_cells {inst9|serializer|data_buffer[0][0]|ff inst9|serializer|data_buffer[0][1]|ff inst9|serializer|data_buffer[0][2]|ff inst9|serializer|data_buffer[0][3]|ff inst9|serializer|data_buffer[0][4]|ff inst9|serializer|data_buffer[0][5]|ff inst9|serializer|data_buffer[0][6]|ff inst9|serializer|data_buffer[0][7]|ff inst9|serializer|data_buffer[0][8]|ff inst9|serializer|data_buffer[0][9]|ff inst9|serializer|data_buffer[0][10]|ff inst9|serializer|data_buffer[0][11]|ff inst9|serializer|data_buffer[0][12]|ff inst9|serializer|data_buffer[0][13]|ff inst9|serializer|data_buffer[0][14]|ff inst9|serializer|data_buffer[0][15]|ff inst9|serializer|data_buffer[1][0]|ff inst9|serializer|data_buffer[1][1]|ff inst9|serializer|data_buffer[1][2]|ff inst9|serializer|data_buffer[1][3]|ff inst9|serializer|data_buffer[1][4]|ff inst9|serializer|data_buffer[1][5]|ff inst9|serializer|data_buffer[1][6]|ff inst9|serializer|data_buffer[1][7]|ff inst9|serializer|data_buffer[1][8]|ff inst9|serializer|data_buffer[1][9]|ff inst9|serializer|data_buffer[1][10]|ff inst9|serializer|data_buffer[1][11]|ff inst9|serializer|data_buffer[1][12]|ff inst9|serializer|data_buffer[1][13]|ff inst9|serializer|data_buffer[1][14]|ff inst9|serializer|data_buffer[1][15]|ff inst9|serializer|data_buffer[2][0]|ff inst9|serializer|data_buffer[2][1]|ff inst9|serializer|data_buffer[2][2]|ff inst9|serializer|data_buffer[2][3]|ff inst9|serializer|data_buffer[2][4]|ff inst9|serializer|data_buffer[2][5]|ff inst9|serializer|data_buffer[2][6]|ff inst9|serializer|data_buffer[2][7]|ff inst9|serializer|data_buffer[2][8]|ff inst9|serializer|data_buffer[2][9]|ff inst9|serializer|data_buffer[2][10]|ff inst9|serializer|data_buffer[2][11]|ff inst9|serializer|data_buffer[2][12]|ff inst9|serializer|data_buffer[2][13]|ff inst9|serializer|data_buffer[2][14]|ff inst9|serializer|data_buffer[2][15]|ff inst9|serializer|data_buffer[3][0]|ff inst9|serializer|data_buffer[3][1]|ff inst9|serializer|data_buffer[3][2]|ff inst9|serializer|data_buffer[3][3]|ff inst9|serializer|data_buffer[3][4]|ff inst9|serializer|data_buffer[3][5]|ff inst9|serializer|data_buffer[3][6]|ff inst9|serializer|data_buffer[3][7]|ff inst9|serializer|data_buffer[3][8]|ff inst9|serializer|data_buffer[3][9]|ff inst9|serializer|data_buffer[3][10]|ff inst9|serializer|data_buffer[3][11]|ff inst9|serializer|data_buffer[3][12]|ff inst9|serializer|data_buffer[3][13]|ff inst9|serializer|data_buffer[3][14]|ff inst9|serializer|data_buffer[3][15]|ff inst9|serializer|data_buffer[4][0]|ff inst9|serializer|data_buffer[4][1]|ff inst9|serializer|data_buffer[4][2]|ff inst9|serializer|data_buffer[4][3]|ff inst9|serializer|data_buffer[4][4]|ff inst9|serializer|data_buffer[4][5]|ff inst9|serializer|data_buffer[4][6]|ff inst9|serializer|data_buffer[4][7]|ff inst9|serializer|data_buffer[4][8]|ff inst9|serializer|data_buffer[4][9]|ff inst9|serializer|data_buffer[4][10]|ff inst9|serializer|data_buffer[4][11]|ff inst9|serializer|data_buffer[4][12]|ff inst9|serializer|data_buffer[4][13]|ff inst9|serializer|data_buffer[4][14]|ff inst9|serializer|data_buffer[4][15]|ff inst9|serializer|data_buffer[5][0]|ff inst9|serializer|data_buffer[5][1]|ff inst9|serializer|data_buffer[5][2]|ff inst9|serializer|data_buffer[5][3]|ff inst9|serializer|data_buffer[5][4]|ff inst9|serializer|data_buffer[5][5]|ff inst9|serializer|data_buffer[5][6]|ff inst9|serializer|data_buffer[5][7]|ff inst9|serializer|data_buffer[5][8]|ff inst9|serializer|data_buffer[5][9]|ff inst9|serializer|data_buffer[5][10]|ff inst9|serializer|data_buffer[5][11]|ff inst9|serializer|data_buffer[5][12]|ff inst9|serializer|data_buffer[5][13]|ff inst9|serializer|data_buffer[5][14]|ff inst9|serializer|data_buffer[5][15]|ff}] -to [get_cells {inst9|crc|lfsr_q[0] inst9|crc|lfsr_q[1] inst9|crc|lfsr_q[2] inst9|crc|lfsr_q[3] inst9|crc|lfsr_q[4] inst9|crc|lfsr_q[5] inst9|crc|lfsr_q[6] inst9|crc|lfsr_q[7] inst9|crc|lfsr_q[8] inst9|crc|lfsr_q[9] inst9|crc|lfsr_q[10] inst9|crc|lfsr_q[11] inst9|crc|lfsr_q[12] inst9|crc|lfsr_q[13] inst9|crc|lfsr_q[14] inst9|crc|lfsr_q[15]}] 1 File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 97
-Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(97): Argument <to> is an empty collection File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 97
-Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(98): Argument <from> is an empty collection File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 98
-    Info (332050): set_multicycle_path -hold -end -from [get_cells {inst9|storer|channel_counter|ffs[0] inst9|storer|channel_counter|ffs[1] inst9|storer|channel_counter|ffs[2] inst9|storer|channel_counter|ffs[2]~3 inst9|storer|channel_counter|ffs[3] inst9|storer|channel_counter|ffs[3]~1}] -to [get_cells {inst9|crc|lfsr_q[0] inst9|crc|lfsr_q[1] inst9|crc|lfsr_q[2] inst9|crc|lfsr_q[3] inst9|crc|lfsr_q[4] inst9|crc|lfsr_q[5] inst9|crc|lfsr_q[6] inst9|crc|lfsr_q[7] inst9|crc|lfsr_q[8] inst9|crc|lfsr_q[9] inst9|crc|lfsr_q[10] inst9|crc|lfsr_q[11] inst9|crc|lfsr_q[12] inst9|crc|lfsr_q[13] inst9|crc|lfsr_q[14] inst9|crc|lfsr_q[15]}] 1 File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 98
-Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(98): Argument <to> is an empty collection File: C:/sensorbuchasv2/sensor_buchas.sdc Line: 98
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|storer|channel_counter|ffs[0] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|storer|channel_counter|ffs[1] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|storer|channel_counter|ffs[2] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|storer|channel_counter|ffs[2]~3 could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|storer|channel_counter|ffs[3] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|storer|channel_counter|ffs[3]~1 could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[0] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[10] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[11] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[12] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[13] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[14] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[15] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[1] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[2] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[3] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[4] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[5] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[6] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[7] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[8] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(95): inst9|crc|lfsr_q[9] could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(95): Argument <from> is an empty collection File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+    Info (332050): set_multicycle_path -setup -end -from [get_cells {inst9|storer|channel_counter|ffs[0] inst9|storer|channel_counter|ffs[1] inst9|storer|channel_counter|ffs[2] inst9|storer|channel_counter|ffs[2]~3 inst9|storer|channel_counter|ffs[3] inst9|storer|channel_counter|ffs[3]~1}] -to [get_cells {inst9|crc|lfsr_q[0] inst9|crc|lfsr_q[1] inst9|crc|lfsr_q[2] inst9|crc|lfsr_q[3] inst9|crc|lfsr_q[4] inst9|crc|lfsr_q[5] inst9|crc|lfsr_q[6] inst9|crc|lfsr_q[7] inst9|crc|lfsr_q[8] inst9|crc|lfsr_q[9] inst9|crc|lfsr_q[10] inst9|crc|lfsr_q[11] inst9|crc|lfsr_q[12] inst9|crc|lfsr_q[13] inst9|crc|lfsr_q[14] inst9|crc|lfsr_q[15]}] 2 File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(95): Argument <to> is an empty collection File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 95
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][0]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][10]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][11]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][12]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][13]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][14]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][15]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][1]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][2]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][3]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][4]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][5]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][6]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][7]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][8]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[0][9]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][0]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][10]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][11]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][12]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][13]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][14]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][15]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][1]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][2]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][3]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][4]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][5]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][6]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][7]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][8]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[1][9]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][0]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][10]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][11]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][12]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][13]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][14]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][15]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][1]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][2]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][3]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][4]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][5]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][6]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][7]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][8]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[2][9]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][0]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][10]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][11]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][12]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][13]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][14]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][15]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][1]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][2]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][3]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][4]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][5]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][6]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][7]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][8]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[3][9]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][0]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][10]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][11]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][12]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][13]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][14]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][15]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][1]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][2]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][3]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][4]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][5]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][6]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][7]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][8]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[4][9]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][0]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][10]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][11]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][12]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][13]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][14]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][15]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][1]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][2]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][3]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][4]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][5]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][6]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][7]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][8]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332174): Ignored filter at sensor_buchas.sdc(96): inst9|serializer|data_buffer[5][9]|ff could not be matched with a cell File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(96): Argument <from> is an empty collection File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+    Info (332050): set_multicycle_path -setup -end -from [get_cells {inst9|serializer|data_buffer[0][0]|ff inst9|serializer|data_buffer[0][1]|ff inst9|serializer|data_buffer[0][2]|ff inst9|serializer|data_buffer[0][3]|ff inst9|serializer|data_buffer[0][4]|ff inst9|serializer|data_buffer[0][5]|ff inst9|serializer|data_buffer[0][6]|ff inst9|serializer|data_buffer[0][7]|ff inst9|serializer|data_buffer[0][8]|ff inst9|serializer|data_buffer[0][9]|ff inst9|serializer|data_buffer[0][10]|ff inst9|serializer|data_buffer[0][11]|ff inst9|serializer|data_buffer[0][12]|ff inst9|serializer|data_buffer[0][13]|ff inst9|serializer|data_buffer[0][14]|ff inst9|serializer|data_buffer[0][15]|ff inst9|serializer|data_buffer[1][0]|ff inst9|serializer|data_buffer[1][1]|ff inst9|serializer|data_buffer[1][2]|ff inst9|serializer|data_buffer[1][3]|ff inst9|serializer|data_buffer[1][4]|ff inst9|serializer|data_buffer[1][5]|ff inst9|serializer|data_buffer[1][6]|ff inst9|serializer|data_buffer[1][7]|ff inst9|serializer|data_buffer[1][8]|ff inst9|serializer|data_buffer[1][9]|ff inst9|serializer|data_buffer[1][10]|ff inst9|serializer|data_buffer[1][11]|ff inst9|serializer|data_buffer[1][12]|ff inst9|serializer|data_buffer[1][13]|ff inst9|serializer|data_buffer[1][14]|ff inst9|serializer|data_buffer[1][15]|ff inst9|serializer|data_buffer[2][0]|ff inst9|serializer|data_buffer[2][1]|ff inst9|serializer|data_buffer[2][2]|ff inst9|serializer|data_buffer[2][3]|ff inst9|serializer|data_buffer[2][4]|ff inst9|serializer|data_buffer[2][5]|ff inst9|serializer|data_buffer[2][6]|ff inst9|serializer|data_buffer[2][7]|ff inst9|serializer|data_buffer[2][8]|ff inst9|serializer|data_buffer[2][9]|ff inst9|serializer|data_buffer[2][10]|ff inst9|serializer|data_buffer[2][11]|ff inst9|serializer|data_buffer[2][12]|ff inst9|serializer|data_buffer[2][13]|ff inst9|serializer|data_buffer[2][14]|ff inst9|serializer|data_buffer[2][15]|ff inst9|serializer|data_buffer[3][0]|ff inst9|serializer|data_buffer[3][1]|ff inst9|serializer|data_buffer[3][2]|ff inst9|serializer|data_buffer[3][3]|ff inst9|serializer|data_buffer[3][4]|ff inst9|serializer|data_buffer[3][5]|ff inst9|serializer|data_buffer[3][6]|ff inst9|serializer|data_buffer[3][7]|ff inst9|serializer|data_buffer[3][8]|ff inst9|serializer|data_buffer[3][9]|ff inst9|serializer|data_buffer[3][10]|ff inst9|serializer|data_buffer[3][11]|ff inst9|serializer|data_buffer[3][12]|ff inst9|serializer|data_buffer[3][13]|ff inst9|serializer|data_buffer[3][14]|ff inst9|serializer|data_buffer[3][15]|ff inst9|serializer|data_buffer[4][0]|ff inst9|serializer|data_buffer[4][1]|ff inst9|serializer|data_buffer[4][2]|ff inst9|serializer|data_buffer[4][3]|ff inst9|serializer|data_buffer[4][4]|ff inst9|serializer|data_buffer[4][5]|ff inst9|serializer|data_buffer[4][6]|ff inst9|serializer|data_buffer[4][7]|ff inst9|serializer|data_buffer[4][8]|ff inst9|serializer|data_buffer[4][9]|ff inst9|serializer|data_buffer[4][10]|ff inst9|serializer|data_buffer[4][11]|ff inst9|serializer|data_buffer[4][12]|ff inst9|serializer|data_buffer[4][13]|ff inst9|serializer|data_buffer[4][14]|ff inst9|serializer|data_buffer[4][15]|ff inst9|serializer|data_buffer[5][0]|ff inst9|serializer|data_buffer[5][1]|ff inst9|serializer|data_buffer[5][2]|ff inst9|serializer|data_buffer[5][3]|ff inst9|serializer|data_buffer[5][4]|ff inst9|serializer|data_buffer[5][5]|ff inst9|serializer|data_buffer[5][6]|ff inst9|serializer|data_buffer[5][7]|ff inst9|serializer|data_buffer[5][8]|ff inst9|serializer|data_buffer[5][9]|ff inst9|serializer|data_buffer[5][10]|ff inst9|serializer|data_buffer[5][11]|ff inst9|serializer|data_buffer[5][12]|ff inst9|serializer|data_buffer[5][13]|ff inst9|serializer|data_buffer[5][14]|ff inst9|serializer|data_buffer[5][15]|ff}] -to [get_cells {inst9|crc|lfsr_q[0] inst9|crc|lfsr_q[1] inst9|crc|lfsr_q[2] inst9|crc|lfsr_q[3] inst9|crc|lfsr_q[4] inst9|crc|lfsr_q[5] inst9|crc|lfsr_q[6] inst9|crc|lfsr_q[7] inst9|crc|lfsr_q[8] inst9|crc|lfsr_q[9] inst9|crc|lfsr_q[10] inst9|crc|lfsr_q[11] inst9|crc|lfsr_q[12] inst9|crc|lfsr_q[13] inst9|crc|lfsr_q[14] inst9|crc|lfsr_q[15]}] 2 File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(96): Argument <to> is an empty collection File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 96
+Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(97): Argument <from> is an empty collection File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 97
+    Info (332050): set_multicycle_path -hold -end -from [get_cells {inst9|serializer|data_buffer[0][0]|ff inst9|serializer|data_buffer[0][1]|ff inst9|serializer|data_buffer[0][2]|ff inst9|serializer|data_buffer[0][3]|ff inst9|serializer|data_buffer[0][4]|ff inst9|serializer|data_buffer[0][5]|ff inst9|serializer|data_buffer[0][6]|ff inst9|serializer|data_buffer[0][7]|ff inst9|serializer|data_buffer[0][8]|ff inst9|serializer|data_buffer[0][9]|ff inst9|serializer|data_buffer[0][10]|ff inst9|serializer|data_buffer[0][11]|ff inst9|serializer|data_buffer[0][12]|ff inst9|serializer|data_buffer[0][13]|ff inst9|serializer|data_buffer[0][14]|ff inst9|serializer|data_buffer[0][15]|ff inst9|serializer|data_buffer[1][0]|ff inst9|serializer|data_buffer[1][1]|ff inst9|serializer|data_buffer[1][2]|ff inst9|serializer|data_buffer[1][3]|ff inst9|serializer|data_buffer[1][4]|ff inst9|serializer|data_buffer[1][5]|ff inst9|serializer|data_buffer[1][6]|ff inst9|serializer|data_buffer[1][7]|ff inst9|serializer|data_buffer[1][8]|ff inst9|serializer|data_buffer[1][9]|ff inst9|serializer|data_buffer[1][10]|ff inst9|serializer|data_buffer[1][11]|ff inst9|serializer|data_buffer[1][12]|ff inst9|serializer|data_buffer[1][13]|ff inst9|serializer|data_buffer[1][14]|ff inst9|serializer|data_buffer[1][15]|ff inst9|serializer|data_buffer[2][0]|ff inst9|serializer|data_buffer[2][1]|ff inst9|serializer|data_buffer[2][2]|ff inst9|serializer|data_buffer[2][3]|ff inst9|serializer|data_buffer[2][4]|ff inst9|serializer|data_buffer[2][5]|ff inst9|serializer|data_buffer[2][6]|ff inst9|serializer|data_buffer[2][7]|ff inst9|serializer|data_buffer[2][8]|ff inst9|serializer|data_buffer[2][9]|ff inst9|serializer|data_buffer[2][10]|ff inst9|serializer|data_buffer[2][11]|ff inst9|serializer|data_buffer[2][12]|ff inst9|serializer|data_buffer[2][13]|ff inst9|serializer|data_buffer[2][14]|ff inst9|serializer|data_buffer[2][15]|ff inst9|serializer|data_buffer[3][0]|ff inst9|serializer|data_buffer[3][1]|ff inst9|serializer|data_buffer[3][2]|ff inst9|serializer|data_buffer[3][3]|ff inst9|serializer|data_buffer[3][4]|ff inst9|serializer|data_buffer[3][5]|ff inst9|serializer|data_buffer[3][6]|ff inst9|serializer|data_buffer[3][7]|ff inst9|serializer|data_buffer[3][8]|ff inst9|serializer|data_buffer[3][9]|ff inst9|serializer|data_buffer[3][10]|ff inst9|serializer|data_buffer[3][11]|ff inst9|serializer|data_buffer[3][12]|ff inst9|serializer|data_buffer[3][13]|ff inst9|serializer|data_buffer[3][14]|ff inst9|serializer|data_buffer[3][15]|ff inst9|serializer|data_buffer[4][0]|ff inst9|serializer|data_buffer[4][1]|ff inst9|serializer|data_buffer[4][2]|ff inst9|serializer|data_buffer[4][3]|ff inst9|serializer|data_buffer[4][4]|ff inst9|serializer|data_buffer[4][5]|ff inst9|serializer|data_buffer[4][6]|ff inst9|serializer|data_buffer[4][7]|ff inst9|serializer|data_buffer[4][8]|ff inst9|serializer|data_buffer[4][9]|ff inst9|serializer|data_buffer[4][10]|ff inst9|serializer|data_buffer[4][11]|ff inst9|serializer|data_buffer[4][12]|ff inst9|serializer|data_buffer[4][13]|ff inst9|serializer|data_buffer[4][14]|ff inst9|serializer|data_buffer[4][15]|ff inst9|serializer|data_buffer[5][0]|ff inst9|serializer|data_buffer[5][1]|ff inst9|serializer|data_buffer[5][2]|ff inst9|serializer|data_buffer[5][3]|ff inst9|serializer|data_buffer[5][4]|ff inst9|serializer|data_buffer[5][5]|ff inst9|serializer|data_buffer[5][6]|ff inst9|serializer|data_buffer[5][7]|ff inst9|serializer|data_buffer[5][8]|ff inst9|serializer|data_buffer[5][9]|ff inst9|serializer|data_buffer[5][10]|ff inst9|serializer|data_buffer[5][11]|ff inst9|serializer|data_buffer[5][12]|ff inst9|serializer|data_buffer[5][13]|ff inst9|serializer|data_buffer[5][14]|ff inst9|serializer|data_buffer[5][15]|ff}] -to [get_cells {inst9|crc|lfsr_q[0] inst9|crc|lfsr_q[1] inst9|crc|lfsr_q[2] inst9|crc|lfsr_q[3] inst9|crc|lfsr_q[4] inst9|crc|lfsr_q[5] inst9|crc|lfsr_q[6] inst9|crc|lfsr_q[7] inst9|crc|lfsr_q[8] inst9|crc|lfsr_q[9] inst9|crc|lfsr_q[10] inst9|crc|lfsr_q[11] inst9|crc|lfsr_q[12] inst9|crc|lfsr_q[13] inst9|crc|lfsr_q[14] inst9|crc|lfsr_q[15]}] 1 File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 97
+Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(97): Argument <to> is an empty collection File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 97
+Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(98): Argument <from> is an empty collection File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 98
+    Info (332050): set_multicycle_path -hold -end -from [get_cells {inst9|storer|channel_counter|ffs[0] inst9|storer|channel_counter|ffs[1] inst9|storer|channel_counter|ffs[2] inst9|storer|channel_counter|ffs[2]~3 inst9|storer|channel_counter|ffs[3] inst9|storer|channel_counter|ffs[3]~1}] -to [get_cells {inst9|crc|lfsr_q[0] inst9|crc|lfsr_q[1] inst9|crc|lfsr_q[2] inst9|crc|lfsr_q[3] inst9|crc|lfsr_q[4] inst9|crc|lfsr_q[5] inst9|crc|lfsr_q[6] inst9|crc|lfsr_q[7] inst9|crc|lfsr_q[8] inst9|crc|lfsr_q[9] inst9|crc|lfsr_q[10] inst9|crc|lfsr_q[11] inst9|crc|lfsr_q[12] inst9|crc|lfsr_q[13] inst9|crc|lfsr_q[14] inst9|crc|lfsr_q[15]}] 1 File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 98
+Warning (332049): Ignored set_multicycle_path at sensor_buchas.sdc(98): Argument <to> is an empty collection File: /home/montrel/QUARTUS_TESTE/sensor_buchas.sdc Line: 98
 Warning (332060): Node: rw_data_module:inst10|dffes:SCLK_ff|ff was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register rw_data_module:inst10|spi_shift_v2:shift|shift_tx[7] is being clocked by rw_data_module:inst10|dffes:SCLK_ff|ff
 Warning (332061): Virtual clock rw_data_module:inst14|dffes:SCLK_ff|ff is never referenced in any input or output delay assignment.
@@ -1232,61 +1205,51 @@ Info (332111): Found 3 clocks
     Info (332111):  100.000 rw_data_module:inst14|dffes:SCLK_ff|ff
 Info (186079): Completed User Assigned Global Signals Promotion Operation
 Info (186215): Automatically promoted signal "clk" to use Global clock in PIN 18
-Info (186215): Automatically promoted signal "switch:inst20|CM_SCLK~1" to use Global clock File: C:/sensorbuchasv2/switch.tdf Line: 190
-Info (186215): Automatically promoted signal "rw_data_module:inst10|dffes:SCLK_ff|ff" to use Global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
-Info (186216): Automatically promoted some destinations of signal "host_interface:inst1|sreset_mode2" to use Global clock File: C:/sensorbuchasv2/host_interface.tdf Line: 58
-    Info (186217): Destination "acquisition_module:inst5|acquisition_store_time_counter:storer_time_counter|dffes:data_bus_out_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
-    Info (186217): Destination "acquisition_module:inst5|acquisition_store_crc:storer_crc|dffes:data_bus_out_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
-    Info (186217): Destination "acquisition_module:inst5|acquisition_store:storer|dffes:data_bus_out_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
-    Info (186217): Destination "acquisition_module:inst5|acquisition_store_time_counter:storer_time_counter|dffes:we_n_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
-    Info (186217): Destination "acquisition_module:inst5|acquisition_store_crc:storer_crc|dffes:we_n_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
-    Info (186217): Destination "acquisition_module:inst5|acquisition_store:storer|dffes:we_n_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
-    Info (186217): Destination "acquisition_module:inst5|acquisition_store_time_counter:storer_time_counter|dffes:cs_n_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
-    Info (186217): Destination "acquisition_module:inst5|acquisition_store_crc:storer_crc|dffes:cs_n_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
-    Info (186217): Destination "acquisition_module:inst5|acquisition_store:storer|dffes:cs_n_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
-    Info (186217): Destination "acquisition_module:inst5|acquisition_ctrl_v2:ctrl|dffes:store_time_counter_ff|ff" may be non-global or may not use global clock File: C:/sensorbuchasv2/dffes.tdf Line: 13
+Info (186215): Automatically promoted signal "switch:inst20|CM_SCLK~1" to use Global clock File: /home/montrel/QUARTUS_TESTE/switch.tdf Line: 190
+Info (186215): Automatically promoted signal "rw_data_module:inst10|dffes:SCLK_ff|ff" to use Global clock File: /home/montrel/QUARTUS_TESTE/dffes.tdf Line: 13
+Info (186216): Automatically promoted some destinations of signal "host_interface:inst1|sreset_mode2" to use Global clock File: /home/montrel/QUARTUS_TESTE/host_interface.tdf Line: 58
+    Info (186217): Destination "acquisition_module:inst5|acquisition_store_time_counter:storer_time_counter|dffes:data_bus_out_ff|ff" may be non-global or may not use global clock File: /home/montrel/QUARTUS_TESTE/dffes.tdf Line: 13
+    Info (186217): Destination "acquisition_module:inst5|acquisition_store_crc:storer_crc|dffes:data_bus_out_ff|ff" may be non-global or may not use global clock File: /home/montrel/QUARTUS_TESTE/dffes.tdf Line: 13
+    Info (186217): Destination "acquisition_module:inst5|acquisition_store:storer|dffes:data_bus_out_ff|ff" may be non-global or may not use global clock File: /home/montrel/QUARTUS_TESTE/dffes.tdf Line: 13
+    Info (186217): Destination "acquisition_module:inst5|acquisition_store_time_counter:storer_time_counter|dffes:we_n_ff|ff" may be non-global or may not use global clock File: /home/montrel/QUARTUS_TESTE/dffes.tdf Line: 13
+    Info (186217): Destination "acquisition_module:inst5|acquisition_store_crc:storer_crc|dffes:we_n_ff|ff" may be non-global or may not use global clock File: /home/montrel/QUARTUS_TESTE/dffes.tdf Line: 13
+    Info (186217): Destination "acquisition_module:inst5|acquisition_store:storer|dffes:we_n_ff|ff" may be non-global or may not use global clock File: /home/montrel/QUARTUS_TESTE/dffes.tdf Line: 13
+    Info (186217): Destination "acquisition_module:inst5|acquisition_store_time_counter:storer_time_counter|dffes:cs_n_ff|ff" may be non-global or may not use global clock File: /home/montrel/QUARTUS_TESTE/dffes.tdf Line: 13
+    Info (186217): Destination "acquisition_module:inst5|acquisition_store_crc:storer_crc|dffes:cs_n_ff|ff" may be non-global or may not use global clock File: /home/montrel/QUARTUS_TESTE/dffes.tdf Line: 13
+    Info (186217): Destination "acquisition_module:inst5|acquisition_store:storer|dffes:cs_n_ff|ff" may be non-global or may not use global clock File: /home/montrel/QUARTUS_TESTE/dffes.tdf Line: 13
+    Info (186217): Destination "acquisition_module:inst5|acquisition_ctrl_v2:ctrl|dffes:store_time_counter_ff|ff" may be non-global or may not use global clock File: /home/montrel/QUARTUS_TESTE/dffes.tdf Line: 13
     Info (186218): Limited to 10 non-global destinations
 Info (186079): Completed Auto Global Promotion Operation
 Info (176234): Starting register packing
 Info (186468): Started processing fast register assignments
 Info (186469): Finished processing fast register assignments
 Info (176235): Finished register packing
-Info (176214): Statistics of I/O pins that need to be placed that use the same VCCIO and VREF, before I/O pin placement
-    Info (176211): Number of I/O pins in group: 6 (unused VREF, 3.3V VCCIO, 0 input, 6 output, 0 bidirectional)
-        Info (176212): I/O standards used: 3.3-V LVTTL.
-Info (176215): I/O bank details before I/O pin placement
-    Info (176214): Statistics of I/O banks
-        Info (176213): I/O bank number 1 does not use VREF pins and has 3.3V VCCIO pins. 13 total pin(s) used --  12 pins available
-        Info (176213): I/O bank number 2 does not use VREF pins and has 3.3V VCCIO pins. 24 total pin(s) used --  6 pins available
-        Info (176213): I/O bank number 3 does not use VREF pins and has 3.3V VCCIO pins. 24 total pin(s) used --  5 pins available
-        Info (176213): I/O bank number 4 does not use VREF pins and has 3.3V VCCIO pins. 25 total pin(s) used --  5 pins available
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:00
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
 Info (170189): Fitter placement preparation operations beginning
-Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
+Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:01
 Info (170191): Fitter placement operations beginning
 Info (170137): Fitter placement was successful
-Info (170192): Fitter placement operations ending: elapsed time is 00:00:02
+Info (170192): Fitter placement operations ending: elapsed time is 00:00:03
 Info (170193): Fitter routing operations beginning
-Info (170195): Router estimated average interconnect usage is 24% of the available device resources
-    Info (170196): Router estimated peak interconnect usage is 29% of the available device resources in the region that extends from location X0_Y0 to location X8_Y11
-Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
-    Info (170200): Optimizations that may affect the design's timing were skipped
+Info (170195): Router estimated average interconnect usage is 25% of the available device resources
+    Info (170196): Router estimated peak interconnect usage is 26% of the available device resources in the region that extends from location X9_Y0 to location X17_Y11
+Info (170202): The Fitter performed an Auto Fit compilation.  No optimizations were skipped because the design's timing and routability requirements required full optimization.
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:01
-Info (11888): Total time spent on timing analysis during the Fitter is 0.40 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.63 seconds.
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:00
 Warning (169174): The Reserve All Unused Pins setting has not been specified, and will default to 'As output driving ground'.
-Info (144001): Generated suppressed messages file C:/sensorbuchasv2/output_files/sensor_buchas.fit.smsg
-Info: Quartus Prime Fitter was successful. 0 errors, 132 warnings
-    Info: Peak virtual memory: 5359 megabytes
-    Info: Processing ended: Thu Jul 08 14:06:29 2021
-    Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:08
+Info (144001): Generated suppressed messages file /home/montrel/QUARTUS_TESTE/output_files/sensor_buchas.fit.smsg
+Info: Quartus Prime Fitter was successful. 0 errors, 131 warnings
+    Info: Peak virtual memory: 539 megabytes
+    Info: Processing ended: Wed Apr 15 08:12:31 2026
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:11
 
 
 +----------------------------+
 ; Fitter Suppressed Messages ;
 +----------------------------+
-The suppressed messages can be found in C:/sensorbuchasv2/output_files/sensor_buchas.fit.smsg.
+The suppressed messages can be found in /home/montrel/QUARTUS_TESTE/output_files/sensor_buchas.fit.smsg.
 
 
