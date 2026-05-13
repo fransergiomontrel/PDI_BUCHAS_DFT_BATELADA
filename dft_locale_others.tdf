@@ -13,6 +13,8 @@ subdesign dft_locale_others(
 	enable_read: input;
 	sample_word[15..0]: output;
 	
+	start_tx: output;
+	
 	sin_out[31..0]: output;
 	cos_out[31..0]: output;
 	
@@ -49,6 +51,7 @@ begin
 	 dft_by_word.reset = sreset;
 	 dft_by_word.read_sample[] = sample_word[];
 	 dft_by_word.end_tx = end_tx;
+	 start_tx = dft_by_word.start_tx;
 	 
 	 sin_out = dft_by_word.sin_out[];
 	 cos_out = dft_by_word.cos_out[];

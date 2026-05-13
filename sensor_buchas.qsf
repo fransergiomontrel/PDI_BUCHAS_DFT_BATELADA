@@ -55,56 +55,7 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "NO HEAT SINK WITH STILL AIR"
-set_global_assignment -name VERILOG_FILE crc16.v
-set_global_assignment -name VECTOR_WAVEFORM_FILE reset_module.vwf
-set_global_assignment -name AHDL_FILE reset_module.tdf
-set_global_assignment -name SDC_FILE sensor_buchas.sdc
-set_global_assignment -name INCLUDE_FILE modes.inc
-set_global_assignment -name AHDL_FILE synchronizer.tdf
-set_global_assignment -name AHDL_FILE switch.tdf
-set_global_assignment -name AHDL_FILE RAM_interface.tdf
-set_global_assignment -name AHDL_FILE mode_selector.tdf
-set_global_assignment -name AHDL_FILE host_interface.tdf
-set_global_assignment -name AHDL_FILE dffes.tdf
-set_global_assignment -name AHDL_FILE counter.tdf
-set_global_assignment -name AHDL_FILE adc_interface.tdf
-set_global_assignment -name AHDL_FILE acquisition_store.tdf
-set_global_assignment -name AHDL_FILE acquisition_serializer.tdf
-set_global_assignment -name AHDL_FILE acquisition_module.tdf
-set_global_assignment -name AHDL_FILE acquisition_ctrl.tdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_synchronizer.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_read_data_module.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_RAM_interface.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_mode_selector.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_counter.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_store.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_serializer.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_ctrl.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_module.vwf
-set_global_assignment -name BDF_FILE sensor_buchas.bdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE sensor_buchas.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE dffes.vwf
-set_global_assignment -name AHDL_FILE rw_data_module.tdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE rw_data_module.vwf
-set_global_assignment -name AHDL_FILE acquisition_store_crc.tdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_store_crc.vwf
-set_global_assignment -name AHDL_FILE spi_shift_v2.tdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE spi_shift_v2.vwf
 
-set_global_assignment -name AHDL_FILE acquisition_time_counter.tdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_time_counter.vwf
-set_global_assignment -name AHDL_FILE acquisition_store_time_counter.tdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_store_time_counter.vwf
-set_global_assignment -name AHDL_FILE acquisition_serializer_v2.tdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_serializer_v2.vwf
-set_global_assignment -name AHDL_FILE acquisition_serializer_v3.tdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_serializer_v3.vwf
-set_global_assignment -name AHDL_FILE acquisition_ctrl_v2.tdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_ctrl_v2.vwf
-set_global_assignment -name AHDL_FILE conf_cpld_module.tdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_conf_cpld_module.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_host_interface.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE test_sensor_buchas_conf_cpld_module.vwf
 
 
 
@@ -113,17 +64,7 @@ set_global_assignment -name VECTOR_WAVEFORM_FILE test_sensor_buchas_conf_cpld_mo
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name AHDL_FILE dft_locale.tdf
-set_global_assignment -name VERILOG_FILE edge_detector.v
-set_global_assignment -name VERILOG_FILE luts_sin.v
-set_global_assignment -name VERILOG_FILE luts_cos.v
-set_global_assignment -name AHDL_FILE DFT.tdf
-set_global_assignment -name VERILOG_FILE multiplier_16_16.v
-set_global_assignment -name VERILOG_FILE tx_serial_32.v
-set_global_assignment -name AHDL_FILE dft_locale_others.tdf
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
-set_location_assignment PIN_27 -to tx_sin
-set_location_assignment PIN_28 -to tx_cos
 set_location_assignment PIN_1 -to ram_address[9]
 set_location_assignment PIN_2 -to ram_address[8]
 set_location_assignment PIN_3 -to ram_address[7]
@@ -208,3 +149,63 @@ set_location_assignment PIN_141 -to ram_address[4]
 set_location_assignment PIN_142 -to ram_cs_n
 set_location_assignment PIN_143 -to ram_data_bus[0]
 set_location_assignment PIN_144 -to ram_data_bus[1]
+set_global_assignment -name VERILOG_FILE uart_tx.v
+set_global_assignment -name VERILOG_FILE produto_modulo.v
+set_global_assignment -name VERILOG_FILE crc16.v
+set_global_assignment -name VECTOR_WAVEFORM_FILE reset_module.vwf
+set_global_assignment -name AHDL_FILE reset_module.tdf
+set_global_assignment -name SDC_FILE sensor_buchas.sdc
+set_global_assignment -name INCLUDE_FILE modes.inc
+set_global_assignment -name AHDL_FILE synchronizer.tdf
+set_global_assignment -name AHDL_FILE switch.tdf
+set_global_assignment -name AHDL_FILE RAM_interface.tdf
+set_global_assignment -name AHDL_FILE mode_selector.tdf
+set_global_assignment -name AHDL_FILE host_interface.tdf
+set_global_assignment -name AHDL_FILE dffes.tdf
+set_global_assignment -name AHDL_FILE counter.tdf
+set_global_assignment -name AHDL_FILE adc_interface.tdf
+set_global_assignment -name AHDL_FILE acquisition_store.tdf
+set_global_assignment -name AHDL_FILE acquisition_serializer.tdf
+set_global_assignment -name AHDL_FILE acquisition_module.tdf
+set_global_assignment -name AHDL_FILE acquisition_ctrl.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_synchronizer.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_read_data_module.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_RAM_interface.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_mode_selector.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_counter.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_store.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_serializer.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_ctrl.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_module.vwf
+set_global_assignment -name BDF_FILE sensor_buchas.bdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE sensor_buchas.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE dffes.vwf
+set_global_assignment -name AHDL_FILE rw_data_module.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE rw_data_module.vwf
+set_global_assignment -name AHDL_FILE acquisition_store_crc.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_store_crc.vwf
+set_global_assignment -name AHDL_FILE spi_shift_v2.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE spi_shift_v2.vwf
+set_global_assignment -name AHDL_FILE acquisition_time_counter.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_time_counter.vwf
+set_global_assignment -name AHDL_FILE acquisition_store_time_counter.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_store_time_counter.vwf
+set_global_assignment -name AHDL_FILE acquisition_serializer_v2.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_serializer_v2.vwf
+set_global_assignment -name AHDL_FILE acquisition_serializer_v3.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_serializer_v3.vwf
+set_global_assignment -name AHDL_FILE acquisition_ctrl_v2.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_acquisition_ctrl_v2.vwf
+set_global_assignment -name AHDL_FILE conf_cpld_module.tdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_conf_cpld_module.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_host_interface.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test_sensor_buchas_conf_cpld_module.vwf
+set_global_assignment -name AHDL_FILE dft_locale.tdf
+set_global_assignment -name VERILOG_FILE edge_detector.v
+set_global_assignment -name VERILOG_FILE luts_sin.v
+set_global_assignment -name VERILOG_FILE luts_cos.v
+set_global_assignment -name AHDL_FILE DFT.tdf
+set_global_assignment -name VERILOG_FILE multiplier_16_16.v
+set_global_assignment -name VERILOG_FILE tx_serial_32.v
+set_global_assignment -name AHDL_FILE dft_locale_others.tdf
+set_location_assignment PIN_27 -to tx

@@ -37,8 +37,8 @@ subdesign rw_data_module(
 	test_data_shift[7..0]: output;
 	test_shift_rx[6..0]: output;
 	
-	acc_sin_1[31..0]: output;
-	acc_cos_1[31..0]: output;
+	data_out_to_uart_tx[383..0]: output;
+	
 )
 variable
 	shift: spi_shift_v2 with (N_BITS=8);
@@ -48,6 +48,9 @@ variable
 	oe_n_FF, we_n_FF, cs_n_FF, load_parallel_FF, busy_ff, data_bus_out_ff, SCLK_ff, MOSI_ff: dffes;
 	buffer_parallel_in[7..0]: dffe;
 	ready_ff: srff;
+	--DFT result bus of 48 bytes to send through tx UART when requested
+	dft_result[11..0][31..0], start_tx_ff: dff;
+	
 	--Teste dft_locale1
 	dft_caller1 : dft_locale;
 	--Teste others dft_locale
@@ -70,6 +73,17 @@ begin
 		ready_ff.r = Gnd;
 	end defaults;
 	
+	
+	
+	--Connections of dft result bus
+	dft_result[][].clk = clk; 
+	dft_result[][].clrn = !sreset;
+	
+	--Connections ff to start uart tx
+	start_tx_ff.clk = clk;
+	start_tx_ff.clrn = !sreset & !done_tx;
+	start_tx = start_tx_ff.q;
+	
 	--Conections of dft_locale 1
 	dft_caller1.clk = clk;
 	dft_caller1.sreset = sreset;
@@ -77,10 +91,10 @@ begin
 	dft_caller1.new_byte = addr_inc_read;
 	dft_caller1.enable_read = oe_n;
 	dft_caller1.end_tx = done_tx;
-	start_tx = dft_caller1.start_tx;
+	--start_tx = dft_caller1.start_tx;
 	
-	acc_sin_1[] = dft_caller1.sin_out[];
-	acc_cos_1[] = dft_caller1.cos_out[];
+	dft_result[0][].d = dft_caller1.cos_out[];
+	dft_result[1][].d = dft_caller1.sin_out[];
 	
 	--Conections of dft_locale 2
 	dft_caller2.clk = clk;
@@ -90,6 +104,9 @@ begin
 	dft_caller2.enable_read = oe_n;
 	dft_caller2.end_tx = done_tx;
 	
+	dft_result[2][].d = dft_caller2.cos_out[];
+	dft_result[3][].d = dft_caller2.sin_out[];
+	
 	--Conections of dft_locale 3
 	dft_caller3.clk = clk;
 	dft_caller3.sreset = sreset;
@@ -97,6 +114,9 @@ begin
 	dft_caller3.new_byte = addr_inc_read;
 	dft_caller3.enable_read = oe_n;
 	dft_caller3.end_tx = done_tx;
+	
+	dft_result[4][].d = dft_caller3.cos_out[];
+	dft_result[5][].d = dft_caller3.sin_out[];
 	
 	--Conections of dft_locale 4
 	dft_caller4.clk = clk;
@@ -106,6 +126,9 @@ begin
 	dft_caller4.enable_read = oe_n;
 	dft_caller4.end_tx = done_tx;
 	
+	dft_result[6][].d = dft_caller4.cos_out[];
+	dft_result[7][].d = dft_caller4.sin_out[];
+	
 	--Conections of dft_locale 5
 	dft_caller5.clk = clk;
 	dft_caller5.sreset = sreset;
@@ -114,6 +137,9 @@ begin
 	dft_caller5.enable_read = oe_n;
 	dft_caller5.end_tx = done_tx;
 	
+	dft_result[8][].d = dft_caller5.cos_out[];
+	dft_result[9][].d = dft_caller5.sin_out[];
+	
 	--Conections of dft_locales 6
 	dft_caller6.clk = clk;
 	dft_caller6.sreset = sreset;
@@ -121,6 +147,26 @@ begin
 	dft_caller6.new_byte = addr_inc_read;
 	dft_caller6.enable_read = oe_n;
 	dft_caller6.end_tx = done_tx;
+	
+	--Lock level of last dft
+	 start_tx_ff.d = dft_caller6.start_tx # start_tx_ff;
+	
+	dft_result[10][].d = dft_caller6.cos_out[];
+	dft_result[11][].d = dft_caller6.sin_out[];
+	
+	--Connect array dft bus to output which in data in to uart tx
+	data_out_to_uart_tx[31..0] = dft_result[0][].q;
+	data_out_to_uart_tx[63..32] = dft_result[1][].q;
+	data_out_to_uart_tx[95..64] = dft_result[2][].q;
+	data_out_to_uart_tx[127..96] = dft_result[3][].q;
+	data_out_to_uart_tx[159..128] = dft_result[4][].q;
+	data_out_to_uart_tx[191..160] = dft_result[5][].q;
+	data_out_to_uart_tx[223..192] = dft_result[6][].q;
+	data_out_to_uart_tx[255..224] = dft_result[7][].q;
+	data_out_to_uart_tx[287..256] = dft_result[8][].q;
+	data_out_to_uart_tx[319..288] = dft_result[9][].q;
+	data_out_to_uart_tx[351..320] = dft_result[10][].q;
+	data_out_to_uart_tx[383..352] = dft_result[11][].q;
 	
 	--Conections between dft_locales to calculate dft only at right memory position
 	dft_caller1.mychannel_now = dft_caller6.next_channel;

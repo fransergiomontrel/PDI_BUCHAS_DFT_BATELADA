@@ -1,6 +1,6 @@
 include "sin.inc";
 include "cos.inc";
-include "mult16x16_lpm.inc";
+include "produto_modulo.inc";
 
 subdesign DFT(
            
@@ -16,14 +16,15 @@ subdesign DFT(
 	 
 	 start_tx: output;
 	 
+	 
 )
 
 variable
-sm: machine with states(idle, product, sum, check_end);
+sm: machine with states(idle, product, sum, check_end, await_end_tx);
 
-samples_counter[12..0], start_tx_ff: dff;
+samples_counter[12..0], start_tx_ff, clean_counter_ff: dff;
 
-multiplier_dft_sin, multiplier_dft_cos : mult16x16_lpm;
+multiplier_dft_sin, multiplier_dft_cos : produto_modulo;
 
 acc_sin[31..0], acc_cos[31..0]: dff;
 
@@ -42,13 +43,20 @@ begin
 		  acc_cos[].clrn = Vcc;
 		  
 		  start_tx_ff.d = Gnd;
+		  
+		  clean_counter_ff.d = Vcc;
 		
 	 end defaults;
+	 
+	 --Clean counter
+	 clean_counter_ff.clk = clk;
+	 clean_counter_ff.clrn = !reset;
 	 
     --Counter of samples
     samples_counter[].clk = next_sample;
 	 samples_counter[].d = samples_counter[].q + 1;
-	 samples_counter[].clrn = !reset & !end_tx;
+	 samples_counter[].clrn = !reset & !end_tx & clean_counter_ff.q;
+	 
 	 
 	 --Inputs of state machine
 	 sm.clk = clk;
@@ -78,21 +86,26 @@ begin
 	 acc_sin[].clk = next_sample;
 	 acc_cos[].clk = next_sample;
 	 
-	 acc_sin[].d = acc_sin[].q + multiplier_dft_sin.dft_component[];
-	 acc_cos[].d = acc_cos[].q + multiplier_dft_cos.dft_component[];
-
+	 --Appling 2 complement in negative regions of sine
+	 if samples_counter[].q <= 3608 then
+	     acc_sin[].d = acc_sin[].q - multiplier_dft_sin.dft_component[];
+	 else
+	     acc_sin[].d = acc_sin[].q + multiplier_dft_sin.dft_component[];
+	 end if;
+	 
+	 --Appling 2 complement in negative regions of cossine
+	 if samples_counter[].q <= 1804 # samples_counter[].q >= 5412 then
+	     acc_cos[].d = acc_cos[].q + multiplier_dft_cos.dft_component[];
+	 else 
+	     acc_cos[].d = acc_cos[].q - multiplier_dft_cos.dft_component[];
+	 end if;
+	 
     sin_out[]= acc_sin[];
 	 cos_out[]= acc_cos[];
    	
 	 
 	 case sm is
         when idle =>
-		 
-		  if end_tx then
-		      acc_sin[].clrn = Gnd;
-		      acc_cos[].clrn = Gnd;
-				sm = idle;
-			end if;
 		  
 		  if !start_dft then
 		      
@@ -115,9 +128,23 @@ begin
 		  	     
 				if samples_counter[] == 7215 then
 				    start_tx_ff.d = Vcc;
+					 sm = await_end_tx;
+					 clean_counter_ff.d = Gnd;
+			   else
+				    sm = idle;
 			   end if;
-		      sm = idle;			 
+		      			 
 					 		 
+		 when await_end_tx =>
+		  	   if end_tx then
+				    acc_sin[].clrn = Gnd;
+		          acc_cos[].clrn = Gnd;
+				    sm = idle;	
+		      else
+				    sm = await_end_tx;
+					 start_tx_ff.d = Vcc;
+					 clean_counter_ff.d = Gnd;
+			   end if;
 		  
 	 end case;
 
