@@ -2,7 +2,7 @@ module uart_tx (
     input  wire        clk,
     input  wire        rst,       // reset síncrono
     input  wire        start,     // inicia transmissão
-    input  wire [383:0] data_in,   // dado paralelo
+    input  wire [463:0] data_in,   // dado paralelo
     output reg         tx,        // saída serial
     output reg         busy,      // está transmitindo
     output reg         done       // pulso de fim
@@ -16,14 +16,14 @@ module uart_tx (
 	 reg        done_start;
 	 reg        stop_on;
 	 reg        loaded;
-    reg [383:0] shift_reg; 
+    reg [463:0] shift_reg; 
     reg [3:0]  bit_cnt; // precisa contar até 32
 	 reg [9:0]  tx_freq_divider;// register to calculate boud rate = 100MHz/tx_freq_divider
 	 
 
     always @(posedge clk) begin
         if (rst) begin
-            shift_reg <= 384'd0;
+            shift_reg <= 464'd0;
             bit_cnt   <= 4'd0;
             tx        <= 1'b1;
             busy      <= 1'b0;
@@ -37,9 +37,10 @@ module uart_tx (
         end 
         else begin
 				
-				if (count_byte == 6'd48) begin
+				if (count_byte == 6'd58) begin
 				    done <= 1'b1; // default
 					 count_byte <= 6'd0;
+					 shift_reg <= 464'd0;
 				end
 				
 				else begin
@@ -47,7 +48,7 @@ module uart_tx (
 				end
 				//tx <= 1'b1;
             // inicia transmissão
-            if (start & !busy & (count_byte < 6'd48)) begin                					 
+            if (start & !busy & (count_byte < 6'd58)) begin                					 
 					 
                 bit_cnt   <= 4'd8;
                 busy      <= 1'b1;
@@ -91,7 +92,7 @@ module uart_tx (
 						  
 						  count_byte  <= count_byte + 6'd1;
 						  
-						  if (count_byte == 6'd47) begin
+						  if (count_byte == 6'd57) begin
 						  
 					         done <= 1'b1;
 					         

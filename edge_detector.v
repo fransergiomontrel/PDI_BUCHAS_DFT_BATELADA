@@ -7,6 +7,7 @@ module edge_detector(
 );
 reg previous_read_pulse;
   
+  
 
   always @(posedge clk, posedge reset) begin
     if(reset) begin

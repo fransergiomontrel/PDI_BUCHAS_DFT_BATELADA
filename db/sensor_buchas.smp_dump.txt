@@ -8,6 +8,56 @@ WAIT_NOT_LOADING_RX 0 0 1 0 0 1
 CHECK_PASSWORD 0 1 0 0 0 1 
 FINISH 1 0 0 0 0 1 
 
+State Machine - |sensor_buchas|driver_ADS1118:inst3|driver1118_state
+Name driver1118_state.SHIFT_TEMP driver1118_state.GET_TEMP driver1118_state.SET_TEMP driver1118_state.GET_CHANNEL_3 driver1118_state.SET_CHANNEL_3 driver1118_state.GET_CHANNEL_2 driver1118_state.SET_CHANNEL_2 driver1118_state.GET_CHANNEL_1 driver1118_state.SET_CHANNEL_1 driver1118_state.GET_CHANNEL_0 driver1118_state.SET_CHANNEL_0 driver1118_state.IDLE_4_20 
+driver1118_state.IDLE_4_20 0 0 0 0 0 0 0 0 0 0 0 0 
+driver1118_state.SET_CHANNEL_0 0 0 0 0 0 0 0 0 0 0 1 1 
+driver1118_state.GET_CHANNEL_0 0 0 0 0 0 0 0 0 0 1 0 1 
+driver1118_state.SET_CHANNEL_1 0 0 0 0 0 0 0 0 1 0 0 1 
+driver1118_state.GET_CHANNEL_1 0 0 0 0 0 0 0 1 0 0 0 1 
+driver1118_state.SET_CHANNEL_2 0 0 0 0 0 0 1 0 0 0 0 1 
+driver1118_state.GET_CHANNEL_2 0 0 0 0 0 1 0 0 0 0 0 1 
+driver1118_state.SET_CHANNEL_3 0 0 0 0 1 0 0 0 0 0 0 1 
+driver1118_state.GET_CHANNEL_3 0 0 0 1 0 0 0 0 0 0 0 1 
+driver1118_state.SET_TEMP 0 0 1 0 0 0 0 0 0 0 0 1 
+driver1118_state.GET_TEMP 0 1 0 0 0 0 0 0 0 0 0 1 
+driver1118_state.SHIFT_TEMP 1 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |sensor_buchas|driver_ADS1118:inst3|spi_4_20:u_spi_4_20|current_miso_state
+Name current_miso_state.DELAY_SCCS_MIS0 current_miso_state.AWAIT_SCLK_RISE_MISO current_miso_state.AWAIT_SCLK_FALL_MISO current_miso_state.DELAY_CSSC_MIS0 current_miso_state.MISO_DATA_READY current_miso_state.AWAIT_MISO_DATA current_miso_state.IDLE_MISO 
+current_miso_state.IDLE_MISO 0 0 0 0 0 0 0 
+current_miso_state.AWAIT_MISO_DATA 0 0 0 0 0 1 1 
+current_miso_state.MISO_DATA_READY 0 0 0 0 1 0 1 
+current_miso_state.DELAY_CSSC_MIS0 0 0 0 1 0 0 1 
+current_miso_state.AWAIT_SCLK_FALL_MISO 0 0 1 0 0 0 1 
+current_miso_state.AWAIT_SCLK_RISE_MISO 0 1 0 0 0 0 1 
+current_miso_state.DELAY_SCCS_MIS0 1 0 0 0 0 0 1 
+
+State Machine - |sensor_buchas|driver_ADS1118:inst3|spi_4_20:u_spi_4_20|current_mosi_state
+Name current_mosi_state.IDLE_MOSI current_mosi_state.DELAY_SCCS_MOSI current_mosi_state.AWAIT_SCLK_RISE_MOSI current_mosi_state.AWAIT_SCLK_FALL_MOSI current_mosi_state.DELAY_CSSC_MOSI current_mosi_state.CHIP_SELECTED current_mosi_state.NO_MOSI_DATA 
+current_mosi_state.NO_MOSI_DATA 0 0 0 0 0 0 0 
+current_mosi_state.CHIP_SELECTED 0 0 0 0 0 1 1 
+current_mosi_state.DELAY_CSSC_MOSI 0 0 0 0 1 0 1 
+current_mosi_state.AWAIT_SCLK_FALL_MOSI 0 0 0 1 0 0 1 
+current_mosi_state.AWAIT_SCLK_RISE_MOSI 0 0 1 0 0 0 1 
+current_mosi_state.DELAY_SCCS_MOSI 0 1 0 0 0 0 1 
+current_mosi_state.IDLE_MOSI 1 0 0 0 0 0 1 
+
+State Machine - |sensor_buchas|sm_corrente_await:inst4|sampling_period
+Name sampling_period.100010101 sampling_period.011100111 sampling_period.000000000 
+sampling_period.000000000 0 0 0 
+sampling_period.011100111 0 1 1 
+sampling_period.100010101 1 0 1 
+
+State Machine - |sensor_buchas|sm_corrente_await:inst4|current_state
+Name current_state.AWAIT_CORRENTE_TX current_state.AWAIT_END_CONVERSION current_state.START_CONVERSION current_state.PREPARE_CONVERSION current_state.CHECK_TYPE current_state.CHECK_SOH 
+current_state.CHECK_SOH 0 0 0 0 0 0 
+current_state.CHECK_TYPE 0 0 0 0 1 1 
+current_state.PREPARE_CONVERSION 0 0 0 1 0 1 
+current_state.START_CONVERSION 0 0 1 0 0 1 
+current_state.AWAIT_END_CONVERSION 0 1 0 0 0 1 
+current_state.AWAIT_CORRENTE_TX 1 0 0 0 0 1 
+
 State Machine - |sensor_buchas|rw_data_module:inst10|sm
 Name wait_loading_n wr6 wr5 wr4 wr3 wr2 wr1 wait_loading load_sync4 load_sync3 load_sync2 load_sync1 init_buffers4 init_buffers3 init_buffers2 init_buffers1 init rst 
 rst 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 

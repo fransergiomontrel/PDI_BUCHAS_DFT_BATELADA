@@ -37,8 +37,8 @@
 # -------------------------------------------------------------------------- #
 
 
-set_global_assignment -name FAMILY "MAX V"
-set_global_assignment -name DEVICE 5M1270ZT144C5
+set_global_assignment -name FAMILY "MAX 10"
+set_global_assignment -name DEVICE 10M08SCE144C8G
 set_global_assignment -name TOP_LEVEL_ENTITY sensor_buchas
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:48:22  APRIL 07, 2021"
@@ -64,91 +64,10 @@ set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "NO HEAT SINK WITH STI
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
-set_location_assignment PIN_1 -to ram_address[9]
-set_location_assignment PIN_2 -to ram_address[8]
-set_location_assignment PIN_3 -to ram_address[7]
-set_location_assignment PIN_4 -to ram_address[6]
-set_location_assignment PIN_5 -to ram_address[5]
-set_location_assignment PIN_6 -to ram_we_n
-set_location_assignment PIN_7 -to ram_data_bus[3]
-set_location_assignment PIN_8 -to ram_data_bus[2]
-set_location_assignment PIN_16 -to HI_mode[1]
-set_location_assignment PIN_18 -to clk
-set_location_assignment PIN_20 -to HI_mode[0]
-set_location_assignment PIN_21 -to ready_mode0
-set_location_assignment PIN_22 -to sreset_mode0
-set_location_assignment PIN_39 -to adc_sdi[0]
-set_location_assignment PIN_40 -to adc_sclk[0]
-set_location_assignment PIN_41 -to adc_convst[0]
-set_location_assignment PIN_42 -to adc_sdo[0]
-set_location_assignment PIN_43 -to adc_rst_n[0]
-set_location_assignment PIN_45 -to host_busy
-set_location_assignment PIN_48 -to adc_sdi[1]
-set_location_assignment PIN_49 -to adc_sclk[1]
-set_location_assignment PIN_50 -to adc_convst[1]
-set_location_assignment PIN_51 -to adc_sdo[1]
-set_location_assignment PIN_52 -to adc_rst_n[1]
-set_location_assignment PIN_57 -to adc_sdi[2]
-set_location_assignment PIN_58 -to adc_sclk[2]
-set_location_assignment PIN_59 -to adc_convst[2]
-set_location_assignment PIN_60 -to adc_sdo[2]
-set_location_assignment PIN_61 -to adc_rst_n[2]
-set_location_assignment PIN_63 -to HI_changing_mode
-set_location_assignment PIN_66 -to adc_sdi[3]
-set_location_assignment PIN_67 -to adc_sclk[3]
-set_location_assignment PIN_68 -to adc_convst[3]
-set_location_assignment PIN_69 -to adc_sdo[3]
-set_location_assignment PIN_70 -to adc_rst_n[3]
-set_location_assignment PIN_73 -to adc_sdi[4]
-set_location_assignment PIN_74 -to adc_sclk[4]
-set_location_assignment PIN_75 -to adc_convst[4]
-set_location_assignment PIN_76 -to adc_sdo[4]
-set_location_assignment PIN_77 -to adc_rst_n[4]
-set_location_assignment PIN_81 -to adc_sdi[5]
-set_location_assignment PIN_84 -to adc_sclk[5]
-set_location_assignment PIN_85 -to adc_convst[5]
-set_location_assignment PIN_86 -to adc_sdo[5]
-set_location_assignment PIN_87 -to adc_rst_n[5]
-set_location_assignment PIN_91 -to host_rst_n
-set_location_assignment PIN_93 -to host_convst_start
-set_location_assignment PIN_94 -to host_MOSI
-set_location_assignment PIN_95 -to host_MISO
-set_location_assignment PIN_96 -to host_SCLK
-set_location_assignment PIN_98 -to host_mode[0]
-set_location_assignment PIN_101 -to host_mode[1]
-set_location_assignment PIN_103 -to HD8
-set_location_assignment PIN_104 -to HD7
-set_location_assignment PIN_105 -to HD6
-set_location_assignment PIN_106 -to HD5
-set_location_assignment PIN_107 -to HD4
-set_location_assignment PIN_108 -to HD3
-set_location_assignment PIN_109 -to HD2
-set_location_assignment PIN_110 -to HD1
-set_location_assignment PIN_117 -to sync_debug
-set_location_assignment PIN_118 -to start_conv
-set_location_assignment PIN_119 -to ram_data_bus[5]
-set_location_assignment PIN_120 -to ram_data_bus[4]
-set_location_assignment PIN_121 -to ram_address[14]
-set_location_assignment PIN_122 -to ram_address[13]
-set_location_assignment PIN_123 -to ram_address[12]
-set_location_assignment PIN_124 -to ram_address[11]
-set_location_assignment PIN_125 -to ram_address[10]
-set_location_assignment PIN_127 -to ram_data_bus[6]
-set_location_assignment PIN_129 -to ram_data_bus[7]
-set_location_assignment PIN_130 -to ram_oe_n
-set_location_assignment PIN_131 -to ram_address[15]
-set_location_assignment PIN_132 -to ram_address[16]
-set_location_assignment PIN_133 -to ram_address[17]
-set_location_assignment PIN_134 -to ram_address[18]
-set_location_assignment PIN_137 -to ram_address[0]
-set_location_assignment PIN_138 -to ram_address[1]
-set_location_assignment PIN_139 -to ram_address[2]
-set_location_assignment PIN_140 -to ram_address[3]
-set_location_assignment PIN_141 -to ram_address[4]
-set_location_assignment PIN_142 -to ram_cs_n
-set_location_assignment PIN_143 -to ram_data_bus[0]
-set_location_assignment PIN_144 -to ram_data_bus[1]
+set_global_assignment -name VERILOG_FILE sm_corrente_await.v
+set_global_assignment -name VERILOG_FILE uart_rx.v
+set_global_assignment -name VERILOG_FILE spi.v
+set_global_assignment -name VERILOG_FILE driver_ads1118.v
 set_global_assignment -name VERILOG_FILE uart_tx.v
 set_global_assignment -name VERILOG_FILE produto_modulo.v
 set_global_assignment -name VERILOG_FILE crc16.v
@@ -208,4 +127,5 @@ set_global_assignment -name AHDL_FILE DFT.tdf
 set_global_assignment -name VERILOG_FILE multiplier_16_16.v
 set_global_assignment -name VERILOG_FILE tx_serial_32.v
 set_global_assignment -name AHDL_FILE dft_locale_others.tdf
-set_location_assignment PIN_27 -to tx
+set_global_assignment -name VERILOG_FILE junction_data_to_tx.v
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
