@@ -11361,13 +11361,15 @@ done <= done~reg0.DB_MAX_OUTPUT_PORT_TYPE
 clk => clk.IN3
 rst => rst.IN3
 rxd_from_gpio47 => rxd_from_gpio47.IN2
-done_tx => Selector0.IN5
+done_tx => Selector1.IN5
 done_tx => requested_data.OUTPUTSELECT
-done_tx => Selector5.IN2
+done_tx => acquire_again.OUTPUTSELECT
+done_tx => Selector6.IN2
 led_conv_60 <= led_conv_60~reg0.DB_MAX_OUTPUT_PORT_TYPE
 led_conv_50 <= led_conv_50~reg0.DB_MAX_OUTPUT_PORT_TYPE
 txd_to_gpio46 <= txd_to_gpio46~reg0.DB_MAX_OUTPUT_PORT_TYPE
 requested_data <= requested_data~reg0.DB_MAX_OUTPUT_PORT_TYPE
+acquire_again <= acquire_again~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |sensor_buchas|sm_corrente_await:inst4|rx_serial_8:u_rx_serial_8
@@ -12479,6 +12481,7 @@ driver_data_out[76] <= array_data[4][12].DB_MAX_OUTPUT_PORT_TYPE
 driver_data_out[77] <= array_data[4][13].DB_MAX_OUTPUT_PORT_TYPE
 driver_data_out[78] <= array_data[4][14].DB_MAX_OUTPUT_PORT_TYPE
 driver_data_out[79] <= array_data[4][15].DB_MAX_OUTPUT_PORT_TYPE
+acquire_again => always0.IN1
 
 
 |sensor_buchas|driver_ADS1118:inst3|spi_4_20:u_spi_4_20

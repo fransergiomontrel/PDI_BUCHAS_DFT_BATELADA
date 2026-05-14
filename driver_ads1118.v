@@ -6,7 +6,8 @@ module driver_ADS1118 (
 	 output driver_sclk,
 	 output driver_mosi,
 	 input  driver_miso,
-	 output [79:0] driver_data_out
+	 output [79:0] driver_data_out,
+	 input wire acquire_again
 	 
 );
 
@@ -80,7 +81,7 @@ module driver_ADS1118 (
 			  
 			          begin
 							 
-							 if (!loaded) begin							 
+							 if (!loaded | acquire_again) begin							 
 								  loaded <= 1'b1;
 								  driver1118_state <= SET_CHANNEL_0;								 
 							 end

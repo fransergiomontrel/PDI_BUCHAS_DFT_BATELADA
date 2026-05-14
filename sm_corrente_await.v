@@ -7,7 +7,8 @@ module sm_corrente_await (
 	 output reg led_conv_60,
 	 output reg led_conv_50,
 	 output reg txd_to_gpio46,
-	 output reg requested_data
+	 output reg requested_data,
+	 output reg acquire_again
     	 
 );
 
@@ -80,6 +81,7 @@ module sm_corrente_await (
 			  led_conv_60 <= 1'b0;
 			  led_conv_50 <= 1'b0;
 			  requested_data <= 1'b0;
+			  acquire_again <= 1'b0;
 
 		 end
 		 
@@ -95,7 +97,7 @@ module sm_corrente_await (
 			      CHECK_SOH:
 			  
 			          begin
-			      
+							  acquire_again <= 1'b0;
 			              if (ed_rx_done == 1'b1) begin
 				               
 						         if (rx_uart_out == 8'h01) begin
@@ -229,6 +231,7 @@ module sm_corrente_await (
 							  end
 							  else begin
 							      requested_data <= 1'b0;
+									acquire_again <= 1'b1;
 									current_state <= CHECK_SOH;
 							  end
 						 end
