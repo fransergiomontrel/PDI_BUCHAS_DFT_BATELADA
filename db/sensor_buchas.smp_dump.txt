@@ -242,6 +242,32 @@ CHECK_STORE_END 0 0 1 0 1
 STORING_TIME_COUNTER 0 1 0 0 1 
 STORING_CRC 1 0 0 0 1 
 
+State Machine - |sensor_buchas|slaver_states:inst12|current_initial_state
+Name current_initial_state.IDLE_AD current_initial_state.RESET_AD current_initial_state.CONFIG_AD current_initial_state.SEND_X01 current_initial_state.TESTE_SPI_AD current_initial_state.TESTE_RAM current_initial_state.CPLD_RST_AD current_initial_state.GPIO_CONFIG 
+current_initial_state.GPIO_CONFIG 0 0 0 0 0 0 0 0 
+current_initial_state.CPLD_RST_AD 0 0 0 0 0 0 1 1 
+current_initial_state.TESTE_RAM 0 0 0 0 0 1 0 1 
+current_initial_state.TESTE_SPI_AD 0 0 0 0 1 0 0 1 
+current_initial_state.SEND_X01 0 0 0 1 0 0 0 1 
+current_initial_state.CONFIG_AD 0 0 1 0 0 0 0 1 
+current_initial_state.RESET_AD 0 1 0 0 0 0 0 1 
+current_initial_state.IDLE_AD 1 0 0 0 0 0 0 1 
+
+State Machine - |sensor_buchas|slaver_states:inst12|driver_ADS8691:u_driver_ADS8691|driver8691_state
+Name driver8691_state.CONFIG 
+driver8691_state.IDLE_ADC 0 
+driver8691_state.CONFIG 1 
+
+State Machine - |sensor_buchas|slaver_states:inst12|driver_ADS8691:u_driver_ADS8691|spi_adc:u_spi_adc|current_spi_state
+Name current_spi_state.IDLE current_spi_state.THT_CKCS_MOSI current_spi_state.AWAIT_SCLK_RISE_MOSI current_spi_state.AWAIT_SCLK_FALL_MOSI current_spi_state.TSU_CSCK_MOSI current_spi_state.CHIP_SELECTED current_spi_state.NO_MOSI_DATA 
+current_spi_state.NO_MOSI_DATA 0 0 0 0 0 0 0 
+current_spi_state.CHIP_SELECTED 0 0 0 0 0 1 1 
+current_spi_state.TSU_CSCK_MOSI 0 0 0 0 1 0 1 
+current_spi_state.AWAIT_SCLK_FALL_MOSI 0 0 0 1 0 0 1 
+current_spi_state.AWAIT_SCLK_RISE_MOSI 0 0 1 0 0 0 1 
+current_spi_state.THT_CKCS_MOSI 0 1 0 0 0 0 1 
+current_spi_state.IDLE 1 0 0 0 0 0 1 
+
 State Machine - |sensor_buchas|host_interface:inst1|mode_selector:mode_sel|sm
 Name sChangedRequested sStable sWaitingChangeOk sUpdateMode sNoticeChanging 
 sNoticeChanging 0 0 0 0 0 

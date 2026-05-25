@@ -34,11 +34,14 @@ subdesign host_interface(
 	host_MISO: output;
 )
 variable
+	
 	mode_sel: mode_selector;
 	busy_flag: srff;
 	rm0, rm1, rm2, rm3: node;
 begin
 	-- Mode selector
+	
+	
 	mode_sel.clk = clk;
 	mode_sel.sreset = sreset;
 	mode_sel.mode_in[] = host_mode[];

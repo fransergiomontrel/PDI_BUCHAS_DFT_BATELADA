@@ -1,0 +1,84 @@
+module driver_ADS8691 (
+
+    input  wire  clk,
+    input  wire  rst,       // reset síncrono
+	 output driver_ncs,
+	 output driver_sclk,
+	 output driver_mosi
+	 
+    	 
+);
+
+   reg [31:0]   driver_config_reg;
+	
+   reg          loaded;	
+	 
+	 spi_adc u_spi_adc(
+    .clk(clk),
+    .rst(rst),       // reset síncrono
+	 .sclk(driver_sclk),
+	 .ncs(driver_ncs),
+	 .mosi(driver_mosi),       // PINO DE OUTPUT DO MESTRE
+	 .config_reg(driver_config_reg)
+
+);
+
+ // Definição dos estados (Verilog clássico)
+    localparam IDLE_ADC = 2'b00;
+	 localparam CONFIG = 2'b01;
+	 
+	 reg [1:0] driver8691_state;    
+	 
+    	 
+	always @(posedge clk) begin
+							 							 	    
+		 if(rst) begin
+		     driver_config_reg <= 32'h00000000;
+			  loaded <= 1'b0;
+			  driver8691_state <= IDLE_ADC;
+		 end
+		 
+		 else begin
+				
+		     case (driver8691_state)
+		
+               IDLE_ADC:
+			  
+			          begin
+							 
+							 if (!loaded) begin							 
+								  loaded <= 1'b1;
+								  driver8691_state <= CONFIG;
+								  driver_config_reg <= 32'hD0140040;
+									
+							 end
+							 
+							 else begin							 
+								  driver8691_state <= IDLE_ADC;								 
+							 end
+					 			              
+				       end
+				
+			
+					CONFIG:
+					  
+						 begin
+							 
+						 	 if (driver_ncs == 1'b0) begin							 
+								  driver8691_state <= CONFIG;								 
+							 end
+							 
+							 else begin							 
+								  driver8691_state <= IDLE_ADC;								 
+							 end
+												 
+						 end
+				
+						  
+	        endcase 
+			 
+		 end 
+		 
+	end
+	
+endmodule

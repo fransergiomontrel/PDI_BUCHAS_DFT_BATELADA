@@ -8,7 +8,9 @@ module sm_corrente_await (
 	 output reg led_conv_50,
 	 output reg txd_to_gpio46,
 	 output reg requested_data,
-	 output reg acquire_again
+	 output reg acquire_again,
+	 output reg select0_0,
+	 output reg select1_0
     	 
 );
 
@@ -76,7 +78,7 @@ module sm_corrente_await (
 		     current_state <= CHECK_SOH;
 			  txd_to_gpio46 <= 1'b0;
 			  is_finished  <= 22'd0;
-			  delayF <= 1'd1;
+			  delayF <= 1'd0;
 			  sampling_period <= 9'd0;
 			  led_conv_60 <= 1'b0;
 			  led_conv_50 <= 1'b0;
@@ -89,6 +91,9 @@ module sm_corrente_await (
 		 
 		     if ((ed_new_pulse == 1'b1) & (delayF == 1'b1)) begin
 			      txd_to_gpio46 = 1'b1;
+					//select <= 2'b00;
+					select0_0 <= 1'b0;
+					select1_0 <= 1'b0;
 				   delayF = 1'b0;	
 		     end
 		     //state machine
@@ -125,7 +130,10 @@ module sm_corrente_await (
 			              if (ed_rx_done == 1'b1) begin
 				               //FRAME OF DELAY
 						         if (rx_uart_out == 8'h13) begin
-										 delayF <= 1'b1;									 
+										 delayF <= 1'b1;
+										 //select <= 2'b01;
+										 select0_0 <= 1'b1;
+										 select1_0 <= 1'b0;
 						             current_state <= CHECK_SOH;
 						             txd_to_gpio46 = 1'b0;							 						
 			                  end
