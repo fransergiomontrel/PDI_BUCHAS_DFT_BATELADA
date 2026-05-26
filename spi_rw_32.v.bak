@@ -1,4 +1,4 @@
-module spi_adc (
+module fpga_rw_32 (
 
     input  wire        clk,
     input  wire        rst,       // reset síncrono
@@ -13,6 +13,7 @@ module spi_adc (
 	 reg [7:0]  div_sclk;
 	 reg [1:0]  delay;
 	 reg [31:0] shift_reg;
+	 reg [5:0] active_period;
 	 reg [2:0] samples;
 	 
 	 // Definição dos estados (Verilog clássico)
@@ -39,6 +40,7 @@ module spi_adc (
 				div_sclk <= 8'd0;
 				delay <= 2'd0;
 				bit_cnt <= 6'd31;
+				active_period <= 6'd0;
 				samples <= 3'd0; 
 				
 				current_spi_state <= NO_MOSI_DATA;

@@ -1,27 +1,30 @@
-module spi_adc (
+module fpga_rw_32 (
 
     input  wire        clk,
+	 input wire         again,
     input  wire        rst,       // reset síncrono
 	 input [31:0] config_reg, 
 	 output reg         sclk,
-	 output reg         ncs,
+	 //output reg         ncs,
 	 output reg         mosi       // PINO DE OUTPUT DO MESTRE
 	 
 );    
-	  
+	 
+	 
 	 reg [5:0]  bit_cnt;
 	 reg [7:0]  div_sclk;
 	 reg [1:0]  delay;
 	 reg [31:0] shift_reg;
+	 
 	 reg [2:0] samples;
 	 
 	 // Definição dos estados (Verilog clássico)
     localparam NO_MOSI_DATA = 4'b0000;
-	 localparam CHIP_SELECTED = 4'b0001;
-	 localparam TSU_CSCK_MOSI = 4'b0010;
+	 //localparam CHIP_SELECTED = 4'b0001;
+	 localparam TSU_CSCK_MOSI = 4'b0001;
 	 localparam AWAIT_SCLK_FALL_MOSI = 4'b0011;
 	 localparam AWAIT_SCLK_RISE_MOSI = 4'b0100;
-	 localparam THT_CKCS_MOSI = 4'b0101;
+	 //localparam THT_CKCS_MOSI = 4'b0101;
 	 localparam IDLE = 4'b0110;
 	 
 	 
@@ -39,6 +42,7 @@ module spi_adc (
 				div_sclk <= 8'd0;
 				delay <= 2'd0;
 				bit_cnt <= 6'd31;
+				
 				samples <= 3'd0; 
 				
 				current_spi_state <= NO_MOSI_DATA;
@@ -52,7 +56,7 @@ module spi_adc (
         NO_MOSI_DATA:
 			  
 			   begin
-			       if (config_reg == 32'd0) begin
+			       if (again == 1'd0) begin
 					     current_spi_state <= NO_MOSI_DATA;
                 end
 					 
@@ -139,7 +143,7 @@ module spi_adc (
 					end
 			       		       
 		     end
-				
+		/*		
 		THT_CKCS_MOSI:
 			  
 			 begin
@@ -160,15 +164,13 @@ module spi_adc (
 						  
 				  end   					       
 		    end
-			 
+			 */
 		IDLE:
 			  
 			 begin
-			   				
+			     				
 			     current_spi_state <= IDLE;
-				  
-				  
-						  
+				  						  
 		    end
 			 
 		

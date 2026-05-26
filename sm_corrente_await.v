@@ -10,7 +10,11 @@ module sm_corrente_await (
 	 output reg requested_data,
 	 output reg acquire_again,
 	 output reg select0_0,
-	 output reg select1_0
+	 output reg select1_0,
+	 output reg convst,
+	 output reg[1:0] host_mode,
+	 output wire sclk,
+	 output wire mosi
     	 
 );
 
@@ -26,7 +30,44 @@ module sm_corrente_await (
 	 
 	 reg [8:0] sampling_period;
 	 
+	 reg command_new_byte;
 	 
+	 reg [7:0] byte_to_send;
+	 
+	 wire signal_sclk;
+	 
+	 wire signal_nedge_sclk;
+	 
+	 reg [4:0] sclk_edges_counter;
+	 
+	 reg [3:0] bytes_counter;
+	 
+	 reg [7:0] readed_data_8;
+	 
+	 reg [31:0] readed_data_32;
+	 
+	 
+	 assign sclk = signal_sclk;
+	 
+	 module nedge_detector(
+		.current_read_pulse(signal_sclk),
+		.clk(clk),
+		.falling_edge(signal_nedge_sclk),
+		.reset(rst)
+);
+	 
+	 fpga_rw_8 u_fpga_rw_8 (
+
+    .clk(clk),
+	 .again(command_new_byte),
+    .rst(rst),       // reset síncrono
+	 .config_reg(byte_to_send),
+	 .data_reg(readed_data_8),
+	 .sclk(signal_sclk),
+	 .mosi(mosi)       // PINO DE OUTPUT DO MESTRE
+	 
+);
+ 
 	 
 	 rx_serial_8 u_rx_serial_8(
     .clk(clk),
@@ -63,14 +104,17 @@ module sm_corrente_await (
     );
   
     // Definição dos estados (Verilog clássico)
-    localparam CHECK_SOH = 3'b000;
-	 localparam CHECK_TYPE = 3'b001;
-	 localparam PREPARE_CONVERSION = 3'b010;
-	 localparam START_CONVERSION = 3'b011;
-	 localparam AWAIT_END_CONVERSION = 3'b100;
-	 localparam AWAIT_CORRENTE_TX = 3'b101;
+    localparam CHECK_SOH = 4'b0000;
+	 localparam CHECK_TYPE = 4'b0001;
+	 localparam RW_1 = 4'b0010;
+	 localparam RW_2 = 4'b0011;
+	 localparam PREPARE_CONVERSION = 4'b0100;
+	 localparam START_CONVERSION = 4'b0101;
+	 localparam AWAIT_END_CONVERSION = 4'b0110;
+	 localparam AWAIT_CORRENTE_TX = 4'b0111;
+	 
 
-	 reg [2:0] current_state;
+	 reg [3:0] current_state;
 	 
 	always @(posedge clk) begin
 							 							 	    
@@ -84,6 +128,9 @@ module sm_corrente_await (
 			  led_conv_50 <= 1'b0;
 			  requested_data <= 1'b0;
 			  acquire_again <= 1'b0;
+			  convst <= 1'b0;
+			  command_new_byte <= 1'b0;
+			  sclk_edges_counter <= 5'd0;
 
 		 end
 		 
@@ -140,13 +187,22 @@ module sm_corrente_await (
 									
 									//FRAME OF SYNC 60
 									else if (rx_uart_out == 8'h0C)  begin
-									    current_state <= PREPARE_CONVERSION;
+									    current_state <= RW_1;
 										 sampling_period <= 9'd231;
+										 //byte 1
+										 command_new_byte <= 1'b1;
+										 byte_to_send <= 1'h00;
+										 bytes_counter <= bytes_counter + 1;
+										 
 									end
 									//FRAME OF SYNC 50
 									else if (rx_uart_out == 8'h2A)  begin
-									    current_state <= PREPARE_CONVERSION;
+									    current_state <= RW_1;
 										 sampling_period <= 9'd277;
+										 //byte 1
+										 command_new_byte <= 1'b1;
+										 byte_to_send <= 1'h00;
+										 bytes_counter <= bytes_counter + 1;
 									end
 									//FRAME OF DATA_REQUEST
 									else if (rx_uart_out == 8'h1E)  begin
@@ -167,7 +223,52 @@ module sm_corrente_await (
 			              
 						 end
 						 
-						 PREPARE_CONVERSION:
+						 RW_1:
+			  
+			          begin
+						 
+						     if (signal_nedge_sclk == 1'b1) begin
+							      
+									sclk_edges_counter <= sclk_edges_counter + 1;									
+									command_new_byte <= 1'b0;
+									
+									if (sclk_edges_counter == 5'd15) begin
+									
+										 bytes_counter <= bytes_counter + 1;
+							          sclk_edges_counter <= 5'd0;
+										 command_new_byte <= 1'b1;
+										 byte_to_send <= 1'h00;
+										
+										 
+										 if (bytes_counter == 3'd1) begin
+										     
+											  readed_data_32 <= {readed_data_8, 24'h000000};
+									
+							          end
+										 
+										 else if (bytes_counter == 3'd2) begin
+										 
+										     readed_data_32 <= {readed_data_32[31:24], readed_data_8, 16'h0000};
+									
+							          end
+										 else if (bytes_counter == 3'd3) begin
+										     
+										     readed_data_32 <= {readed_data_32[31:16], readed_data_8, 8'h00};
+									
+							          end
+									
+							      end
+							  end
+			          
+							  
+						 end
+						 
+						 RW_2:
+						 begin
+						 
+						 end
+						 
+						 PREPARE_CONVERSION_2:
 			  
 			          begin
 						 
@@ -195,10 +296,12 @@ module sm_corrente_await (
 							  if (ed_new_pulse == 1'b1) begin
 							      if (sampling_period == 9'd231) begin
 									    led_conv_60 = 1'b1;
+										 convst = 1'b1;
 									end
 									
 									else if (sampling_period == 9'd277) begin
 									    led_conv_50 = 1'b1;
+										 convst = 1'b1;
 									end
 									
 							      current_state <= AWAIT_END_CONVERSION;
@@ -215,15 +318,17 @@ module sm_corrente_await (
 			  
 			          begin
 			              
-							  if(is_finished < 3500000) begin
-							      is_finished  <= is_finished + 22'd1;    
+							  if(is_finished < 22'd3500000) begin
+							      is_finished  <= is_finished + 1;    
 							  end
 							  else begin
-							      is_finished  <= 3500000;
+							      is_finished  <= 22'd3500000;
 							  end
 						     
-							  if (is_finished == 3500000) begin
-									current_state <= CHECK_SOH;
+							  if (is_finished == 22'd3500000) begin
+									current_state <= DISABLE_WRITE;
+									//host_mode 0 activated
+									host_mode <= 2'b00;
 								   is_finished <= 22'd0;
 							  end
 							  else begin
@@ -231,7 +336,15 @@ module sm_corrente_await (
 							  end	  
 							  
 						 end
-
+						 
+						 DISABLE_WRITE:
+						 begin
+						 
+						    
+		  
+						 
+						 end
+						 
 				       AWAIT_CORRENTE_TX:
 						 begin
 						     if (done_tx == 1'b0) begin
