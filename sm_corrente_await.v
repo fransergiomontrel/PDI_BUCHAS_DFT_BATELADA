@@ -4,6 +4,7 @@ module sm_corrente_await (
     input  wire  rst,       // reset síncrono
 	 input wire rxd_from_gpio47,
 	 input wire done_tx,
+	 input wire host_miso,
 	 output reg led_conv_60,
 	 output reg led_conv_50,
 	 output reg txd_to_gpio46,
@@ -12,9 +13,12 @@ module sm_corrente_await (
 	 output reg select0_0,
 	 output reg select1_0,
 	 output reg convst,
-	 output reg[1:0] host_mode,
-	 output wire sclk,
-	 output wire mosi
+	 output wire host_sclk,
+	 output wire host_mosi,
+	 
+	 output wire [8:0] sampling_period_output,
+	 
+	 output reg [1:0] host_mode
     	 
 );
 
@@ -34,8 +38,6 @@ module sm_corrente_await (
 	 
 	 reg [7:0] byte_to_send;
 	 
-	 wire signal_sclk;
-	 
 	 wire signal_nedge_sclk;
 	 
 	 reg [4:0] sclk_edges_counter;
@@ -47,9 +49,9 @@ module sm_corrente_await (
 	 reg [31:0] readed_data_32;
 	 
 	 
-	 assign sclk = signal_sclk;
+	 assign sampling_period_output = sampling_period;
 	 
-	 module nedge_detector(
+	  nedge_detector u_nedge_detector(
 		.current_read_pulse(signal_sclk),
 		.clk(clk),
 		.falling_edge(signal_nedge_sclk),
@@ -63,8 +65,9 @@ module sm_corrente_await (
     .rst(rst),       // reset síncrono
 	 .config_reg(byte_to_send),
 	 .data_reg(readed_data_8),
-	 .sclk(signal_sclk),
-	 .mosi(mosi)       // PINO DE OUTPUT DO MESTRE
+	 .miso(host_miso),
+	 .sclk(host_sclk),
+	 .mosi(host_mosi)       // PINO DE OUTPUT DO MESTRE
 	 
 );
  
@@ -103,18 +106,26 @@ module sm_corrente_await (
         .rising_edge(ed_new_pulse)  // saída
     );
   
-    // Definição dos estados (Verilog clássico)
+    //Definição dos estados (Verilog clássico)
     localparam CHECK_SOH = 4'b0000;
 	 localparam CHECK_TYPE = 4'b0001;
-	 localparam RW_1 = 4'b0010;
-	 localparam RW_2 = 4'b0011;
+	 localparam EN_W_1 = 4'b0010;
+	 localparam EN_W_2 = 4'b0011;
 	 localparam PREPARE_CONVERSION = 4'b0100;
 	 localparam START_CONVERSION = 4'b0101;
 	 localparam AWAIT_END_CONVERSION = 4'b0110;
-	 localparam AWAIT_CORRENTE_TX = 4'b0111;
-	 
+	 localparam DIS_W_1 = 4'b0111;
+	 localparam DIS_W_2 = 4'b1000;
+	 localparam CALC_PHASORS = 4'b1001;
+	 localparam AWAIT_CORRENTE_TX = 4'b1010; 
 
 	 reg [3:0] current_state;
+	 
+	 //Definição dos estados (Verilog clássico)
+    localparam MODE_CFG_FPGA = 2'b00;
+	 localparam MODE_CFG = 2'b01;
+	 localparam MODE_ACQ = 2'b10;
+	 localparam MODE_RW = 2'b11;
 	 
 	always @(posedge clk) begin
 							 							 	    
@@ -138,7 +149,7 @@ module sm_corrente_await (
 		 
 		     if ((ed_new_pulse == 1'b1) & (delayF == 1'b1)) begin
 			      txd_to_gpio46 = 1'b1;
-					//select <= 2'b00;
+					
 					select0_0 <= 1'b0;
 					select1_0 <= 1'b0;
 				   delayF = 1'b0;	
@@ -178,7 +189,7 @@ module sm_corrente_await (
 				               //FRAME OF DELAY
 						         if (rx_uart_out == 8'h13) begin
 										 delayF <= 1'b1;
-										 //select <= 2'b01;
+										 
 										 select0_0 <= 1'b1;
 										 select1_0 <= 1'b0;
 						             current_state <= CHECK_SOH;
@@ -187,9 +198,9 @@ module sm_corrente_await (
 									
 									//FRAME OF SYNC 60
 									else if (rx_uart_out == 8'h0C)  begin
-									    current_state <= RW_1;
+									    current_state <= EN_W_1;
 										 sampling_period <= 9'd231;
-										 //byte 1
+										 //byte 1 to be sent
 										 command_new_byte <= 1'b1;
 										 byte_to_send <= 1'h00;
 										 bytes_counter <= bytes_counter + 1;
@@ -197,9 +208,9 @@ module sm_corrente_await (
 									end
 									//FRAME OF SYNC 50
 									else if (rx_uart_out == 8'h2A)  begin
-									    current_state <= RW_1;
+									    current_state <= EN_W_1;
 										 sampling_period <= 9'd277;
-										 //byte 1
+										 //byte 1 to be sent
 										 command_new_byte <= 1'b1;
 										 byte_to_send <= 1'h00;
 										 bytes_counter <= bytes_counter + 1;
@@ -213,8 +224,7 @@ module sm_corrente_await (
 									else  begin
 									    current_state <= CHECK_TYPE;
 									end
-									
-									
+																		
 							  end
 							      
 						     else begin
@@ -223,7 +233,7 @@ module sm_corrente_await (
 			              
 						 end
 						 
-						 RW_1:
+						 EN_W_1:
 			  
 			          begin
 						 
@@ -232,43 +242,129 @@ module sm_corrente_await (
 									sclk_edges_counter <= sclk_edges_counter + 1;									
 									command_new_byte <= 1'b0;
 									
-									if (sclk_edges_counter == 5'd15) begin
+									if (sclk_edges_counter == 5'd16) begin
 									
 										 bytes_counter <= bytes_counter + 1;
 							          sclk_edges_counter <= 5'd0;
-										 command_new_byte <= 1'b1;
-										 byte_to_send <= 1'h00;
 										
 										 
 										 if (bytes_counter == 3'd1) begin
 										     
 											  readed_data_32 <= {readed_data_8, 24'h000000};
+											  //byte 2 to be sent
+											  command_new_byte <= 1'b1;
+											  byte_to_send <= 1'h00;
 									
 							          end
 										 
 										 else if (bytes_counter == 3'd2) begin
 										 
 										     readed_data_32 <= {readed_data_32[31:24], readed_data_8, 16'h0000};
+											  //byte 3 to be sent
+											  command_new_byte <= 1'b1;
+											  byte_to_send <= 1'h00;
 									
 							          end
 										 else if (bytes_counter == 3'd3) begin
 										     
 										     readed_data_32 <= {readed_data_32[31:16], readed_data_8, 8'h00};
+											  //byte 4 to be sent
+											  command_new_byte <= 1'b1;
+											  byte_to_send <= 1'h00;
+									
+							          end
+										 else if (bytes_counter == 3'd4) begin
+										     
+										     readed_data_32 <= {readed_data_32[31:8], readed_data_8};
+											  bytes_counter <= 3'd0;
+											  
 									
 							          end
 									
 							      end
 							  end
-			          
 							  
+							  if (bytes_counter == 3'd0) begin
+									
+									//32 bit returned data completed 
+									readed_data_32 <= readed_data_32 | 32'hAC000001;
+																		
+									//byte 1 to be sent
+									command_new_byte <= 1'b1;
+									byte_to_send <= readed_data_32[31:24];
+									bytes_counter <= bytes_counter + 1;
+									
+									host_mode <= MODE_CFG_FPGA;
+											  
+									current_state <= EN_W_2;
+									
+							  end
+			          							  
 						 end
 						 
-						 RW_2:
+						 EN_W_2:
+						 
 						 begin
-						 
+						 						 
+						 if (signal_nedge_sclk == 1'b1) begin
+							      
+							  sclk_edges_counter <= sclk_edges_counter + 1;									
+							  command_new_byte <= 1'b0;
+									
+							  if (sclk_edges_counter == 5'd16) begin
+									
+									bytes_counter <= bytes_counter + 1;
+							      sclk_edges_counter <= 5'd0;
+																				 
+									if (bytes_counter == 3'd1) begin
+											  
+										 //byte 2 to be sent
+										 command_new_byte <= 1'b1;
+										 byte_to_send <= readed_data_32[23:16];
+									
+							      end
+										 
+									else if (bytes_counter == 3'd2) begin
+										 
+										 //byte 3 to be sent
+										 command_new_byte <= 1'b1;
+										 byte_to_send <= readed_data_32[15:8];
+									
+							      end
+									else if (bytes_counter == 3'd3) begin
+										     
+										 //byte 4 to be sent
+										 command_new_byte <= 1'b1;
+										 byte_to_send <= readed_data_32[7:0];
+									
+							      end
+									else if (bytes_counter == 3'd4) begin
+										     										     
+										 bytes_counter <= 3'd0;
+									
+							      end
+									
+							      end
+							  end
+							  
+							  if (bytes_counter == 3'd0) begin
+										     
+									convst <= 1'b0;
+									
+									host_mode <= MODE_ACQ;
+									
+									is_finished <= is_finished + 1;
+									
+								   if (is_finished == 22'd1000) begin
+										 is_finished <= 22'd0;
+									    current_state <= PREPARE_CONVERSION;
+									end
+								   									
+						     end
+						 						 
 						 end
 						 
-						 PREPARE_CONVERSION_2:
+						 PREPARE_CONVERSION:
 			  
 			          begin
 						 
@@ -326,9 +422,16 @@ module sm_corrente_await (
 							  end
 						     
 							  if (is_finished == 22'd3500000) begin
-									current_state <= DISABLE_WRITE;
-									//host_mode 0 activated
-									host_mode <= 2'b00;
+									current_state <= DIS_W_1;
+									
+									byte_to_send <= 1'h00;
+									
+									bytes_counter <= bytes_counter + 1;
+									
+									command_new_byte <= 1'b1;
+									
+									host_mode <= MODE_CFG_FPGA;
+																											
 								   is_finished <= 22'd0;
 							  end
 							  else begin
@@ -337,13 +440,134 @@ module sm_corrente_await (
 							  
 						 end
 						 
-						 DISABLE_WRITE:
-						 begin
-						 
-						    
-		  
-						 
+						 DIS_W_1:
+			  
+			          begin
+			              
+						 if (signal_nedge_sclk == 1'b1) begin
+							      
+								sclk_edges_counter <= sclk_edges_counter + 1;									
+								command_new_byte <= 1'b0;
+								
+								if (sclk_edges_counter == 5'd16) begin
+								
+									 bytes_counter <= bytes_counter + 1;
+									 sclk_edges_counter <= 5'd0;
+									
+									 
+									 if (bytes_counter == 3'd1) begin
+										  
+										  readed_data_32 <= {readed_data_8, 24'h000000};
+										  //byte 2 to be sent
+										  command_new_byte <= 1'b1;
+										  byte_to_send <= 1'h00;
+								
+									 end
+									 
+									 else if (bytes_counter == 3'd2) begin
+									 
+										  readed_data_32 <= {readed_data_32[31:24], readed_data_8, 16'h0000};
+										  //byte 3 to be sent
+										  command_new_byte <= 1'b1;
+										  byte_to_send <= 1'h00;
+								
+									 end
+									 else if (bytes_counter == 3'd3) begin
+										  
+										  readed_data_32 <= {readed_data_32[31:16], readed_data_8, 8'h00};
+										  //byte 4 to be sent
+										  command_new_byte <= 1'b1;
+										  byte_to_send <= 1'h00;
+								
+									 end
+									 else if (bytes_counter == 3'd4) begin
+										  
+										  readed_data_32 <= {readed_data_32[31:8], readed_data_8};
+										  bytes_counter <= 3'd0;
+										  
+								
+									 end
+								
+								end
 						 end
+							  
+						 if (bytes_counter == 3'd0) begin
+								
+							  //32 bit returned data completed 
+							  readed_data_32 <= (readed_data_32 | 32'hAC000000) & (32'hFFFFFFFE);
+																	
+							  //byte 1 to be sent
+							  command_new_byte <= 1'b1;
+							  byte_to_send <= readed_data_32[31:24];
+							  bytes_counter <= bytes_counter + 1;
+								
+							  host_mode <= MODE_CFG_FPGA;
+										  
+							  current_state <= DIS_W_2;
+								
+						 end
+					    
+							  
+						 end
+						 
+						 DIS_W_2:
+			  
+			          begin
+			              
+						 if (signal_nedge_sclk == 1'b1) begin
+							      
+							  sclk_edges_counter <= sclk_edges_counter + 1;									
+							  command_new_byte <= 1'b0;
+									
+							  if (sclk_edges_counter == 5'd16) begin
+									
+									bytes_counter <= bytes_counter + 1;
+							      sclk_edges_counter <= 5'd0;
+																				 
+									if (bytes_counter == 3'd1) begin
+											  
+										 //byte 2 to be sent
+										 command_new_byte <= 1'b1;
+										 byte_to_send <= readed_data_32[23:16];
+									
+							      end
+										 
+									else if (bytes_counter == 3'd2) begin
+										 
+										 //byte 3 to be sent
+										 command_new_byte <= 1'b1;
+										 byte_to_send <= readed_data_32[15:8];
+									
+							      end
+									else if (bytes_counter == 3'd3) begin
+										     
+										 //byte 4 to be sent
+										 command_new_byte <= 1'b1;
+										 byte_to_send <= readed_data_32[7:0];
+							      end
+									else if (bytes_counter == 3'd4) begin
+										     										     
+										 bytes_counter <= 3'd0;
+										 
+										 current_state <= CALC_PHASORS;
+									
+							      end
+									
+							      end
+							  end						 
+						     
+						 end
+							  
+					    CALC_PHASORS:
+						 
+						 begin
+						     
+						     host_mode <= MODE_RW;
+							  
+							  
+							  
+						 end
+						 
 						 
 				       AWAIT_CORRENTE_TX:
 						 begin

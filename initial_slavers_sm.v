@@ -7,27 +7,17 @@ module slaver_states (
 	 output reg convst,
 	 output wire host_mosi,
 	 output wire host_sclk,
-	 //output reg [1:0] select,
 	 output reg select0_1,
-	 output reg select1_1
+	 output reg select1_1,
+	 output reg[1:0] host_mode
 	 
 );    
 	 	  
     reg [23:0]  delay;
 	 reg start_8_ctl;
-	 reg tx_B;
 	 
 	 reg reset_adc_config;
 	 wire ncs_adc_config;
-	 wire mosi_adc_config;
-	 wire sclk_adc_config;
-	 
-	 
-	 assign tx = tx_B;
-	 
-	 assign host_mosi = mosi_adc_config;
-	 
-	 assign host_sclk = sclk_adc_config;
 	 
 	 // Definição dos estados (Verilog clássico)
     localparam GPIO_CONFIG = 3'b000;
@@ -41,12 +31,18 @@ module slaver_states (
 	 
 	 reg [2:0] current_initial_state;
 	 
+	 //Definição dos estados (Verilog clássico)
+    localparam MODE_CFG_FPGA = 2'b00;
+	 localparam MODE_CFG = 2'b01;
+	 localparam MODE_ACQ = 2'b10;
+	 localparam MODE_RW = 2'b11;
+	 
 	  uart_tx_8 u_uart_tx_8(
 	  
 	  .clk(clk),
      .rst(rst_hardware),       
      .start(start_8_ctl),     
-     .tx(tx_8B),        
+     .tx(tx),        
      .busy(),      
      .done(done_8_ctl)       
 	  
@@ -57,8 +53,8 @@ module slaver_states (
     .clk(clk),
     .rst(reset_adc_config),       // reset síncrono
 	 .driver_ncs(ncs_adc_config),
-	 .driver_sclk(sclk_adc_config),
-	 .driver_mosi(mosi_adc_config)	 
+	 .driver_sclk(host_sclk),
+	 .driver_mosi(host_mosi)	 
     	 
 );
 
@@ -72,7 +68,8 @@ module slaver_states (
 		  //select <= 2'b00;
 		  select0_1 <= 1'b0;
 		  select1_1 <= 1'b0;
-		  current_initial_state <= GPIO_CONFIG; 
+		  current_initial_state <= GPIO_CONFIG;
+		  host_mode <= MODE_CFG_FPGA; 
     end
 	 
 	 else begin
@@ -129,6 +126,7 @@ module slaver_states (
 			  begin
 			      
 					current_initial_state <= SEND_X01;
+					host_mode <= MODE_CFG;
 			       		       
 		     end
 				
