@@ -10,47 +10,41 @@ module sm_corrente_await (
 	 output reg txd_to_gpio46,
 	 output reg requested_data,
 	 output reg acquire_again,
-	 output reg select0_0,
-	 output reg select1_0,
+	 output reg select0_1,
+	 output reg select1_1,
 	 output reg convst,
 	 output wire host_sclk,
 	 output wire host_mosi,
 	 
-	 output wire [8:0] sampling_period_output,
+	 output reg frequency,
 	 
 	 output reg [1:0] host_mode
     	 
 );
-
-    // Sinal interno para conectar o done_rx de rx_serial_8 a entrada
-    //current_read_pulse de edge_detector
-    wire done_rx_to_read_ed;	 
 	 
-	 wire [7:0] rx_uart_out;
 	 
+	 //22 bit size register to insert delay thick 
 	 reg [21:0] is_finished;
 	 
+	 //Signal to enable loopback for pulsing
 	 reg delayF;
 	 
-	 reg [8:0] sampling_period;
-	 
-	 reg command_new_byte;
-	 
-	 reg [7:0] byte_to_send;
-	 
-	 wire signal_nedge_sclk;
-	 
+	 //5 bit size register to count 16 falling edges during one byte RW operation based on SPI
 	 reg [4:0] sclk_edges_counter;
 	 
+	 //4 bit size register to count 4 bytes to be sent on 32 bits SPI writing
 	 reg [3:0] bytes_counter;
 	 
-	 reg [7:0] readed_data_8;
-	 
+	 //32 bit size register to store 4 bytes returned through SPI
 	 reg [31:0] readed_data_32;
 	 
+	 //17 bit size register to count 7215 (samples) * 6 (channels for all samples) * 2 (bytes by sample)
+	 reg [16:0] bytes_to_read;
 	 
-	 assign sampling_period_output = sampling_period;
-	 
+	  //Signal which outputs falling edge detector of SPI sclk
+	  wire signal_nedge_sclk;
+	
+	  //Instance of falling edge detector for SPI sclk
 	  nedge_detector u_nedge_detector(
 		.current_read_pulse(signal_sclk),
 		.clk(clk),
@@ -58,6 +52,16 @@ module sm_corrente_await (
 		.reset(rst)
 );
 	 
+	 //Signal to send new byte through SPI
+	 reg command_new_byte;
+	 
+	 //New byte itsel to be sent through SPI
+	 reg [7:0] byte_to_send;
+	 
+	 //8 bit size register to store one byte returned through SPI
+	 wire [7:0] readed_data_8;
+	 
+	 //Instance of SPI to write and read one byte
 	 fpga_rw_8 u_fpga_rw_8 (
 
     .clk(clk),
@@ -67,11 +71,15 @@ module sm_corrente_await (
 	 .data_reg(readed_data_8),
 	 .miso(host_miso),
 	 .sclk(host_sclk),
-	 .mosi(host_mosi)       // PINO DE OUTPUT DO MESTRE
+	 .mosi(host_mosi)       
 	 
 );
  
-	 
+	 //Signal to notice that UART receptor ever received its byte 
+    wire done_rx_to_read_ed;
+	 //1 byte size register to store one received byte
+	 wire [7:0] rx_uart_out;
+	 //Instance of UART receptor
 	 rx_serial_8 u_rx_serial_8(
     .clk(clk),
     .rst(rst),                          // reset
@@ -82,11 +90,10 @@ module sm_corrente_await (
 
 );
 
-
-// Sinal interno para conectar à saída do edge detector
+    //Signal which outputs rising edge of UART rx done
     wire ed_rx_done;
 
-// Instância do módulo edge_detector
+   //Instance of rising edge detector for UART rx done
     edge_detector u_edge_detector (
         .current_read_pulse(done_rx_to_read_ed),   // entrada
         .clk(clk),                        // clock
@@ -95,33 +102,34 @@ module sm_corrente_await (
     );
 
 	 
-	 // Sinal interno para conectar à saída do edge detector
+	 //Signal which outputs rising edge of arriving pulse on optical port
     wire ed_new_pulse;
 
-// Instância do módulo edge_detector
+    //Instance of rising edge detector for arriving pulse on optical port
     edge_detector new_pulse_edge_detector (
-        .current_read_pulse(rxd_from_gpio47),   // entrada
-        .clk(clk),                        // clock
-        .reset(rst),                    // reset
-        .rising_edge(ed_new_pulse)  // saída
+        .current_read_pulse(rxd_from_gpio47),  
+        .clk(clk),                        
+        .reset(rst),                    
+        .rising_edge(ed_new_pulse)  
     );
   
-    //Definição dos estados (Verilog clássico)
-    localparam CHECK_SOH = 4'b0000;
-	 localparam CHECK_TYPE = 4'b0001;
-	 localparam EN_W_1 = 4'b0010;
-	 localparam EN_W_2 = 4'b0011;
-	 localparam PREPARE_CONVERSION = 4'b0100;
-	 localparam START_CONVERSION = 4'b0101;
-	 localparam AWAIT_END_CONVERSION = 4'b0110;
-	 localparam DIS_W_1 = 4'b0111;
-	 localparam DIS_W_2 = 4'b1000;
-	 localparam CALC_PHASORS = 4'b1001;
-	 localparam AWAIT_CORRENTE_TX = 4'b1010; 
+    //States definition for states machine of slaver IED
+    localparam CHECK_SOH = 4'b0000;//UART await for SOH byte
+	 localparam CHECK_TYPE = 4'b0001;//UART await for TYPE byte
+	 localparam EN_W_1 = 4'b0010;//Reading current write key with writing enable bit
+	 localparam EN_W_2 = 4'b0011;//Writing write key with writing enable bit activated
+	 localparam PREPARE_CONVERSION = 4'b0100;//Prepare IED slaver to receive next pulse as conversion trigger
+	 localparam START_CONVERSION = 4'b0101;//Trigg AD conversion for 50 Hz or 60 Hz, as chosen previously in type_byte
+	 localparam AWAIT_END_CONVERSION = 4'b0110;//Await 35 ms to conversion completes
+	 localparam DIS_W_1 = 4'b0111;//Reading current write key with writing enable bit
+	 localparam DIS_W_2 = 4'b1000;//Writing write key with writing enable bit desactivated
+	 localparam CALC_PHASORS = 4'b1001;//Requesting SRAM data of 86580 bytes
+	 localparam AWAIT_CORRENTE_TX = 4'b1010; //Request 58 bytes which is all data available (phasors, temp and 4-20mA)
 
 	 reg [3:0] current_state;
 	 
-	 //Definição dos estados (Verilog clássico)
+	 
+	 //Modes definition to internal connection of switch module
     localparam MODE_CFG_FPGA = 2'b00;
 	 localparam MODE_CFG = 2'b01;
 	 localparam MODE_ACQ = 2'b10;
@@ -134,7 +142,7 @@ module sm_corrente_await (
 			  txd_to_gpio46 <= 1'b0;
 			  is_finished  <= 22'd0;
 			  delayF <= 1'd0;
-			  sampling_period <= 9'd0;
+			  frequency <= 1'b0;
 			  led_conv_60 <= 1'b0;
 			  led_conv_50 <= 1'b0;
 			  requested_data <= 1'b0;
@@ -142,21 +150,22 @@ module sm_corrente_await (
 			  convst <= 1'b0;
 			  command_new_byte <= 1'b0;
 			  sclk_edges_counter <= 5'd0;
+			  bytes_to_read <= 17'd0;
 
 		 end
 		 
 		 else begin
-		 
+			  //Return pulse to optical port output if pulse arrives in input 
 		     if ((ed_new_pulse == 1'b1) & (delayF == 1'b1)) begin
 			      txd_to_gpio46 = 1'b1;
 					
-					select0_0 <= 1'b0;
-					select1_0 <= 1'b0;
+					select0_1 <= 1'b0;
+					select1_1 <= 1'b0;
 				   delayF = 1'b0;	
 		     end
 		     //state machine
 		     case (current_state)			  
-			          			  
+	
 			      CHECK_SOH:
 			  
 			          begin
@@ -190,8 +199,8 @@ module sm_corrente_await (
 						         if (rx_uart_out == 8'h13) begin
 										 delayF <= 1'b1;
 										 
-										 select0_0 <= 1'b1;
-										 select1_0 <= 1'b0;
+										 select0_1 <= 1'b1;
+										 select1_1 <= 1'b0;
 						             current_state <= CHECK_SOH;
 						             txd_to_gpio46 = 1'b0;							 						
 			                  end
@@ -199,7 +208,7 @@ module sm_corrente_await (
 									//FRAME OF SYNC 60
 									else if (rx_uart_out == 8'h0C)  begin
 									    current_state <= EN_W_1;
-										 sampling_period <= 9'd231;
+										 frequency <= 1'b0;
 										 //byte 1 to be sent
 										 command_new_byte <= 1'b1;
 										 byte_to_send <= 1'h00;
@@ -209,7 +218,7 @@ module sm_corrente_await (
 									//FRAME OF SYNC 50
 									else if (rx_uart_out == 8'h2A)  begin
 									    current_state <= EN_W_1;
-										 sampling_period <= 9'd277;
+										 frequency <= 1'b1;
 										 //byte 1 to be sent
 										 command_new_byte <= 1'b1;
 										 byte_to_send <= 1'h00;
@@ -390,12 +399,12 @@ module sm_corrente_await (
 			          begin
 			              
 							  if (ed_new_pulse == 1'b1) begin
-							      if (sampling_period == 9'd231) begin
+							      if (frequency == 1'b0) begin
 									    led_conv_60 = 1'b1;
 										 convst = 1'b1;
 									end
 									
-									else if (sampling_period == 9'd277) begin
+									else if (frequency == 1'b1) begin
 									    led_conv_50 = 1'b1;
 										 convst = 1'b1;
 									end
@@ -550,6 +559,11 @@ module sm_corrente_await (
 										 bytes_counter <= 3'd0;
 										 
 										 current_state <= CALC_PHASORS;
+										 
+										 //byte sent to read first byte
+										 command_new_byte <= 1'b1;
+										 byte_to_send <= 1'h00;
+										 host_mode <= MODE_RW;
 									
 							      end
 									
@@ -562,13 +576,38 @@ module sm_corrente_await (
 						 
 						 begin
 						     
-						     host_mode <= MODE_RW;
+						     
+							  if (bytes_to_read < 17'd86581) begin
 							  
+									
+									if (signal_nedge_sclk == 1'b1) begin
+							      
+									    sclk_edges_counter <= sclk_edges_counter + 1;									
+									    command_new_byte <= 1'b0;
+									
+									    if (sclk_edges_counter == 5'd16) begin
+									
+							              sclk_edges_counter <= 5'd0;
+											  bytes_to_read <= bytes_to_read + 1;
+											  //byte sent to read next byte
+											  command_new_byte <= 1'b1;
+											  byte_to_send <= 1'h00;
+											  
+							          end															  									
 							  
+							     end
+								  
+							  end
 							  
-						 end
-						 
-						 
+						     else begin
+						  
+							      host_mode <= MODE_CFG_FPGA;
+							      current_state <= CHECK_SOH;
+							 
+						     end
+							  							  
+					    end
+						 						 
 				       AWAIT_CORRENTE_TX:
 						 begin
 						     if (done_tx == 1'b0) begin

@@ -3,8 +3,8 @@ module fpga_rw_8 (
     input  wire        clk,
 	 input  wire        again,
     input  wire        rst,       // reset síncrono
-	 input  [7:0]       config_reg,
-	 output  [7:0]      data_reg,
+	 input  wire [7:0]  config_reg,
+	 output reg  [7:0]  data_reg,
 	 input wire 		  miso,
 	 output reg         sclk,
 	 output reg         mosi       // PINO DE OUTPUT DO MESTRE

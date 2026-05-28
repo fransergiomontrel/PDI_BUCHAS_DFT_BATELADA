@@ -43,21 +43,6 @@ current_mosi_state.AWAIT_SCLK_RISE_MOSI 0 0 1 0 0 0 1
 current_mosi_state.DELAY_SCCS_MOSI 0 1 0 0 0 0 1 
 current_mosi_state.IDLE_MOSI 1 0 0 0 0 0 1 
 
-State Machine - |sensor_buchas|sm_corrente_await:inst4|sampling_period
-Name sampling_period.100010101 sampling_period.011100111 sampling_period.000000000 
-sampling_period.000000000 0 0 0 
-sampling_period.011100111 0 1 1 
-sampling_period.100010101 1 0 1 
-
-State Machine - |sensor_buchas|sm_corrente_await:inst4|current_state
-Name current_state.AWAIT_CORRENTE_TX current_state.AWAIT_END_CONVERSION current_state.START_CONVERSION current_state.PREPARE_CONVERSION current_state.CHECK_TYPE current_state.CHECK_SOH 
-current_state.CHECK_SOH 0 0 0 0 0 0 
-current_state.CHECK_TYPE 0 0 0 0 1 1 
-current_state.PREPARE_CONVERSION 0 0 0 1 0 1 
-current_state.START_CONVERSION 0 0 1 0 0 1 
-current_state.AWAIT_END_CONVERSION 0 1 0 0 0 1 
-current_state.AWAIT_CORRENTE_TX 1 0 0 0 0 1 
-
 State Machine - |sensor_buchas|rw_data_module:inst10|sm
 Name wait_loading_n wr6 wr5 wr4 wr3 wr2 wr1 wait_loading load_sync4 load_sync3 load_sync2 load_sync1 init_buffers4 init_buffers3 init_buffers2 init_buffers1 init rst 
 rst 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
@@ -180,6 +165,30 @@ product 0 0 0 1 1
 sum 0 0 1 0 1 
 check_end 0 1 0 0 1 
 await_end_tx 1 0 0 0 1 
+
+State Machine - |sensor_buchas|sm_corrente_await:inst4|current_state
+Name current_state.AWAIT_CORRENTE_TX current_state.CALC_PHASORS current_state.DIS_W_2 current_state.DIS_W_1 current_state.AWAIT_END_CONVERSION current_state.START_CONVERSION current_state.PREPARE_CONVERSION current_state.EN_W_2 current_state.EN_W_1 current_state.CHECK_TYPE current_state.CHECK_SOH 
+current_state.CHECK_SOH 0 0 0 0 0 0 0 0 0 0 0 
+current_state.CHECK_TYPE 0 0 0 0 0 0 0 0 0 1 1 
+current_state.EN_W_1 0 0 0 0 0 0 0 0 1 0 1 
+current_state.EN_W_2 0 0 0 0 0 0 0 1 0 0 1 
+current_state.PREPARE_CONVERSION 0 0 0 0 0 0 1 0 0 0 1 
+current_state.START_CONVERSION 0 0 0 0 0 1 0 0 0 0 1 
+current_state.AWAIT_END_CONVERSION 0 0 0 0 1 0 0 0 0 0 1 
+current_state.DIS_W_1 0 0 0 1 0 0 0 0 0 0 1 
+current_state.DIS_W_2 0 0 1 0 0 0 0 0 0 0 1 
+current_state.CALC_PHASORS 0 1 0 0 0 0 0 0 0 0 1 
+current_state.AWAIT_CORRENTE_TX 1 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |sensor_buchas|sm_corrente_await:inst4|fpga_rw_8:u_fpga_rw_8|current_spi_state
+Name current_spi_state.AWAIT_SCLK_RISE_MISO current_spi_state.AWAIT_SCLK_FALL_MISO current_spi_state.NOP current_spi_state.AWAIT_SCLK_RISE_MOSI current_spi_state.AWAIT_SCLK_FALL_MOSI current_spi_state.TSU_CSCK_MOSI current_spi_state.NO_MOSI_DATA 
+current_spi_state.NO_MOSI_DATA 0 0 0 0 0 0 0 
+current_spi_state.TSU_CSCK_MOSI 0 0 0 0 0 1 1 
+current_spi_state.AWAIT_SCLK_FALL_MOSI 0 0 0 0 1 0 1 
+current_spi_state.AWAIT_SCLK_RISE_MOSI 0 0 0 1 0 0 1 
+current_spi_state.NOP 0 0 1 0 0 0 1 
+current_spi_state.AWAIT_SCLK_FALL_MISO 0 1 0 0 0 0 1 
+current_spi_state.AWAIT_SCLK_RISE_MISO 1 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|acquisition_module:inst5|acquisition_store_time_counter:storer_time_counter|sm
 Name WAIT_END WE1_CS0_LSBb WE0_CS0_LSBc WE0_CS0_LSBb WE0_CS0_LSBa WE1_CS0_LSBa WAIT_STORE_TIME_COUNTER 

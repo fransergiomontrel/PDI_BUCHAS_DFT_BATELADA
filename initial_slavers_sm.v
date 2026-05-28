@@ -7,8 +7,8 @@ module slaver_states (
 	 output reg convst,
 	 output wire host_mosi,
 	 output wire host_sclk,
-	 output reg select0_1,
-	 output reg select1_1,
+	 output reg select0_0,
+	 output reg select1_0,
 	 output reg[1:0] host_mode
 	 
 );    
@@ -66,8 +66,8 @@ module slaver_states (
 		  start_8_ctl <= 1'b0;
 		  reset_adc_config <= 1'b1;
 		  //select <= 2'b00;
-		  select0_1 <= 1'b0;
-		  select1_1 <= 1'b0;
+		  select0_0 <= 1'b0;
+		  select1_0 <= 1'b0;
 		  current_initial_state <= GPIO_CONFIG;
 		  host_mode <= MODE_CFG_FPGA; 
     end
@@ -136,15 +136,15 @@ module slaver_states (
 			      
 			      start_8_ctl <= 1'b1;
 					//select <= 2'b10;
-					select0_1 <= 1'b0;
-					select1_1 <= 1'b1;
+					select0_0 <= 1'b0;
+					select1_0 <= 1'b1;
 					
 					if (done_8_ctl == 1'b1) begin
 					    start_8_ctl <= 1'b0;
 						 convst <= ncs_adc_config;
 						 //select <= 2'b00;
-						 select0_1 <= 1'b0;
-						 select1_1 <= 1'b0;
+						 select0_0 <= 1'b0;
+						 select1_0 <= 1'b0;
 						 current_initial_state <= CONFIG_AD;
 					end
 					else begin
@@ -187,7 +187,8 @@ module slaver_states (
 		
 		IDLE_AD:
 			  
-			 begin     
+			 begin
+				  host_mode <= MODE_CFG_FPGA;
 				  current_initial_state <= IDLE_AD;				  				  
 		    end		
 					  

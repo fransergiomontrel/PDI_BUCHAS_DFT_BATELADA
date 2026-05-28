@@ -4,24 +4,24 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 2020  Intel Corporation. All rights reserved.
-Your use of Intel Corporation's design tools, logic functions 
+Copyright (C) 2025  Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and any partner logic 
 functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
-to the terms and conditions of the Intel Program License 
-Subscription Agreement, the Intel Quartus Prime License Agreement,
-the Intel FPGA IP License Agreement, or other applicable license
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera IP License Agreement, or other applicable license
 agreement, including, without limitation, that your use is for
 the sole purpose of programming logic devices manufactured by
-Intel and sold by Intel or its authorized distributors.  Please
-refer to the applicable agreement for further details, at
-https://fpgasoftware.intel.com/eula.
+Altera and sold by Altera or its authorized distributors.  Please
+refer to the Altera Software License Subscription Agreements 
+on the Quartus Prime software download page.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 208 224)
+	(rect 16 16 216 224)
 	(text "acquisition_module" (rect 5 0 78 12)(font "Arial" ))
 	(text "inst" (rect 8 192 20 204)(font "Arial" ))
 	(port
@@ -53,74 +53,81 @@ https://fpgasoftware.intel.com/eula.
 		(line (pt 0 80)(pt 16 80)(line_width 3))
 	)
 	(port
-		(pt 192 32)
+		(pt 0 96)
+		(input)
+		(text "frequency" (rect 0 0 41 12)(font "Arial" ))
+		(text "frequency" (rect 21 91 62 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 1))
+	)
+	(port
+		(pt 200 32)
 		(output)
 		(text "sclk_" (rect 0 0 21 12)(font "Arial" ))
-		(text "sclk_" (rect 150 27 171 39)(font "Arial" ))
-		(line (pt 192 32)(pt 176 32)(line_width 1))
+		(text "sclk_" (rect 158 27 179 39)(font "Arial" ))
+		(line (pt 200 32)(pt 184 32)(line_width 1))
 	)
 	(port
-		(pt 192 48)
+		(pt 200 48)
 		(output)
 		(text "convst" (rect 0 0 27 12)(font "Arial" ))
-		(text "convst" (rect 144 43 171 55)(font "Arial" ))
-		(line (pt 192 48)(pt 176 48)(line_width 1))
+		(text "convst" (rect 152 43 179 55)(font "Arial" ))
+		(line (pt 200 48)(pt 184 48)(line_width 1))
 	)
 	(port
-		(pt 192 64)
+		(pt 200 64)
 		(output)
 		(text "addr_inc_write" (rect 0 0 57 12)(font "Arial" ))
-		(text "addr_inc_write" (rect 114 59 171 71)(font "Arial" ))
-		(line (pt 192 64)(pt 176 64)(line_width 1))
+		(text "addr_inc_write" (rect 122 59 179 71)(font "Arial" ))
+		(line (pt 200 64)(pt 184 64)(line_width 1))
 	)
 	(port
-		(pt 192 80)
+		(pt 200 80)
 		(output)
 		(text "addr_clr" (rect 0 0 33 12)(font "Arial" ))
-		(text "addr_clr" (rect 138 75 171 87)(font "Arial" ))
-		(line (pt 192 80)(pt 176 80)(line_width 1))
+		(text "addr_clr" (rect 146 75 179 87)(font "Arial" ))
+		(line (pt 200 80)(pt 184 80)(line_width 1))
 	)
 	(port
-		(pt 192 96)
+		(pt 200 96)
 		(output)
 		(text "busy" (rect 0 0 20 12)(font "Arial" ))
-		(text "busy" (rect 151 91 171 103)(font "Arial" ))
-		(line (pt 192 96)(pt 176 96)(line_width 1))
+		(text "busy" (rect 159 91 179 103)(font "Arial" ))
+		(line (pt 200 96)(pt 184 96)(line_width 1))
 	)
 	(port
-		(pt 192 112)
+		(pt 200 112)
 		(output)
 		(text "we_n" (rect 0 0 21 12)(font "Arial" ))
-		(text "we_n" (rect 150 107 171 119)(font "Arial" ))
-		(line (pt 192 112)(pt 176 112)(line_width 1))
+		(text "we_n" (rect 158 107 179 119)(font "Arial" ))
+		(line (pt 200 112)(pt 184 112)(line_width 1))
 	)
 	(port
-		(pt 192 128)
+		(pt 200 128)
 		(output)
 		(text "cs_n" (rect 0 0 20 12)(font "Arial" ))
-		(text "cs_n" (rect 151 123 171 135)(font "Arial" ))
-		(line (pt 192 128)(pt 176 128)(line_width 1))
+		(text "cs_n" (rect 159 123 179 135)(font "Arial" ))
+		(line (pt 200 128)(pt 184 128)(line_width 1))
 	)
 	(port
-		(pt 192 144)
+		(pt 200 144)
 		(output)
 		(text "data[7..0]" (rect 0 0 36 12)(font "Arial" ))
-		(text "data[7..0]" (rect 135 139 171 151)(font "Arial" ))
-		(line (pt 192 144)(pt 176 144)(line_width 3))
+		(text "data[7..0]" (rect 143 139 179 151)(font "Arial" ))
+		(line (pt 200 144)(pt 184 144)(line_width 3))
 	)
 	(port
-		(pt 192 160)
+		(pt 200 160)
 		(output)
 		(text "data_bus_out" (rect 0 0 54 12)(font "Arial" ))
-		(text "data_bus_out" (rect 117 155 171 167)(font "Arial" ))
-		(line (pt 192 160)(pt 176 160)(line_width 1))
+		(text "data_bus_out" (rect 125 155 179 167)(font "Arial" ))
+		(line (pt 200 160)(pt 184 160)(line_width 1))
 	)
 	(port
-		(pt 192 176)
+		(pt 200 176)
 		(output)
 		(text "ready" (rect 0 0 23 12)(font "Arial" ))
-		(text "ready" (rect 148 171 171 183)(font "Arial" ))
-		(line (pt 192 176)(pt 176 176)(line_width 1))
+		(text "ready" (rect 156 171 179 183)(font "Arial" ))
+		(line (pt 200 176)(pt 184 176)(line_width 1))
 	)
 	(parameter
 		"samples"
@@ -128,7 +135,7 @@ https://fpgasoftware.intel.com/eula.
 		""
 	)
 	(drawing
-		(rectangle (rect 16 16 176 192)(line_width 1))
+		(rectangle (rect 16 16 184 192)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 208 -64 308 16))
+	(annotation_block (parameter)(rect 216 -64 316 16))
 )

@@ -19,6 +19,7 @@ subdesign acquisition_module(
 	start: input;
 	sdi[5..0]: input;
 	
+	frequency: input;
 
 	sclk_: output;	
 	convst: output;
@@ -38,7 +39,7 @@ subdesign acquisition_module(
 variable
 	start_ff: dffes;
 --	ctrl: acquisition_ctrl_v2 with (active_period = 68, period = 463, samples = samples);
-	ctrl: acquisition_ctrl_v2 with (active_period = 68, period = 231, samples = samples);
+	ctrl: acquisition_ctrl_v2 with (active_period = 68, samples = samples);
 	serializer: acquisition_serializer_v3 with (little_endian = 1, wait_states = 3);
 	storer: acquisition_store;
 	storer_crc: acquisition_store_crc;
@@ -65,6 +66,7 @@ begin
 	ctrl.start = start_ff.q;
 	ctrl.serialize_ok = serializer.serialize_ok;
 	ctrl.store_ok = storer.store_ok;
+	ctrl.frequency = frequency;
 
 	-- SERIALIZER
 	serializer.clk = clk;
