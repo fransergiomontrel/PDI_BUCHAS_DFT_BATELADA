@@ -197,9 +197,7 @@ test_sm_pipeline1_state[] = 3;
 				    convst_ff.d = Vcc;
 				    sm_pipeline1 = AQUISITIONING;
 			   end if;
-			end if;
-			
-			
+			end if;		
 			
 		when WAIT_STATE =>
 test_sm_pipeline1_state[] = 4;
@@ -231,12 +229,14 @@ test_sm_pipeline1_state[] = 6;
 			   if !frequency then
 				    if clock_counter_60.o[] == 231 then
 					     clock_counter_60.clr = Vcc;	-- Reinicia o contador
+						  clock_counter_50.clr = Vcc;	-- Reinicia o contador
 					     convst_ff.d = Vcc; -- Liga o convst
 					     sm_pipeline1 = AQUISITIONING;
 				    end if;
 				else
 				    if clock_counter_50.o[] == 277 then
 					     clock_counter_50.clr = Vcc;	-- Reinicia o contador
+						  clock_counter_60.clr = Vcc;	-- Reinicia o contador
 					     convst_ff.d = Vcc; -- Liga o convst
 					     sm_pipeline1 = AQUISITIONING;
 				    end if;

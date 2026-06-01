@@ -611,12 +611,16 @@ module sm_corrente_await (
 				       AWAIT_CORRENTE_TX:
 						 begin
 						     if (done_tx == 1'b0) begin
+							  
+									requested_data <= 1'b0;
 							      current_state <= AWAIT_CORRENTE_TX;
+									
 							  end
 							  else begin
-							      requested_data <= 1'b0;
+							      
 									acquire_again <= 1'b1;
 									current_state <= CHECK_SOH;
+									
 							  end
 						 end
 		

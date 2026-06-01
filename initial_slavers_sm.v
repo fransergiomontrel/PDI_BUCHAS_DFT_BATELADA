@@ -17,6 +17,7 @@ module slaver_states (
 	 reg start_8_ctl;
 	 
 	 reg reset_adc_config;
+	 reg [7:0] data_to_send;
 	 wire ncs_adc_config;
 	 
 	 // Definição dos estados (Verilog clássico)
@@ -41,7 +42,8 @@ module slaver_states (
 	  
 	  .clk(clk),
      .rst(rst_hardware),       
-     .start(start_8_ctl),     
+     .start(start_8_ctl),
+	  .data_in(data_to_send),
      .tx(tx),        
      .busy(),      
      .done(done_8_ctl)       
@@ -68,6 +70,7 @@ module slaver_states (
 		  //select <= 2'b00;
 		  select0_0 <= 1'b0;
 		  select1_0 <= 1'b0;
+		  data_to_send <= 8'h00;
 		  current_initial_state <= GPIO_CONFIG;
 		  host_mode <= MODE_CFG_FPGA; 
     end
@@ -124,9 +127,11 @@ module slaver_states (
 		 TESTE_SPI_AD:
 			  
 			  begin
-			      
-					current_initial_state <= SEND_X01;
+			  
+					data_to_send <= 8'h01;
+					start_8_ctl <= 1'b1;
 					host_mode <= MODE_CFG;
+					current_initial_state <= SEND_X01;
 			       		       
 		     end
 				
@@ -134,13 +139,11 @@ module slaver_states (
 			  
 			  begin
 			      
-			      start_8_ctl <= 1'b1;
-					//select <= 2'b10;
+			      start_8_ctl <= 1'b0;
 					select0_0 <= 1'b0;
 					select1_0 <= 1'b1;
 					
 					if (done_8_ctl == 1'b1) begin
-					    start_8_ctl <= 1'b0;
 						 convst <= ncs_adc_config;
 						 //select <= 2'b00;
 						 select0_0 <= 1'b0;
