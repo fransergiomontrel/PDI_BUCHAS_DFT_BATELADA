@@ -81,6 +81,7 @@ module sm_corrente_await (
 	 wire [7:0] rx_uart_out;
 	 //Instance of UART receptor
 	 rx_serial_8 u_rx_serial_8(
+	 
     .clk(clk),
     .rst(rst),                          // reset
     .rx(rxd_from_gpio47),               // dado serie
@@ -127,8 +128,7 @@ module sm_corrente_await (
 	 localparam AWAIT_CORRENTE_TX = 4'b1010; //Request 58 bytes which is all data available (phasors, temp and 4-20mA)
 
 	 reg [3:0] current_state;
-	 
-	 
+	 	 
 	 //Modes definition to internal connection of switch module
     localparam MODE_CFG_FPGA = 2'b00;
 	 localparam MODE_CFG = 2'b01;

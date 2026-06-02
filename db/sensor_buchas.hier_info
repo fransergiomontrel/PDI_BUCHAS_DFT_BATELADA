@@ -4254,6 +4254,11 @@ mosi <= mosi~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |sensor_buchas|sm_corrente_await:inst4|rx_serial_8:u_rx_serial_8
+clk => parity_received.CLK
+clk => stop_bit.CLK
+clk => parity_error.CLK
+clk => byte_received.CLK
+clk => check_parity.CLK
 clk => rx_reg[0]~reg0.CLK
 clk => rx_reg[1]~reg0.CLK
 clk => rx_reg[2]~reg0.CLK
@@ -4302,6 +4307,11 @@ rst => rx_reg.OUTPUTSELECT
 rst => rx_reg.OUTPUTSELECT
 rst => rx_reg.OUTPUTSELECT
 rst => rx_reg.OUTPUTSELECT
+rst => check_parity.OUTPUTSELECT
+rst => byte_received.OUTPUTSELECT
+rst => parity_error.OUTPUTSELECT
+rst => stop_bit.OUTPUTSELECT
+rst => parity_received.ENA
 rx => always0.IN1
 rx => rx_reg.DATAB
 rx => rx_reg.DATAB
@@ -4311,6 +4321,7 @@ rx => rx_reg.DATAB
 rx => rx_reg.DATAB
 rx => rx_reg.DATAB
 rx => rx_reg.DATAB
+rx => parity_received.DATAB
 rx => always0.IN1
 busy_rx <= busy_rx~reg0.DB_MAX_OUTPUT_PORT_TYPE
 done_rx <= done_rx~reg0.DB_MAX_OUTPUT_PORT_TYPE
