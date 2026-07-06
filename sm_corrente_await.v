@@ -216,7 +216,7 @@ module sm_corrente_await (
 										 
 									end
 									//FRAME OF SYNC 50
-									else if (rx_uart_out == 8'h2A)  begin
+									else if (rx_uart_out == 8'h0D)  begin
 									    current_state <= EN_W_1;
 										 frequency <= 1'b1;
 										 //byte 1 to be sent
