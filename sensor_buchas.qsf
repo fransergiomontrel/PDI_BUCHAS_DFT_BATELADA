@@ -37,15 +37,15 @@
 # -------------------------------------------------------------------------- #
 
 
-set_global_assignment -name FAMILY "MAX V"
-set_global_assignment -name DEVICE 5M1270ZT144I5
+set_global_assignment -name FAMILY "MAX 10"
+set_global_assignment -name DEVICE 10M08SCE144C8G
 set_global_assignment -name TOP_LEVEL_ENTITY sensor_buchas
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:48:22  APRIL 07, 2021"
 set_global_assignment -name LAST_QUARTUS_VERSION "24.1std.0 Lite Edition"
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
-set_global_assignment -name MIN_CORE_JUNCTION_TEMP "-40"
-set_global_assignment -name MAX_CORE_JUNCTION_TEMP 125
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR "-1"
 #set_global_assignment -name POWER_EXT_SUPPLY_VOLTAGE_TO_REGULATOR 3.3V
 set_global_assignment -name EDA_SIMULATION_TOOL "<None>"
@@ -66,6 +66,8 @@ set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_RO
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name FLOW_ENABLE_POWER_ANALYZER ON
 set_global_assignment -name POWER_DEFAULT_INPUT_IO_TOGGLE_RATE "12.5 %"
+set_global_assignment -name VERILOG_FILE luts_dft.v
+set_global_assignment -name QIP_FILE ufm_read/synthesis/ufm_read.qip
 set_global_assignment -name VERILOG_FILE spi_rw_8.v
 set_global_assignment -name VERILOG_FILE driver_adc.v
 set_global_assignment -name VERILOG_FILE spi_adc.v
@@ -127,7 +129,6 @@ set_global_assignment -name VECTOR_WAVEFORM_FILE test_sensor_buchas_conf_cpld_mo
 set_global_assignment -name AHDL_FILE dft_locale.tdf
 set_global_assignment -name VERILOG_FILE edge_detector.v
 set_global_assignment -name VERILOG_FILE luts_sin.v
-set_global_assignment -name VERILOG_FILE luts_cos.v
 set_global_assignment -name AHDL_FILE DFT.tdf
 set_global_assignment -name VERILOG_FILE multiplier_16_16.v
 set_global_assignment -name VERILOG_FILE tx_serial_32.v

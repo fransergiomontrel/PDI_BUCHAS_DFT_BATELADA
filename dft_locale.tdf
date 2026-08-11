@@ -52,8 +52,8 @@ begin
 	 start_tx = dft_by_word.start_tx;
 	 dft_by_word.end_tx = end_tx;
 	 
-	 sin_out = dft_by_word.sin_out[];
-	 cos_out = dft_by_word.cos_out[];
+	 sin_out[] = dft_by_word.sin_out[];
+	 cos_out[] = dft_by_word.cos_out[];
 	 
 	 --Clock of ff first_byte
 	 first_byte.clk = clk;
@@ -146,7 +146,7 @@ begin
 			
 		  when load =>
 
-      		--Firt load
+      		--First load
 				if !first_byte then
 				    byte_counter_ff.d = Vcc;
 				    out_reg_LSB[].d = byte_channel[];

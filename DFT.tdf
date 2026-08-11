@@ -1,5 +1,4 @@
-include "sin.inc";
-include "cos.inc";
+include "luts.inc";
 include "produto_modulo.inc";
 
 subdesign DFT(
@@ -15,22 +14,19 @@ subdesign DFT(
 	 cos_out[31..0]: output;
 	 
 	 start_tx: output;
-	 
-	 
+	 	 
 )
 
 variable
 sm: machine with states(idle, product, sum, check_end, await_end_tx);
 
-samples_counter[12..0], start_tx_ff, clean_counter_ff: dff;
+luts_addr[12..0], samples_counter[12..0], start_tx_ff, clean_counter_ff: dff;
 
 multiplier_dft_sin, multiplier_dft_cos : produto_modulo;
 
 acc_sin[31..0], acc_cos[31..0]: dff;
 
-sin_dft: sin;
-cos_dft: cos;
-
+luts_dft: luts;
 
 begin
 
@@ -52,11 +48,20 @@ begin
 	 clean_counter_ff.clk = clk;
 	 clean_counter_ff.clrn = !reset;
 	 
+	 --Increments address of luts tables
+	 luts_addr[].clk = next_sample;
+	 if samples_counter[].q <= 3607 then
+	     luts_addr[].d = luts_addr[].q + 2;
+	 else
+	     luts_addr[].d = luts_addr[].q - 2;
+	 end if;
+	 
+	 luts_addr[].clrn = !reset & !end_tx & clean_counter_ff.q;
+	 
     --Counter of samples
     samples_counter[].clk = next_sample;
 	 samples_counter[].d = samples_counter[].q + 1;
 	 samples_counter[].clrn = !reset & !end_tx & clean_counter_ff.q;
-	 
 	 
 	 --Inputs of state machine
 	 sm.clk = clk;
@@ -66,6 +71,7 @@ begin
 	 start_tx_ff.clk = clk;
 	 start_tx_ff.clrn = !reset;
 	 start_tx = start_tx_ff.q;
+	 
 	 --Permanent connections of multipliers for sin and cos
 	 multiplier_dft_sin.clk = clk;
 	 multiplier_dft_cos.clk = clk;
@@ -76,25 +82,28 @@ begin
 	 multiplier_dft_sin.data[] = read_sample[];
 	 multiplier_dft_cos.data[] = read_sample[];
 	 
-	 sin_dft.addr = samples_counter[].q;
-	 cos_dft.addr = samples_counter[].q;
+	 --Address of luts table assigned
+	 luts_dft.addr[] = luts_addr[];
+	 luts_dft.clk = clk;
+	 luts_dft.rst = reset;
 	 
-	 multiplier_dft_sin.luts[] = sin_dft.sine[];
-	 multiplier_dft_cos.luts[] = cos_dft.cossine[];
+	 --Value of luts table assigned to multiplier unit
+	 multiplier_dft_sin.luts[] = luts_dft.sin[];
+	 multiplier_dft_cos.luts[] = luts_dft.cos[];
 	 
 	 --Acumulators
 	 acc_sin[].clk = next_sample;
 	 acc_cos[].clk = next_sample;
 	 
 	 --Appling 2 complement in negative regions of sine
-	 if samples_counter[].q <= 3608 then
-	     acc_sin[].d = acc_sin[].q - multiplier_dft_sin.dft_component[];
-	 else
+	 if samples_counter[].q <= 3607 then
 	     acc_sin[].d = acc_sin[].q + multiplier_dft_sin.dft_component[];
+	 else
+	     acc_sin[].d = acc_sin[].q - multiplier_dft_sin.dft_component[];
 	 end if;
 	 
 	 --Appling 2 complement in negative regions of cossine
-	 if samples_counter[].q <= 1804 # samples_counter[].q >= 5412 then
+	 if samples_counter[].q <= 1803 # samples_counter[].q >= 5411 then
 	     acc_cos[].d = acc_cos[].q + multiplier_dft_cos.dft_component[];
 	 else 
 	     acc_cos[].d = acc_cos[].q - multiplier_dft_cos.dft_component[];

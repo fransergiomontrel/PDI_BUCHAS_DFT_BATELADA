@@ -81,6 +81,31 @@ sum 0 0 1 0 1
 check_end 0 1 0 0 1 
 await_end_tx 1 0 0 0 1 
 
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller6|DFT:dft_by_word|luts:luts_dft|state
+Name state.S_WAIT state.S_REQ state.S_FETCH state.S_DELAY_FETCH state.S_DONE 
+state.S_DELAY_FETCH 0 0 0 0 0 
+state.S_FETCH 0 0 1 1 0 
+state.S_REQ 0 1 0 1 0 
+state.S_WAIT 1 0 0 1 0 
+state.S_DONE 0 0 0 1 1 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller6|DFT:dft_by_word|luts:luts_dft|ufm_read:u_ufm_read|altera_onchip_flash:onchip_flash_0|altera_onchip_flash_avmm_data_controller:avmm_data_controller|avmm_read_valid_state
+Name avmm_read_valid_state.READ_VALID_IDLE avmm_read_valid_state.READ_VALID_PRE_READING avmm_read_valid_state.READ_VALID_READING 
+avmm_read_valid_state.READ_VALID_IDLE 0 0 0 
+avmm_read_valid_state.READ_VALID_READING 1 0 1 
+avmm_read_valid_state.READ_VALID_PRE_READING 1 1 0 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller6|DFT:dft_by_word|luts:luts_dft|ufm_read:u_ufm_read|altera_onchip_flash:onchip_flash_0|altera_onchip_flash_avmm_data_controller:avmm_data_controller|read_state
+Name read_state.READ_STATE_PULSE_SE read_state.READ_STATE_CLEAR read_state.READ_STATE_FINAL read_state.READ_STATE_READY read_state.READ_STATE_DUMMY read_state.READ_STATE_SETUP read_state.READ_STATE_ADDR read_state.READ_STATE_IDLE 
+read_state.READ_STATE_IDLE 0 0 0 0 0 0 0 0 
+read_state.READ_STATE_ADDR 0 0 0 0 0 0 1 1 
+read_state.READ_STATE_SETUP 0 0 0 0 0 1 0 1 
+read_state.READ_STATE_DUMMY 0 0 0 0 1 0 0 1 
+read_state.READ_STATE_READY 0 0 0 1 0 0 0 1 
+read_state.READ_STATE_FINAL 0 0 1 0 0 0 0 1 
+read_state.READ_STATE_CLEAR 0 1 0 0 0 0 0 1 
+read_state.READ_STATE_PULSE_SE 1 0 0 0 0 0 0 1 
+
 State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller5|sm
 Name sum_dft calculus_dft load_dft load nop idle 
 idle 0 0 0 0 0 0 
@@ -97,6 +122,31 @@ product 0 0 0 1 1
 sum 0 0 1 0 1 
 check_end 0 1 0 0 1 
 await_end_tx 1 0 0 0 1 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller5|DFT:dft_by_word|luts:luts_dft|state
+Name state.S_WAIT state.S_REQ state.S_FETCH state.S_DELAY_FETCH state.S_DONE 
+state.S_DELAY_FETCH 0 0 0 0 0 
+state.S_FETCH 0 0 1 1 0 
+state.S_REQ 0 1 0 1 0 
+state.S_WAIT 1 0 0 1 0 
+state.S_DONE 0 0 0 1 1 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller5|DFT:dft_by_word|luts:luts_dft|ufm_read:u_ufm_read|altera_onchip_flash:onchip_flash_0|altera_onchip_flash_avmm_data_controller:avmm_data_controller|avmm_read_valid_state
+Name avmm_read_valid_state.READ_VALID_IDLE avmm_read_valid_state.READ_VALID_PRE_READING avmm_read_valid_state.READ_VALID_READING 
+avmm_read_valid_state.READ_VALID_IDLE 0 0 0 
+avmm_read_valid_state.READ_VALID_READING 1 0 1 
+avmm_read_valid_state.READ_VALID_PRE_READING 1 1 0 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller5|DFT:dft_by_word|luts:luts_dft|ufm_read:u_ufm_read|altera_onchip_flash:onchip_flash_0|altera_onchip_flash_avmm_data_controller:avmm_data_controller|read_state
+Name read_state.READ_STATE_PULSE_SE read_state.READ_STATE_CLEAR read_state.READ_STATE_FINAL read_state.READ_STATE_READY read_state.READ_STATE_DUMMY read_state.READ_STATE_SETUP read_state.READ_STATE_ADDR read_state.READ_STATE_IDLE 
+read_state.READ_STATE_IDLE 0 0 0 0 0 0 0 0 
+read_state.READ_STATE_ADDR 0 0 0 0 0 0 1 1 
+read_state.READ_STATE_SETUP 0 0 0 0 0 1 0 1 
+read_state.READ_STATE_DUMMY 0 0 0 0 1 0 0 1 
+read_state.READ_STATE_READY 0 0 0 1 0 0 0 1 
+read_state.READ_STATE_FINAL 0 0 1 0 0 0 0 1 
+read_state.READ_STATE_CLEAR 0 1 0 0 0 0 0 1 
+read_state.READ_STATE_PULSE_SE 1 0 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller4|sm
 Name sum_dft calculus_dft load_dft load nop idle 
@@ -115,6 +165,31 @@ sum 0 0 1 0 1
 check_end 0 1 0 0 1 
 await_end_tx 1 0 0 0 1 
 
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller4|DFT:dft_by_word|luts:luts_dft|state
+Name state.S_WAIT state.S_REQ state.S_FETCH state.S_DELAY_FETCH state.S_DONE 
+state.S_DELAY_FETCH 0 0 0 0 0 
+state.S_FETCH 0 0 1 1 0 
+state.S_REQ 0 1 0 1 0 
+state.S_WAIT 1 0 0 1 0 
+state.S_DONE 0 0 0 1 1 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller4|DFT:dft_by_word|luts:luts_dft|ufm_read:u_ufm_read|altera_onchip_flash:onchip_flash_0|altera_onchip_flash_avmm_data_controller:avmm_data_controller|avmm_read_valid_state
+Name avmm_read_valid_state.READ_VALID_IDLE avmm_read_valid_state.READ_VALID_PRE_READING avmm_read_valid_state.READ_VALID_READING 
+avmm_read_valid_state.READ_VALID_IDLE 0 0 0 
+avmm_read_valid_state.READ_VALID_READING 1 0 1 
+avmm_read_valid_state.READ_VALID_PRE_READING 1 1 0 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller4|DFT:dft_by_word|luts:luts_dft|ufm_read:u_ufm_read|altera_onchip_flash:onchip_flash_0|altera_onchip_flash_avmm_data_controller:avmm_data_controller|read_state
+Name read_state.READ_STATE_PULSE_SE read_state.READ_STATE_CLEAR read_state.READ_STATE_FINAL read_state.READ_STATE_READY read_state.READ_STATE_DUMMY read_state.READ_STATE_SETUP read_state.READ_STATE_ADDR read_state.READ_STATE_IDLE 
+read_state.READ_STATE_IDLE 0 0 0 0 0 0 0 0 
+read_state.READ_STATE_ADDR 0 0 0 0 0 0 1 1 
+read_state.READ_STATE_SETUP 0 0 0 0 0 1 0 1 
+read_state.READ_STATE_DUMMY 0 0 0 0 1 0 0 1 
+read_state.READ_STATE_READY 0 0 0 1 0 0 0 1 
+read_state.READ_STATE_FINAL 0 0 1 0 0 0 0 1 
+read_state.READ_STATE_CLEAR 0 1 0 0 0 0 0 1 
+read_state.READ_STATE_PULSE_SE 1 0 0 0 0 0 0 1 
+
 State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller3|sm
 Name sum_dft calculus_dft load_dft load nop idle 
 idle 0 0 0 0 0 0 
@@ -131,6 +206,31 @@ product 0 0 0 1 1
 sum 0 0 1 0 1 
 check_end 0 1 0 0 1 
 await_end_tx 1 0 0 0 1 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller3|DFT:dft_by_word|luts:luts_dft|state
+Name state.S_WAIT state.S_REQ state.S_FETCH state.S_DELAY_FETCH state.S_DONE 
+state.S_DELAY_FETCH 0 0 0 0 0 
+state.S_FETCH 0 0 1 1 0 
+state.S_REQ 0 1 0 1 0 
+state.S_WAIT 1 0 0 1 0 
+state.S_DONE 0 0 0 1 1 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller3|DFT:dft_by_word|luts:luts_dft|ufm_read:u_ufm_read|altera_onchip_flash:onchip_flash_0|altera_onchip_flash_avmm_data_controller:avmm_data_controller|avmm_read_valid_state
+Name avmm_read_valid_state.READ_VALID_IDLE avmm_read_valid_state.READ_VALID_PRE_READING avmm_read_valid_state.READ_VALID_READING 
+avmm_read_valid_state.READ_VALID_IDLE 0 0 0 
+avmm_read_valid_state.READ_VALID_READING 1 0 1 
+avmm_read_valid_state.READ_VALID_PRE_READING 1 1 0 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller3|DFT:dft_by_word|luts:luts_dft|ufm_read:u_ufm_read|altera_onchip_flash:onchip_flash_0|altera_onchip_flash_avmm_data_controller:avmm_data_controller|read_state
+Name read_state.READ_STATE_PULSE_SE read_state.READ_STATE_CLEAR read_state.READ_STATE_FINAL read_state.READ_STATE_READY read_state.READ_STATE_DUMMY read_state.READ_STATE_SETUP read_state.READ_STATE_ADDR read_state.READ_STATE_IDLE 
+read_state.READ_STATE_IDLE 0 0 0 0 0 0 0 0 
+read_state.READ_STATE_ADDR 0 0 0 0 0 0 1 1 
+read_state.READ_STATE_SETUP 0 0 0 0 0 1 0 1 
+read_state.READ_STATE_DUMMY 0 0 0 0 1 0 0 1 
+read_state.READ_STATE_READY 0 0 0 1 0 0 0 1 
+read_state.READ_STATE_FINAL 0 0 1 0 0 0 0 1 
+read_state.READ_STATE_CLEAR 0 1 0 0 0 0 0 1 
+read_state.READ_STATE_PULSE_SE 1 0 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller2|sm
 Name sum_dft calculus_dft load_dft load nop idle 
@@ -149,6 +249,31 @@ sum 0 0 1 0 1
 check_end 0 1 0 0 1 
 await_end_tx 1 0 0 0 1 
 
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller2|DFT:dft_by_word|luts:luts_dft|state
+Name state.S_WAIT state.S_REQ state.S_FETCH state.S_DELAY_FETCH state.S_DONE 
+state.S_DELAY_FETCH 0 0 0 0 0 
+state.S_FETCH 0 0 1 1 0 
+state.S_REQ 0 1 0 1 0 
+state.S_WAIT 1 0 0 1 0 
+state.S_DONE 0 0 0 1 1 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller2|DFT:dft_by_word|luts:luts_dft|ufm_read:u_ufm_read|altera_onchip_flash:onchip_flash_0|altera_onchip_flash_avmm_data_controller:avmm_data_controller|avmm_read_valid_state
+Name avmm_read_valid_state.READ_VALID_IDLE avmm_read_valid_state.READ_VALID_PRE_READING avmm_read_valid_state.READ_VALID_READING 
+avmm_read_valid_state.READ_VALID_IDLE 0 0 0 
+avmm_read_valid_state.READ_VALID_READING 1 0 1 
+avmm_read_valid_state.READ_VALID_PRE_READING 1 1 0 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale_others:dft_caller2|DFT:dft_by_word|luts:luts_dft|ufm_read:u_ufm_read|altera_onchip_flash:onchip_flash_0|altera_onchip_flash_avmm_data_controller:avmm_data_controller|read_state
+Name read_state.READ_STATE_PULSE_SE read_state.READ_STATE_CLEAR read_state.READ_STATE_FINAL read_state.READ_STATE_READY read_state.READ_STATE_DUMMY read_state.READ_STATE_SETUP read_state.READ_STATE_ADDR read_state.READ_STATE_IDLE 
+read_state.READ_STATE_IDLE 0 0 0 0 0 0 0 0 
+read_state.READ_STATE_ADDR 0 0 0 0 0 0 1 1 
+read_state.READ_STATE_SETUP 0 0 0 0 0 1 0 1 
+read_state.READ_STATE_DUMMY 0 0 0 0 1 0 0 1 
+read_state.READ_STATE_READY 0 0 0 1 0 0 0 1 
+read_state.READ_STATE_FINAL 0 0 1 0 0 0 0 1 
+read_state.READ_STATE_CLEAR 0 1 0 0 0 0 0 1 
+read_state.READ_STATE_PULSE_SE 1 0 0 0 0 0 0 1 
+
 State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale:dft_caller1|sm
 Name sum_dft calculus_dft load_dft load nop idle 
 idle 0 0 0 0 0 0 
@@ -165,6 +290,31 @@ product 0 0 0 1 1
 sum 0 0 1 0 1 
 check_end 0 1 0 0 1 
 await_end_tx 1 0 0 0 1 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale:dft_caller1|DFT:dft_by_word|luts:luts_dft|state
+Name state.S_WAIT state.S_REQ state.S_FETCH state.S_DELAY_FETCH state.S_DONE 
+state.S_DELAY_FETCH 0 0 0 0 0 
+state.S_FETCH 0 0 1 1 0 
+state.S_REQ 0 1 0 1 0 
+state.S_WAIT 1 0 0 1 0 
+state.S_DONE 0 0 0 1 1 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale:dft_caller1|DFT:dft_by_word|luts:luts_dft|ufm_read:u_ufm_read|altera_onchip_flash:onchip_flash_0|altera_onchip_flash_avmm_data_controller:avmm_data_controller|avmm_read_valid_state
+Name avmm_read_valid_state.READ_VALID_IDLE avmm_read_valid_state.READ_VALID_PRE_READING avmm_read_valid_state.READ_VALID_READING 
+avmm_read_valid_state.READ_VALID_IDLE 0 0 0 
+avmm_read_valid_state.READ_VALID_READING 1 0 1 
+avmm_read_valid_state.READ_VALID_PRE_READING 1 1 0 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale:dft_caller1|DFT:dft_by_word|luts:luts_dft|ufm_read:u_ufm_read|altera_onchip_flash:onchip_flash_0|altera_onchip_flash_avmm_data_controller:avmm_data_controller|read_state
+Name read_state.READ_STATE_PULSE_SE read_state.READ_STATE_CLEAR read_state.READ_STATE_FINAL read_state.READ_STATE_READY read_state.READ_STATE_DUMMY read_state.READ_STATE_SETUP read_state.READ_STATE_ADDR read_state.READ_STATE_IDLE 
+read_state.READ_STATE_IDLE 0 0 0 0 0 0 0 0 
+read_state.READ_STATE_ADDR 0 0 0 0 0 0 1 1 
+read_state.READ_STATE_SETUP 0 0 0 0 0 1 0 1 
+read_state.READ_STATE_DUMMY 0 0 0 0 1 0 0 1 
+read_state.READ_STATE_READY 0 0 0 1 0 0 0 1 
+read_state.READ_STATE_FINAL 0 0 1 0 0 0 0 1 
+read_state.READ_STATE_CLEAR 0 1 0 0 0 0 0 1 
+read_state.READ_STATE_PULSE_SE 1 0 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|uart_tx:inst2|state_uart_tx
 Name state_uart_tx.PARITY_BIT state_uart_tx.DATA_BITS state_uart_tx.START_BIT state_uart_tx.START state_uart_tx.STOP_BIT 

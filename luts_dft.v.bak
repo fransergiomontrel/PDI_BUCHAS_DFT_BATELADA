@@ -1,0 +1,32 @@
+module luts(
+
+input clk,
+input rst,
+input [12:0] addr,
+output reg [15:0] sine,
+output reg [15:0] cos
+
+);
+
+reg [12:0] ufm_addr;
+reg ufm_read_reg;
+wire [31:0] ufm_readdata;
+wire ufm_waitrequest;
+wire ufm_readdatavalid;
+
+ufm_read u_ufm_read (
+    .clock                   (clk),
+    .reset_n                 (~rst),
+
+    .avmm_data_addr          (ufm_addr),
+    .avmm_data_read          (ufm_read_reg),
+    .avmm_data_readdata      (ufm_readdata),
+    .avmm_data_waitrequest   (ufm_waitrequest),
+    .avmm_data_readdatavalid (ufm_readdatavalid),
+    .avmm_data_burstcount    (4'd1)
+);
+
+
+
+
+endmodule
