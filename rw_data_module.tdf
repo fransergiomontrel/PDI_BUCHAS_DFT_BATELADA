@@ -3,7 +3,7 @@ include "counter.inc";
 include "modes.inc";
 include "dffes.inc";
 include "dft_locale.inc";
-include "dft_locale_others.inc";
+include "luts.inc";
 
 
 subdesign rw_data_module(
@@ -51,11 +51,10 @@ variable
 	--DFT result bus of 48 bytes to send through tx UART when requested
 	dft_result[11..0][31..0], start_tx_ff: dff;
 	
-	--Teste dft_locale1
-	dft_caller1 : dft_locale;
-	--Teste others dft_locale
-	dft_caller2, dft_caller3, dft_caller4, dft_caller5, dft_caller6: dft_locale_others; 
-	
+	--Module which call dft modules
+	dft_caller : dft_locale;
+	--Module that retrive UFM data
+	luts_table: luts;
 	
 begin
 	defaults
@@ -73,8 +72,6 @@ begin
 		ready_ff.r = Gnd;
 	end defaults;
 	
-	
-	
 	--Connections of dft result bus
 	dft_result[][].clk = clk; 
 	dft_result[][].clrn = !sreset;
@@ -85,74 +82,41 @@ begin
 	start_tx = start_tx_ff.q;
 	
 	--Conections of dft_locale 1
-	dft_caller1.clk = clk;
-	dft_caller1.sreset = sreset;
-	dft_caller1.byte_channel[] = data_read[];
-	dft_caller1.new_byte = addr_inc_read;
-	dft_caller1.enable_read = oe_n;
-	dft_caller1.end_tx = done_tx;
-	--start_tx = dft_caller1.start_tx;
+	dft_caller.clk = clk;
+	dft_caller.sreset = sreset;
+	dft_caller.byte_channel[] = data_read[];
+	dft_caller.new_byte = addr_inc_read;
+	dft_caller.enable_read = oe_n;
+	dft_caller.end_tx = done_tx;
+	luts_table.addr = dft_caller.step_ufm_addr[];
 	
-	dft_result[0][].d = dft_caller1.cos_out[];
-	dft_result[1][].d = dft_caller1.sin_out[];
+	dft_result[0][].d = dft_caller.cos_out1[];
+	dft_result[1][].d = dft_caller.sin_out1[];
 	
-	--Conections of dft_locale 2
-	dft_caller2.clk = clk;
-	dft_caller2.sreset = sreset;
-	dft_caller2.byte_channel[] = data_read[];
-	dft_caller2.new_byte = addr_inc_read;
-	dft_caller2.enable_read = oe_n;
-	dft_caller2.end_tx = done_tx;
+	dft_result[2][].d = dft_caller.cos_out2[];
+	dft_result[3][].d = dft_caller.sin_out2[];
 	
-	dft_result[2][].d = dft_caller2.cos_out[];
-	dft_result[3][].d = dft_caller2.sin_out[];
+	dft_result[4][].d = dft_caller.cos_out3[];
+	dft_result[5][].d = dft_caller.sin_out3[];
 	
-	--Conections of dft_locale 3
-	dft_caller3.clk = clk;
-	dft_caller3.sreset = sreset;
-	dft_caller3.byte_channel[] = data_read[];
-	dft_caller3.new_byte = addr_inc_read;
-	dft_caller3.enable_read = oe_n;
-	dft_caller3.end_tx = done_tx;
+	dft_result[6][].d = dft_caller.cos_out4[];
+	dft_result[7][].d = dft_caller.sin_out4[];
 	
-	dft_result[4][].d = dft_caller3.cos_out[];
-	dft_result[5][].d = dft_caller3.sin_out[];
+	dft_result[8][].d = dft_caller.cos_out5[];
+	dft_result[9][].d = dft_caller.sin_out5[];
 	
-	--Conections of dft_locale 4
-	dft_caller4.clk = clk;
-	dft_caller4.sreset = sreset;
-	dft_caller4.byte_channel[] = data_read[];
-	dft_caller4.new_byte = addr_inc_read;
-	dft_caller4.enable_read = oe_n;
-	dft_caller4.end_tx = done_tx;
+	dft_result[10][].d = dft_caller.cos_out6[];
+	dft_result[11][].d = dft_caller.sin_out6[];
 	
-	dft_result[6][].d = dft_caller4.cos_out[];
-	dft_result[7][].d = dft_caller4.sin_out[];
-	
-	--Conections of dft_locale 5
-	dft_caller5.clk = clk;
-	dft_caller5.sreset = sreset;
-	dft_caller5.byte_channel[] = data_read[];
-	dft_caller5.new_byte = addr_inc_read;
-	dft_caller5.enable_read = oe_n;
-	dft_caller5.end_tx = done_tx;
-	
-	dft_result[8][].d = dft_caller5.cos_out[];
-	dft_result[9][].d = dft_caller5.sin_out[];
-	
-	--Conections of dft_locales 6
-	dft_caller6.clk = clk;
-	dft_caller6.sreset = sreset;
-	dft_caller6.byte_channel[] = data_read[];
-	dft_caller6.new_byte = addr_inc_read;
-	dft_caller6.enable_read = oe_n;
-	dft_caller6.end_tx = done_tx;
-	
+		
 	--Lock level of last dft
-	 start_tx_ff.d = dft_caller6.start_tx # start_tx_ff;
-	
-	dft_result[10][].d = dft_caller6.cos_out[];
-	dft_result[11][].d = dft_caller6.sin_out[];
+	 start_tx_ff.d = dft_caller.start_tx # start_tx_ff;
+	 
+	 --Permanent connections of ufm module
+	luts_table.clk = clk;
+	luts_table.clk = rst;
+	luts_table.addr = dft_caller.step_ufm_addr;
+	dft_caller.luts_value[] = (luts_table.sin[], luts_table.cos[]);
 	
 	--Connect array dft bus to output which in data in to uart tx
 	data_out_to_uart_tx[31..0] = dft_result[0][].q;
@@ -167,14 +131,6 @@ begin
 	data_out_to_uart_tx[319..288] = dft_result[9][].q;
 	data_out_to_uart_tx[351..320] = dft_result[10][].q;
 	data_out_to_uart_tx[383..352] = dft_result[11][].q;
-	
-	--Conections between dft_locales to calculate dft only at right memory position
-	dft_caller1.mychannel_now = dft_caller6.next_channel;
-	dft_caller2.mychannel_now = dft_caller1.next_channel;
-	dft_caller3.mychannel_now = dft_caller2.next_channel;
-	dft_caller4.mychannel_now = dft_caller3.next_channel;
-	dft_caller5.mychannel_now = dft_caller4.next_channel;
-	dft_caller6.mychannel_now = dft_caller5.next_channel;
 			
 	
 	ready_ff.clk = clk;
