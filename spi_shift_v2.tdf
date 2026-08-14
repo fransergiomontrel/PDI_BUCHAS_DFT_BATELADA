@@ -15,11 +15,7 @@ subdesign spi_shift_v2(
 	loading_rx: output;
 	loading_tx: output;
 	
---	test_shift[N_BITS-1..0]: output;
-	test_shift_rx[N_BITS-2..0]: output;
-	test_shift_tx[N_BITS-1..0]: output;
-	test_count_rx[COUNTER_BITS-1..0]: output;
-	test_count_tx[COUNTER_BITS-1..0]: output;
+
 )
 variable
 	parallel_rx[N_BITS-1..0]: dffe;
@@ -65,10 +61,5 @@ begin
 	ltx = ltx_ff.q;
 	loading_tx = ltx;
 
-	-- TESTS
-	test_shift_rx[] = shift_rx[].q;
-	test_shift_tx[] = shift_tx[].q;	
-	test_count_rx[] = count_rx[].q;
-	test_count_tx[] = count_tx[].q;
 	
 end;

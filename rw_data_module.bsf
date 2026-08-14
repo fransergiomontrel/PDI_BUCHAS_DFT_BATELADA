@@ -21,9 +21,9 @@ on the Quartus Prime software download page.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 288 352)
+	(rect 16 16 288 288)
 	(text "rw_data_module" (rect 5 0 71 12)(font "Arial" ))
-	(text "inst" (rect 8 320 20 332)(font "Arial" ))
+	(text "inst" (rect 8 256 20 268)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -62,8 +62,8 @@ on the Quartus Prime software download page.
 	(port
 		(pt 0 112)
 		(input)
-		(text "data_read[7..0]" (rect 0 0 60 12)(font "Arial" ))
-		(text "data_read[7..0]" (rect 21 107 81 119)(font "Arial" ))
+		(text "data_read[15..0]" (rect 0 0 63 12)(font "Arial" ))
+		(text "data_read[15..0]" (rect 21 107 84 119)(font "Arial" ))
 		(line (pt 0 112)(pt 16 112)(line_width 3))
 	)
 	(port
@@ -125,8 +125,8 @@ on the Quartus Prime software download page.
 	(port
 		(pt 272 160)
 		(output)
-		(text "data_write[7..0]" (rect 0 0 60 12)(font "Arial" ))
-		(text "data_write[7..0]" (rect 191 155 251 167)(font "Arial" ))
+		(text "data_write[15..0]" (rect 0 0 63 12)(font "Arial" ))
+		(text "data_write[15..0]" (rect 188 155 251 167)(font "Arial" ))
 		(line (pt 272 160)(pt 256 160)(line_width 3))
 	)
 	(port
@@ -153,46 +153,11 @@ on the Quartus Prime software download page.
 	(port
 		(pt 272 224)
 		(output)
-		(text "test_async_load" (rect 0 0 66 12)(font "Arial" ))
-		(text "test_async_load" (rect 185 219 251 231)(font "Arial" ))
-		(line (pt 272 224)(pt 256 224)(line_width 1))
-	)
-	(port
-		(pt 272 240)
-		(output)
-		(text "test_loading" (rect 0 0 46 12)(font "Arial" ))
-		(text "test_loading" (rect 205 235 251 247)(font "Arial" ))
-		(line (pt 272 240)(pt 256 240)(line_width 1))
-	)
-	(port
-		(pt 272 256)
-		(output)
-		(text "test_state[5..0]" (rect 0 0 59 12)(font "Arial" ))
-		(text "test_state[5..0]" (rect 192 251 251 263)(font "Arial" ))
-		(line (pt 272 256)(pt 256 256)(line_width 3))
-	)
-	(port
-		(pt 272 272)
-		(output)
-		(text "test_data_shift[7..0]" (rect 0 0 79 12)(font "Arial" ))
-		(text "test_data_shift[7..0]" (rect 172 267 251 279)(font "Arial" ))
-		(line (pt 272 272)(pt 256 272)(line_width 3))
-	)
-	(port
-		(pt 272 288)
-		(output)
-		(text "test_shift_rx[6..0]" (rect 0 0 70 12)(font "Arial" ))
-		(text "test_shift_rx[6..0]" (rect 181 283 251 295)(font "Arial" ))
-		(line (pt 272 288)(pt 256 288)(line_width 3))
-	)
-	(port
-		(pt 272 304)
-		(output)
 		(text "data_out_to_uart_tx[383..0]" (rect 0 0 110 12)(font "Arial" ))
-		(text "data_out_to_uart_tx[383..0]" (rect 141 299 251 311)(font "Arial" ))
-		(line (pt 272 304)(pt 256 304)(line_width 3))
+		(text "data_out_to_uart_tx[383..0]" (rect 141 219 251 231)(font "Arial" ))
+		(line (pt 272 224)(pt 256 224)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 256 320)(line_width 1))
+		(rectangle (rect 16 16 256 256)(line_width 1))
 	)
 )

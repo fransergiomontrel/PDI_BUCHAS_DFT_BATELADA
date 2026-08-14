@@ -23,30 +23,25 @@ subdesign rw_data_module(
 	MISO: output;
 	MOSI: input;
 	
-	data_read[7..0]: input;
-	data_write[7..0]: output;
+	data_read[15..0]: input;
+	data_write[15..0]: output;
 	
 	busy: output;
 	
 	data_bus_out: output;
 	ready: output;
 	
-	test_async_load: output;
-	test_loading: output;
-	test_state[5..0]: output;
-	test_data_shift[7..0]: output;
-	test_shift_rx[6..0]: output;
 	
 	data_out_to_uart_tx[383..0]: output;
 	
 )
 variable
-	shift: spi_shift_v2 with (N_BITS=8);
+	shift: spi_shift_v2 with (N_BITS=16);
 	
 	sm: machine with states(rst, init, init_buffers1, init_buffers2, init_buffers3, init_buffers4, load_sync1, load_sync2, load_sync3, load_sync4, wait_loading, wr1, wr2, wr3, wr4, wr5, wr6, wait_loading_n);
 	
 	oe_n_FF, we_n_FF, cs_n_FF, load_parallel_FF, busy_ff, data_bus_out_ff, SCLK_ff, MOSI_ff: dffes;
-	buffer_parallel_in[7..0]: dffe;
+	buffer_parallel_in[15..0]: dffe;
 	ready_ff: srff;
 	--DFT result bus of 48 bytes to send through tx UART when requested
 	dft_result[11..0][31..0], start_tx_ff: dff;
@@ -167,8 +162,7 @@ begin
 	buffer_parallel_in[].d = data_read[];
 	buffer_parallel_in[].clrn = !(load_parallel_FF.q and !data_read[]);
 	buffer_parallel_in[].prn  = !(load_parallel_FF.q and  data_read[]);
-
-
+    
 	load_parallel_FF.clk = clk;
 	shift.async_load = load_parallel_FF.q;
 	load_parallel_FF.spre = sreset;
@@ -293,12 +287,6 @@ begin
 	data_write[] = shift.parallel_out[];
 --	data_write[] = h"A5";
 
-	
-	-- TESTS
-	test_async_load = load_parallel_FF.q;
-	test_loading = shift.loading_tx;
-	test_data_shift[] = shift.test_shift_tx[];
-	test_shift_rx[] = shift.test_shift_rx[];
 	
 	TABLE
 		sm					=> test_state[];

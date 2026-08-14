@@ -15,11 +15,11 @@ subdesign switch(
 	HI_MISO: output;
 	
 	-- RAM Interface
-	RI_data_out[7..0]: input;
+	RI_data_out[15..0]: input;
 	RI_addr_clr: output;
 	RI_addr_inc_read: output;
 	RI_addr_inc_write: output;
-	RI_data_in[7..0]: output;
+	RI_data_in[15..0]: output;
 	RI_we_n: output;
 	RI_oe_n: output;
 	RI_cs_n: output;
@@ -46,7 +46,7 @@ subdesign switch(
 	
 	-- Read Data Module
 	RDM_SCLK: output;
-	RDM_data_read[7..0]: output;
+	RDM_data_read[15..0]: output;
 	RDM_addr_clr: input;
 	RDM_addr_inc_read: input;
 	RDM_addr_inc_write: input;
@@ -56,7 +56,7 @@ subdesign switch(
 	RDM_busy: input;
 	RDM_MOSI: output;
 	RDM_we_n: input;
-	RDM_data_write[7..0]: input;
+	RDM_data_write[15..0]: input;
 	RDM_data_bus_out: input;
 	
 	-- CONFIG CPLD Module

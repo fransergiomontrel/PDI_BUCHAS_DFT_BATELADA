@@ -1,10 +1,10 @@
-module fpga_rw_8 (
+module fpga_rw_16 (
 
     input  wire        clk,
 	 input  wire        again,
     input  wire        rst,       // reset síncrono
-	 input  wire [7:0]  config_reg,
-	 output reg  [7:0]  data_reg,
+	 input  wire [15:0]  config_reg,
+	 output reg  [15:0]  data_reg,
 	 input wire 		  miso,
 	 output reg         sclk,
 	 output reg         mosi,       // PINO DE OUTPUT DO MESTRE
@@ -12,14 +12,13 @@ module fpga_rw_8 (
 	 
 );    
 	 	 
-	 reg [3:0]  bit_cnt;
+	 reg [4:0]  bit_cnt;
 	 reg [7:0]  div_sclk;
 	 	 
 	 // Definição dos estados (Verilog clássico)
     localparam NO_DATA = 3'b00;
 	 localparam AWAIT_SCLK_FALL = 3'b01;
 	 localparam AWAIT_SCLK_RISE = 3'b10;
-	 
 	 
 	 reg [1:0] current_spi_state;
 	 
@@ -32,7 +31,7 @@ module fpga_rw_8 (
             sclk <= 1'b0;
 				mosi <= 1'b0;
 				div_sclk <= 8'd0;
-				bit_cnt <= 4'd7;
+				bit_cnt <= 5'd15;
 				spi_done <= 1'b0;
 				current_spi_state <= NO_DATA;
 				
@@ -51,10 +50,10 @@ module fpga_rw_8 (
 						  mosi <= config_reg[bit_cnt];
 						  data_reg[bit_cnt] <= miso;	
 					     current_spi_state <= NO_DATA;
-						  if (bit_cnt == 4'd0) begin
+						  if (bit_cnt == 5'd0) begin
 						  
 						      spi_done <= 1'b1;
-								bit_cnt <= 4'd7;
+								bit_cnt <= 5'd15;
 								
 						  end
 						  else begin
@@ -72,8 +71,7 @@ module fpga_rw_8 (
                 end
 					 			              
 				end
-						
-				
+									
 		 AWAIT_SCLK_FALL:
 			  
 			  begin
@@ -130,7 +128,3 @@ module fpga_rw_8 (
 	 
 	 
 endmodule
-	 
-	 
-	 
-       

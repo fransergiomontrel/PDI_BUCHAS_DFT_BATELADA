@@ -6,7 +6,7 @@ module spi_adc (
 	 output reg         sclk,
 	 output reg         ncs,
 	 output reg         mosi       // PINO DE OUTPUT DO MESTRE
-	 
+    	 
 );    
 	  
 	 reg [5:0]  bit_cnt;
