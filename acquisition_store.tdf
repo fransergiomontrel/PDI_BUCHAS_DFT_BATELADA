@@ -11,15 +11,14 @@ subdesign acquisition_store(
 	channel[2..0]: output;
 	addr_inc_write: output;
 	store_ok: output;
-	msb: output;
-	data_bus_out: output;
-	crc_enable: output;
 	
-	test_sm[2..0]: output;
+	data_bus_out: output;
+	
 )
 variable	
-	cs_n_ff, we_n_ff, data_bus_out_ff, crc_enable_ff: dffes;
-	channel_counter: counter with (MAX_VALUE = 12);
+	--cs_n_ff, we_n_ff, data_bus_out_ff, crc_enable_ff: dffes;
+	cs_n_ff, we_n_ff, data_bus_out_ff: dffes;
+	channel_counter: counter with (MAX_VALUE = 6);
 	last_channel: node;
 	
 	sm: MACHINE WITH STATES(WAIT_STORE, CS1a,	CS0a1, CS0a2, CS0b, CS1b ,	INC_CHANNEL, WAIT_END);
@@ -34,7 +33,6 @@ begin
 		channel_counter.inc = Gnd;
 		channel_counter.clr = Gnd;
 		
-		crc_enable_ff.d = Gnd;
 	end defaults;
 	
 	-- sresets
@@ -48,15 +46,15 @@ begin
 	cs_n_ff.clk = clk;
 	we_n_ff.clk = clk;
 	data_bus_out_ff.clk = clk;
-	crc_enable_ff.clk = clk;
+	
 	channel_counter.clk = clk;
 	sm.clk = clk;
 	
-	last_channel = (channel_counter.o[] == 12);
+	last_channel = (channel_counter.o[] == 6);
 
 	case sm IS
 		WHEN WAIT_STORE =>
-test_sm[] = 0;
+
 			if store then
 				data_bus_out_ff.d = Vcc;
 				sm = CS1a;
@@ -67,37 +65,37 @@ test_sm[] = 0;
 			end if;
 			
 		WHEN CS1a =>
-test_sm[] = 1;
+
 			data_bus_out_ff.d = Vcc;
 			we_n_ff.d = Gnd;
 			sm = CS0a1;
 			
 		WHEN CS0a1 =>
-test_sm[] = 2;
+
 			data_bus_out_ff.d = Vcc;
 			we_n_ff.d = Gnd;
 			sm = CS0a2;
 
 		WHEN CS0a2 =>
-test_sm[] = 2;
+
 			data_bus_out_ff.d = Vcc;
 			we_n_ff.d = Gnd;
-			crc_enable_ff.d = Vcc;
+			
 			sm = CS0b;
 
 			WHEN CS0b =>
-test_sm[] = 3;
+
 			data_bus_out_ff.d = Vcc;
 			sm = CS1b;
 			
 		WHEN CS1b =>
-test_sm[] = 4;
+
 			channel_counter.inc = Vcc;
 			addr_inc_write = Vcc;
 			sm = INC_CHANNEL;
 		
 		WHEN INC_CHANNEL =>
-test_sm[] = 5;
+
 			if last_channel then
 				cs_n_ff.d = Vcc;
 				store_ok = Vcc;
@@ -108,7 +106,7 @@ test_sm[] = 5;
 			
 			end if;
 		WHEN WAIT_END =>
-test_sm[] = 6;
+
 			if store then
 				cs_n_ff.d = Vcc;
 				store_ok = Vcc;
@@ -124,7 +122,6 @@ test_sm[] = 6;
 	cs_n = cs_n_ff.q;
 	we_n = we_n_ff.q;
 	data_bus_out = data_bus_out_ff.q;
-	channel[] = channel_counter.o[3..1];
-	msb = channel_counter.o[0];
-	crc_enable = crc_enable_ff.q;
+	channel[] = channel_counter.o[2..0];
+	
 end;

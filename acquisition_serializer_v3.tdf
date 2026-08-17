@@ -14,16 +14,12 @@ subdesign acquisition_serializer_v3(
 	msb: input;
 	channel[2..0]: input;
 	
-	data[7..0]: output;
+	data[15..0]: output;
 	serialize_ok: output;
 	
 	adc_sdi[5..0]: input;
 	adc_sclk: output;
-	
---	
-	test_cont[4..0]: output;
-	test_data[15..0]: output;
-	test_div_clock[1..0]: output;
+
 )
 variable
 	data_buffer[5..0][15..0]: dffes;
@@ -145,13 +141,10 @@ begin
 	END CASE;
 	
 	-- Seleciona o Endian
-	if msb $ little_endian then
-		data[] = bus_bits[7..0];
+	if little_endian then
+		data[] = {bus_bits[7..0], bus_bits[15..8]};
 	else
-		data[] = bus_bits[15..8];
+		data[] = {bus_bits[15..8], bus_bits[7..0]};
 	end if;
 
-	test_cont[] = count.o[];
-	test_data[] = data_buffer[0][].q;
-	test_div_clock[] = divclock.o[];
 end;
