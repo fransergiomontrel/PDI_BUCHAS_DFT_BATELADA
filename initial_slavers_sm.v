@@ -12,13 +12,15 @@ module slaver_states (
 	 output reg[1:0] host_mode
 	 
 );    
-	 	  
+	 reg [2:0] channel_config;	  
     reg [23:0]  delay;
 	 reg start_8_ctl;
 	 
 	 reg reset_adc_config;
 	 reg [7:0] data_to_send;
 	 wire ncs_adc_config;
+	 wire done_8_ctl;
+	 wire cs_n;
 	 
 	 // Definição dos estados (Verilog clássico)
     localparam GPIO_CONFIG = 3'b000;
@@ -60,14 +62,22 @@ module slaver_states (
     	 
 );
 
+//Instance of rising edge detector for cs_n at end of adc setting
+    edge_detector u_edge_detector (
+        .current_read_pulse(ncs_adc_config),   // entrada
+        .clk(clk),                        // clock
+        .reset(reset_adc_config),                    // reset
+        .rising_edge(cs_n)  // saída
+    );
+
 	 always @(posedge clk) begin
 	 
 	 
 	 if (!rst_hardware) begin
-        delay <= 24'b0;
+		  channel_config <= 3'd0;
+        delay <= 24'd0;
 		  start_8_ctl <= 1'b0;
 		  reset_adc_config <= 1'b1;
-		  //select <= 2'b00;
 		  select0_0 <= 1'b0;
 		  select1_0 <= 1'b0;
 		  data_to_send <= 8'h00;
@@ -86,7 +96,7 @@ module slaver_states (
 					 delay <= delay + 1;
 					 rst <= 1'b0;
 					 if (delay == 24'd10000000) begin
-					     delay <= 24'b0;
+					     delay <= 24'd0;
 						  rst <= 1'b1;
 						  current_initial_state <= CPLD_RST_AD;
 					 end
@@ -102,13 +112,13 @@ module slaver_states (
 			   begin
 			      
 					 delay <= delay + 1;
-					 if ((delay == 2100000) & (rst == 1'b1)) begin
-					     delay <= 1'b0;
+					 if ((delay == 24'd2100000) & (rst == 1'b1)) begin
+					     delay <= 1'd0;
 						  rst <= 1'b0;
 						  current_initial_state <= CPLD_RST_AD;
 					 end
-					 else if ((delay == 200) & (rst == 1'b0)) begin
-					     delay <= 1'b0;
+					 else if ((delay == 24'd200) & (rst == 1'b0)) begin
+					     delay <= 24'd0;
 						  rst <= 1'b1;
 						  current_initial_state <= TESTE_RAM;
 					 end
@@ -130,6 +140,8 @@ module slaver_states (
 			  
 					data_to_send <= 8'h01;
 					start_8_ctl <= 1'b1;
+					select0_0 <= 1'b0;
+					select1_0 <= 1'b1;
 					host_mode <= MODE_CFG;
 					current_initial_state <= SEND_X01;
 			       		       
@@ -140,15 +152,15 @@ module slaver_states (
 			  begin
 			      
 			      start_8_ctl <= 1'b0;
-					select0_0 <= 1'b0;
-					select1_0 <= 1'b1;
 					
 					if (done_8_ctl == 1'b1) begin
+					
 						 convst <= ncs_adc_config;
-						 //select <= 2'b00;
 						 select0_0 <= 1'b0;
 						 select1_0 <= 1'b0;
+						 
 						 current_initial_state <= CONFIG_AD;
+						 
 					end
 					else begin
 					    current_initial_state <= SEND_X01;
@@ -159,16 +171,23 @@ module slaver_states (
 		CONFIG_AD:
 			  
 			 begin
-			     reset_adc_config <= 1'b0;
-				  if (ncs_adc_config == 1'b1) begin
+			 
+				  reset_adc_config <= 1'b0;
+				  convst <= ncs_adc_config;
+				  if ((cs_n == 1'b1) & (channel_config == 3'd6)) begin
+
 						convst <= 1'b1;
 				      current_initial_state <= RESET_AD;
+						
 				  end
-				  else begin
-				      current_initial_state <= CONFIG_AD;
+				  else if (cs_n == 1'b1) begin
+				  
+						reset_adc_config <= 1'b1;
+						channel_config <= channel_config + 1;
+				      
 				  end
 				  
-				  
+				  		  
 		    end
 		
 		RESET_AD:

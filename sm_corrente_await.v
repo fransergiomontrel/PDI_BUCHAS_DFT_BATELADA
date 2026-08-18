@@ -381,15 +381,15 @@ module sm_corrente_await (
 			  
 			      begin
 			              
-						 if (ed_new_pulse == 1'b1) begin
-							  if (frequency == 1'b0) begin
-									led_conv_60 = 1'b1;
-									convst = 1'b1;
-							  end
-									
+					if (ed_new_pulse == 1'b1) begin
+						 
+						 if (frequency == 1'b0) begin
+							  led_conv_60 = 1'b1;
+							  convst <= 1'b1;
+						 end				
 						 else if (frequency == 1'b1) begin
 							  led_conv_50 = 1'b1;
-							  convst = 1'b1;
+							  convst <= 1'b1;
 						 end
 									
 						 current_state <= AWAIT_END_CONVERSION;
@@ -398,7 +398,7 @@ module sm_corrente_await (
 							  
 					else begin
 						 current_state <= START_CONVERSION;
-						 end
+				   end
 							  
 				end
 						 
@@ -534,9 +534,9 @@ module sm_corrente_await (
 										     										     
 									bytes_counter <= 3'd0;
 										 
-									current_state <= CALC_PHASORS;
-										 
 									host_mode <= MODE_RW;
+									
+									current_state <= CALC_PHASORS;
 									
 							  end
 									

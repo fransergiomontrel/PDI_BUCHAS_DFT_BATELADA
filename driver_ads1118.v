@@ -68,6 +68,11 @@ module driver_ADS1118 (
 	always @(posedge clk) begin
 							 							 	    
 		 if(rst) begin
+			  array_data[4] <= 16'd0;
+			  array_data[3] <= 16'd0;
+			  array_data[2] <= 16'd0;
+			  array_data[1] <= 16'd0;
+			  array_data[0] <= 16'd0;
 		     driver_config_reg <= 16'h0000;
 			  loaded <= 1'b0;
 			  shift_temp <= 2'b00;
@@ -223,6 +228,7 @@ module driver_ADS1118 (
 								if (shift_temp == 2'b01) begin
 								    shift_temp <= 2'b00;
 									 driver1118_state <= IDLE_4_20;
+									 loaded <= 1'b1;
 								end
 								else begin
 								    driver1118_state <= SHIFT_TEMP;

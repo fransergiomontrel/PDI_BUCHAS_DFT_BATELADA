@@ -29,7 +29,6 @@ module driver_ADS8691 (
 	 
 	 reg [1:0] driver8691_state;    
 	 
-    	 
 	always @(posedge clk) begin
 							 							 	    
 		 if(rst) begin
