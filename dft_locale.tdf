@@ -1,16 +1,15 @@
-include "edge_detector.inc";
+include "nedge_detector.inc";
 include "DFT.inc";
 
 subdesign dft_locale(
 
 	clk: input;
 	sreset: input;
-	byte_channel[7..0]: input;
-	new_byte: input;
+	word[15..0]: input;
+	new_word: input;
 	
 	enable_read: input;
 	luts_value[31..0]: input;
-	sample_word[15..0]: output;
 	
 	sin_out1[31..0]: output;
 	cos_out1[31..0]: output;
@@ -33,19 +32,18 @@ subdesign dft_locale(
 )
 variable
 
-    sm: machine with states(idle, nop, load, load_dft, calculus_dft, sum_dft);
-	 count_nop[1..0], channel_number[2..0] , byte_counter_ff, first_byte,first_sample_ff, next_step_all_ff: dff;
-	 out_reg_MSB[7..0], out_reg_LSB[7..0]: dffe;
-	 detect_rising: edge_detector;
+    sm: machine with states(idle, nop, start_dft, on_dft, on_dft2, sum_dft);
+	 count_nop[1..0], channel_number[2..0], first_sample_ff, next_step_all_ff: dff;
+	 out_reg[15..0]: dffe;
+	 detect_falling: nedge_detector;
 	 dft_by_word1, dft_by_word2, dft_by_word3, dft_by_word4, dft_by_word5, dft_by_word6 : DFT;	  
 
 begin
 		 	 
     defaults
-	 
-  	     count_nop[].clrn = Gnd;   	
-	     out_reg_MSB[].ena = Gnd;
-		  out_reg_LSB[].ena = Gnd;
+		  count_nop[].d = Gnd;
+  	     count_nop[].clrn = Vcc;   	
+
 		  dft_by_word1.start_dft = Gnd;
 		  dft_by_word2.start_dft = Gnd;
 		  dft_by_word3.start_dft = Gnd;
@@ -64,7 +62,7 @@ begin
 	 --DFT permanent connections
 	 dft_by_word1.clk = clk;
 	 dft_by_word1.reset = sreset;
-	 dft_by_word1.read_sample[] = sample_word[];
+	 dft_by_word1.read_sample[] = word[];
 	 dft_by_word1.luts_dft_in[] = luts_value[];
 	 dft_by_word1.end_tx = end_tx;
 	 
@@ -73,7 +71,7 @@ begin
 	 
 	 dft_by_word2.clk = clk;
 	 dft_by_word2.reset = sreset;
-	 dft_by_word2.read_sample[] = sample_word[];
+	 dft_by_word2.read_sample[] = word[];
 	 dft_by_word2.luts_dft_in[] = luts_value[];
 	 dft_by_word2.end_tx = end_tx;
 	 
@@ -82,7 +80,7 @@ begin
 	 
 	 dft_by_word3.clk = clk;
 	 dft_by_word3.reset = sreset;
-	 dft_by_word3.read_sample[] = sample_word[];
+	 dft_by_word3.read_sample[] = word[];
 	 dft_by_word3.luts_dft_in[] = luts_value[];
 	 dft_by_word3.end_tx = end_tx;
 	 
@@ -91,7 +89,7 @@ begin
 	 
 	 dft_by_word4.clk = clk;
 	 dft_by_word4.reset = sreset;
-	 dft_by_word4.read_sample[] = sample_word[];
+	 dft_by_word4.read_sample[] = word[];
 	 dft_by_word4.luts_dft_in[] = luts_value[];
 	 dft_by_word4.end_tx = end_tx;
 	 
@@ -100,7 +98,7 @@ begin
 	 
 	 dft_by_word5.clk = clk;
 	 dft_by_word5.reset = sreset;
-	 dft_by_word5.read_sample[] = sample_word[];
+	 dft_by_word5.read_sample[] = word[];
 	 dft_by_word5.luts_dft_in[] = luts_value[];
 	 dft_by_word5.end_tx = end_tx;
 	 
@@ -109,7 +107,7 @@ begin
 	 
 	 dft_by_word6.clk = clk;
 	 dft_by_word6.reset = sreset;
-	 dft_by_word6.read_sample[] = sample_word[];
+	 dft_by_word6.read_sample[] = word[];
 	 dft_by_word6.luts_dft_in[] = luts_value[];
 	 start_tx = dft_by_word6.start_tx;
 	 dft_by_word6.end_tx = end_tx;
@@ -130,126 +128,85 @@ begin
 	 dft_by_word6.next_step = next_step_all_ff.q;
 	 
 	 step_ufm_addr = dft_by_word6.luts_addr_out[];
-	 --Clock of ff first_byte
-	 first_byte.clk = clk;
-	 --Inicial state of ff first_byte
-	 first_byte.clrn = !sreset;
-	 --Lock first_byte output into 1
-	 first_byte.d = byte_counter_ff # first_byte;
+	 
 	 --Lock first sample of channel 1
 	 first_sample_ff.clk = clk;
 	 first_sample_ff.clrn = !sreset;
-	 first_sample_ff.d = first_byte # first_sample_ff;
+	 first_sample_ff.d = first_sample_ff.q;
 	 
     --Clock of nop count
     count_nop[].clk = clk;
 	 
 	 --Clock of output register
-	 out_reg_MSB[].clk = clk;
-	 out_reg_LSB[].clk = clk;
-	 sample_word[] = (out_reg_MSB[], out_reg_LSB[]); 
+	 out_reg[].clk = clk;
+	 
 	 
 	 --Inputs of state machine
 	 sm.clk = clk;
 	 sm.reset = sreset;
 	 
-	 --Inputs of bytes counter
-	 byte_counter_ff = clk;
-	 byte_counter_ff.clrn = !sreset;
-	 --Avoid defineless state of byte_counter_ff
-	 byte_counter_ff = byte_counter_ff;
-	 
 	 --Clock of edge_detector
-	 detect_rising.clk = clk;
-	 detect_rising.reset = sreset # enable_read;
-	 detect_rising.current_read_pulse = new_byte;
+	 detect_falling.clk = clk;
+	 detect_falling.reset = sreset # enable_read;
+	 detect_falling.current_read_pulse = new_word;
 	 
 	 --Register to identify channel which is making dft step
 	 channel_number[].d = channel_number[].q + 1;
 	 
     case sm is
         when idle =>	
-	     
-	     if !first_sample_ff then	  
+	      
 		      if enable_read then
 		  	       sm = idle;
-		      else
-		          if !first_byte & !byte_counter_ff then
+		      else 
+		          if !first_sample_ff then
+						  first_sample_ff.d = Vcc;
 		              sm = nop;
-			       elsif detect_rising.rising_edge then
-				        sm = nop;
-			       else
-				        sm = idle;
+						  
+			       elsif detect_falling.falling_edge  then
+					 
+				        sm = start_dft;
+			       
 				    end if;
 				
-		      end if;
-			else
-			        if enable_read then
-		  	           sm = idle;
-		           else
-		              if !first_byte & !byte_counter_ff then
-		                  sm = nop;
-			           elsif detect_rising.rising_edge then
-				            sm = nop;
-			           else
-				            sm = idle;
-				        end if;
-		           end if;	           		 
-				 
-			end if;
+		      end if; 		 
+			
 			
 		  when nop =>
 				
-			   count_nop[].d = count_nop[].q+1;
-			   count_nop[].clrn = Vcc;
             if count_nop[] == B"10" then
-			       sm = load;
+					 count_nop[].clrn = Gnd;
+			       sm = start_dft;
 			   else
+				    count_nop[].d = count_nop[].q+1;
 			       sm = nop;
 			   end if;
 			
-		  when load =>
-
-      		--First load
-				if !first_byte then
-				    byte_counter_ff.d = Vcc;
-				    out_reg_LSB[].d = byte_channel[];
-					 out_reg_LSB[].ena = Vcc;
-			       sm = idle;
-			   else
-				    if byte_counter_ff == 1 then
-					     byte_counter_ff.d = Gnd;
-				        out_reg_MSB[].d = byte_channel[];
-						  out_reg_MSB[].ena = Vcc;
+		  when start_dft =>
 						  
-						  if channel_number[] == B"000" then
-						      dft_by_word1.start_dft = Vcc;
-						  elsif channel_number[] == B"001" then 
-								dft_by_word2.start_dft = Vcc;
-						  elsif channel_number[] == B"010" then 
-								dft_by_word3.start_dft = Vcc;
-						  elsif channel_number[] == B"011" then 
-								dft_by_word4.start_dft = Vcc;
-						  elsif channel_number[] == B"100" then 
-								dft_by_word5.start_dft = Vcc;
-						  elsif channel_number[] == B"101" then 
-								dft_by_word6.start_dft = Vcc;
-						  end if;
-						  
-			           sm = load_dft;
-				    else
-					     byte_counter_ff.d = Vcc; 
-				        out_reg_LSB[].d = byte_channel[];
-						  out_reg_LSB[].ena = Vcc;
-			           sm = idle;
-				    end if;
+				if channel_number[] == B"000" then
+					 dft_by_word1.start_dft = Vcc;
+				elsif channel_number[] == B"001" then 
+					 dft_by_word2.start_dft = Vcc;
+				elsif channel_number[] == B"010" then 
+					 dft_by_word3.start_dft = Vcc;
+				elsif channel_number[] == B"011" then 
+					 dft_by_word4.start_dft = Vcc;
+				elsif channel_number[] == B"100" then 
+					 dft_by_word5.start_dft = Vcc;
+				elsif channel_number[] == B"101" then 
+					 dft_by_word6.start_dft = Vcc;
 				end if;
-
-		  when load_dft =>
-		      
-				sm = calculus_dft;
+						  
+			   sm = on_dft;
+				 
 				
-		  when calculus_dft =>
+
+		  when on_dft =>
+		      
+				sm = on_dft2;
+				
+		  when on_dft2 =>
 		      
 				sm = sum_dft;
 				

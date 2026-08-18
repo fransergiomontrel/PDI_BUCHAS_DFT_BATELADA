@@ -106,14 +106,17 @@ module sm_corrente_await (
     localparam CHECK_SOH = 4'b0000;//UART await for SOH byte
 	 localparam CHECK_TYPE = 4'b0001;//UART await for TYPE byte
 	 localparam EN_W_1 = 4'b0010;//Reading current write key with writing enable bit
-	 localparam EN_W_2 = 4'b0011;//Writing write key with writing enable bit activated
-	 localparam PREPARE_CONVERSION = 4'b0100;//Prepare IED slaver to receive next pulse as conversion trigger
-	 localparam START_CONVERSION = 4'b0101;//Trigg AD conversion for 50 Hz or 60 Hz, as chosen previously in type_byte
-	 localparam AWAIT_END_CONVERSION = 4'b0110;//Await 35 ms to conversion completes
-	 localparam DIS_W_1 = 4'b0111;//Reading current write key with writing enable bit
-	 localparam DIS_W_2 = 4'b1000;//Writing write key with writing enable bit desactivated
-	 localparam CALC_PHASORS = 4'b1001;//Requesting SRAM data of 86580 bytes
-	 localparam AWAIT_CORRENTE_TX = 4'b1010; //Request 58 bytes which is all data available (phasors, temp and 4-20mA)
+	 localparam EN_W_2 = 4'b0011;//Send first byte on next clock
+	 localparam EN_W_3 = 4'b0100;//Writing write key with writing enable bit activated
+	 localparam PREPARE_CONVERSION = 4'b0101;//Prepare IED slaver to receive next pulse as conversion trigger
+	 localparam START_CONVERSION = 4'b0110;//Trigg AD conversion for 50 Hz or 60 Hz, as chosen previously in type_byte
+	 localparam AWAIT_END_CONVERSION = 4'b0111;//Await 35 ms to conversion completes
+	 localparam DIS_W_1 = 4'b1000;//Reading current write key with writing enable bit
+	 localparam DIS_W_2 = 4'b1001;//Send first byte on next clock
+	 localparam DIS_W_3 = 4'b1010;//Writing write key with writing enable bit desactivated
+	 localparam CALC_PHASORS = 4'b1011;//Requesting SRAM data of 86580 bytes
+	 localparam DELAY_SAMPLES = 4'b1100;//Requesting SRAM data of 86580 bytes
+	 localparam AWAIT_CORRENTE_TX = 4'b1101; //Request 58 bytes which is all data available (phasors, temp and 4-20mA)
 
 	 reg [3:0] current_state;
 	 	 
@@ -275,12 +278,8 @@ module sm_corrente_await (
 							 if (bytes_counter == 3'd0) begin
 									
 								  //32 bit returned data completed 
-								  readed_data_32 = readed_data_32 | 32'hAC000001;
+								  readed_data_32 <= readed_data_32 | 32'hAC000001;
 																		
-								  //byte 1 to be sent
-								  command_new_byte <= 1'b1;
-								  byte_to_send <= readed_data_32[31:24];
-								  bytes_counter <= bytes_counter + 1;
 									
 								  host_mode <= MODE_CFG_FPGA;
 											  
@@ -291,6 +290,17 @@ module sm_corrente_await (
 						 end
 						 
 						 EN_W_2:
+						 begin
+						 
+						     //byte 1 to be sent
+							  command_new_byte <= 1'b1;
+							  byte_to_send <= readed_data_32[31:24];
+							  bytes_counter <= bytes_counter + 1;
+							  current_state <= EN_W_3;
+						 
+						 end
+						 
+						 EN_W_3:
 						 
 						 begin
 						 
@@ -468,12 +478,7 @@ module sm_corrente_await (
 						 if (bytes_counter == 3'd0) begin
 								
 							  //32 bit returned data completed 
-							  readed_data_32 = (readed_data_32 | 32'hAC000000) & (32'hFFFFFFFE);
-																	
-							  //byte 1 to be sent
-							  command_new_byte <= 1'b1;
-							  byte_to_send <= readed_data_32[31:24];
-							  bytes_counter <= bytes_counter + 1;
+							  readed_data_32 <= (readed_data_32 | 32'hAC000000) & (32'hFFFFFFFE);
 								
 							  host_mode <= MODE_CFG_FPGA;
 										  
@@ -485,6 +490,16 @@ module sm_corrente_await (
 						 end
 						 
 						 DIS_W_2:
+			  
+			          begin
+						     //byte 1 to be sent
+							  command_new_byte <= 1'b1;
+							  byte_to_send <= readed_data_32[31:24];
+							  bytes_counter <= bytes_counter + 1;
+						     current_state <= DIS_W_3;
+						 end
+						 
+						 DIS_W_3:
 			  
 			          begin
 						 
@@ -563,10 +578,7 @@ module sm_corrente_await (
 								 readed_words <= readed_words + 1;
 								 //Commands occur only until last word
 								 if (readed_words < 16'd43289) begin
-									  //Command to read another first byte of next word
-								     bytes_counter <= 3'd1;
-								     command_new_byte <= 1'b1;
-								     byte_to_send <= 1'h00;
+									  current_state <= DELAY_SAMPLES;  
 								 end
 								 
 								 else begin
@@ -579,6 +591,19 @@ module sm_corrente_await (
 							end							 							 					    
 							  							  
 					    end
+						 
+						 DELAY_SAMPLES:
+						 begin
+						     is_finished  <= is_finished + 1;
+							  if (is_finished == 22'd200) begin
+							      //Command to read another first byte of next word
+								   bytes_counter <= 3'd1;
+								   command_new_byte <= 1'b1;
+								   byte_to_send <= 1'h00;
+							      is_finished  <= 22'd0;
+									current_state <= CALC_PHASORS;
+							  end
+						 end
 						 						 
 				       AWAIT_CORRENTE_TX:
 						 begin

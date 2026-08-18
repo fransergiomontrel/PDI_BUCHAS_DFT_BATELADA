@@ -90,12 +90,12 @@ read_state.READ_STATE_CLEAR 0 1 0 0 0 0 0 1
 read_state.READ_STATE_PULSE_SE 1 0 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale:dft_caller|sm
-Name sum_dft calculus_dft load_dft load nop idle 
+Name sum_dft on_dft2 on_dft start_dft nop idle 
 idle 0 0 0 0 0 0 
 nop 0 0 0 0 1 1 
-load 0 0 0 1 0 1 
-load_dft 0 0 1 0 0 1 
-calculus_dft 0 1 0 0 0 1 
+start_dft 0 0 0 1 0 1 
+on_dft 0 0 1 0 0 1 
+on_dft2 0 1 0 0 0 1 
 sum_dft 1 0 0 0 0 1 
 
 State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale:dft_caller|DFT:dft_by_word6|sm
@@ -155,28 +155,27 @@ state_uart_tx.PARITY_BIT 1 0 0 1 0
 state_uart_tx.STOP_BIT 0 0 0 1 1 
 
 State Machine - |sensor_buchas|sm_corrente_await:inst4|current_state
-Name current_state.AWAIT_CORRENTE_TX current_state.CALC_PHASORS current_state.DIS_W_2 current_state.DIS_W_1 current_state.AWAIT_END_CONVERSION current_state.START_CONVERSION current_state.PREPARE_CONVERSION current_state.EN_W_2 current_state.EN_W_1 current_state.CHECK_TYPE current_state.CHECK_SOH 
-current_state.CHECK_SOH 0 0 0 0 0 0 0 0 0 0 0 
-current_state.CHECK_TYPE 0 0 0 0 0 0 0 0 0 1 1 
-current_state.EN_W_1 0 0 0 0 0 0 0 0 1 0 1 
-current_state.EN_W_2 0 0 0 0 0 0 0 1 0 0 1 
-current_state.PREPARE_CONVERSION 0 0 0 0 0 0 1 0 0 0 1 
-current_state.START_CONVERSION 0 0 0 0 0 1 0 0 0 0 1 
-current_state.AWAIT_END_CONVERSION 0 0 0 0 1 0 0 0 0 0 1 
-current_state.DIS_W_1 0 0 0 1 0 0 0 0 0 0 1 
-current_state.DIS_W_2 0 0 1 0 0 0 0 0 0 0 1 
-current_state.CALC_PHASORS 0 1 0 0 0 0 0 0 0 0 1 
-current_state.AWAIT_CORRENTE_TX 1 0 0 0 0 0 0 0 0 0 1 
+Name current_state.AWAIT_CORRENTE_TX current_state.DELAY_SAMPLES current_state.CALC_PHASORS current_state.DIS_W_3 current_state.DIS_W_2 current_state.DIS_W_1 current_state.AWAIT_END_CONVERSION current_state.START_CONVERSION current_state.PREPARE_CONVERSION current_state.EN_W_3 current_state.EN_W_2 current_state.EN_W_1 current_state.CHECK_TYPE current_state.CHECK_SOH 
+current_state.CHECK_SOH 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+current_state.CHECK_TYPE 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+current_state.EN_W_1 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+current_state.EN_W_2 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+current_state.EN_W_3 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+current_state.PREPARE_CONVERSION 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+current_state.START_CONVERSION 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+current_state.AWAIT_END_CONVERSION 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+current_state.DIS_W_1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+current_state.DIS_W_2 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+current_state.DIS_W_3 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+current_state.CALC_PHASORS 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+current_state.DELAY_SAMPLES 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+current_state.AWAIT_CORRENTE_TX 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|sm_corrente_await:inst4|fpga_rw_8:u_fpga_rw_8|current_spi_state
-Name current_spi_state.AWAIT_SCLK_RISE_MISO current_spi_state.AWAIT_SCLK_FALL_MISO current_spi_state.NOP current_spi_state.AWAIT_SCLK_RISE_MOSI current_spi_state.AWAIT_SCLK_FALL_MOSI current_spi_state.TSU_CSCK_MOSI current_spi_state.NO_MOSI_DATA 
-current_spi_state.NO_MOSI_DATA 0 0 0 0 0 0 0 
-current_spi_state.TSU_CSCK_MOSI 0 0 0 0 0 1 1 
-current_spi_state.AWAIT_SCLK_FALL_MOSI 0 0 0 0 1 0 1 
-current_spi_state.AWAIT_SCLK_RISE_MOSI 0 0 0 1 0 0 1 
-current_spi_state.NOP 0 0 1 0 0 0 1 
-current_spi_state.AWAIT_SCLK_FALL_MISO 0 1 0 0 0 0 1 
-current_spi_state.AWAIT_SCLK_RISE_MISO 1 0 0 0 0 0 1 
+Name current_spi_state.NO_DATA current_spi_state.AWAIT_SCLK_RISE current_spi_state.AWAIT_SCLK_FALL 
+current_spi_state.NO_DATA 0 0 0 
+current_spi_state.AWAIT_SCLK_FALL 1 0 1 
+current_spi_state.AWAIT_SCLK_RISE 1 1 0 
 
 State Machine - |sensor_buchas|acquisition_module:inst5|acquisition_store_time_counter:storer_time_counter|sm
 Name WAIT_END WE1_CS0_LSBb WE0_CS0_LSBc WE0_CS0_LSBb WE0_CS0_LSBa WE1_CS0_LSBa WAIT_STORE_TIME_COUNTER 
@@ -187,21 +186,6 @@ WE0_CS0_LSBb 0 0 0 1 0 0 1
 WE0_CS0_LSBc 0 0 1 0 0 0 1 
 WE1_CS0_LSBb 0 1 0 0 0 0 1 
 WAIT_END 1 0 0 0 0 0 1 
-
-State Machine - |sensor_buchas|acquisition_module:inst5|acquisition_store_crc:storer_crc|sm
-Name WAIT_END WE1_CS0_MSBb WE0_CS0_MSBc WE0_CS0_MSBb WE0_CS0_MSBa WE1_CS0_MSBa WE1_CS0_LSBb WE0_CS0_LSBc WE0_CS0_LSBb WE0_CS0_LSBa WE1_CS0_LSBa WAIT_STORE_CRC 
-WAIT_STORE_CRC 0 0 0 0 0 0 0 0 0 0 0 0 
-WE1_CS0_LSBa 0 0 0 0 0 0 0 0 0 0 1 1 
-WE0_CS0_LSBa 0 0 0 0 0 0 0 0 0 1 0 1 
-WE0_CS0_LSBb 0 0 0 0 0 0 0 0 1 0 0 1 
-WE0_CS0_LSBc 0 0 0 0 0 0 0 1 0 0 0 1 
-WE1_CS0_LSBb 0 0 0 0 0 0 1 0 0 0 0 1 
-WE1_CS0_MSBa 0 0 0 0 0 1 0 0 0 0 0 1 
-WE0_CS0_MSBa 0 0 0 0 1 0 0 0 0 0 0 1 
-WE0_CS0_MSBb 0 0 0 1 0 0 0 0 0 0 0 1 
-WE0_CS0_MSBc 0 0 1 0 0 0 0 0 0 0 0 1 
-WE1_CS0_MSBb 0 1 0 0 0 0 0 0 0 0 0 1 
-WAIT_END 1 0 0 0 0 0 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|acquisition_module:inst5|acquisition_store:storer|sm
 Name WAIT_END INC_CHANNEL CS1b CS0b CS0a2 CS0a1 CS1a WAIT_STORE 
@@ -232,12 +216,11 @@ SERIALIZING 0 1 0 0 0 0 1
 WAITING_END_OF_CYCLE 1 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|acquisition_module:inst5|acquisition_ctrl_v2:ctrl|sm_pipeline2
-Name STORING_CRC STORING_TIME_COUNTER CHECK_STORE_END STORING WAITING_STORE 
-WAITING_STORE 0 0 0 0 0 
-STORING 0 0 0 1 1 
-CHECK_STORE_END 0 0 1 0 1 
-STORING_TIME_COUNTER 0 1 0 0 1 
-STORING_CRC 1 0 0 0 1 
+Name STORING_TIME_COUNTER CHECK_STORE_END STORING WAITING_STORE 
+WAITING_STORE 0 0 0 0 
+STORING 0 0 1 1 
+CHECK_STORE_END 0 1 0 1 
+STORING_TIME_COUNTER 1 0 0 1 
 
 State Machine - |sensor_buchas|slaver_states:inst12|current_initial_state
 Name current_initial_state.IDLE_AD current_initial_state.RESET_AD current_initial_state.CONFIG_AD current_initial_state.SEND_X01 current_initial_state.TESTE_SPI_AD current_initial_state.TESTE_RAM current_initial_state.CPLD_RST_AD current_initial_state.GPIO_CONFIG 

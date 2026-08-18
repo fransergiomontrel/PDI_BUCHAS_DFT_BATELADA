@@ -142,9 +142,9 @@ begin
 	
 	-- Seleciona o Endian
 	if little_endian then
-		data[] = {bus_bits[7..0], bus_bits[15..8]};
+		data[] = (bus_bits[7..0], bus_bits[15..8]);
 	else
-		data[] = {bus_bits[15..8], bus_bits[7..0]};
+		data[] = (bus_bits[15..8], bus_bits[7..0]);
 	end if;
 
 end;

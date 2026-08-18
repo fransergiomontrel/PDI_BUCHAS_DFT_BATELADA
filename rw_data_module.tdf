@@ -79,8 +79,8 @@ begin
 	--Conections of dft_locale 1
 	dft_caller.clk = clk;
 	dft_caller.sreset = sreset;
-	dft_caller.byte_channel[] = data_read[];
-	dft_caller.new_byte = addr_inc_read;
+	dft_caller.word[] = buffer_parallel_in[].q;
+	dft_caller.new_word = shift.loading_tx;
 	dft_caller.enable_read = oe_n;
 	dft_caller.end_tx = done_tx;
 	luts_table.addr = dft_caller.step_ufm_addr[];
@@ -288,25 +288,4 @@ begin
 --	data_write[] = h"A5";
 
 	
-	TABLE
-		sm					=> test_state[];
-		rst 				=>	0;
-		init 				=>	1;
-		init_buffers1 	=>	2;
-		init_buffers2 	=>	3;
-		init_buffers3 	=>	4;
-		init_buffers4 	=>	5;
-		load_sync1		=> 6;
-		load_sync2		=> 7;
-		load_sync3		=> 8;
-		load_sync4		=> 9;
-		wait_loading 	=>	10;
-		wr1				=>	11;
-		wr2				=>	12;
-		wr3				=>	13;
-		wr4				=>	14;
-		wr5				=>	15;
-		wr6				=>	16;
-		wait_loading_n	=>	17;
-	END TABLE;
 end;
