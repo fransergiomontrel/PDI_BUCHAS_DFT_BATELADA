@@ -147,12 +147,16 @@ check_end 0 1 0 0 1
 await_end_tx 1 0 0 0 1 
 
 State Machine - |sensor_buchas|uart_tx:inst2|state_uart_tx
-Name state_uart_tx.PARITY_BIT state_uart_tx.DATA_BITS state_uart_tx.START_BIT state_uart_tx.START state_uart_tx.STOP_BIT 
-state_uart_tx.START 0 0 0 0 0 
-state_uart_tx.START_BIT 0 0 1 1 0 
-state_uart_tx.DATA_BITS 0 1 0 1 0 
-state_uart_tx.PARITY_BIT 1 0 0 1 0 
-state_uart_tx.STOP_BIT 0 0 0 1 1 
+Name state_uart_tx.STOP_BIT state_uart_tx.DATA_BITS state_uart_tx.START_BIT state_uart_tx.START 
+state_uart_tx.START 0 0 0 0 
+state_uart_tx.START_BIT 0 0 1 1 
+state_uart_tx.DATA_BITS 0 1 0 1 
+state_uart_tx.STOP_BIT 1 0 0 1 
+
+State Machine - |sensor_buchas|uart_tx:inst2|count_byte
+Name count_byte.111100 
+count_byte.000000 0 
+count_byte.111100 1 
 
 State Machine - |sensor_buchas|sm_corrente_await:inst4|current_state
 Name current_state.AWAIT_CORRENTE_TX current_state.DELAY_SAMPLES current_state.CALC_PHASORS current_state.DIS_W_3 current_state.DIS_W_2 current_state.DIS_W_1 current_state.AWAIT_END_CONVERSION current_state.START_CONVERSION current_state.PREPARE_CONVERSION current_state.EN_W_3 current_state.EN_W_2 current_state.EN_W_1 current_state.CHECK_TYPE current_state.CHECK_SOH 
@@ -249,12 +253,11 @@ current_spi_state.THT_CKCS_MOSI 0 1 0 0 0 0 1
 current_spi_state.IDLE 1 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|slaver_states:inst12|uart_tx_8:u_uart_tx_8|state_uart_tx
-Name state_uart_tx.PARITY_BIT state_uart_tx.DATA_BITS state_uart_tx.START_BIT state_uart_tx.START state_uart_tx.STOP_BIT 
-state_uart_tx.START 0 0 0 0 0 
-state_uart_tx.START_BIT 0 0 1 1 0 
-state_uart_tx.DATA_BITS 0 1 0 1 0 
-state_uart_tx.PARITY_BIT 1 0 0 1 0 
-state_uart_tx.STOP_BIT 0 0 0 1 1 
+Name state_uart_tx.STOP_BIT state_uart_tx.DATA_BITS state_uart_tx.START_BIT state_uart_tx.START 
+state_uart_tx.START 0 0 0 0 
+state_uart_tx.START_BIT 0 0 1 1 
+state_uart_tx.DATA_BITS 0 1 0 1 
+state_uart_tx.STOP_BIT 1 0 0 1 
 
 State Machine - |sensor_buchas|host_interface:inst1|mode_selector:mode_sel|sm
 Name sChangedRequested sStable sWaitingChangeOk sUpdateMode sNoticeChanging 
