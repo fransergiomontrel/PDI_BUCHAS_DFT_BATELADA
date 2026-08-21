@@ -2,94 +2,108 @@ module rx_serial_8 (
 
     input  wire        clk,
     input  wire        rst,       
-    input  wire        rx,        
-    output reg         busy_rx,      
+    input  wire        rx,             
     output reg         done_rx,     
-	 output reg [7:0]   rx_reg,
-	 output wire error
+	 output reg [7:0]   rx_reg
 
 );    
 
 	 //8 bits size register to count 8 bits of data
     reg [3:0]  bit_cnt; 
 	 //10 bits size register to count period of boud between bits
-	 reg [9:0]  bit_time_cnt;
-	 //1 bit size register to notice state of all bits data received
-	 reg byte_received;
+	 reg [10:0]  bit_time_cnt;
+	 
+	 //States definition for states machine of UART 8N1 for 1 byte
+	 localparam START = 3'b00;//
+    localparam START_BIT = 3'b01;//
+	 localparam DATA_BITS = 3'b10;//
+	 localparam STOP_BIT = 3'b11;//
+	 
+	 reg [1:0] state_uart_rx;
 	 
     always @(posedge clk) begin
 	 
         if (rst) begin
             done_rx <= 1'b0;
-            busy_rx   <= 1'b0;
-				bit_time_cnt  <= 10'd0;
+				bit_time_cnt  <= 11'd0;
 				bit_cnt <= 4'd0;
 				rx_reg <= 8'd0;
-				byte_received <= 1'b0;
+				state_uart_rx <= START;
         end
 		  
-        else begin
-				
-				//State idle
-            if (rx == 1'd1 & !busy_rx) begin
-				
-				    done_rx <= 1'b0;
-					 			 
-		      end
-				
-				//Check start bit arriving
-            else if (rx == 1'd0 & !busy_rx) begin
-				
-				    busy_rx <= 1'b1;
-					 
-		      end
-				
-				//UART reception on
-            else if (busy_rx & !byte_received) begin
-				    					 
-					 bit_time_cnt  <= bit_time_cnt + 10'd1;
-					 //Count bit time
-					 if (bit_time_cnt == 10'd900) begin 
-					 
-                    bit_time_cnt  <= 10'd0;						  						  					  
-						  bit_cnt <= bit_cnt + 10'd1;
-						  				  
-						  if (bit_cnt == 10'd7) begin 
-								
-								bit_cnt <= 10'd0;
-								byte_received <= 1'b1;
-							   									 						      
-						  end
-						  else begin 
-					 
-							   rx_reg[bit_cnt] <= rx;
-								
-							   									 						      
-						  end
-																					
-					 end										 					 					 
-					 
-		      end				
-				
-           //Await one stop bit finish
-           else if (byte_received == 1'b1) begin
-				
-				    bit_time_cnt  <= bit_time_cnt + 10'd1;
-					 if (bit_time_cnt == 10'd900) begin
-					 
-					     bit_time_cnt  <= 10'd0;
-						  
-						  done_rx <= 1'b1;
-						  busy_rx <= 1'b0;
-						  byte_received <= 1'b0;
-						  						  
-					 end
-					 
-			  end
-						 
-		  end //End of condition no reset
+		  else begin
 		  
-    end
+		  done_rx <= 1'b0;
+		  
+		  case (state_uart_rx)	
+		  
+		  START:
+		  begin
+		  
+				if (rx != 1'd1) begin
+				    state_uart_rx <= START_BIT;
+					 bit_time_cnt  <= bit_time_cnt + 11'd1;
+					 
+				end
+		      
+		  end
+		  
+		  START_BIT:
+		  begin
+		  
+		      bit_time_cnt  <= bit_time_cnt + 11'd1;
+				//Count bit time
+				if (bit_time_cnt == 11'd1302) begin 
+				
+                bit_time_cnt  <= 11'd0;
+					 rx_reg[bit_cnt] <= rx;
+					 bit_cnt <= bit_cnt + 4'd1;
+					 state_uart_rx <= DATA_BITS;
+					
+		      end
+		  
+		  end
+		  
+		  DATA_BITS:
+		  begin
+		  
+		      bit_time_cnt  <= bit_time_cnt + 11'd1;
+				
+				//Count bit time
+				if (bit_time_cnt == 11'd868) begin 
+                bit_time_cnt  <= 11'd0;
+					 rx_reg[bit_cnt] <= rx;
+					 bit_cnt <= bit_cnt + 4'd1;
+					 if (bit_cnt == 4'd7) begin 
+								
+							bit_cnt <= 4'd0;
+							state_uart_rx <= STOP_BIT;
+							   									 						      
+					end
+					 
+		      end
+		  
+		  end
+		  
+		  STOP_BIT:
+		  begin
+		  
+		      bit_time_cnt  <= bit_time_cnt + 11'd1;
+						
+				if (bit_time_cnt == 11'd1302) begin 
+				
+                bit_time_cnt  <= 11'd0;
+					 done_rx <= 1'b1;
+					 state_uart_rx <= START;
+					 
+		      end
+		  end
+		  
+  endcase
+
+end  
+				
+end
 	 
 endmodule
 

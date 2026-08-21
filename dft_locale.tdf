@@ -127,7 +127,7 @@ begin
 	 dft_by_word5.next_step = next_step_all_ff.q;
 	 dft_by_word6.next_step = next_step_all_ff.q;
 	 
-	 step_ufm_addr = dft_by_word6.luts_addr_out[];
+	 step_ufm_addr[] = dft_by_word6.luts_addr_out[];
 	 
 	 --Lock first sample of channel 1
 	 first_sample_ff.clk = clk;

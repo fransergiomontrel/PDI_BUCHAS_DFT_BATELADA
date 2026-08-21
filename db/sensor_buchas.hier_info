@@ -3,7 +3,7 @@ ram_we_n <= RAM_interface:inst15.ram_we_n
 clk => RAM_interface:inst15.clk
 clk => host_interface:inst1.clk
 clk => reset_module:inst7.clk
-clk => slaver_states:inst12.clk
+clk => slaver_states:inst31.clk
 clk => switch:inst20.clk
 clk => acquisition_module:inst5.clk
 clk => sm_corrente_await:inst4.clk
@@ -12,7 +12,7 @@ clk => rw_data_module:inst10.clk
 clk => driver_ADS1118:inst3.clk
 clk => conf_cpld_module:inst.clk
 clk => adc_interface:inst17.clk
-rst_hardware => slaver_states:inst12.rst_hardware
+rst_hardware => slaver_states:inst31.rst_hardware
 rxd_from_gpio47 => sm_corrente_await:inst4.rxd_from_gpio47
 driver_miso => driver_ADS1118:inst3.driver_miso
 adc_sdi[0] => adc_interface:inst17.adc_sdi[0]
@@ -39,10 +39,12 @@ ram_data_bus[14] <> RAM_interface:inst15.ram_data_bus[14]
 ram_data_bus[15] <> RAM_interface:inst15.ram_data_bus[15]
 ram_cs_n <= RAM_interface:inst15.ram_cs_n
 ram_oe_n <= RAM_interface:inst15.ram_oe_n
-tx <= MUX:inst11.result
 driver_ncs <= driver_ADS1118:inst3.driver_ncs
 driver_sclk <= driver_ADS1118:inst3.driver_sclk
 driver_mosi <= driver_ADS1118:inst3.driver_mosi
+tx <= MUX:inst11.result
+tx_fibra <= selected_to_uart[1].DB_MAX_OUTPUT_PORT_TYPE
+debug <= sm_corrente_await:inst4.debug
 adc_convst[0] <= adc_interface:inst17.adc_convst[0]
 adc_convst[1] <= adc_interface:inst17.adc_convst[1]
 adc_convst[2] <= adc_interface:inst17.adc_convst[2]
@@ -417,9 +419,61 @@ count_rst_n => ini_ff.IN0
 reset <= rst_ff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|slaver_states:inst12
+|sensor_buchas|slaver_states:inst31
 clk => clk.IN3
-rst_hardware => rst_hardware.IN1
+rst_hardware => reset_uart.OUTPUTSELECT
+rst_hardware => channel_config.OUTPUTSELECT
+rst_hardware => channel_config.OUTPUTSELECT
+rst_hardware => channel_config.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => delay.OUTPUTSELECT
+rst_hardware => start_8_ctl.OUTPUTSELECT
+rst_hardware => reset_adc_config.OUTPUTSELECT
+rst_hardware => select0_0.OUTPUTSELECT
+rst_hardware => select1_0.OUTPUTSELECT
+rst_hardware => data_to_send.OUTPUTSELECT
+rst_hardware => data_to_send.OUTPUTSELECT
+rst_hardware => data_to_send.OUTPUTSELECT
+rst_hardware => data_to_send.OUTPUTSELECT
+rst_hardware => data_to_send.OUTPUTSELECT
+rst_hardware => data_to_send.OUTPUTSELECT
+rst_hardware => data_to_send.OUTPUTSELECT
+rst_hardware => data_to_send.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
+rst_hardware => host_mode.OUTPUTSELECT
+rst_hardware => host_mode.OUTPUTSELECT
+rst_hardware => reset_sm_laver.OUTPUTSELECT
+rst_hardware => rst~reg0.ENA
+rst_hardware => convst~reg0.ENA
 rst <= rst~reg0.DB_MAX_OUTPUT_PORT_TYPE
 tx <= uart_tx_8:u_uart_tx_8.tx
 convst <= convst~reg0.DB_MAX_OUTPUT_PORT_TYPE
@@ -429,9 +483,10 @@ select0_0 <= select0_0~reg0.DB_MAX_OUTPUT_PORT_TYPE
 select1_0 <= select1_0~reg0.DB_MAX_OUTPUT_PORT_TYPE
 host_mode[0] <= host_mode[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 host_mode[1] <= host_mode[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+reset_sm_laver <= reset_sm_laver~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|slaver_states:inst12|uart_tx_8:u_uart_tx_8
+|sensor_buchas|slaver_states:inst31|uart_tx_8:u_uart_tx_8
 clk => tx_freq_divider[0].CLK
 clk => tx_freq_divider[1].CLK
 clk => tx_freq_divider[2].CLK
@@ -449,7 +504,23 @@ clk => bit_cnt[0].CLK
 clk => bit_cnt[1].CLK
 clk => bit_cnt[2].CLK
 clk => bit_cnt[3].CLK
-clk => state_uart_tx~5.DATAIN
+clk => data_reg[0].CLK
+clk => data_reg[1].CLK
+clk => data_reg[2].CLK
+clk => data_reg[3].CLK
+clk => data_reg[4].CLK
+clk => data_reg[5].CLK
+clk => data_reg[6].CLK
+clk => data_reg[7].CLK
+clk => state_uart_tx~6.DATAIN
+rst => data_reg.OUTPUTSELECT
+rst => data_reg.OUTPUTSELECT
+rst => data_reg.OUTPUTSELECT
+rst => data_reg.OUTPUTSELECT
+rst => data_reg.OUTPUTSELECT
+rst => data_reg.OUTPUTSELECT
+rst => data_reg.OUTPUTSELECT
+rst => data_reg.OUTPUTSELECT
 rst => bit_cnt.OUTPUTSELECT
 rst => bit_cnt.OUTPUTSELECT
 rst => bit_cnt.OUTPUTSELECT
@@ -471,6 +542,15 @@ rst => state_uart_tx.OUTPUTSELECT
 rst => state_uart_tx.OUTPUTSELECT
 rst => state_uart_tx.OUTPUTSELECT
 rst => state_uart_tx.OUTPUTSELECT
+rst => state_uart_tx.OUTPUTSELECT
+start => data_reg.OUTPUTSELECT
+start => data_reg.OUTPUTSELECT
+start => data_reg.OUTPUTSELECT
+start => data_reg.OUTPUTSELECT
+start => data_reg.OUTPUTSELECT
+start => data_reg.OUTPUTSELECT
+start => data_reg.OUTPUTSELECT
+start => data_reg.OUTPUTSELECT
 start => busy.OUTPUTSELECT
 start => tx.OUTPUTSELECT
 start => tx_freq_divider.OUTPUTSELECT
@@ -487,20 +567,21 @@ start => state_uart_tx.OUTPUTSELECT
 start => state_uart_tx.OUTPUTSELECT
 start => state_uart_tx.OUTPUTSELECT
 start => state_uart_tx.OUTPUTSELECT
-data_in[0] => Mux0.IN7
-data_in[1] => Mux0.IN6
-data_in[2] => Mux0.IN5
-data_in[3] => Mux0.IN4
-data_in[4] => Mux0.IN3
-data_in[5] => Mux0.IN2
-data_in[6] => Mux0.IN1
-data_in[7] => Mux0.IN0
+start => state_uart_tx.OUTPUTSELECT
+data_in[0] => data_reg.DATAB
+data_in[1] => data_reg.DATAB
+data_in[2] => data_reg.DATAB
+data_in[3] => data_reg.DATAB
+data_in[4] => data_reg.DATAB
+data_in[5] => data_reg.DATAB
+data_in[6] => data_reg.DATAB
+data_in[7] => data_reg.DATAB
 tx <= tx~reg0.DB_MAX_OUTPUT_PORT_TYPE
 busy <= busy~reg0.DB_MAX_OUTPUT_PORT_TYPE
 done <= done~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|slaver_states:inst12|driver_ADS8691:u_driver_ADS8691
+|sensor_buchas|slaver_states:inst31|driver_ADS8691:u_driver_ADS8691
 clk => clk.IN1
 rst => rst.IN1
 driver_ncs <= spi_adc:u_spi_adc.ncs
@@ -508,7 +589,7 @@ driver_sclk <= spi_adc:u_spi_adc.sclk
 driver_mosi <= spi_adc:u_spi_adc.mosi
 
 
-|sensor_buchas|slaver_states:inst12|driver_ADS8691:u_driver_ADS8691|spi_adc:u_spi_adc
+|sensor_buchas|slaver_states:inst31|driver_ADS8691:u_driver_ADS8691|spi_adc:u_spi_adc
 clk => shift_reg[0].CLK
 clk => shift_reg[1].CLK
 clk => shift_reg[2].CLK
@@ -688,7 +769,7 @@ ncs <= ncs~reg0.DB_MAX_OUTPUT_PORT_TYPE
 mosi <= mosi~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|slaver_states:inst12|edge_detector:u_edge_detector
+|sensor_buchas|slaver_states:inst31|edge_detector:u_edge_detector
 current_read_pulse => rising_edge.IN1
 current_read_pulse => previous_read_pulse.DATAIN
 clk => previous_read_pulse.CLK
@@ -3889,13 +3970,11 @@ o[2] <= ffs[2].DB_MAX_OUTPUT_PORT_TYPE
 clk => clk.IN4
 rst => rst.IN4
 rxd_from_gpio47 => rxd_from_gpio47.IN2
-done_tx => Selector1.IN10
+done_tx => Selector4.IN12
 done_tx => requested_data.OUTPUTSELECT
 done_tx => acquire_again.OUTPUTSELECT
-done_tx => Selector14.IN8
+done_tx => Selector17.IN11
 host_miso => host_miso.IN1
-led_conv_60 <= led_conv_60~reg0.DB_MAX_OUTPUT_PORT_TYPE
-led_conv_50 <= led_conv_50~reg0.DB_MAX_OUTPUT_PORT_TYPE
 txd_to_gpio46 <= txd_to_gpio46~reg0.DB_MAX_OUTPUT_PORT_TYPE
 requested_data <= requested_data~reg0.DB_MAX_OUTPUT_PORT_TYPE
 acquire_again <= acquire_again~reg0.DB_MAX_OUTPUT_PORT_TYPE
@@ -3907,6 +3986,7 @@ host_mosi <= fpga_rw_8:u_fpga_rw_8.mosi
 frequency <= frequency~reg0.DB_MAX_OUTPUT_PORT_TYPE
 host_mode[0] <= host_mode[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 host_mode[1] <= host_mode[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+debug <= debug~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |sensor_buchas|sm_corrente_await:inst4|fpga_rw_8:u_fpga_rw_8
@@ -4006,7 +4086,6 @@ spi_done <= spi_done~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |sensor_buchas|sm_corrente_await:inst4|rx_serial_8:u_rx_serial_8
-clk => byte_received.CLK
 clk => rx_reg[0]~reg0.CLK
 clk => rx_reg[1]~reg0.CLK
 clk => rx_reg[2]~reg0.CLK
@@ -4029,10 +4108,11 @@ clk => bit_time_cnt[6].CLK
 clk => bit_time_cnt[7].CLK
 clk => bit_time_cnt[8].CLK
 clk => bit_time_cnt[9].CLK
-clk => busy_rx~reg0.CLK
+clk => bit_time_cnt[10].CLK
 clk => done_rx~reg0.CLK
+clk => state_uart_rx~5.DATAIN
 rst => done_rx.OUTPUTSELECT
-rst => busy_rx.OUTPUTSELECT
+rst => bit_time_cnt.OUTPUTSELECT
 rst => bit_time_cnt.OUTPUTSELECT
 rst => bit_time_cnt.OUTPUTSELECT
 rst => bit_time_cnt.OUTPUTSELECT
@@ -4055,8 +4135,10 @@ rst => rx_reg.OUTPUTSELECT
 rst => rx_reg.OUTPUTSELECT
 rst => rx_reg.OUTPUTSELECT
 rst => rx_reg.OUTPUTSELECT
-rst => byte_received.OUTPUTSELECT
-rx => always0.IN1
+rst => state_uart_rx.OUTPUTSELECT
+rst => state_uart_rx.OUTPUTSELECT
+rst => state_uart_rx.OUTPUTSELECT
+rst => state_uart_rx.OUTPUTSELECT
 rx => rx_reg.DATAB
 rx => rx_reg.DATAB
 rx => rx_reg.DATAB
@@ -4065,8 +4147,21 @@ rx => rx_reg.DATAB
 rx => rx_reg.DATAB
 rx => rx_reg.DATAB
 rx => rx_reg.DATAB
-rx => always0.IN1
-busy_rx <= busy_rx~reg0.DB_MAX_OUTPUT_PORT_TYPE
+rx => state_uart_rx.OUTPUTSELECT
+rx => state_uart_rx.OUTPUTSELECT
+rx => state_uart_rx.OUTPUTSELECT
+rx => state_uart_rx.OUTPUTSELECT
+rx => bit_time_cnt.OUTPUTSELECT
+rx => bit_time_cnt.OUTPUTSELECT
+rx => bit_time_cnt.OUTPUTSELECT
+rx => bit_time_cnt.OUTPUTSELECT
+rx => bit_time_cnt.OUTPUTSELECT
+rx => bit_time_cnt.OUTPUTSELECT
+rx => bit_time_cnt.OUTPUTSELECT
+rx => bit_time_cnt.OUTPUTSELECT
+rx => bit_time_cnt.OUTPUTSELECT
+rx => bit_time_cnt.OUTPUTSELECT
+rx => bit_time_cnt.OUTPUTSELECT
 done_rx <= done_rx~reg0.DB_MAX_OUTPUT_PORT_TYPE
 rx_reg[0] <= rx_reg[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 rx_reg[1] <= rx_reg[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
@@ -4076,7 +4171,6 @@ rx_reg[4] <= rx_reg[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 rx_reg[5] <= rx_reg[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 rx_reg[6] <= rx_reg[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 rx_reg[7] <= rx_reg[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-error <= <GND>
 
 
 |sensor_buchas|sm_corrente_await:inst4|edge_detector:u_edge_detector

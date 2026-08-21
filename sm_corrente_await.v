@@ -5,8 +5,6 @@ module sm_corrente_await (
 	 input wire rxd_from_gpio47,
 	 input wire done_tx,
 	 input wire host_miso,
-	 output reg led_conv_60,
-	 output reg led_conv_50,
 	 output reg txd_to_gpio46,
 	 output reg requested_data,
 	 output reg acquire_again,
@@ -18,15 +16,15 @@ module sm_corrente_await (
 	 
 	 output reg frequency,
 	 
-	 output reg [1:0] host_mode
+	 output reg [1:0] host_mode,
+	 output reg debug
     	 
 );
+    
 	  
 	 //22 bit size register to insert delay thick 
 	 reg [21:0] is_finished;
 	 
-	 //Signal to enable loopback for pulsing
-	 reg delayF;
 	 
 	 //4 bit size register to count 4 bytes to be sent on 32 bits SPI writing
 	 reg [3:0] bytes_counter;
@@ -71,12 +69,14 @@ module sm_corrente_await (
 	 
 	 //Instance of UART receptor
 	 rx_serial_8 u_rx_serial_8(
+	 
     .clk(clk),
     .rst(rst),                          // reset
     .rx(rxd_from_gpio47),               // dado serie
     .busy_rx(),                         // está transmitindo
     .done_rx(done_rx_to_read_ed),       // pulso de fim
 	 .rx_reg(rx_uart_out)	 
+	 
 );
 
     //Signal which outputs rising edge of UART rx done
@@ -103,23 +103,25 @@ module sm_corrente_await (
     );
   
     //States definition for states machine of slaver IED
-    localparam CHECK_SOH = 4'b0000;//UART await for SOH byte
-	 localparam CHECK_TYPE = 4'b0001;//UART await for TYPE byte
-	 localparam EN_W_1 = 4'b0010;//Reading current write key with writing enable bit
-	 localparam EN_W_2 = 4'b0011;//Send first byte on next clock
-	 localparam EN_W_3 = 4'b0100;//Writing write key with writing enable bit activated
-	 localparam PREPARE_CONVERSION = 4'b0101;//Prepare IED slaver to receive next pulse as conversion trigger
-	 localparam START_CONVERSION = 4'b0110;//Trigg AD conversion for 50 Hz or 60 Hz, as chosen previously in type_byte
-	 localparam AWAIT_END_CONVERSION = 4'b0111;//Await 35 ms to conversion completes
-	 localparam DIS_W_1 = 4'b1000;//Reading current write key with writing enable bit
-	 localparam DIS_W_2 = 4'b1001;//Send first byte on next clock
-	 localparam DIS_W_3 = 4'b1010;//Writing write key with writing enable bit desactivated
-	 localparam CALC_PHASORS = 4'b1011;//Requesting SRAM data of 86580 bytes
-	 localparam DELAY_SAMPLES = 4'b1100;//Requesting SRAM data of 86580 bytes
-	 localparam AWAIT_CORRENTE_TX = 4'b1101; //Request 58 bytes which is all data available (phasors, temp and 4-20mA)
-
-	 reg [3:0] current_state;
-	 	 
+    localparam CHECK_SOH = 5'b00000;//UART await for SOH byte
+	 localparam CHECK_TYPE = 5'b00001;//UART await for TYPE byte
+	 localparam EN_W_1 = 5'b00010;//Reading current write key with writing enable bit
+	 localparam EN_W_2 = 5'b00011;//Send first byte on next clock
+	 localparam EN_W_3 = 5'b00100;//Writing write key with writing enable bit activated
+	 localparam PREPARE_CONVERSION = 5'b00101;//Prepare IED slaver to receive next pulse as conversion trigger
+	 localparam START_CONVERSION = 5'b00110;//Trigg AD conversion for 50 Hz or 60 Hz, as chosen previously in type_byte
+	 localparam AWAIT_END_CONVERSION = 5'b00111;//Await 35 ms to conversion completes
+	 localparam DIS_W_1 = 5'b01000;//Reading current write key with writing enable bit
+	 localparam DIS_W_2 = 5'b01001;//Send first byte on next clock
+	 localparam DIS_W_3 = 5'b01010;//Writing write key with writing enable bit desactivated
+	 localparam CALC_PHASORS = 5'b01011;//Requesting SRAM data of 86580 bytes
+	 localparam DELAY_SAMPLES = 5'b01100;//Requesting SRAM data of 86580 bytes
+	 localparam AWAIT_CORRENTE_TX = 5'b01101; //Request 58 bytes which is all data available (phasors, temp and 4-20mA)
+    localparam AWAIT_LAST_BYTE = 5'b01110;
+	 localparam AWAIT_HIGH = 5'b01111; 
+	 localparam AWAIT_LOW = 5'b10000; 
+	 reg [4:0] current_state;
+	 
 	 //Modes definition to internal connection of switch module
     localparam MODE_CFG_FPGA = 2'b00;
 	 localparam MODE_CFG = 2'b01;
@@ -130,40 +132,86 @@ module sm_corrente_await (
 							 							 	    
 		 if(rst) begin
 		     current_state <= CHECK_SOH;
-			  txd_to_gpio46 <= 1'b0;
+			  txd_to_gpio46 <= 1'b1;
 			  is_finished  <= 22'd0;
-			  delayF <= 1'd0;
 			  frequency <= 1'b0;
-			  led_conv_60 <= 1'b0;
-			  led_conv_50 <= 1'b0;
+			  select0_1 <= 1'b0;
+			  select1_1 <= 1'b0;
 			  requested_data <= 1'b0;
 			  acquire_again <= 1'b0;
 			  convst <= 1'b0;
 			  command_new_byte <= 1'b0;
 			  readed_words <= 16'd0;
+			  bytes_counter <= 4'd0;
+			  debug <= 1'b0;
+			  host_mode <= MODE_CFG_FPGA;
 
 		 end
 		 
 		 else begin
-			  //Return pulse to optical port output if pulse arrives in input 
-		     if ((ed_new_pulse == 1'b1) & (delayF == 1'b1)) begin
-			      txd_to_gpio46 = 1'b1;
-					
-					select0_1 <= 1'b0;
-					select1_1 <= 1'b0;
-				   delayF = 1'b0;	
-		     end
+			  
+			  
 		     //state machine
 		     case (current_state)			  
 	
+					AWAIT_LAST_BYTE:
+					
+					begin
+						
+						if (ed_rx_done == 1'b1) begin
+				           //
+						     if (rx_uart_out == 8'h80) begin
+										 
+						         bytes_counter <= bytes_counter + 1;
+									if (bytes_counter == 4'd1) begin
+									     
+									     current_state <= AWAIT_HIGH;
+										  is_finished <= is_finished + 22'd1;
+									end
+										 									 
+			              end
+						
+				      end
+						end
+					
+					AWAIT_HIGH:
+					
+					begin
+						
+						is_finished <= is_finished + 22'd1;
+						if (is_finished == 22'd1408) begin
+									is_finished <= 22'd0;
+									debug <= 1'b1;
+									txd_to_gpio46 <= 1'b0;
+									current_state <= AWAIT_LOW;
+						end
+						
+				   end
+					
+					AWAIT_LOW:
+					
+					begin
+						
+						is_finished <= is_finished + 22'd1;
+						if (is_finished == 22'd2880) begin
+							 is_finished <= 22'd0;
+							 txd_to_gpio46 <= 1'b1;
+							 debug <= 1'b0;
+							 current_state <= CHECK_SOH;
+						end
+						
+				   end
+						 
 			      CHECK_SOH:
 			  
 			          begin
+							  txd_to_gpio46 <= 1'b1; 
 							  acquire_again <= 1'b0;
 			              if (ed_rx_done == 1'b1) begin
+							      
 				               
 						         if (rx_uart_out == 8'h01) begin
-																			 
+										 				 
 						             current_state <= CHECK_TYPE;
 							 						
 			                  end
@@ -175,7 +223,9 @@ module sm_corrente_await (
 							  end
 							      
 						     else begin
+							  
 							      current_state <= CHECK_SOH;
+									
 							  end						
 			              
 						 end 
@@ -187,17 +237,21 @@ module sm_corrente_await (
 			              if (ed_rx_done == 1'b1) begin
 				               //FRAME OF DELAY
 						         if (rx_uart_out == 8'h13) begin
-										 delayF <= 1'b1;
+										 
 										 
 										 select0_1 <= 1'b1;
 										 select1_1 <= 1'b0;
-						             current_state <= CHECK_SOH;
-						             txd_to_gpio46 = 1'b0;							 						
+										 
+						             current_state <= AWAIT_LAST_BYTE;
+						             
+										 									 
 			                  end
 									
 									//FRAME OF SYNC 60
 									else if (rx_uart_out == 8'h0C)  begin
 									    current_state <= EN_W_1;
+										 select0_1 <= 1'b0;
+										 select1_1 <= 1'b0;
 										 frequency <= 1'b0;
 										 //byte 1 to be sent
 										 command_new_byte <= 1'b1;
@@ -207,6 +261,8 @@ module sm_corrente_await (
 									end
 									//FRAME OF SYNC 50
 									else if (rx_uart_out == 8'h0D)  begin
+									    select0_1 <= 1'b0;
+										 select1_1 <= 1'b0;
 									    current_state <= EN_W_1;
 										 frequency <= 1'b1;
 										 //byte 1 to be sent
@@ -384,11 +440,10 @@ module sm_corrente_await (
 					if (ed_new_pulse == 1'b1) begin
 						 
 						 if (frequency == 1'b0) begin
-							  led_conv_60 = 1'b1;
 							  convst <= 1'b1;
 						 end				
 						 else if (frequency == 1'b1) begin
-							  led_conv_50 = 1'b1;
+
 							  convst <= 1'b1;
 						 end
 									

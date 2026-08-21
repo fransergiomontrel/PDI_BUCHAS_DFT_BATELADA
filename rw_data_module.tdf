@@ -83,7 +83,7 @@ begin
 	dft_caller.new_word = shift.loading_tx;
 	dft_caller.enable_read = oe_n;
 	dft_caller.end_tx = done_tx;
-	luts_table.addr = dft_caller.step_ufm_addr[];
+	luts_table.addr[] = dft_caller.step_ufm_addr[];
 	
 	dft_result[0][].d = dft_caller.cos_out1[];
 	dft_result[1][].d = dft_caller.sin_out1[];
@@ -110,7 +110,7 @@ begin
 	 --Permanent connections of ufm module
 	luts_table.clk = clk;
 	luts_table.clk = rst;
-	luts_table.addr = dft_caller.step_ufm_addr;
+	luts_table.addr[] = dft_caller.step_ufm_addr[];
 	dft_caller.luts_value[] = (luts_table.sin[], luts_table.cos[]);
 	
 	--Connect array dft bus to output which in data in to uart tx

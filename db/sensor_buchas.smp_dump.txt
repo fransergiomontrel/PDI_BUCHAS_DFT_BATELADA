@@ -159,21 +159,31 @@ count_byte.000000 0
 count_byte.111100 1 
 
 State Machine - |sensor_buchas|sm_corrente_await:inst4|current_state
-Name current_state.AWAIT_CORRENTE_TX current_state.DELAY_SAMPLES current_state.CALC_PHASORS current_state.DIS_W_3 current_state.DIS_W_2 current_state.DIS_W_1 current_state.AWAIT_END_CONVERSION current_state.START_CONVERSION current_state.PREPARE_CONVERSION current_state.EN_W_3 current_state.EN_W_2 current_state.EN_W_1 current_state.CHECK_TYPE current_state.CHECK_SOH 
-current_state.CHECK_SOH 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-current_state.CHECK_TYPE 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
-current_state.EN_W_1 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
-current_state.EN_W_2 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
-current_state.EN_W_3 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
-current_state.PREPARE_CONVERSION 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
-current_state.START_CONVERSION 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
-current_state.AWAIT_END_CONVERSION 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
-current_state.DIS_W_1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
-current_state.DIS_W_2 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
-current_state.DIS_W_3 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
-current_state.CALC_PHASORS 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
-current_state.DELAY_SAMPLES 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
-current_state.AWAIT_CORRENTE_TX 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+Name current_state.AWAIT_HIGH current_state.AWAIT_LAST_BYTE current_state.AWAIT_CORRENTE_TX current_state.DELAY_SAMPLES current_state.CALC_PHASORS current_state.DIS_W_3 current_state.DIS_W_2 current_state.DIS_W_1 current_state.AWAIT_END_CONVERSION current_state.START_CONVERSION current_state.PREPARE_CONVERSION current_state.EN_W_3 current_state.EN_W_2 current_state.EN_W_1 current_state.CHECK_TYPE current_state.CHECK_SOH current_state.AWAIT_LOW 
+current_state.CHECK_SOH 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+current_state.CHECK_TYPE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 
+current_state.EN_W_1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 
+current_state.EN_W_2 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 
+current_state.EN_W_3 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 
+current_state.PREPARE_CONVERSION 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 
+current_state.START_CONVERSION 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 
+current_state.AWAIT_END_CONVERSION 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 
+current_state.DIS_W_1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 
+current_state.DIS_W_2 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 
+current_state.DIS_W_3 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 
+current_state.CALC_PHASORS 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 
+current_state.DELAY_SAMPLES 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 
+current_state.AWAIT_CORRENTE_TX 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 
+current_state.AWAIT_LAST_BYTE 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 
+current_state.AWAIT_HIGH 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 
+current_state.AWAIT_LOW 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+
+State Machine - |sensor_buchas|sm_corrente_await:inst4|rx_serial_8:u_rx_serial_8|state_uart_rx
+Name state_uart_rx.STOP_BIT state_uart_rx.DATA_BITS state_uart_rx.START_BIT state_uart_rx.START 
+state_uart_rx.START 0 0 0 0 
+state_uart_rx.START_BIT 0 0 1 1 
+state_uart_rx.DATA_BITS 0 1 0 1 
+state_uart_rx.STOP_BIT 1 0 0 1 
 
 State Machine - |sensor_buchas|sm_corrente_await:inst4|fpga_rw_8:u_fpga_rw_8|current_spi_state
 Name current_spi_state.NO_DATA current_spi_state.AWAIT_SCLK_RISE current_spi_state.AWAIT_SCLK_FALL 
@@ -226,7 +236,7 @@ STORING 0 0 1 1
 CHECK_STORE_END 0 1 0 1 
 STORING_TIME_COUNTER 1 0 0 1 
 
-State Machine - |sensor_buchas|slaver_states:inst12|current_initial_state
+State Machine - |sensor_buchas|slaver_states:inst31|current_initial_state
 Name current_initial_state.IDLE_AD current_initial_state.RESET_AD current_initial_state.CONFIG_AD current_initial_state.SEND_X01 current_initial_state.TESTE_SPI_AD current_initial_state.TESTE_RAM current_initial_state.CPLD_RST_AD current_initial_state.GPIO_CONFIG 
 current_initial_state.GPIO_CONFIG 0 0 0 0 0 0 0 0 
 current_initial_state.CPLD_RST_AD 0 0 0 0 0 0 1 1 
@@ -237,12 +247,12 @@ current_initial_state.CONFIG_AD 0 0 1 0 0 0 0 1
 current_initial_state.RESET_AD 0 1 0 0 0 0 0 1 
 current_initial_state.IDLE_AD 1 0 0 0 0 0 0 1 
 
-State Machine - |sensor_buchas|slaver_states:inst12|driver_ADS8691:u_driver_ADS8691|driver8691_state
+State Machine - |sensor_buchas|slaver_states:inst31|driver_ADS8691:u_driver_ADS8691|driver8691_state
 Name driver8691_state.CONFIG 
 driver8691_state.IDLE_ADC 0 
 driver8691_state.CONFIG 1 
 
-State Machine - |sensor_buchas|slaver_states:inst12|driver_ADS8691:u_driver_ADS8691|spi_adc:u_spi_adc|current_spi_state
+State Machine - |sensor_buchas|slaver_states:inst31|driver_ADS8691:u_driver_ADS8691|spi_adc:u_spi_adc|current_spi_state
 Name current_spi_state.IDLE current_spi_state.THT_CKCS_MOSI current_spi_state.AWAIT_SCLK_RISE_MOSI current_spi_state.AWAIT_SCLK_FALL_MOSI current_spi_state.TSU_CSCK_MOSI current_spi_state.CHIP_SELECTED current_spi_state.NO_MOSI_DATA 
 current_spi_state.NO_MOSI_DATA 0 0 0 0 0 0 0 
 current_spi_state.CHIP_SELECTED 0 0 0 0 0 1 1 
@@ -252,12 +262,13 @@ current_spi_state.AWAIT_SCLK_RISE_MOSI 0 0 1 0 0 0 1
 current_spi_state.THT_CKCS_MOSI 0 1 0 0 0 0 1 
 current_spi_state.IDLE 1 0 0 0 0 0 1 
 
-State Machine - |sensor_buchas|slaver_states:inst12|uart_tx_8:u_uart_tx_8|state_uart_tx
-Name state_uart_tx.STOP_BIT state_uart_tx.DATA_BITS state_uart_tx.START_BIT state_uart_tx.START 
-state_uart_tx.START 0 0 0 0 
-state_uart_tx.START_BIT 0 0 1 1 
-state_uart_tx.DATA_BITS 0 1 0 1 
-state_uart_tx.STOP_BIT 1 0 0 1 
+State Machine - |sensor_buchas|slaver_states:inst31|uart_tx_8:u_uart_tx_8|state_uart_tx
+Name state_uart_tx.STOP_BIT state_uart_tx.DATA_BITS state_uart_tx.START_BIT state_uart_tx.START state_uart_tx.IDLE 
+state_uart_tx.START 0 0 0 0 0 
+state_uart_tx.START_BIT 0 0 1 1 0 
+state_uart_tx.DATA_BITS 0 1 0 1 0 
+state_uart_tx.STOP_BIT 1 0 0 1 0 
+state_uart_tx.IDLE 0 0 0 1 1 
 
 State Machine - |sensor_buchas|host_interface:inst1|mode_selector:mode_sel|sm
 Name sChangedRequested sStable sWaitingChangeOk sUpdateMode sNoticeChanging 

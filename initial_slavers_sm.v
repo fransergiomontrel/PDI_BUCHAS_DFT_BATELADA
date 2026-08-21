@@ -9,12 +9,14 @@ module slaver_states (
 	 output wire host_sclk,
 	 output reg select0_0,
 	 output reg select1_0,
-	 output reg[1:0] host_mode
+	 output reg[1:0] host_mode,
+	 output reg reset_sm_laver
 	 
 );    
 	 reg [2:0] channel_config;	  
     reg [23:0]  delay;
 	 reg start_8_ctl;
+	 reg reset_uart;
 	 
 	 reg reset_adc_config;
 	 reg [7:0] data_to_send;
@@ -43,12 +45,12 @@ module slaver_states (
 	  uart_tx_8 u_uart_tx_8(
 	  
 	  .clk(clk),
-     .rst(rst_hardware),       
+     .rst(reset_uart),       
      .start(start_8_ctl),
 	  .data_in(data_to_send),
      .tx(tx),        
      .busy(),      
-     .done(done_8_ctl)       
+     .done(done_8_ctl)	  
 	  
 );
 
@@ -74,6 +76,7 @@ module slaver_states (
 	 
 	 
 	 if (!rst_hardware) begin
+	     reset_uart <= 1'b1;
 		  channel_config <= 3'd0;
         delay <= 24'd0;
 		  start_8_ctl <= 1'b0;
@@ -82,7 +85,9 @@ module slaver_states (
 		  select1_0 <= 1'b0;
 		  data_to_send <= 8'h00;
 		  current_initial_state <= GPIO_CONFIG;
-		  host_mode <= MODE_CFG_FPGA; 
+		  host_mode <= MODE_CFG_FPGA;
+		  reset_sm_laver <= 1'b1;
+		 
     end
 	 
 	 else begin
@@ -90,12 +95,12 @@ module slaver_states (
 	 case (current_initial_state)
 		
         GPIO_CONFIG:
-			  
 			   begin
 			       
 					 delay <= delay + 1;
 					 rst <= 1'b0;
 					 if (delay == 24'd10000000) begin
+						  
 					     delay <= 24'd0;
 						  rst <= 1'b1;
 						  current_initial_state <= CPLD_RST_AD;
@@ -113,11 +118,12 @@ module slaver_states (
 			      
 					 delay <= delay + 1;
 					 if ((delay == 24'd2100000) & (rst == 1'b1)) begin
-					     delay <= 1'd0;
+					     delay <= 24'd0;
 						  rst <= 1'b0;
 						  current_initial_state <= CPLD_RST_AD;
 					 end
 					 else if ((delay == 24'd200) & (rst == 1'b0)) begin
+						  
 					     delay <= 24'd0;
 						  rst <= 1'b1;
 						  current_initial_state <= TESTE_RAM;
@@ -140,6 +146,7 @@ module slaver_states (
 			  
 					data_to_send <= 8'h01;
 					start_8_ctl <= 1'b1;
+					reset_uart <= 1'b0;
 					select0_0 <= 1'b0;
 					select1_0 <= 1'b1;
 					host_mode <= MODE_CFG;
@@ -150,11 +157,11 @@ module slaver_states (
 		 SEND_X01:
 			  
 			  begin
-			      
+			
 			      start_8_ctl <= 1'b0;
 					
 					if (done_8_ctl == 1'b1) begin
-					
+						 reset_uart <= 1'b1;
 						 convst <= ncs_adc_config;
 						 select0_0 <= 1'b0;
 						 select1_0 <= 1'b0;
@@ -162,9 +169,7 @@ module slaver_states (
 						 current_initial_state <= CONFIG_AD;
 						 
 					end
-					else begin
-					    current_initial_state <= SEND_X01;
-					end
+				
 			       		       
 		     end
 				
@@ -175,7 +180,6 @@ module slaver_states (
 				  reset_adc_config <= 1'b0;
 				  convst <= ncs_adc_config;
 				  if ((cs_n == 1'b1) & (channel_config == 3'd6)) begin
-
 						convst <= 1'b1;
 				      current_initial_state <= RESET_AD;
 						
@@ -210,6 +214,8 @@ module slaver_states (
 		IDLE_AD:
 			  
 			 begin
+			     
+			     reset_sm_laver <= 1'b0;
 				  host_mode <= MODE_CFG_FPGA;
 				  current_initial_state <= IDLE_AD;				  				  
 		    end		
