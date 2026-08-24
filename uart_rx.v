@@ -8,18 +8,39 @@ module rx_serial_8 (
 
 );    
 
+fpga_rw_8 u_fpga_rw_8 (
+
+    .clk(clk),
+	 .again(command_new_byte),
+    .rst(rst),       // reset síncrono
+	 .config_reg(byte_to_send),
+	 .data_reg(readed_data_8),
+	 .miso(host_miso),
+	 .sclk(host_sclk),
+	 .mosi(host_mosi),
+	 .spi_done(signal_spi_done)
+	 
+);
+wire rx_start;
+nedge_detector u_nedge_detector(
+  .current_read_pulse(rx),
+  .clk(clk),
+  .falling_edge(rx_start),
+  .reset(rst)
+);
+
 	 //8 bits size register to count 8 bits of data
     reg [3:0]  bit_cnt; 
 	 //10 bits size register to count period of boud between bits
 	 reg [10:0]  bit_time_cnt;
-	 
 	 //States definition for states machine of UART 8N1 for 1 byte
-	 localparam START = 3'b00;//
-    localparam START_BIT = 3'b01;//
-	 localparam DATA_BITS = 3'b10;//
-	 localparam STOP_BIT = 3'b11;//
+	
+	 localparam START = 3'b001;//
+    localparam START_BIT = 3'b010;//
+	 localparam DATA_BITS = 3'b011;//
+	 localparam STOP_BIT = 3'b100;//
 	 
-	 reg [1:0] state_uart_rx;
+	 reg [2:0] state_uart_rx;
 	 
     always @(posedge clk) begin
 	 
@@ -36,11 +57,12 @@ module rx_serial_8 (
 		  done_rx <= 1'b0;
 		  
 		  case (state_uart_rx)	
-		  
+		 
+		
 		  START:
 		  begin
 		  
-				if (rx != 1'd1) begin
+				if (rx_start == 1'd1) begin
 				    state_uart_rx <= START_BIT;
 					 bit_time_cnt  <= bit_time_cnt + 11'd1;
 					 

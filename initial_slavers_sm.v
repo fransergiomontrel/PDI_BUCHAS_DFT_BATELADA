@@ -4,15 +4,30 @@ module slaver_states (
 	 input  wire rst_hardware,
     output reg  rst,
 	 output wire tx,
-	 output reg convst,
-	 output wire host_mosi,
-	 output wire host_sclk,
-	 output reg select0_0,
-	 output reg select1_0,
+	 output wire convst_out,
+	 output wire host_mosi_out,
+	 output wire host_sclk_out,
+	 output wire select0_0_out,
+	 output wire select1_0_out,
 	 output reg[1:0] host_mode,
-	 output reg reset_sm_laver
+	 output wire reset_sm_laver_out
 	 
 );    
+
+    reg convst;
+	 wire host_mosi;
+	 wire host_sclk;
+	 reg select0_0;
+	 reg select1_0;
+	 reg reset_sm_laver;
+
+    assign convst_out = convst;
+	 assign host_mosi_out = host_mosi;
+	 assign host_sclk_out = host_sclk;
+	 assign select0_0_out = select0_0;
+	 assign select1_0_out = select1_0;
+	 assign reset_sm_laver_out = reset_sm_laver;
+
 	 reg [2:0] channel_config;	  
     reg [23:0]  delay;
 	 reg start_8_ctl;
@@ -48,9 +63,9 @@ module slaver_states (
      .rst(reset_uart),       
      .start(start_8_ctl),
 	  .data_in(data_to_send),
-     .tx(tx),        
-     .busy(),      
-     .done(done_8_ctl)	  
+     .tx_out(tx),        
+     .busy_out(),      
+     .done_out(done_8_ctl)	  
 	  
 );
 

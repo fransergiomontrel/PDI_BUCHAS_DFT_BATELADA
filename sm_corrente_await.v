@@ -5,25 +5,49 @@ module sm_corrente_await (
 	 input wire rxd_from_gpio47,
 	 input wire done_tx,
 	 input wire host_miso,
-	 output reg txd_to_gpio46,
-	 output reg requested_data,
-	 output reg acquire_again,
-	 output reg select0_1,
-	 output reg select1_1,
-	 output reg convst,
-	 output wire host_sclk,
-	 output wire host_mosi,
+	 output wire txd_to_gpio46,
+	 output wire requested_data_out,
+	 output wire acquire_again_out,
+	 output wire select0_1_out,
+	 output wire select1_1_out,
+	 output wire convst_out,
+	 output wire host_sclk_out,
+	 output wire host_mosi_out,
 	 
 	 output reg frequency,
 	 
 	 output reg [1:0] host_mode,
-	 output reg debug
+	 output wire debug_out
     	 
 );
     
+	 (* preserve, noprune *) reg reset_uart_rx;
+	 (* preserve *) reg txd_reg;
+	 
+	 
+    reg requested_data;
+	 reg acquire_again;
+	 reg select0_1;
+	 reg select1_1;
+	 reg convst;
+	 wire host_sclk;
+	 reg host_mosi_sclk;
+	 reg in;
+	 reg debug;
+	 
+	 assign debug_out = debug;
+	 assign txd_to_gpio46 = txd_reg;
+	 assign requested_data_out = requested_data;
+	 assign acquire_again_out = acquire_again;
+	 assign select0_1_out = select0_1;
+	 assign select1_1_out = select1_1;
+	 assign convst_out = convst;
+	 assign host_sclk_out = host_sclk;
+	 assign host_mosi_out = host_mosi_sclk;
+	 
 	  
 	 //22 bit size register to insert delay thick 
-	 reg [21:0] is_finished;
+	 (* preserve *) reg [21:0] is_finished;
 	 
 	 
 	 //4 bit size register to count 4 bytes to be sent on 32 bits SPI writing
@@ -71,7 +95,7 @@ module sm_corrente_await (
 	 rx_serial_8 u_rx_serial_8(
 	 
     .clk(clk),
-    .rst(rst),                          // reset
+    .rst(reset_uart_rx),                          // reset
     .rx(rxd_from_gpio47),               // dado serie
     .busy_rx(),                         // está transmitindo
     .done_rx(done_rx_to_read_ed),       // pulso de fim
@@ -120,7 +144,7 @@ module sm_corrente_await (
     localparam AWAIT_LAST_BYTE = 5'b01110;
 	 localparam AWAIT_HIGH = 5'b01111; 
 	 localparam AWAIT_LOW = 5'b10000; 
-	 reg [4:0] current_state;
+	 (* preserve *) reg [4:0] current_state;
 	 
 	 //Modes definition to internal connection of switch module
     localparam MODE_CFG_FPGA = 2'b00;
@@ -132,7 +156,7 @@ module sm_corrente_await (
 							 							 	    
 		 if(rst) begin
 		     current_state <= CHECK_SOH;
-			  txd_to_gpio46 <= 1'b1;
+			  txd_reg <= 1'b1;
 			  is_finished  <= 22'd0;
 			  frequency <= 1'b0;
 			  select0_1 <= 1'b0;
@@ -143,13 +167,15 @@ module sm_corrente_await (
 			  command_new_byte <= 1'b0;
 			  readed_words <= 16'd0;
 			  bytes_counter <= 4'd0;
+			  reset_uart_rx <= 1'b1;
+			  in <= 1'b0;
 			  debug <= 1'b0;
 			  host_mode <= MODE_CFG_FPGA;
 
 		 end
 		 
 		 else begin
-			  
+			  in <= rxd_from_gpio47;
 			  
 		     //state machine
 		     case (current_state)			  
@@ -164,7 +190,9 @@ module sm_corrente_await (
 										 
 						         bytes_counter <= bytes_counter + 1;
 									if (bytes_counter == 4'd1) begin
-									     
+										  reset_uart_rx <= 1'b1;
+									     bytes_counter <= 4'd0;
+									     reset_uart_rx <= 1'b1;
 									     current_state <= AWAIT_HIGH;
 										  is_finished <= is_finished + 22'd1;
 									end
@@ -179,10 +207,9 @@ module sm_corrente_await (
 					begin
 						
 						is_finished <= is_finished + 22'd1;
-						if (is_finished == 22'd1408) begin
+						if (is_finished == 22'd2367) begin
 									is_finished <= 22'd0;
-									debug <= 1'b1;
-									txd_to_gpio46 <= 1'b0;
+									txd_reg <= 1'b0;
 									current_state <= AWAIT_LOW;
 						end
 						
@@ -192,20 +219,26 @@ module sm_corrente_await (
 					
 					begin
 						
-						is_finished <= is_finished + 22'd1;
-						if (is_finished == 22'd2880) begin
-							 is_finished <= 22'd0;
-							 txd_to_gpio46 <= 1'b1;
-							 debug <= 1'b0;
+						if (in == 1'b1) begin
+						    txd_reg <= 1'b1;
 							 current_state <= CHECK_SOH;
-						end
+					   end	
+						//is_finished <= is_finished + 22'd1;
+						//if (is_finished == 22'd2150) begin
+							// is_finished <= 22'd0;
+							// txd_reg <= 1'b1;
+							 
+							 
+							 //current_state <= CHECK_SOH;
+						//end
 						
 				   end
 						 
 			      CHECK_SOH:
-			  
+			    
 			          begin
-							  txd_to_gpio46 <= 1'b1; 
+						     reset_uart_rx <= 1'b0;
+						     is_finished <= 22'd0;
 							  acquire_again <= 1'b0;
 			              if (ed_rx_done == 1'b1) begin
 							      
@@ -423,7 +456,7 @@ module sm_corrente_await (
 							  is_finished  <= 10000;
 						 end
 							  
-						 if ((is_finished == 10000) & (rxd_from_gpio47 == 1'b0)) begin
+						 if ((is_finished == 10000) & (in == 1'b0)) begin
 							 current_state <= START_CONVERSION;
 							 is_finished <= 22'd0;
 						 end
@@ -441,6 +474,7 @@ module sm_corrente_await (
 						 
 						 if (frequency == 1'b0) begin
 							  convst <= 1'b1;
+							  
 						 end				
 						 else if (frequency == 1'b1) begin
 
@@ -470,7 +504,7 @@ module sm_corrente_await (
 						     
 						if (is_finished == 22'd3500000) begin
 							 current_state <= DIS_W_1;
-									
+							 
 							 byte_to_send <= 1'h00;
 									
 							 bytes_counter <= bytes_counter + 1;
@@ -640,6 +674,7 @@ module sm_corrente_await (
 									  readed_words <= 16'd0;
 									  bytes_counter <= 3'd0;
 								     host_mode <= MODE_CFG_FPGA;
+									  
 							        current_state <= CHECK_SOH;
 								 end
 								 								
@@ -661,7 +696,9 @@ module sm_corrente_await (
 						 end
 						 						 
 				       AWAIT_CORRENTE_TX:
+						 
 						 begin
+						 
 						     if (done_tx == 1'b0) begin
 							  
 									requested_data <= 1'b0;
@@ -669,7 +706,7 @@ module sm_corrente_await (
 									
 							  end
 							  else begin
-							      
+							      debug <= 1'b1;
 									acquire_again <= 1'b1;
 									current_state <= CHECK_SOH;
 									

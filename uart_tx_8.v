@@ -3,11 +3,18 @@ module uart_tx_8 (
     input  wire        rst,       // reset síncrono
     input  wire        start,     // inicia transmissão
     input  wire [7:0] data_in,   // dado paralelo
-    output reg         tx,        // saída serial
-    output reg         busy,      // está transmitindo
-    output reg         done       // pulso de fim
+    output wire         tx_out,        // saída serial
+    output wire         busy_out,      // está transmitindo
+    output wire         done_out       // pulso de fim
 
 );    
+    reg tx;
+	 reg busy;
+	 reg done;
+	 
+	 assign tx_out = tx;
+	 assign busy_out = busy;
+	 assign done_out = done;
 
     reg [3:0]  bit_cnt; // precisa contar até 32
 	 reg [9:0]  tx_freq_divider;// register to calculate boud rate = 100MHz/tx_freq_divider
