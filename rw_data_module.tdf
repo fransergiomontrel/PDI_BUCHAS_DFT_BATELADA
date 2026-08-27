@@ -31,9 +31,10 @@ subdesign rw_data_module(
 	data_bus_out: output;
 	ready: output;
 	
-	
 	data_out_to_uart_tx[383..0]: output;
 	
+	debug: output;
+	debug_res: output;
 )
 variable
 	shift: spi_shift_v2 with (N_BITS=16);
@@ -44,7 +45,7 @@ variable
 	buffer_parallel_in[15..0]: dffe;
 	ready_ff: srff;
 	--DFT result bus of 48 bytes to send through tx UART when requested
-	dft_result[11..0][31..0], start_tx_ff: dff;
+	dft_result[11..0][31..0], start_tx_ff, debug_ff: dff;
 	
 	--Module which call dft modules
 	dft_caller : dft_locale;
@@ -53,6 +54,7 @@ variable
 	
 begin
 	defaults
+	   
   		addr_clr = Gnd;
 		addr_inc_read = Gnd;
 		addr_inc_write = Gnd;
@@ -67,21 +69,25 @@ begin
 		ready_ff.r = Gnd;
 	end defaults;
 	
+	
+	--debug = shift.loading_tx;
+	--debug = detect_falling.falling_edge;
+	debug = dft_caller.debug;
+	debug_res = (luts_table.cos != 0);
+	--debug = shift.loading_tx;
+	
 	--Connections of dft result bus
 	dft_result[][].clk = clk; 
-	dft_result[][].clrn = !sreset;
+	dft_result[][].clrn = !done_tx;
 	
-	--Connections ff to start uart tx
-	start_tx_ff.clk = clk;
-	start_tx_ff.clrn = !sreset & !done_tx;
-	start_tx = start_tx_ff.q;
 	
-	--Conections of dft_locale 1
+	start_tx = dft_caller.start_tx;
+	
+	--Connections of dft_locale 1
 	dft_caller.clk = clk;
 	dft_caller.sreset = sreset;
 	dft_caller.word[] = buffer_parallel_in[].q;
-	dft_caller.new_word = shift.loading_tx;
-	dft_caller.enable_read = oe_n;
+	dft_caller.tx_status = shift.loading_tx;
 	dft_caller.end_tx = done_tx;
 	luts_table.addr[] = dft_caller.step_ufm_addr[];
 	
@@ -109,7 +115,7 @@ begin
 	 
 	 --Permanent connections of ufm module
 	luts_table.clk = clk;
-	luts_table.clk = rst;
+	luts_table.rst = sreset;
 	luts_table.addr[] = dft_caller.step_ufm_addr[];
 	dft_caller.luts_value[] = (luts_table.sin[], luts_table.cos[]);
 	

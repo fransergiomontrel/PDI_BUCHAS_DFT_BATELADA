@@ -122,7 +122,7 @@ module uart_tx (
 					 		  
 						  tx_freq_divider  <= 10'd0;
 						  
-						  if (count_byte == 6'd60) begin
+						  if (count_byte == 6'd59) begin
 						  
 						      done <= 1'b1;
 						      count_byte <= 6'd0;
@@ -131,8 +131,8 @@ module uart_tx (
 								
 						  end
 						  else begin
-						  
 						      //New start bit
+								count_byte <= count_byte + 6'd1;
 								tx <= 1'b0;
 								state_uart_tx <= START_BIT;
 								

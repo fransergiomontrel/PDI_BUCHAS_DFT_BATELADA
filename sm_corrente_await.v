@@ -16,8 +16,8 @@ module sm_corrente_await (
 	 
 	 output reg frequency,
 	 
-	 output reg [1:0] host_mode,
-	 output wire debug_out
+	 output reg [1:0] host_mode
+	 
     	 
 );
     
@@ -33,9 +33,9 @@ module sm_corrente_await (
 	 wire host_sclk;
 	 reg host_mosi_sclk;
 	 reg in;
-	 reg debug;
 	 
-	 assign debug_out = debug;
+	 
+	 
 	 assign txd_to_gpio46 = txd_reg;
 	 assign requested_data_out = requested_data;
 	 assign acquire_again_out = acquire_again;
@@ -169,7 +169,7 @@ module sm_corrente_await (
 			  bytes_counter <= 4'd0;
 			  reset_uart_rx <= 1'b1;
 			  in <= 1'b0;
-			  debug <= 1'b0;
+			  
 			  host_mode <= MODE_CFG_FPGA;
 
 		 end
@@ -706,7 +706,7 @@ module sm_corrente_await (
 									
 							  end
 							  else begin
-							      debug <= 1'b1;
+							      
 									acquire_again <= 1'b1;
 									current_state <= CHECK_SOH;
 									

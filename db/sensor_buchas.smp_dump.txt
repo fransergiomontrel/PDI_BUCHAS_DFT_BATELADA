@@ -90,13 +90,16 @@ read_state.READ_STATE_CLEAR 0 1 0 0 0 0 0 1
 read_state.READ_STATE_PULSE_SE 1 0 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale:dft_caller|sm
-Name sum_dft on_dft2 on_dft start_dft nop idle 
-idle 0 0 0 0 0 0 
-nop 0 0 0 0 1 1 
-start_dft 0 0 0 1 0 1 
-on_dft 0 0 1 0 0 1 
-on_dft2 0 1 0 0 0 1 
-sum_dft 1 0 0 0 0 1 
+Name await_tx_high back_start sum_dft on_dft2 on_dft start_dft nop tx_begin first_sample 
+first_sample 0 0 0 0 0 0 0 0 0 
+tx_begin 0 0 0 0 0 0 0 1 1 
+nop 0 0 0 0 0 0 1 0 1 
+start_dft 0 0 0 0 0 1 0 0 1 
+on_dft 0 0 0 0 1 0 0 0 1 
+on_dft2 0 0 0 1 0 0 0 0 1 
+sum_dft 0 0 1 0 0 0 0 0 1 
+back_start 0 1 0 0 0 0 0 0 1 
+await_tx_high 1 0 0 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale:dft_caller|DFT:dft_by_word6|sm
 Name await_end_tx check_end sum product idle 
@@ -152,11 +155,6 @@ state_uart_tx.START 0 0 0 0
 state_uart_tx.START_BIT 0 0 1 1 
 state_uart_tx.DATA_BITS 0 1 0 1 
 state_uart_tx.STOP_BIT 1 0 0 1 
-
-State Machine - |sensor_buchas|uart_tx:inst2|count_byte
-Name count_byte.111100 
-count_byte.000000 0 
-count_byte.111100 1 
 
 State Machine - |sensor_buchas|sm_corrente_await:inst4|rx_serial_8:u_rx_serial_8|state_uart_rx
 Name state_uart_rx.DATA_BITS state_uart_rx.START_BIT state_uart_rx.START state_uart_rx.STOP_BIT 

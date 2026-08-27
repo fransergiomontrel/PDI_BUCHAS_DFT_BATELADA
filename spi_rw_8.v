@@ -82,15 +82,16 @@ module fpga_rw_8 (
 					//Await 1 us to low sclk based on fsclk = 500 kHz
 					if (div_sclk == 8'd49) begin
 					    div_sclk <= 8'd0;
-						 sclk <= 1'b0;	
-						 bit_cnt <= bit_cnt - 1;
+						 sclk <= 1'b0;				 
 						 
-						 if (bit_cnt == 4'd1) begin
+						 
+						 if (bit_cnt == 4'd0) begin
 							 
 						     current_spi_state <= NO_DATA;
 							  
 						 end
 						 else begin
+						     bit_cnt <= bit_cnt - 1;
 						     current_spi_state <= AWAIT_SCLK_RISE;
 						 end
 						  					  
