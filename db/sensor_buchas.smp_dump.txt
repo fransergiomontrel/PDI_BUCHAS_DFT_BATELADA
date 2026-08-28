@@ -44,25 +44,26 @@ current_mosi_state.DELAY_SCCS_MOSI 0 1 0 0 0 0 1
 current_mosi_state.IDLE_MOSI 1 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|rw_data_module:inst10|sm
-Name wait_loading_n wr6 wr5 wr4 wr3 wr2 wr1 wait_loading load_sync4 load_sync3 load_sync2 load_sync1 init_buffers4 init_buffers3 init_buffers2 init_buffers1 init rst 
-rst 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-init 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
-init_buffers1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
-init_buffers2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
-init_buffers3 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
-init_buffers4 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
-load_sync1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
-load_sync2 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
-load_sync3 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
-load_sync4 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
-wait_loading 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
-wr1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
-wr2 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
-wr3 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
-wr4 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
-wr5 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
-wr6 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
-wait_loading_n 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+Name wait_loading_n wr6 wr5 wr4 wr3 wr2 wr1 wait_loading load_sync4 load_sync3 load_sync_test load_sync2 load_sync1 init_buffers4 init_buffers3 init_buffers2 init_buffers1 init rst 
+rst 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+init 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+init_buffers1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+init_buffers2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+init_buffers3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+init_buffers4 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+load_sync1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+load_sync2 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+load_sync_test 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+load_sync3 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+load_sync4 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+wait_loading 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+wr1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+wr2 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+wr3 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+wr4 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+wr5 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+wr6 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+wait_loading_n 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|rw_data_module:inst10|luts:luts_table|state
 Name state.S_WAIT state.S_REQ state.S_FETCH state.S_DELAY_FETCH state.S_DONE 

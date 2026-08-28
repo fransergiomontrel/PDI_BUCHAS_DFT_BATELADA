@@ -5,8 +5,8 @@ include "dffes.inc";
 include "dft_locale.inc";
 include "luts.inc";
 
-
 subdesign rw_data_module(
+
 	clk: input;
 	sreset: input;
 	done_tx: input;
@@ -39,7 +39,7 @@ subdesign rw_data_module(
 variable
 	shift: spi_shift_v2 with (N_BITS=16);
 	
-	sm: machine with states(rst, init, init_buffers1, init_buffers2, init_buffers3, init_buffers4, load_sync1, load_sync2, load_sync3, load_sync4, wait_loading, wr1, wr2, wr3, wr4, wr5, wr6, wait_loading_n);
+	sm: machine with states(rst, init, init_buffers1, init_buffers2, init_buffers3, init_buffers4, load_sync1, load_sync2, load_sync_test, load_sync3, load_sync4, wait_loading, wr1, wr2, wr3, wr4, wr5, wr6, wait_loading_n);
 	
 	oe_n_FF, we_n_FF, cs_n_FF, load_parallel_FF, busy_ff, data_bus_out_ff, SCLK_ff, MOSI_ff: dffes;
 	buffer_parallel_in[15..0]: dffe;
@@ -115,7 +115,7 @@ begin
 	 
 	 --Permanent connections of ufm module
 	luts_table.clk = clk;
-	luts_table.rst = sreset;
+	luts_table.rst = sreset # done_tx;
 	luts_table.addr[] = dft_caller.step_ufm_addr[];
 	dft_caller.luts_value[] = (luts_table.sin[], luts_table.cos[]);
 	
@@ -191,7 +191,10 @@ begin
 			busy_ff.d = Vcc;
 			load_parallel_FF.d = Vcc;
 			oe_n_FF.d = Gnd;
-			sm = init_buffers1;
+			if dft_caller.await_lut_out then
+				sm = init_buffers1;
+			end if;
+			
 		
 		when init_buffers1 =>					-- 4 estados para dar temporização suficiente da leitura da RAM (taa)
 			load_parallel_FF.d = load_parallel_FF.q;
@@ -224,8 +227,13 @@ begin
 		when load_sync2 =>
 			busy_ff.d = Vcc;
 			oe_n_FF.d = Gnd;
-			sm = load_sync3;
+			sm = load_sync_test;
 
+		when load_sync_test =>
+			busy_ff.d = Vcc;
+			oe_n_FF.d = Gnd;
+			sm = load_sync3;
+			
 		when load_sync3 =>
 			busy_ff.d = Vcc;
 			oe_n_FF.d = Gnd;

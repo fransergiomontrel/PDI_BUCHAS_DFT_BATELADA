@@ -52,7 +52,8 @@ begin
 	 
 	 --Increments address of luts tables
 	 luts_addr[].clk = clk;
-	 luts_addr[].clrn = !reset;
+	 luts_addr[].clrn = !reset & !start_tx_ff;
+	 luts_addr_out[] = luts_addr[];
 	 luts_addr[].ena = next_step;
 	 if samples_counter[].q <= 3607 then
 	     luts_addr[].d = luts_addr[].q + 2;
@@ -60,8 +61,6 @@ begin
 	     luts_addr[].d = luts_addr[].q - 2;
 	 end if;
 	 
-	 luts_addr[].clrn = !reset;
-	 luts_addr_out[] = luts_addr[].q;
 	 
     --Counter of samples
     samples_counter[].clk = clk;
