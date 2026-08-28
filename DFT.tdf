@@ -4,27 +4,24 @@ subdesign DFT(
            
 	 clk: input;
 	 reset: input;
-	 read_sample[15..0]: input;
-	 next_sample: input;	 
+	 read_sample[15..0]: input;	 
 	 start_dft: input;
 	 end_tx: input;
 	 luts_dft_in[31..0]: input;
-	 next_step: input;
+	 sample_counter[12..0]: input;
 	 
 	 sin_out[31..0]: output;
 	 cos_out[31..0]: output;
 	 
 	 start_tx: output;
 	 
-	 luts_addr_out[12..0]: output;
 	 	 
 )
 
 variable
-sm: machine with states(idle, product, sum, check_end, await_end_tx);
+sm: machine with states(idle, product, product1, sum, check_end, await_end_tx);
 
 start_tx_ff: dff;
-samples_counter[12..0], luts_addr[12..0]: dffe;
 
 multiplier_dft_sin, multiplier_dft_cos : produto_modulo;
 
@@ -49,24 +46,6 @@ begin
 		
 	 end defaults;
 	 
-	 
-	 --Increments address of luts tables
-	 luts_addr[].clk = clk;
-	 luts_addr[].clrn = !reset & !start_tx_ff;
-	 luts_addr_out[] = luts_addr[];
-	 luts_addr[].ena = next_step;
-	 if samples_counter[].q <= 3607 then
-	     luts_addr[].d = luts_addr[].q + 2;
-	 else
-	     luts_addr[].d = luts_addr[].q - 2;
-	 end if;
-	 
-	 
-    --Counter of samples
-    samples_counter[].clk = clk;
-	 samples_counter[].d = samples_counter[].q + 1;
-	 samples_counter[].clrn = !reset;
-	 samples_counter[].ena = next_sample;
 	 
 	 --Inputs of state machine
 	 sm.clk = clk;
@@ -95,20 +74,16 @@ begin
 	 acc_sin[].clk = clk;
 	 acc_cos[].clk = clk;
 	 
-	 acc_sin[].ena = next_sample;
-	 acc_cos[].ena = next_sample;
-	 
-	 
 	 
 	 --Appling 2 complement in negative regions of sine
-	 if samples_counter[].q <= 3607 then
+	 if sample_counter[] <= 3607 then
 	     acc_sin[].d = acc_sin[].q + multiplier_dft_sin.dft_component[];
 	 else
 	     acc_sin[].d = acc_sin[].q - multiplier_dft_sin.dft_component[];
 	 end if;
 	 
 	 --Appling 2 complement in negative regions of cossine
-	 if samples_counter[].q <= 1803 # samples_counter[].q >= 5411 then
+	 if sample_counter[] <= 1803 # sample_counter[] >= 5411 then
 	     acc_cos[].d = acc_cos[].q + multiplier_dft_cos.dft_component[];
 	 else 
 	     acc_cos[].d = acc_cos[].q - multiplier_dft_cos.dft_component[];
@@ -132,15 +107,20 @@ begin
 			
 		  when product =>
 		  	      
+				sm = product1;
+				
+			when product1 =>
+		  	      
 				sm = sum;
 				
         when sum =>
-		  	      
+		  	   acc_sin[].ena = Vcc;
+	         acc_cos[].ena = Vcc;   
 				sm = check_end;
 				
         when check_end =>
 		  	     
-				if samples_counter[] == 7214 then
+				if sample_counter[] == 7214 then
 				    
 					 sm = await_end_tx;
 					 

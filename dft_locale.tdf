@@ -23,21 +23,24 @@ subdesign dft_locale(
 	sin_out6[31..0]: output;
 	cos_out6[31..0]: output;
 	
-	step_ufm_addr[12..0]: output;
-	
 	start_tx: output;
 	end_tx: input;
 	debug: output;
 	debug_res: output;
 	await_lut_out: output;
+	luts_addr_out[12..0]: output;
 		
 )
+
 variable
 
     sm: machine with states(first_sample, tx_begin, nop, start_dft, on_dft, on_dft2, sum_dft, back_start, await_tx_high);
 	 
-	 count_nop[6..0], next_step_all_ff, tx_status_ff, await_lut_ff: dff;
-	 channel_number[2..0],out_reg[15..0]: dffe;
+	 count_nop[6..0], tx_status_ff, await_lut_ff: dff;
+	 channel_number[2..0],out_reg[15..0], sample_counter[12..0]: dffe;
+	 lut_index[12..0]: node;
+	 lut_index_plus1[12..0]: node;
+	 lut_addr[12..0]: node;
 	 dft_by_word1, dft_by_word2, dft_by_word3, dft_by_word4, dft_by_word5, dft_by_word6 : DFT;	  
 
 begin
@@ -52,15 +55,30 @@ begin
 		  dft_by_word4.start_dft = Gnd;
 		  dft_by_word5.start_dft = Gnd;
 		  dft_by_word6.start_dft = Gnd;
-		  
-		  next_step_all_ff.d = Gnd;
+		 
+		
+		   sample_counter[].ena = Gnd;
 		  --Only specific states can increment channel_number or clean it
 		  channel_number[].ena = Gnd;
 		  
 		  
 	 end defaults;
 	 
+	 --Counter of samples
+    sample_counter[].clk = clk;
+	 sample_counter[].d = sample_counter[].q + 1;
+	 sample_counter[].clrn = !sreset & !end_tx;
+	
+	 if sample_counter[].q <= 3607 then
+	     lut_index[] = sample_counter[].q;
+	 else
+	     lut_index[] = 7215 - sample_counter[].q;
+	 end if;
 	 
+	 lut_index_plus1[] = lut_index[] + 1;
+	 lut_addr[0] = Gnd;
+	 lut_addr[12..1] = lut_index_plus1[11..0];
+	 luts_addr_out[] = lut_addr[];
 	 
 	 debug = start_tx;
 	 
@@ -77,9 +95,9 @@ begin
 	 tx_status_ff.d = tx_status;
 	 
 	 --Only specific states can increment channel_number or clean it
-		  channel_number[].clk = clk;
-		  channel_number[].clrn = !sreset;
-		  channel_number[].d = channel_number[].q + 1;
+	channel_number[].clk = clk;
+	channel_number[].clrn = !sreset;
+	channel_number[].d = channel_number[].q + 1;
 	 
 	 --DFT permanent connections
 	 dft_by_word1.clk = clk;
@@ -87,6 +105,7 @@ begin
 	 dft_by_word1.read_sample[] = word[];
 	 dft_by_word1.luts_dft_in[] = luts_value[];
 	 dft_by_word1.end_tx = end_tx;
+	 dft_by_word1.sample_counter[] = sample_counter[].q;
 	 
 	 sin_out1[] = dft_by_word1.sin_out[];
 	 cos_out1[] = dft_by_word1.cos_out[];
@@ -96,6 +115,7 @@ begin
 	 dft_by_word2.read_sample[] = word[];
 	 dft_by_word2.luts_dft_in[] = luts_value[];
 	 dft_by_word2.end_tx = end_tx;
+	 dft_by_word2.sample_counter[] = sample_counter[].q;
 	 
 	 sin_out2[] = dft_by_word2.sin_out[];
 	 cos_out2[] = dft_by_word2.cos_out[];
@@ -105,6 +125,7 @@ begin
 	 dft_by_word3.read_sample[] = word[];
 	 dft_by_word3.luts_dft_in[] = luts_value[];
 	 dft_by_word3.end_tx = end_tx;
+	 dft_by_word3.sample_counter[] = sample_counter[].q;
 	 
 	 sin_out3[] = dft_by_word3.sin_out[];
 	 cos_out3[] = dft_by_word3.cos_out[];
@@ -114,6 +135,7 @@ begin
 	 dft_by_word4.read_sample[] = word[];
 	 dft_by_word4.luts_dft_in[] = luts_value[];
 	 dft_by_word4.end_tx = end_tx;
+	 dft_by_word4.sample_counter[] = sample_counter[].q;
 	 
 	 sin_out4[] = dft_by_word4.sin_out[];
 	 cos_out4[] = dft_by_word4.cos_out[];
@@ -123,6 +145,7 @@ begin
 	 dft_by_word5.read_sample[] = word[];
 	 dft_by_word5.luts_dft_in[] = luts_value[];
 	 dft_by_word5.end_tx = end_tx;
+	 dft_by_word5.sample_counter[] = sample_counter[].q;
 	 
 	 sin_out5[] = dft_by_word5.sin_out[];
 	 cos_out5[] = dft_by_word5.cos_out[];
@@ -133,24 +156,11 @@ begin
 	 dft_by_word6.luts_dft_in[] = luts_value[];
 	 start_tx = dft_by_word1.start_tx & dft_by_word2.start_tx & dft_by_word3.start_tx & dft_by_word4.start_tx & dft_by_word5.start_tx & dft_by_word6.start_tx;
 	 dft_by_word6.end_tx = end_tx;
+	 dft_by_word6.sample_counter[] = sample_counter[].q;
 	 
 	 sin_out6[] = dft_by_word6.sin_out[];
 	 cos_out6[] = dft_by_word6.cos_out[];
 	 
-	 --Permanent connectios of flipflop which increments step of all 6 DFT;
-	 next_step_all_ff.clk = clk;
-	 next_step_all_ff.clrn = !sreset;
-	 
-	 
-	 --Address selected of UFM is same for all 6 DFTs
-	 dft_by_word1.next_step = next_step_all_ff.q;
-	 dft_by_word2.next_step = next_step_all_ff.q;
-	 dft_by_word3.next_step = next_step_all_ff.q;
-	 dft_by_word4.next_step = next_step_all_ff.q;
-	 dft_by_word5.next_step = next_step_all_ff.q;
-	 dft_by_word6.next_step = next_step_all_ff.q;
-	 
-	 step_ufm_addr[] = dft_by_word6.luts_addr_out[];
 	 
     --Clock of nop count
     count_nop[].clk = clk;
@@ -161,7 +171,6 @@ begin
 	 --Inputs of state machine
 	 sm.clk = clk;
 	 sm.reset = sreset; 
-	 
 	 
 	 
     case sm is
@@ -222,61 +231,52 @@ begin
 				
 		  when sum_dft =>
 				
-			
-				
 				if channel_number[] == B"000" then
-					 dft_by_word1.next_sample = Vcc;
+					 
 					 sm = await_tx_high;
-					 --channel_number[].d = B"001";
 					 channel_number[].ena = Vcc;
-					 --channel_number[].d = channel_number[].q + 1;
+					 
 				elsif channel_number[] == B"001" then 
-					 dft_by_word2.next_sample = Vcc;
+					 
 					 sm = await_tx_high;
-					 --channel_number[].d = B"010";
 					 channel_number[].ena = Vcc;
-					 --channel_number[].d = channel_number[].q + 1;
+					 
 				elsif channel_number[] == B"010" then 
-					 dft_by_word3.next_sample = Vcc;
-					 --channel_number[].d = B"011";
+					 
+					 
 					 channel_number[].ena = Vcc;
 					 sm = await_tx_high;
-					 --channel_number[].d = channel_number[].q + 1;
+					 
 				elsif channel_number[] == B"011" then 
-					 dft_by_word4.next_sample = Vcc;
-					 sm = await_tx_high;
-					 --channel_number[].d = B"100";
+					 
+					 sm = await_tx_high; 
 					 channel_number[].ena = Vcc;
-					 --channel_number[].d = channel_number[].q + 1;
+					 
 				elsif channel_number[] == B"100" then 
-					 dft_by_word5.next_sample = Vcc;
+					 
 					 sm = await_tx_high;
-					 --channel_number[].d = B"101";
 					 channel_number[].ena = Vcc;
-					 --channel_number[].d = channel_number[].q + 1;
+					 
 				elsif channel_number[] == B"101" then 
-					 dft_by_word6.next_sample = Vcc;
+					 
 					 sm = back_start;
-					 --sm = await_tx_high;
-					 next_step_all_ff.d = Vcc;
-					 --channel_number[].d = B"000";
+					 sample_counter[].ena = Vcc;
 					 channel_number[].ena = Vcc;
+					 
 				end if;
 				
 				
 	when back_start =>
 
     	if channel_number[] != B"000" then 
-					 --channel_number[].ena = Vcc;
-					 --sm = await_tx_high;
-					 --next_step_all_ff.d = Vcc;
-					 --channel_number[].d = B"000";
-					 sm = back_start;
-					 channel_number[].ena = Vcc;	 
-				
-				
+					 
+			sm = back_start;
+			channel_number[].ena = Vcc;	 
+					
 		else
-		sm = await_tx_high;
+		
+		    sm = await_tx_high;
+		
 		end if;
 	
 	when await_tx_high =>
