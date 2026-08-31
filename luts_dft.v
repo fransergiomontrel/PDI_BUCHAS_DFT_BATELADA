@@ -8,7 +8,7 @@ module luts(
 	 output wire debug_luts
 
 );
-localparam [12:0] data_addr = 13'h0000;
+//localparam [12:0] data_addr = 13'h0008;
 
 (* preserve, noprune *) reg [15:0] sin_reg;
 (* preserve, noprune *) reg [15:0] cos_reg;
@@ -27,7 +27,7 @@ ufm_read u_ufm_read (
     .clock                   (clk),
     .reset_n                 (~rst),
 
-    .avmm_data_addr          (addr),
+    .avmm_data_addr          (prev_ufm_addr),
     .avmm_data_read          (ufm_read_reg),
     .avmm_data_readdata      (ufm_readdata),
     .avmm_data_waitrequest   (ufm_waitrequest),
@@ -44,7 +44,6 @@ localparam S_DONE = 3'd4;
 
 reg[2:0] state;
 
-reg[7:0] count_start;
 
 reg [12:0] prev_ufm_addr;
 
@@ -58,7 +57,6 @@ always @(posedge clk) begin
         ufm_read_reg <= 1'b0;
         sin_reg <= 16'd0;
 		  cos_reg <= 16'd0;
-        count_start <= 8'd0;
 		  fetch_seen <= 1'b0;
                  
     end
@@ -71,14 +69,7 @@ always @(posedge clk) begin
         
 		  prev_ufm_addr <= addr;
         ufm_read_reg <= 1'b0;
-        if (count_start == 8'd120) begin
-            count_start <= 8'd0;
-            state <= S_FETCH;
-        end
-		  
-        else begin
-            count_start <= count_start + 8'd1;
-        end
+        state <= S_FETCH;
 
 	 end
 		 
@@ -104,20 +95,25 @@ always @(posedge clk) begin
 	S_WAIT: begin
 		 
        if(ufm_readdatavalid) begin
-            fetch_seen <= 1'b1;                             
+								
+			  fetch_seen <= 1'b1; 
            cos_reg <= ufm_readdata[15:0];
 			  sin_reg <= ufm_readdata[31:16];
-           state <= S_DONE;
-													  
+           state <= S_DONE;	
+			  
        end
+		
    end
 
    S_DONE: begin
 		 //While address is unchanged does not fetch next ufm data
 	    if(prev_ufm_addr == addr) begin
+		 
            state <= S_DONE;
+			  
 		 end
 		 else begin
+		     fetch_seen <= 1'b0;
 		     state <= S_DELAY_FETCH;
 		 end
 		 

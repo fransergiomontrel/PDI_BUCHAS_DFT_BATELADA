@@ -74,22 +74,30 @@ begin
 	--debug = shift.loading_tx;
 	--debug = detect_falling.falling_edge;
 	debug = dft_caller.debug;
-	debug_res = (luts_table.cos != 0);
+	debug_res = luts_table.debug_luts;
 	--debug = shift.loading_tx;
 	
 	--Connections of dft result bus
 	dft_result[][].clk = clk; 
 	dft_result[][].clrn = !done_tx;
 	
-	
 	start_tx = dft_caller.start_tx;
+	
+	--Permanent connections of ufm module
+	luts_table.clk = clk;
+	luts_table.rst = sreset # done_tx;
+	luts_table.addr[] = dft_caller.luts_addr_out[];
+	dft_caller.luts_value[] = (luts_table.sin[], luts_table.cos[]);
 	
 	--Connections of dft_locale 1
 	dft_caller.clk = clk;
 	dft_caller.sreset = sreset;
-	dft_caller.word[] = buffer_parallel_in[].q;
+	--dft_caller.word[] = buffer_parallel_in[].q;
+	dft_caller.word[] = 160;
 	dft_caller.tx_status = shift.loading_tx;
 	dft_caller.end_tx = done_tx;
+	dft_caller.await_lut = luts_table.debug_luts;
+	
 	luts_table.addr[] = dft_caller.luts_addr_out[];
 	
 	dft_result[0][].d = dft_caller.cos_out1[];
@@ -114,11 +122,6 @@ begin
 	--Lock level of last dft
 	 start_tx_ff.d = dft_caller.start_tx # start_tx_ff;
 	 
-	 --Permanent connections of ufm module
-	luts_table.clk = clk;
-	luts_table.rst = sreset # done_tx;
-	luts_table.addr[] = dft_caller.luts_addr_out[];
-	dft_caller.luts_value[] = (luts_table.sin[], luts_table.cos[]);
 	
 	--Connect array dft bus to output which in data in to uart tx
 	data_out_to_uart_tx[31..0] = dft_result[0][].q;
@@ -192,7 +195,7 @@ begin
 			busy_ff.d = Vcc;
 			load_parallel_FF.d = Vcc;
 			oe_n_FF.d = Gnd;
-			if dft_caller.await_lut_out then
+			if luts_table.debug_luts then
 				sm = init_buffers1;
 			end if;
 			

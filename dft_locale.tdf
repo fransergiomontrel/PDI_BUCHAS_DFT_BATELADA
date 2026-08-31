@@ -10,6 +10,8 @@ subdesign dft_locale(
 	
 	luts_value[31..0]: input;
 	
+	await_lut: input;
+	
 	sin_out1[31..0]: output;
 	cos_out1[31..0]: output;
 	sin_out2[31..0]: output;
@@ -27,7 +29,6 @@ subdesign dft_locale(
 	end_tx: input;
 	debug: output;
 	debug_res: output;
-	await_lut_out: output;
 	luts_addr_out[12..0]: output;
 		
 )
@@ -36,7 +37,7 @@ variable
 
     sm: machine with states(first_sample, tx_begin, nop, start_dft, on_dft, on_dft2, sum_dft, back_start, await_tx_high);
 	 
-	 count_nop[6..0], tx_status_ff, await_lut_ff: dff;
+	 tx_status_ff, await_lut_ff: dff;
 	 channel_number[2..0],out_reg[15..0], sample_counter[12..0]: dffe;
 	 lut_index[12..0]: node;
 	 lut_index_plus1[12..0]: node;
@@ -45,9 +46,7 @@ variable
 
 begin
 		 	 
-    defaults
-		  count_nop[].d = Gnd;
-  	     count_nop[].clrn = Vcc;   	
+    defaults  	
 
 		  dft_by_word1.start_dft = Gnd;
 		  dft_by_word2.start_dft = Gnd;
@@ -55,12 +54,10 @@ begin
 		  dft_by_word4.start_dft = Gnd;
 		  dft_by_word5.start_dft = Gnd;
 		  dft_by_word6.start_dft = Gnd;
-		 
 		
-		   sample_counter[].ena = Gnd;
+		  sample_counter[].ena = Gnd;
 		  --Only specific states can increment channel_number or clean it
 		  channel_number[].ena = Gnd;
-		  
 		  
 	 end defaults;
 	 
@@ -70,9 +67,13 @@ begin
 	 sample_counter[].clrn = !sreset & !end_tx;
 	
 	 if sample_counter[].q <= 3607 then
+	 
 	     lut_index[] = sample_counter[].q;
+	 
 	 else
-	     lut_index[] = 7215 - sample_counter[].q;
+	 
+	     lut_index[] = 7214 - sample_counter[].q;
+		  
 	 end if;
 	 
 	 lut_index_plus1[] = lut_index[] + 1;
@@ -85,10 +86,6 @@ begin
 	 
 	 debug_res = channel_number[1].q;
 	 
-	 await_lut_ff.clk = clk;
-	 await_lut_ff.clrn = !sreset;
-	 await_lut_ff.d = await_lut_ff.q;
-	 await_lut_out = await_lut_ff.q;
 	 
 	 tx_status_ff.clk = clk;
 	 tx_status_ff.clrn = !sreset;
@@ -161,10 +158,6 @@ begin
 	 sin_out6[] = dft_by_word6.sin_out[];
 	 cos_out6[] = dft_by_word6.cos_out[];
 	 
-	 
-    --Clock of nop count
-    count_nop[].clk = clk;
-	 
 	 --Clock of output register
 	 out_reg[].clk = clk;
 	 
@@ -184,7 +177,7 @@ begin
 						
 			       if !tx_status_ff.q  then
 					      
-				        sm = start_dft;
+				        sm = nop;
 			       
 					 else  
 					     
@@ -194,13 +187,14 @@ begin
 					 		
 		  when nop =>
 				
-            if count_nop[] == B"1111000" then
-					 count_nop[].d = B"0000000";
-					 await_lut_ff.d = Vcc;
+            if await_lut then
+					 
 			       sm = start_dft;
+					 
 			   else
-				    count_nop[].d = count_nop[].q+1;
+				    
 			       sm = nop;
+					 
 			   end if;
 			
 		  when start_dft =>
@@ -260,7 +254,7 @@ begin
 				elsif channel_number[] == B"101" then 
 					 
 					 sm = back_start;
-					 sample_counter[].ena = Vcc;
+					 
 					 channel_number[].ena = Vcc;
 					 
 				end if;
@@ -274,7 +268,7 @@ begin
 			channel_number[].ena = Vcc;	 
 					
 		else
-		
+		    sample_counter[].ena = Vcc;
 		    sm = await_tx_high;
 		
 		end if;
