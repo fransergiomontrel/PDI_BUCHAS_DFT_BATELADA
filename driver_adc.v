@@ -2,6 +2,7 @@ module driver_ADS8691 (
 
     input  wire  clk,
     input  wire  rst,       // reset síncrono
+	 input wire restart,
 	 output driver_ncs,
 	 output driver_sclk,
 	 output driver_mosi	 
@@ -10,12 +11,12 @@ module driver_ADS8691 (
 
    reg [31:0]   driver_config_reg;
 	
-   reg          loaded;	
 	 
 	 spi_adc u_spi_adc(
 	 
     .clk(clk),
     .rst(rst),       // reset síncrono
+	 .restart(restart),
 	 .sclk(driver_sclk),
 	 .ncs(driver_ncs),
 	 .mosi(driver_mosi),       // PINO DE OUTPUT DO MESTRE
@@ -24,8 +25,9 @@ module driver_ADS8691 (
 );
 
  // Definição dos estados (Verilog clássico)
-    localparam IDLE_ADC = 2'b00;
+    localparam START_ADC = 2'b00;
 	 localparam CONFIG = 2'b01;
+	 localparam IDLE_ADC = 2'b10;
 	 
 	 reg [1:0] driver8691_state;    
 	 
@@ -33,46 +35,50 @@ module driver_ADS8691 (
 							 							 	    
 		 if(rst) begin
 		     driver_config_reg <= 32'h00000000;
-			  loaded <= 1'b0;
-			  driver8691_state <= IDLE_ADC;
+			  driver8691_state <= START_ADC;
 		 end
 		 
 		 else begin
 				
 		     case (driver8691_state)
 		
-               IDLE_ADC:
+               START_ADC:
 			  
-			          begin
-							 
-							 if (!loaded) begin							 
-								  loaded <= 1'b1;
-								  driver8691_state <= CONFIG;
-								  driver_config_reg <= 32'hD0140040;
-									
-							 end
-							 
-							 else begin							 
-								  driver8691_state <= IDLE_ADC;								 
-							 end
-					 			              
-				       end
+			      begin
+							 	 		
+						driver8691_state <= CONFIG;
+						driver_config_reg <= 32'hD0140040;
+									  
+				   end
 				
 			
 					CONFIG:
 					  
-						 begin
+					begin
 							 
-						 	 if (driver_ncs == 1'b0) begin							 
-								  driver8691_state <= CONFIG;								 
-							 end
+					if (driver_ncs == 1'b0) begin		
+					
+						 driver8691_state <= CONFIG;	
+							  
+					end
 							 
-							 else begin							 
-								  driver8691_state <= IDLE_ADC;								 
-							 end
-												 
-						 end
+					else begin					
+					
+						 driver8691_state <= IDLE_ADC;
+						 
+					end
+								 				 
+					end
 				
+				IDLE_ADC:
+			  
+			   begin
+							 	 		
+					if (restart == 1'b1) begin							 
+						 driver8691_state <= START_ADC;								 
+					end
+									  
+				 end
 						  
 	        endcase 
 			 

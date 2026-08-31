@@ -15,6 +15,7 @@ module slaver_states (
 );    
 
     reg convst;
+	 reg restart_spi;
 	 wire host_mosi;
 	 wire host_sclk;
 	 reg select0_0;
@@ -37,7 +38,7 @@ module slaver_states (
 	 reg [7:0] data_to_send;
 	 wire ncs_adc_config;
 	 wire done_8_ctl;
-	 wire cs_n;
+	 
 	 
 	 // Definição dos estados (Verilog clássico)
     localparam GPIO_CONFIG = 3'b000;
@@ -73,19 +74,13 @@ module slaver_states (
 
     .clk(clk),
     .rst(reset_adc_config),       // reset síncrono
+	 .restart(restart_spi),
 	 .driver_ncs(ncs_adc_config),
 	 .driver_sclk(host_sclk),
 	 .driver_mosi(host_mosi)	 
     	 
 );
 
-//Instance of rising edge detector for cs_n at end of adc setting
-    edge_detector u_edge_detector (
-        .current_read_pulse(ncs_adc_config),   // entrada
-        .clk(clk),                        // clock
-        .reset(reset_adc_config),                    // reset
-        .rising_edge(cs_n)  // saída
-    );
 
 	 always @(posedge clk) begin
 	 
@@ -99,6 +94,7 @@ module slaver_states (
 		  select0_0 <= 1'b0;
 		  select1_0 <= 1'b0;
 		  data_to_send <= 8'h00;
+		  restart_spi <= 1'b0;
 		  current_initial_state <= GPIO_CONFIG;
 		  host_mode <= MODE_CFG_FPGA;
 		  reset_sm_laver <= 1'b1;
@@ -176,14 +172,20 @@ module slaver_states (
 			      start_8_ctl <= 1'b0;
 					
 					if (done_8_ctl == 1'b1) begin
+					
 						 reset_uart <= 1'b1;
-						 convst <= ncs_adc_config;
 						 select0_0 <= 1'b0;
 						 select1_0 <= 1'b0;
-						 
-						 current_initial_state <= CONFIG_AD;
+			
+						 reset_adc_config <= 1'b0;
+				       convst <= ncs_adc_config;
 						 
 					end
+					
+					 if (ncs_adc_config == 1'b0) begin
+					     convst <= ncs_adc_config;
+						  current_initial_state <= CONFIG_AD;    
+					 end
 				
 			       		       
 		     end
@@ -191,17 +193,21 @@ module slaver_states (
 		CONFIG_AD:
 			  
 			 begin
-			 
-				  reset_adc_config <= 1'b0;
+			     
 				  convst <= ncs_adc_config;
-				  if ((cs_n == 1'b1) & (channel_config == 3'd6)) begin
+				  if (restart_spi == 1'b1) begin
+				      restart_spi <= 1'b0;
+				  end
+				  
+				  if ((ncs_adc_config == 1'b1) & (channel_config == 3'd6)) begin
 						convst <= 1'b1;
+						channel_config = 3'd0;
 				      current_initial_state <= RESET_AD;
 						
 				  end
-				  else if (cs_n == 1'b1) begin
-				  
-						reset_adc_config <= 1'b1;
+				  else if (ncs_adc_config == 1'b1) begin
+				      convst <= ncs_adc_config;
+						restart_spi <= 1'b1;
 						channel_config <= channel_config + 1;
 				      
 				  end

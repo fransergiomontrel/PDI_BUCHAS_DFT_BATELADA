@@ -2,6 +2,7 @@ module spi_adc (
 
     input  wire        clk,
     input  wire        rst,       // reset síncrono
+	 input  wire restart,
 	 input [31:0] config_reg, 
 	 output reg         sclk,
 	 output reg         ncs,
@@ -52,16 +53,9 @@ module spi_adc (
         NO_MOSI_DATA:
 			  
 			   begin
-			       if (config_reg == 32'd0) begin
-					     current_spi_state <= NO_MOSI_DATA;
-                end
-					 
-					 else begin
-					 
-                	  current_spi_state <= CHIP_SELECTED;
-						  ncs <= 1'b0;
-						  
-                end
+			       
+               current_spi_state <= CHIP_SELECTED;
+					ncs <= 1'b0;
 					 			              
 				end
 				
@@ -71,6 +65,7 @@ module spi_adc (
 			      
 			       current_spi_state <= TSU_CSCK_MOSI;
                 /*real design begin*/
+					 ncs <= 1'b0;
 					 shift_reg <= config_reg;
 			              
 		      end
@@ -163,13 +158,16 @@ module spi_adc (
 			 
 		IDLE:
 			  
-			 begin
-			   				
-			     current_spi_state <= IDLE;
+		begin
+		
+		if (restart == 1'b1) begin		
+			 ncs <= 1'b1;
+			 current_spi_state <= CHIP_SELECTED;	
+				 
+		end
 				  
-				  
-						  
-		    end
+			 	  				  
+		end
 			 
 		
 	  endcase 

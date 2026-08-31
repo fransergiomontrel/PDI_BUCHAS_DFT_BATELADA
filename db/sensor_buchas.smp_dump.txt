@@ -239,9 +239,10 @@ current_initial_state.RESET_AD 0 1 0 0 0 0 0 1
 current_initial_state.IDLE_AD 1 0 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|slaver_states:inst31|driver_ADS8691:u_driver_ADS8691|driver8691_state
-Name driver8691_state.CONFIG 
-driver8691_state.IDLE_ADC 0 
-driver8691_state.CONFIG 1 
+Name driver8691_state.START_ADC driver8691_state.IDLE_ADC driver8691_state.CONFIG 
+driver8691_state.START_ADC 0 0 0 
+driver8691_state.CONFIG 1 0 1 
+driver8691_state.IDLE_ADC 1 1 0 
 
 State Machine - |sensor_buchas|slaver_states:inst31|driver_ADS8691:u_driver_ADS8691|spi_adc:u_spi_adc|current_spi_state
 Name current_spi_state.IDLE current_spi_state.THT_CKCS_MOSI current_spi_state.AWAIT_SCLK_RISE_MOSI current_spi_state.AWAIT_SCLK_FALL_MOSI current_spi_state.TSU_CSCK_MOSI current_spi_state.CHIP_SELECTED current_spi_state.NO_MOSI_DATA 
