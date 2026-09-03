@@ -92,8 +92,8 @@ begin
 	--Connections of dft_locale 1
 	dft_caller.clk = clk;
 	dft_caller.sreset = sreset;
-	--dft_caller.word[] = buffer_parallel_in[].q;
-	dft_caller.word[] = 160;
+	dft_caller.word[] = buffer_parallel_in[15..0].q;
+	--dft_caller.word[] = 160;
 	dft_caller.tx_status = shift.loading_tx;
 	dft_caller.end_tx = done_tx;
 	dft_caller.await_lut = luts_table.debug_luts;

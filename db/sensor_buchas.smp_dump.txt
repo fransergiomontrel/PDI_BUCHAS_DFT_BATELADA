@@ -238,20 +238,14 @@ current_initial_state.CONFIG_AD 0 0 1 0 0 0 0 1
 current_initial_state.RESET_AD 0 1 0 0 0 0 0 1 
 current_initial_state.IDLE_AD 1 0 0 0 0 0 0 1 
 
-State Machine - |sensor_buchas|slaver_states:inst31|driver_ADS8691:u_driver_ADS8691|driver8691_state
-Name driver8691_state.START_ADC driver8691_state.IDLE_ADC driver8691_state.CONFIG 
-driver8691_state.START_ADC 0 0 0 
-driver8691_state.CONFIG 1 0 1 
-driver8691_state.IDLE_ADC 1 1 0 
-
-State Machine - |sensor_buchas|slaver_states:inst31|driver_ADS8691:u_driver_ADS8691|spi_adc:u_spi_adc|current_spi_state
-Name current_spi_state.IDLE current_spi_state.THT_CKCS_MOSI current_spi_state.AWAIT_SCLK_RISE_MOSI current_spi_state.AWAIT_SCLK_FALL_MOSI current_spi_state.TSU_CSCK_MOSI current_spi_state.CHIP_SELECTED current_spi_state.NO_MOSI_DATA 
+State Machine - |sensor_buchas|slaver_states:inst31|spi_adc:u_spi_adc|current_spi_state
+Name current_spi_state.IDLE current_spi_state.LOAD_NEXT_WORD current_spi_state.AWAIT_SCLK_RISE_MOSI current_spi_state.AWAIT_SCLK_FALL_MOSI current_spi_state.TSU_CSCK_MOSI current_spi_state.CHIP_SELECTED current_spi_state.NO_MOSI_DATA 
 current_spi_state.NO_MOSI_DATA 0 0 0 0 0 0 0 
 current_spi_state.CHIP_SELECTED 0 0 0 0 0 1 1 
 current_spi_state.TSU_CSCK_MOSI 0 0 0 0 1 0 1 
 current_spi_state.AWAIT_SCLK_FALL_MOSI 0 0 0 1 0 0 1 
 current_spi_state.AWAIT_SCLK_RISE_MOSI 0 0 1 0 0 0 1 
-current_spi_state.THT_CKCS_MOSI 0 1 0 0 0 0 1 
+current_spi_state.LOAD_NEXT_WORD 0 1 0 0 0 0 1 
 current_spi_state.IDLE 1 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|slaver_states:inst31|uart_tx_8:u_uart_tx_8|state_uart_tx

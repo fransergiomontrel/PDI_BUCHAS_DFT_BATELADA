@@ -37,7 +37,7 @@ subdesign acquisition_module(
 variable
 	start_ff: dffes;
 --	ctrl: acquisition_ctrl_v2 with (active_period = 68, period = 463, samples = samples);
-	ctrl: acquisition_ctrl_v2 with (active_period = 68, samples = samples);
+	ctrl: acquisition_ctrl_v2 with (active_period = 100, samples = samples);
 	serializer: acquisition_serializer_v3 with (little_endian = 0, wait_states = 3);
 	storer: acquisition_store;
 	--storer_crc: acquisition_store_crc;

@@ -1,10 +1,10 @@
-include "counter.inc";
+--include "counter.inc";
 include "dffes.inc";
 
 PARAMETERS
 (
-		little_endian = 1,
-		wait_states = 3
+		little_endian = 0,
+		wait_states = 7
 );
 
 subdesign acquisition_serializer_v3(
@@ -24,8 +24,12 @@ subdesign acquisition_serializer_v3(
 variable
 	data_buffer[5..0][15..0]: dffes;
 	data_output_buffer[5..0][15..0]: dffes;
-	count: counter with (MAX_VALUE = 16);
-	divclock: counter with (MAX_VALUE = wait_states);
+	--count: counter with (MAX_VALUE = 16);
+	count[3..0]: dffe;
+	divclock[1..0]: dffe;
+	--divclock[3..0]: dffe;
+	--clockspi[2..0]: dffe;
+	--divclock: counter with (MAX_VALUE = wait_states);
 	serialize_ok_ff: dffes;
 	bus_bits[15..0]: node;
 	sclk_ff: dff;
@@ -35,21 +39,37 @@ variable
 	
 begin
 	defaults
-		count.inc = Gnd;
-		count.clr = Gnd;
-		divclock.inc=Vcc;
-		divclock.clr = Gnd;
+	   count[].clrn = Vcc;
+	   count[].ena = Gnd;
+		divclock[].clrn = Vcc;
+	   divclock[].ena = Gnd;
+		
 		data_buffer[][].ena = Gnd;
 		serialize_ok_ff.d = Gnd;
 		data_buffer[][].ena = Gnd;
 		data_output_buffer[][].ena = Gnd;
+		
+		sclk_ff.d = Gnd;
+		
 	end defaults;
+	
+	--clockspi[].clk = clk;
+	--clockspi[].clrn = !sreset;
+	--clockspi[].d = clockspi[].q + 1;
+	
+	divclock[].clk = clk;
+	divclock[].d = divclock[].q + 1;
+	
+	count[].clk = clk;
+	count[].d = count[].q + 1;
+	
 	
 	-- CLOCKS
 	sclk_ff.clk = clk;
+	sclk_ff.clrn = !sreset;
 	sm.clk= clk;
-	divclock.clk = clk;
-	count.clk = clk;
+	--divclock.clk = clk;
+	--count.clk = clk;
 	serialize_ok_ff.clk = clk;
 	
 	-- RESETs
@@ -58,49 +78,50 @@ begin
 	
 	case sm is
 		when WAIT_SERIALIZE =>
-			sclk_ff.d = Gnd;
+		   
 			if serialize then
+			   divclock[].ena = Vcc;
 				sm = SERIALIZING_SCLK0;
 			else
-				count.clr = Vcc;
-				divclock.clr = Vcc;
+				count[].clrn = Gnd;
+				divclock[].clrn = Gnd;
 				sm = WAIT_SERIALIZE;
 			end if;
 
 		when SERIALIZING_SCLK0 =>
-			if divclock.o[] == wait_states then
-				divclock.clr = Vcc;
+		   
+			if divclock[].q == B"11" then
+				divclock[].ena = Vcc;
 				sclk_ff.d = Vcc;
 				data_buffer[][].ena = Vcc;
 				sm = SERIALIZING_SCLK1;
 			else
+			   divclock[].ena = Vcc;
 				sm = SERIALIZING_SCLK0;
 			end if;
 
 		when SERIALIZING_SCLK1 =>
-			if divclock.o[] == wait_states then
-				divclock.clr = Vcc;
-				sclk_ff.d = Gnd;
-				if count.o[] == 15 then
+			if divclock[].q == B"11" then
+				divclock[].ena = Vcc;
+				
+				if count[].q == B"1111" then
 					serialize_ok_ff.d = Vcc;
 					data_output_buffer[][].ena = Vcc;
 					sm = FINISH;
 				else
-					count.inc = Vcc;
+				   count[].ena = Vcc;
 					sm = SERIALIZING_SCLK0;
 				end if;
 			else
+			   divclock[].ena = Vcc;
 				sclk_ff.d = Vcc;
 				sm = SERIALIZING_SCLK1;
 			end if;
 		when FINISH =>
-			sclk_ff.d = Gnd;
 			if serialize then
 				serialize_ok_ff.d = Vcc;
 				sm = FINISH;
 			else
-				count.clr = Vcc;
-				divclock.clr = Vcc;
 				sm = WAIT_SERIALIZE;
 			end if;
 	end case;
@@ -108,8 +129,14 @@ begin
 
 	-- SAIDAS
 	serialize_ok = serialize_ok_ff.q;
-	adc_sclk = sclk_ff.q;
-
+	 
+	--sclk_ff.d = !sclk_ff.q
+	
+	--adc_sclk = clk;
+	--adc_sclk = clockspi[2];
+	--adc_sclk = divclock[0];
+   adc_sclk = sclk_ff.q;
+	
 	-- Shift register
 	data_buffer[][15..1].d = data_buffer[][14..0].q;
 	data_buffer[][0].d = adc_sdi[];

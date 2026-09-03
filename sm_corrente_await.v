@@ -685,7 +685,7 @@ module sm_corrente_await (
 						 DELAY_SAMPLES:
 						 begin
 						     is_finished  <= is_finished + 1;
-							  if (is_finished == 22'd200) begin
+							  if (is_finished == 22'd50) begin
 							      //Command to read another first byte of next word
 								   bytes_counter <= 3'd1;
 								   command_new_byte <= 1'b1;

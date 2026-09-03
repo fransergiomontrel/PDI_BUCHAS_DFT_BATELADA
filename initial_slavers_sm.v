@@ -15,7 +15,6 @@ module slaver_states (
 );    
 
     reg convst;
-	 reg restart_spi;
 	 wire host_mosi;
 	 wire host_sclk;
 	 reg select0_0;
@@ -70,15 +69,15 @@ module slaver_states (
 	  
 );
 
-	driver_ADS8691 u_driver_ADS8691 (
 
+spi_adc u_spi_adc(
+	 
     .clk(clk),
     .rst(reset_adc_config),       // reset síncrono
-	 .restart(restart_spi),
-	 .driver_ncs(ncs_adc_config),
-	 .driver_sclk(host_sclk),
-	 .driver_mosi(host_mosi)	 
-    	 
+	 .sclk(host_sclk),
+	 .ncs(ncs_adc_config),
+	 .mosi(host_mosi)      // PINO DE OUTPUT DO MESTRE
+
 );
 
 
@@ -94,7 +93,6 @@ module slaver_states (
 		  select0_0 <= 1'b0;
 		  select1_0 <= 1'b0;
 		  data_to_send <= 8'h00;
-		  restart_spi <= 1'b0;
 		  current_initial_state <= GPIO_CONFIG;
 		  host_mode <= MODE_CFG_FPGA;
 		  reset_sm_laver <= 1'b1;
@@ -126,7 +124,7 @@ module slaver_states (
 		  CPLD_RST_AD:
 			  
 			   begin
-			      
+			       host_mode <= MODE_CFG;
 					 delay <= delay + 1;
 					 if ((delay == 24'd2100000) & (rst == 1'b1)) begin
 					     delay <= 24'd0;
@@ -160,7 +158,6 @@ module slaver_states (
 					reset_uart <= 1'b0;
 					select0_0 <= 1'b0;
 					select1_0 <= 1'b1;
-					host_mode <= MODE_CFG;
 					current_initial_state <= SEND_X01;
 			       		       
 		     end
@@ -170,7 +167,7 @@ module slaver_states (
 			  begin
 			
 			      start_8_ctl <= 1'b0;
-					
+					convst <= 1'b1;
 					if (done_8_ctl == 1'b1) begin
 					
 						 reset_uart <= 1'b1;
@@ -178,13 +175,14 @@ module slaver_states (
 						 select1_0 <= 1'b0;
 			
 						 reset_adc_config <= 1'b0;
-				       convst <= ncs_adc_config;
-						 
+				       
 					end
 					
 					 if (ncs_adc_config == 1'b0) begin
-					     convst <= ncs_adc_config;
-						  current_initial_state <= CONFIG_AD;    
+					     convst <= 1'b0;
+						  channel_config <= channel_config + 3'd1;
+						  current_initial_state <= CONFIG_AD;  
+						  
 					 end
 				
 			       		       
@@ -192,33 +190,19 @@ module slaver_states (
 				
 		CONFIG_AD:
 			  
-			 begin
-			     
-				  convst <= ncs_adc_config;
-				  if (restart_spi == 1'b1) begin
-				      restart_spi <= 1'b0;
-				  end
-				  
-				  if ((ncs_adc_config == 1'b1) & (channel_config == 3'd6)) begin
-						convst <= 1'b1;
-						channel_config = 3'd0;
-				      current_initial_state <= RESET_AD;
-						
-				  end
-				  else if (ncs_adc_config == 1'b1) begin
-				      convst <= ncs_adc_config;
-						restart_spi <= 1'b1;
-						channel_config <= channel_config + 1;
+		begin
+			     	  
+		if (ncs_adc_config == 1'b1) begin
 				      
-				  end
-				  
+			 current_initial_state <= RESET_AD; 	
 				  		  
-		    end
+		end
+		end
 		
 		RESET_AD:
 			  
 			 begin
-				  
+				  convst <= 1'b1;
 			     delay <= delay + 1;
 				  if (delay == 24'd1000) begin
 					   delay <= 24'b0;
