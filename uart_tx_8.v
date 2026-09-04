@@ -91,7 +91,7 @@ module uart_tx_8 (
 					 
 						  if (bit_cnt == 7) begin
 								
-						  		//bit_cnt   <= 4'd0;
+						  		bit_cnt   <= 4'd0;
 								tx_freq_divider  <= 10'd0;
 								tx <= 1'b1;
 								state_uart_tx <= STOP_BIT;
@@ -129,8 +129,21 @@ module uart_tx_8 (
 			   IDLE:
 				
 				begin
-				    
-					 state_uart_tx <= IDLE;
+				
+				    if (start) begin
+					 
+					     data_reg <= data_in;
+                    busy  <= 1'b1;
+					     tx <= 1'b0;
+					     tx_freq_divider  <= 10'd0;	
+					     state_uart_tx <= START_BIT;
+						  
+					 end
+					 else begin
+					 
+					     state_uart_tx <= IDLE;
+						  
+					 end
 				
 				end				
 				

@@ -214,7 +214,7 @@ module driver_ADS1118 (
 							  
 						  begin
 									
-								array_data[0] <= driver_data_reg;
+								array_data[4] <= driver_data_reg;
 								
 								driver1118_state <= SHIFT_TEMP;									
 													 
