@@ -12,18 +12,18 @@ subdesign dft_locale(
 	
 	await_lut: input;
 	
-	sin_out1[31..0]: output;
-	cos_out1[31..0]: output;
-	sin_out2[31..0]: output;
-	cos_out2[31..0]: output;
-	sin_out3[31..0]: output;
-	cos_out3[31..0]: output;
-	sin_out4[31..0]: output;
-	cos_out4[31..0]: output;
-	sin_out5[31..0]: output;
-	cos_out5[31..0]: output;
-	sin_out6[31..0]: output;
-	cos_out6[31..0]: output;
+	sin_out1[47..0]: output;
+	cos_out1[47..0]: output;
+	sin_out2[47..0]: output;
+	cos_out2[47..0]: output;
+	sin_out3[47..0]: output;
+	cos_out3[47..0]: output;
+	sin_out4[47..0]: output;
+	cos_out4[47..0]: output;
+	sin_out5[47..0]: output;
+	cos_out5[47..0]: output;
+	sin_out6[47..0]: output;
+	cos_out6[47..0]: output;
 	
 	start_tx: output;
 	end_tx: input;
@@ -164,7 +164,6 @@ begin
 	 --Inputs of state machine
 	 sm.clk = clk;
 	 sm.reset = sreset; 
-	 
 	 
     case sm is
 	 

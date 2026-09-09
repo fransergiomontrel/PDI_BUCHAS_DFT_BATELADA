@@ -31,7 +31,7 @@ subdesign rw_data_module(
 	data_bus_out: output;
 	ready: output;
 	
-	data_out_to_uart_tx[383..0]: output;
+	data_out_to_uart_tx[575..0]: output;
 	
 	debug: output;
 	debug_res: output;
@@ -39,13 +39,13 @@ subdesign rw_data_module(
 variable
 	shift: spi_shift_v2 with (N_BITS=16);
 	
-	sm: machine with states(rst, init, init_buffers1, init_buffers2, init_buffers3, init_buffers4, load_sync1, load_sync2, load_sync_test, load_sync3, load_sync4, wait_loading, wr1, wr2, wr3, wr4, wr5, wr6, wait_loading_n);
+	sm: machine with states(rst, init, init_buffers1, init_buffers2, init_buffers3, init_buffers4, load_sync1, load_sync2, load_sync3, load_sync4, load_sync5, wait_loading, wr1, wr2, wr3, wr4, wr5, wr6, wait_loading_n);
 	
 	oe_n_FF, we_n_FF, cs_n_FF, load_parallel_FF, busy_ff, data_bus_out_ff, SCLK_ff, MOSI_ff: dffes;
 	buffer_parallel_in[15..0]: dffe;
 	ready_ff: srff;
 	--DFT result bus of 48 bytes to send through tx UART when requested
-	dft_result[11..0][31..0], start_tx_ff, debug_ff: dff;
+	dft_result[11..0][47..0], start_tx_ff, debug_ff: dff;
 	
 	--Module which call dft modules
 	dft_caller : dft_locale;
@@ -124,18 +124,18 @@ begin
 	 
 	
 	--Connect array dft bus to output which in data in to uart tx
-	data_out_to_uart_tx[31..0] = dft_result[0][].q;
-	data_out_to_uart_tx[63..32] = dft_result[1][].q;
-	data_out_to_uart_tx[95..64] = dft_result[2][].q;
-	data_out_to_uart_tx[127..96] = dft_result[3][].q;
-	data_out_to_uart_tx[159..128] = dft_result[4][].q;
-	data_out_to_uart_tx[191..160] = dft_result[5][].q;
-	data_out_to_uart_tx[223..192] = dft_result[6][].q;
-	data_out_to_uart_tx[255..224] = dft_result[7][].q;
-	data_out_to_uart_tx[287..256] = dft_result[8][].q;
-	data_out_to_uart_tx[319..288] = dft_result[9][].q;
-	data_out_to_uart_tx[351..320] = dft_result[10][].q;
-	data_out_to_uart_tx[383..352] = dft_result[11][].q;
+	data_out_to_uart_tx[47..0] = dft_result[0][].q;
+	data_out_to_uart_tx[95..48] = dft_result[1][].q;
+	data_out_to_uart_tx[143..96] = dft_result[2][].q;
+	data_out_to_uart_tx[191..144] = dft_result[3][].q;
+	data_out_to_uart_tx[239..192] = dft_result[4][].q;
+	data_out_to_uart_tx[287..240] = dft_result[5][].q;
+	data_out_to_uart_tx[335..288] = dft_result[6][].q;
+	data_out_to_uart_tx[383..336] = dft_result[7][].q;
+	data_out_to_uart_tx[431..384] = dft_result[8][].q;
+	data_out_to_uart_tx[479..432] = dft_result[9][].q;
+	data_out_to_uart_tx[527..480] = dft_result[10][].q;
+	data_out_to_uart_tx[575..528] = dft_result[11][].q;
 			
 	
 	ready_ff.clk = clk;
@@ -231,20 +231,20 @@ begin
 		when load_sync2 =>
 			busy_ff.d = Vcc;
 			oe_n_FF.d = Gnd;
-			sm = load_sync_test;
-
-		when load_sync_test =>
-			busy_ff.d = Vcc;
-			oe_n_FF.d = Gnd;
 			sm = load_sync3;
-			
+
 		when load_sync3 =>
 			busy_ff.d = Vcc;
 			oe_n_FF.d = Gnd;
-			buffer_parallel_in[].ena = Vcc;
 			sm = load_sync4;
-
+			
 		when load_sync4 =>
+			busy_ff.d = Vcc;
+			oe_n_FF.d = Gnd;
+			buffer_parallel_in[].ena = Vcc;
+			sm = load_sync5;
+
+		when load_sync5 =>
 			addr_inc_read = Vcc;
 			busy_ff.d = Vcc;
 			oe_n_FF.d = Gnd;
