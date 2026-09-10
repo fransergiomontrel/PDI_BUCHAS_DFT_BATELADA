@@ -154,17 +154,17 @@ begin
 	-- Buffer de saida
 	CASE channel[] IS
 		WHEN 0 =>
-			bus_bits[] = data_output_buffer[0][].q;
+			bus_bits[] = data_output_buffer[0][].q - H"8000";
 		WHEN 1 =>
-			bus_bits[] = data_output_buffer[1][].q;
+			bus_bits[] = data_output_buffer[1][].q - H"8000";
 		WHEN 2 =>
-			bus_bits[] = data_output_buffer[2][].q;
+			bus_bits[] = data_output_buffer[2][].q - H"8000";
 		WHEN 3 =>
-			bus_bits[] = data_output_buffer[3][].q;
+			bus_bits[] = data_output_buffer[3][].q - H"8000";
 		WHEN 4 =>
-			bus_bits[] = data_output_buffer[4][].q;
+			bus_bits[] = data_output_buffer[4][].q - H"8000";
 		WHEN 5 =>
-			bus_bits[] = data_output_buffer[5][].q;
+			bus_bits[] = data_output_buffer[5][].q - H"8000";
 	END CASE;
 	
 	-- Seleciona o Endian

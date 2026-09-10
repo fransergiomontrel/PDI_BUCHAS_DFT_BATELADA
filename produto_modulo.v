@@ -17,7 +17,7 @@ lpm_mult #(
     .lpm_widtha(16),
 	 .lpm_widthb(16),
 	 .lpm_widthp(32),
-	 .lpm_representation("UNSIGNED"),
+	 .lpm_representation("SIGNED"),
 	 .lpm_pipeline(1)
 )u_mult (
     .dataa(data),

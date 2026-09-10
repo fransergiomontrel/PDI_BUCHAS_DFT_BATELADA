@@ -76,18 +76,46 @@ begin
 	 
 	 
 	 --Appling 2 complement in negative regions of sine
-	 if sample_counter[] <= 3607 then
-	     acc_sin[].d = acc_sin[].q + (Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, multiplier_dft_sin.dft_component[]);
-	 else
-	     acc_sin[].d = acc_sin[].q - (Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, multiplier_dft_sin.dft_component[]);
-	 end if;
+	 acc_sin[].d = acc_sin[].q + (
+	 multiplier_dft_sin.dft_component[31],
+	 multiplier_dft_sin.dft_component[31],
+	 multiplier_dft_sin.dft_component[31],
+	 multiplier_dft_sin.dft_component[31],
+	 multiplier_dft_sin.dft_component[31],
+	 multiplier_dft_sin.dft_component[31],
+	 multiplier_dft_sin.dft_component[31],
+	 multiplier_dft_sin.dft_component[31],
+	 multiplier_dft_sin.dft_component[31],
+	 multiplier_dft_sin.dft_component[31],
+	 multiplier_dft_sin.dft_component[31],
+	 multiplier_dft_sin.dft_component[31],
+	 multiplier_dft_sin.dft_component[31],
+	 multiplier_dft_sin.dft_component[31],
+	 multiplier_dft_sin.dft_component[31],
+	 multiplier_dft_sin.dft_component[31], 
+	 multiplier_dft_sin.dft_component[]);
 	 
 	 --Appling 2 complement in negative regions of cossine
-	 if sample_counter[] <= 1803 # sample_counter[] >= 5411 then
-	     acc_cos[].d = acc_cos[].q + (Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, multiplier_dft_cos.dft_component[]);
-	 else 
-	     acc_cos[].d = acc_cos[].q - (Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, Gnd, multiplier_dft_cos.dft_component[]);
-	 end if;
+	 
+	 acc_cos[].d = acc_cos[].q + (
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[31],
+	 multiplier_dft_cos.dft_component[]);
+	 
 	 
     sin_out[] = acc_sin[];
 	 cos_out[] = acc_cos[];

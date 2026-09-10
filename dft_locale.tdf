@@ -39,9 +39,9 @@ variable
 	 
 	 tx_status_ff, await_lut_ff: dff;
 	 channel_number[2..0],out_reg[15..0], sample_counter[12..0]: dffe;
-	 lut_index[12..0]: node;
-	 lut_index_plus1[12..0]: node;
-	 lut_addr[12..0]: node;
+	 --lut_index[12..0]: node;
+	 --lut_index_plus1[12..0]: node;
+	 --lut_addr[12..0]: node;
 	 dft_by_word1, dft_by_word2, dft_by_word3, dft_by_word4, dft_by_word5, dft_by_word6 : DFT;	  
 
 begin
@@ -66,20 +66,21 @@ begin
 	 sample_counter[].d = sample_counter[].q + 1;
 	 sample_counter[].clrn = !sreset & !end_tx;
 	
-	 if sample_counter[].q <= 3607 then
+	 --if sample_counter[].q <= 3607 then
 	 
-	     lut_index[] = sample_counter[].q;
+	 --    lut_index[] = sample_counter[].q;
 	 
-	 else
+	 --else
 	 
-	     lut_index[] = 7214 - sample_counter[].q;
+	--     lut_index[] = 7214 - sample_counter[].q;
 		  
-	 end if;
+	 --end if;
 	 
-	 lut_index_plus1[] = lut_index[] + 1;
-	 lut_addr[0] = Gnd;
-	 lut_addr[12..1] = lut_index_plus1[11..0];
-	 luts_addr_out[] = lut_addr[];
+	 --lut_index_plus1[] = lut_index[] + 1;
+	 --lut_addr[0] = Gnd;
+	 --lut_addr[12..1] = lut_index_plus1[11..0];
+	 --luts_addr_out[] = lut_addr[];
+	 luts_addr_out[] = sample_counter[].q;
 	 
 	 debug = start_tx;
 	 
