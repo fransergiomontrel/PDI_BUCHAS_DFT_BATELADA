@@ -9,6 +9,8 @@ module luts(
 
 );
 //localparam [12:0] data_addr = 13'h0008;
+wire rst_global;
+assign rst_global = rst | ((addr - 1) == 13'd7214); 
 
 (* preserve, noprune *) reg [15:0] sin_reg;
 (* preserve, noprune *) reg [15:0] cos_reg;
@@ -25,7 +27,7 @@ wire ufm_readdatavalid;
 ufm_read u_ufm_read (
 
     .clock                   (clk),
-    .reset_n                 (~rst),
+    .reset_n                 (~rst_global),
 
     .avmm_data_addr          (prev_ufm_addr),
     .avmm_data_read          (ufm_read_reg),
@@ -51,7 +53,7 @@ reg fetch_seen;
 
 always @(posedge clk) begin
 
-    if (rst) begin
+    if (rst_global) begin
 	 
         state <= S_DELAY_FETCH;
         ufm_read_reg <= 1'b0;

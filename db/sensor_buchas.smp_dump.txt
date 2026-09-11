@@ -90,17 +90,35 @@ read_state.READ_STATE_FINAL 0 0 1 0 0 0 0 1
 read_state.READ_STATE_CLEAR 0 1 0 0 0 0 0 1 
 read_state.READ_STATE_PULSE_SE 1 0 0 0 0 0 0 1 
 
+State Machine - |sensor_buchas|rw_data_module:inst10|luts:luts_table|ufm_read:u_ufm_read|altera_onchip_flash:onchip_flash_0|altera_onchip_flash_avmm_data_controller:avmm_data_controller|erase_state
+Name erase_state.ERASE_STATE_ERROR erase_state.ERASE_STATE_RESET erase_state.ERASE_STATE_WAIT_DONE erase_state.ERASE_STATE_WAIT_BUSY erase_state.ERASE_STATE_ADDR erase_state.ERASE_STATE_IDLE 
+erase_state.ERASE_STATE_IDLE 0 0 0 0 0 0 
+erase_state.ERASE_STATE_ADDR 0 0 0 0 1 1 
+erase_state.ERASE_STATE_WAIT_BUSY 0 0 0 1 0 1 
+erase_state.ERASE_STATE_WAIT_DONE 0 0 1 0 0 1 
+erase_state.ERASE_STATE_RESET 0 1 0 0 0 1 
+erase_state.ERASE_STATE_ERROR 1 0 0 0 0 1 
+
+State Machine - |sensor_buchas|rw_data_module:inst10|luts:luts_table|ufm_read:u_ufm_read|altera_onchip_flash:onchip_flash_0|altera_onchip_flash_avmm_data_controller:avmm_data_controller|write_state
+Name write_state.WRITE_STATE_ERROR write_state.WRITE_STATE_RESET write_state.WRITE_STATE_WAIT_DONE write_state.WRITE_STATE_WAIT_BUSY write_state.WRITE_STATE_WRITE write_state.WRITE_STATE_ADDR write_state.WRITE_STATE_IDLE 
+write_state.WRITE_STATE_IDLE 0 0 0 0 0 0 0 
+write_state.WRITE_STATE_ADDR 0 0 0 0 0 1 1 
+write_state.WRITE_STATE_WRITE 0 0 0 0 1 0 1 
+write_state.WRITE_STATE_WAIT_BUSY 0 0 0 1 0 0 1 
+write_state.WRITE_STATE_WAIT_DONE 0 0 1 0 0 0 1 
+write_state.WRITE_STATE_RESET 0 1 0 0 0 0 1 
+write_state.WRITE_STATE_ERROR 1 0 0 0 0 0 1 
+
 State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale:dft_caller|sm
-Name await_tx_high back_start sum_dft on_dft2 on_dft start_dft nop tx_begin first_sample 
-first_sample 0 0 0 0 0 0 0 0 0 
-tx_begin 0 0 0 0 0 0 0 1 1 
-nop 0 0 0 0 0 0 1 0 1 
-start_dft 0 0 0 0 0 1 0 0 1 
-on_dft 0 0 0 0 1 0 0 0 1 
-on_dft2 0 0 0 1 0 0 0 0 1 
-sum_dft 0 0 1 0 0 0 0 0 1 
-back_start 0 1 0 0 0 0 0 0 1 
-await_tx_high 1 0 0 0 0 0 0 0 1 
+Name await_tx_high back_start sum_dft on_dft2 on_dft start_dft tx_begin nop 
+nop 0 0 0 0 0 0 0 0 
+tx_begin 0 0 0 0 0 0 1 1 
+start_dft 0 0 0 0 0 1 0 1 
+on_dft 0 0 0 0 1 0 0 1 
+on_dft2 0 0 0 1 0 0 0 1 
+sum_dft 0 0 1 0 0 0 0 1 
+back_start 0 1 0 0 0 0 0 1 
+await_tx_high 1 0 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|rw_data_module:inst10|dft_locale:dft_caller|DFT:dft_by_word6|sm
 Name await_end_tx check_end sum product1 product idle 

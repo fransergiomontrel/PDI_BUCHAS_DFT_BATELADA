@@ -432,8 +432,6 @@ module sm_corrente_await (
 										     
 							  convst <= 1'b0;
 									
-							  host_mode <= MODE_ACQ;
-									
 							  is_finished <= is_finished + 1;
 									
 							  if (is_finished == 22'd1000) begin
@@ -457,6 +455,7 @@ module sm_corrente_await (
 						 end
 							  
 						 if ((is_finished == 10000) & (in == 1'b0)) begin
+						    host_mode <= MODE_ACQ;
 							 current_state <= START_CONVERSION;
 							 is_finished <= 22'd0;
 						 end

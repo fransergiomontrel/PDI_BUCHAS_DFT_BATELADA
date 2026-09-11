@@ -93,7 +93,7 @@ begin
 	dft_caller.clk = clk;
 	dft_caller.sreset = sreset;
 	dft_caller.word[] = buffer_parallel_in[15..0].q;
-	--dft_caller.word[] = 160;
+	--dft_caller.word[] = H"FFF8";
 	dft_caller.tx_status = shift.loading_tx;
 	dft_caller.end_tx = done_tx;
 	dft_caller.await_lut = luts_table.debug_luts;
@@ -181,7 +181,7 @@ begin
 	busy = busy_ff.q;
 	busy_ff.sclr = sreset;
 
-	sm.reset = sreset;
+	sm.reset = sreset # done_tx;
 	sm.clk = clk;
 	
 	case sm is
@@ -224,9 +224,13 @@ begin
 			sm = load_sync1;			
 			
 		when load_sync1 =>					-- 4 estados para dar temporização suficiente da leitura da RAM (taa)
+		   
 			busy_ff.d = Vcc;
 			oe_n_FF.d = Gnd;
-			sm = load_sync2;
+			if luts_table.debug_luts then
+				sm = load_sync2;
+			end if;
+			
 
 		when load_sync2 =>
 			busy_ff.d = Vcc;

@@ -35,9 +35,6 @@ begin
 		  multiplier_dft_sin.product_on = Gnd;
 		  multiplier_dft_cos.product_on = Gnd;
 		  
-		  acc_sin[].clrn = Vcc;
-		  acc_cos[].clrn = Vcc;
-		  
 		  acc_sin[].ena = Gnd;
 		  acc_cos[].ena = Gnd;
 		  
@@ -46,6 +43,8 @@ begin
 		
 	 end defaults;
 	 
+	 acc_sin[].clrn = !end_tx;
+	 acc_cos[].clrn = !end_tx;
 	 
 	 --Inputs of state machine
 	 sm.clk = clk;
@@ -148,7 +147,7 @@ begin
 				
         when check_end =>
 		  	     
-				if sample_counter[] == 7214 then
+				if sample_counter[] == 7215 then
 				    
 					 sm = await_end_tx;
 					 
@@ -159,8 +158,7 @@ begin
 					 		 
 		 when await_end_tx =>
 		  	   if end_tx then
-				    acc_sin[].clrn = Gnd;
-		          acc_cos[].clrn = Gnd;
+				    
 				    sm = idle;	
 		      else
 				    sm = await_end_tx;
