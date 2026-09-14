@@ -43,9 +43,10 @@ begin
 		
 	 end defaults;
 	 
-	 acc_sin[].clrn = !end_tx;
-	 acc_cos[].clrn = !end_tx;
-	 
+	 --acc_sin[].clrn = !end_tx;
+	 --acc_cos[].clrn = !end_tx;
+	 acc_sin[].clrn = !(end_tx # ((sm == idle) & start_dft & (sample_counter[] == 0)));
+    acc_cos[].clrn = !(end_tx # ((sm == idle) & start_dft & (sample_counter[] == 0)));
 	 --Inputs of state machine
 	 sm.clk = clk;
 	 sm.reset = reset;
@@ -127,6 +128,7 @@ begin
 		  	   sm = idle;
 		  else
 		      
+				
 				multiplier_dft_sin.product_on = Vcc;
 		      multiplier_dft_cos.product_on = Vcc;
 				sm = product;

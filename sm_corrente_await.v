@@ -25,7 +25,7 @@ module sm_corrente_await (
 	 (* preserve *) reg txd_reg;
 	 
 	 
-    reg requested_data;
+    (* preserve *) reg requested_data;
 	 reg acquire_again;
 	 reg select0_1;
 	 reg select1_1;
@@ -237,6 +237,7 @@ module sm_corrente_await (
 			      CHECK_SOH:
 			    
 			          begin
+
 						     reset_uart_rx <= 1'b0;
 						     is_finished <= 22'd0;
 							  acquire_again <= 1'b0;
@@ -282,6 +283,7 @@ module sm_corrente_await (
 									
 									//FRAME OF SYNC 60
 									else if (rx_uart_out == 8'h0C)  begin
+									    //requested_data <= 1'b1;
 									    current_state <= EN_W_1;
 										 select0_1 <= 1'b0;
 										 select1_1 <= 1'b0;
@@ -670,6 +672,7 @@ module sm_corrente_await (
 								 end
 								 
 								 else begin
+								     
 									  readed_words <= 16'd0;
 									  bytes_counter <= 3'd0;
 								     host_mode <= MODE_CFG_FPGA;
