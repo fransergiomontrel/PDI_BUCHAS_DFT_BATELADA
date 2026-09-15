@@ -43,8 +43,7 @@ begin
 		
 	 end defaults;
 	 
-	 --acc_sin[].clrn = !end_tx;
-	 --acc_cos[].clrn = !end_tx;
+	
 	 acc_sin[].clrn = !(end_tx # ((sm == idle) & start_dft & (sample_counter[] == 0)));
     acc_cos[].clrn = !(end_tx # ((sm == idle) & start_dft & (sample_counter[] == 0)));
 	 --Inputs of state machine
