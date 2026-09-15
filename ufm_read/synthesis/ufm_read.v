@@ -22,7 +22,7 @@ module ufm_read (
 	);
 
 	altera_onchip_flash #(
-		.INIT_FILENAME                       ("/home/montrel/QUARTUS_TESTE/luts_3608_32bits.mif"),
+		.INIT_FILENAME                       ("/home/engenharia/projeto_msa1000/FPGA_MSA1000/PDI_BUCHAS_DFT_BATELADA/luts_7215_32bits_corrigido.mif"),
 		.INIT_FILENAME_SIM                   ("altera_onchip_flash.dat"),
 		.DEVICE_FAMILY                       ("MAX 10"),
 		.PART_NAME                           ("10M08SCE144C8G"),
