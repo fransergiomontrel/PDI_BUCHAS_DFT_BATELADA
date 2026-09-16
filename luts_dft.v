@@ -10,7 +10,7 @@ module luts(
 );
 //localparam [12:0] data_addr = 13'h0008;
 wire rst_global;
-assign rst_global = rst | ((addr - 1) == 13'd7214); 
+assign rst_global = rst | (addr  == 13'd7215); 
 
 (* preserve, noprune *) reg [15:0] sin_reg;
 (* preserve, noprune *) reg [15:0] cos_reg;

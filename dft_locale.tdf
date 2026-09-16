@@ -248,7 +248,6 @@ begin
 				elsif channel_number[] == B"101" then 
 					 
 					 sm = back_start;
-					 sample_counter[].ena = Vcc;
 					 channel_number[].ena = Vcc;
 					 
 				end if;
@@ -262,7 +261,7 @@ begin
 			channel_number[].ena = Vcc;	 
 					
 		else
-		    
+		    sample_counter[].ena = Vcc;
 		    sm = await_tx_high;
 		
 		end if;
