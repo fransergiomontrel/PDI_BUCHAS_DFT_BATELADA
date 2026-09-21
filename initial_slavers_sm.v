@@ -10,7 +10,7 @@ module slaver_states (
 	 output wire select0_0_out,
 	 output wire select1_0_out,
 	 output reg[1:0] host_mode,
-	 output wire reset_sm_laver_out
+	 output wire reset_sm_slaver_out
 	 
 );    
 
@@ -19,14 +19,14 @@ module slaver_states (
 	 wire host_sclk;
 	 reg select0_0;
 	 reg select1_0;
-	 reg reset_sm_laver;
+	 reg reset_sm_slaver;
 
     assign convst_out = convst;
 	 assign host_mosi_out = host_mosi;
 	 assign host_sclk_out = host_sclk;
 	 assign select0_0_out = select0_0;
 	 assign select1_0_out = select1_0;
-	 assign reset_sm_laver_out = reset_sm_laver;
+	 assign reset_sm_slaver_out = reset_sm_slaver;
 
 	 reg [2:0] channel_config;	  
     reg [23:0]  delay;
@@ -46,7 +46,7 @@ module slaver_states (
 	 localparam TESTE_SPI_AD = 3'b011;
 	 localparam SEND_X01 = 3'b100;
 	 localparam CONFIG_AD = 3'b101;
-	 localparam RESET_AD = 3'b110;
+	 localparam AFTER_CONFIG_AD = 3'b110;
 	 localparam IDLE_AD = 3'b111;
 	 
 	 reg [2:0] current_initial_state;
@@ -94,10 +94,10 @@ spi_adc u_spi_adc(
 		  select0_0 <= 1'b0;
 		  select1_0 <= 1'b0;
 		  data_to_send <= 8'h00;
-		  current_initial_state <= GPIO_CONFIG;
-		  host_mode <= MODE_CFG_FPGA;
-		  reset_sm_laver <= 1'b1;
+		  reset_sm_slaver <= 1'b1;
 		  convst <= 1'b0;
+		  host_mode <= MODE_CFG_FPGA;
+		  current_initial_state <= GPIO_CONFIG;
 		 
     end
 	 
@@ -106,46 +106,47 @@ spi_adc u_spi_adc(
 	 case (current_initial_state)
 		
         GPIO_CONFIG:
-			   begin
-			       
-					 delay <= delay + 1;
-					 rst <= 1'b0;
-					 if (delay == 24'd10000000) begin
-						  
-					     delay <= 24'd0;
-						  rst <= 1'b1;
-						  current_initial_state <= CPLD_RST_AD;
-						  
-					 end
-					 
-					 else begin
-					     current_initial_state <= GPIO_CONFIG;
-					 end
-					 
-				end
+		  
+			begin
+				 
+				 delay <= delay + 1;
+				 rst <= 1'b0;
+				 if (delay == 24'd10000000) begin
+					  
+					  delay <= 24'd0;
+					  rst <= 1'b1;
+					  current_initial_state <= CPLD_RST_AD;
+					  
+				 end
+				 
+				 else begin
+					  current_initial_state <= GPIO_CONFIG;
+				 end
+				 
+			end
 				
 		  CPLD_RST_AD:
 			  
-			   begin
-				
-			       host_mode <= MODE_CFG;
-					 delay <= delay + 1;
-					 if ((delay == 24'd2100000) & (rst == 1'b1)) begin
-					 
-					     delay <= 24'd0;
-						  rst <= 1'b0;
-						  current_initial_state <= CPLD_RST_AD;
-						  
-					 end
-					 else if ((delay == 24'd200) & (rst == 1'b0)) begin
-						  
-					     delay <= 24'd0;
-						  rst <= 1'b1;
-						  current_initial_state <= TESTE_RAM;
-						  
-					 end
-					   			              
-		      end
+			begin
+			
+				 host_mode <= MODE_CFG;
+				 delay <= delay + 1;
+				 if ((delay == 24'd2100000) & (rst == 1'b1)) begin
+				 
+					  delay <= 24'd0;
+					  rst <= 1'b0;
+					  current_initial_state <= CPLD_RST_AD;
+					  
+				 end
+				 else if ((delay == 24'd200) & (rst == 1'b0)) begin
+					  
+					  delay <= 24'd0;
+					  rst <= 1'b1;
+					  current_initial_state <= TESTE_RAM;
+					  
+				 end
+												  
+			end
 			
 			TESTE_RAM:
 			  
@@ -160,8 +161,8 @@ spi_adc u_spi_adc(
 					 
 		      end
 				
-		 TESTE_SPI_AD:
-			  
+			TESTE_SPI_AD:
+				  
 			  begin
 			  
 					data_to_send <= 8'h01;
@@ -170,8 +171,8 @@ spi_adc u_spi_adc(
 					select0_0 <= 1'b0;
 					select1_0 <= 1'b1;
 					current_initial_state <= SEND_X01;
-			       		       
-		     end
+									 
+			  end
 				
 		 SEND_X01:
 			  
@@ -201,16 +202,17 @@ spi_adc u_spi_adc(
 				
 		CONFIG_AD:
 			  
-		begin
+		 begin
 			     	  
-		if (ncs_adc_config == 1'b1) begin
-				      
-			 current_initial_state <= RESET_AD; 	
-				  		  
-		end
-		end
+			if (ncs_adc_config == 1'b1) begin
+							
+				 current_initial_state <= AFTER_CONFIG_AD; 	
+							  
+			end
+			
+		 end
 		
-		RESET_AD:
+		AFTER_CONFIG_AD:
 			  
 			 begin
 				  convst <= 1'b1;
@@ -221,7 +223,7 @@ spi_adc u_spi_adc(
 						current_initial_state <= IDLE_AD;
 				  end
 				  else begin
-						current_initial_state <= RESET_AD;
+						current_initial_state <= AFTER_CONFIG_AD;
 				  end
 				  
 				  
@@ -231,7 +233,7 @@ spi_adc u_spi_adc(
 			  
 			 begin
 			     
-			     reset_sm_laver <= 1'b0;
+			     reset_sm_slaver <= 1'b0;
 				  host_mode <= MODE_CFG_FPGA;
 				  current_initial_state <= IDLE_AD;				  				  
 		    end		

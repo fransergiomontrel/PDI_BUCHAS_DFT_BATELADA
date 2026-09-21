@@ -1,4 +1,4 @@
-module sm_corrente_await (
+module slaver_states_main (
 
     input  wire  clk,
     input  wire  rst,       // reset síncrono
@@ -34,11 +34,11 @@ module sm_corrente_await (
 	 reg select0_1;
 	 reg select1_1;
 	 reg convst;
-	 wire host_sclk;
-	 reg host_mosi_sclk;
 	 reg in;
 	 reg dft_reg;
 	 reg tx_reg;
+	 wire host_sclk;
+	 wire host_mosi;
 	 
 	 assign led_dft_on_out = dft_reg;
 	 assign led_tx_on_out = tx_reg;
@@ -48,7 +48,7 @@ module sm_corrente_await (
 	 assign select1_1_out = select1_1;
 	 assign convst_out = convst;
 	 assign host_sclk_out = host_sclk;
-	 assign host_mosi_out = host_mosi_sclk;
+	 assign host_mosi_out = host_mosi;
 	 
 	  
 	 //22 bit size register to insert delay thick 
@@ -160,6 +160,7 @@ module sm_corrente_await (
 	always @(posedge clk) begin
 							 							 	    
 		 if(rst) begin
+		 
 		     current_state <= CHECK_SOH;
 			  txd_reg <= 1'b1;
 			  is_finished  <= 22'd0;
@@ -646,13 +647,13 @@ module sm_corrente_await (
 						 begin
 						     dft_reg <= 1'b0;
 							 //Command to read first byte
-						     if (bytes_counter == 3'd0) begin
+						    if (bytes_counter == 3'd0) begin
 								
-									bytes_counter <= 3'd1;
-									command_new_byte <= 1'b1;
-									byte_to_send <= 1'h00;     									
+								  bytes_counter <= 3'd1;
+								  command_new_byte <= 1'b1;
+								  byte_to_send <= 1'h00;     									
 									
-							  end
+							 end
 							  
 							 else begin
 								  //After one cycle of 100 MHz, command get down

@@ -6,14 +6,14 @@ clk => reset_module:inst7.clk
 clk => slaver_states:inst31.clk
 clk => switch:inst20.clk
 clk => acquisition_module:inst5.clk
-clk => sm_corrente_await:inst4.clk
+clk => slaver_states_main:inst4.clk
 clk => uart_tx:inst2.clk
 clk => rw_data_module:inst10.clk
 clk => conf_cpld_module:inst.clk
 clk => adc_interface:inst17.clk
 clk => driver_ADS1118:inst3.clk
 rst_hardware => slaver_states:inst31.rst_hardware
-rxd_from_gpio47 => sm_corrente_await:inst4.rxd_from_gpio47
+rxd_from_gpio47 => slaver_states_main:inst4.rxd_from_gpio47
 adc_sdi[0] => adc_interface:inst17.adc_sdi[0]
 adc_sdi[0] => debug.DATAIN
 adc_sdi[1] => adc_interface:inst17.adc_sdi[1]
@@ -55,8 +55,8 @@ adc_sclk[3] <= adc_interface:inst17.adc_sclk[3]
 adc_sclk[4] <= adc_interface:inst17.adc_sclk[4]
 adc_sclk[5] <= adc_interface:inst17.adc_sclk[5]
 tx <= selected_to_uart[0].DB_MAX_OUTPUT_PORT_TYPE
-dft_on <= sm_corrente_await:inst4.led_dft_on_out
-tx_on <= sm_corrente_await:inst4.led_tx_on_out
+dft_on <= slaver_states_main:inst4.led_dft_on_out
+tx_on <= slaver_states_main:inst4.led_tx_on_out
 adc_convst[0] <= adc_interface:inst17.adc_convst[0]
 adc_convst[1] <= adc_interface:inst17.adc_convst[1]
 adc_convst[2] <= adc_interface:inst17.adc_convst[2]
@@ -464,18 +464,18 @@ rst_hardware => data_to_send.OUTPUTSELECT
 rst_hardware => data_to_send.OUTPUTSELECT
 rst_hardware => data_to_send.OUTPUTSELECT
 rst_hardware => data_to_send.OUTPUTSELECT
-rst_hardware => current_initial_state.OUTPUTSELECT
-rst_hardware => current_initial_state.OUTPUTSELECT
-rst_hardware => current_initial_state.OUTPUTSELECT
-rst_hardware => current_initial_state.OUTPUTSELECT
-rst_hardware => current_initial_state.OUTPUTSELECT
-rst_hardware => current_initial_state.OUTPUTSELECT
-rst_hardware => current_initial_state.OUTPUTSELECT
-rst_hardware => current_initial_state.OUTPUTSELECT
-rst_hardware => host_mode.OUTPUTSELECT
-rst_hardware => host_mode.OUTPUTSELECT
-rst_hardware => reset_sm_laver.OUTPUTSELECT
+rst_hardware => reset_sm_slaver.OUTPUTSELECT
 rst_hardware => convst.OUTPUTSELECT
+rst_hardware => host_mode.OUTPUTSELECT
+rst_hardware => host_mode.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
+rst_hardware => current_initial_state.OUTPUTSELECT
 rst_hardware => rst~reg0.ENA
 rst <= rst~reg0.DB_MAX_OUTPUT_PORT_TYPE
 tx <= uart_tx_8:u_uart_tx_8.tx_out
@@ -486,7 +486,7 @@ select0_0_out <= select0_0.DB_MAX_OUTPUT_PORT_TYPE
 select1_0_out <= select1_0.DB_MAX_OUTPUT_PORT_TYPE
 host_mode[0] <= host_mode[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 host_mode[1] <= host_mode[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-reset_sm_laver_out <= reset_sm_laver.DB_MAX_OUTPUT_PORT_TYPE
+reset_sm_slaver_out <= reset_sm_slaver.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |sensor_buchas|slaver_states:inst31|uart_tx_8:u_uart_tx_8
@@ -3870,7 +3870,7 @@ o[1] <= ffs[1].DB_MAX_OUTPUT_PORT_TYPE
 o[2] <= ffs[2].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|sm_corrente_await:inst4
+|sensor_buchas|slaver_states_main:inst4
 clk => clk.IN4
 rst => rst.IN3
 rxd_from_gpio47 => rxd_from_gpio47.IN2
@@ -3888,7 +3888,7 @@ select0_1_out <= select0_1.DB_MAX_OUTPUT_PORT_TYPE
 select1_1_out <= select1_1.DB_MAX_OUTPUT_PORT_TYPE
 convst_out <= convst.DB_MAX_OUTPUT_PORT_TYPE
 host_sclk_out <= fpga_rw_8:u_fpga_rw_8.sclk
-host_mosi_out <= <GND>
+host_mosi_out <= fpga_rw_8:u_fpga_rw_8.mosi
 frequency <= frequency~reg0.DB_MAX_OUTPUT_PORT_TYPE
 host_mode[0] <= host_mode[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 host_mode[1] <= host_mode[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
@@ -3896,7 +3896,7 @@ led_dft_on_out <= dft_reg.DB_MAX_OUTPUT_PORT_TYPE
 led_tx_on_out <= tx_reg.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|sm_corrente_await:inst4|fpga_rw_8:u_fpga_rw_8
+|sensor_buchas|slaver_states_main:inst4|fpga_rw_8:u_fpga_rw_8
 clk => data_reg[0]~reg0.CLK
 clk => data_reg[1]~reg0.CLK
 clk => data_reg[2]~reg0.CLK
@@ -3992,7 +3992,7 @@ mosi <= mosi~reg0.DB_MAX_OUTPUT_PORT_TYPE
 spi_done <= spi_done~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|sm_corrente_await:inst4|rx_serial_8:u_rx_serial_8
+|sensor_buchas|slaver_states_main:inst4|rx_serial_8:u_rx_serial_8
 clk => clk.IN2
 rst => rst.IN2
 rx => rx.IN1
@@ -4007,7 +4007,7 @@ rx_reg[6] <= rx_reg[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 rx_reg[7] <= rx_reg[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|sm_corrente_await:inst4|rx_serial_8:u_rx_serial_8|fpga_rw_8:u_fpga_rw_8
+|sensor_buchas|slaver_states_main:inst4|rx_serial_8:u_rx_serial_8|fpga_rw_8:u_fpga_rw_8
 clk => data_reg[0]~reg0.CLK
 clk => data_reg[1]~reg0.CLK
 clk => data_reg[2]~reg0.CLK
@@ -4103,7 +4103,7 @@ mosi <= mosi~reg0.DB_MAX_OUTPUT_PORT_TYPE
 spi_done <= spi_done~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|sensor_buchas|sm_corrente_await:inst4|rx_serial_8:u_rx_serial_8|nedge_detector:u_nedge_detector
+|sensor_buchas|slaver_states_main:inst4|rx_serial_8:u_rx_serial_8|nedge_detector:u_nedge_detector
 current_read_pulse => previous_read_pulse.DATAIN
 current_read_pulse => falling_edge.IN1
 clk => previous_read_pulse.CLK
@@ -4113,7 +4113,7 @@ reset => previous_read_pulse.ACLR
 reset => falling_edge~reg0.ACLR
 
 
-|sensor_buchas|sm_corrente_await:inst4|edge_detector:u_edge_detector
+|sensor_buchas|slaver_states_main:inst4|edge_detector:u_edge_detector
 current_read_pulse => rising_edge.IN1
 current_read_pulse => previous_read_pulse.DATAIN
 clk => previous_read_pulse.CLK
@@ -4123,7 +4123,7 @@ reset => previous_read_pulse.ACLR
 reset => rising_edge~reg0.ACLR
 
 
-|sensor_buchas|sm_corrente_await:inst4|edge_detector:new_pulse_edge_detector
+|sensor_buchas|slaver_states_main:inst4|edge_detector:new_pulse_edge_detector
 current_read_pulse => rising_edge.IN1
 current_read_pulse => previous_read_pulse.DATAIN
 clk => previous_read_pulse.CLK

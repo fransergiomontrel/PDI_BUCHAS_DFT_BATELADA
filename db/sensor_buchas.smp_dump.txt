@@ -194,20 +194,20 @@ state_uart_tx.DATA_BITS 0 1 0 1 0
 state_uart_tx.STOP_BIT 1 0 0 1 0 
 state_uart_tx.IDLE 0 0 0 1 1 
 
-State Machine - |sensor_buchas|sm_corrente_await:inst4|rx_serial_8:u_rx_serial_8|state_uart_rx
+State Machine - |sensor_buchas|slaver_states_main:inst4|rx_serial_8:u_rx_serial_8|state_uart_rx
 Name state_uart_rx.DATA_BITS state_uart_rx.START_BIT state_uart_rx.START state_uart_rx.STOP_BIT 
 state_uart_rx.START 0 0 0 0 
 state_uart_rx.START_BIT 0 1 1 0 
 state_uart_rx.DATA_BITS 1 0 1 0 
 state_uart_rx.STOP_BIT 0 0 1 1 
 
-State Machine - |sensor_buchas|sm_corrente_await:inst4|rx_serial_8:u_rx_serial_8|fpga_rw_8:u_fpga_rw_8|current_spi_state
+State Machine - |sensor_buchas|slaver_states_main:inst4|rx_serial_8:u_rx_serial_8|fpga_rw_8:u_fpga_rw_8|current_spi_state
 Name current_spi_state.NO_DATA current_spi_state.AWAIT_SCLK_RISE current_spi_state.AWAIT_SCLK_FALL 
 current_spi_state.NO_DATA 0 0 0 
 current_spi_state.AWAIT_SCLK_FALL 1 0 1 
 current_spi_state.AWAIT_SCLK_RISE 1 1 0 
 
-State Machine - |sensor_buchas|sm_corrente_await:inst4|fpga_rw_8:u_fpga_rw_8|current_spi_state
+State Machine - |sensor_buchas|slaver_states_main:inst4|fpga_rw_8:u_fpga_rw_8|current_spi_state
 Name current_spi_state.NO_DATA current_spi_state.AWAIT_SCLK_RISE current_spi_state.AWAIT_SCLK_FALL 
 current_spi_state.NO_DATA 0 0 0 
 current_spi_state.AWAIT_SCLK_FALL 1 0 1 
@@ -259,14 +259,14 @@ CHECK_STORE_END 0 1 0 1
 STORING_TIME_COUNTER 1 0 0 1 
 
 State Machine - |sensor_buchas|slaver_states:inst31|current_initial_state
-Name current_initial_state.IDLE_AD current_initial_state.RESET_AD current_initial_state.CONFIG_AD current_initial_state.SEND_X01 current_initial_state.TESTE_SPI_AD current_initial_state.TESTE_RAM current_initial_state.CPLD_RST_AD current_initial_state.GPIO_CONFIG 
+Name current_initial_state.IDLE_AD current_initial_state.AFTER_CONFIG_AD current_initial_state.CONFIG_AD current_initial_state.SEND_X01 current_initial_state.TESTE_SPI_AD current_initial_state.TESTE_RAM current_initial_state.CPLD_RST_AD current_initial_state.GPIO_CONFIG 
 current_initial_state.GPIO_CONFIG 0 0 0 0 0 0 0 0 
 current_initial_state.CPLD_RST_AD 0 0 0 0 0 0 1 1 
 current_initial_state.TESTE_RAM 0 0 0 0 0 1 0 1 
 current_initial_state.TESTE_SPI_AD 0 0 0 0 1 0 0 1 
 current_initial_state.SEND_X01 0 0 0 1 0 0 0 1 
 current_initial_state.CONFIG_AD 0 0 1 0 0 0 0 1 
-current_initial_state.RESET_AD 0 1 0 0 0 0 0 1 
+current_initial_state.AFTER_CONFIG_AD 0 1 0 0 0 0 0 1 
 current_initial_state.IDLE_AD 1 0 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|slaver_states:inst31|spi_adc:u_spi_adc|current_spi_state
