@@ -16,7 +16,10 @@ module sm_corrente_await (
 	 
 	 output reg frequency,
 	 
-	 output reg [1:0] host_mode
+	 output reg [1:0] host_mode,
+	 
+	 output wire led_dft_on_out,
+	 output wire led_tx_on_out
 	 
     	 
 );
@@ -26,6 +29,7 @@ module sm_corrente_await (
 	 
 	 
     (* preserve *) reg requested_data;
+	 assign txd_to_gpio46 = txd_reg;
 	 reg acquire_again;
 	 reg select0_1;
 	 reg select1_1;
@@ -33,10 +37,11 @@ module sm_corrente_await (
 	 wire host_sclk;
 	 reg host_mosi_sclk;
 	 reg in;
+	 reg dft_reg;
+	 reg tx_reg;
 	 
-	 
-	 
-	 assign txd_to_gpio46 = txd_reg;
+	 assign led_dft_on_out = dft_reg;
+	 assign led_tx_on_out = tx_reg;
 	 assign requested_data_out = requested_data;
 	 assign acquire_again_out = acquire_again;
 	 assign select0_1_out = select0_1;
@@ -169,8 +174,9 @@ module sm_corrente_await (
 			  bytes_counter <= 4'd0;
 			  reset_uart_rx <= 1'b1;
 			  in <= 1'b0;
-			  
 			  host_mode <= MODE_CFG_FPGA;
+			  dft_reg <= 1'b1;
+			  tx_reg <= 1'b1;
 
 		 end
 		 
@@ -309,6 +315,7 @@ module sm_corrente_await (
 									else if (rx_uart_out == 8'h1E)  begin
 									    current_state <= AWAIT_CORRENTE_TX;
 										 requested_data <= 1'b1;
+										 tx_reg <= 1'b0;
 									end
 									//NO VALID FRAME
 									else  begin
@@ -635,8 +642,9 @@ module sm_corrente_await (
 				end
 							  
 					    CALC_PHASORS:
-						 
+			          
 						 begin
+						     dft_reg <= 1'b0;
 							 //Command to read first byte
 						     if (bytes_counter == 3'd0) begin
 								
@@ -672,7 +680,7 @@ module sm_corrente_await (
 								 end
 								 
 								 else begin
-								     
+								     dft_reg <= 1'b1;
 									  readed_words <= 16'd0;
 									  bytes_counter <= 3'd0;
 								     host_mode <= MODE_CFG_FPGA;
@@ -708,7 +716,7 @@ module sm_corrente_await (
 									
 							  end
 							  else begin
-							      
+							      tx_reg <= 1'b1;
 									acquire_again <= 1'b1;
 									current_state <= CHECK_SOH;
 									

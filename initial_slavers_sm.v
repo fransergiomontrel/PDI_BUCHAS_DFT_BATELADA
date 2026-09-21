@@ -85,6 +85,7 @@ spi_adc u_spi_adc(
 	 
 	 
 	 if (!rst_hardware) begin
+	 
 	     reset_uart <= 1'b1;
 		  channel_config <= 3'd0;
         delay <= 24'd0;
@@ -96,6 +97,7 @@ spi_adc u_spi_adc(
 		  current_initial_state <= GPIO_CONFIG;
 		  host_mode <= MODE_CFG_FPGA;
 		  reset_sm_laver <= 1'b1;
+		  convst <= 1'b0;
 		 
     end
 	 
@@ -113,6 +115,7 @@ spi_adc u_spi_adc(
 					     delay <= 24'd0;
 						  rst <= 1'b1;
 						  current_initial_state <= CPLD_RST_AD;
+						  
 					 end
 					 
 					 else begin
@@ -124,29 +127,37 @@ spi_adc u_spi_adc(
 		  CPLD_RST_AD:
 			  
 			   begin
+				
 			       host_mode <= MODE_CFG;
 					 delay <= delay + 1;
 					 if ((delay == 24'd2100000) & (rst == 1'b1)) begin
+					 
 					     delay <= 24'd0;
 						  rst <= 1'b0;
 						  current_initial_state <= CPLD_RST_AD;
+						  
 					 end
 					 else if ((delay == 24'd200) & (rst == 1'b0)) begin
 						  
 					     delay <= 24'd0;
 						  rst <= 1'b1;
 						  current_initial_state <= TESTE_RAM;
+						  
 					 end
-					 
-			       			              
+					   			              
 		      end
 			
 			TESTE_RAM:
 			  
 			   begin
-			      
-					 current_initial_state <= TESTE_SPI_AD;
-			       
+			       delay <= delay + 1;
+					 if (delay == 24'd2000000) begin
+					 
+					     delay <= 24'd0;
+						  current_initial_state <= TESTE_SPI_AD;
+						  
+					 end
+					 
 		      end
 				
 		 TESTE_SPI_AD:
