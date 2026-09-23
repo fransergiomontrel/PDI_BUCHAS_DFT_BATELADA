@@ -89,16 +89,23 @@ module slaver_states_main (
 
     //Signal that indicates when spi communication is over
     wire signal_spi_done;
-
-	 //Instance of SPI to write and read one byte
-  crc16	u_crc16(
-  .data_in(),
-  input crc_en,
-  output [15:0] crc_out,
-  output [7:0] crc_out_byte,
-  input rst,
-  input clk,
-  input msb
+    
+	 //To restart crc16 after one frame received
+	 reg crc_restart;
+	 reg [7:0] data_in_crc;
+	 reg crc_en_reg;
+	 wire [15:0] crc_result;
+	 wire crc_global_reset;
+	 assign crc_global_reset = rst | crc_restart;
+	 //Instance of crc16-CCITT False to calculate crc 16 bits data
+    crc16 u_crc16(
+	 
+		  .data_in(data_in_crc),
+        .crc_en(crc_en_reg),
+        .crc_out(crc_result),
+        .rst(crc_global_reset),
+        .clk(clk)
+		  
 );
 	 
     //Instance of SPI to write and read one byte
@@ -174,23 +181,26 @@ module slaver_states_main (
     localparam CHECK_SOH = 5'b00000;//UART await for SOH byte
     localparam CHECK_LENGTH = 5'b00001;//UART await for length of payload
     localparam CHECK_TYPE = 5'b00010;//UART await for TYPE byte
-    localparam READ_CRC_LOW = 5'b00011;//
-    localparam READ_CRC_HIGH = 5'b00100;//
-    localparam EN_W_1 = 5'b00101;//Reading current write key with writing enable bit
-    localparam EN_W_2 = 5'b00110;//Send first byte on next clock
-    localparam EN_W_3 = 5'b00111;//Writing write key with writing enable bit activated
-    localparam PREPARE_CONVERSION = 5'b01000;//Prepare IED slaver to receive next pulse as conversion trigger
-    localparam START_CONVERSION = 5'b01001;//Trigg AD conversion for 50 Hz or 60 Hz, as chosen previously in type_byte
-    localparam AWAIT_END_CONVERSION = 5'b01010;//Await 35 ms to conversion completes
-    localparam DIS_W_1 = 5'b01011;//Reading current write key with writing enable bit
-    localparam DIS_W_2 = 5'b01100;//Send first byte on next clock
-    localparam DIS_W_3 = 5'b01101;//Writing write key with writing enable bit desactivated
-    localparam CALC_PHASORS = 5'b01110;//Requesting SRAM data of 86580 bytes
-    localparam DELAY_SAMPLES = 5'b01111;//Requesting SRAM data of 86580 bytes
-    localparam AWAIT_CORRENTE_TX = 5'b10000; //Request 58 bytes which is all data available (phasors, temp and 4-20mA)
-    localparam AWAIT_LAST_BYTE = 5'b10001;
-    localparam AWAIT_HIGH = 5'b10010; 
-    localparam AWAIT_LOW = 5'b10011; 
+	 localparam READ_PAYLOAD = 5'b00011;//UART store payload byte by byte
+	 localparam CHECK_END = 5'b00100;//UART await byte of end
+    localparam READ_CRC_LOW = 5'b00101;//UART await sent CRC LOW BYTE
+    localparam READ_CRC_HIGH = 5'b00110;//UART await sent CRC HIGH BYTE
+	 localparam CHECK_INTEGRITY = 5'b00111;//Check integrity of frame
+	 localparam DO_COMMAND = 5'b01000;//Do sent command
+    localparam EN_W_1 = 5'b01001;//Reading current write key with writing enable bit
+    localparam EN_W_2 = 5'b01010;//Send first byte on next clock
+    localparam EN_W_3 = 5'b01011;//Writing write key with writing enable bit activated
+    localparam PREPARE_CONVERSION = 5'b01100;//Prepare IED slaver to receive next pulse as conversion trigger
+    localparam START_CONVERSION = 5'b01101;//Trigg AD conversion for 50 Hz or 60 Hz, as chosen previously in type_byte
+    localparam AWAIT_END_CONVERSION = 5'b01110;//Await 35 ms to conversion completes
+    localparam DIS_W_1 = 5'b01111;//Reading current write key with writing enable bit
+    localparam DIS_W_2 = 5'b10000;//Send first byte on next clock
+    localparam DIS_W_3 = 5'b10001;//Writing write key with writing enable bit desactivated
+    localparam CALC_PHASORS = 5'b10010;//Requesting SRAM data of 86580 bytes
+    localparam DELAY_SAMPLES = 5'b10011;//Requesting SRAM data of 86580 bytes
+    localparam AWAIT_CORRENTE_TX = 5'b10100; //Request 58 bytes which is all data available (phasors, temp and 4-20mA)
+    localparam AWAIT_HIGH = 5'b10101; 
+    localparam AWAIT_LOW = 5'b10110; 
     (* preserve *) reg [4:0] current_state;
 
     //Modes definition to internal connection of switch module
@@ -223,6 +233,10 @@ module slaver_states_main (
             tx_reg <= 1'b1;
             lenth_reg <= 8'h00;
 				
+				data_in_crc <= 8'h00;
+	         crc_en_reg <= 1'b0;
+				crc_restart  <= 1'b0;
+				
 				payload_reg[0] <= 8'h00;
 				payload_reg[1] <= 8'h00;
 				payload_reg[2] <= 8'h00;
@@ -240,28 +254,6 @@ module slaver_states_main (
 
             //state machine
             case (current_state)			  
-
-                AWAIT_LAST_BYTE:
-
-                begin
-
-                    if (ed_rx_done == 1'b1) begin
-
-                        if (rx_uart_out == 8'h80) begin
-
-                            bytes_counter <= bytes_counter + 1;
-                            if (bytes_counter == 4'd1) begin
-                                reset_uart_rx <= 1'b1;
-                                bytes_counter <= 4'd0;
-                                reset_uart_rx <= 1'b1;
-                                current_state <= AWAIT_HIGH;
-                                is_finished <= is_finished + 22'd1;
-                            end
-
-                        end
-
-                    end
-                end
 
                 AWAIT_HIGH:
 
@@ -286,30 +278,25 @@ module slaver_states_main (
                         txd_reg <= 1'b1;
                         current_state <= CHECK_SOH;
                     end	
-                    //is_finished <= is_finished + 22'd1;
-                    //if (is_finished == 22'd2150) begin
-                    // is_finished <= 22'd0;
-                    // txd_reg <= 1'b1;
-
-
-                    //current_state <= CHECK_SOH;
-                    //end
 
                 end
 
                 CHECK_SOH:
 
                 begin
-
+					 
+						  crc_restart  <= 1'b0;
                     reset_uart_rx <= 1'b0;
-                    is_finished <= 22'd0;
+                    
                     acquire_again <= 1'b0;
                     if (ed_rx_done == 1'b1) begin
 
                         if (rx_uart_out == START_BYTE) begin
-
+								
+									 data_in_crc <= START_BYTE;
+	                         crc_en_reg <= 1'b1;
                             current_state <= CHECK_LENGTH;
-
+									 
                         end
 
                         else begin
@@ -332,74 +319,159 @@ module slaver_states_main (
 
 
                     if (ed_rx_done == 1'b1) begin
-
+						  
+								crc_en_reg <= 1'b1;
+								data_in_crc <= rx_uart_out;
+								
                         lenth_reg <= rx_uart_out;
                         current_state <= CHECK_TYPE;
 
-                        else begin
+                    else begin
+						  
+							   crc_en_reg <= 1'b0;
+                        current_state <= CHECK_LENTH;
 
-                            current_state <= CHECK_LENTH;
+                    end						
 
-                        end						
-
-                    end 	
+                end 	
 
                 CHECK_TYPE:
 
                 begin
 
                     if (ed_rx_done == 1'b1) begin
+						  
+						      //FRAME OF ECHO
+                        if (rx_uart_out == ECHO_BYTE) begin
+										
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= ECHO_BYTE;
+                            
+                            type_reg <= ECHO_BYTE;
+                            current_state <= READ_PAYLOAD;
+
+                        end
+								
+								//FRAME TO GET ID
+                        else if (rx_uart_out == GET_ID_BYTE) begin
+										
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= GET_ID_BYTE;
+                            
+                            type_reg <= GET_ID_BYTE;
+                            current_state <= READ_PAYLOAD;
+
+                        end
+								
+								//FRAME TO GET CONFIG
+                        else if (rx_uart_out == GET_CONFIG_BYTE) begin
+										
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= GET_CONFIG_BYTE;
+                            
+                            type_reg <= GET_CONFIG_BYTE;
+                            current_state <= READ_PAYLOAD;
+
+                        end
+								
+								//FRAME TO SET CONFIG
+                        else if (rx_uart_out == SET_CONFIG_BYTE) begin
+										
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= SET_CONFIG_BYTE;
+                            
+                            type_reg <= SET_CONFIG_BYTE;
+                            current_state <= READ_PAYLOAD;
+
+                        end
+								
                         //FRAME OF DELAY
-                        if (rx_uart_out == PROPAGATION_BYTE) begin
-
-
-                            //select0_1 <= 1'b1;
-                            //select1_1 <= 1'b0;
+                        else if (rx_uart_out == PROPAGATION_BYTE) begin
+										
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= PROPAGATION_BYTE;
+                            
                             type_reg <= PROPAGATION_BYTE;
-                            //current_state <= AWAIT_LAST_BYTE;
                             current_state <= READ_PAYLOAD;
 
                         end
 
-                        //FRAME OF SYNC 60
-                        else if (rx_uart_out == 8'h0C)  begin
-                            //requested_data <= 1'b1;
-                            current_state <= EN_W_1;
-                            select0_1 <= 1'b0;
-                            select1_1 <= 1'b0;
-                            frequency <= 1'b0;
-                            //byte 1 to be sent
-                            command_new_byte <= 1'b1;
-                            byte_to_send <= 1'h00;
-                            bytes_counter <= bytes_counter + 1;
-
                         end
                         //FRAME OF SYNC 50
-                        else if (rx_uart_out == 8'h0D)  begin
-                            select0_1 <= 1'b0;
-                            select1_1 <= 1'b0;
-                            current_state <= EN_W_1;
-                            frequency <= 1'b1;
-                            //byte 1 to be sent
-                            command_new_byte <= 1'b1;
-                            byte_to_send <= 1'h00;
-                            bytes_counter <= bytes_counter + 1;
+                        else if (rx_uart_out == PREPARE_50HZ_BYTE)  begin
+                            
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= PREPARE_50HZ_BYTE;
+									 
+									 type_reg <= PREPARE_50HZ_BYTE;
+									 current_state <= READ_PAYLOAD;
+
                         end
+								
+								//FRAME OF SYNC 60
+                        else if (rx_uart_out == PREPARE_60HZ_BYTE)  begin
+                            
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= PREPARE_60HZ_BYTE;
+									 
+									 type_reg <= PREPARE_60HZ_BYTE;
+									 current_state <= READ_PAYLOAD;
+									 
+							    //FRAME OF MEASURE
+                        else if (rx_uart_out == MEASURE_BYTE)  begin
+                            
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= MEASURE_BYTE;
+									 
+									 type_reg <= MEASURE_BYTE;
+									 current_state <= READ_PAYLOAD;
+								
                         //FRAME OF DATA_REQUEST
-                        else if (rx_uart_out == 8'h1E)  begin
-                            current_state <= AWAIT_CORRENTE_TX;
-                            requested_data <= 1'b1;
-                            tx_reg <= 1'b0;
+                        else if (rx_uart_out == GET_RESULTS_BYTE)  begin
+                            
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= GET_RESULTS_BYTE;
+									 
+									 type_reg <= GET_RESULTS_BYTE;
+									 current_state <= READ_PAYLOAD;
+
                         end
+								
+								//FRAME OF BYPASS
+                        else if (rx_uart_out == BYPASS_BYTE)  begin
+                            
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= BYPASS_BYTE;
+									 
+									 type_reg <= BYPASS_BYTE;
+									 current_state <= READ_PAYLOAD;
+
+                        end
+								
+								//FRAME OF ERROR
+                        else if (rx_uart_out == ERROR_BYTE)  begin
+                            
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= ERROR_BYTE;
+									 
+									 type_reg <= ERROR_BYTE;
+									 current_state <= READ_PAYLOAD;
+
+                        end
+								
                         //NO VALID FRAME
                         else  begin
-                            current_state <= CHECK_TYPE;
+								    crc_restart  <= 1'b1;
+                            current_state <= CHECK_SOH;
                         end
 
                     end
 
                     else begin
+						  
+						      crc_en_reg <= 1'b0;
                         current_state <= CHECK_TYPE;
+								
                     end						
 
                 end
@@ -410,16 +482,27 @@ module slaver_states_main (
 					     
 						  if (bytes_counter == lenth_reg) begin
 						  
+						      crc_en_reg <= 1'b0;
+								bytes_counter <= 4'd0;
 						      current_state <= CHECK_END;
 						  
 						  end
 
-                    if (ed_rx_done == 1'b1) begin
+                    else if (ed_rx_done == 1'b1) begin
 						      	
+								crc_en_reg <= 1'b1;
+								data_in_crc <= rx_uart_out;
+								
                         payload_reg[bytes_counter] <= rx_uart_out;
 								bytes_counter <= bytes_counter + 1;					
 
                     end
+						  
+						  else begin
+						  
+						      crc_en_reg <= 1'b0;
+								
+						  end
 						  
 					 end
 				
@@ -430,7 +513,9 @@ module slaver_states_main (
                     if (ed_rx_done == 1'b1) begin
 						      	
 								if (rx_uart_out == END_BYTE) begin
-         
+									 
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= END_BYTE;
                             current_state <= READ_CRC_LOW;
 
                         end					
@@ -442,7 +527,8 @@ module slaver_states_main (
 					READ_CRC_LOW:
 
                begin
-
+					
+                   crc_en_reg <= 1'b0;
                    if (ed_rx_done == 1'b1) begin
 						  
 							  crc_low_reg <= rx_uart_out;
@@ -458,12 +544,130 @@ module slaver_states_main (
 
                    if (ed_rx_done == 1'b1) begin
 						  
-							  crc_HIGH_reg <= rx_uart_out;
+							  crc_low_reg <= rx_uart_out;
                        current_state <= CHECK_INTEGRITY;
  				
                    end
 						  
-					end  	
+					end
+		
+				 CHECK_INTEGRITY:
+
+             begin
+
+					 if (crc_result == {crc_high_reg, crc_low_reg}) begin
+					 
+						  current_state <= DO_COMMAND;
+						  
+					 end
+					 else begin
+					 
+						  current_state <= CHECK_SOH;
+						  
+					 end
+					 //Restart crc16 once that it won't be used again until next frame
+					 crc_restart  <= 1'b1;
+						  
+				 end
+		
+				 DO_COMMAND:
+
+             begin
+
+					  case (type_reg)
+					  
+					     ECHO_BYTE: begin
+						      
+                        
+								
+                    end
+						  
+						  GET_ID_BYTE: begin
+						      
+                        
+								
+                    end
+					  
+						  GET_CONFIG_BYTE: begin
+						      
+                        
+								
+                    end
+						  
+						  SET_CONFIG_BYTE: begin
+						      
+                        
+								
+                    end
+
+						  PROPAGATION_BYTE: begin
+						  
+						      reset_uart_rx <= 1'b1;
+                        select0_1 <= 1'b1;
+								select1_1 <= 1'b0;
+								current_state <= AWAIT_HIGH;
+								
+                    end
+
+                    PREPARE_50HZ_BYTE: begin
+						  
+						      select0_1 <= 1'b0;
+                        select1_1 <= 1'b0;
+                        current_state <= EN_W_1;
+                        frequency <= 1'b1;
+								
+                        //byte 1 to be sent
+                        command_new_byte <= 1'b1;
+                        byte_to_send <= 1'h00;
+                        bytes_counter <= bytes_counter + 1;
+                        
+                    end
+
+                    PREPARE_60HZ_BYTE: begin
+						  
+                        current_state <= EN_W_1;
+                        select0_1 <= 1'b0;
+                        select1_1 <= 1'b0;
+                        frequency <= 1'b0;
+								
+                        //byte 1 to be sent
+                        command_new_byte <= 1'b1;
+                        byte_to_send <= 1'h00;
+                        bytes_counter <= bytes_counter + 1;
+                        
+                    end
+						  
+						  MEASURE_BYTE: begin
+						      
+								
+                    end
+						  
+						  GET_RESULTS_BYTE: begin
+						      
+                        requested_data <= 1'b1;
+                        tx_reg <= 1'b0;
+                        current_state <= AWAIT_CORRENTE_TX;
+								
+                    end
+						  
+						  BYPASS_BYTE: begin
+						      
+                       
+								
+                    end
+						  
+						  ERROR_BYTE: begin
+						      
+                       
+								
+                    end
+
+                   
+                endcase
+
+						  
+				 end
+		
 		
                 EN_W_1:
 
@@ -512,7 +716,6 @@ module slaver_states_main (
 
                         //32 bit returned data completed 
                         readed_data_32 <= readed_data_32 | 32'hAC000001;
-
 
                         host_mode <= MODE_CFG_FPGA;
 

@@ -47,7 +47,6 @@ nedge_detector u_nedge_detector(
 		  
 		  case (state_uart_rx)	
 		 
-		
 		  START:
 		  begin
 		  
