@@ -21,7 +21,6 @@ module slaver_states_main (
     output wire led_dft_on_out,
     output wire led_tx_on_out
 
-
 );
 
     (* preserve, noprune *) reg reset_uart_rx;
@@ -75,12 +74,15 @@ module slaver_states_main (
 
     //Reg of 8 bits to store type byte
     reg [7:0] type_reg;
-
-    //Reg of 8 bits to store type byte
-    reg [7:0] type_reg;
     
     //Reg of 8 bits to store type byte
     reg [7:0] payload_reg[0:7];
+	 
+	 //Reg of 8 bits to store crc low
+    reg [7:0] crc_low_reg[0:7];
+	 
+	 //Reg of 8 bits to store crc high
+    reg [7:0] crc_high_reg[0:7];
 	 
     //8 bit size register to store one byte returned through SPI
     wire [7:0] readed_data_8;
@@ -88,6 +90,17 @@ module slaver_states_main (
     //Signal that indicates when spi communication is over
     wire signal_spi_done;
 
+	 //Instance of SPI to write and read one byte
+  crc16	u_crc16(
+  .data_in(),
+  input crc_en,
+  output [15:0] crc_out,
+  output [7:0] crc_out_byte,
+  input rst,
+  input clk,
+  input msb
+);
+	 
     //Instance of SPI to write and read one byte
     fpga_rw_8 u_fpga_rw_8 (
 
@@ -188,6 +201,8 @@ module slaver_states_main (
 
     always @(posedge clk) begin
 
+	     in <= rxd_from_gpio47;
+	 
         if(rst) begin
 
             current_state <= CHECK_SOH;
@@ -203,16 +218,25 @@ module slaver_states_main (
             readed_words <= 16'd0;
             bytes_counter <= 4'd0;
             reset_uart_rx <= 1'b1;
-            in <= 1'b0;
             host_mode <= MODE_CFG_FPGA;
             dft_reg <= 1'b1;
             tx_reg <= 1'b1;
             lenth_reg <= 8'h00;
+				
+				payload_reg[0] <= 8'h00;
+				payload_reg[1] <= 8'h00;
+				payload_reg[2] <= 8'h00;
+				payload_reg[3] <= 8'h00;
+				payload_reg[4] <= 8'h00;
+				payload_reg[5] <= 8'h00;
+				payload_reg[6] <= 8'h00;
+				payload_reg[7] <= 8'h00;
+				crc_low_reg <= 8'h00;
+				crc_high_reg <= 8'h00;
 
         end
 
         else begin
-            in <= rxd_from_gpio47;
 
             //state machine
             case (current_state)			  
@@ -383,22 +407,64 @@ module slaver_states_main (
 					 READ_PAYLOAD:
 
                 begin
-
+					     
+						  if (bytes_counter == lenth_reg) begin
+						  
+						      current_state <= CHECK_END;
+						  
+						  end
 
                     if (ed_rx_done == 1'b1) begin
-
-                        lenth_reg <= rx_uart_out;
-                        current_state <= CHECK_TYPE;
-
-                        else begin
-
-                            current_state <= CHECK_LENTH;
-
-                        end						
+						      	
+                        payload_reg[bytes_counter] <= rx_uart_out;
+								bytes_counter <= bytes_counter + 1;					
 
                     end
-					end  
+						  
+					 end
+				
+                CHECK_END:
 
+                begin
+
+                    if (ed_rx_done == 1'b1) begin
+						      	
+								if (rx_uart_out == END_BYTE) begin
+         
+                            current_state <= READ_CRC_LOW;
+
+                        end					
+
+                    end
+						  
+					 end
+		
+					READ_CRC_LOW:
+
+               begin
+
+                   if (ed_rx_done == 1'b1) begin
+						  
+							  crc_low_reg <= rx_uart_out;
+                       current_state <= READ_CRC_HIGH;
+ 				
+                   end
+						  
+					end
+		
+					READ_CRC_HIGH:
+
+               begin
+
+                   if (ed_rx_done == 1'b1) begin
+						  
+							  crc_HIGH_reg <= rx_uart_out;
+                       current_state <= CHECK_INTEGRITY;
+ 				
+                   end
+						  
+					end  	
+		
                 EN_W_1:
 
                 begin
@@ -409,7 +475,7 @@ module slaver_states_main (
 
                         bytes_counter <= bytes_counter + 1;									
 
-                        if (bytes_counter == 3'd1) begin
+                        if (bytes_counter == 4'd1) begin
 
                             readed_data_32 <= {readed_data_8, 24'h000000};
                             //byte 2 to be sent
@@ -418,7 +484,7 @@ module slaver_states_main (
 
                         end
 
-                        else if (bytes_counter == 3'd2) begin
+                        else if (bytes_counter == 4'd2) begin
 
                             readed_data_32 <= {readed_data_32[31:24], readed_data_8, 16'h0000};
                             //byte 3 to be sent
@@ -426,7 +492,7 @@ module slaver_states_main (
                             byte_to_send <= 1'h00;
 
                         end
-                        else if (bytes_counter == 3'd3) begin
+                        else if (bytes_counter == 4'd3) begin
 
                             readed_data_32 <= {readed_data_32[31:16], readed_data_8, 8'h00};
                             //byte 4 to be sent
@@ -434,15 +500,15 @@ module slaver_states_main (
                             byte_to_send <= 1'h00;
 
                         end
-                        else if (bytes_counter == 3'd4) begin
+                        else if (bytes_counter == 4'd4) begin
 
                             readed_data_32 <= {readed_data_32[31:8], readed_data_8};
-                            bytes_counter <= 3'd0;											  
+                            bytes_counter <= 4'd0;											  
 
                         end
                     end
 
-                    if (bytes_counter == 3'd0) begin
+                    if (bytes_counter == 4'd0) begin
 
                         //32 bit returned data completed 
                         readed_data_32 <= readed_data_32 | 32'hAC000001;
@@ -476,7 +542,7 @@ module slaver_states_main (
 
                         bytes_counter <= bytes_counter + 1;
 
-                        if (bytes_counter == 3'd1) begin
+                        if (bytes_counter == 4'd1) begin
 
                             //byte 2 to be sent
                             command_new_byte <= 1'b1;
@@ -484,29 +550,29 @@ module slaver_states_main (
 
                         end
 
-                        else if (bytes_counter == 3'd2) begin
+                        else if (bytes_counter == 4'd2) begin
 
                             //byte 3 to be sent
                             command_new_byte <= 1'b1;
                             byte_to_send <= readed_data_32[15:8];
 
                         end
-                        else if (bytes_counter == 3'd3) begin
+                        else if (bytes_counter == 4'd3) begin
 
                             //byte 4 to be sent
                             command_new_byte <= 1'b1;
                             byte_to_send <= readed_data_32[7:0];
 
                         end
-                        else if (bytes_counter == 3'd4) begin
+                        else if (bytes_counter == 4'd4) begin
 
-                            bytes_counter <= 3'd0;
+                            bytes_counter <= 4'd0;
 
                         end
 
                     end
 
-                    if (bytes_counter == 3'd0) begin
+                    if (bytes_counter == 4'd0) begin
 
                         convst <= 1'b0;
 
@@ -606,7 +672,7 @@ module slaver_states_main (
 
                         bytes_counter <= bytes_counter + 1;
 
-                        if (bytes_counter == 3'd1) begin
+                        if (bytes_counter == 4'd1) begin
 
                             readed_data_32 <= {readed_data_8, 24'h000000};
                             //byte 2 to be sent
@@ -615,7 +681,7 @@ module slaver_states_main (
 
                         end
 
-                        else if (bytes_counter == 3'd2) begin
+                        else if (bytes_counter == 4'd2) begin
 
                             readed_data_32 <= {readed_data_32[31:24], readed_data_8, 16'h0000};
                             //byte 3 to be sent
@@ -623,7 +689,7 @@ module slaver_states_main (
                             byte_to_send <= 1'h00;
 
                         end
-                        else if (bytes_counter == 3'd3) begin
+                        else if (bytes_counter == 4'd3) begin
 
                             readed_data_32 <= {readed_data_32[31:16], readed_data_8, 8'h00};
                             //byte 4 to be sent
@@ -631,17 +697,17 @@ module slaver_states_main (
                             byte_to_send <= 1'h00;
 
                         end
-                        else if (bytes_counter == 3'd4) begin
+                        else if (bytes_counter == 4'd4) begin
 
                             readed_data_32 <= {readed_data_32[31:8], readed_data_8};
-                            bytes_counter <= 3'd0;
+                            bytes_counter <= 4'd0;
 
                         end
 
 
                     end
 
-                    if (bytes_counter == 3'd0) begin
+                    if (bytes_counter == 4'd0) begin
 
                         //32 bit returned data completed 
                         readed_data_32 <= (readed_data_32 | 32'hAC000000) & (32'hFFFFFFFE);
@@ -675,7 +741,7 @@ module slaver_states_main (
 
                         bytes_counter <= bytes_counter + 1;
 
-                        if (bytes_counter == 3'd1) begin
+                        if (bytes_counter == 4'd1) begin
 
                             //byte 2 to be sent
                             command_new_byte <= 1'b1;
@@ -683,22 +749,22 @@ module slaver_states_main (
 
                         end
 
-                        else if (bytes_counter == 3'd2) begin
+                        else if (bytes_counter == 4'd2) begin
 
                             //byte 3 to be sent
                             command_new_byte <= 1'b1;
                             byte_to_send <= readed_data_32[15:8];
 
                         end
-                        else if (bytes_counter == 3'd3) begin
+                        else if (bytes_counter == 4'd3) begin
 
                             //byte 4 to be sent
                             command_new_byte <= 1'b1;
                             byte_to_send <= readed_data_32[7:0];
                         end
-                        else if (bytes_counter == 3'd4) begin
+                        else if (bytes_counter == 4'd4) begin
 
-                            bytes_counter <= 3'd0;
+                            bytes_counter <= 4'd0;
 
                             host_mode <= MODE_RW;
 
@@ -715,9 +781,9 @@ module slaver_states_main (
                 begin
                     dft_reg <= 1'b0;
                     //Command to read first byte
-                    if (bytes_counter == 3'd0) begin
+                    if (bytes_counter == 4'd0) begin
 
-                        bytes_counter <= 3'd1;
+                        bytes_counter <= 4'd1;
                         command_new_byte <= 1'b1;
                         byte_to_send <= 1'h00;     									
 
@@ -729,17 +795,17 @@ module slaver_states_main (
 
                     end
 
-                    if ((signal_spi_done == 1'b1) & (bytes_counter == 3'd1)) begin
+                    if ((signal_spi_done == 1'b1) & (bytes_counter == 4'd1)) begin
 
                         //First byte is readed
                         //Then command to read second byte
-                        bytes_counter <= 3'd2;
+                        bytes_counter <= 4'd2;
                         command_new_byte <= 1'b1;
                         byte_to_send <= 1'h00;
 
                     end
 
-                    else if ((signal_spi_done == 1'b1) & (bytes_counter == 3'd2)) begin
+                    else if ((signal_spi_done == 1'b1) & (bytes_counter == 4'd2)) begin
 
                         //Second byte readed then more one word is readed
                         readed_words <= readed_words + 1;
@@ -751,7 +817,7 @@ module slaver_states_main (
                         else begin
                             dft_reg <= 1'b1;
                             readed_words <= 16'd0;
-                            bytes_counter <= 3'd0;
+                            bytes_counter <= 4'd0;
                             host_mode <= MODE_CFG_FPGA;
 
                             current_state <= CHECK_SOH;
@@ -766,7 +832,7 @@ module slaver_states_main (
                     is_finished  <= is_finished + 1;
                     if (is_finished == 22'd50) begin
                         //Command to read another first byte of next word
-                        bytes_counter <= 3'd1;
+                        bytes_counter <= 4'd1;
                         command_new_byte <= 1'b1;
                         byte_to_send <= 1'h00;
                         is_finished  <= 22'd0;

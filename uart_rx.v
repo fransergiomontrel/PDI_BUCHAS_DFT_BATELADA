@@ -8,20 +8,9 @@ module rx_serial_8 (
 
 );    
 
-fpga_rw_8 u_fpga_rw_8 (
 
-    .clk(clk),
-	 .again(command_new_byte),
-    .rst(rst),       // reset síncrono
-	 .config_reg(byte_to_send),
-	 .data_reg(readed_data_8),
-	 .miso(host_miso),
-	 .sclk(host_sclk),
-	 .mosi(host_mosi),
-	 .spi_done(signal_spi_done)
-	 
-);
 wire rx_start;
+
 nedge_detector u_nedge_detector(
   .current_read_pulse(rx),
   .clk(clk),
