@@ -57,6 +57,9 @@ module slaver_states_main (
 
     //4 bit size register to count 4 bytes to be sent on 32 bits SPI writing
     reg [3:0] bytes_counter;
+	 
+	 //4 bit size register to count 4 bytes to be sent on 32 bits SPI writing
+    reg [3:0] payload_bytes_counter;
 
     //32 bit size register to store 4 bytes returned through SPI
     reg [31:0] readed_data_32;
@@ -243,6 +246,7 @@ module slaver_states_main (
             command_new_byte <= 1'b0;
             readed_words <= 16'd0;
             bytes_counter <= 4'd0;
+				payload_bytes_counter <= 4'd0;
             reset_uart_rx <= 1'b1;
             host_mode <= MODE_CFG_FPGA;
             dft_reg <= 1'b1;
@@ -302,10 +306,13 @@ module slaver_states_main (
                 CHECK_SOH:
 
                 begin
-					 
+					     //Restart crc for new frame
 						  crc_restart  <= 1'b0;
+						  //Free uart rx for new frame
                     reset_uart_rx <= 1'b0;
-                    
+						  //Uart tx not started, that is, it will started on demand
+                    start_8_ctl <= 1'b0;
+						  //Disable 4-20 ma + temp request, that is, it will started only once after request is done
                     acquire_again <= 1'b0;
                     if (ed_rx_done == 1'b1) begin
 
@@ -503,7 +510,7 @@ module slaver_states_main (
 						  if (bytes_counter == lenth_reg) begin
 						  
 						      crc_en_reg <= 1'b0;
-								bytes_counter <= 4'd0;
+								payload_bytes_counter <= 4'd0;
 						      current_state <= CHECK_END;
 						  
 						  end
@@ -513,8 +520,8 @@ module slaver_states_main (
 								crc_en_reg <= 1'b1;
 								data_in_crc <= rx_uart_out;
 								
-                        payload_reg[bytes_counter] <= rx_uart_out;
-								bytes_counter <= bytes_counter + 1;					
+                        payload_reg[payload_bytes_counter] <= rx_uart_out;
+								payload_bytes_counter <= payload_bytes_counter + 1;					
 
                     end
 						  
@@ -598,13 +605,15 @@ module slaver_states_main (
 					  
 					     ECHO_BYTE: begin
 						  
-						      if (byte_to_send == 8'h00) begin
+						      if ((select0_1 != 1'b1) && (select1_1 != 1'b1)) begin
 								
 								    select0_1 <= 1'b1;
 									 select1_1 <= 1'b1;
-									 //Sent byte of start through uart
+									 
+									 //Send byte of start through uart
                             start_8_ctl <= 1'b1;
 									 byte_to_send <= START_BYTE;
+									 byte_counter <= byte_counter + 1;
 									 
 								end
 								else begin
@@ -615,31 +624,61 @@ module slaver_states_main (
 								
 								if (done_8_ctl == 1'b1)
 								
-									if ((byte_to_send == START_BYTE) && (byte_counter == 4'd0))
-									     //Sent byte of length through uart
+									 if ((byte_to_send == START_BYTE) && (byte_counter == 4'd1))
+									
+									     //Send byte of length through uart
 									     start_8_ctl <= 1'b1;
 									     byte_to_send <= lenth_reg;
+										  byte_counter <= byte_counter + 1;
 									 
 									 end
 								
-								    else if (byte_counter < lenth_reg)
+								    else if ((byte_to_send == lenth_reg) && (byte_counter == 4'd2))
 									 
+									     //Send type byte through uart
 									     start_8_ctl <= 1'b1;
-									     byte_to_send <= payload_reg[byte_counter];
-										  byte_counter <= byte_counter + 1;
+									     byte_to_send <= type_reg;
+										  byte_counter <= 4'd0;
+									 
+									 end
+								
+								    else if (payload_bytes_counter < lenth_reg)
+									 
+										  //Send bytes of payload through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= payload_reg[payload_bytes_counter];
+										  payload_bytes_counter <= payload_bytes_counter + 1;
 									 
 									 end
 									 
-									 else if (byte_counter == lenth_reg)
+									 else if (payload_bytes_counter == lenth_reg)
 									 
+									     //Send byte of end through uart
 									     start_8_ctl <= 1'b1;
 									     byte_to_send <= END_BYTE;
-										  byte_counter <= byte_counter + 1;
+										  payload_bytes_counter <= payload_bytes_counter + 1;
 										  
 									 end
 									 
-									 else if (byte_counter == (lenth_reg + 8'h01))
+									 else if (payload_bytes_counter == (lenth_reg + 8'h01))
 									 
+										  //Send byte low of crc
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= crc_low_byte;
+										  payload_bytes_counter <= payload_bytes_counter + 1;
+										  
+									 end
+									 
+									 else if (payload_bytes_counter == (lenth_reg + 8'h02))
+									 
+									     //Send byte high of crc
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= crc_high_byte;
+										  payload_bytes_counter <= 4'd0;
+										  select0_1 <= 1'b0;
+									     select1_1 <= 1'b0;
+										  current_state <= CHECK_SOH;
+										  
 									 end
 									 
 								end
@@ -1119,6 +1158,7 @@ module slaver_states_main (
                     end
                     else begin
                         tx_reg <= 1'b1;
+								//After request data is done, enable other 4-20 + temp measure is requested
                         acquire_again <= 1'b1;
                         current_state <= CHECK_SOH;
 
