@@ -192,17 +192,16 @@ module slaver_states_main (
 					begin
 						
 						if (ed_rx_done == 1'b1) begin
-				           //
-						     if (rx_uart_out == 8'h80) begin
+						
+				           if (rx_uart_out == 8'h80) begin
 										 
 						         bytes_counter <= bytes_counter + 1;
 									if (bytes_counter == 4'd1) begin
 										  reset_uart_rx <= 1'b1;
 									     bytes_counter <= 4'd0;
-									     reset_uart_rx <= 1'b1;
 									     current_state <= AWAIT_HIGH;
-										  is_finished <= is_finished + 22'd1;
 									end
+										 			
 										 									 
 			              end
 						
@@ -214,7 +213,7 @@ module slaver_states_main (
 					begin
 						
 						is_finished <= is_finished + 22'd1;
-						if (is_finished == 22'd2767) begin
+						if (is_finished == 22'd3237) begin
 									is_finished <= 22'd0;
 									txd_reg <= 1'b0;
 									current_state <= AWAIT_LOW;
