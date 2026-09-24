@@ -39,8 +39,7 @@ module uart_tx (
      .rst(rst),       
      .start(start_8_ctl),
 	  .data_in(byte_to_send),
-     .tx_out(tx_8),        
-     .busy_out(),      
+     .tx_out(tx_8),            
      .done_out(done_8_ctl)	  
 	  
 );

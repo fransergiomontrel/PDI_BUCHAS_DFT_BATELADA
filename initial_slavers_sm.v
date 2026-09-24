@@ -63,8 +63,7 @@ module slaver_states (
      .rst(reset_uart),       
      .start(start_8_ctl),
 	  .data_in(data_to_send),
-     .tx_out(tx),        
-     .busy_out(),      
+     .tx_out(tx),              
      .done_out(done_8_ctl)	  
 	  
 );

@@ -4,16 +4,13 @@ module uart_tx_8 (
     input  wire        start,     // inicia transmissão
     input  wire [7:0] data_in,   // dado paralelo
     output wire         tx_out,        // saída serial
-    output wire         busy_out,      // está transmitindo
     output wire         done_out       // pulso de fim
 
 );    
     reg tx;
-	 reg busy;
 	 reg done;
 	 
 	 assign tx_out = tx;
-	 assign busy_out = busy;
 	 assign done_out = done;
 
     reg [3:0]  bit_cnt; // precisa contar até 32
@@ -34,7 +31,6 @@ module uart_tx_8 (
 				data_reg <= 8'd0;
             bit_cnt   <= 4'd0;
             tx        <= 1'b1;
-            busy      <= 1'b0;
             done      <= 1'b0;
 				tx_freq_divider  <= 10'd0;			
 				state_uart_tx <= START;
@@ -54,7 +50,6 @@ module uart_tx_8 (
 				    if (start) begin                					 
 					 
 						  data_reg <= data_in;
-                    busy  <= 1'b1;
 					     tx <= 1'b0;
 					     tx_freq_divider  <= 10'd0;					 
 					     state_uart_tx <= START_BIT;
@@ -119,7 +114,6 @@ module uart_tx_8 (
 						  data_reg <= 8'd0; 
 						  tx_freq_divider  <= 10'd0;
 						  done <= 1'b1;
-						  busy <= 1'b0;
 						 
 						  state_uart_tx <= IDLE;
 						 
@@ -133,7 +127,6 @@ module uart_tx_8 (
 				    if (start) begin
 					 
 					     data_reg <= data_in;
-                    busy  <= 1'b1;
 					     tx <= 1'b0;
 					     tx_freq_divider  <= 10'd0;	
 					     state_uart_tx <= START_BIT;

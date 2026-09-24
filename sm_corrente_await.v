@@ -19,7 +19,8 @@ module slaver_states_main (
     output reg [1:0] host_mode,
 
     output wire led_dft_on_out,
-    output wire led_tx_on_out
+    output wire led_tx_on_out,
+	 output wire tx_8
 
 );
 
@@ -79,10 +80,10 @@ module slaver_states_main (
     reg [7:0] payload_reg[0:7];
 	 
 	 //Reg of 8 bits to store crc low
-    reg [7:0] crc_low_reg[0:7];
+    reg [7:0] crc_low_reg;
 	 
 	 //Reg of 8 bits to store crc high
-    reg [7:0] crc_high_reg[0:7];
+    reg [7:0] crc_high_reg;
 	 
     //8 bit size register to store one byte returned through SPI
     wire [7:0] readed_data_8;
@@ -132,13 +133,27 @@ module slaver_states_main (
     rx_serial_8 u_rx_serial_8(
 
         .clk(clk),
-        .rst(reset_uart_rx),                          // reset
-        .rx(rxd_from_gpio47),               // dado serie
-        .busy_rx(),                         // está transmitindo
-        .done_rx(done_rx_to_read_ed),       // pulso de fim
+        .rst(reset_uart_rx),           // reset
+        .rx(rxd_from_gpio47),          // dado serie
+        .busy_rx(),                    // está transmitindo
+        .done_rx(done_rx_to_read_ed),  // pulso de fim
         .rx_reg(rx_uart_out)	 
 
     );
+	 
+	 reg start_8_ctl;
+	 wire done_8_ctl;
+	 
+	 uart_tx_8 u_uart_tx_8(
+	  
+	     .clk(clk),
+        .rst(rst),       
+        .start(start_8_ctl),
+	     .data_in(byte_to_send),
+        .tx_out(tx_8),            
+        .done_out(done_8_ctl)	  
+	  
+);
 
     //Signal which outputs rising edge of UART rx done
     wire ed_rx_done;
@@ -165,6 +180,7 @@ module slaver_states_main (
 
     //Bytes of protocol
     localparam START_BYTE = 8'h01;//Start of frame byte
+	 localparam END_BYTE = 8'h04;//End of frame byte
     localparam ECHO_BYTE = 8'h01;//Echo byte
     localparam GET_ID_BYTE = 8'h02;//Get ID byte
     localparam GET_CONFIG_BYTE = 8'h10;//Get config byte
@@ -247,6 +263,8 @@ module slaver_states_main (
 				payload_reg[7] <= 8'h00;
 				crc_low_reg <= 8'h00;
 				crc_high_reg <= 8'h00;
+				start_8_ctl <= 1'b0;
+            byte_to_send <= 8'h00;
 
         end
 
@@ -313,7 +331,7 @@ module slaver_states_main (
 
                 end
 
-                CHECK_LENTH:
+                CHECK_LENGTH:
 
                 begin
 
@@ -326,10 +344,11 @@ module slaver_states_main (
                         lenth_reg <= rx_uart_out;
                         current_state <= CHECK_TYPE;
 
+                        end
                     else begin
 						  
 							   crc_en_reg <= 1'b0;
-                        current_state <= CHECK_LENTH;
+                        current_state <= CHECK_LENGTH;
 
                     end						
 
@@ -396,7 +415,6 @@ module slaver_states_main (
 
                         end
 
-                        end
                         //FRAME OF SYNC 50
                         else if (rx_uart_out == PREPARE_50HZ_BYTE)  begin
                             
@@ -417,6 +435,7 @@ module slaver_states_main (
 									 type_reg <= PREPARE_60HZ_BYTE;
 									 current_state <= READ_PAYLOAD;
 									 
+                        end
 							    //FRAME OF MEASURE
                         else if (rx_uart_out == MEASURE_BYTE)  begin
                             
@@ -426,6 +445,7 @@ module slaver_states_main (
 									 type_reg <= MEASURE_BYTE;
 									 current_state <= READ_PAYLOAD;
 								
+                        end
                         //FRAME OF DATA_REQUEST
                         else if (rx_uart_out == GET_RESULTS_BYTE)  begin
                             
@@ -577,8 +597,52 @@ module slaver_states_main (
 					  case (type_reg)
 					  
 					     ECHO_BYTE: begin
-						      
-                        
+						  
+						      if (byte_to_send == 8'h00) begin
+								
+								    select0_1 <= 1'b1;
+									 select1_1 <= 1'b1;
+									 //Sent byte of start through uart
+                            start_8_ctl <= 1'b1;
+									 byte_to_send <= START_BYTE;
+									 
+								end
+								else begin
+								
+								    start_8_ctl <= 1'b0;
+									 
+								end
+								
+								if (done_8_ctl == 1'b1)
+								
+									if ((byte_to_send == START_BYTE) && (byte_counter == 4'd0))
+									     //Sent byte of length through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= lenth_reg;
+									 
+									 end
+								
+								    else if (byte_counter < lenth_reg)
+									 
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= payload_reg[byte_counter];
+										  byte_counter <= byte_counter + 1;
+									 
+									 end
+									 
+									 else if (byte_counter == lenth_reg)
+									 
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= END_BYTE;
+										  byte_counter <= byte_counter + 1;
+										  
+									 end
+									 
+									 else if (byte_counter == (lenth_reg + 8'h01))
+									 
+									 end
+									 
+								end
 								
                     end
 						  
@@ -618,7 +682,7 @@ module slaver_states_main (
 								
                         //byte 1 to be sent
                         command_new_byte <= 1'b1;
-                        byte_to_send <= 1'h00;
+                        byte_to_send <= 8'h00;
                         bytes_counter <= bytes_counter + 1;
                         
                     end
@@ -632,7 +696,7 @@ module slaver_states_main (
 								
                         //byte 1 to be sent
                         command_new_byte <= 1'b1;
-                        byte_to_send <= 1'h00;
+                        byte_to_send <= 8'h00;
                         bytes_counter <= bytes_counter + 1;
                         
                     end
@@ -684,7 +748,7 @@ module slaver_states_main (
                             readed_data_32 <= {readed_data_8, 24'h000000};
                             //byte 2 to be sent
                             command_new_byte <= 1'b1;
-                            byte_to_send <= 1'h00;
+                            byte_to_send <= 8'h00;
 
                         end
 
@@ -693,7 +757,7 @@ module slaver_states_main (
                             readed_data_32 <= {readed_data_32[31:24], readed_data_8, 16'h0000};
                             //byte 3 to be sent
                             command_new_byte <= 1'b1;
-                            byte_to_send <= 1'h00;
+                            byte_to_send <= 8'h00;
 
                         end
                         else if (bytes_counter == 4'd3) begin
@@ -701,7 +765,7 @@ module slaver_states_main (
                             readed_data_32 <= {readed_data_32[31:16], readed_data_8, 8'h00};
                             //byte 4 to be sent
                             command_new_byte <= 1'b1;
-                            byte_to_send <= 1'h00;
+                            byte_to_send <= 8'h00;
 
                         end
                         else if (bytes_counter == 4'd4) begin
@@ -851,7 +915,7 @@ module slaver_states_main (
                     if (is_finished == 22'd3500000) begin
                         current_state <= DIS_W_1;
 
-                        byte_to_send <= 1'h00;
+                        byte_to_send <= 8'h00;
 
                         bytes_counter <= bytes_counter + 1;
 
@@ -880,7 +944,7 @@ module slaver_states_main (
                             readed_data_32 <= {readed_data_8, 24'h000000};
                             //byte 2 to be sent
                             command_new_byte <= 1'b1;
-                            byte_to_send <= 1'h00;
+                            byte_to_send <= 8'h00;
 
                         end
 
@@ -889,7 +953,7 @@ module slaver_states_main (
                             readed_data_32 <= {readed_data_32[31:24], readed_data_8, 16'h0000};
                             //byte 3 to be sent
                             command_new_byte <= 1'b1;
-                            byte_to_send <= 1'h00;
+                            byte_to_send <= 8'h00;
 
                         end
                         else if (bytes_counter == 4'd3) begin
@@ -897,7 +961,7 @@ module slaver_states_main (
                             readed_data_32 <= {readed_data_32[31:16], readed_data_8, 8'h00};
                             //byte 4 to be sent
                             command_new_byte <= 1'b1;
-                            byte_to_send <= 1'h00;
+                            byte_to_send <= 8'h00;
 
                         end
                         else if (bytes_counter == 4'd4) begin
@@ -988,7 +1052,7 @@ module slaver_states_main (
 
                         bytes_counter <= 4'd1;
                         command_new_byte <= 1'b1;
-                        byte_to_send <= 1'h00;     									
+                        byte_to_send <= 8'h00;     									
 
                     end
 
@@ -1004,7 +1068,7 @@ module slaver_states_main (
                         //Then command to read second byte
                         bytes_counter <= 4'd2;
                         command_new_byte <= 1'b1;
-                        byte_to_send <= 1'h00;
+                        byte_to_send <= 8'h00;
 
                     end
 
@@ -1037,7 +1101,7 @@ module slaver_states_main (
                         //Command to read another first byte of next word
                         bytes_counter <= 4'd1;
                         command_new_byte <= 1'b1;
-                        byte_to_send <= 1'h00;
+                        byte_to_send <= 8'h00;
                         is_finished  <= 22'd0;
                         current_state <= CALC_PHASORS;
                     end
