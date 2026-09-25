@@ -100,7 +100,7 @@ nedge_detector u_nedge_detector(
 		  
 		      bit_time_cnt  <= bit_time_cnt + 11'd1;
 						
-				if (bit_time_cnt == 11'd1302) begin 
+				if (bit_time_cnt == 11'd868) begin 
 				
                 bit_time_cnt  <= 11'd0;
 					 done_rx <= 1'b1;

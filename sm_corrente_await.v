@@ -180,6 +180,18 @@ module slaver_states_main (
         .reset(rst),                    
         .rising_edge(ed_new_pulse)  
     );
+	 
+	 wire id_valid;
+	 wire [63:0] fpga_id;
+	 //Instance to get id of MAX1008SCE144
+	 altchip_id u_altchip_id
+        (
+        .clkin(clk),
+        .chip_id(id_valid),
+        .data_valid(fpga_id),
+        .reset(rst)
+		  );
+
 
     //Bytes of protocol
     localparam START_BYTE = 8'h01;//Start of frame byte
@@ -687,7 +699,83 @@ module slaver_states_main (
 						  
 						  GET_ID_BYTE: begin
 						      
-                        
+                        if ((select0_1 != 1'b1) && (select1_1 != 1'b1)) begin
+								
+								    select0_1 <= 1'b1;
+									 select1_1 <= 1'b1;
+									 
+									 //Send byte of start through uart
+                            start_8_ctl <= 1'b1;
+									 byte_to_send <= START_BYTE;
+									 byte_counter <= byte_counter + 1;
+									 
+								end
+								else begin
+								
+								    start_8_ctl <= 1'b0;
+									 
+								end
+								
+								if (done_8_ctl == 1'b1)
+								
+									 if ((byte_to_send == START_BYTE) && (byte_counter == 4'd1))
+									
+									     //Send byte of length through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= 8'h08;
+										  byte_counter <= byte_counter + 1;
+									 
+									 end
+								
+								    else if ((byte_to_send == lenth_reg) && (byte_counter == 4'd2))
+									 
+									     //Send type byte through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= type_reg;
+										  byte_counter <= 4'd0;
+									 
+									 end
+								
+								    else if (payload_bytes_counter < 8'h08)
+									 
+										  //Send bytes of payload through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= fpga_id[(payload_bytes_counter + 1)*7:payload_bytes_counter];
+										  payload_bytes_counter <= payload_bytes_counter + 1;
+									 
+									 end
+									 
+									 else if (payload_bytes_counter == lenth_reg)
+									 
+									     //Send byte of end through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= END_BYTE;
+										  payload_bytes_counter <= payload_bytes_counter + 1;
+										  
+									 end
+									 
+									 else if (payload_bytes_counter == (lenth_reg + 8'h01))
+									 
+										  //Send byte low of crc
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= crc_low_byte;
+										  payload_bytes_counter <= payload_bytes_counter + 1;
+										  
+									 end
+									 
+									 else if (payload_bytes_counter == (lenth_reg + 8'h02))
+									 
+									     //Send byte high of crc
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= crc_high_byte;
+										  payload_bytes_counter <= 4'd0;
+										  select0_1 <= 1'b0;
+									     select1_1 <= 1'b0;
+										  current_state <= CHECK_SOH;
+										  
+									 end
+									 
+								end
 								
                     end
 					  
