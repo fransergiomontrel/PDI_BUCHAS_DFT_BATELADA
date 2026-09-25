@@ -445,7 +445,7 @@ module slaver_states_main (
 									
 							  is_finished <= is_finished + 1;
 									
-							  if (is_finished == 22'd1000) begin
+							  if (is_finished == 22'd200000) begin
 									is_finished <= 22'd0;
 									current_state <= PREPARE_CONVERSION;
 							  end
