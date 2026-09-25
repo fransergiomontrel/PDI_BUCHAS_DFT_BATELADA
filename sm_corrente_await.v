@@ -289,7 +289,7 @@ module slaver_states_main (
 									
 									//FRAME OF SYNC 60
 									else if (rx_uart_out == 8'h0C)  begin
-									    //requested_data <= 1'b1;
+									    
 									    current_state <= EN_W_1;
 										 select0_1 <= 1'b0;
 										 select1_1 <= 1'b0;
@@ -302,6 +302,7 @@ module slaver_states_main (
 									end
 									//FRAME OF SYNC 50
 									else if (rx_uart_out == 8'h0D)  begin
+									    
 									    select0_1 <= 1'b0;
 										 select1_1 <= 1'b0;
 									    current_state <= EN_W_1;
@@ -313,6 +314,7 @@ module slaver_states_main (
 									end
 									//FRAME OF DATA_REQUEST
 									else if (rx_uart_out == 8'h1E)  begin
+									    
 									    current_state <= AWAIT_CORRENTE_TX;
 										 requested_data <= 1'b1;
 										 tx_reg <= 1'b0;
@@ -333,7 +335,7 @@ module slaver_states_main (
 						 EN_W_1:
 			  
 			          begin
-						 
+						     
 							  command_new_byte <= 1'b0;
 							  
 						     if (signal_spi_done == 1'b1) begin
@@ -644,6 +646,7 @@ module slaver_states_main (
 					    CALC_PHASORS:
 			          
 						 begin
+						     
 						     dft_reg <= 1'b0;
 							 //Command to read first byte
 						    if (bytes_counter == 3'd0) begin
@@ -708,7 +711,7 @@ module slaver_states_main (
 				       AWAIT_CORRENTE_TX:
 						 
 						 begin
-						 
+						     
 						     if (done_tx == 1'b0) begin
 							  
 									requested_data <= 1'b0;
