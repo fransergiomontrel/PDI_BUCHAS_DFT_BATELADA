@@ -733,14 +733,41 @@ module slaver_states_main (
 									     start_8_ctl <= 1'b1;
 									     byte_to_send <= type_reg;
 										  byte_counter <= 4'd0;
+										  if(id_valid) begin
+										      payload_reg[0] <= fpga_id[7:0];
+												payload_reg[1] <= fpga_id[15:8];
+												payload_reg[2] <= fpga_id[23:16];
+												payload_reg[3] <= fpga_id[31:24];
+												payload_reg[4] <= fpga_id[39:32];
+												payload_reg[5] <= fpga_id[47:40];
+												payload_reg[6] <= fpga_id[55:48];
+												payload_reg[7] <= fpga_id[63:56];
+										  end
 									 
 									 end
 								
 								    else if (payload_bytes_counter < 8'h08)
 									 
 										  //Send bytes of payload through uart
-									     start_8_ctl <= 1'b1;
-									     byte_to_send <= fpga_id[(payload_bytes_counter + 1)*7:payload_bytes_counter];
+									     case (byte_counter)
+										      4'd0: fpga_id_byte <= fpga_id[7:0];
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+												4'd1: fpga_id_byte <= fpga_id[15:8];
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+												4'd2: fpga_id_byte <= fpga_id[23:16];
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+												4'd3: fpga_id_byte <= fpga_id[31:24];
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+												4'd4: fpga_id_byte <= fpga_id[39:32];
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+												4'd5: fpga_id_byte <= fpga_id[47:40];
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+												4'd6: fpga_id_byte <= fpga_id[55:48];
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+												4'd7: fpga_id_byte <= fpga_id[63:56];
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+										  endcase
+										  
 										  payload_bytes_counter <= payload_bytes_counter + 1;
 									 
 									 end
@@ -972,7 +999,7 @@ module slaver_states_main (
 
                         is_finished <= is_finished + 1;
 
-                        if (is_finished == 22'd1000) begin
+                        if (is_finished == 22'd2000000) begin
                             is_finished <= 22'd0;
                             current_state <= PREPARE_CONVERSION;
                         end
