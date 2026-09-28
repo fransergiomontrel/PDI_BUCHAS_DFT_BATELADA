@@ -1,4 +1,5 @@
-module uart_tx (
+// Frozen pre-timing-change implementation for cycle-by-cycle comparison.
+module uart_tx_reference (
     input  wire        clk,
     input  wire        rst,       // reset síncrono
     input  wire        start,     // inicia transmissão
@@ -10,38 +11,18 @@ module uart_tx (
 );    
 
 	 //localparam [383:0] data_in = 384'hABCD788C498308570E0A788C498308570E0A788C498308570E0A788C498308570E0A788C498308570E0A788C49830B12;
-    // Checksum only: 72 bytes -> 18 groups -> 6 -> 2 -> total.
-    // Four clock cycles of latency; data_in stays stable until transmission done.
-    // The checksum is consumed only after the header and all payload bytes.
-    reg [9:0] checksum_s1 [0:17];
-    reg [11:0] checksum_s2 [0:5];
-    reg [13:0] checksum_s3 [0:1];
-    reg [15:0] sum_reg;
-    integer i;
-    always @(posedge clk) begin
-        if (rst) begin
-            for (i = 0; i < 18; i = i + 1) checksum_s1[i] <= 10'd0;
-            for (i = 0; i < 6; i = i + 1) checksum_s2[i] <= 12'd0;
-            for (i = 0; i < 2; i = i + 1) checksum_s3[i] <= 14'd0;
-            sum_reg <= 16'd0;
-        end else begin
-            for (i = 0; i < 18; i = i + 1)
-                checksum_s1[i] <= ({2'b0, data_in[(i*32) +: 8]}
-                                + {2'b0, data_in[(i*32+8) +: 8]})
-                               + ({2'b0, data_in[(i*32+16) +: 8]}
-                                + {2'b0, data_in[(i*32+24) +: 8]});
-            for (i = 0; i < 6; i = i + 1)
-                checksum_s2[i] <= {2'b0, checksum_s1[i*3]}
-                                + {2'b0, checksum_s1[i*3+1]}
-                                + {2'b0, checksum_s1[i*3+2]};
-            for (i = 0; i < 2; i = i + 1)
-                checksum_s3[i] <= {2'b0, checksum_s2[i*3]}
-                                + {2'b0, checksum_s2[i*3+1]}
-                                + {2'b0, checksum_s2[i*3+2]};
-            sum_reg <= {2'b0, checksum_s3[0]} + {2'b0, checksum_s3[1]};
-        end
-    end
-
+	 integer i;
+	 reg [15:0] sum_reg;
+	 
+	 always @(*) begin
+	 
+	     sum_reg = 16'd0;
+		  for (i = 0; i < 72; i = i +1) begin
+		      sum_reg = sum_reg + data_in[(i*8) +: 8];
+		  end
+	 
+	 end
+	 
 	 wire [7:0] chksum_low;
 	 wire [7:0] chksum_high;
 	 

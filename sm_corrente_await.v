@@ -101,7 +101,7 @@ module slaver_states_main (
 	 
     .clk(clk),
     .rst(reset_uart_rx),                          // reset
-    .rx(rxd_from_gpio47),               // dado serie
+    .rx(in),                           // entrada registrada em clk
     .busy_rx(),                         // está transmitindo
     .done_rx(done_rx_to_read_ed),       // pulso de fim
 	 .rx_reg(rx_uart_out)	 
@@ -125,7 +125,7 @@ module slaver_states_main (
 
     //Instance of rising edge detector for arriving pulse on optical port
     edge_detector new_pulse_edge_detector (
-        .current_read_pulse(rxd_from_gpio47),  
+        .current_read_pulse(in),
         .clk(clk),                        
         .reset(rst),                    
         .rising_edge(ed_new_pulse)  
