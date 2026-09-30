@@ -231,7 +231,7 @@ spi_adc u_spi_adc(
 		IDLE_AD:
 			  
 			 begin
-			     
+			     reset_adc_config <= 1'b1;
 			     reset_sm_slaver <= 1'b0;
 				  host_mode <= MODE_CFG_FPGA;
 				  current_initial_state <= IDLE_AD;				  				  

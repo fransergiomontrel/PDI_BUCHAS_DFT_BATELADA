@@ -37,7 +37,7 @@ module slaver_states_main (
     reg in;
     reg dft_reg;
     reg tx_reg;
-    wire host_sclk;
+    wire host_sclk_fpga;
     wire host_mosi;
 
     assign led_dft_on_out = dft_reg;
@@ -47,8 +47,8 @@ module slaver_states_main (
     assign select0_1_out = select0_1;
     assign select1_1_out = select1_1;
     assign convst_out = convst;
-    assign host_sclk_out = host_sclk;
-    assign host_mosi_out = host_mosi;
+    assign host_sclk_out = host_sclk_fpga_rw_8 | host_sclk_set_get_adc;
+    assign host_mosi_out = host_mosi_fpga_rw_8 | host_mosi_set_get_adc;
 
 
     //22 bit size register to insert delay thick 
@@ -94,6 +94,27 @@ module slaver_states_main (
     //Signal that indicates when spi communication is over
     wire signal_spi_done;
     
+	 reg set_get_adc_reset;
+	 reg [31:0] adc_word_reg;
+	 wire host_sclk_set_get_adc;
+	 wire host_mosi_set_get_adc;
+	 wire set_get_adc_global_reset;
+	 assign set_get_adc_global_reset = rst | set_get_adc_reset;
+	 //Module to write and read ADS8691 individually
+	 set_get_adc u_set_get_adc (
+	 
+    clk(clk),
+    rst(set_get_adc_global_reset),      // reset síncrono
+	 cmd_word(adc_word_reg),
+	 miso(host_miso),
+    sclk(host_sclk_set_get_adc),
+    ncs(),
+    mosi(host_mosi_set_get_adc),      // saída serial do mestre
+	 readed_half_word(),
+	 set_get_done_out()
+	 
+);
+	 
 	 //To restart crc16 after one frame received
 	 reg crc_restart;
 	 reg [7:0] data_in_crc;
@@ -121,8 +142,8 @@ module slaver_states_main (
         .config_reg(byte_to_send),
         .data_reg(readed_data_8),
         .miso(host_miso),
-        .sclk(host_sclk),
-        .mosi(host_mosi),
+        .sclk(host_sclk_fpga_rw_8),
+        .mosi(host_mosi_fpga_rw_8),
         .spi_done(signal_spi_done)
 
     );
@@ -285,6 +306,8 @@ module slaver_states_main (
 				crc_high_reg <= 8'h00;
 				start_8_ctl <= 1'b0;
             byte_to_send <= 8'h00;
+				set_get_adc_reset <= 1'b1;
+				adc_word_reg <= 32'h00000000;
 
         end
 
@@ -587,7 +610,7 @@ module slaver_states_main (
 
                    if (ed_rx_done == 1'b1) begin
 						  
-							  crc_low_reg <= rx_uart_out;
+							  crc_high_reg <= rx_uart_out;
                        current_state <= CHECK_INTEGRITY;
  				
                    end
