@@ -136,17 +136,13 @@ set_location_assignment PIN_28 -to rst_hardware
 set_location_assignment PIN_7 -to rxd_from_gpio47
 set_location_assignment PIN_11 -to tx
 set_location_assignment PIN_110 -to ram_we_n
-set_location_assignment PIN_10 -to debug
 set_location_assignment PIN_6 -to tx_fibra
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_location_assignment PIN_12 -to debug_res
-set_location_assignment PIN_13 -to ncs
 set_location_assignment PIN_29 -to tx_on
 set_location_assignment PIN_27 -to dft_on
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name QIP_FILE ufm_read/synthesis/ufm_read.qip
 set_global_assignment -name VERILOG_FILE luts_dft.v
 set_global_assignment -name VERILOG_FILE spi_rw_8.v
@@ -217,3 +213,4 @@ set_global_assignment -name VERILOG_FILE crc_10B_to_2B.v
 set_global_assignment -name QIP_FILE ip_core.qip
 set_global_assignment -name SIP_FILE ip_core.sip
 set_global_assignment -name VERILOG_FILE set_get_adc.v
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

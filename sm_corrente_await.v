@@ -5,6 +5,12 @@ module slaver_states_main (
     input wire rxd_from_gpio47,
     input wire done_tx,
     input wire host_miso,
+	 input wire miso_1_in,
+	 input wire miso_2_in,
+	 input wire miso_3_in,
+	 input wire miso_4_in,
+	 input wire miso_5_in,
+	 input wire miso_6_in,
     output wire txd_to_gpio46,
     output wire requested_data_out,
     output wire acquire_again_out,
@@ -46,14 +52,13 @@ module slaver_states_main (
     assign acquire_again_out = acquire_again;
     assign select0_1_out = select0_1;
     assign select1_1_out = select1_1;
-    assign convst_out = convst;
-    assign host_sclk_out = host_sclk_fpga_rw_8 | host_sclk_set_get_adc;
-    assign host_mosi_out = host_mosi_fpga_rw_8 | host_mosi_set_get_adc;
+    assign convst_out = convst && ncs_signal;
+    assign host_sclk_out = host_sclk_fpga_rw_8 || host_sclk_set_get_adc;
+    assign host_mosi_out = host_mosi_fpga_rw_8 || host_mosi_set_get_adc;
 
 
     //22 bit size register to insert delay thick 
     (* preserve *) reg [21:0] is_finished;
-
 
     //4 bit size register to count 4 bytes to be sent on 32 bits SPI writing
     reg [3:0] bytes_counter;
@@ -99,19 +104,27 @@ module slaver_states_main (
 	 wire host_sclk_set_get_adc;
 	 wire host_mosi_set_get_adc;
 	 wire set_get_adc_global_reset;
-	 assign set_get_adc_global_reset = rst | set_get_adc_reset;
+	 wire [95:0] current_adc_config;
+	 wire ncs_signal;
+	 wire set_get_adc_done_signal;
+	 assign set_get_adc_global_reset = rst || set_get_adc_reset;
 	 //Module to write and read ADS8691 individually
 	 set_get_adc u_set_get_adc (
 	 
-    clk(clk),
-    rst(set_get_adc_global_reset),      // reset síncrono
+    clk_p(clk),
+    reset(set_get_adc_global_reset),      // reset síncrono
 	 cmd_word(adc_word_reg),
-	 miso(host_miso),
+	 miso_1(miso_1_in),
+	 miso_2(miso_2_in),
+	 miso_3(miso_3_in),
+	 miso_4(miso_4_in),
+	 miso_5(miso_5_in),
+	 miso_6(miso_6_in),
     sclk(host_sclk_set_get_adc),
-    ncs(),
+    ncs(ncs_signal),
     mosi(host_mosi_set_get_adc),      // saída serial do mestre
-	 readed_half_word(),
-	 set_get_done_out()
+	 readed_half_words(current_adc_config),
+	 set_get_done_out(set_get_adc_done_signal)
 	 
 );
 	 
@@ -132,7 +145,8 @@ module slaver_states_main (
         .clk(clk)
 		  
 );
-	 
+	 wire host_sclk_fpga_rw_8;
+	 wire host_mosi_fpga_rw_8;
     //Instance of SPI to write and read one byte
     fpga_rw_8 u_fpga_rw_8 (
 
@@ -217,7 +231,11 @@ module slaver_states_main (
         .reset(rst)
 		  );
 
-
+    //Used payload sizes
+	 localparam GET_ID_SIZE = 8'd08;
+	 localparam GET_CONFIG_SIZE = 8'd06;
+	 
+		  
     //Bytes of protocol
     localparam START_BYTE = 8'h01;//Start of frame byte
 	 localparam END_BYTE = 8'h04;//End of frame byte
@@ -231,7 +249,8 @@ module slaver_states_main (
     localparam MEASURE_BYTE = 8'h33;//Measure byte
     localparam GET_RESULTS_BYTE = 8'h40;//Get results byte
     localparam BYPASS_BYTE = 8'h50;//Bypass byte
-    localparam ERROR_BYTE = 8'h7F;//Error byte	 
+    localparam ERROR_BYTE = 8'h7F;//Error byte	
+	 localparam COMMAND_TO_READ = 32'hC8140000; 
 
     //States definition for states machine of slaver IED
     localparam CHECK_SOH = 5'b00000;//UART await for SOH byte
@@ -633,6 +652,7 @@ module slaver_states_main (
 					 end
 					 //Restart crc16 once that it won't be used again until next frame
 					 crc_restart  <= 1'b1;
+					 
 						  
 				 end
 		
@@ -757,22 +777,22 @@ module slaver_states_main (
 									
 									     //Send byte of length through uart
 									     start_8_ctl <= 1'b1;
-									     byte_to_send <= 8'h08;
+									     byte_to_send <= GET_ID_SIZE;
 										  
 										  crc_en_reg <= 1'b1;
-								        data_in_crc <= 8'h08;
+								        data_in_crc <= GET_ID_SIZE;
 										  
 										  bytes_counter <= bytes_counter + 1;
 									 
 									 end
 								
-								    else if ((byte_to_send == 8'h08) && (bytes_counter == 4'd2)) begin
+								    else if ((byte_to_send == GET_ID_SIZE) && (bytes_counter == 4'd2)) begin
 									 
 									     //Send type byte through uart
 									     start_8_ctl <= 1'b1;
-									     byte_to_send <= type_reg;
+									     byte_to_send <= GET_ID_BYTE;
 										  crc_en_reg <= 1'b1;
-								        data_in_crc <= type_reg;
+								        data_in_crc <= GET_ID_BYTE;
 										  
 										  bytes_counter <= 4'd0;
 										  if(id_valid) begin
@@ -912,7 +932,200 @@ module slaver_states_main (
 					  
 						  GET_CONFIG_BYTE: begin
 						      
-                        
+                        if ((select0_1 != 1'b1) && (select1_1 != 1'b1)) begin
+								
+								    select0_1 <= 1'b1;
+									 select1_1 <= 1'b1;
+									 
+									 //Send byte of start through uart
+                            start_8_ctl <= 1'b1;
+									 byte_to_send <= START_BYTE;
+									 
+									 
+									 //Free crc16 module from reset 
+									 crc_restart  <= 1'b0;
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= START_BYTE;
+									 
+									 bytes_counter <= bytes_counter + 1;
+									 
+								end
+								else begin
+								
+								    crc_en_reg <= 1'b0;
+								    start_8_ctl <= 1'b0;
+									 
+								end
+								
+								if (done_8_ctl == 1'b1) begin
+								
+									 if ((byte_to_send == START_BYTE) && (bytes_counter == 4'd1)) begin
+									
+									     //Send byte of length through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= GET_CONFIG_SIZE;
+										  
+										  crc_en_reg <= 1'b1;
+								        data_in_crc <= GET_CONFIG_SIZE;
+										  
+										  bytes_counter <= bytes_counter + 1;
+									 
+									 end
+								
+								    else if ((byte_to_send == GET_CONFIG_SIZE) && (bytes_counter == 4'd2)) begin
+									 
+									     //Send type byte through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= GET_CONFIG_BYTE;
+										  crc_en_reg <= 1'b1;
+								        data_in_crc <= GET_CONFIG_BYTE;
+										  
+										  adc_word_reg <= COMMAND_TO_READ;
+										  set_get_adc_reset <= 1'b0;
+										  //host_mode
+										  bytes_counter <= 4'd0;
+										  
+									 end
+									 
+									 else if ((set_get_adc_done_signal == 1'd0) && (set_get_adc_reset == 1'b0)) begin
+									 
+									 //Only awaits for 32 clocks of spi on 6 adc convertes
+									 
+									 end
+									 
+									 else if ((set_get_adc_done_signal == 1'd1) && (set_get_adc_reset == 1'b0)) begin
+									 //Only register 6 least significant bytes of each converter
+									 
+										  payload_reg[0] <= current_adc_config[7:0];
+										  payload_reg[1] <= current_adc_config[23:16];
+										  payload_reg[2] <= current_adc_config[39:32];
+										  payload_reg[3] <= current_adc_config[55:48];
+										  payload_reg[4] <= current_adc_config[71:64];
+										  payload_reg[5] <= current_adc_config[87:80];
+										  set_get_adc_reset <= 1'b1;
+										  //host mode
+									 end
+								
+								    else if (payload_bytes_counter < GET_CONFIG_SIZE) begin
+									 
+										  //Send bytes of payload through uart
+									     case (payload_bytes_counter)
+										      4'd0: begin byte_to_send <= payload_reg[0];
+														start_8_ctl <= 1'b1;
+														
+														crc_en_reg <= 1'b1;
+														data_in_crc <= payload_reg[0];
+														
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+												      end
+														
+												4'd1: begin byte_to_send <= payload_reg[1];
+														start_8_ctl <= 1'b1;
+														
+														crc_en_reg <= 1'b1;
+														data_in_crc <= payload_reg[1];
+														
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+												      end
+														
+												4'd2: begin byte_to_send <= payload_reg[2];
+														start_8_ctl <= 1'b1;
+														
+														crc_en_reg <= 1'b1;
+														data_in_crc <= payload_reg[2];
+														
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+												      end
+														
+												4'd3: begin byte_to_send <= payload_reg[3];
+														start_8_ctl <= 1'b1;
+														
+														crc_en_reg <= 1'b1;
+														data_in_crc <= payload_reg[3];
+														
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+												      end
+														
+												4'd4: begin byte_to_send <= payload_reg[4];
+														start_8_ctl <= 1'b1;
+														
+														crc_en_reg <= 1'b1;
+														data_in_crc <= payload_reg[4];
+														
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+												      end
+														
+												4'd5: begin byte_to_send <= payload_reg[5];
+														start_8_ctl <= 1'b1;
+														
+														crc_en_reg <= 1'b1;
+														data_in_crc <= payload_reg[5];
+														
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+												      end
+														
+												4'd6: begin byte_to_send <= payload_reg[6];
+														start_8_ctl <= 1'b1;
+														
+														crc_en_reg <= 1'b1;
+														data_in_crc <= payload_reg[6];
+														
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+												      end
+														
+												4'd7: begin byte_to_send <= payload_reg[7];
+														start_8_ctl <= 1'b1;
+														
+														crc_en_reg <= 1'b1;
+														data_in_crc <= payload_reg[7];
+														
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+												      end
+										  endcase
+										  
+									 
+									 end
+									 
+									 else if (payload_bytes_counter == 8'd08) begin
+									 
+									     //Send byte of end through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= END_BYTE;
+										  
+										  crc_en_reg <= 1'b1;
+										  data_in_crc <= END_BYTE;
+										  
+										  payload_bytes_counter <= payload_bytes_counter + 1;
+										  
+									 end
+									 
+									 else if (payload_bytes_counter == 8'd09) begin
+									 
+										  //Send byte low of crc
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= crc_result[7:0];
+										  crc_high_reg <= crc_result[15:8];
+										  
+										  payload_bytes_counter <= payload_bytes_counter + 1;
+										  
+									 end
+									 
+									 else if (payload_bytes_counter == 8'd10) begin
+									 
+										  crc_restart  <= 1'b1;
+										  //Send byte high of crc
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= crc_high_reg;
+										  payload_bytes_counter <= 4'd0;
+										  
+										  select0_1 <= 1'b0;
+									     select1_1 <= 1'b0;
+										  current_state <= CHECK_SOH;
+										  
+									 end
+									 
+								end
+
 								
                     end
 						  

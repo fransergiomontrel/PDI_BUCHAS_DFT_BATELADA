@@ -1,22 +1,33 @@
 module set_get_adc (
-    input  wire clk,
-    input  wire rst,      // reset síncrono
+    input  wire clk_p,
+    input  wire reset,      // reset síncrono
 	 input wire [31:0] cmd_word,
-	 input wire miso,
+	 input wire miso_1,
+	 input wire miso_2,
+	 input wire miso_3,
+	 input wire miso_4,
+	 input wire miso_5,
+	 input wire miso_6,
     output reg  sclk,
     output reg  ncs,
     output reg  mosi,      // saída serial do mestre
-	 output wire [15:0] readed_half_word,
+	 output wire [95:0] readed_half_words,
 	 output wire set_get_done_out
 );
 
     reg [5:0] bit_cnt;
     reg [7:0] div_sclk;
     reg [1:0] delay;
-	 reg [15:0] miso_buffer;
+	 reg [15:0] miso_buffer_1;
+	 reg [15:0] miso_buffer_2;
+	 reg [15:0] miso_buffer_3;
+	 reg [15:0] miso_buffer_4;
+	 reg [15:0] miso_buffer_5;
+	 reg [15:0] miso_buffer_6;
+	 
 	 reg set_get_done_reg;
 	 
-	 assign readed_half_word = miso_buffer;
+	 assign readed_half_words = {miso_buffer_6, miso_buffer_5, miso_buffer_4, miso_buffer_3, miso_buffer_2, miso_buffer_1};
 	 assign set_get_done_out = set_get_done_reg;
 	 
 	 
@@ -32,8 +43,8 @@ module set_get_adc (
 
     reg [3:0] current_spi_state;
 
-    always @(posedge clk) begin
-        if (rst) begin
+    always @(posedge clk_p) begin
+        if (reset) begin
 		  
             sclk <= 1'b0;
             ncs  <= 1'b1;
@@ -42,7 +53,13 @@ module set_get_adc (
             div_sclk <= 8'd0;
             delay    <= 2'd0;
             bit_cnt  <= 6'd31;
-				miso_buffer <= 16'h00;
+				miso_buffer_1 <= 16'h0000;
+				miso_buffer_2 <= 16'h0000;
+				miso_buffer_3 <= 16'h0000;
+				miso_buffer_4 <= 16'h0000;
+				miso_buffer_5 <= 16'h0000;
+				miso_buffer_6 <= 16'h0000;
+				
             set_get_done_reg <= 1'b0;
 
             current_spi_state <= LOAD_WORD;
@@ -114,9 +131,14 @@ module set_get_adc (
                     end
                     else begin
 						      //A partir do 16°clock apos cada sclk rising 
-						      if ((bit_cnt == 6'd15) && (cmd_word[31:27] == READ_COMMAND)) begin
+						      if ((bit_cnt < 6'd16) && (cmd_word[31:27] == READ_COMMAND)) begin
 								
-									 miso_buffer[bit_cnt] <= miso;
+									 miso_buffer_1[bit_cnt] <= miso_1;
+									 miso_buffer_2[bit_cnt] <= miso_2;
+									 miso_buffer_3[bit_cnt] <= miso_3;
+									 miso_buffer_4[bit_cnt] <= miso_4;
+									 miso_buffer_5[bit_cnt] <= miso_5;
+									 miso_buffer_6[bit_cnt] <= miso_6;
 									 
 							   end
 								

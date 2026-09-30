@@ -57,7 +57,7 @@ on the Quartus Prime software download page.
 )
 (pin
 	(input)
-	(rect 824 1464 992 1480)
+	(rect 704 456 872 472)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
 	(text "driver_miso" (rect 5 0 67 11)(font "Arial" ))
 	(pt 168 8)
@@ -70,7 +70,7 @@ on the Quartus Prime software download page.
 		(line (pt 109 12)(pt 113 8))
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 816 1440 872 1456))
+	(annotation_block (location)(rect 920 360 976 376))
 )
 (pin
 	(input)
@@ -105,6 +105,22 @@ on the Quartus Prime software download page.
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
 	(annotation_block (location)(rect -96 400 -40 416))
+)
+(pin
+	(input)
+	(rect 1680 1408 1848 1424)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "driver_miso" (rect 5 0 68 11)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
 (pin
 	(output)
@@ -240,7 +256,7 @@ on the Quartus Prime software download page.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 2320 1376 2376 1392))
+	(annotation_block (location)(rect 2304 1376 2360 1392))
 )
 (pin
 	(output)
@@ -257,7 +273,7 @@ on the Quartus Prime software download page.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 2320 1392 2376 1408))
+	(annotation_block (location)(rect 2304 1392 2360 1408))
 )
 (pin
 	(output)
@@ -274,7 +290,7 @@ on the Quartus Prime software download page.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 2320 1408 2376 1424))
+	(annotation_block (location)(rect 2304 1408 2360 1424))
 )
 (pin
 	(output)
@@ -309,23 +325,6 @@ on the Quartus Prime software download page.
 		(line (pt 78 12)(pt 82 8))
 	)
 	(annotation_block (location)(rect 2328 856 2384 872))
-)
-(pin
-	(output)
-	(rect 2432 1136 2608 1152)
-	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "tx" (rect 90 0 101 11)(font "Arial" ))
-	(pt 0 8)
-	(drawing
-		(line (pt 0 8)(pt 52 8))
-		(line (pt 52 4)(pt 78 4))
-		(line (pt 52 12)(pt 78 12))
-		(line (pt 52 12)(pt 52 4))
-		(line (pt 78 4)(pt 82 8))
-		(line (pt 82 8)(pt 78 12))
-		(line (pt 78 12)(pt 82 8))
-	)
-	(annotation_block (location)(rect 2544 1136 2600 1152))
 )
 (pin
 	(output)
@@ -1265,7 +1264,7 @@ on the Quartus Prime software download page.
 	)
 )
 (symbol
-	(rect 736 1424 1024 1952)
+	(rect 616 416 904 944)
 	(text "switch" (rect 5 0 39 11)(font "Arial" ))
 	(text "inst20" (rect 8 512 41 523)(font "Arial" ))
 	(port
@@ -2247,94 +2246,136 @@ on the Quartus Prime software download page.
 		(line (pt 0 96)(pt 16 96))
 	)
 	(port
+		(pt 0 112)
+		(input)
+		(text "miso_1_in" (rect 0 0 53 11)(font "Arial" ))
+		(text "miso_1_in" (rect 21 107 74 118)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "miso_2_in" (rect 0 0 53 11)(font "Arial" ))
+		(text "miso_2_in" (rect 21 123 74 134)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "miso_3_in" (rect 0 0 53 11)(font "Arial" ))
+		(text "miso_3_in" (rect 21 139 74 150)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "miso_4_in" (rect 0 0 53 11)(font "Arial" ))
+		(text "miso_4_in" (rect 21 155 74 166)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "miso_5_in" (rect 0 0 53 11)(font "Arial" ))
+		(text "miso_5_in" (rect 21 171 74 182)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176))
+	)
+	(port
+		(pt 0 192)
+		(input)
+		(text "miso_6_in" (rect 0 0 53 11)(font "Arial" ))
+		(text "miso_6_in" (rect 21 187 74 198)(font "Arial" ))
+		(line (pt 0 192)(pt 16 192))
+	)
+	(port
 		(pt 248 32)
 		(output)
 		(text "txd_to_gpio46" (rect 0 0 75 11)(font "Arial" ))
-		(text "txd_to_gpio46" (rect 164 27 239 38)(font "Arial" ))
+		(text "txd_to_gpio46" (rect 164 27 227 38)(font "Arial" ))
 		(line (pt 248 32)(pt 232 32))
 	)
 	(port
 		(pt 248 48)
 		(output)
 		(text "requested_data_out" (rect 0 0 106 11)(font "Arial" ))
-		(text "requested_data_out" (rect 138 43 244 54)(font "Arial" ))
+		(text "requested_data_out" (rect 138 43 227 54)(font "Arial" ))
 		(line (pt 248 48)(pt 232 48))
 	)
 	(port
 		(pt 248 64)
 		(output)
 		(text "acquire_again_out" (rect 0 0 97 11)(font "Arial" ))
-		(text "acquire_again_out" (rect 145 59 242 70)(font "Arial" ))
+		(text "acquire_again_out" (rect 145 59 227 70)(font "Arial" ))
 		(line (pt 248 64)(pt 232 64))
 	)
 	(port
 		(pt 248 80)
 		(output)
 		(text "select0_1_out" (rect 0 0 73 11)(font "Arial" ))
-		(text "select0_1_out" (rect 166 75 239 86)(font "Arial" ))
+		(text "select0_1_out" (rect 166 75 227 86)(font "Arial" ))
 		(line (pt 248 80)(pt 232 80))
 	)
 	(port
 		(pt 248 96)
 		(output)
 		(text "select1_1_out" (rect 0 0 73 11)(font "Arial" ))
-		(text "select1_1_out" (rect 166 91 239 102)(font "Arial" ))
+		(text "select1_1_out" (rect 166 91 227 102)(font "Arial" ))
 		(line (pt 248 96)(pt 232 96))
 	)
 	(port
 		(pt 248 112)
 		(output)
 		(text "convst_out" (rect 0 0 57 11)(font "Arial" ))
-		(text "convst_out" (rect 179 107 236 118)(font "Arial" ))
+		(text "convst_out" (rect 179 107 227 118)(font "Arial" ))
 		(line (pt 248 112)(pt 232 112))
 	)
 	(port
 		(pt 248 128)
 		(output)
 		(text "host_sclk_out" (rect 0 0 71 11)(font "Arial" ))
-		(text "host_sclk_out" (rect 167 123 238 134)(font "Arial" ))
+		(text "host_sclk_out" (rect 167 123 227 134)(font "Arial" ))
 		(line (pt 248 128)(pt 232 128))
 	)
 	(port
 		(pt 248 144)
 		(output)
 		(text "host_mosi_out" (rect 0 0 76 11)(font "Arial" ))
-		(text "host_mosi_out" (rect 163 139 239 150)(font "Arial" ))
+		(text "host_mosi_out" (rect 163 139 227 150)(font "Arial" ))
 		(line (pt 248 144)(pt 232 144))
 	)
 	(port
 		(pt 248 160)
 		(output)
 		(text "frequency" (rect 0 0 55 11)(font "Arial" ))
-		(text "frequency" (rect 181 155 236 166)(font "Arial" ))
+		(text "frequency" (rect 181 155 227 166)(font "Arial" ))
 		(line (pt 248 160)(pt 232 160))
 	)
 	(port
 		(pt 248 176)
 		(output)
 		(text "host_mode[1..0]" (rect 0 0 87 11)(font "Arial" ))
-		(text "host_mode[1..0]" (rect 154 171 241 182)(font "Arial" ))
+		(text "host_mode[1..0]" (rect 154 171 227 182)(font "Arial" ))
 		(line (pt 248 176)(pt 232 176)(line_width 3))
 	)
 	(port
 		(pt 248 192)
 		(output)
 		(text "led_dft_on_out" (rect 0 0 77 11)(font "Arial" ))
-		(text "led_dft_on_out" (rect 162 187 239 198)(font "Arial" ))
+		(text "led_dft_on_out" (rect 162 187 227 198)(font "Arial" ))
 		(line (pt 248 192)(pt 232 192))
 	)
 	(port
 		(pt 248 208)
 		(output)
 		(text "led_tx_on_out" (rect 0 0 73 11)(font "Arial" ))
-		(text "led_tx_on_out" (rect 166 203 239 214)(font "Arial" ))
+		(text "led_tx_on_out" (rect 166 203 227 214)(font "Arial" ))
 		(line (pt 248 208)(pt 232 208))
 	)
 	(port
 		(pt 248 224)
 		(output)
 		(text "tx_8" (rect 0 0 23 11)(font "Arial" ))
-		(text "tx_8" (rect 208 219 231 230)(font "Arial" ))
+		(text "tx_8" (rect 208 219 227 230)(font "Arial" ))
 		(line (pt 248 224)(pt 232 224))
 	)
 	(drawing
@@ -2349,12 +2390,6 @@ on the Quartus Prime software download page.
 (connector
 	(pt 1560 776)
 	(pt 1560 616)
-	(bus)
-)
-(connector
-	(text "AI_sdi[5..0]" (rect 1368 72 1422 84)(font "Intel Clear" ))
-	(pt 1688 152)
-	(pt 1704 152)
 	(bus)
 )
 (connector
@@ -2427,11 +2462,6 @@ on the Quartus Prime software download page.
 	(pt 792 128)
 )
 (connector
-	(text "HI_convst_start" (rect 796 128 871 140)(font "Intel Clear" ))
-	(pt 768 144)
-	(pt 792 144)
-)
-(connector
 	(text "sreset" (rect 480 120 509 132)(font "Intel Clear" ))
 	(pt 520 128)
 	(pt 528 128)
@@ -2472,7 +2502,7 @@ on the Quartus Prime software download page.
 	(pt 792 256)
 )
 (connector
-	(text "HI_busy" (rect 753 48 791 60)(font "Intel Clear" ))
+	(text "HI_busy" (rect 753 56 791 68)(font "Intel Clear" ))
 	(pt 744 64)
 	(pt 440 64)
 )
@@ -2481,7 +2511,7 @@ on the Quartus Prime software download page.
 	(pt 440 144)
 )
 (connector
-	(text "HI_MISO" (rect 752 32 794 44)(font "Intel Clear" ))
+	(text "HI_MISO" (rect 752 40 794 52)(font "Intel Clear" ))
 	(pt 744 48)
 	(pt 424 48)
 )
@@ -2647,17 +2677,17 @@ on the Quartus Prime software download page.
 	(pt 1760 872)
 )
 (connector
-	(text "AI_sclk" (rect 1378 208 1412 220)(font "Intel Clear" ))
+	(text "AI_sclk" (rect 1370 208 1404 220)(font "Intel Clear" ))
 	(pt 1464 216)
 	(pt 1416 216)
 )
 (connector
-	(text "AI_convst" (rect 1370 192 1417 204)(font "Intel Clear" ))
+	(text "AI_convst" (rect 1362 192 1409 204)(font "Intel Clear" ))
 	(pt 1464 200)
 	(pt 1416 200)
 )
 (connector
-	(text "AI_rst_n" (rect 1362 176 1402 188)(font "Intel Clear" ))
+	(text "AI_rst_n" (rect 1370 176 1410 188)(font "Intel Clear" ))
 	(pt 1464 184)
 	(pt 1416 184)
 )
@@ -2667,7 +2697,7 @@ on the Quartus Prime software download page.
 	(bus)
 )
 (connector
-	(text "AI_sdo[5..0]" (rect 1360 224 1417 236)(font "Intel Clear" ))
+	(text "AI_sdo[5..0]" (rect 1352 224 1409 236)(font "Intel Clear" ))
 	(pt 1464 232)
 	(pt 1424 232)
 	(bus)
@@ -2737,10 +2767,6 @@ on the Quartus Prime software download page.
 	(text "clk" (rect 2154 1168 2168 1180)(font "Intel Clear" ))
 	(pt 2176 1176)
 	(pt 2232 1176)
-)
-(connector
-	(pt 2104 1208)
-	(pt 2232 1208)
 )
 (connector
 	(text "clk" (rect 50 368 64 380)(font "Intel Clear" ))
@@ -3015,10 +3041,6 @@ on the Quartus Prime software download page.
 	(pt 1544 1136)
 )
 (connector
-	(pt 2024 1088)
-	(pt 2024 1200)
-)
-(connector
 	(pt 112 392)
 	(pt 80 392)
 )
@@ -3069,11 +3091,6 @@ on the Quartus Prime software download page.
 	(pt 1832 1136)
 )
 (connector
-	(text "host_convst_start_1" (rect 1840 1144 1937 1156)(font "Intel Clear" ))
-	(pt 1824 1152)
-	(pt 1832 1152)
-)
-(connector
 	(text "host_sclk_1" (rect 1840 1160 1897 1172)(font "Intel Clear" ))
 	(pt 1824 1168)
 	(pt 1832 1168)
@@ -3088,14 +3105,6 @@ on the Quartus Prime software download page.
 	(pt 1824 1216)
 	(pt 1832 1216)
 	(bus)
-)
-(connector
-	(pt 2104 1200)
-	(pt 2024 1200)
-)
-(connector
-	(pt 2104 1200)
-	(pt 2104 1208)
 )
 (connector
 	(text "clk" (rect 728 992 742 1004)(font "Intel Clear" ))
@@ -3206,11 +3215,6 @@ on the Quartus Prime software download page.
 	(pt 368 440)
 )
 (connector
-	(text "host_convst_start_0" (rect 384 400 481 412)(font "Intel Clear" ))
-	(pt 352 408)
-	(pt 368 408)
-)
-(connector
 	(text "AM_adc_sclk" (rect 512 1048 574 1060)(font "Intel Clear" ))
 	(pt 488 1056)
 	(pt 504 1056)
@@ -3225,18 +3229,9 @@ on the Quartus Prime software download page.
 	(pt 2152 864)
 )
 (connector
-	(pt 2432 1144)
-	(pt 2432 1176)
-)
-(connector
 	(text "done" (rect 2434 1200 2458 1212)(font "Intel Clear" ))
 	(pt 2408 1208)
 	(pt 2424 1208)
-)
-(connector
-	(text "request" (rect 1978 1072 2014 1084)(font "Intel Clear" ))
-	(pt 2024 1088)
-	(pt 1824 1088)
 )
 (connector
 	(pt 1824 1232)
@@ -3301,240 +3296,6 @@ on the Quartus Prime software download page.
 	(pt 1832 1264)
 )
 (connector
-	(text "clk" (rect 688 1440 702 1452)(font "Intel Clear" ))
-	(pt 712 1456)
-	(pt 736 1456)
-)
-(connector
-	(text "sreset" (rect 672 1456 701 1468)(font "Intel Clear" ))
-	(pt 712 1472)
-	(pt 736 1472)
-)
-(connector
-	(text "HI_mode[1..0]" (rect 640 1472 708 1484)(font "Intel Clear" ))
-	(pt 712 1488)
-	(pt 736 1488)
-	(bus)
-)
-(connector
-	(text "HI_changing_mode" (rect 624 1488 717 1500)(font "Intel Clear" ))
-	(pt 712 1504)
-	(pt 736 1504)
-)
-(connector
-	(text "HI_convst_start" (rect 640 1504 715 1516)(font "Intel Clear" ))
-	(pt 712 1520)
-	(pt 736 1520)
-)
-(connector
-	(text "HI_SCLK" (rect 672 1536 713 1548)(font "Intel Clear" ))
-	(pt 712 1552)
-	(pt 736 1552)
-)
-(connector
-	(text "HI_MOSI" (rect 664 1552 706 1564)(font "Intel Clear" ))
-	(pt 712 1568)
-	(pt 736 1568)
-)
-(connector
-	(text "AI_sdi[5..0]" (rect 656 1584 710 1596)(font "Intel Clear" ))
-	(pt 712 1600)
-	(pt 736 1600)
-	(bus)
-)
-(connector
-	(text "AM_adc_sclk" (rect 648 1600 710 1612)(font "Intel Clear" ))
-	(pt 712 1616)
-	(pt 736 1616)
-)
-(connector
-	(text "AM_adc_convst" (rect 632 1616 707 1628)(font "Intel Clear" ))
-	(pt 712 1632)
-	(pt 736 1632)
-)
-(connector
-	(text "AM_addr_inc_write" (rect 624 1632 716 1644)(font "Intel Clear" ))
-	(pt 712 1648)
-	(pt 736 1648)
-)
-(connector
-	(text "AM_addr_clr" (rect 648 1648 710 1660)(font "Intel Clear" ))
-	(pt 712 1664)
-	(pt 736 1664)
-)
-(connector
-	(text "AM_busy" (rect 664 1664 708 1676)(font "Intel Clear" ))
-	(pt 712 1680)
-	(pt 736 1680)
-)
-(connector
-	(text "AM_we_n" (rect 664 1680 711 1692)(font "Intel Clear" ))
-	(pt 712 1696)
-	(pt 736 1696)
-)
-(connector
-	(text "AM_cs_n" (rect 664 1696 707 1708)(font "Intel Clear" ))
-	(pt 712 1712)
-	(pt 736 1712)
-)
-(connector
-	(text "AM_data_bus_out" (rect 632 1728 719 1740)(font "Intel Clear" ))
-	(pt 712 1744)
-	(pt 736 1744)
-)
-(connector
-	(text "RDM_addr_clr" (rect 648 1744 717 1756)(font "Intel Clear" ))
-	(pt 712 1760)
-	(pt 736 1760)
-)
-(connector
-	(text "RDM_addr_inc_read" (rect 624 1760 720 1772)(font "Intel Clear" ))
-	(pt 712 1776)
-	(pt 736 1776)
-)
-(connector
-	(text "RDM_addr_inc_write" (rect 624 1776 723 1788)(font "Intel Clear" ))
-	(pt 712 1792)
-	(pt 736 1792)
-)
-(connector
-	(text "RDM_oe_n" (rect 664 1792 715 1804)(font "Intel Clear" ))
-	(pt 712 1808)
-	(pt 736 1808)
-)
-(connector
-	(text "RDM_cs_n" (rect 664 1808 714 1820)(font "Intel Clear" ))
-	(pt 712 1824)
-	(pt 736 1824)
-)
-(connector
-	(text "RDM_MISO" (rect 656 1824 710 1836)(font "Intel Clear" ))
-	(pt 712 1840)
-	(pt 736 1840)
-)
-(connector
-	(text "RDM_busy" (rect 664 1840 715 1852)(font "Intel Clear" ))
-	(pt 712 1856)
-	(pt 736 1856)
-)
-(connector
-	(text "RDM_we_n" (rect 656 1856 710 1868)(font "Intel Clear" ))
-	(pt 712 1872)
-	(pt 736 1872)
-)
-(connector
-	(text "RDM_data_bus_out" (rect 624 1888 718 1900)(font "Intel Clear" ))
-	(pt 712 1904)
-	(pt 736 1904)
-)
-(connector
-	(text "CM_MISO" (rect 664 1904 711 1916)(font "Intel Clear" ))
-	(pt 712 1920)
-	(pt 736 1920)
-)
-(connector
-	(text "RI_addr_inc_read" (rect 1065 1496 1148 1508)(font "Intel Clear" ))
-	(pt 1024 1504)
-	(pt 1056 1504)
-)
-(connector
-	(text "RI_addr_inc_write" (rect 1064 1512 1150 1524)(font "Intel Clear" ))
-	(pt 1024 1520)
-	(pt 1056 1520)
-)
-(connector
-	(text "RI_we_n" (rect 1064 1544 1104 1556)(font "Intel Clear" ))
-	(pt 1024 1552)
-	(pt 1056 1552)
-)
-(connector
-	(text "RI_oe_n" (rect 1064 1560 1102 1572)(font "Intel Clear" ))
-	(pt 1024 1568)
-	(pt 1056 1568)
-)
-(connector
-	(text "RI_cs_n" (rect 1065 1576 1101 1588)(font "Intel Clear" ))
-	(pt 1024 1584)
-	(pt 1056 1584)
-)
-(connector
-	(text "RI_data_bus_out" (rect 1064 1592 1144 1604)(font "Intel Clear" ))
-	(pt 1024 1600)
-	(pt 1056 1600)
-)
-(connector
-	(text "AI_sdo[5..0]" (rect 1064 1656 1121 1668)(font "Intel Clear" ))
-	(pt 1024 1664)
-	(pt 1056 1664)
-	(bus)
-)
-(connector
-	(text "AM_adc_sdi[5..0]" (rect 1064 1672 1146 1684)(font "Intel Clear" ))
-	(pt 1024 1680)
-	(pt 1056 1680)
-	(bus)
-)
-(connector
-	(text "RDM_SCLK" (rect 1064 1688 1118 1700)(font "Intel Clear" ))
-	(pt 1024 1696)
-	(pt 1056 1696)
-)
-(connector
-	(text "RDM_data_read[15..0]" (rect 1064 1704 1171 1716)(font "Intel Clear" ))
-	(pt 1024 1712)
-	(pt 1056 1712)
-	(bus)
-)
-(connector
-	(text "RDM_MOSI" (rect 1064 1720 1118 1732)(font "Intel Clear" ))
-	(pt 1024 1728)
-	(pt 1056 1728)
-)
-(connector
-	(text "CM_MOSI" (rect 1064 1736 1111 1748)(font "Intel Clear" ))
-	(pt 1024 1744)
-	(pt 1056 1744)
-)
-(connector
-	(text "CM_SCLK" (rect 1064 1752 1111 1764)(font "Intel Clear" ))
-	(pt 1024 1760)
-	(pt 1056 1760)
-)
-(connector
-	(text "ready_mode1" (rect 1064 1768 1131 1780)(font "Intel Clear" ))
-	(pt 1024 1776)
-	(pt 1056 1776)
-)
-(connector
-	(text "RI_data_in[15..0]" (rect 1064 1528 1145 1540)(font "Intel Clear" ))
-	(pt 1024 1536)
-	(pt 1056 1536)
-	(bus)
-)
-(connector
-	(text "RI_data_out[15..0]" (rect 616 1568 704 1580)(font "Intel Clear" ))
-	(pt 712 1584)
-	(pt 736 1584)
-	(bus)
-)
-(connector
-	(text "RDM_data_write[15..0]" (rect 616 1872 725 1884)(font "Intel Clear" ))
-	(pt 712 1888)
-	(pt 736 1888)
-	(bus)
-)
-(connector
-	(text "AM_data[15..0]" (rect 648 1712 721 1724)(font "Intel Clear" ))
-	(pt 712 1728)
-	(pt 736 1728)
-	(bus)
-)
-(connector
-	(text "HI_rst_n" (rect 672 1520 712 1532)(font "Intel Clear" ))
-	(pt 712 1536)
-	(pt 736 1536)
-)
-(connector
 	(text "driver_data_out[79..0]" (rect 928 1344 1035 1356)(font "Intel Clear" ))
 	(pt 1024 1352)
 	(pt 1040 1352)
@@ -3554,45 +3315,6 @@ on the Quartus Prime software download page.
 	(pt 1304 1352)
 	(pt 1256 1352)
 	(bus)
-)
-(connector
-	(pt 1032 1616)
-	(pt 1032 1624)
-)
-(connector
-	(pt 1024 1616)
-	(pt 1032 1616)
-)
-(connector
-	(text "AI_rst_n" (rect 1066 1608 1106 1620)(font "Intel Clear" ))
-	(pt 1032 1624)
-	(pt 1096 1624)
-)
-(connector
-	(pt 1040 1632)
-	(pt 1040 1640)
-)
-(connector
-	(pt 1024 1632)
-	(pt 1040 1632)
-)
-(connector
-	(text "AI_convst" (rect 1064 1624 1111 1636)(font "Intel Clear" ))
-	(pt 1040 1640)
-	(pt 1128 1640)
-)
-(connector
-	(pt 1048 1648)
-	(pt 1048 1656)
-)
-(connector
-	(pt 1024 1648)
-	(pt 1048 1648)
-)
-(connector
-	(text "AI_sclk" (rect 1064 1640 1098 1652)(font "Intel Clear" ))
-	(pt 1048 1656)
-	(pt 1144 1656)
 )
 (connector
 	(text "driver_data_out[79..0]" (rect 2168 1424 2275 1436)(font "Intel Clear" ))
@@ -3626,6 +3348,367 @@ on the Quartus Prime software download page.
 	(text "clk" (rect 1826 1376 1840 1388)(font "Intel Clear" ))
 	(pt 1872 1384)
 	(pt 1848 1384)
+)
+(connector
+	(text "clk" (rect 568 432 582 444)(font "Intel Clear" ))
+	(pt 592 448)
+	(pt 616 448)
+)
+(connector
+	(text "sreset" (rect 552 448 581 460)(font "Intel Clear" ))
+	(pt 592 464)
+	(pt 616 464)
+)
+(connector
+	(text "HI_mode[1..0]" (rect 520 464 588 476)(font "Intel Clear" ))
+	(pt 592 480)
+	(pt 616 480)
+	(bus)
+)
+(connector
+	(text "HI_changing_mode" (rect 504 480 597 492)(font "Intel Clear" ))
+	(pt 592 496)
+	(pt 616 496)
+)
+(connector
+	(text "HI_convst_start" (rect 520 496 595 508)(font "Intel Clear" ))
+	(pt 592 512)
+	(pt 616 512)
+)
+(connector
+	(text "HI_SCLK" (rect 552 528 593 540)(font "Intel Clear" ))
+	(pt 592 544)
+	(pt 616 544)
+)
+(connector
+	(text "HI_MOSI" (rect 544 544 586 556)(font "Intel Clear" ))
+	(pt 592 560)
+	(pt 616 560)
+)
+(connector
+	(text "AI_sdi[5..0]" (rect 536 576 590 588)(font "Intel Clear" ))
+	(pt 592 592)
+	(pt 616 592)
+	(bus)
+)
+(connector
+	(text "AM_adc_sclk" (rect 528 592 590 604)(font "Intel Clear" ))
+	(pt 592 608)
+	(pt 616 608)
+)
+(connector
+	(text "AM_addr_inc_write" (rect 504 624 596 636)(font "Intel Clear" ))
+	(pt 592 640)
+	(pt 616 640)
+)
+(connector
+	(text "AM_addr_clr" (rect 528 640 590 652)(font "Intel Clear" ))
+	(pt 592 656)
+	(pt 616 656)
+)
+(connector
+	(text "AM_busy" (rect 544 656 588 668)(font "Intel Clear" ))
+	(pt 592 672)
+	(pt 616 672)
+)
+(connector
+	(text "AM_we_n" (rect 544 672 591 684)(font "Intel Clear" ))
+	(pt 592 688)
+	(pt 616 688)
+)
+(connector
+	(text "AM_cs_n" (rect 544 688 587 700)(font "Intel Clear" ))
+	(pt 592 704)
+	(pt 616 704)
+)
+(connector
+	(text "AM_data_bus_out" (rect 512 720 599 732)(font "Intel Clear" ))
+	(pt 592 736)
+	(pt 616 736)
+)
+(connector
+	(text "RDM_addr_clr" (rect 528 736 597 748)(font "Intel Clear" ))
+	(pt 592 752)
+	(pt 616 752)
+)
+(connector
+	(text "RDM_addr_inc_read" (rect 504 752 600 764)(font "Intel Clear" ))
+	(pt 592 768)
+	(pt 616 768)
+)
+(connector
+	(text "RDM_addr_inc_write" (rect 504 768 603 780)(font "Intel Clear" ))
+	(pt 592 784)
+	(pt 616 784)
+)
+(connector
+	(text "RDM_oe_n" (rect 544 784 595 796)(font "Intel Clear" ))
+	(pt 592 800)
+	(pt 616 800)
+)
+(connector
+	(text "RDM_cs_n" (rect 544 800 594 812)(font "Intel Clear" ))
+	(pt 592 816)
+	(pt 616 816)
+)
+(connector
+	(text "RDM_MISO" (rect 536 816 590 828)(font "Intel Clear" ))
+	(pt 592 832)
+	(pt 616 832)
+)
+(connector
+	(text "RDM_busy" (rect 544 832 595 844)(font "Intel Clear" ))
+	(pt 592 848)
+	(pt 616 848)
+)
+(connector
+	(text "RDM_we_n" (rect 536 848 590 860)(font "Intel Clear" ))
+	(pt 592 864)
+	(pt 616 864)
+)
+(connector
+	(text "RDM_data_bus_out" (rect 504 880 598 892)(font "Intel Clear" ))
+	(pt 592 896)
+	(pt 616 896)
+)
+(connector
+	(text "CM_MISO" (rect 544 896 591 908)(font "Intel Clear" ))
+	(pt 592 912)
+	(pt 616 912)
+)
+(connector
+	(text "RI_addr_inc_read" (rect 945 488 1028 500)(font "Intel Clear" ))
+	(pt 904 496)
+	(pt 936 496)
+)
+(connector
+	(text "RI_addr_inc_write" (rect 944 504 1030 516)(font "Intel Clear" ))
+	(pt 904 512)
+	(pt 936 512)
+)
+(connector
+	(text "RI_we_n" (rect 944 536 984 548)(font "Intel Clear" ))
+	(pt 904 544)
+	(pt 936 544)
+)
+(connector
+	(text "RI_oe_n" (rect 944 552 982 564)(font "Intel Clear" ))
+	(pt 904 560)
+	(pt 936 560)
+)
+(connector
+	(text "RI_cs_n" (rect 945 568 981 580)(font "Intel Clear" ))
+	(pt 904 576)
+	(pt 936 576)
+)
+(connector
+	(text "RI_data_bus_out" (rect 944 584 1024 596)(font "Intel Clear" ))
+	(pt 904 592)
+	(pt 936 592)
+)
+(connector
+	(text "AI_sdo[5..0]" (rect 944 648 1001 660)(font "Intel Clear" ))
+	(pt 904 656)
+	(pt 936 656)
+	(bus)
+)
+(connector
+	(text "AM_adc_sdi[5..0]" (rect 944 664 1026 676)(font "Intel Clear" ))
+	(pt 904 672)
+	(pt 936 672)
+	(bus)
+)
+(connector
+	(text "RDM_SCLK" (rect 944 680 998 692)(font "Intel Clear" ))
+	(pt 904 688)
+	(pt 936 688)
+)
+(connector
+	(text "RDM_data_read[15..0]" (rect 944 696 1051 708)(font "Intel Clear" ))
+	(pt 904 704)
+	(pt 936 704)
+	(bus)
+)
+(connector
+	(text "RDM_MOSI" (rect 944 712 998 724)(font "Intel Clear" ))
+	(pt 904 720)
+	(pt 936 720)
+)
+(connector
+	(text "CM_MOSI" (rect 944 728 991 740)(font "Intel Clear" ))
+	(pt 904 736)
+	(pt 936 736)
+)
+(connector
+	(text "CM_SCLK" (rect 944 744 991 756)(font "Intel Clear" ))
+	(pt 904 752)
+	(pt 936 752)
+)
+(connector
+	(text "ready_mode1" (rect 944 760 1011 772)(font "Intel Clear" ))
+	(pt 904 768)
+	(pt 936 768)
+)
+(connector
+	(text "RI_data_in[15..0]" (rect 944 520 1025 532)(font "Intel Clear" ))
+	(pt 904 528)
+	(pt 936 528)
+	(bus)
+)
+(connector
+	(text "RI_data_out[15..0]" (rect 496 560 584 572)(font "Intel Clear" ))
+	(pt 592 576)
+	(pt 616 576)
+	(bus)
+)
+(connector
+	(text "RDM_data_write[15..0]" (rect 496 864 605 876)(font "Intel Clear" ))
+	(pt 592 880)
+	(pt 616 880)
+	(bus)
+)
+(connector
+	(text "AM_data[15..0]" (rect 528 704 601 716)(font "Intel Clear" ))
+	(pt 592 720)
+	(pt 616 720)
+	(bus)
+)
+(connector
+	(text "HI_rst_n" (rect 552 512 592 524)(font "Intel Clear" ))
+	(pt 592 528)
+	(pt 616 528)
+)
+(connector
+	(pt 912 608)
+	(pt 912 616)
+)
+(connector
+	(pt 904 608)
+	(pt 912 608)
+)
+(connector
+	(text "AI_rst_n" (rect 946 600 986 612)(font "Intel Clear" ))
+	(pt 912 616)
+	(pt 976 616)
+)
+(connector
+	(pt 920 624)
+	(pt 920 632)
+)
+(connector
+	(pt 904 624)
+	(pt 920 624)
+)
+(connector
+	(pt 928 640)
+	(pt 928 648)
+)
+(connector
+	(pt 904 640)
+	(pt 928 640)
+)
+(connector
+	(text "AI_sclk" (rect 944 632 978 644)(font "Intel Clear" ))
+	(pt 928 648)
+	(pt 1024 648)
+)
+(connector
+	(text "HI_busy" (rect 944 440 982 452)(font "Intel Clear" ))
+	(pt 904 448)
+	(pt 936 448)
+)
+(connector
+	(text "HI_MISO" (rect 944 456 986 468)(font "Intel Clear" ))
+	(pt 904 464)
+	(pt 936 464)
+)
+(connector
+	(text "RI_addr_clr" (rect 944 472 999 484)(font "Intel Clear" ))
+	(pt 904 480)
+	(pt 936 480)
+)
+(connector
+	(text "sreset" (rect 1816 1392 1845 1404)(font "Intel Clear" ))
+	(pt 1872 1400)
+	(pt 1848 1400)
+)
+(connector
+	(pt 1872 1416)
+	(pt 1848 1416)
+)
+(connector
+	(text "request" (rect 1842 1080 1878 1092)(font "Intel Clear" ))
+	(pt 1824 1088)
+	(pt 2048 1088)
+)
+(connector
+	(pt 2048 1088)
+	(pt 2048 1208)
+)
+(connector
+	(pt 2232 1208)
+	(pt 2048 1208)
+)
+(connector
+	(text "AM_adc_convst" (rect 512 608 587 620)(font "Intel Clear" ))
+	(pt 592 624)
+	(pt 616 624)
+)
+(connector
+	(text "AI_convst" (rect 944 616 991 628)(font "Intel Clear" ))
+	(pt 920 632)
+	(pt 1008 632)
+)
+(connector
+	(text "host_convst_start_1" (rect 1840 1144 1937 1156)(font "Intel Clear" ))
+	(pt 1824 1152)
+	(pt 1832 1152)
+)
+(connector
+	(text "host_convst_start_0" (rect 384 400 481 412)(font "Intel Clear" ))
+	(pt 352 408)
+	(pt 368 408)
+)
+(connector
+	(text "HI_convst_start" (rect 796 128 871 140)(font "Intel Clear" ))
+	(pt 768 144)
+	(pt 792 144)
+)
+(connector
+	(text "AI_sdi[5..0]" (rect 1368 72 1422 84)(font "Intel Clear" ))
+	(pt 1688 152)
+	(pt 1704 152)
+	(bus)
+)
+(connector
+	(text "adc_sdi[0]" (rect 1488 1144 1538 1156)(font "Intel Clear" ))
+	(pt 1576 1152)
+	(pt 1544 1152)
+)
+(connector
+	(text "adc_sdi[1]" (rect 1488 1160 1538 1172)(font "Intel Clear" ))
+	(pt 1576 1168)
+	(pt 1544 1168)
+)
+(connector
+	(text "adc_sdi[2]" (rect 1488 1176 1538 1188)(font "Intel Clear" ))
+	(pt 1576 1184)
+	(pt 1544 1184)
+)
+(connector
+	(text "adc_sdi[3]" (rect 1488 1192 1538 1204)(font "Intel Clear" ))
+	(pt 1576 1200)
+	(pt 1544 1200)
+)
+(connector
+	(text "adc_sdi[4]" (rect 1488 1208 1538 1220)(font "Intel Clear" ))
+	(pt 1576 1216)
+	(pt 1544 1216)
+)
+(connector
+	(text "adc_sdi[5]" (rect 1488 1224 1538 1236)(font "Intel Clear" ))
+	(pt 1576 1232)
+	(pt 1544 1232)
 )
 (junction (pt 1288 1304))
 (text "ADC Interface" (rect 1752 128 1833 143)(font "Intel Clear" (font_size 8)))
