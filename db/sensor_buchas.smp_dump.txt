@@ -229,6 +229,15 @@ current_spi_state.NO_DATA 0 0 0
 current_spi_state.AWAIT_SCLK_FALL 1 0 1 
 current_spi_state.AWAIT_SCLK_RISE 1 1 0 
 
+State Machine - |sensor_buchas|slaver_states_main:inst4|set_get_ads8691:u_set_get_ads8691|current_spi_state
+Name current_spi_state.IDLE current_spi_state.AWAIT_SCLK_RISE_MOSI current_spi_state.AWAIT_SCLK_FALL_MOSI current_spi_state.TSU_CSCK_MOSI current_spi_state.CHIP_SELECTED current_spi_state.LOAD_WORD 
+current_spi_state.LOAD_WORD 0 0 0 0 0 0 
+current_spi_state.CHIP_SELECTED 0 0 0 0 1 1 
+current_spi_state.TSU_CSCK_MOSI 0 0 0 1 0 1 
+current_spi_state.AWAIT_SCLK_FALL_MOSI 0 0 1 0 0 1 
+current_spi_state.AWAIT_SCLK_RISE_MOSI 0 1 0 0 0 1 
+current_spi_state.IDLE 1 0 0 0 0 1 
+
 State Machine - |sensor_buchas|acquisition_module:inst5|acquisition_store_time_counter:storer_time_counter|sm
 Name WAIT_END WE1_CS0_LSBb WE0_CS0_LSBc WE0_CS0_LSBb WE0_CS0_LSBa WE1_CS0_LSBa WAIT_STORE_TIME_COUNTER 
 WAIT_STORE_TIME_COUNTER 0 0 0 0 0 0 0 

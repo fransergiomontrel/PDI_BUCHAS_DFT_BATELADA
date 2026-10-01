@@ -1,6 +1,6 @@
-module set_get_adc (
-    input  wire clk_p,
-    input  wire reset,      // reset síncrono
+module set_get_ads8691 (
+    input  wire clk,
+    input  wire rst,      // reset síncrono
 	 input wire [31:0] cmd_word,
 	 input wire miso_1,
 	 input wire miso_2,
@@ -43,8 +43,8 @@ module set_get_adc (
 
     reg [3:0] current_spi_state;
 
-    always @(posedge clk_p) begin
-        if (reset) begin
+    always @(posedge clk) begin
+        if (rst) begin
 		  
             sclk <= 1'b0;
             ncs  <= 1'b1;

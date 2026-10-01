@@ -3,11 +3,11 @@ include "dffes.inc";
 
 subdesign mode_selector(
 	clk: INPUT;				-- Clock principal
-	mode_in[1..0]: input;
+	mode_in[2..0]: input;
 	sreset: input;
 	change_ok: input = Vcc;
 	
-	mode_out[1..0]: output;
+	mode_out[2..0]: output;
 	ready: output;
 	changing: output;
 	stable: output;
@@ -16,9 +16,9 @@ subdesign mode_selector(
 )
 variable
 	sm : MACHINE WITH STATES (sNoticeChanging, sUpdateMode, sWaitingChangeOk, sStable, sChangedRequested);
-	sync: synchronizer with (bus_size = 2);
+	sync: synchronizer with (bus_size = 3);
 	changing_ff, ready_ff: dffes;
-	mode_out_ff[1..0]: dffes;
+	mode_out_ff[2..0]: dffes;
 begin
 	defaults
 		mode_out_ff[].ena = Gnd;

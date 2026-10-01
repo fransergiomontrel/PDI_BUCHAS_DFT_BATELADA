@@ -22,7 +22,7 @@ module slaver_states_main (
 
     output reg frequency,
 
-    output reg [1:0] host_mode,
+    output reg [2:0] host_mode,
 
     output wire led_dft_on_out,
     output wire led_tx_on_out,
@@ -99,34 +99,6 @@ module slaver_states_main (
     //Signal that indicates when spi communication is over
     wire signal_spi_done;
     
-	 reg set_get_adc_reset;
-	 reg [31:0] adc_word_reg;
-	 wire host_sclk_set_get_adc;
-	 wire host_mosi_set_get_adc;
-	 wire set_get_adc_global_reset;
-	 wire [95:0] current_adc_config;
-	 wire ncs_signal;
-	 wire set_get_adc_done_signal;
-	 assign set_get_adc_global_reset = rst || set_get_adc_reset;
-	 //Module to write and read ADS8691 individually
-	 set_get_adc u_set_get_adc (
-	 
-    clk_p(clk),
-    reset(set_get_adc_global_reset),      // reset síncrono
-	 cmd_word(adc_word_reg),
-	 miso_1(miso_1_in),
-	 miso_2(miso_2_in),
-	 miso_3(miso_3_in),
-	 miso_4(miso_4_in),
-	 miso_5(miso_5_in),
-	 miso_6(miso_6_in),
-    sclk(host_sclk_set_get_adc),
-    ncs(ncs_signal),
-    mosi(host_mosi_set_get_adc),      // saída serial do mestre
-	 readed_half_words(current_adc_config),
-	 set_get_done_out(set_get_adc_done_signal)
-	 
-);
 	 
 	 //To restart crc16 after one frame received
 	 reg crc_restart;
@@ -145,6 +117,37 @@ module slaver_states_main (
         .clk(clk)
 		  
 );
+    
+	 reg [31:0] adc_word_reg;
+	 wire host_sclk_set_get_adc;
+	 wire host_mosi_set_get_adc;
+	 wire [95:0] current_adc_config;
+	 wire ncs_signal;
+	 wire set_get_adc_done_signal;
+	 
+	 reg set_get_adc_reset;
+	 wire set_get_adc_global_reset;
+	 assign set_get_adc_global_reset = rst || set_get_adc_reset;
+	 //Module to write and read ADS8691 individually
+	 set_get_ads8691 u_set_get_ads8691 (
+	 
+    .clk(clk),
+    .rst(set_get_adc_global_reset),      // reset síncrono
+	 .cmd_word(adc_word_reg),
+	 .miso_1(miso_1_in),
+	 .miso_2(miso_2_in),
+	 .miso_3(miso_3_in),
+	 .miso_4(miso_4_in),
+	 .miso_5(miso_5_in),
+	 .miso_6(miso_6_in),
+    .sclk(host_sclk_set_get_adc),
+    .ncs(ncs_signal),
+    .mosi(host_mosi_set_get_adc),      // saída serial do mestre
+	 .readed_half_words(current_adc_config),
+	 .set_get_done_out(set_get_adc_done_signal)
+	 
+);
+
 	 wire host_sclk_fpga_rw_8;
 	 wire host_mosi_fpga_rw_8;
     //Instance of SPI to write and read one byte
@@ -250,7 +253,7 @@ module slaver_states_main (
     localparam GET_RESULTS_BYTE = 8'h40;//Get results byte
     localparam BYPASS_BYTE = 8'h50;//Bypass byte
     localparam ERROR_BYTE = 8'h7F;//Error byte	
-	 localparam COMMAND_TO_READ = 32'hC8140000; 
+	 localparam COMMAND_TO_READ = 32'hC8140000;//Command to read adc configuration of converters 
 
     //States definition for states machine of slaver IED
     localparam CHECK_SOH = 5'b00000;//UART await for SOH byte
@@ -279,11 +282,12 @@ module slaver_states_main (
     (* preserve *) reg [4:0] current_state;
 
     //Modes definition to internal connection of switch module
-    localparam MODE_CFG_FPGA = 2'b00;
-    localparam MODE_CFG = 2'b01;
-    localparam MODE_ACQ = 2'b10;
-    localparam MODE_RW = 2'b11;
-
+    localparam MODE_CFG_FPGA = 3'b000;
+    localparam MODE_CFG = 3'b001;
+    localparam MODE_ACQ = 3'b010;
+    localparam MODE_RW = 3'b011;
+	 localparam MODE_GET_CONFIG = 3'b100;
+	 
     always @(posedge clk) begin
 
 	     in <= rxd_from_gpio47;
@@ -373,6 +377,9 @@ module slaver_states_main (
 						  //Disable 4-20 ma + temp request, that is, it will started only once after request is done
                     acquire_again <= 1'b0;
                     if (ed_rx_done == 1'b1) begin
+						      
+								select0_1 <= 1'b0;
+							   select1_1 <= 1'b0;
 
                         if (rx_uart_out == START_BYTE) begin
 								
@@ -734,8 +741,7 @@ module slaver_states_main (
 									     start_8_ctl <= 1'b1;
 									     byte_to_send <= crc_high_reg;
 										  payload_bytes_counter <= 4'd0;
-										  select0_1 <= 1'b0;
-									     select1_1 <= 1'b0;
+										 
 										  current_state <= CHECK_SOH;
 										  
 									 end
@@ -920,8 +926,6 @@ module slaver_states_main (
 									     byte_to_send <= crc_high_reg;
 										  payload_bytes_counter <= 4'd0;
 										  
-										  select0_1 <= 1'b0;
-									     select1_1 <= 1'b0;
 										  current_state <= CHECK_SOH;
 										  
 									 end
@@ -982,8 +986,8 @@ module slaver_states_main (
 										  
 										  adc_word_reg <= COMMAND_TO_READ;
 										  set_get_adc_reset <= 1'b0;
-										  //host_mode
 										  bytes_counter <= 4'd0;
+										  host_mode <= MODE_GET_CONFIG;
 										  
 									 end
 									 
@@ -1003,14 +1007,15 @@ module slaver_states_main (
 										  payload_reg[4] <= current_adc_config[71:64];
 										  payload_reg[5] <= current_adc_config[87:80];
 										  set_get_adc_reset <= 1'b1;
-										  //host mode
+										  host_mode <= MODE_CFG_FPGA;
 									 end
 								
 								    else if (payload_bytes_counter < GET_CONFIG_SIZE) begin
 									 
 										  //Send bytes of payload through uart
 									     case (payload_bytes_counter)
-										      4'd0: begin byte_to_send <= payload_reg[0];
+										      4'd0: begin 
+														byte_to_send <= payload_reg[0];
 														start_8_ctl <= 1'b1;
 														
 														crc_en_reg <= 1'b1;
@@ -1019,7 +1024,8 @@ module slaver_states_main (
 												      payload_bytes_counter <= payload_bytes_counter + 1;
 												      end
 														
-												4'd1: begin byte_to_send <= payload_reg[1];
+												4'd1: begin 
+														byte_to_send <= payload_reg[1];
 														start_8_ctl <= 1'b1;
 														
 														crc_en_reg <= 1'b1;
@@ -1028,7 +1034,8 @@ module slaver_states_main (
 												      payload_bytes_counter <= payload_bytes_counter + 1;
 												      end
 														
-												4'd2: begin byte_to_send <= payload_reg[2];
+												4'd2: begin 
+														byte_to_send <= payload_reg[2];
 														start_8_ctl <= 1'b1;
 														
 														crc_en_reg <= 1'b1;
@@ -1037,7 +1044,8 @@ module slaver_states_main (
 												      payload_bytes_counter <= payload_bytes_counter + 1;
 												      end
 														
-												4'd3: begin byte_to_send <= payload_reg[3];
+												4'd3: begin 
+														byte_to_send <= payload_reg[3];
 														start_8_ctl <= 1'b1;
 														
 														crc_en_reg <= 1'b1;
@@ -1046,7 +1054,8 @@ module slaver_states_main (
 												      payload_bytes_counter <= payload_bytes_counter + 1;
 												      end
 														
-												4'd4: begin byte_to_send <= payload_reg[4];
+												4'd4: begin 
+														byte_to_send <= payload_reg[4];
 														start_8_ctl <= 1'b1;
 														
 														crc_en_reg <= 1'b1;
@@ -1055,7 +1064,8 @@ module slaver_states_main (
 												      payload_bytes_counter <= payload_bytes_counter + 1;
 												      end
 														
-												4'd5: begin byte_to_send <= payload_reg[5];
+												4'd5: begin 
+														byte_to_send <= payload_reg[5];
 														start_8_ctl <= 1'b1;
 														
 														crc_en_reg <= 1'b1;
@@ -1064,29 +1074,12 @@ module slaver_states_main (
 												      payload_bytes_counter <= payload_bytes_counter + 1;
 												      end
 														
-												4'd6: begin byte_to_send <= payload_reg[6];
-														start_8_ctl <= 1'b1;
-														
-														crc_en_reg <= 1'b1;
-														data_in_crc <= payload_reg[6];
-														
-												      payload_bytes_counter <= payload_bytes_counter + 1;
-												      end
-														
-												4'd7: begin byte_to_send <= payload_reg[7];
-														start_8_ctl <= 1'b1;
-														
-														crc_en_reg <= 1'b1;
-														data_in_crc <= payload_reg[7];
-														
-												      payload_bytes_counter <= payload_bytes_counter + 1;
-												      end
 										  endcase
 										  
 									 
 									 end
 									 
-									 else if (payload_bytes_counter == 8'd08) begin
+									 else if (payload_bytes_counter == GET_CONFIG_SIZE) begin
 									 
 									     //Send byte of end through uart
 									     start_8_ctl <= 1'b1;
@@ -1099,7 +1092,7 @@ module slaver_states_main (
 										  
 									 end
 									 
-									 else if (payload_bytes_counter == 8'd09) begin
+									 else if (payload_bytes_counter == (GET_CONFIG_SIZE + 1)) begin
 									 
 										  //Send byte low of crc
 									     start_8_ctl <= 1'b1;
@@ -1110,7 +1103,7 @@ module slaver_states_main (
 										  
 									 end
 									 
-									 else if (payload_bytes_counter == 8'd10) begin
+									 else if (payload_bytes_counter == (GET_CONFIG_SIZE + 2)) begin
 									 
 										  crc_restart  <= 1'b1;
 										  //Send byte high of crc
@@ -1118,8 +1111,6 @@ module slaver_states_main (
 									     byte_to_send <= crc_high_reg;
 										  payload_bytes_counter <= 4'd0;
 										  
-										  select0_1 <= 1'b0;
-									     select1_1 <= 1'b0;
 										  current_state <= CHECK_SOH;
 										  
 									 end

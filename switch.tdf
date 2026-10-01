@@ -6,7 +6,7 @@ subdesign switch(
 	sreset: input;
 	
 	-- Host Interface
-	HI_mode[1..0]: input;
+	HI_mode[2..0]: input;
 	HI_changing_mode: input;
 	HI_convst_start: input;
 	HI_rst_n: input;
@@ -186,6 +186,41 @@ begin
 			RDM_data_read[] = RI_data_out[];
 			RDM_MOSI = HI_MOSI;
 
+			-- Configuration CPLD Module
+			CM_MOSI = Gnd;
+			CM_SCLK = Gnd;
+			HI_MISO = Gnd;
+			
+			when MODE_GET_CONFIGURATION =>
+			-- Host Interface
+			HI_MISO = Gnd;
+			
+			-- RAM Interface
+			RI_addr_clr = Gnd;
+			RI_addr_inc_read = Gnd;
+			RI_addr_inc_write = Gnd;
+			RI_data_in[] = Gnd;
+			RI_we_n = Vcc;
+			RI_oe_n = Vcc;
+			RI_cs_n = Vcc;
+			RI_data_bus_out = Gnd;
+			
+			-- ADC Interface
+			AI_rst_n = HI_rst_n;
+			AI_convst = HI_convst_start;
+			AI_sclk = HI_SCLK;
+			AI_sdo[0] = HI_MOSI;
+		   AI_sdo[1] = HI_MOSI;
+		   AI_sdo[2] = HI_MOSI;
+		   AI_sdo[3] = HI_MOSI;
+		   AI_sdo[4] = HI_MOSI;
+		   AI_sdo[5] = HI_MOSI;
+			
+			--AI_sdo[5..1] = AI_sdi[4..0];
+			
+			-- Acquisition Module
+			AM_adc_sdi[] = Gnd;
+						
 			-- Configuration CPLD Module
 			CM_MOSI = Gnd;
 			CM_SCLK = Gnd;

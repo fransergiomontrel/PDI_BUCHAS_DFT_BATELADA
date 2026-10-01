@@ -9,7 +9,7 @@ module slaver_states (
 	 output wire host_sclk_out,
 	 output wire select0_0_out,
 	 output wire select1_0_out,
-	 output reg[1:0] host_mode,
+	 output reg[2:0] host_mode,
 	 output wire reset_sm_slaver_out
 	 
 );    
@@ -52,10 +52,11 @@ module slaver_states (
 	 reg [2:0] current_initial_state;
 	 
 	 //Definição dos estados (Verilog clássico)
-    localparam MODE_CFG_FPGA = 2'b00;
-	 localparam MODE_CFG = 2'b01;
-	 localparam MODE_ACQ = 2'b10;
-	 localparam MODE_RW = 2'b11;
+    localparam MODE_CFG_FPGA = 3'b000;
+	 localparam MODE_CFG = 3'b001;
+	 localparam MODE_ACQ = 3'b010;
+	 localparam MODE_RW = 3'b011;
+	 localparam MODE_GET_CONFIG = 3'b100;
 	 
 	  uart_tx_8 u_uart_tx_8(
 	  

@@ -6,7 +6,7 @@ subdesign host_interface(
 	busy: input = Vcc;
 	MISO: input;
 
-	host_mode[1..0]: input;
+	host_mode[2..0]: input;
 	host_convst_start: input;
 	host_rst_n: input;
 
@@ -18,7 +18,7 @@ subdesign host_interface(
 	ready_mode2: input;
 	ready_mode3: input;
 	
-	mode[1..0]: output;
+	mode[2..0]: output;
 	changing_mode: output;
 	convst_start: output;
 	rst_n: output;
