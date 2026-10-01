@@ -70,7 +70,7 @@ module slaver_states_main (
     reg [31:0] readed_data_32;
 
     //16 bit size register to count 7215 (samples) * 6 (channels for all samples) * 1 (word by sample)
-    reg [15:0] readed_words;
+    reg [15:0] read_words;
 
     //Signal to send new byte through SPI
     reg command_new_byte;
@@ -143,7 +143,7 @@ module slaver_states_main (
     .sclk(host_sclk_set_get_adc),
     .ncs(ncs_signal),
     .mosi(host_mosi_set_get_adc),      // saída serial do mestre
-	 .readed_half_words(current_adc_config),
+	 .read_half_words(current_adc_config),
 	 .set_get_done_out(set_get_adc_done_signal)
 	 
 );
@@ -304,7 +304,7 @@ module slaver_states_main (
             acquire_again <= 1'b0;
             convst <= 1'b0;
             command_new_byte <= 1'b0;
-            readed_words <= 16'd0;
+            read_words <= 16'd0;
             bytes_counter <= 4'd0;
 				payload_bytes_counter <= 4'd0;
             reset_uart_rx <= 1'b1;
@@ -1537,15 +1537,15 @@ module slaver_states_main (
                     else if ((signal_spi_done == 1'b1) & (bytes_counter == 4'd2)) begin
 
                         //Second byte readed then more one word is readed
-                        readed_words <= readed_words + 1;
+                        read_words <= read_words + 1;
                         //Commands occur only until last word
-                        if (readed_words < 16'd43289) begin
+                        if (read_words < 16'd43289) begin
                             current_state <= DELAY_SAMPLES;  
                         end
 
                         else begin
                             dft_reg <= 1'b1;
-                            readed_words <= 16'd0;
+                            read_words <= 16'd0;
                             bytes_counter <= 4'd0;
                             host_mode <= MODE_CFG_FPGA;
 

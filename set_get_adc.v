@@ -11,7 +11,7 @@ module set_get_ads8691 (
     output reg  sclk,
     output reg  ncs,
     output reg  mosi,      // saída serial do mestre
-	 output wire [95:0] readed_half_words,
+	 output wire [95:0] read_half_words,
 	 output wire set_get_done_out
 );
 
@@ -27,7 +27,7 @@ module set_get_ads8691 (
 	 
 	 reg set_get_done_reg;
 	 
-	 assign readed_half_words = {miso_buffer_6, miso_buffer_5, miso_buffer_4, miso_buffer_3, miso_buffer_2, miso_buffer_1};
+	 assign read_half_words = {miso_buffer_6, miso_buffer_5, miso_buffer_4, miso_buffer_3, miso_buffer_2, miso_buffer_1};
 	 assign set_get_done_out = set_get_done_reg;
 	 
 	 
