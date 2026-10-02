@@ -2,51 +2,44 @@ module uart_tx (
     input  wire        clk,
     input  wire        rst,       // reset síncrono
     input  wire        start,     // inicia transmissão
-    input  wire [575:0] data_in,   // dado paralelo
+    input  wire [655:0] data_in,   // dado paralelo
     output reg         tx,        // saída serial
     output reg         busy,      // está transmitindo
     output reg         done       // pulso de fim	 
 
 );    
 
-	 //localparam [383:0] data_in = 384'hABCD788C498308570E0A788C498308570E0A788C498308570E0A788C498308570E0A788C498308570E0A788C49830B12;
+	 //Bytes of protocol
+    localparam START_BYTE = 8'h01;//Start of frame byte
+	 localparam GET_RESULTS_BYTE = 8'h40;//Get results byte
+	 localparam FRAME_SIZE = 8'd84;
+	 localparam END_BYTE = 8'h04;//End of frame byte
+	  
+	 
     // Checksum only: 72 bytes -> 18 groups -> 6 -> 2 -> total.
     // Four clock cycles of latency; data_in stays stable until transmission done.
     // The checksum is consumed only after the header and all payload bytes.
-    reg [9:0] checksum_s1 [0:17];
-    reg [11:0] checksum_s2 [0:5];
-    reg [13:0] checksum_s3 [0:1];
-    reg [15:0] sum_reg;
-    integer i;
-    always @(posedge clk) begin
-        if (rst) begin
-            for (i = 0; i < 18; i = i + 1) checksum_s1[i] <= 10'd0;
-            for (i = 0; i < 6; i = i + 1) checksum_s2[i] <= 12'd0;
-            for (i = 0; i < 2; i = i + 1) checksum_s3[i] <= 14'd0;
-            sum_reg <= 16'd0;
-        end else begin
-            for (i = 0; i < 18; i = i + 1)
-                checksum_s1[i] <= ({2'b0, data_in[(i*32) +: 8]}
-                                + {2'b0, data_in[(i*32+8) +: 8]})
-                               + ({2'b0, data_in[(i*32+16) +: 8]}
-                                + {2'b0, data_in[(i*32+24) +: 8]});
-            for (i = 0; i < 6; i = i + 1)
-                checksum_s2[i] <= {2'b0, checksum_s1[i*3]}
-                                + {2'b0, checksum_s1[i*3+1]}
-                                + {2'b0, checksum_s1[i*3+2]};
-            for (i = 0; i < 2; i = i + 1)
-                checksum_s3[i] <= {2'b0, checksum_s2[i*3]}
-                                + {2'b0, checksum_s2[i*3+1]}
-                                + {2'b0, checksum_s2[i*3+2]};
-            sum_reg <= {2'b0, checksum_s3[0]} + {2'b0, checksum_s3[1]};
-        end
-    end
-
-	 wire [7:0] chksum_low;
-	 wire [7:0] chksum_high;
+    
+	  //To restart crc16 after one frame received
+	 reg crc_restart;
+	 reg [7:0] data_in_crc;
+	 reg crc_en_reg;
+	 wire [15:0] crc_result;
+	 wire crc_global_reset;
+	 assign crc_global_reset = rst || crc_restart;
 	 
-	 assign chksum_low = sum_reg[7:0] | 8'h80;
-	 assign chksum_high = sum_reg[15:8] | 8'h80;
+	 
+	 reg [7:0] crc_low_reg;
+	 //Instance of crc16-CCITT False to calculate crc 16 bits data
+    crc16 u_crc16(
+		  
+		  .data_in(data_in_crc),
+        .crc_en(crc_en_reg),
+        .crc_out(crc_result),
+        .rst(crc_global_reset),
+        .clk(clk)
+		  
+);
 	 
 	 reg start_8_ctl;
     reg [7:0] byte_to_send;
@@ -64,31 +57,39 @@ module uart_tx (
 	  
 );
 
-	 
 	 reg [6:0]  count_byte;
-    reg [575:0] shift_reg; 
+    reg [655:0] shift_reg;
+	 reg [655:0] shift_reg_8;
+	 
     reg [3:0]  bit_cnt; // precisa contar até 32
 	 reg [9:0]  tx_freq_divider;// register to calculate boud rate = 100MHz/tx_freq_divider
 	 
-	 //States definition for states machine of UART 8E1 for 60 bytes
+	 reg [7:0] reserved_1_reg;
+	 reg [7:0] reserved_2_reg;
 	 
-    localparam START = 4'b0000;//
-	 localparam BYTE_START = 4'b0001;//
-	 localparam BYTE_TYPE = 4'b0010;//
-	 //localparam START = 3'b000;//
-	 localparam START_BIT = 4'b0011;//
-	 localparam DATA_BITS = 4'b0100;//
-	 localparam STOP_BIT = 4'b0101;//
-	 localparam BYTE_END = 4'b0110;//
-	 localparam CHKSUM_LOW = 4'b0111;//
-	 localparam CHKSUM_HIGH = 4'b1000;//
+	 //States definition for states machine of UART 8E1 for 60 bytes 
+    localparam START_SM = 4'b0000;//
+	 localparam BYTE_START_SM = 4'b0001;//
+	 localparam BYTE_TYPE_SM = 4'b0010;//
+	 localparam BYTE_LENGTH_SM = 4'b0011;//
+	 localparam START_BIT_SM = 4'b0100;//
+	 localparam DATA_BITS_SM = 4'b0101;//
+	 localparam STOP_BIT_SM = 4'b0110;//
+	 localparam RESERVED_1_SM = 4'b0111;
+	 localparam RESERVED_2_SM = 4'b1000;
+	 localparam BYTE_END_SM = 4'b1001;//
+	 localparam CRC_READY = 4'b1010;//
+	 localparam CRC_HIGH_SM = 4'b1011;//
+	 localparam CRC_LOW_SM = 4'b1100;//
+	 localparam AWAIT_TX_END_SM = 4'b1101;//
 	 
 	 reg [3:0] state_uart_tx;
 	 
     always @(posedge clk) begin
         if (rst) begin
 		  
-            shift_reg <= 576'd0;
+            shift_reg <= 656'd0;
+				shift_reg_8 <= 656'd0;
             bit_cnt   <= 4'd0;
             tx        <= 1'b1;
             busy      <= 1'b0;
@@ -97,17 +98,27 @@ module uart_tx (
 				tx_freq_divider <= 10'd0;
 				byte_to_send <= 8'h00;
 				start_8_ctl <= 1'b0;
-				state_uart_tx <= START;
+				crc_restart <= 1'b1;
+				crc_en_reg <= 1'b0;
+	         crc_low_reg <= 8'h00;
+				
+				reserved_1_reg <= 8'h00;
+	         reserved_2_reg <= 8'h00;
+				
+				state_uart_tx <= START_SM;
 				
         end
 		  
         else begin
 		  
 				done <= 1'b0;
+				crc_restart <= 1'b0;
+				crc_en_reg <= 1'b0;
+				start_8_ctl <= 1'b0;
 				
 				case (state_uart_tx)			  
 	
-			   START:
+			   START_SM:
 			  
 			   begin
 						 
@@ -115,49 +126,78 @@ module uart_tx (
 					 
                     bit_cnt   <= 4'd8;
                     busy      <= 1'b1;
-					     //tx <= 1'b0;
+					     
 					     tx_freq_divider  <= 10'd0;
 				        shift_reg <= data_in;
-						  byte_to_send <= 8'h01;
+						  shift_reg_8 <= data_in; 
+						  byte_to_send <= START_BYTE;
 					     start_8_ctl <= 1'b1;
-					     state_uart_tx <= BYTE_START;
+						  
+						  data_in_crc <= START_BYTE;
+						  crc_en_reg <= 1'b1;
+						  
+					     state_uart_tx <= BYTE_START_SM;
 					 
                 end
 						 
 				end
 				
-				BYTE_START:
+				BYTE_START_SM:
 			  
 			   begin
 				
 				   tx <= tx_8;
-					start_8_ctl <= 1'b0;
+					
 					if (done_8_ctl == 1'b1) begin
 					
-						 byte_to_send <= 8'h18;
+						 byte_to_send <= GET_RESULTS_BYTE;
 					    start_8_ctl <= 1'b1;
-					    state_uart_tx <= BYTE_TYPE;
+						 
+						 data_in_crc <= GET_RESULTS_BYTE;
+						 crc_en_reg <= 1'b1;
+						 
+					    state_uart_tx <= BYTE_TYPE_SM;
 				       
 					end
 						 
 				end
 				
-				BYTE_TYPE:
+				BYTE_TYPE_SM:
 			  
 			   begin
 				
 				   tx <= tx_8;
-					start_8_ctl <= 1'b0;
 					
 					if (done_8_ctl == 1'b1) begin
-					    tx <= 1'b0;
-					    state_uart_tx <= START_BIT;
+					
+						 byte_to_send <= FRAME_SIZE;
+					    start_8_ctl <= 1'b1;
+						 
+						 data_in_crc <= FRAME_SIZE;
+						 crc_en_reg <= 1'b1;
+						 
+					    state_uart_tx <= BYTE_LENGTH_SM;
 				       
 					end
 						 
 				end
 				
-				START_BIT:
+				BYTE_LENGTH_SM:
+			  
+			   begin
+				
+				   tx <= tx_8;
+					
+					if (done_8_ctl == 1'b1) begin
+					    
+					    tx <= 1'b0;
+					    state_uart_tx <= START_BIT_SM;
+				       
+					end
+						 
+				end
+				
+				START_BIT_SM:
 			  
 			   begin
 						 
@@ -167,14 +207,14 @@ module uart_tx (
 						 
 						  tx_freq_divider  <= 10'd0;
 						  tx <= shift_reg[0];
-						  bit_cnt   <= bit_cnt - 1;
-						  state_uart_tx <= DATA_BITS;
+						  bit_cnt <= bit_cnt - 1;
+						  state_uart_tx <= DATA_BITS_SM;
 							  
 					 end
 						 
 				end
 				
-				DATA_BITS:
+				DATA_BITS_SM:
 				
 				begin
 				
@@ -190,7 +230,7 @@ module uart_tx (
 								shift_reg <= shift_reg >> 1;
 								tx_freq_divider  <= 10'd0;
 								tx <= 1'b1;
-								state_uart_tx <= STOP_BIT;
+								state_uart_tx <= STOP_BIT_SM;
 								
 						  end
 						  
@@ -199,7 +239,7 @@ module uart_tx (
 								bit_cnt   <= bit_cnt - 1;
                         shift_reg <= shift_reg >> 1;
 						      tx_freq_divider  <= 10'd0;
-								state_uart_tx <= DATA_BITS;
+								state_uart_tx <= DATA_BITS_SM;
 								
 						  end
 						  
@@ -207,7 +247,7 @@ module uart_tx (
 					 								
 				end
 			    
-				STOP_BIT:
+				STOP_BIT_SM:
 				
 				begin
 				
@@ -216,68 +256,135 @@ module uart_tx (
 					 		  
 						  tx_freq_divider  <= 10'd0;
 						  
-						  if (count_byte == 7'd71) begin
+						  data_in_crc <= shift_reg_8[7:0];
+						  crc_en_reg <= 1'b1;
+						  
+						  if (count_byte == 7'd81) begin
 						  
 						      //done <= 1'b1;
 						      count_byte <= 7'd0;
 								busy <= 1'b0;
-								byte_to_send <= 8'h04;
+								byte_to_send <= reserved_1_reg;
+								
 					         start_8_ctl <= 1'b1;
-								state_uart_tx <= BYTE_END;
+								state_uart_tx <= RESERVED_1_SM;
 								
 						  end
 						  else begin
+						  
 						      //New start bit
 								count_byte <= count_byte + 7'd1;
 								tx <= 1'b0;
-								state_uart_tx <= START_BIT;
+								shift_reg_8 <= shift_reg_8 >> 8;
+								state_uart_tx <= START_BIT_SM;
 								
 						  end
 						 
 					 end
 				end
 
-				BYTE_END:
+				RESERVED_1_SM:
 			 
 			   begin
 				
 				   tx <= tx_8;
-					start_8_ctl <= 1'b0;
 					if (done_8_ctl == 1'b1) begin
 					
-						 byte_to_send <= chksum_low;
+						 data_in_crc <= reserved_1_reg;
+						 crc_en_reg <= 1'b1;
+						 
+						 byte_to_send <= reserved_2_reg;
 					    start_8_ctl <= 1'b1;
-					    state_uart_tx <= CHKSUM_LOW;
+					
+					    state_uart_tx <= RESERVED_2_SM;
 				       
 					end
 						 
 				end
 				
-			   CHKSUM_LOW:
-			  
+				RESERVED_2_SM:
+			 
 			   begin
 				
 				   tx <= tx_8;
-					start_8_ctl <= 1'b0;
 					if (done_8_ctl == 1'b1) begin
 					
-						 byte_to_send <= chksum_high;
+						 data_in_crc <= reserved_2_reg;
+						 crc_en_reg <= 1'b1;
+						 
+						 byte_to_send <= END_BYTE;
 					    start_8_ctl <= 1'b1;
-					    state_uart_tx <= CHKSUM_HIGH;
+					
+					    state_uart_tx <= BYTE_END_SM;
 				       
 					end
 						 
 				end
 				
-				CHKSUM_HIGH:
+				BYTE_END_SM:
+			 
+			   begin
+				
+				   tx <= tx_8;
+					if (done_8_ctl == 1'b1) begin
+					
+						 data_in_crc <= END_BYTE;
+						 crc_en_reg <= 1'b1;
+					
+					    state_uart_tx <= CRC_READY;
+				       
+					end
+						 
+				end
+				
+				CRC_READY:
+			 
+			   begin
+					
+					 state_uart_tx <= CRC_HIGH_SM;
+				       
+			   end
+				
+			   CRC_HIGH_SM:
 			  
 			   begin
 				
 				   tx <= tx_8;
-					start_8_ctl <= 1'b0;
+					
+					start_8_ctl <= 1'b1;
+					byte_to_send <= crc_result[15:8];
+					crc_low_reg <= crc_result[7:0];    
+					state_uart_tx <= CRC_LOW_SM;
+						 
+				end
+				
+				CRC_LOW_SM:
+			  
+			   begin
+				
+				   tx <= tx_8;
+					
 					if (done_8_ctl == 1'b1) begin
+					    //done <= 1'b1;
+						 byte_to_send <= crc_low_reg;
+						 start_8_ctl <= 1'b1;
+					    state_uart_tx <= AWAIT_TX_END_SM;
+				       
+					end
+						 
+				end
+				
+				AWAIT_TX_END_SM:
+			  
+			   begin
+				
+				   tx <= tx_8;
+					
+					if (done_8_ctl == 1'b1) begin
+					
 					    done <= 1'b1;
-					    state_uart_tx <= START;
+						 crc_restart <= 1'b1;
+					    state_uart_tx <= START_SM;
 				       
 					end
 						 

@@ -1,4 +1,13 @@
 
+State Machine - |sensor_buchas|conf_cpld_module:inst|sm
+Name FINISH CHECK_PASSWORD WAIT_NOT_LOADING_RX WAIT_LOADING_RX LOAD_ASYNC WAIT_MODE 
+WAIT_MODE 0 0 0 0 0 0 
+LOAD_ASYNC 0 0 0 0 1 1 
+WAIT_LOADING_RX 0 0 0 1 0 1 
+WAIT_NOT_LOADING_RX 0 0 1 0 0 1 
+CHECK_PASSWORD 0 1 0 0 0 1 
+FINISH 1 0 0 0 0 1 
+
 State Machine - |sensor_buchas|driver_ADS1118:inst3|driver1118_state
 Name driver1118_state.SHIFT_TEMP driver1118_state.GET_TEMP driver1118_state.SET_TEMP driver1118_state.GET_CHANNEL_3 driver1118_state.SET_CHANNEL_3 driver1118_state.GET_CHANNEL_2 driver1118_state.SET_CHANNEL_2 driver1118_state.GET_CHANNEL_1 driver1118_state.SET_CHANNEL_1 driver1118_state.GET_CHANNEL_0 driver1118_state.SET_CHANNEL_0 driver1118_state.IDLE_4_20 
 driver1118_state.IDLE_4_20 0 0 0 0 0 0 0 0 0 0 0 0 
@@ -32,15 +41,6 @@ current_mosi_state.AWAIT_SCLK_FALL_MOSI 0 0 0 1 0 0 1
 current_mosi_state.AWAIT_SCLK_RISE_MOSI 0 0 1 0 0 0 1 
 current_mosi_state.DELAY_SCCS_MOSI 0 1 0 0 0 0 1 
 current_mosi_state.IDLE_MOSI 1 0 0 0 0 0 1 
-
-State Machine - |sensor_buchas|conf_cpld_module:inst|sm
-Name FINISH CHECK_PASSWORD WAIT_NOT_LOADING_RX WAIT_LOADING_RX LOAD_ASYNC WAIT_MODE 
-WAIT_MODE 0 0 0 0 0 0 
-LOAD_ASYNC 0 0 0 0 1 1 
-WAIT_LOADING_RX 0 0 0 1 0 1 
-WAIT_NOT_LOADING_RX 0 0 1 0 0 1 
-CHECK_PASSWORD 0 1 0 0 0 1 
-FINISH 1 0 0 0 0 1 
 
 State Machine - |sensor_buchas|rw_data_module:inst10|sm
 Name wait_loading_n wr6 wr5 wr4 wr3 wr2 wr1 wait_loading load_sync5 load_sync4 load_sync3 load_sync2 load_sync1 init_buffers4 init_buffers3 init_buffers2 init_buffers1 init rst 
@@ -174,16 +174,21 @@ check_end 0 1 0 0 0 1
 await_end_tx 1 0 0 0 0 1 
 
 State Machine - |sensor_buchas|uart_tx:inst2|state_uart_tx
-Name state_uart_tx.CHKSUM_LOW state_uart_tx.BYTE_END state_uart_tx.STOP_BIT state_uart_tx.DATA_BITS state_uart_tx.START_BIT state_uart_tx.BYTE_TYPE state_uart_tx.BYTE_START state_uart_tx.START state_uart_tx.CHKSUM_HIGH 
-state_uart_tx.START 0 0 0 0 0 0 0 0 0 
-state_uart_tx.BYTE_START 0 0 0 0 0 0 1 1 0 
-state_uart_tx.BYTE_TYPE 0 0 0 0 0 1 0 1 0 
-state_uart_tx.START_BIT 0 0 0 0 1 0 0 1 0 
-state_uart_tx.DATA_BITS 0 0 0 1 0 0 0 1 0 
-state_uart_tx.STOP_BIT 0 0 1 0 0 0 0 1 0 
-state_uart_tx.BYTE_END 0 1 0 0 0 0 0 1 0 
-state_uart_tx.CHKSUM_LOW 1 0 0 0 0 0 0 1 0 
-state_uart_tx.CHKSUM_HIGH 0 0 0 0 0 0 0 1 1 
+Name state_uart_tx.AWAIT_TX_END_SM state_uart_tx.CRC_LOW_SM state_uart_tx.CRC_HIGH_SM state_uart_tx.CRC_READY state_uart_tx.BYTE_END_SM state_uart_tx.RESERVED_2_SM state_uart_tx.RESERVED_1_SM state_uart_tx.STOP_BIT_SM state_uart_tx.DATA_BITS_SM state_uart_tx.START_BIT_SM state_uart_tx.BYTE_LENGTH_SM state_uart_tx.BYTE_TYPE_SM state_uart_tx.BYTE_START_SM state_uart_tx.START_SM 
+state_uart_tx.START_SM 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+state_uart_tx.BYTE_START_SM 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+state_uart_tx.BYTE_TYPE_SM 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+state_uart_tx.BYTE_LENGTH_SM 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+state_uart_tx.START_BIT_SM 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+state_uart_tx.DATA_BITS_SM 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+state_uart_tx.STOP_BIT_SM 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+state_uart_tx.RESERVED_1_SM 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+state_uart_tx.RESERVED_2_SM 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+state_uart_tx.BYTE_END_SM 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+state_uart_tx.CRC_READY 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+state_uart_tx.CRC_HIGH_SM 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+state_uart_tx.CRC_LOW_SM 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+state_uart_tx.AWAIT_TX_END_SM 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|uart_tx:inst2|uart_tx_8:u_uart_tx_8|state_uart_tx
 Name state_uart_tx.STOP_BIT state_uart_tx.DATA_BITS state_uart_tx.START_BIT state_uart_tx.START state_uart_tx.IDLE 

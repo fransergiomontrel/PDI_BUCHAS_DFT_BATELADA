@@ -33,7 +33,6 @@ module slaver_states_main (
     (* preserve, noprune *) reg reset_uart_rx;
     (* preserve *) reg txd_reg;
 
-
     (* preserve *) reg requested_data;
     assign txd_to_gpio46 = txd_reg;
     reg acquire_again;
@@ -315,7 +314,7 @@ module slaver_states_main (
 				
 				data_in_crc <= 8'h00;
 	         crc_en_reg <= 1'b0;
-				crc_restart  <= 1'b0;
+				crc_restart  <= 1'b1;
 				
 				payload_reg[0] <= 8'h00;
 				payload_reg[1] <= 8'h00;
@@ -376,6 +375,7 @@ module slaver_states_main (
                     start_8_ctl <= 1'b0;
 						  //Disable 4-20 ma + temp request, that is, it will started only once after request is done
                     acquire_again <= 1'b0;
+						  
                     if (ed_rx_done == 1'b1) begin
 						      
 								select0_1 <= 1'b0;
