@@ -35,11 +35,10 @@ module spi_4_20 (
 	 // Definição dos estados (Verilog clássico)
 	 localparam AWAIT_RESET_MISO = 3'b000;
 	 localparam AWAIT_MISO_DATA = 3'b001;
-	 localparam MISO_DATA_READY = 3'b010;
-	 localparam DELAY_CSSC_MIS0 = 3'b011;
-	 localparam AWAIT_SCLK_FALL_MISO = 3'b100;
-	 localparam AWAIT_SCLK_RISE_MISO = 3'b101;
-	 localparam DELAY_SCCS_MIS0 = 3'b110;
+	 localparam DELAY_CSSC_MIS0 = 3'b010;
+	 localparam AWAIT_SCLK_FALL_MISO = 3'b011;
+	 localparam AWAIT_SCLK_RISE_MISO = 3'b100;
+	 localparam DELAY_SCCS_MIS0 = 3'b101;
 	 
 	 reg [2:0] current_miso_state;
 	 
@@ -197,13 +196,13 @@ module spi_4_20 (
 			       		       
 		      end
 				
-	 
-	  endcase 
+	 endcase 
 	 
 	 case (current_miso_state)
 	 
 	 AWAIT_RESET_MISO:
 	 begin
+	 
 	     done_miso <= 1'b0;
 	     if (miso_enable == 1'b1) begin
 	         delay  <= delay + 5'd1;
@@ -215,10 +214,10 @@ module spi_4_20 (
 			        current_miso_state <= AWAIT_MISO_DATA;
 						  
 		      end
+				
 		  end
 		  
 	 end
-	 
 	 
 	 AWAIT_MISO_DATA:
 	 begin
@@ -227,15 +226,8 @@ module spi_4_20 (
 	         current_miso_state <= AWAIT_MISO_DATA;
 	     end
 	     else begin
-	         current_miso_state <= MISO_DATA_READY;
+	         current_miso_state <= DELAY_CSSC_MIS0;
 	     end
-	 
-	 end
-	 
-	 MISO_DATA_READY:
-	 begin
-	 
-		  current_miso_state <= DELAY_CSSC_MIS0;
 	 
 	 end
 	 
@@ -258,18 +250,17 @@ module spi_4_20 (
 	 AWAIT_SCLK_FALL_MISO:
 			  
 	 begin
-			      
+		       
 		 div_sclk  <= div_sclk + 6'd1;
-		 //await 1 us to low sclk based on fsclk = 500 kHz
+		 //await 0,5 us to low sclk based on fsclk = 1 MHz
 		 if (div_sclk == 6'd49) begin
+		 
 			  div_sclk <= 6'd0;
 			  sclk <= 1'b0;
-			  
 			  
 			  if (bit_cnt == 5'd0) begin
 			  
 				   current_miso_state <= DELAY_SCCS_MIS0;
-					bit_cnt <= 5'd15;
 							  
 			  end
 			  else begin
@@ -289,8 +280,8 @@ module spi_4_20 (
 		 begin
 			      
 			  div_sclk  <= div_sclk + 6'd1;
-			  data_reg[bit_cnt] <= miso;
-			  //await 1 us to low sclk based on fsclk = 500 kHz
+			  data_reg[bit_cnt] <= miso_reg;
+			  //await 0,5 us to low sclk based on fsclk = 1 MHz
 			  if (div_sclk == 6'd49) begin
 			      bit_cnt <= bit_cnt - 1;
 					sclk <= 1'b1;
@@ -308,15 +299,15 @@ module spi_4_20 (
 	  begin
 			      
 			delay  <= delay + 5'd1;
-				  
+			data_reg[bit_cnt] <= miso_reg;	  
 			//200 ns to satisfy delay between SCLK falling and nCS rising 
 			if (delay == 5'd20) begin
-			
+			    
+				 bit_cnt <= 5'd15;
 				 delay <= 5'd0;
 				 ncs <= 1'b1;
 				 done_miso <= 1'b1;
-				 current_miso_state <= IDLE_MISO;
-				 miso_enable <= 1'b0;
+				 current_miso_state <= AWAIT_RESET_MISO;
 						  
 			end
 				  

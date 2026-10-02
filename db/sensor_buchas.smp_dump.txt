@@ -15,14 +15,13 @@ driver1118_state.GET_TEMP 0 1 0 0 0 0 0 0 0 0 0 1
 driver1118_state.SHIFT_TEMP 1 0 0 0 0 0 0 0 0 0 0 1 
 
 State Machine - |sensor_buchas|driver_ADS1118:inst3|spi_4_20:u_spi_4_20|current_miso_state
-Name current_miso_state.DELAY_SCCS_MIS0 current_miso_state.AWAIT_SCLK_RISE_MISO current_miso_state.AWAIT_SCLK_FALL_MISO current_miso_state.DELAY_CSSC_MIS0 current_miso_state.MISO_DATA_READY current_miso_state.AWAIT_MISO_DATA current_miso_state.IDLE_MISO 
-current_miso_state.IDLE_MISO 0 0 0 0 0 0 0 
-current_miso_state.AWAIT_MISO_DATA 0 0 0 0 0 1 1 
-current_miso_state.MISO_DATA_READY 0 0 0 0 1 0 1 
-current_miso_state.DELAY_CSSC_MIS0 0 0 0 1 0 0 1 
-current_miso_state.AWAIT_SCLK_FALL_MISO 0 0 1 0 0 0 1 
-current_miso_state.AWAIT_SCLK_RISE_MISO 0 1 0 0 0 0 1 
-current_miso_state.DELAY_SCCS_MIS0 1 0 0 0 0 0 1 
+Name current_miso_state.DELAY_SCCS_MIS0 current_miso_state.AWAIT_SCLK_RISE_MISO current_miso_state.AWAIT_SCLK_FALL_MISO current_miso_state.DELAY_CSSC_MIS0 current_miso_state.AWAIT_MISO_DATA current_miso_state.AWAIT_RESET_MISO 
+current_miso_state.AWAIT_RESET_MISO 0 0 0 0 0 0 
+current_miso_state.AWAIT_MISO_DATA 0 0 0 0 1 1 
+current_miso_state.DELAY_CSSC_MIS0 0 0 0 1 0 1 
+current_miso_state.AWAIT_SCLK_FALL_MISO 0 0 1 0 0 1 
+current_miso_state.AWAIT_SCLK_RISE_MISO 0 1 0 0 0 1 
+current_miso_state.DELAY_SCCS_MIS0 1 0 0 0 0 1 
 
 State Machine - |sensor_buchas|driver_ADS1118:inst3|spi_4_20:u_spi_4_20|current_mosi_state
 Name current_mosi_state.IDLE_MOSI current_mosi_state.DELAY_SCCS_MOSI current_mosi_state.AWAIT_SCLK_RISE_MOSI current_mosi_state.AWAIT_SCLK_FALL_MOSI current_mosi_state.DELAY_CSSC_MOSI current_mosi_state.CHIP_SELECTED current_mosi_state.NO_MOSI_DATA 

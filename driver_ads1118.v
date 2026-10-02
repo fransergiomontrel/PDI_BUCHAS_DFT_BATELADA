@@ -61,12 +61,15 @@ module driver_ADS1118 (
 	 localparam GET_TEMP = 4'b1010;
 	 localparam SHIFT_TEMP = 4'b1011;
 	 
+	 reg [3:0] driver1118_state;
+	 
 	 //COMMANDS TO SET
-	 localparam SINGLE_AN0_6_144 = 16'h208A;    
-	 localparam SINGLE_AN1_6_144 = 16'h508A;
-	 localparam SINGLE_AN2_6_144 = 16'h608A;
-	 localparam SINGLE_AN3_6_144 = 16'h708A;
-	 localparam TEMP_MODE = 16'h009A;
+	 localparam SINGLE_AN0_4_096 = 16'h428A;    
+	 localparam SINGLE_AN1_4_096 = 16'h528A;
+	 localparam SINGLE_AN2_4_096 = 16'h628A;
+	 localparam SINGLE_AN3_4_096 = 16'h728A;
+	 localparam TEMP_MODE = 16'h729A;
+	 
 	 
 	always @(posedge clk) begin
 							 							 	    
@@ -92,23 +95,23 @@ module driver_ADS1118 (
 			  
 			          begin
 							 
-							 if (!loaded || acquire_again) begin							 
-								  loaded <= 1'b1;
-								  driver1118_state <= SET_CHANNEL_0;								 
-							 end
+							  if (!loaded || acquire_again) begin							 
+								   loaded <= 1'b1;
+								   driver1118_state <= SET_CHANNEL_0;								 
+							  end
 							 
-							 else begin							 
-								  driver1118_state <= IDLE_4_20;								 
-							 end
-					 			              
-				       end
+							  else begin							 
+								   driver1118_state <= IDLE_4_20;								 
+							  end
+					 		 	              
+				        end
 				
 			
 					SET_CHANNEL_0:
 					  
 						 begin
 							 
-							  driver_config_reg <= SINGLE_AN0_6_144;
+							  driver_config_reg <= SINGLE_AN0_4_096;
 							  if (driver_done_miso == 1'b1) begin
 							      driver1118_state <= GET_CHANNEL_0;    
 							  end
@@ -132,7 +135,7 @@ module driver_ADS1118 (
 						  
 						 begin
 								
-							  driver_config_reg <= SINGLE_AN1_6_144;
+							  driver_config_reg <= SINGLE_AN1_4_096;
 							  if (driver_done_miso == 1'b1) begin
 							      driver1118_state <= GET_CHANNEL_1;    
 							  end
@@ -155,7 +158,7 @@ module driver_ADS1118 (
 						  
 						 begin
 								
-							  driver_config_reg <= SINGLE_AN2_6_144;
+							  driver_config_reg <= SINGLE_AN2_4_096;
 							  if (driver_done_miso == 1'b1) begin
 							      driver1118_state <= GET_CHANNEL_2;    
 							  end
@@ -180,7 +183,7 @@ module driver_ADS1118 (
 						  
 						 begin
 								
-					        driver_config_reg <= SINGLE_AN3_6_144;
+					        driver_config_reg <= SINGLE_AN3_4_096;
 							  if (driver_done_miso == 1'b1) begin
 							      driver1118_state <= GET_CHANNEL_3;    
 							  end
@@ -205,7 +208,7 @@ module driver_ADS1118 (
 							  
 						  begin
 									
-								driver_config_reg <= 16'h049A;
+							  driver_config_reg <= TEMP_MODE;
 							  if (driver_done_miso == 1'b1) begin
 							      driver1118_state <= GET_TEMP;    
 							  end
