@@ -8,6 +8,7 @@ module set_get_ads8691 (
 	 input wire miso_4,
 	 input wire miso_5,
 	 input wire miso_6,
+	 input wire [7:0] channel_mask,
     output reg  sclk,
     output reg  ncs,
     output reg  mosi,      // saída serial do mestre
@@ -24,6 +25,7 @@ module set_get_ads8691 (
 	 reg [15:0] miso_buffer_4;
 	 reg [15:0] miso_buffer_5;
 	 reg [15:0] miso_buffer_6;
+	 reg [7:0]  channel_mask_reg;
 	 
 	 reg set_get_done_reg;
 	 
@@ -53,20 +55,22 @@ module set_get_ads8691 (
             div_sclk <= 8'd0;
             delay    <= 2'd0;
             bit_cnt  <= 6'd31;
-				miso_buffer_1 <= 16'h0000;
-				miso_buffer_2 <= 16'h0000;
-				miso_buffer_3 <= 16'h0000;
-				miso_buffer_4 <= 16'h0000;
-				miso_buffer_5 <= 16'h0000;
-				miso_buffer_6 <= 16'h0000;
+				miso_buffer_1 <= 16'h00FF;
+				miso_buffer_2 <= 16'h00FF;
+				miso_buffer_3 <= 16'h00FF;
+				miso_buffer_4 <= 16'h00FF;
+				miso_buffer_5 <= 16'h00FF;
+				miso_buffer_6 <= 16'h00FF;
 				
             set_get_done_reg <= 1'b0;
-
+				channel_mask_reg <= 8'hFF;
+				
             current_spi_state <= LOAD_WORD;
 				
         end
         else begin
 		  
+				channel_mask_reg <= channel_mask;
 				
             case (current_spi_state)
 
@@ -133,16 +137,17 @@ module set_get_ads8691 (
 						      //A partir do 16°clock apos cada sclk rising 
 						      if ((bit_cnt < 6'd16) && (cmd_word[31:27] == READ_COMMAND)) begin
 								
-									 miso_buffer_1[bit_cnt] <= miso_1;
-									 miso_buffer_2[bit_cnt] <= miso_2;
-									 miso_buffer_3[bit_cnt] <= miso_3;
-									 miso_buffer_4[bit_cnt] <= miso_4;
-									 miso_buffer_5[bit_cnt] <= miso_5;
-									 miso_buffer_6[bit_cnt] <= miso_6;
+									 miso_buffer_1[bit_cnt] <= miso_1 | ~(channel_mask_reg[0]);
+									 miso_buffer_2[bit_cnt] <= miso_2 | ~(channel_mask_reg[1]);
+									 miso_buffer_3[bit_cnt] <= miso_3 | ~(channel_mask_reg[2]);
+									 miso_buffer_4[bit_cnt] <= miso_4 | ~(channel_mask_reg[3]);
+									 miso_buffer_5[bit_cnt] <= miso_5 | ~(channel_mask_reg[4]);
+									 miso_buffer_6[bit_cnt] <= miso_6 | ~(channel_mask_reg[5]);
 									 
 							   end
 								
                         current_spi_state <= AWAIT_SCLK_FALL_MOSI;
+								
                     end
                 end
 
