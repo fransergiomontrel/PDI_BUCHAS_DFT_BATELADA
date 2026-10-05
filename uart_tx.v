@@ -4,7 +4,6 @@ module uart_tx (
     input  wire        start,     // inicia transmissão
     input  wire [655:0] data_in,   // dado paralelo
     output reg         tx,        // saída serial
-    output reg         busy,      // está transmitindo
     output reg         done       // pulso de fim	 
 
 );    
@@ -15,7 +14,6 @@ module uart_tx (
 	 localparam FRAME_SIZE = 8'd84;
 	 localparam END_BYTE = 8'h04;//End of frame byte
 	  
-	 
     // Checksum only: 72 bytes -> 18 groups -> 6 -> 2 -> total.
     // Four clock cycles of latency; data_in stays stable until transmission done.
     // The checksum is consumed only after the header and all payload bytes.
@@ -27,7 +25,6 @@ module uart_tx (
 	 wire [15:0] crc_result;
 	 wire crc_global_reset;
 	 assign crc_global_reset = rst || crc_restart;
-	 
 	 
 	 reg [7:0] crc_low_reg;
 	 //Instance of crc16-CCITT False to calculate crc 16 bits data
@@ -92,7 +89,6 @@ module uart_tx (
 				shift_reg_8 <= 656'd0;
             bit_cnt   <= 4'd0;
             tx        <= 1'b1;
-            busy      <= 1'b0;
             done      <= 1'b0;
 				count_byte <= 7'd0;
 				tx_freq_divider <= 10'd0;
@@ -123,9 +119,8 @@ module uart_tx (
 			   begin
 						 
 				    if (start) begin                					 
-					 
+					     
                     bit_cnt   <= 4'd8;
-                    busy      <= 1'b1;
 					     
 					     tx_freq_divider  <= 10'd0;
 				        shift_reg <= data_in;
@@ -204,7 +199,7 @@ module uart_tx (
 				    //Bit de start durante 868*(Tck)
 				    tx_freq_divider  <= tx_freq_divider + 10'd1;
 					 if (tx_freq_divider == 10'd868) begin
-						 
+						  
 						  tx_freq_divider  <= 10'd0;
 						  tx <= shift_reg[0];
 						  bit_cnt <= bit_cnt - 1;
@@ -228,7 +223,7 @@ module uart_tx (
 								
 						  		bit_cnt   <= 4'd8;
 								shift_reg <= shift_reg >> 1;
-								tx_freq_divider  <= 10'd0;
+								tx_freq_divider <= 10'd0;
 								tx <= 1'b1;
 								state_uart_tx <= STOP_BIT_SM;
 								
@@ -261,9 +256,7 @@ module uart_tx (
 						  
 						  if (count_byte == 7'd81) begin
 						  
-						      //done <= 1'b1;
 						      count_byte <= 7'd0;
-								busy <= 1'b0;
 								byte_to_send <= reserved_1_reg;
 								
 					         start_8_ctl <= 1'b1;

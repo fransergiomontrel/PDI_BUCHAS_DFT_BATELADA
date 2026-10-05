@@ -88,7 +88,6 @@ module slaver_states_main (
 	 
 	 //Reg of 8 bits to store crc low
     reg [7:0] crc_low_reg;
-	 
 	 //Reg of 8 bits to store crc high
     reg [7:0] crc_high_reg;
 	 
@@ -106,6 +105,7 @@ module slaver_states_main (
 	 wire [15:0] crc_result;
 	 wire crc_global_reset;
 	 assign crc_global_reset = rst | crc_restart;
+	 
 	 //Instance of crc16-CCITT False to calculate crc 16 bits data
     crc16 u_crc16(
 	 
@@ -236,8 +236,7 @@ module slaver_states_main (
     //Used payload sizes
 	 localparam GET_ID_SIZE = 8'd08;
 	 localparam GET_CONFIG_SIZE = 8'd06;
-	 
-		  
+	   
     //Bytes of protocol
     localparam START_BYTE = 8'h01;//Start of frame byte
 	 localparam END_BYTE = 8'h04;//End of frame byte
@@ -250,14 +249,15 @@ module slaver_states_main (
     localparam PREPARE_60HZ_BYTE = 8'h32;//Prepare sync for 60 Hz signal byte
     localparam MEASURE_BYTE = 8'h33;//Measure byte
     localparam GET_RESULTS_BYTE = 8'h40;//Get results byte
-    localparam BYPASS_BYTE = 8'h50;//Bypass byte
+    localparam BYPASS_ON_BYTE = 8'h60;//Bypass on byte
+	 localparam BYPASS_OFF_BYTE = 8'h61;//Bypass on byte
     localparam ERROR_BYTE = 8'h7F;//Error byte	
 	 localparam COMMAND_TO_READ = 32'hC8140000;//Command to read adc configuration of converters 
 
     //States definition for states machine of slaver IED
     localparam CHECK_SOH = 5'b00000;//UART await for SOH byte
-    localparam CHECK_LENGTH = 5'b00001;//UART await for length of payload
-    localparam CHECK_TYPE = 5'b00010;//UART await for TYPE byte
+    localparam CHECK_TYPE = 5'b00001;//UART await for TYPE byte
+	 localparam CHECK_LENGTH = 5'b00010;//UART await for length of payload
 	 localparam READ_PAYLOAD = 5'b00011;//UART store payload byte by byte
 	 localparam CHECK_END = 5'b00100;//UART await byte of end
     localparam READ_CRC_LOW = 5'b00101;//UART await sent CRC LOW BYTE
@@ -275,7 +275,7 @@ module slaver_states_main (
     localparam DIS_W_3 = 5'b10001;//Writing write key with writing enable bit desactivated
     localparam CALC_PHASORS = 5'b10010;//Requesting SRAM data of 86580 bytes
     localparam DELAY_SAMPLES = 5'b10011;//Requesting SRAM data of 86580 bytes
-    localparam AWAIT_CORRENTE_TX = 5'b10100; //Request 58 bytes which is all data available (phasors, temp and 4-20mA)
+    localparam AWAIT_CORRENTE_TX = 5'b10100; //Request 84 bytes which is all data available (phasors bytes, temp and 4-20mA bytes and reserved ones)
     localparam AWAIT_HIGH = 5'b10101; 
     localparam AWAIT_LOW = 5'b10110; 
     (* preserve *) reg [4:0] current_state;
@@ -326,6 +326,7 @@ module slaver_states_main (
 				payload_reg[7] <= 8'h00;
 				crc_low_reg <= 8'h00;
 				crc_high_reg <= 8'h00;
+				
 				start_8_ctl <= 1'b0;
             byte_to_send <= 8'h00;
 				set_get_adc_reset <= 1'b1;
@@ -334,7 +335,14 @@ module slaver_states_main (
         end
 
         else begin
-
+            
+				//Free crc16 module from reset 
+				crc_restart  <= 1'b0;
+			   //Uart tx not started, that is, it will started on demand
+            start_8_ctl <= 1'b0;
+				//Disable 4-20 ma + temp request, that is, it will started only once after request is done
+            acquire_again <= 1'b0;
+				
             //state machine
             case (current_state)			  
 
@@ -367,14 +375,9 @@ module slaver_states_main (
                 CHECK_SOH:
 
                 begin
-					     //Restart crc for new frame
-						  crc_restart  <= 1'b0;
+					 
 						  //Free uart rx for new frame
-                    reset_uart_rx <= 1'b0;
-						  //Uart tx not started, that is, it will started on demand
-                    start_8_ctl <= 1'b0;
-						  //Disable 4-20 ma + temp request, that is, it will started only once after request is done
-                    acquire_again <= 1'b0;
+						  reset_uart_rx <= 1'b0;
 						  
                     if (ed_rx_done == 1'b1) begin
 						      
@@ -385,7 +388,7 @@ module slaver_states_main (
 								
 									 data_in_crc <= START_BYTE;
 	                         crc_en_reg <= 1'b1;
-                            current_state <= CHECK_LENGTH;
+                            current_state <= CHECK_TYPE;
 									 
                         end
 
@@ -402,33 +405,11 @@ module slaver_states_main (
                     end						
 
                 end
-
-                CHECK_LENGTH:
-
-                begin
-
-
-                    if (ed_rx_done == 1'b1) begin
-						  
-								crc_en_reg <= 1'b1;
-								data_in_crc <= rx_uart_out;
-								
-                        lenth_reg <= rx_uart_out;
-                        current_state <= CHECK_TYPE;
-
-                        end
-                    else begin
-						  
-							   crc_en_reg <= 1'b0;
-                        current_state <= CHECK_LENGTH;
-
-                    end						
-
-                end 	
-
-                CHECK_TYPE:
+					 
+					 CHECK_TYPE:
 
                 begin
+					 
 
                     if (ed_rx_done == 1'b1) begin
 						  
@@ -439,7 +420,8 @@ module slaver_states_main (
 								    data_in_crc <= ECHO_BYTE;
                             
                             type_reg <= ECHO_BYTE;
-                            current_state <= READ_PAYLOAD;
+									 
+                            current_state <= CHECK_LENGTH;
 
                         end
 								
@@ -450,7 +432,8 @@ module slaver_states_main (
 								    data_in_crc <= GET_ID_BYTE;
                             
                             type_reg <= GET_ID_BYTE;
-                            current_state <= READ_PAYLOAD;
+									 
+                            current_state <= CHECK_LENGTH;
 
                         end
 								
@@ -461,7 +444,8 @@ module slaver_states_main (
 								    data_in_crc <= GET_CONFIG_BYTE;
                             
                             type_reg <= GET_CONFIG_BYTE;
-                            current_state <= READ_PAYLOAD;
+									 
+                            current_state <= CHECK_LENGTH;
 
                         end
 								
@@ -472,7 +456,8 @@ module slaver_states_main (
 								    data_in_crc <= SET_CONFIG_BYTE;
                             
                             type_reg <= SET_CONFIG_BYTE;
-                            current_state <= READ_PAYLOAD;
+									 
+                            current_state <= CHECK_LENGTH;
 
                         end
 								
@@ -483,7 +468,8 @@ module slaver_states_main (
 								    data_in_crc <= PROPAGATION_BYTE;
                             
                             type_reg <= PROPAGATION_BYTE;
-                            current_state <= READ_PAYLOAD;
+									 
+                            current_state <= CHECK_LENGTH;
 
                         end
 
@@ -494,7 +480,8 @@ module slaver_states_main (
 								    data_in_crc <= PREPARE_50HZ_BYTE;
 									 
 									 type_reg <= PREPARE_50HZ_BYTE;
-									 current_state <= READ_PAYLOAD;
+									 
+									 current_state <= CHECK_LENGTH;
 
                         end
 								
@@ -505,19 +492,23 @@ module slaver_states_main (
 								    data_in_crc <= PREPARE_60HZ_BYTE;
 									 
 									 type_reg <= PREPARE_60HZ_BYTE;
-									 current_state <= READ_PAYLOAD;
+									 
+									 current_state <= CHECK_LENGTH;
 									 
                         end
-							    //FRAME OF MEASURE
+								
+							   //FRAME OF MEASURE
                         else if (rx_uart_out == MEASURE_BYTE)  begin
                             
 									 crc_en_reg <= 1'b1;
 								    data_in_crc <= MEASURE_BYTE;
 									 
 									 type_reg <= MEASURE_BYTE;
-									 current_state <= READ_PAYLOAD;
+									 
+									 current_state <= CHECK_LENGTH;
 								
                         end
+								
                         //FRAME OF DATA_REQUEST
                         else if (rx_uart_out == GET_RESULTS_BYTE)  begin
                             
@@ -525,18 +516,32 @@ module slaver_states_main (
 								    data_in_crc <= GET_RESULTS_BYTE;
 									 
 									 type_reg <= GET_RESULTS_BYTE;
-									 current_state <= READ_PAYLOAD;
+									 
+									 current_state <= CHECK_LENGTH;
 
                         end
 								
-								//FRAME OF BYPASS
-                        else if (rx_uart_out == BYPASS_BYTE)  begin
+								//FRAME OF BYPASS ON
+                        else if (rx_uart_out == BYPASS_ON_BYTE)  begin
                             
 									 crc_en_reg <= 1'b1;
-								    data_in_crc <= BYPASS_BYTE;
+								    data_in_crc <= BYPASS_ON_BYTE;
 									 
-									 type_reg <= BYPASS_BYTE;
-									 current_state <= READ_PAYLOAD;
+									 type_reg <= BYPASS_ON_BYTE;
+									 
+									 current_state <= CHECK_LENGTH;
+
+                        end
+								
+								//FRAME OF BYPASS OFF
+                        else if (rx_uart_out == BYPASS_OFF_BYTE)  begin
+                            
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= BYPASS_OFF_BYTE;
+									 
+									 type_reg <= BYPASS_OFF_BYTE;
+			 
+									 current_state <= CHECK_LENGTH;
 
                         end
 								
@@ -547,7 +552,8 @@ module slaver_states_main (
 								    data_in_crc <= ERROR_BYTE;
 									 
 									 type_reg <= ERROR_BYTE;
-									 current_state <= READ_PAYLOAD;
+									 
+									 current_state <= CHECK_LENGTH;
 
                         end
 								
@@ -561,12 +567,36 @@ module slaver_states_main (
 
                     else begin
 						  
-						      crc_en_reg <= 1'b0;
                         current_state <= CHECK_TYPE;
 								
                     end						
 
                 end
+
+                CHECK_LENGTH:
+
+                begin
+
+
+                    if (ed_rx_done == 1'b1) begin
+						  
+								crc_en_reg <= 1'b1;
+								data_in_crc <= rx_uart_out;
+								
+                        lenth_reg <= rx_uart_out;
+                        current_state <= READ_PAYLOAD;
+
+                        end
+                    else begin
+						  
+							   
+                        current_state <= CHECK_LENGTH;
+
+                    end						
+
+                end 	
+
+                
 					 
 					 READ_PAYLOAD:
 
@@ -574,7 +604,6 @@ module slaver_states_main (
 					     
 						  if (payload_bytes_counter == lenth_reg) begin
 						  
-						      crc_en_reg <= 1'b0;
 								payload_bytes_counter <= 4'd0;
 						      current_state <= CHECK_END;
 						  
@@ -590,11 +619,6 @@ module slaver_states_main (
 
                     end
 						  
-						  else begin
-						  
-						      crc_en_reg <= 1'b0;
-								
-						  end
 						  
 					 end
 				
@@ -608,7 +632,7 @@ module slaver_states_main (
 									 
 									 crc_en_reg <= 1'b1;
 								    data_in_crc <= END_BYTE;
-                            current_state <= READ_CRC_LOW;
+                            current_state <= READ_CRC_HIGH;
 
                         end					
 
@@ -616,32 +640,32 @@ module slaver_states_main (
 						  
 					 end
 		
-					READ_CRC_LOW:
+					READ_CRC_HIGH:
 
                begin
-					
-                   crc_en_reg <= 1'b0;
+						 
                    if (ed_rx_done == 1'b1) begin
 						  
-							  crc_low_reg <= rx_uart_out;
-                       current_state <= READ_CRC_HIGH;
+							  crc_high_reg <= rx_uart_out;
+                       current_state <= READ_CRC_LOW;
  				
                    end
 						  
 					end
 		
-					READ_CRC_HIGH:
+					READ_CRC_LOW:
 
                begin
-
+					
                    if (ed_rx_done == 1'b1) begin
 						  
-							  crc_high_reg <= rx_uart_out;
-                       current_state <= CHECK_INTEGRITY;
+							  crc_low_reg <= rx_uart_out; 
+							  current_state <= CHECK_INTEGRITY;
  				
                    end
 						  
 					end
+		
 		
 				 CHECK_INTEGRITY:
 
@@ -682,28 +706,23 @@ module slaver_states_main (
 									 bytes_counter <= bytes_counter + 1;
 									 
 								end
-								else begin
 								
-								    start_8_ctl <= 1'b0;
-									 
-								end
-								
-								if (done_8_ctl == 1'b1) begin
+								else if (done_8_ctl == 1'b1) begin
 								
 									 if ((byte_to_send == START_BYTE) && (bytes_counter == 4'd1)) begin
 									
-									     //Send byte of length through uart
+										  //Send type byte through uart
 									     start_8_ctl <= 1'b1;
-									     byte_to_send <= lenth_reg;
+									     byte_to_send <= type_reg;
 										  bytes_counter <= bytes_counter + 1;
 									 
 									 end
 								
-								    else if ((byte_to_send == lenth_reg) && (bytes_counter == 4'd2)) begin
-									 
-									     //Send type byte through uart
+								    else if ((byte_to_send == type_reg) && (bytes_counter == 4'd2)) begin
+									 	  
+										  //Send byte of length through uart
 									     start_8_ctl <= 1'b1;
-									     byte_to_send <= type_reg;
+									     byte_to_send <= lenth_reg;
 										  bytes_counter <= 4'd0;
 									 
 									 end
@@ -726,20 +745,20 @@ module slaver_states_main (
 										  
 									 end
 									 
-									 else if (payload_bytes_counter == (lenth_reg + 8'h01)) begin
+									 else if (payload_bytes_counter == (lenth_reg + 8'd01)) begin
 									 
-										  //Send byte low of crc
+										  //Send byte high of crc
 									     start_8_ctl <= 1'b1;
-									     byte_to_send <= crc_low_reg;
+									     byte_to_send <= crc_high_reg;
 										  payload_bytes_counter <= payload_bytes_counter + 1;
 										  
 									 end
 									 
-									 else if (payload_bytes_counter == (lenth_reg + 8'h02)) begin
+									 else if (payload_bytes_counter == (lenth_reg + 8'd02)) begin
 									 
 									     //Send byte high of crc
 									     start_8_ctl <= 1'b1;
-									     byte_to_send <= crc_high_reg;
+									     byte_to_send <= crc_low_reg;
 										  payload_bytes_counter <= 4'd0;
 										 
 										  current_state <= CHECK_SOH;
@@ -761,44 +780,36 @@ module slaver_states_main (
                             start_8_ctl <= 1'b1;
 									 byte_to_send <= START_BYTE;
 									 
-									 
-									 //Free crc16 module from reset 
-									 crc_restart  <= 1'b0;
 									 crc_en_reg <= 1'b1;
 								    data_in_crc <= START_BYTE;
 									 
 									 bytes_counter <= bytes_counter + 1;
 									 
 								end
-								else begin
 								
-								    crc_en_reg <= 1'b0;
-								    start_8_ctl <= 1'b0;
-									 
-								end
-								
-								if (done_8_ctl == 1'b1) begin
+								else if (done_8_ctl == 1'b1) begin
 								
 									 if ((byte_to_send == START_BYTE) && (bytes_counter == 4'd1)) begin
 									
 									     //Send byte of length through uart
 									     start_8_ctl <= 1'b1;
-									     byte_to_send <= GET_ID_SIZE;
+									     byte_to_send <= GET_ID_BYTE;
 										  
 										  crc_en_reg <= 1'b1;
-								        data_in_crc <= GET_ID_SIZE;
+								        data_in_crc <= GET_ID_BYTE;
 										  
 										  bytes_counter <= bytes_counter + 1;
 									 
 									 end
 								
-								    else if ((byte_to_send == GET_ID_SIZE) && (bytes_counter == 4'd2)) begin
+								    else if ((byte_to_send == GET_ID_BYTE) && (bytes_counter == 4'd2)) begin
 									 
 									     //Send type byte through uart
 									     start_8_ctl <= 1'b1;
-									     byte_to_send <= GET_ID_BYTE;
+									     byte_to_send <= GET_ID_SIZE;
+										  
 										  crc_en_reg <= 1'b1;
-								        data_in_crc <= GET_ID_BYTE;
+								        data_in_crc <= GET_ID_SIZE;
 										  
 										  bytes_counter <= 4'd0;
 										  if(id_valid) begin
@@ -814,7 +825,7 @@ module slaver_states_main (
 									 
 									 end
 								
-								    else if (payload_bytes_counter < 8'd08) begin
+								    else if (payload_bytes_counter < GET_ID_SIZE) begin
 									 
 										  //Send bytes of payload through uart
 									     case (payload_bytes_counter)
@@ -909,10 +920,10 @@ module slaver_states_main (
 									 
 									 else if (payload_bytes_counter == 8'd09) begin
 									 
-										  //Send byte low of crc
+										  //Send byte high of crc
 									     start_8_ctl <= 1'b1;
-									     byte_to_send <= crc_result[7:0];
-										  crc_high_reg <= crc_result[15:8];
+									     byte_to_send <= crc_result[15:8];
+										  crc_low_reg <= crc_result[7:0];
 										  
 										  payload_bytes_counter <= payload_bytes_counter + 1;
 										  
@@ -921,9 +932,9 @@ module slaver_states_main (
 									 else if (payload_bytes_counter == 8'd10) begin
 									 
 										  crc_restart  <= 1'b1;
-										  //Send byte high of crc
+										  //Send byte low of crc
 									     start_8_ctl <= 1'b1;
-									     byte_to_send <= crc_high_reg;
+									     byte_to_send <= crc_low_reg;
 										  payload_bytes_counter <= 4'd0;
 										  
 										  current_state <= CHECK_SOH;
@@ -945,44 +956,36 @@ module slaver_states_main (
                             start_8_ctl <= 1'b1;
 									 byte_to_send <= START_BYTE;
 									 
-									 
-									 //Free crc16 module from reset 
-									 crc_restart  <= 1'b0;
 									 crc_en_reg <= 1'b1;
 								    data_in_crc <= START_BYTE;
 									 
 									 bytes_counter <= bytes_counter + 1;
 									 
-								end
-								else begin
+								end						
 								
-								    crc_en_reg <= 1'b0;
-								    start_8_ctl <= 1'b0;
-									 
-								end
-								
-								if (done_8_ctl == 1'b1) begin
+								else if (done_8_ctl == 1'b1) begin
 								
 									 if ((byte_to_send == START_BYTE) && (bytes_counter == 4'd1)) begin
 									
 									     //Send byte of length through uart
 									     start_8_ctl <= 1'b1;
-									     byte_to_send <= GET_CONFIG_SIZE;
+									     byte_to_send <= GET_CONFIG_BYTE;
 										  
 										  crc_en_reg <= 1'b1;
-								        data_in_crc <= GET_CONFIG_SIZE;
+								        data_in_crc <= GET_CONFIG_BYTE;
 										  
 										  bytes_counter <= bytes_counter + 1;
 									 
 									 end
 								
-								    else if ((byte_to_send == GET_CONFIG_SIZE) && (bytes_counter == 4'd2)) begin
+								    else if ((byte_to_send == GET_CONFIG_BYTE) && (bytes_counter == 4'd2)) begin
 									 
 									     //Send type byte through uart
 									     start_8_ctl <= 1'b1;
-									     byte_to_send <= GET_CONFIG_BYTE;
+									     byte_to_send <= GET_CONFIG_SIZE;
+										  
 										  crc_en_reg <= 1'b1;
-								        data_in_crc <= GET_CONFIG_BYTE;
+								        data_in_crc <= GET_CONFIG_SIZE;
 										  
 										  adc_word_reg <= COMMAND_TO_READ;
 										  set_get_adc_reset <= 1'b0;
@@ -1094,10 +1097,10 @@ module slaver_states_main (
 									 
 									 else if (payload_bytes_counter == (GET_CONFIG_SIZE + 1)) begin
 									 
-										  //Send byte low of crc
+										  //Send byte high of crc
 									     start_8_ctl <= 1'b1;
-									     byte_to_send <= crc_result[7:0];
-										  crc_high_reg <= crc_result[15:8];
+									     byte_to_send <= crc_result[15:8];
+										  crc_low_reg <= crc_result[7:0];
 										  
 										  payload_bytes_counter <= payload_bytes_counter + 1;
 										  
@@ -1106,9 +1109,9 @@ module slaver_states_main (
 									 else if (payload_bytes_counter == (GET_CONFIG_SIZE + 2)) begin
 									 
 										  crc_restart  <= 1'b1;
-										  //Send byte high of crc
+										  //Send byte low of crc
 									     start_8_ctl <= 1'b1;
-									     byte_to_send <= crc_high_reg;
+									     byte_to_send <= crc_low_reg;
 										  payload_bytes_counter <= 4'd0;
 										  
 										  current_state <= CHECK_SOH;
@@ -1176,11 +1179,18 @@ module slaver_states_main (
 								
                     end
 						  
-						  BYPASS_BYTE: begin
+						  BYPASS_ON_BYTE: begin
 						      
                        
 								
                     end
+						  
+						  BYPASS_OFF_BYTE: begin
+						      
+                       
+								
+                    end
+						  
 						  
 						  ERROR_BYTE: begin
 						      
