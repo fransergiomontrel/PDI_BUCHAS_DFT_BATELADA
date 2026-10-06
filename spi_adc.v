@@ -12,8 +12,8 @@ module spi_adc (
     reg [31:0] shift_reg;
     reg [2:0] samples;
 
-    localparam [31:0] CMD_WORD = 32'hD0140040;
-
+    //localparam [31:0] CMD_WORD = 32'hD0140040;
+    localparam [31:0] CMD_WORD = 32'hD0140043; //ref +-/1,5 vref
     // Definição dos estados
     localparam NO_MOSI_DATA         = 4'b0000;
     localparam CHIP_SELECTED        = 4'b0001;

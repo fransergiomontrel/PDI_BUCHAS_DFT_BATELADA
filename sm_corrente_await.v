@@ -51,7 +51,10 @@ module slaver_states_main (
     assign acquire_again_out = acquire_again;
     assign select0_1_out = select0_1;
     assign select1_1_out = select1_1;
-    assign convst_out = convst && ncs_signal;
+    assign convst_out =
+    ((current_state == DO_COMMAND) && (type_reg == GET_CONFIG_BYTE))
+    ? ncs_signal
+    : convst;
     assign host_sclk_out = host_sclk_fpga_rw_8 || host_sclk_set_get_adc;
     assign host_mosi_out = host_mosi_fpga_rw_8 || host_mosi_set_get_adc;
 
@@ -232,14 +235,14 @@ module slaver_states_main (
 	 u_altchip_id
         (
         .clkin(clk),
-        .chip_id(id_valid),
-        .data_valid(fpga_id),
+        .chip_id(fpga_id),
+        .data_valid(id_valid),
         .reset(rst)
 		  );
 
     //Used payload sizes
-	 localparam GET_ID_SIZE = 8'd09;
-	 localparam GET_CONFIG_SIZE = 8'd07;
+	 localparam GET_ID_SIZE = 8'h09;
+	 localparam GET_CONFIG_SIZE = 8'h07;
 	   
     //Bytes of protocol
     localparam START_BYTE = 8'h01;//Start of frame byte
@@ -348,6 +351,8 @@ module slaver_states_main (
             start_8_ctl <= 1'b0;
 				//Disable 4-20 ma + temp request, that is, it will started only once after request is done
             acquire_again <= 1'b0;
+				//Disable crc16 calculus
+				crc_en_reg <= 1'b0;
 				
             //state machine
             case (current_state)			  
@@ -990,6 +995,7 @@ module slaver_states_main (
 								        data_in_crc <= GET_CONFIG_BYTE;
 										  
 										  bytes_counter <= bytes_counter + 1;
+										  host_mode <= MODE_GET_CONFIG;
 									 
 									 end
 								
@@ -1007,7 +1013,7 @@ module slaver_states_main (
 										  channel_mask_in <= payload_reg[payload_bytes_counter];
 										  
 										  bytes_counter <= 4'd0;
-										  host_mode <= MODE_GET_CONFIG;
+										  
 										  
 									 end
 									 
@@ -1026,7 +1032,19 @@ module slaver_states_main (
 										  payload_reg[4] <= current_adc_config[55:48];
 										  payload_reg[5] <= current_adc_config[71:64];
 										  payload_reg[6] <= current_adc_config[87:80];
+										  
+										  
 										  set_get_adc_reset <= 1'b1;
+										  
+										  byte_to_send <= payload_reg[0];
+										  start_8_ctl <= 1'b1;
+														
+										  crc_en_reg <= 1'b1;
+										  data_in_crc <= payload_reg[0];
+														
+										  payload_bytes_counter <= payload_bytes_counter + 1;
+												      
+										  
 										  host_mode <= MODE_CFG_FPGA;
 									 end
 								
@@ -1035,15 +1053,6 @@ module slaver_states_main (
 										  //Send bytes of payload through uart
 									     case (payload_bytes_counter)
 										  
-										      4'd0: begin 
-														byte_to_send <= payload_reg[0];
-														start_8_ctl <= 1'b1;
-														
-														crc_en_reg <= 1'b1;
-														data_in_crc <= payload_reg[0];
-														
-												      payload_bytes_counter <= payload_bytes_counter + 1;
-												      end
 														
 										      4'd1: begin 
 														byte_to_send <= payload_reg[6];

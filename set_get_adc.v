@@ -16,6 +16,7 @@ module set_get_ads8691 (
 	 output wire set_get_done_out
 );
 
+    reg second_frame;
     reg [5:0] bit_cnt;
     reg [7:0] div_sclk;
     reg [1:0] delay;
@@ -40,7 +41,8 @@ module set_get_ads8691 (
     localparam TSU_CSCK_MOSI        = 4'b0010;
     localparam AWAIT_SCLK_FALL_MOSI = 4'b0011;
     localparam AWAIT_SCLK_RISE_MOSI = 4'b0100;
-    localparam LOAD_NEXT_WORD       = 4'b0101;
+    localparam END_FRAME            = 4'b0101;
+    localparam INTER_FRAME          = 4'b0111;
     localparam IDLE                 = 4'b0110;
 
     reg [3:0] current_spi_state;
@@ -55,6 +57,7 @@ module set_get_ads8691 (
             div_sclk <= 8'd0;
             delay    <= 2'd0;
             bit_cnt  <= 6'd31;
+            second_frame <= 1'b0;
 				miso_buffer_1 <= 16'h00FF;
 				miso_buffer_2 <= 16'h00FF;
 				miso_buffer_3 <= 16'h00FF;
@@ -77,7 +80,7 @@ module set_get_ads8691 (
                 // Após sair do reset, já inicia automaticamente
                 LOAD_WORD: begin
 					 
-					     mosi <= cmd_word[bit_cnt];
+					     mosi <= second_frame ? 1'b0 : cmd_word[bit_cnt];
                     ncs <= 1'b0;
                     sclk <= 1'b0;
                     current_spi_state <= CHIP_SELECTED;
@@ -121,8 +124,7 @@ module set_get_ads8691 (
                             // terminou a palavra atual de 32 bits
                             bit_cnt <= 6'd31;
                             mosi <= 1'b0;
-									 set_get_done_reg <= 1'b1;
-									 current_spi_state <= IDLE;
+									 current_spi_state <= END_FRAME;
      
                         end
                         else begin
@@ -134,15 +136,15 @@ module set_get_ads8691 (
                         end
                     end
                     else begin
-						      //A partir do 16°clock apos cada sclk rising 
-						      if ((bit_cnt < 6'd16) && (cmd_word[31:27] == READ_COMMAND)) begin
+						      // Captura os primeiros 16 bits apenas no frame de resposta.
+						      if (second_frame && (bit_cnt >= 6'd16) && (div_sclk == 8'd0) && (cmd_word[31:27] == READ_COMMAND)) begin
 								
-									 miso_buffer_1[bit_cnt] <= miso_1 | ~(channel_mask_reg[0]);
-									 miso_buffer_2[bit_cnt] <= miso_2 | ~(channel_mask_reg[1]);
-									 miso_buffer_3[bit_cnt] <= miso_3 | ~(channel_mask_reg[2]);
-									 miso_buffer_4[bit_cnt] <= miso_4 | ~(channel_mask_reg[3]);
-									 miso_buffer_5[bit_cnt] <= miso_5 | ~(channel_mask_reg[4]);
-									 miso_buffer_6[bit_cnt] <= miso_6 | ~(channel_mask_reg[5]);
+									 miso_buffer_1[bit_cnt - 6'd16] <= miso_1 | ~(channel_mask_reg[0]);
+									 miso_buffer_2[bit_cnt - 6'd16] <= miso_2 | ~(channel_mask_reg[1]);
+									 miso_buffer_3[bit_cnt - 6'd16] <= miso_3 | ~(channel_mask_reg[2]);
+									 miso_buffer_4[bit_cnt - 6'd16] <= miso_4 | ~(channel_mask_reg[3]);
+									 miso_buffer_5[bit_cnt - 6'd16] <= miso_5 | ~(channel_mask_reg[4]);
+									 miso_buffer_6[bit_cnt - 6'd16] <= miso_6 | ~(channel_mask_reg[5]);
 									 
 							   end
 								
@@ -155,7 +157,7 @@ module set_get_ads8691 (
                 // Em SPI modo 0, o escravo captura nessa subida
                 AWAIT_SCLK_RISE_MOSI: begin
                     div_sclk <= div_sclk + 8'd1;
-						  mosi <= cmd_word[bit_cnt];
+						  mosi <= second_frame ? 1'b0 : cmd_word[bit_cnt];
                     if (div_sclk == 8'd49) begin
                         div_sclk <= 8'd0;
                         sclk <= 1'b1;
@@ -166,6 +168,30 @@ module set_get_ads8691 (
                     end
                 end
 
+
+                // Encerra cada frame depois da ultima descida de SCLK.
+                END_FRAME: begin
+                    ncs <= 1'b1;
+                    div_sclk <= 8'd0;
+                    if (second_frame) begin
+                        set_get_done_reg <= 1'b1;
+                        current_spi_state <= IDLE;
+                    end
+                    else begin
+                        current_spi_state <= INTER_FRAME;
+                    end
+                end
+
+                // CS alto por 200 ciclos (2 us com clk de 100 MHz).
+                // Permite concluir a conversao iniciada pela subida de CS.
+                INTER_FRAME: begin
+                    div_sclk <= div_sclk + 8'd1;
+                    if (div_sclk == 8'd199) begin
+                        div_sclk <= 8'd0;
+                        second_frame <= 1'b1;
+                        current_spi_state <= LOAD_WORD;
+                    end
+                end
 
                 // Estado final
                 IDLE: begin
