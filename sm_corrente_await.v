@@ -26,7 +26,9 @@ module slaver_states_main (
 
     output wire led_dft_on_out,
     output wire led_tx_on_out,
-	 output wire tx_8
+	 output wire tx_8,
+	 
+	 output wire [2:0] channel_selector_out
 
 );
 
@@ -42,6 +44,7 @@ module slaver_states_main (
     reg in;
     reg dft_reg;
     reg tx_reg;
+	 reg[2:0] channel_selector_reg;
     wire host_sclk_fpga;
     wire host_mosi;
 
@@ -51,9 +54,10 @@ module slaver_states_main (
     assign acquire_again_out = acquire_again;
     assign select0_1_out = select0_1;
     assign select1_1_out = select1_1;
-    assign convst_out = ((current_state == DO_COMMAND) && (type_reg == GET_CONFIG_BYTE)) ? ncs_signal : convst;
-    assign host_sclk_out = ((current_state == DO_COMMAND) && (type_reg == GET_CONFIG_BYTE)) ? host_sclk_set_get_adc : host_sclk_fpga_rw_8;
-    assign host_mosi_out = ((current_state == DO_COMMAND) && (type_reg == GET_CONFIG_BYTE)) ? host_mosi_set_get_adc : host_mosi_fpga_rw_8;
+    assign convst_out = ((current_state == DO_COMMAND) && ((type_reg == GET_CONFIG_BYTE) || (type_reg == SET_CONFIG_BYTE))) ? ncs_signal : convst;
+    assign host_sclk_out = ((current_state == DO_COMMAND) && ((type_reg == GET_CONFIG_BYTE) || (type_reg == SET_CONFIG_BYTE))) ? host_sclk_set_get_adc : host_sclk_fpga_rw_8;
+    assign host_mosi_out = ((current_state == DO_COMMAND) && ((type_reg == GET_CONFIG_BYTE) || (type_reg == SET_CONFIG_BYTE))) ? host_mosi_set_get_adc : host_mosi_fpga_rw_8;
+	 assign channel_selector_out = channel_selector_reg;
 
 
     //22 bit size register to insert delay thick 
@@ -122,7 +126,7 @@ module slaver_states_main (
 	 reg [31:0] adc_word_reg;
 	 wire host_sclk_set_get_adc;
 	 wire host_mosi_set_get_adc;
-	 wire [95:0] current_adc_config;
+	 wire [47:0] current_adc_config;
 	 wire ncs_signal;
 	 wire set_get_adc_done_signal;
 	 
@@ -240,6 +244,7 @@ module slaver_states_main (
     //Used payload sizes
 	 localparam GET_ID_SIZE = 8'h09;
 	 localparam GET_CONFIG_SIZE = 8'h07;
+	 localparam SET_CONFIG_SIZE = 8'h07;
 	   
     //Bytes of protocol
     localparam START_BYTE = 8'h01;//Start of frame byte
@@ -256,8 +261,10 @@ module slaver_states_main (
     localparam BYPASS_ON_BYTE = 8'h60;//Bypass on byte
 	 localparam BYPASS_OFF_BYTE = 8'h61;//Bypass on byte
     localparam ERROR_BYTE = 8'h7F;//Error byte	
-	 localparam COMMAND_TO_READ = 32'hC8140000;//Command to read adc configuration of converters 
-
+	 //localparam COMMAND_TO_READ = 32'hC8140000;//Command to read adc configuration of converters 
+	 localparam COMMAND_TO_READ = 32'h48140000;//Command to read adc configuration of converters
+	 localparam COMMAND_TO_WRITE = 24'hD01400;//Command to write adc configuration of converters
+	 
     //States definition for states machine of slaver IED
     localparam CHECK_SOH = 5'b00000;//UART await for SOH byte
     localparam CHECK_TYPE = 5'b00001;//UART await for TYPE byte
@@ -290,6 +297,7 @@ module slaver_states_main (
     localparam MODE_ACQ = 3'b010;
     localparam MODE_RW = 3'b011;
 	 localparam MODE_GET_CONFIG = 3'b100;
+	 localparam MODE_SET_CONFIG = 3'b101;
 	 
     always @(posedge clk) begin
 
@@ -337,6 +345,7 @@ module slaver_states_main (
 				adc_word_reg <= 32'h00000000;
 				id_reserved <= 8'h00;
 				channel_mask_in <= 8'hFF;
+				channel_selector_reg <= 3'd0;
 
         end
 
@@ -350,6 +359,13 @@ module slaver_states_main (
             acquire_again <= 1'b0;
 				//Disable crc16 calculus
 				crc_en_reg <= 1'b0;
+				
+				
+				if ((set_get_adc_done_signal == 1'd1) && (current_state == DO_COMMAND) && (type_reg == SET_CONFIG_BYTE)) begin
+									 							  
+					 set_get_adc_reset <= 1'b1;
+					 
+			   end
 				
             //state machine
             case (current_state)			  
@@ -1024,11 +1040,11 @@ module slaver_states_main (
 									 //Only register 6 least significant bytes of each converter
 									 
 										  payload_reg[1] <= current_adc_config[7:0];
-										  payload_reg[2] <= current_adc_config[23:16];
-										  payload_reg[3] <= current_adc_config[39:32];
-										  payload_reg[4] <= current_adc_config[55:48];
-										  payload_reg[5] <= current_adc_config[71:64];
-										  payload_reg[6] <= current_adc_config[87:80];
+										  payload_reg[2] <= current_adc_config[15:8];
+										  payload_reg[3] <= current_adc_config[23:16];
+										  payload_reg[4] <= current_adc_config[31:24];
+										  payload_reg[5] <= current_adc_config[39:32];
+										  payload_reg[6] <= current_adc_config[47:40];
 										  
 										  
 										  set_get_adc_reset <= 1'b1;
@@ -1159,7 +1175,222 @@ module slaver_states_main (
 						  
 						  SET_CONFIG_BYTE: begin
 						      
-                        
+                        if ((select0_1 != 1'b1) && (select1_1 != 1'b1)) begin
+								
+								    select0_1 <= 1'b1;
+									 select1_1 <= 1'b1;
+									 
+									 //Send byte of start through uart
+                            start_8_ctl <= 1'b1;
+									 byte_to_send <= START_BYTE;
+									 
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= START_BYTE;
+									 
+									 bytes_counter <= bytes_counter + 1;
+									 
+								end						
+								
+								else if (done_8_ctl == 1'b1) begin
+								
+									 if ((byte_to_send == START_BYTE) && (bytes_counter == 4'd1)) begin
+									
+									     //Send byte of length through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= SET_CONFIG_BYTE;
+										  
+										  crc_en_reg <= 1'b1;
+								        data_in_crc <= SET_CONFIG_BYTE;
+										  
+										  bytes_counter <= bytes_counter + 1;
+										  //host_mode <= MODE_SET_CONFIG;
+									 
+									 end
+								
+								    else if ((byte_to_send == SET_CONFIG_BYTE) && (bytes_counter == 4'd2)) begin
+									 
+									     //Send type byte through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= SET_CONFIG_SIZE;
+										  
+										  crc_en_reg <= 1'b1;
+								        data_in_crc <= SET_CONFIG_SIZE;
+										  
+										  //adc_word_reg <= COMMAND_TO_WRITE;
+										  //set_get_adc_reset <= 1'b0;
+										  channel_mask_in <= payload_reg[payload_bytes_counter];
+										  
+										  bytes_counter <= 4'd0;
+										  
+										  host_mode <= MODE_SET_CONFIG;
+										 
+									 end
+									 
+									
+								    else if (payload_bytes_counter < SET_CONFIG_SIZE) begin
+									 
+										  //Send bytes of payload through uart
+									     case (payload_bytes_counter)
+										  
+												
+												4'd0: begin 
+														byte_to_send <= channel_mask_in;
+														start_8_ctl <= 1'b1;
+														
+														crc_en_reg <= 1'b1;
+														data_in_crc <= channel_mask_in;
+														
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+														
+														if (channel_mask_in[0] == 1'b1) begin
+														    channel_selector_reg <= 3'd0;
+															 adc_word_reg <= {COMMAND_TO_WRITE, payload_reg[6]};
+										                set_get_adc_reset <= 1'b0; 
+														end
+														
+												      end
+										
+										      4'd1: begin 
+														byte_to_send <= payload_reg[1];
+														start_8_ctl <= 1'b1;
+														
+														crc_en_reg <= 1'b1;
+														data_in_crc <= payload_reg[1];
+														
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+														
+														if (channel_mask_in[1] == 1'b1) begin
+														    channel_selector_reg <= 3'd1;
+															 adc_word_reg <= {COMMAND_TO_WRITE, payload_reg[5]};
+										                set_get_adc_reset <= 1'b0; 
+														end
+														
+												      end
+														
+												4'd2: begin 
+														byte_to_send <= payload_reg[2];
+														start_8_ctl <= 1'b1;
+														
+														crc_en_reg <= 1'b1;
+														data_in_crc <= payload_reg[2];
+														
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+														
+														if (channel_mask_in[2] == 1'b1) begin
+														    channel_selector_reg <= 3'd2;
+															 adc_word_reg <= {COMMAND_TO_WRITE, payload_reg[4]};
+										                set_get_adc_reset <= 1'b0; 
+														end
+														
+												      end
+														
+												4'd3: begin 
+														byte_to_send <= payload_reg[3];
+														start_8_ctl <= 1'b1;
+														
+														crc_en_reg <= 1'b1;
+														data_in_crc <= payload_reg[3];
+														
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+														
+														if (channel_mask_in[3] == 1'b1) begin
+														    channel_selector_reg <= 3'd3;
+															 adc_word_reg <= {COMMAND_TO_WRITE, payload_reg[3]};
+										                set_get_adc_reset <= 1'b0; 
+														end
+												      end
+														
+												4'd4: begin 
+														byte_to_send <= payload_reg[4];
+														start_8_ctl <= 1'b1;
+														
+														crc_en_reg <= 1'b1;
+														data_in_crc <= payload_reg[4];
+														
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+														
+														if (channel_mask_in[4] == 1'b1) begin
+														    channel_selector_reg <= 3'd4;
+															 adc_word_reg <= {COMMAND_TO_WRITE, payload_reg[2]};
+										                set_get_adc_reset <= 1'b0; 
+														end
+												      end
+														
+												4'd5: begin 
+														byte_to_send <= payload_reg[5];
+														start_8_ctl <= 1'b1;
+														
+														crc_en_reg <= 1'b1;
+														data_in_crc <= payload_reg[5];
+														
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+														
+														
+														if (channel_mask_in[5] == 1'b1) begin
+														    channel_selector_reg <= 3'd5;
+															 adc_word_reg <= {COMMAND_TO_WRITE, payload_reg[1]};
+										                set_get_adc_reset <= 1'b0; 
+														end
+														
+												      end
+														
+												4'd6: begin 
+														byte_to_send <= payload_reg[6];
+														start_8_ctl <= 1'b1;
+														
+														crc_en_reg <= 1'b1;
+														data_in_crc <= payload_reg[6];
+														
+												      payload_bytes_counter <= payload_bytes_counter + 1;
+														channel_selector_reg <= 3'd0;
+														host_mode <= MODE_CFG_FPGA;
+														
+												      end
+														
+												
+										  endcase
+										  
+									 
+									 end
+									 
+									 else if (payload_bytes_counter == SET_CONFIG_SIZE) begin
+									 
+									     //Send byte of end through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= END_BYTE;
+										  
+										  crc_en_reg <= 1'b1;
+										  data_in_crc <= END_BYTE;
+										  
+										  payload_bytes_counter <= payload_bytes_counter + 1;
+										  
+									 end
+									 
+									 else if (payload_bytes_counter == (SET_CONFIG_SIZE + 1)) begin
+									 
+										  //Send byte high of crc
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= crc_result[15:8];
+										  crc_low_reg <= crc_result[7:0];
+										  
+										  payload_bytes_counter <= payload_bytes_counter + 1;
+										  
+									 end
+									 
+									 else if (payload_bytes_counter == (SET_CONFIG_SIZE + 2)) begin
+									 
+										  crc_restart  <= 1'b1;
+										  //Send byte low of crc
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= crc_low_reg;
+										  payload_bytes_counter <= 4'd0;
+										  
+										  current_state <= CHECK_SOH;
+										  
+									 end
+									 
+								end
+
 								
                     end
 

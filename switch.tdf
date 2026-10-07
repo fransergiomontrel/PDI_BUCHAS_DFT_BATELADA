@@ -62,6 +62,7 @@ subdesign switch(
 	
 	-- CONFIG CPLD Module
 	CM_MISO: input;
+	channel_selector_in[2..0]: input;
 	CM_MOSI: output;
 	CM_SCLK: output;
 	
@@ -217,6 +218,94 @@ begin
 		   AI_sdo[5] = HI_MOSI;
 			
 			--AI_sdo[5..1] = AI_sdi[4..0];
+			
+			-- Acquisition Module
+			AM_adc_sdi[] = Gnd;
+						
+			-- Configuration CPLD Module
+			CM_MOSI = Gnd;
+			CM_SCLK = Gnd;
+			HI_MISO = Gnd;
+			
+			when MODE_SET_CONFIGURATION =>
+			-- Host Interface
+			HI_MISO = Gnd;
+			
+			-- RAM Interface
+			RI_addr_clr = Gnd;
+			RI_addr_inc_read = Gnd;
+			RI_addr_inc_write = Gnd;
+			RI_data_in[] = Gnd;
+			RI_we_n = Vcc;
+			RI_oe_n = Vcc;
+			RI_cs_n = Vcc;
+			RI_data_bus_out = Gnd;
+			
+			-- ADC Interface
+			AI_rst_n = HI_rst_n;
+			AI_convst = HI_convst_start;
+			AI_sclk = HI_SCLK;
+			
+			case channel_selector_in[] is
+         when 0 =>
+			
+             AI_sdo[0] = HI_MOSI;
+				 AI_sdo[1] = Gnd;
+				 AI_sdo[2] = Gnd;
+				 AI_sdo[3] = Gnd;
+				 AI_sdo[4] = Gnd;
+				 AI_sdo[5] = Gnd;
+
+         when 1 =>
+			
+             AI_sdo[0] = Gnd;
+				 AI_sdo[1] = HI_MOSI;
+				 AI_sdo[2] = Gnd;
+				 AI_sdo[3] = Gnd;
+				 AI_sdo[4] = Gnd;
+				 AI_sdo[5] = Gnd;             
+
+         when 2 =>
+             
+				 AI_sdo[0] = Gnd;
+				 AI_sdo[1] = Gnd;
+				 AI_sdo[2] = HI_MOSI;
+				 AI_sdo[3] = Gnd;
+				 AI_sdo[4] = Gnd;
+				 AI_sdo[5] = Gnd;             
+
+
+         when 3 =>
+             
+				 AI_sdo[0] = Gnd;
+				 AI_sdo[1] = Gnd;
+				 AI_sdo[2] = Gnd;
+				 AI_sdo[3] = HI_MOSI;
+				 AI_sdo[4] = Gnd;
+				 AI_sdo[5] = Gnd;
+
+         when 4 =>
+             
+				 AI_sdo[0] = Gnd;
+				 AI_sdo[1] = Gnd;
+				 AI_sdo[2] = Gnd;
+				 AI_sdo[3] = Gnd;
+				 AI_sdo[4] = HI_MOSI;
+				 AI_sdo[5] = Gnd;
+
+         when 5 =>
+			
+             AI_sdo[0] = Gnd;
+				 AI_sdo[1] = Gnd;
+				 AI_sdo[2] = Gnd;
+				 AI_sdo[3] = Gnd;
+				 AI_sdo[4] = Gnd;
+				 AI_sdo[5] = HI_MOSI;
+
+         
+         end case;
+			
+			
 			
 			-- Acquisition Module
 			AM_adc_sdi[] = Gnd;

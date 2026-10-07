@@ -30,6 +30,7 @@ subdesign host_interface(
 	sreset_mode2: output;
 	sreset_mode3: output;
 	sreset_mode4: output;
+	sreset_mode5: output;
 	
 	host_busy: output;
 	host_MISO: output;
@@ -62,6 +63,7 @@ begin
 	sreset_mode2 = sreset or mode_sel.changing or (mode_sel.mode_out[]!=2);
 	sreset_mode3 = sreset or mode_sel.changing or (mode_sel.mode_out[]!=3);
 	sreset_mode4 = sreset or mode_sel.changing or (mode_sel.mode_out[]!=4);
+	sreset_mode5 = sreset or mode_sel.changing or (mode_sel.mode_out[]!=5);
 	
 	-- BUSY FLAG
 	busy_flag.clk = clk;

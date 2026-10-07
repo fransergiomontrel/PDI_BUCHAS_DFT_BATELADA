@@ -12,7 +12,7 @@ module set_get_ads8691 (
     output reg  sclk,
     output reg  ncs,
     output reg  mosi,      // saída serial do mestre
-	 output wire [95:0] read_half_words,
+	 output wire [47:0] read_half_words,
 	 output wire set_get_done_out
 );
 
@@ -20,12 +20,12 @@ module set_get_ads8691 (
     reg [5:0] bit_cnt;
     reg [7:0] div_sclk;
     reg [1:0] delay;
-	 reg [15:0] miso_buffer_1;
-	 reg [15:0] miso_buffer_2;
-	 reg [15:0] miso_buffer_3;
-	 reg [15:0] miso_buffer_4;
-	 reg [15:0] miso_buffer_5;
-	 reg [15:0] miso_buffer_6;
+	 reg [7:0] miso_buffer_1;
+	 reg [7:0] miso_buffer_2;
+	 reg [7:0] miso_buffer_3;
+	 reg [7:0] miso_buffer_4;
+	 reg [7:0] miso_buffer_5;
+	 reg [7:0] miso_buffer_6;
 	 reg [7:0]  channel_mask_reg;
 	 
 	 reg set_get_done_reg;
@@ -34,7 +34,8 @@ module set_get_ads8691 (
 	 assign set_get_done_out = set_get_done_reg;
 	 
 	 
-	 localparam READ_COMMAND = 5'b11001;
+	 localparam READ_COMMAND  = 5'b01001;
+	 localparam WRITE_COMMAND = 5'b11010;
     // Definição dos estados
     localparam LOAD_WORD            = 4'b0000;
     localparam CHIP_SELECTED        = 4'b0001;
@@ -58,12 +59,12 @@ module set_get_ads8691 (
             delay    <= 2'd0;
             bit_cnt  <= 6'd31;
             second_frame <= 1'b0;
-				miso_buffer_1 <= 16'h00FF;
-				miso_buffer_2 <= 16'h00FF;
-				miso_buffer_3 <= 16'h00FF;
-				miso_buffer_4 <= 16'h00FF;
-				miso_buffer_5 <= 16'h00FF;
-				miso_buffer_6 <= 16'h00FF;
+				miso_buffer_1 <= 8'hFF;
+				miso_buffer_2 <= 8'hFF;
+				miso_buffer_3 <= 8'hFF;
+				miso_buffer_4 <= 8'hFF;
+				miso_buffer_5 <= 8'hFF;
+				miso_buffer_6 <= 8'hFF;
 				
             set_get_done_reg <= 1'b0;
 				channel_mask_reg <= 8'hFF;
@@ -124,7 +125,15 @@ module set_get_ads8691 (
                             // terminou a palavra atual de 32 bits
                             bit_cnt <= 6'd31;
                             mosi <= 1'b0;
-									 current_spi_state <= END_FRAME;
+									 
+									 if (cmd_word[31:27] == READ_COMMAND)
+									 begin
+									     current_spi_state <= END_FRAME;
+									 end
+									 else if(cmd_word[31:27] == WRITE_COMMAND)
+									 begin
+									     current_spi_state <= IDLE;
+									 end
      
                         end
                         else begin
@@ -137,14 +146,14 @@ module set_get_ads8691 (
                     end
                     else begin
 						      // Captura os primeiros 16 bits apenas no frame de resposta.
-						      if (second_frame && (bit_cnt >= 6'd16) && (cmd_word[31:27] == READ_COMMAND)) begin
+						      if (second_frame && (bit_cnt >= 6'd24) && (cmd_word[31:27] == READ_COMMAND)) begin
 								
-									 miso_buffer_1[bit_cnt - 6'd16] <= miso_1 | ~(channel_mask_reg[0]);
-									 miso_buffer_2[bit_cnt - 6'd16] <= miso_2 | ~(channel_mask_reg[1]);
-									 miso_buffer_3[bit_cnt - 6'd16] <= miso_3 | ~(channel_mask_reg[2]);
-									 miso_buffer_4[bit_cnt - 6'd16] <= miso_4 | ~(channel_mask_reg[3]);
-									 miso_buffer_5[bit_cnt - 6'd16] <= miso_5 | ~(channel_mask_reg[4]);
-									 miso_buffer_6[bit_cnt - 6'd16] <= miso_6 | ~(channel_mask_reg[5]);
+									 miso_buffer_1[bit_cnt - 6'd24] <= miso_1 | ~(channel_mask_reg[0]);
+									 miso_buffer_2[bit_cnt - 6'd24] <= miso_2 | ~(channel_mask_reg[1]);
+									 miso_buffer_3[bit_cnt - 6'd24] <= miso_3 | ~(channel_mask_reg[2]);
+									 miso_buffer_4[bit_cnt - 6'd24] <= miso_4 | ~(channel_mask_reg[3]);
+									 miso_buffer_5[bit_cnt - 6'd24] <= miso_5 | ~(channel_mask_reg[4]);
+									 miso_buffer_6[bit_cnt - 6'd24] <= miso_6 | ~(channel_mask_reg[5]);
 									 
 							   end
 								
@@ -198,6 +207,7 @@ module set_get_ads8691 (
                     ncs <= 1'b1;
                     sclk <= 1'b0;
                     mosi <= 1'b0;
+						  set_get_done_reg <= 1'b1;
                     current_spi_state <= IDLE;
                 end
 
