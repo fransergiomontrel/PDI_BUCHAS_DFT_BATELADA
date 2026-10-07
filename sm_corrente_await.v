@@ -51,12 +51,9 @@ module slaver_states_main (
     assign acquire_again_out = acquire_again;
     assign select0_1_out = select0_1;
     assign select1_1_out = select1_1;
-    assign convst_out =
-    ((current_state == DO_COMMAND) && (type_reg == GET_CONFIG_BYTE))
-    ? ncs_signal
-    : convst;
-    assign host_sclk_out = host_sclk_fpga_rw_8 || host_sclk_set_get_adc;
-    assign host_mosi_out = host_mosi_fpga_rw_8 || host_mosi_set_get_adc;
+    assign convst_out = ((current_state == DO_COMMAND) && (type_reg == GET_CONFIG_BYTE)) ? ncs_signal : convst;
+    assign host_sclk_out = ((current_state == DO_COMMAND) && (type_reg == GET_CONFIG_BYTE)) ? host_sclk_set_get_adc : host_sclk_fpga_rw_8;
+    assign host_mosi_out = ((current_state == DO_COMMAND) && (type_reg == GET_CONFIG_BYTE)) ? host_mosi_set_get_adc : host_mosi_fpga_rw_8;
 
 
     //22 bit size register to insert delay thick 

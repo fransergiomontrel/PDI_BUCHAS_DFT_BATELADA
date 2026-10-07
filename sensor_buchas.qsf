@@ -134,7 +134,6 @@ set_location_assignment PIN_98 -to ram_data_bus[0]
 set_location_assignment PIN_111 -to ram_oe_n
 set_location_assignment PIN_28 -to rst_hardware
 set_location_assignment PIN_7 -to rxd_from_gpio47
-set_location_assignment PIN_11 -to tx
 set_location_assignment PIN_110 -to ram_we_n
 set_location_assignment PIN_6 -to tx_fibra
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
@@ -213,4 +212,8 @@ set_global_assignment -name VERILOG_FILE crc_10B_to_2B.v
 set_global_assignment -name QIP_FILE ip_core.qip
 set_global_assignment -name SIP_FILE ip_core.sip
 set_global_assignment -name VERILOG_FILE set_get_adc.v
+set_location_assignment PIN_13 -to cs
+set_location_assignment PIN_12 -to spi_sclk
+set_location_assignment PIN_11 -to spi_sdo
+set_location_assignment PIN_10 -to spi_sdi
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
