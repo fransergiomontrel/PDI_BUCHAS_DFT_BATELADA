@@ -11,6 +11,8 @@ module slaver_states_main (
 	 input wire miso_4_in,
 	 input wire miso_5_in,
 	 input wire miso_6_in,
+	 input wire dp_rx_in,
+	 input wire dp_complete_in,
     output wire txd_to_gpio46,
     output wire requested_data_out,
     output wire acquire_again_out,
@@ -28,7 +30,9 @@ module slaver_states_main (
     output wire led_tx_on_out,
 	 output wire tx_8,
 	 
-	 output wire [2:0] channel_selector_out
+	 output wire [2:0] channel_selector_out,
+	 output wire dp_tx_out,
+	 output wire dp_enable_out
 
 );
 
@@ -36,7 +40,6 @@ module slaver_states_main (
     (* preserve *) reg txd_reg;
 
     (* preserve *) reg requested_data;
-    assign txd_to_gpio46 = txd_reg;
     reg acquire_again;
     reg select0_1;
     reg select1_1;
@@ -45,6 +48,10 @@ module slaver_states_main (
     reg dft_reg;
     reg tx_reg;
 	 reg[2:0] channel_selector_reg;
+	 
+	 reg dp_enable_reg;
+	 reg dp_complete_reg;
+	 
     wire host_sclk_fpga;
     wire host_mosi;
 
@@ -57,6 +64,9 @@ module slaver_states_main (
     assign convst_out = ((current_state == DO_COMMAND) && ((type_reg == GET_CONFIG_BYTE) || (type_reg == SET_CONFIG_BYTE))) ? ncs_signal : convst;
     assign host_sclk_out = ((current_state == DO_COMMAND) && ((type_reg == GET_CONFIG_BYTE) || (type_reg == SET_CONFIG_BYTE))) ? host_sclk_set_get_adc : host_sclk_fpga_rw_8;
     assign host_mosi_out = ((current_state == DO_COMMAND) && ((type_reg == GET_CONFIG_BYTE) || (type_reg == SET_CONFIG_BYTE))) ? host_mosi_set_get_adc : host_mosi_fpga_rw_8;
+	 assign dp_tx_out = ((current_state == DO_COMMAND) && (type_reg == BYPASS_ON_BYTE)) ? in : 1'b1;
+	 assign txd_to_gpio46 = ((current_state == DO_COMMAND) && (type_reg == BYPASS_ON_BYTE)) ? dp_rx_in : txd_reg;//works
+	 assign dp_enable_out = dp_enable_reg;
 	 assign channel_selector_out = channel_selector_reg;
 
 
@@ -137,21 +147,21 @@ module slaver_states_main (
 	 //Module to write and read ADS8691 individually
 	 set_get_ads8691 u_set_get_ads8691 (
 	 
-    .clk(clk),
-    .rst(set_get_adc_global_reset),      // reset síncrono
-	 .cmd_word(adc_word_reg),
-	 .miso_1(miso_1_in),
-	 .miso_2(miso_2_in),
-	 .miso_3(miso_3_in),
-	 .miso_4(miso_4_in),
-	 .miso_5(miso_5_in),
-	 .miso_6(miso_6_in),
-	 .channel_mask(channel_mask_in),
-    .sclk(host_sclk_set_get_adc),
-    .ncs(ncs_signal),
-    .mosi(host_mosi_set_get_adc),      // saída serial do mestre
-	 .read_half_words(current_adc_config),
-	 .set_get_done_out(set_get_adc_done_signal)
+        .clk(clk),
+        .rst(set_get_adc_global_reset),      // reset síncrono
+	     .cmd_word(adc_word_reg),
+	     .miso_1(miso_1_in),
+	     .miso_2(miso_2_in),
+	     .miso_3(miso_3_in),
+	     .miso_4(miso_4_in),
+	     .miso_5(miso_5_in),
+	     .miso_6(miso_6_in),
+	     .channel_mask(channel_mask_in),
+        .sclk(host_sclk_set_get_adc),
+        .ncs(ncs_signal),
+        .mosi(host_mosi_set_get_adc),      // saída serial do mestre
+	     .read_half_words(current_adc_config),
+	     .set_get_done_out(set_get_adc_done_signal)
 	 
 );
 
@@ -260,9 +270,8 @@ module slaver_states_main (
     localparam GET_RESULTS_BYTE = 8'h40;//Get results byte
     localparam BYPASS_ON_BYTE = 8'h60;//Bypass on byte
 	 localparam BYPASS_OFF_BYTE = 8'h61;//Bypass on byte
-    localparam ERROR_BYTE = 8'h7F;//Error byte	
-	 //localparam COMMAND_TO_READ = 32'hC8140000;//Command to read adc configuration of converters 
-	 localparam COMMAND_TO_READ = 32'h48140000;//Command to read adc configuration of converters
+    localparam ERROR_BYTE = 8'h7F;//Error byte	 
+	 localparam COMMAND_TO_READ  = 32'h48140000;//Command to read adc configuration of converters
 	 localparam COMMAND_TO_WRITE = 24'hD01400;//Command to write adc configuration of converters
 	 
     //States definition for states machine of slaver IED
@@ -346,6 +355,8 @@ module slaver_states_main (
 				id_reserved <= 8'h00;
 				channel_mask_in <= 8'hFF;
 				channel_selector_reg <= 3'd0;
+				
+				dp_enable_reg <= 1'b0;
 
         end
 
@@ -1445,8 +1456,21 @@ module slaver_states_main (
                     end
 						  
 						  BYPASS_ON_BYTE: begin
-						      
-                       
+						      //Select tx_to_gpio46
+                        select0_1 <= 1'b1;
+							   select1_1 <= 1'b0;
+							   //Register signal when DP completes
+							   dp_complete_reg <= dp_complete_in;
+							   dp_enable_reg <= 1'b1;
+							   if (dp_complete_reg == 1'b1) begin
+								
+								    select0_1 <= 1'b0;
+							       select1_1 <= 1'b0;
+							       dp_enable_reg <= 1'b0;
+									 current_state <= CHECK_SOH;
+									 
+							   end
+							  
 								
                     end
 						  
