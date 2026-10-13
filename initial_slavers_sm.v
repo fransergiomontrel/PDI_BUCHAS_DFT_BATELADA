@@ -9,6 +9,7 @@ module slaver_states (
 	 output wire host_sclk_out,
 	 output wire select0_0_out,
 	 output wire select1_0_out,
+	 output wire select2_0_out,
 	 output reg[2:0] host_mode,
 	 output wire reset_sm_slaver_out
 	 
@@ -19,6 +20,7 @@ module slaver_states (
 	 wire host_sclk;
 	 reg select0_0;
 	 reg select1_0;
+	 reg select2_0;
 	 reg reset_sm_slaver;
 
     assign convst_out = convst;
@@ -26,6 +28,7 @@ module slaver_states (
 	 assign host_sclk_out = host_sclk;
 	 assign select0_0_out = select0_0;
 	 assign select1_0_out = select1_0;
+	 assign select2_0_out = select2_0;
 	 assign reset_sm_slaver_out = reset_sm_slaver;
 
 	 reg [2:0] channel_config;	  
@@ -93,6 +96,7 @@ spi_adc u_spi_adc(
 		  reset_adc_config <= 1'b1;
 		  select0_0 <= 1'b0;
 		  select1_0 <= 1'b0;
+		  select2_0 <= 1'b0;
 		  data_to_send <= 8'h00;
 		  reset_sm_slaver <= 1'b1;
 		  convst <= 1'b0;
@@ -170,6 +174,7 @@ spi_adc u_spi_adc(
 					reset_uart <= 1'b0;
 					select0_0 <= 1'b0;
 					select1_0 <= 1'b1;
+					select2_0 <= 1'b0;
 					current_initial_state <= SEND_X01;
 									 
 			  end
@@ -185,6 +190,7 @@ spi_adc u_spi_adc(
 						 reset_uart <= 1'b1;
 						 select0_0 <= 1'b0;
 						 select1_0 <= 1'b0;
+						 select2_0 <= 1'b0;
 			
 						 reset_adc_config <= 1'b0;
 				       
@@ -232,6 +238,9 @@ spi_adc u_spi_adc(
 		IDLE_AD:
 			  
 			 begin
+			     select0_0 <= 1'b0;
+				  select1_0 <= 1'b0;
+				  select2_0 <= 1'b0;
 			     reset_adc_config <= 1'b1;
 			     reset_sm_slaver <= 1'b0;
 				  host_mode <= MODE_CFG_FPGA;

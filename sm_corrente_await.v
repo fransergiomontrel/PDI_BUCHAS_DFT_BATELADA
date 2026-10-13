@@ -18,6 +18,7 @@ module slaver_states_main (
     output wire acquire_again_out,
     output wire select0_1_out,
     output wire select1_1_out,
+	 output wire select2_1_out,
     output wire convst_out,
     output wire host_sclk_out,
     output wire host_mosi_out,
@@ -32,7 +33,8 @@ module slaver_states_main (
 	 
 	 output wire [2:0] channel_selector_out,
 	 output wire dp_tx_out,
-	 output wire dp_enable_out
+	 output wire dp_enable_out,
+	 output wire dp_rx_out
 
 );
 
@@ -43,14 +45,17 @@ module slaver_states_main (
     reg acquire_again;
     reg select0_1;
     reg select1_1;
+	 reg select2_1;
     reg convst;
     reg in;
     reg dft_reg;
     reg tx_reg;
 	 reg[2:0] channel_selector_reg;
 	 
-	 reg dp_enable_reg;
+	 //reg dp_enable_reg;
 	 reg dp_complete_reg;
+	 (* preserve *) reg dp_rx_reg;
+	 
 	 
     wire host_sclk_fpga;
     wire host_mosi;
@@ -61,12 +66,17 @@ module slaver_states_main (
     assign acquire_again_out = acquire_again;
     assign select0_1_out = select0_1;
     assign select1_1_out = select1_1;
+	 assign select2_1_out = select2_1;
     assign convst_out = ((current_state == DO_COMMAND) && ((type_reg == GET_CONFIG_BYTE) || (type_reg == SET_CONFIG_BYTE))) ? ncs_signal : convst;
     assign host_sclk_out = ((current_state == DO_COMMAND) && ((type_reg == GET_CONFIG_BYTE) || (type_reg == SET_CONFIG_BYTE))) ? host_sclk_set_get_adc : host_sclk_fpga_rw_8;
     assign host_mosi_out = ((current_state == DO_COMMAND) && ((type_reg == GET_CONFIG_BYTE) || (type_reg == SET_CONFIG_BYTE))) ? host_mosi_set_get_adc : host_mosi_fpga_rw_8;
-	 assign dp_tx_out = ((current_state == DO_COMMAND) && (type_reg == BYPASS_ON_BYTE)) ? in : 1'b1;
-	 assign txd_to_gpio46 = ((current_state == DO_COMMAND) && (type_reg == BYPASS_ON_BYTE)) ? dp_rx_in : txd_reg;//works
-	 assign dp_enable_out = dp_enable_reg;
+	 
+	 assign txd_to_gpio46 = txd_reg;
+	 assign dp_rx_out = dp_rx_reg;
+	 
+	 assign dp_tx_out = ((current_state == DO_COMMAND) && (type_reg == BYPASS_ON_BYTE)) ? in:1'b1;
+	 assign dp_enable_out = ((current_state == DO_COMMAND) && (type_reg == BYPASS_ON_BYTE)) ? 1'b1:1'b0;//dp_enable_reg;
+	 
 	 assign channel_selector_out = channel_selector_reg;
 
 
@@ -311,15 +321,18 @@ module slaver_states_main (
     always @(posedge clk) begin
 
 	     in <= rxd_from_gpio47;
+		  
 	 
         if(rst) begin
-
+				
             current_state <= CHECK_SOH;
             txd_reg <= 1'b1;
+				
             is_finished  <= 22'd0;
             frequency <= 1'b0;
             select0_1 <= 1'b0;
             select1_1 <= 1'b0;
+				select2_1 <= 1'b0;
             requested_data <= 1'b0;
             acquire_again <= 1'b0;
             convst <= 1'b0;
@@ -345,6 +358,7 @@ module slaver_states_main (
 				payload_reg[5] <= 8'h00;
 				payload_reg[6] <= 8'h00;
 				payload_reg[7] <= 8'h00;
+				
 				crc_low_reg <= 8'h00;
 				crc_high_reg <= 8'h00;
 				
@@ -356,7 +370,9 @@ module slaver_states_main (
 				channel_mask_in <= 8'hFF;
 				channel_selector_reg <= 3'd0;
 				
-				dp_enable_reg <= 1'b0;
+				//dp_enable_reg <= 1'b0;
+				dp_complete_reg <= 1'b0; 
+				dp_rx_reg <= 1'b1;
 
         end
 
@@ -377,6 +393,8 @@ module slaver_states_main (
 					 set_get_adc_reset <= 1'b1;
 					 
 			   end
+				
+				
 				
             //state machine
             case (current_state)			  
@@ -418,6 +436,7 @@ module slaver_states_main (
 						      
 								select0_1 <= 1'b0;
 							   select1_1 <= 1'b0;
+								select2_1 <= 1'b0;
 
                         if (rx_uart_out == START_BYTE) begin
 								
@@ -734,6 +753,7 @@ module slaver_states_main (
 									 
 								    select0_1 <= 1'b1;
 									 select1_1 <= 1'b1;
+									 select2_1 <= 1'b0;
 									 
 									 //Send byte of start through uart
                             start_8_ctl <= 1'b1;
@@ -810,6 +830,7 @@ module slaver_states_main (
 								
 								    select0_1 <= 1'b1;
 									 select1_1 <= 1'b1;
+									 select2_1 <= 1'b0;
 									 
 									 //Send byte of start through uart
                             start_8_ctl <= 1'b1;
@@ -995,6 +1016,7 @@ module slaver_states_main (
 								
 								    select0_1 <= 1'b1;
 									 select1_1 <= 1'b1;
+									 select2_1 <= 1'b0;
 									 
 									 //Send byte of start through uart
                             start_8_ctl <= 1'b1;
@@ -1190,6 +1212,7 @@ module slaver_states_main (
 								
 								    select0_1 <= 1'b1;
 									 select1_1 <= 1'b1;
+									 select2_1 <= 1'b0;
 									 
 									 //Send byte of start through uart
                             start_8_ctl <= 1'b1;
@@ -1410,6 +1433,7 @@ module slaver_states_main (
 						      reset_uart_rx <= 1'b1;
                         select0_1 <= 1'b1;
 								select1_1 <= 1'b0;
+								select2_1 <= 1'b0;
 								current_state <= AWAIT_HIGH;
 								
                     end
@@ -1418,6 +1442,7 @@ module slaver_states_main (
 						  
 						      select0_1 <= 1'b0;
                         select1_1 <= 1'b0;
+								select2_1 <= 1'b0;
                         current_state <= EN_W_1;
                         frequency <= 1'b1;
 								
@@ -1433,6 +1458,7 @@ module slaver_states_main (
                         current_state <= EN_W_1;
                         select0_1 <= 1'b0;
                         select1_1 <= 1'b0;
+								select2_1 <= 1'b0;
                         frequency <= 1'b0;
 								
                         //byte 1 to be sent
@@ -1456,17 +1482,23 @@ module slaver_states_main (
                     end
 						  
 						  BYPASS_ON_BYTE: begin
-						      //Select tx_to_gpio46
-                        select0_1 <= 1'b1;
-							   select1_1 <= 1'b0;
-							   //Register signal when DP completes
-							   dp_complete_reg <= dp_complete_in;
-							   dp_enable_reg <= 1'b1;
-							   if (dp_complete_reg == 1'b1) begin
+                
 								
-								    select0_1 <= 1'b0;
-							       select1_1 <= 1'b0;
-							       dp_enable_reg <= 1'b0;
+							   //Register signal when DP completes
+								reset_uart_rx <= 1'b1;
+								
+								select0_1 <= 1'b0;
+                        select1_1 <= 1'b0;
+								select2_1 <= 1'b0;
+								
+								dp_rx_reg <= dp_rx_in;
+							   dp_complete_reg <= dp_complete_in;
+							   
+								
+							   if (dp_complete_reg == 1'b1) begin
+									 
+								    dp_complete_reg <= 1'b0;
+								    dp_rx_reg <= 1'b1;    
 									 current_state <= CHECK_SOH;
 									 
 							   end

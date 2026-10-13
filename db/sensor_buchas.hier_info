@@ -490,6 +490,7 @@ rst_hardware => start_8_ctl.OUTPUTSELECT
 rst_hardware => reset_adc_config.OUTPUTSELECT
 rst_hardware => select0_0.OUTPUTSELECT
 rst_hardware => select1_0.OUTPUTSELECT
+rst_hardware => select2_0.OUTPUTSELECT
 rst_hardware => data_to_send.OUTPUTSELECT
 rst_hardware => data_to_send.OUTPUTSELECT
 rst_hardware => data_to_send.OUTPUTSELECT
@@ -519,6 +520,7 @@ host_mosi_out <= spi_adc:u_spi_adc.mosi
 host_sclk_out <= spi_adc:u_spi_adc.sclk
 select0_0_out <= select0_0.DB_MAX_OUTPUT_PORT_TYPE
 select1_0_out <= select1_0.DB_MAX_OUTPUT_PORT_TYPE
+select2_0_out <= select2_0.DB_MAX_OUTPUT_PORT_TYPE
 host_mode[0] <= host_mode[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 host_mode[1] <= host_mode[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 host_mode[2] <= host_mode[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
@@ -3964,13 +3966,14 @@ miso_3_in => miso_3_in.IN1
 miso_4_in => miso_4_in.IN1
 miso_5_in => miso_5_in.IN1
 miso_6_in => miso_6_in.IN1
-dp_rx_in => txd_to_gpio46.DATAB
-dp_complete_in => dp_complete_reg.DATAB
+dp_rx_in => dp_rx_reg.DATAA
+dp_complete_in => dp_complete_reg.DATAA
 txd_to_gpio46 <= txd_to_gpio46.DB_MAX_OUTPUT_PORT_TYPE
 requested_data_out <= requested_data_out.DB_MAX_OUTPUT_PORT_TYPE
 acquire_again_out <= acquire_again.DB_MAX_OUTPUT_PORT_TYPE
 select0_1_out <= select0_1.DB_MAX_OUTPUT_PORT_TYPE
 select1_1_out <= select1_1.DB_MAX_OUTPUT_PORT_TYPE
+select2_1_out <= select2_1.DB_MAX_OUTPUT_PORT_TYPE
 convst_out <= convst_out.DB_MAX_OUTPUT_PORT_TYPE
 host_sclk_out <= host_sclk_out.DB_MAX_OUTPUT_PORT_TYPE
 host_mosi_out <= host_mosi_out.DB_MAX_OUTPUT_PORT_TYPE
@@ -3985,7 +3988,8 @@ channel_selector_out[0] <= channel_selector_reg[0].DB_MAX_OUTPUT_PORT_TYPE
 channel_selector_out[1] <= channel_selector_reg[1].DB_MAX_OUTPUT_PORT_TYPE
 channel_selector_out[2] <= channel_selector_reg[2].DB_MAX_OUTPUT_PORT_TYPE
 dp_tx_out <= dp_tx_out.DB_MAX_OUTPUT_PORT_TYPE
-dp_enable_out <= dp_enable_reg.DB_MAX_OUTPUT_PORT_TYPE
+dp_enable_out <= dp_tx_out.DB_MAX_OUTPUT_PORT_TYPE
+dp_rx_out <= dp_rx_out.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |sensor_buchas|slaver_states_main:inst4|crc16:u_crc16
@@ -18395,41 +18399,42 @@ data[0] => lpm_mux:$00001.data[0][0]
 data[1] => lpm_mux:$00001.data[1][0]
 data[2] => lpm_mux:$00001.data[2][0]
 data[3] => lpm_mux:$00001.data[3][0]
+data[4] => lpm_mux:$00001.data[4][0]
 sel[0] => lpm_mux:$00001.sel[0]
 sel[1] => lpm_mux:$00001.sel[1]
+sel[2] => lpm_mux:$00001.sel[2]
 result <= lpm_mux:$00001.result[0]
 
 
 |sensor_buchas|MUX:inst11|lpm_mux:$00001
-data[0][0] => mux_06c:auto_generated.data[0]
-data[1][0] => mux_06c:auto_generated.data[1]
-data[2][0] => mux_06c:auto_generated.data[2]
-data[3][0] => mux_06c:auto_generated.data[3]
-sel[0] => mux_06c:auto_generated.sel[0]
-sel[1] => mux_06c:auto_generated.sel[1]
+data[0][0] => mux_26c:auto_generated.data[0]
+data[1][0] => mux_26c:auto_generated.data[1]
+data[2][0] => mux_26c:auto_generated.data[2]
+data[3][0] => mux_26c:auto_generated.data[3]
+data[4][0] => mux_26c:auto_generated.data[4]
+sel[0] => mux_26c:auto_generated.sel[0]
+sel[1] => mux_26c:auto_generated.sel[1]
+sel[2] => mux_26c:auto_generated.sel[2]
 clock => ~NO_FANOUT~
 aclr => ~NO_FANOUT~
 clken => ~NO_FANOUT~
-result[0] <= mux_06c:auto_generated.result[0]
+result[0] <= mux_26c:auto_generated.result[0]
 
 
-|sensor_buchas|MUX:inst11|lpm_mux:$00001|mux_06c:auto_generated
-data[0] => _.IN0
-data[0] => _.IN0
-data[1] => _.IN0
+|sensor_buchas|MUX:inst11|lpm_mux:$00001|mux_26c:auto_generated
+data[0] => _.IN1
+data[1] => _.IN1
 data[2] => _.IN1
-data[2] => _.IN1
-data[3] => _.IN0
-result[0] <= result_node[0].DB_MAX_OUTPUT_PORT_TYPE
-sel[0] => _.IN1
-sel[0] => _.IN0
+data[3] => _.IN1
+data[4] => muxlut_result0w.IN0
+result[0] <= muxlut_result0w.DB_MAX_OUTPUT_PORT_TYPE
 sel[0] => _.IN0
 sel[0] => _.IN0
 sel[0] => _.IN0
 sel[0] => _.IN0
 sel[1] => _.IN0
 sel[1] => _.IN0
-sel[1] => _.IN0
-sel[1] => _.IN0
+sel[2] => _.IN0
+sel[2] => muxlut_result0w.IN1
 
 
