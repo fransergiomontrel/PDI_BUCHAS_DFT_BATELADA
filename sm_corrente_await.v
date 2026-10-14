@@ -79,7 +79,6 @@ module slaver_states_main (
 	 
 	 assign channel_selector_out = channel_selector_reg;
 
-
     //22 bit size register to insert delay thick 
     (* preserve *) reg [21:0] is_finished;
 
@@ -234,7 +233,6 @@ module slaver_states_main (
         .rising_edge(ed_rx_done)  // saída
     );
 
-
     //Signal which outputs rising edge of arriving pulse on optical port
     wire ed_new_pulse;
 
@@ -265,8 +263,36 @@ module slaver_states_main (
 	 localparam GET_ID_SIZE = 8'h09;
 	 localparam GET_CONFIG_SIZE = 8'h07;
 	 localparam SET_CONFIG_SIZE = 8'h07;
+	 
+	 //Alarm bytes
+	 localparam OK_BYTE = 8'h00;
+	 localparam NOT_SELECTED_BYTE = 8'h01;
+    localparam RESPONSE_TIMEOUT_BYTE = 8'h02;
+    localparam CRC_FAILURE_BYTE = 8'h03;
+    localparam INVALID_LENGTH_BYTE = 8'h04;
+    localparam UNEXPECTED_COMMAND_BYTE = 8'h05;
+    localparam UART_FAILURE_BYTE = 8'h06;
+    localparam EXTRA_DATA_BYTE = 8'h07;
+    localparam CONFIGURATION_MISMATCH_BYTE = 8'h08;
+    localparam CALIBRATION_EXHAUSTED_BYTE = 8'h09;
+    localparam CONVERSION_FAILURE_BYTE = 8'h0A;
+    localparam TRANSMIT_TIMEOUT_BYTE = 8'h0B;
+	 localparam INVALID_FRAME_BYTE = 8'h0C;
+	 //Unsupported Command
+	 localparam FPGA_ERROR_1_BYTE = 8'h21;
+	 //Invalid parameter
+	 localparam FPGA_ERROR_2_BYTE = 8'h22;
+	 //Invalid length
+	 localparam FPGA_ERROR_3_BYTE = 8'h23;
+	 //Unsupported Vref
+	 localparam FPGA_ERROR_4_BYTE = 8'h24;
+	 //Busy
+	 localparam FPGA_ERROR_5_BYTE = 8'h25;
+	 //Config required
+	 localparam FPGA_ERROR_6_BYTE = 8'h26;
+	 localparam FPGA_UNKNOWN_BYTE = 8'h2F;
 	   
-    //Bytes of protocol
+    //Commands bytes
     localparam START_BYTE = 8'h01;//Start of frame byte
 	 localparam END_BYTE = 8'h04;//End of frame byte
     localparam ECHO_BYTE = 8'h01;//Echo byte
@@ -393,8 +419,6 @@ module slaver_states_main (
 					 set_get_adc_reset <= 1'b1;
 					 
 			   end
-				
-				
 				
             //state machine
             case (current_state)			  
@@ -1485,7 +1509,6 @@ module slaver_states_main (
                 
 								
 							   //Register signal when DP completes
-								reset_uart_rx <= 1'b1;
 								
 								select0_1 <= 1'b0;
                         select1_1 <= 1'b0;
