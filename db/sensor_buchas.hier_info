@@ -3989,7 +3989,15 @@ channel_selector_out[1] <= channel_selector_reg[1].DB_MAX_OUTPUT_PORT_TYPE
 channel_selector_out[2] <= channel_selector_reg[2].DB_MAX_OUTPUT_PORT_TYPE
 dp_tx_out <= dp_tx_out.DB_MAX_OUTPUT_PORT_TYPE
 dp_enable_out <= dp_tx_out.DB_MAX_OUTPUT_PORT_TYPE
-dp_rx_out <= dp_rx_out.DB_MAX_OUTPUT_PORT_TYPE
+dp_rx_out <= dp_rx_reg.DB_MAX_OUTPUT_PORT_TYPE
+alarm_out[0] <= alarm_out[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+alarm_out[1] <= alarm_out[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+alarm_out[2] <= alarm_out[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+alarm_out[3] <= alarm_out[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+alarm_out[4] <= alarm_out[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+alarm_out[5] <= alarm_out[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+alarm_out[6] <= alarm_out[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+alarm_out[7] <= alarm_out[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |sensor_buchas|slaver_states_main:inst4|crc16:u_crc16
@@ -7868,6 +7876,14 @@ data_in[654] => shift_reg.DATAB
 data_in[654] => shift_reg_8.DATAB
 data_in[655] => shift_reg.DATAB
 data_in[655] => shift_reg_8.DATAB
+alarm_input[0] => reserved_2_reg.DATAB
+alarm_input[1] => reserved_2_reg.DATAB
+alarm_input[2] => reserved_2_reg.DATAB
+alarm_input[3] => reserved_2_reg.DATAB
+alarm_input[4] => reserved_2_reg.DATAB
+alarm_input[5] => reserved_2_reg.DATAB
+alarm_input[6] => reserved_2_reg.DATAB
+alarm_input[7] => reserved_2_reg.DATAB
 tx <= tx~reg0.DB_MAX_OUTPUT_PORT_TYPE
 done <= done~reg0.DB_MAX_OUTPUT_PORT_TYPE
 

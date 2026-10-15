@@ -34,7 +34,8 @@ module slaver_states_main (
 	 output wire [2:0] channel_selector_out,
 	 output wire dp_tx_out,
 	 output wire dp_enable_out,
-	 output wire dp_rx_out
+	 output wire dp_rx_out,
+	 output reg [7:0] alarm_out
 
 );
 
@@ -52,9 +53,9 @@ module slaver_states_main (
     reg tx_reg;
 	 reg[2:0] channel_selector_reg;
 	 
-	 //reg dp_enable_reg;
 	 reg dp_complete_reg;
-	 (* preserve *) reg dp_rx_reg;
+	 reg dp_rx_reg;
+	 reg [7:0] fpga_error_byte;
 	 
 	 
     wire host_sclk_fpga;
@@ -89,7 +90,7 @@ module slaver_states_main (
     reg [3:0] payload_bytes_counter;
 
     //32 bit size register to store 4 bytes returned through SPI
-    reg [31:0] readed_data_32;
+    reg [31:0] read_data_32;
 
     //16 bit size register to count 7215 (samples) * 6 (channels for all samples) * 1 (word by sample)
     reg [15:0] read_words;
@@ -260,9 +261,10 @@ module slaver_states_main (
 		  );
 
     //Used payload sizes
-	 localparam GET_ID_SIZE = 8'h09;
-	 localparam GET_CONFIG_SIZE = 8'h07;
-	 localparam SET_CONFIG_SIZE = 8'h07;
+	 localparam GET_ID_SIZE = 8'd09;
+	 localparam GET_CONFIG_SIZE = 8'd07;
+	 localparam SET_CONFIG_SIZE = 8'd07;
+	 localparam ERROR_SIZE = 8'd01;
 	 
 	 //Alarm bytes
 	 localparam OK_BYTE = 8'h00;
@@ -306,7 +308,7 @@ module slaver_states_main (
     localparam GET_RESULTS_BYTE = 8'h40;//Get results byte
     localparam BYPASS_ON_BYTE = 8'h60;//Bypass on byte
 	 localparam BYPASS_OFF_BYTE = 8'h61;//Bypass on byte
-    localparam ERROR_BYTE = 8'h7F;//Error byte	 
+    localparam ERROR_BYTE = 8'h7F;//Error byte
 	 localparam COMMAND_TO_READ  = 32'h48140000;//Command to read adc configuration of converters
 	 localparam COMMAND_TO_WRITE = 24'hD01400;//Command to write adc configuration of converters
 	 
@@ -396,9 +398,10 @@ module slaver_states_main (
 				channel_mask_in <= 8'hFF;
 				channel_selector_reg <= 3'd0;
 				
-				//dp_enable_reg <= 1'b0;
 				dp_complete_reg <= 1'b0; 
 				dp_rx_reg <= 1'b1;
+				alarm_out <= OK_BYTE;
+				fpga_error_byte <= 8'b00;
 
         end
 
@@ -412,7 +415,6 @@ module slaver_states_main (
             acquire_again <= 1'b0;
 				//Disable crc16 calculus
 				crc_en_reg <= 1'b0;
-				
 				
 				if ((set_get_adc_done_signal == 1'd1) && (current_state == DO_COMMAND) && (type_reg == SET_CONFIG_BYTE)) begin
 									 							  
@@ -635,10 +637,12 @@ module slaver_states_main (
 
                         end
 								
-                        //NO VALID FRAME
+                        //NO VALID COMMAND
                         else  begin
 								    crc_restart  <= 1'b1;
-                            current_state <= CHECK_SOH;
+									 fpga_error_byte <= FPGA_ERROR_1_BYTE;
+                            //current_state <= CHECK_SOH;
+									 current_state <= ERROR_BYTE;
                         end
 
                     end
@@ -654,28 +658,43 @@ module slaver_states_main (
                 CHECK_LENGTH:
 
                 begin
+					 
+                if (ed_rx_done == 1'b1) begin
+					 
+						  case (rx_uart_out)
 
-
-                    if (ed_rx_done == 1'b1) begin
-						  
-								crc_en_reg <= 1'b1;
-								data_in_crc <= rx_uart_out;
+                        GET_ID_SIZE,
+                        GET_CONFIG_SIZE,
+                        ERROR_SIZE: begin
 								
-                        lenth_reg <= rx_uart_out;
-                        current_state <= READ_PAYLOAD;
+								    crc_en_reg <= 1'b1;
+								    data_in_crc <= rx_uart_out;
+								
+                            lenth_reg <= rx_uart_out;
+                            current_state <= READ_PAYLOAD;
 
+                    end
+
+                        default: begin
+								    
+									 crc_restart  <= 1'b1;
+									 fpga_error_byte <= FPGA_ERROR_3_BYTE;
+									 current_state <= ERROR_BYTE;
+									 
                         end
-                    else begin
+
+                    endcase
 						  
-							   
-                        current_state <= CHECK_LENGTH;
+					 end
+				
+					 else begin
+						     
+                    current_state <= CHECK_LENGTH;
 
-                    end						
-
+                end						  
+                    
                 end 	
 
-                
-					 
 					 READ_PAYLOAD:
 
                 begin
@@ -757,6 +776,7 @@ module slaver_states_main (
 					 else begin
 					 
 						  current_state <= CHECK_SOH;
+						  fpga_error_byte <= CRC_FAILURE_BYTE;
 						  
 					 end
 					 //Restart crc16 once that it won't be used again until next frame
@@ -1507,7 +1527,6 @@ module slaver_states_main (
 						  
 						  BYPASS_ON_BYTE: begin
                 
-								
 							   //Register signal when DP completes
 								
 								select0_1 <= 1'b0;
@@ -1538,8 +1557,106 @@ module slaver_states_main (
 						  
 						  ERROR_BYTE: begin
 						      
-                       
+                       //////////////////////////
 								
+								if ((select0_1 != 1'b1) && (select1_1 != 1'b1)) begin
+								
+								    select0_1 <= 1'b1;
+									 select1_1 <= 1'b1;
+									 select2_1 <= 1'b0;
+									 
+									 //Send byte of start through uart
+                            start_8_ctl <= 1'b1;
+									 byte_to_send <= START_BYTE;
+									 
+									 crc_en_reg <= 1'b1;
+								    data_in_crc <= START_BYTE;
+									 
+									 bytes_counter <= bytes_counter + 1;
+									 
+								end
+								
+								else if (done_8_ctl == 1'b1) begin
+								
+									 if ((byte_to_send == START_BYTE) && (bytes_counter == 4'd1)) begin
+									
+									     //Send byte of type through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= ERROR_BYTE;
+										  
+										  crc_en_reg <= 1'b1;
+								        data_in_crc <= ERROR_BYTE;
+										  
+										  bytes_counter <= bytes_counter + 1;
+									 
+									 end
+								
+								    else if ((byte_to_send == ERROR_BYTE) && (bytes_counter == 4'd2)) begin
+									 
+									     //Send type byte through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= ERROR_SIZE;
+										  
+										  crc_en_reg <= 1'b1;
+								        data_in_crc <= ERROR_SIZE;
+										  
+										  bytes_counter <= 4'd0;
+										
+									 
+									 end
+								
+								    else if (payload_bytes_counter < ERROR_SIZE) begin
+									 
+										  //Send error code byte through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= fpga_error_byte;
+										  
+										  crc_en_reg <= 1'b1;
+								        data_in_crc <= fpga_error_byte;
+										  
+										  payload_bytes_counter <= payload_bytes_counter + 1;
+									 
+									 end
+									 
+									 else if (payload_bytes_counter == ERROR_SIZE) begin
+									 
+									     //Send byte of end through uart
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= END_BYTE;
+										  
+										  crc_en_reg <= 1'b1;
+										  data_in_crc <= END_BYTE;
+										  
+										  payload_bytes_counter <= payload_bytes_counter + 1;
+										  
+									 end
+									 
+									 else if (payload_bytes_counter == (ERROR_SIZE + 1)) begin
+									 
+										  //Send byte high of crc
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= crc_result[15:8];
+										  crc_low_reg <= crc_result[7:0];
+										  
+										  payload_bytes_counter <= payload_bytes_counter + 1;
+										  
+									 end
+									 
+									 else if (payload_bytes_counter == (ERROR_SIZE + 2)) begin
+									 
+										  crc_restart  <= 1'b1;
+										  //Send byte low of crc
+									     start_8_ctl <= 1'b1;
+									     byte_to_send <= crc_low_reg;
+										  payload_bytes_counter <= 4'd0;
+										  
+										  current_state <= CHECK_SOH;
+										  
+									 end
+									 
+								end
+									
+							  //////////////////////////
                     end
 
                    
@@ -1561,7 +1678,7 @@ module slaver_states_main (
 
                         if (bytes_counter == 4'd1) begin
 
-                            readed_data_32 <= {readed_data_8, 24'h000000};
+                            read_data_32 <= {readed_data_8, 24'h000000};
                             //byte 2 to be sent
                             command_new_byte <= 1'b1;
                             byte_to_send <= 8'h00;
@@ -1570,7 +1687,7 @@ module slaver_states_main (
 
                         else if (bytes_counter == 4'd2) begin
 
-                            readed_data_32 <= {readed_data_32[31:24], readed_data_8, 16'h0000};
+                            read_data_32 <= {read_data_32[31:24], readed_data_8, 16'h0000};
                             //byte 3 to be sent
                             command_new_byte <= 1'b1;
                             byte_to_send <= 8'h00;
@@ -1578,7 +1695,7 @@ module slaver_states_main (
                         end
                         else if (bytes_counter == 4'd3) begin
 
-                            readed_data_32 <= {readed_data_32[31:16], readed_data_8, 8'h00};
+                            read_data_32 <= {read_data_32[31:16], readed_data_8, 8'h00};
                             //byte 4 to be sent
                             command_new_byte <= 1'b1;
                             byte_to_send <= 8'h00;
@@ -1586,7 +1703,7 @@ module slaver_states_main (
                         end
                         else if (bytes_counter == 4'd4) begin
 
-                            readed_data_32 <= {readed_data_32[31:8], readed_data_8};
+                            read_data_32 <= {read_data_32[31:8], readed_data_8};
                             bytes_counter <= 4'd0;											  
 
                         end
@@ -1595,7 +1712,7 @@ module slaver_states_main (
                     if (bytes_counter == 4'd0) begin
 
                         //32 bit returned data completed 
-                        readed_data_32 <= readed_data_32 | 32'hAC000001;
+                        read_data_32 <= read_data_32 | 32'hAC000001;
 
                         host_mode <= MODE_CFG_FPGA;
 
@@ -1610,7 +1727,7 @@ module slaver_states_main (
 
                     //byte 1 to be sent
                     command_new_byte <= 1'b1;
-                    byte_to_send <= readed_data_32[31:24];
+                    byte_to_send <= read_data_32[31:24];
                     bytes_counter <= bytes_counter + 1;
                     current_state <= EN_W_3;
 
@@ -1629,7 +1746,7 @@ module slaver_states_main (
 
                             //byte 2 to be sent
                             command_new_byte <= 1'b1;
-                            byte_to_send <= readed_data_32[23:16];
+                            byte_to_send <= read_data_32[23:16];
 
                         end
 
@@ -1637,14 +1754,14 @@ module slaver_states_main (
 
                             //byte 3 to be sent
                             command_new_byte <= 1'b1;
-                            byte_to_send <= readed_data_32[15:8];
+                            byte_to_send <= read_data_32[15:8];
 
                         end
                         else if (bytes_counter == 4'd3) begin
 
                             //byte 4 to be sent
                             command_new_byte <= 1'b1;
-                            byte_to_send <= readed_data_32[7:0];
+                            byte_to_send <= read_data_32[7:0];
 
                         end
                         else if (bytes_counter == 4'd4) begin
@@ -1757,7 +1874,7 @@ module slaver_states_main (
 
                         if (bytes_counter == 4'd1) begin
 
-                            readed_data_32 <= {readed_data_8, 24'h000000};
+                            read_data_32 <= {readed_data_8, 24'h000000};
                             //byte 2 to be sent
                             command_new_byte <= 1'b1;
                             byte_to_send <= 8'h00;
@@ -1766,7 +1883,7 @@ module slaver_states_main (
 
                         else if (bytes_counter == 4'd2) begin
 
-                            readed_data_32 <= {readed_data_32[31:24], readed_data_8, 16'h0000};
+                            read_data_32 <= {read_data_32[31:24], readed_data_8, 16'h0000};
                             //byte 3 to be sent
                             command_new_byte <= 1'b1;
                             byte_to_send <= 8'h00;
@@ -1774,7 +1891,7 @@ module slaver_states_main (
                         end
                         else if (bytes_counter == 4'd3) begin
 
-                            readed_data_32 <= {readed_data_32[31:16], readed_data_8, 8'h00};
+                            read_data_32 <= {read_data_32[31:16], readed_data_8, 8'h00};
                             //byte 4 to be sent
                             command_new_byte <= 1'b1;
                             byte_to_send <= 8'h00;
@@ -1782,7 +1899,7 @@ module slaver_states_main (
                         end
                         else if (bytes_counter == 4'd4) begin
 
-                            readed_data_32 <= {readed_data_32[31:8], readed_data_8};
+                            read_data_32 <= {read_data_32[31:8], readed_data_8};
                             bytes_counter <= 4'd0;
 
                         end
@@ -1793,7 +1910,7 @@ module slaver_states_main (
                     if (bytes_counter == 4'd0) begin
 
                         //32 bit returned data completed 
-                        readed_data_32 <= (readed_data_32 | 32'hAC000000) & (32'hFFFFFFFE);
+                        read_data_32 <= (read_data_32 | 32'hAC000000) & (32'hFFFFFFFE);
 
                         host_mode <= MODE_CFG_FPGA;
 
@@ -1809,7 +1926,7 @@ module slaver_states_main (
                 begin
                     //byte 1 to be sent
                     command_new_byte <= 1'b1;
-                    byte_to_send <= readed_data_32[31:24];
+                    byte_to_send <= read_data_32[31:24];
                     bytes_counter <= bytes_counter + 1;
                     current_state <= DIS_W_3;
                 end
@@ -1828,7 +1945,7 @@ module slaver_states_main (
 
                             //byte 2 to be sent
                             command_new_byte <= 1'b1;
-                            byte_to_send <= readed_data_32[23:16];
+                            byte_to_send <= read_data_32[23:16];
 
                         end
 
@@ -1836,14 +1953,14 @@ module slaver_states_main (
 
                             //byte 3 to be sent
                             command_new_byte <= 1'b1;
-                            byte_to_send <= readed_data_32[15:8];
+                            byte_to_send <= read_data_32[15:8];
 
                         end
                         else if (bytes_counter == 4'd3) begin
 
                             //byte 4 to be sent
                             command_new_byte <= 1'b1;
-                            byte_to_send <= readed_data_32[7:0];
+                            byte_to_send <= read_data_32[7:0];
                         end
                         else if (bytes_counter == 4'd4) begin
 

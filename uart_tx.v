@@ -3,6 +3,7 @@ module uart_tx (
     input  wire        rst,       // reset síncrono
     input  wire        start,     // inicia transmissão
     input  wire [655:0] data_in,   // dado paralelo
+	 input wire [7:0] alarm_input,
     output reg         tx,        // saída serial
     output reg         done       // pulso de fim	 
 
@@ -258,6 +259,7 @@ module uart_tx (
 						  
 						      count_byte <= 7'd0;
 								byte_to_send <= reserved_1_reg;
+								reserved_2_reg <= alarm_input;
 								
 					         start_8_ctl <= 1'b1;
 								state_uart_tx <= RESERVED_1_SM;
