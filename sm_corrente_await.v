@@ -625,24 +625,14 @@ module slaver_states_main (
 
                         end
 								
-								//FRAME OF ERROR
-                        else if (rx_uart_out == ERROR_BYTE)  begin
-                            
-									 crc_en_reg <= 1'b1;
-								    data_in_crc <= ERROR_BYTE;
-									 
-									 type_reg <= ERROR_BYTE;
-									 
-									 current_state <= CHECK_LENGTH;
-
-                        end
-								
                         //NO VALID COMMAND
                         else  begin
+								
 								    crc_restart  <= 1'b1;
 									 fpga_error_byte <= FPGA_ERROR_1_BYTE;
-                            //current_state <= CHECK_SOH;
-									 current_state <= ERROR_BYTE;
+									 type_reg <= ERROR_BYTE;
+									 current_state <= DO_COMMAND;
+									 
                         end
 
                     end
@@ -668,6 +658,7 @@ module slaver_states_main (
                         ERROR_SIZE: begin
 								
 								    crc_en_reg <= 1'b1;
+									 
 								    data_in_crc <= rx_uart_out;
 								
                             lenth_reg <= rx_uart_out;
@@ -679,11 +670,14 @@ module slaver_states_main (
 								    
 									 crc_restart  <= 1'b1;
 									 fpga_error_byte <= FPGA_ERROR_3_BYTE;
-									 current_state <= ERROR_BYTE;
+									 type_reg <= ERROR_BYTE;
+									 current_state <= DO_COMMAND;
 									 
                         end
 
                     endcase
+						  
+						  
 						  
 					 end
 				
@@ -775,8 +769,9 @@ module slaver_states_main (
 					 end
 					 else begin
 					 
-						  current_state <= CHECK_SOH;
 						  fpga_error_byte <= CRC_FAILURE_BYTE;
+						  type_reg <= ERROR_BYTE;
+						  current_state <= DO_COMMAND;
 						  
 					 end
 					 //Restart crc16 once that it won't be used again until next frame
@@ -1281,7 +1276,7 @@ module slaver_states_main (
 								        data_in_crc <= SET_CONFIG_BYTE;
 										  
 										  bytes_counter <= bytes_counter + 1;
-										  //host_mode <= MODE_SET_CONFIG;
+										  
 									 
 									 end
 								
@@ -1294,8 +1289,6 @@ module slaver_states_main (
 										  crc_en_reg <= 1'b1;
 								        data_in_crc <= SET_CONFIG_SIZE;
 										  
-										  //adc_word_reg <= COMMAND_TO_WRITE;
-										  //set_get_adc_reset <= 1'b0;
 										  channel_mask_in <= payload_reg[payload_bytes_counter];
 										  
 										  bytes_counter <= 4'd0;

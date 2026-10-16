@@ -11,7 +11,7 @@ module driver_ADS1118 (
 	 
 );
 
-
+   reg acquire_again_reg;
    reg [15:0]   driver_config_reg;
 	/*(* noprune *)*/ wire [15:0]   driver_data_reg;
 	wire  driver_done_miso;
@@ -68,7 +68,7 @@ module driver_ADS1118 (
 	 localparam SINGLE_AN1_4_096 = 16'h526A;
 	 localparam SINGLE_AN2_4_096 = 16'h626A;
 	 localparam SINGLE_AN3_4_096 = 16'h726A;
-	 localparam TEMP_MODE = 16'h726A;
+	 localparam TEMP_MODE = 16'h387A;
 	 
 	 
 	always @(posedge clk) begin
@@ -83,19 +83,21 @@ module driver_ADS1118 (
 			  loaded <= 1'b0;
 			  shift_temp <= 2'b00;
 			  driver_config_reg <= 16'h0000;
+			  acquire_again_reg <= 1'b0;
 			  driver1118_state <= IDLE_4_20;
 			  
 		 end
 		 
 		 else begin
-				
+			
+			  acquire_again_reg <= acquire_again;
 		     case (driver1118_state)
 		
                IDLE_4_20:
 			  
 			          begin
 							 
-							  if (!loaded || acquire_again) begin							 
+							  if (!loaded || acquire_again_reg) begin							 
 								   loaded <= 1'b1;
 								   driver1118_state <= SET_CHANNEL_0;								 
 							  end

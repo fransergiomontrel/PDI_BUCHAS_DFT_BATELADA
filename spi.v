@@ -125,6 +125,7 @@ module spi_4_20 (
 						 if (bit_cnt > 5'd0) begin
 						     shift_reg <= shift_reg << 1;
 						     bit_cnt <= bit_cnt - 1;
+							  current_mosi_state <= AWAIT_SCLK_RISE_MOSI;
 						 end
 						 
 						 else if (bit_cnt == 5'd0) begin
