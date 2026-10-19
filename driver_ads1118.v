@@ -64,11 +64,11 @@ module driver_ADS1118 (
 	 reg [3:0] driver1118_state;
 	 
 	 //COMMANDS TO SET
-	 localparam SINGLE_AN0_4_096 = 16'h426A;    
-	 localparam SINGLE_AN1_4_096 = 16'h526A;
-	 localparam SINGLE_AN2_4_096 = 16'h626A;
-	 localparam SINGLE_AN3_4_096 = 16'h726A;
-	 localparam TEMP_MODE = 16'h387A;
+	 localparam SINGLE_AN0_4_096 = 16'hC36A;    
+	 localparam SINGLE_AN1_4_096 = 16'hD36A;
+	 localparam SINGLE_AN2_4_096 = 16'hE36A;
+	 localparam SINGLE_AN3_4_096 = 16'hF36A;
+	 localparam TEMP_MODE = 16'hB97A;
 	 
 	 
 	always @(posedge clk) begin
@@ -202,7 +202,7 @@ module driver_ADS1118 (
 								
 							  array_data[3] <= driver_data_reg;
 							  driver1118_state <= SET_TEMP;
-								 
+							  
 												 
 						 end
 			 

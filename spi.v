@@ -34,11 +34,12 @@ module spi_4_20 (
 	 
 	 // Definição dos estados (Verilog clássico)
 	 localparam AWAIT_RESET_MISO = 3'b000;
-	 localparam AWAIT_MISO_DATA = 3'b001;
-	 localparam DELAY_CSSC_MIS0 = 3'b010;
-	 localparam AWAIT_SCLK_FALL_MISO = 3'b011;
-	 localparam AWAIT_SCLK_RISE_MISO = 3'b100;
-	 localparam DELAY_SCCS_MIS0 = 3'b101;
+	 localparam AWAIT_SETTLING_MISO = 3'b001;
+	 localparam AWAIT_MISO_DATA = 3'b010;
+	 localparam DELAY_CSSC_MIS0 = 3'b011;
+	 localparam AWAIT_SCLK_FALL_MISO = 3'b100;
+	 localparam AWAIT_SCLK_RISE_MISO = 3'b101;
+	 localparam DELAY_SCCS_MIS0 = 3'b110;
 	 
 	 reg [2:0] current_miso_state;
 	 
@@ -212,12 +213,22 @@ module spi_4_20 (
 		           delay <= 5'd0;
 				     ncs <= 1'b0;
 				     miso_enable <= 1'b0;
-			        current_miso_state <= AWAIT_MISO_DATA;
+					  current_miso_state <= AWAIT_SETTLING_MISO;
 						  
 		      end
 				
 		  end
 		  
+	 end
+	 
+	 AWAIT_SETTLING_MISO:
+	 begin
+	 
+	 delay  <= delay + 5'd1;
+	 if (delay == 5'd20) begin
+		  delay <= 5'd0;
+	     current_miso_state <= AWAIT_MISO_DATA;
+	 end
 	 end
 	 
 	 AWAIT_MISO_DATA:
