@@ -2,14 +2,18 @@ module driver_ADS1118 (
 
     input  wire  clk,
     input  wire  rst,       // reset síncrono
+	 input  driver_miso,
+	 input wire acquire_again,
 	 output driver_ncs,
 	 output driver_sclk,
 	 output driver_mosi,
-	 input  driver_miso,
 	 output [79:0] driver_data_out,
-	 input wire acquire_again
+	 output wire loaded_out
+	 
 	 
 );
+
+   assign loaded_out = loaded; 
 
    reg acquire_again_reg;
    reg [15:0]   driver_config_reg;
@@ -32,7 +36,7 @@ module driver_ADS1118 (
 	
 	reg [1:0] shift_temp;
    
-   reg          loaded;	
+   reg loaded;	
 	 
 	 spi_4_20 u_spi_4_20(
     .clk(clk),
@@ -96,9 +100,9 @@ module driver_ADS1118 (
                IDLE_4_20:
 			  
 			          begin
-							 
-							  if (!loaded || acquire_again_reg) begin							 
-								   loaded <= 1'b1;
+						 
+							  loaded <= 1'b0;
+							  if (acquire_again_reg) begin							 
 								   driver1118_state <= SET_CHANNEL_0;								 
 							  end
 							 

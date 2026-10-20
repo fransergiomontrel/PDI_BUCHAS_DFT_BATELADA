@@ -13,6 +13,7 @@ module slaver_states_main (
 	 input wire miso_6_in,
 	 input wire dp_rx_in,
 	 input wire dp_complete_in,
+	 input wire loaded_in,
     output wire txd_to_gpio46,
     output wire requested_data_out,
     output wire acquire_again_out,
@@ -335,7 +336,8 @@ module slaver_states_main (
     localparam DELAY_SAMPLES = 5'b10011;//Requesting SRAM data of 86580 bytes
     localparam AWAIT_CORRENTE_TX = 5'b10100; //Request 84 bytes which is all data available (phasors bytes, temp and 4-20mA bytes and reserved ones)
     localparam AWAIT_HIGH = 5'b10101; 
-    localparam AWAIT_LOW = 5'b10110; 
+    localparam AWAIT_LOW = 5'b10110;
+	 localparam REQUEST__DATA_ADS1118 = 5'b10111;
     (* preserve *) reg [4:0] current_state;
 
     //Modes definition to internal connection of switch module
@@ -1512,9 +1514,8 @@ module slaver_states_main (
 						  
 						  GET_RESULTS_BYTE: begin
 						      
-                        requested_data <= 1'b1;
-                        tx_reg <= 1'b0;
-                        current_state <= AWAIT_CORRENTE_TX;
+                        acquire_again <= 1'b1;
+							   current_state <= REQUEST__DATA_ADS1118;
 								
                     end
 						  
@@ -2033,20 +2034,32 @@ module slaver_states_main (
                     end
                 end
 
+					 REQUEST__DATA_ADS1118:
+					 begin
+					     acquire_again <= 1'b0;
+						  if (loaded_in == 1'b1) begin
+						  
+					         requested_data <= 1'b1;
+								current_state <= AWAIT_CORRENTE_TX;
+								
+						  end
+					 end
+					 
                 AWAIT_CORRENTE_TX:
 
                 begin
 
                     if (done_tx == 1'b0) begin
-
+								
+								tx_reg <= 1'b0;
                         requested_data <= 1'b0;
                         current_state <= AWAIT_CORRENTE_TX;
 
                     end
                     else begin
+						  
                         tx_reg <= 1'b1;
 								//After request data is done, enable other 4-20 + temp measure is requested
-                        acquire_again <= 1'b1;
                         current_state <= CHECK_SOH;
 
                     end
