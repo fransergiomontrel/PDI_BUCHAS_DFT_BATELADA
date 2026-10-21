@@ -4,7 +4,6 @@ clk => RAM_interface:inst15.clk
 clk => host_interface:inst1.clk
 clk => reset_module:inst7.clk
 clk => slaver_states:inst31.clk
-clk => switch:inst9.clk
 clk => acquisition_module:inst5.clk
 clk => slaver_states_main:inst4.clk
 clk => uart_tx:inst2.clk
@@ -55,7 +54,8 @@ dft_on <= slaver_states_main:inst4.led_dft_on_out
 tx_on <= slaver_states_main:inst4.led_tx_on_out
 dp_tx <= slaver_states_main:inst4.dp_tx_out
 dp_enable <= slaver_states_main:inst4.dp_enable_out
-enable_led <= inst12.DB_MAX_OUTPUT_PORT_TYPE
+prep_60hz <= slaver_states_main:inst4.prep_60hz_out
+prep_50hz <= slaver_states_main:inst4.prep_50hz_out
 adc_convst[0] <= adc_interface:inst17.adc_convst[0]
 adc_convst[1] <= adc_interface:inst17.adc_convst[1]
 adc_convst[2] <= adc_interface:inst17.adc_convst[2]
@@ -490,7 +490,6 @@ rst_hardware => start_8_ctl.OUTPUTSELECT
 rst_hardware => reset_adc_config.OUTPUTSELECT
 rst_hardware => select0_0.OUTPUTSELECT
 rst_hardware => select1_0.OUTPUTSELECT
-rst_hardware => select2_0.OUTPUTSELECT
 rst_hardware => data_to_send.OUTPUTSELECT
 rst_hardware => data_to_send.OUTPUTSELECT
 rst_hardware => data_to_send.OUTPUTSELECT
@@ -520,7 +519,6 @@ host_mosi_out <= spi_adc:u_spi_adc.mosi
 host_sclk_out <= spi_adc:u_spi_adc.sclk
 select0_0_out <= select0_0.DB_MAX_OUTPUT_PORT_TYPE
 select1_0_out <= select1_0.DB_MAX_OUTPUT_PORT_TYPE
-select2_0_out <= select2_0.DB_MAX_OUTPUT_PORT_TYPE
 host_mode[0] <= host_mode[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 host_mode[1] <= host_mode[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 host_mode[2] <= host_mode[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
@@ -741,8 +739,6 @@ mosi <= mosi~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |sensor_buchas|switch:inst9
-clk => ~NO_FANOUT~
-sreset => ~NO_FANOUT~
 HI_mode[0] => _.IN0
 HI_mode[0] => RI_we_n~1.IN2
 HI_mode[0] => _.IN0
@@ -3973,12 +3969,11 @@ loaded_in => current_state.OUTPUTSELECT
 loaded_in => current_state.OUTPUTSELECT
 loaded_in => current_state.OUTPUTSELECT
 loaded_in => current_state.OUTPUTSELECT
-txd_to_gpio46 <= txd_to_gpio46.DB_MAX_OUTPUT_PORT_TYPE
-requested_data_out <= requested_data_out.DB_MAX_OUTPUT_PORT_TYPE
+txd_to_gpio46 <= txd_reg.DB_MAX_OUTPUT_PORT_TYPE
+requested_data_out <= requested_data.DB_MAX_OUTPUT_PORT_TYPE
 acquire_again_out <= acquire_again.DB_MAX_OUTPUT_PORT_TYPE
 select0_1_out <= select0_1.DB_MAX_OUTPUT_PORT_TYPE
 select1_1_out <= select1_1.DB_MAX_OUTPUT_PORT_TYPE
-select2_1_out <= select2_1.DB_MAX_OUTPUT_PORT_TYPE
 convst_out <= convst_out.DB_MAX_OUTPUT_PORT_TYPE
 host_sclk_out <= host_sclk_out.DB_MAX_OUTPUT_PORT_TYPE
 host_mosi_out <= host_mosi_out.DB_MAX_OUTPUT_PORT_TYPE
@@ -4003,6 +3998,8 @@ alarm_out[4] <= alarm_out[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 alarm_out[5] <= alarm_out[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 alarm_out[6] <= alarm_out[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 alarm_out[7] <= alarm_out[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+prep_60hz_out <= prep_60hz.DB_MAX_OUTPUT_PORT_TYPE
+prep_50hz_out <= prep_50hz.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |sensor_buchas|slaver_states_main:inst4|crc16:u_crc16
@@ -10672,8 +10669,6 @@ data_out_to_uart_tx[572] <= dft_result[11][44].DB_MAX_OUTPUT_PORT_TYPE
 data_out_to_uart_tx[573] <= dft_result[11][45].DB_MAX_OUTPUT_PORT_TYPE
 data_out_to_uart_tx[574] <= dft_result[11][46].DB_MAX_OUTPUT_PORT_TYPE
 data_out_to_uart_tx[575] <= dft_result[11][47].DB_MAX_OUTPUT_PORT_TYPE
-debug <= dft_locale:dft_caller.debug
-debug_res <= luts:luts_table.debug_luts
 
 
 |sensor_buchas|rw_data_module:inst10|spi_shift_v2:shift
@@ -16357,7 +16352,7 @@ cos[12] <= cos[12].DB_MAX_OUTPUT_PORT_TYPE
 cos[13] <= cos[13].DB_MAX_OUTPUT_PORT_TYPE
 cos[14] <= cos[14].DB_MAX_OUTPUT_PORT_TYPE
 cos[15] <= cos[15].DB_MAX_OUTPUT_PORT_TYPE
-debug_luts <= fetch_seen.DB_MAX_OUTPUT_PORT_TYPE
+await_data <= data_ready.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |sensor_buchas|rw_data_module:inst10|luts:luts_table|ufm_read:u_ufm_read
@@ -18422,42 +18417,41 @@ data[0] => lpm_mux:$00001.data[0][0]
 data[1] => lpm_mux:$00001.data[1][0]
 data[2] => lpm_mux:$00001.data[2][0]
 data[3] => lpm_mux:$00001.data[3][0]
-data[4] => lpm_mux:$00001.data[4][0]
 sel[0] => lpm_mux:$00001.sel[0]
 sel[1] => lpm_mux:$00001.sel[1]
-sel[2] => lpm_mux:$00001.sel[2]
 result <= lpm_mux:$00001.result[0]
 
 
 |sensor_buchas|MUX:inst11|lpm_mux:$00001
-data[0][0] => mux_26c:auto_generated.data[0]
-data[1][0] => mux_26c:auto_generated.data[1]
-data[2][0] => mux_26c:auto_generated.data[2]
-data[3][0] => mux_26c:auto_generated.data[3]
-data[4][0] => mux_26c:auto_generated.data[4]
-sel[0] => mux_26c:auto_generated.sel[0]
-sel[1] => mux_26c:auto_generated.sel[1]
-sel[2] => mux_26c:auto_generated.sel[2]
+data[0][0] => mux_06c:auto_generated.data[0]
+data[1][0] => mux_06c:auto_generated.data[1]
+data[2][0] => mux_06c:auto_generated.data[2]
+data[3][0] => mux_06c:auto_generated.data[3]
+sel[0] => mux_06c:auto_generated.sel[0]
+sel[1] => mux_06c:auto_generated.sel[1]
 clock => ~NO_FANOUT~
 aclr => ~NO_FANOUT~
 clken => ~NO_FANOUT~
-result[0] <= mux_26c:auto_generated.result[0]
+result[0] <= mux_06c:auto_generated.result[0]
 
 
-|sensor_buchas|MUX:inst11|lpm_mux:$00001|mux_26c:auto_generated
-data[0] => _.IN1
-data[1] => _.IN1
+|sensor_buchas|MUX:inst11|lpm_mux:$00001|mux_06c:auto_generated
+data[0] => _.IN0
+data[0] => _.IN0
+data[1] => _.IN0
 data[2] => _.IN1
-data[3] => _.IN1
-data[4] => muxlut_result0w.IN0
-result[0] <= muxlut_result0w.DB_MAX_OUTPUT_PORT_TYPE
+data[2] => _.IN1
+data[3] => _.IN0
+result[0] <= result_node[0].DB_MAX_OUTPUT_PORT_TYPE
+sel[0] => _.IN1
+sel[0] => _.IN0
 sel[0] => _.IN0
 sel[0] => _.IN0
 sel[0] => _.IN0
 sel[0] => _.IN0
 sel[1] => _.IN0
 sel[1] => _.IN0
-sel[2] => _.IN0
-sel[2] => muxlut_result0w.IN1
+sel[1] => _.IN0
+sel[1] => _.IN0
 
 

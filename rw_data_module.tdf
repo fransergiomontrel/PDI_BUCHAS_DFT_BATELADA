@@ -33,8 +33,6 @@ subdesign rw_data_module(
 	
 	data_out_to_uart_tx[575..0]: output;
 	
-	debug: output;
-	debug_res: output;
 )
 variable
 	shift: spi_shift_v2 with (N_BITS=16);
@@ -45,7 +43,7 @@ variable
 	buffer_parallel_in[15..0]: dffe;
 	ready_ff: srff;
 	--DFT result bus of 48 bytes to send through tx UART when requested
-	dft_result[11..0][47..0], start_tx_ff, debug_ff: dff;
+	dft_result[11..0][47..0]: dff;
 	
 	--Module which call dft modules
 	dft_caller : dft_locale;
@@ -71,12 +69,6 @@ begin
 	end defaults;
 	
 	
-	--debug = shift.loading_tx;
-	--debug = detect_falling.falling_edge;
-	debug = dft_caller.debug;
-	debug_res = luts_table.debug_luts;
-	--debug = shift.loading_tx;
-	
 	--Connections of dft result bus
 	dft_result[][].clk = clk; 
 	dft_result[][].clrn = !done_tx;
@@ -96,7 +88,7 @@ begin
 	--dft_caller.word[] = H"0000";
 	dft_caller.tx_status = shift.loading_tx;
 	dft_caller.end_tx = done_tx;
-	dft_caller.await_lut = luts_table.debug_luts;
+	dft_caller.await_lut = luts_table.await_data;
 	dft_caller.word[] = buffer_parallel_in[15..0].q;
 	luts_table.addr[] = dft_caller.luts_addr_out[];
 	
@@ -117,10 +109,6 @@ begin
 	
 	dft_result[10][].d = dft_caller.cos_out6[];
 	dft_result[11][].d = dft_caller.sin_out6[];
-	
-		
-	--Lock level of last dft
-	 start_tx_ff.d = dft_caller.start_tx # start_tx_ff;
 	 
 	
 	--Connect array dft bus to output which in data in to uart tx
@@ -195,7 +183,7 @@ begin
 			busy_ff.d = Vcc;
 			load_parallel_FF.d = Vcc;
 			oe_n_FF.d = Gnd;
-			if luts_table.debug_luts then
+			if luts_table.await_data then
 				sm = init_buffers1;
 			end if;
 			
@@ -227,7 +215,7 @@ begin
 		   
 			busy_ff.d = Vcc;
 			oe_n_FF.d = Gnd;
-			if luts_table.debug_luts then
+			if luts_table.await_data then
 				sm = load_sync2;
 			end if;
 			

@@ -5,7 +5,7 @@ module luts(
     input [12:0] addr,
     output  [15:0] sin,
     output [15:0] cos,
-	 output wire debug_luts
+	 output wire await_data
 
 );
 //localparam [12:0] data_addr = 13'h0008;
@@ -18,7 +18,7 @@ assign rst_global = rst || (addr  == 13'd7215);
 assign sin = sin_reg;
 assign cos = cos_reg;
 
-assign debug_luts = fetch_seen;
+assign await_data = data_ready;
 reg ufm_read_reg;
 wire [31:0] ufm_readdata;
 wire ufm_waitrequest;
@@ -49,7 +49,7 @@ reg[2:0] state;
 
 reg [12:0] prev_ufm_addr;
 
-reg fetch_seen;
+reg data_ready;
 
 always @(posedge clk) begin
 
@@ -59,7 +59,7 @@ always @(posedge clk) begin
         ufm_read_reg <= 1'b0;
         sin_reg <= 16'd0;
 		  cos_reg <= 16'd0;
-		  fetch_seen <= 1'b0;
+		  data_ready <= 1'b0;
                  
     end
 
@@ -98,7 +98,7 @@ always @(posedge clk) begin
 		 
        if(ufm_readdatavalid) begin
 								
-			  fetch_seen <= 1'b1; 
+			  data_ready <= 1'b1; 
            cos_reg <= ufm_readdata[15:0];
 			  sin_reg <= ufm_readdata[31:16];
            state <= S_DONE;	
@@ -115,7 +115,7 @@ always @(posedge clk) begin
 			  
 		 end
 		 else begin
-		     fetch_seen <= 1'b0;
+		     data_ready <= 1'b0;
 		     state <= S_DELAY_FETCH;
 		 end
 		 

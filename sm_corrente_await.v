@@ -19,7 +19,6 @@ module slaver_states_main (
     output wire acquire_again_out,
     output wire select0_1_out,
     output wire select1_1_out,
-	 output wire select2_1_out,
     output wire convst_out,
     output wire host_sclk_out,
     output wire host_mosi_out,
@@ -36,18 +35,26 @@ module slaver_states_main (
 	 output wire dp_tx_out,
 	 output wire dp_enable_out,
 	 output wire dp_rx_out,
-	 output reg [7:0] alarm_out
+	 output reg [7:0] alarm_out,
+	 output prep_60hz_out,
+	 output prep_50hz_out
 
 );
 
-    (* preserve, noprune *) reg reset_uart_rx;
-    (* preserve *) reg txd_reg;
+	 reg prep_50hz;
+	 reg prep_60hz;
+	 
+	 assign prep_60hz_out = prep_60hz;
+	 assign prep_50hz_out = prep_50hz;
 
-    (* preserve *) reg requested_data;
+    reg reset_uart_rx;
+    reg txd_reg;
+
+    reg requested_data;
     reg acquire_again;
     reg select0_1;
     reg select1_1;
-	 reg select2_1;
+	 
     reg convst;
     reg in;
     reg dft_reg;
@@ -68,7 +75,6 @@ module slaver_states_main (
     assign acquire_again_out = acquire_again;
     assign select0_1_out = select0_1;
     assign select1_1_out = select1_1;
-	 assign select2_1_out = select2_1;
     assign convst_out = ((current_state == DO_COMMAND) && ((type_reg == GET_CONFIG_BYTE) || (type_reg == SET_CONFIG_BYTE))) ? ncs_signal : convst;
     assign host_sclk_out = ((current_state == DO_COMMAND) && ((type_reg == GET_CONFIG_BYTE) || (type_reg == SET_CONFIG_BYTE))) ? host_sclk_set_get_adc : host_sclk_fpga_rw_8;
     assign host_mosi_out = ((current_state == DO_COMMAND) && ((type_reg == GET_CONFIG_BYTE) || (type_reg == SET_CONFIG_BYTE))) ? host_mosi_set_get_adc : host_mosi_fpga_rw_8;
@@ -362,7 +368,6 @@ module slaver_states_main (
             frequency <= 1'b0;
             select0_1 <= 1'b0;
             select1_1 <= 1'b0;
-				select2_1 <= 1'b0;
             requested_data <= 1'b0;
             acquire_again <= 1'b0;
             convst <= 1'b0;
@@ -404,6 +409,8 @@ module slaver_states_main (
 				dp_rx_reg <= 1'b1;
 				alarm_out <= OK_BYTE;
 				fpga_error_byte <= 8'b00;
+				prep_50hz <= 1'b1;
+				prep_60hz <= 1'b1;
 
         end
 
@@ -464,7 +471,6 @@ module slaver_states_main (
 						      
 								select0_1 <= 1'b0;
 							   select1_1 <= 1'b0;
-								select2_1 <= 1'b0;
 
                         if (rx_uart_out == START_BYTE) begin
 								
@@ -794,7 +800,6 @@ module slaver_states_main (
 									 
 								    select0_1 <= 1'b1;
 									 select1_1 <= 1'b1;
-									 select2_1 <= 1'b0;
 									 
 									 //Send byte of start through uart
                             start_8_ctl <= 1'b1;
@@ -871,7 +876,6 @@ module slaver_states_main (
 								
 								    select0_1 <= 1'b1;
 									 select1_1 <= 1'b1;
-									 select2_1 <= 1'b0;
 									 
 									 //Send byte of start through uart
                             start_8_ctl <= 1'b1;
@@ -1057,7 +1061,6 @@ module slaver_states_main (
 								
 								    select0_1 <= 1'b1;
 									 select1_1 <= 1'b1;
-									 select2_1 <= 1'b0;
 									 
 									 //Send byte of start through uart
                             start_8_ctl <= 1'b1;
@@ -1253,7 +1256,6 @@ module slaver_states_main (
 								
 								    select0_1 <= 1'b1;
 									 select1_1 <= 1'b1;
-									 select2_1 <= 1'b0;
 									 
 									 //Send byte of start through uart
                             start_8_ctl <= 1'b1;
@@ -1472,7 +1474,7 @@ module slaver_states_main (
 						      reset_uart_rx <= 1'b1;
                         select0_1 <= 1'b1;
 								select1_1 <= 1'b0;
-								select2_1 <= 1'b0;
+								
 								current_state <= AWAIT_HIGH;
 								
                     end
@@ -1481,7 +1483,6 @@ module slaver_states_main (
 						  
 						      select0_1 <= 1'b0;
                         select1_1 <= 1'b0;
-								select2_1 <= 1'b0;
                         current_state <= EN_W_1;
                         frequency <= 1'b1;
 								
@@ -1489,6 +1490,7 @@ module slaver_states_main (
                         command_new_byte <= 1'b1;
                         byte_to_send <= 8'h00;
                         bytes_counter <= bytes_counter + 1;
+								prep_50hz <= 1'b0;
                         
                     end
 
@@ -1497,14 +1499,14 @@ module slaver_states_main (
                         current_state <= EN_W_1;
                         select0_1 <= 1'b0;
                         select1_1 <= 1'b0;
-								select2_1 <= 1'b0;
                         frequency <= 1'b0;
 								
                         //byte 1 to be sent
                         command_new_byte <= 1'b1;
                         byte_to_send <= 8'h00;
                         bytes_counter <= bytes_counter + 1;
-                        
+                        prep_60hz <= 1'b0;
+								
                     end
 						  
 						  MEASURE_BYTE: begin
@@ -1525,7 +1527,6 @@ module slaver_states_main (
 								
 								select0_1 <= 1'b0;
                         select1_1 <= 1'b0;
-								select2_1 <= 1'b0;
 								
 								dp_rx_reg <= dp_rx_in;
 							   dp_complete_reg <= dp_complete_in;
@@ -1557,7 +1558,6 @@ module slaver_states_main (
 								
 								    select0_1 <= 1'b1;
 									 select1_1 <= 1'b1;
-									 select2_1 <= 1'b0;
 									 
 									 //Send byte of start through uart
                             start_8_ctl <= 1'b1;
