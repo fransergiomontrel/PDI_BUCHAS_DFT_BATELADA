@@ -1,10 +1,10 @@
 include "acquisition_ctrl_v2.inc";
 include "acquisition_serializer_v3.inc";
 include "acquisition_store.inc";
---include "acquisition_store_crc.inc";
+
 include "acquisition_store_time_counter.inc";
 include "dffes.inc";
---include "crc16.inc";
+
 include "acquisition_time_counter.inc";
 
 parameters(
@@ -31,17 +31,15 @@ subdesign acquisition_module(
 	
 	ready: output;
 	
---	test_crc16[15..0]: output;
+
 
 )
 variable
 	start_ff: dffes;
---	ctrl: acquisition_ctrl_v2 with (active_period = 68, period = 463, samples = samples);
 	ctrl: acquisition_ctrl_v2 with (active_period = 90, samples = samples);
 	serializer: acquisition_serializer_v3 with (little_endian = 0, wait_states = 3);
 	storer: acquisition_store;
-	--storer_crc: acquisition_store_crc;
-	--crc: crc16;
+	
 	atc: acquisition_time_counter;
 	storer_time_counter: acquisition_store_time_counter;
 
@@ -79,18 +77,6 @@ begin
 	storer.sreset = sreset;
 	storer.store = ctrl.store;
 	
-	-- CRC16
-	--crc.clk = clk;
-	--crc.rst = ctrl.crc_clr;
-	--crc.crc_en = storer.crc_enable or storer_time_counter.crc_enable;
---	test_crc16[] = crc.crc_out[];
-	--crc.msb = storer_crc.msb;
-
-	-- STORE_CRC
-	--storer_crc.clk = clk;
-	--storer_crc.sreset = sreset;
-	--storer_crc.store_crc = ctrl.store_crc;
-	--ctrl.store_crc_ok = storer_crc.store_crc_ok;
 	
 	-- STORE_TIME_COUNTER
 	storer_time_counter.clk = clk;
@@ -106,12 +92,10 @@ begin
 	addr_clr = ctrl.addr_clr;
 	busy = ctrl.busy;
 	sclk_ = serializer.adc_sclk;
-	--cs_n = storer.cs_n and storer_crc.cs_n and storer_time_counter.cs_n;
-	--we_n = storer.we_n and storer_crc.we_n and storer_time_counter.we_n;
+	
 	cs_n = storer.cs_n and storer_time_counter.cs_n;
 	we_n = storer.we_n and storer_time_counter.we_n;
-	--addr_inc_write = storer.addr_inc_write or storer_crc.addr_inc_write or storer_time_counter.addr_inc_write;
-	--data_bus_out = storer.data_bus_out or storer_crc.data_bus_out or storer_time_counter.data_bus_out;
+	
 	addr_inc_write = storer.addr_inc_write or storer_time_counter.addr_inc_write;
 	data_bus_out = storer.data_bus_out or storer_time_counter.data_bus_out;
 		

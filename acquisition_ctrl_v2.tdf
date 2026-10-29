@@ -1,22 +1,14 @@
 PARAMETERS
 (
---		active_period = 68,
---		period = 463,
---		samples = 7200
-		active_period = 4,
-		--period = 7,
-		samples = 3
+	 active_period = 4,
+	 samples = 3
 );
 
 
 include "counter.inc";
 include "dffes.inc";
 
---ASSERT active_period < period
-	--REPORT		"'active_period'(%) deve ser maior que 'period' (%)" active_period, period
-	--SEVERITY	ERROR;
-
---CONSTANT MAX_VALUE = 277;	
+	
 CONSTANT N_BITS = 9;	
 
 subdesign acquisition_ctrl_v2(
@@ -33,9 +25,6 @@ subdesign acquisition_ctrl_v2(
 	
 	store:output;
 	store_ok:input;
-
-	--store_crc:output;
-	--store_crc_ok:input;
 	
 	store_time_counter: output;
 	store_time_counter_ok:input;
@@ -57,7 +46,7 @@ variable
 	clock_counter_50: counter with (MAX_VALUE = 277);
 	
 	samples_counter: counter with (MAX_VALUE = samples);
-	--convst_ff, serialize_ff, store_ff, store_crc_ff, store_time_counter_ff: dffes;
+	
 	convst_ff, serialize_ff, store_ff, store_time_counter_ff: dffes;
 	start_pipeline2_ff, finish_store_ff: srff;
 	start_sync: dff;
@@ -68,7 +57,6 @@ begin
 		convst_ff.d = Gnd;
 		serialize_ff.d = Gnd;
 		store_ff.d = Gnd;
-		--store_crc_ff.d = Gnd;
 		store_time_counter_ff.d = Gnd;
 		
 		
@@ -116,7 +104,7 @@ end defaults;
 	convst_ff.clk = clk;
 	serialize_ff.clk = clk;
 	store_ff.clk = clk;
-	--store_crc_ff.clk = clk;
+	
 	store_time_counter_ff.clk = clk;
 	busy_ff.clk = clk;
 	start_pipeline2_ff.clk = clk;
@@ -129,7 +117,7 @@ end defaults;
 	convst_ff.sclr = sreset;
 	serialize_ff.sclr = sreset;
 	store_ff.sclr = sreset;
-	--store_crc_ff.sclr = sreset;
+	
 	store_time_counter_ff.sclr = sreset;
 	start_pipeline2_ff.clrn = !sreset;
 	finish_store_ff.clrn = !sreset;
@@ -273,7 +261,6 @@ end defaults;
 		when STORING_TIME_COUNTER =>
 
 			if store_time_counter_ok then
-				--store_crc_ff.d = Vcc;
 				sm_pipeline2 = WAITING_STORE;
 			else
 				store_time_counter_ff.d = Vcc;

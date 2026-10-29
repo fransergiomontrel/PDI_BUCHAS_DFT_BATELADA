@@ -24,12 +24,9 @@ subdesign acquisition_serializer_v3(
 variable
 	data_buffer[5..0][15..0]: dffes;
 	data_output_buffer[5..0][15..0]: dffes;
-	--count: counter with (MAX_VALUE = 16);
 	count[3..0]: dffe;
 	divclock[1..0]: dffe;
-	--divclock[3..0]: dffe;
-	--clockspi[2..0]: dffe;
-	--divclock: counter with (MAX_VALUE = wait_states);
+
 	serialize_ok_ff: dffes;
 	bus_bits[15..0]: node;
 	sclk_ff: dff;
@@ -53,23 +50,16 @@ begin
 		
 	end defaults;
 	
-	--clockspi[].clk = clk;
-	--clockspi[].clrn = !sreset;
-	--clockspi[].d = clockspi[].q + 1;
-	
 	divclock[].clk = clk;
 	divclock[].d = divclock[].q + 1;
 	
 	count[].clk = clk;
 	count[].d = count[].q + 1;
 	
-	
 	-- CLOCKS
 	sclk_ff.clk = clk;
 	sclk_ff.clrn = !sreset;
 	sm.clk= clk;
-	--divclock.clk = clk;
-	--count.clk = clk;
 	serialize_ok_ff.clk = clk;
 	
 	-- RESETs
@@ -117,6 +107,7 @@ begin
 				sclk_ff.d = Vcc;
 				sm = SERIALIZING_SCLK1;
 			end if;
+			
 		when FINISH =>
 			if serialize then
 				serialize_ok_ff.d = Vcc;
@@ -129,12 +120,7 @@ begin
 
 	-- SAIDAS
 	serialize_ok = serialize_ok_ff.q;
-	 
-	--sclk_ff.d = !sclk_ff.q
 	
-	--adc_sclk = clk;
-	--adc_sclk = clockspi[2];
-	--adc_sclk = divclock[0];
    adc_sclk = sclk_ff.q;
 	
 	-- Shift register
