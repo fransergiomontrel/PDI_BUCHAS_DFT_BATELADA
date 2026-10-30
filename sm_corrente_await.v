@@ -88,7 +88,7 @@ module slaver_states_main (
 	 assign channel_selector_out = channel_selector_reg;
 
     //22 bit size register to insert delay thick 
-    (* preserve *) reg [27:0] is_finished;
+    (* preserve *) reg [28:0] is_finished;
 
     //4 bit size register to count 4 bytes to be sent on 32 bits SPI writing
     reg [3:0] bytes_counter;
@@ -263,12 +263,12 @@ module slaver_states_main (
     .DEVICE_FAMILY("MAX 10")
 )
 	 u_altchip_id
-        (
+    (
         .clkin(clk),
         .chip_id(fpga_id),
         .data_valid(id_valid),
         .reset(rst)
-		  );
+	 );
 
     //Used payload sizes
 	 localparam GET_ID_SIZE = 8'd09;
@@ -374,7 +374,7 @@ module slaver_states_main (
             current_state <= CHECK_SOH;
             txd_reg <= 1'b1;
 				
-            is_finished  <= 28'd0;
+            is_finished  <= 29'd0;
             frequency <= 1'b0;
             select0_1 <= 1'b0;
             select1_1 <= 1'b0;
@@ -463,11 +463,11 @@ module slaver_states_main (
 
                 begin
 
-                    is_finished <= is_finished + 28'd1;
+                    is_finished <= is_finished + 29'd1;
 						  //To be adjusted in new protocol
-                    if (is_finished == 28'd2367) begin
+                    if (is_finished == 29'd2367) begin
 
-                        is_finished <= 28'd0;
+                        is_finished <= 29'd0;
                         txd_reg <= 1'b0;
                         current_state <= AWAIT_TX_TO_HIGH;
 
@@ -479,21 +479,21 @@ module slaver_states_main (
 
                 begin
 					 
-						  is_finished <= is_finished + 28'd1;
+						  is_finished <= is_finished + 29'd1;
 							
                     if ((in == 1'b1)) begin
 								
                         txd_reg <= 1'b1;
-								is_finished <= 28'd0;
+								is_finished <= 29'd0;
                         current_state <= CHECK_SOH;
 								
                     end
 						  
 						  //Timeout of propagation pulse await after 2 sec 
-					     else if(is_finished == 28'd200000000) begin
+					     else if(is_finished == 29'd500000000) begin
 						      alarm_out <= TRANSMIT_TIMEOUT_BYTE;
 						      txd_reg <= 1'b1;
-						      is_finished <= 28'd0;
+						      is_finished <= 29'd0;
 								current_state <= CHECK_SOH;
 								
 						  end 						   
@@ -1819,10 +1819,10 @@ module slaver_states_main (
 
                         convst <= 1'b0;
 
-                        is_finished <= is_finished + 28'd1;
+                        is_finished <= is_finished + 29'd1;
 
-                        if (is_finished == 28'd2000000) begin
-                            is_finished <= 28'd0;
+                        if (is_finished == 29'd2000000) begin
+                            is_finished <= 29'd0;
                             current_state <= PREPARE_CONVERSION;
                         end
 
@@ -1834,17 +1834,17 @@ module slaver_states_main (
 
                 begin
 
-                    if(is_finished < 28'd10000) begin
-                        is_finished  <= is_finished + 28'd1;    
+                    if(is_finished < 29'd10000) begin
+                        is_finished  <= is_finished + 29'd1;    
                     end
                     else begin
-                        is_finished  <= 28'd10000;
+                        is_finished  <= 29'd10000;
                     end
 
-                    if ((is_finished == 28'd10000) & (in == 1'b0)) begin
+                    if ((is_finished == 29'd10000) & (in == 1'b0)) begin
                         host_mode <= MODE_ACQ;
                         current_state <= START_CONVERSION;
-                        is_finished <= 28'd0;
+                        is_finished <= 29'd0;
                     end
                     else begin
                         current_state <= PREPARE_CONVERSION;
@@ -1856,11 +1856,11 @@ module slaver_states_main (
 
                 begin
 
-					     is_finished <= is_finished  + 28'd1;
+					     is_finished <= is_finished  + 29'd1;
 						  
                     if (ed_new_pulse == 1'b1) begin
 						  
-							   is_finished <= 28'd0;
+							   is_finished <= 29'd0;
 								
                         if (frequency == 1'b0) begin
 								
@@ -1877,9 +1877,9 @@ module slaver_states_main (
                     end
 						  
 						  //Timeout of sync 60 or 50 Hz pulse await after 2 sec 
-					     else if(is_finished == 28'd200000000) begin
+					     else if(is_finished == 28'd500000000) begin
 						      
-						      is_finished <= 28'd0;
+						      is_finished <= 29'd0;
 								alarm_out <= TRANSMIT_TIMEOUT_BYTE;
 								current_state <= CHECK_SOH;
 								
@@ -1897,14 +1897,14 @@ module slaver_states_main (
 
                 begin
 
-                    if(is_finished < 28'd3500000) begin
-                        is_finished  <= is_finished + 28'd1;    
+                    if(is_finished < 29'd3500000) begin
+                        is_finished  <= is_finished + 29'd1;    
                     end
                     else begin
-                        is_finished  <= 28'd3500000;
+                        is_finished  <= 29'd3500000;
                     end
 
-                    if (is_finished == 28'd3500000) begin
+                    if (is_finished == 29'd3500000) begin
                         current_state <= DIS_W_1;
 
                         byte_to_send <= 8'h00;
@@ -1915,7 +1915,7 @@ module slaver_states_main (
 
                         host_mode <= MODE_CFG_FPGA;
 
-                        is_finished <= 28'd0;
+                        is_finished <= 29'd0;
                     end
                     else begin
                         current_state <= AWAIT_END_CONVERSION;
@@ -2088,13 +2088,13 @@ module slaver_states_main (
 
                 DELAY_SAMPLES:
                 begin
-                    is_finished  <= is_finished + 28'd1;
-                    if (is_finished == 28'd50) begin
+                    is_finished  <= is_finished + 29'd1;
+                    if (is_finished == 29'd50) begin
                         //Command to read another first byte of next word
                         bytes_counter <= 4'd1;
                         command_new_byte <= 1'b1;
                         byte_to_send <= 8'h00;
-                        is_finished  <= 28'd0;
+                        is_finished  <= 29'd0;
                         current_state <= CALC_PHASORS;
                     end
                 end
