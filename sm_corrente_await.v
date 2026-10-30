@@ -88,7 +88,7 @@ module slaver_states_main (
 	 assign channel_selector_out = channel_selector_reg;
 
     //22 bit size register to insert delay thick 
-    (* preserve *) reg [21:0] is_finished;
+    (* preserve *) reg [27:0] is_finished;
 
     //4 bit size register to count 4 bytes to be sent on 32 bits SPI writing
     reg [3:0] bytes_counter;
@@ -161,6 +161,7 @@ module slaver_states_main (
 	 reg [7:0] channel_mask_in;
 	 wire set_get_adc_global_reset;
 	 assign set_get_adc_global_reset = rst || set_get_adc_reset;
+	 
 	 //Module to write and read ADS8691 individually
 	 set_get_ads8691 u_set_get_ads8691 (
 	 
@@ -203,7 +204,8 @@ module slaver_states_main (
     wire done_rx_to_read_ed;
     //1 byte size register to store one received byte
     wire [7:0] rx_uart_out;
-
+    //Signal of  failure in uart receptor
+	 wire [7:0] uart_error;
     //Instance of UART receptor
     rx_serial_8 u_rx_serial_8(
 
@@ -212,7 +214,8 @@ module slaver_states_main (
         .rx(in),                           // entrada registrada em clk
         .busy_rx(),                    // está transmitindo
         .done_rx(done_rx_to_read_ed),  // pulso de fim
-        .rx_reg(rx_uart_out)	 
+        .rx_reg(rx_uart_out),
+		  .error_out(uart_error)  
 
     );
 	 
@@ -300,6 +303,13 @@ module slaver_states_main (
 	 //Config required
 	 localparam FPGA_ERROR_6_BYTE = 8'h26;
 	 localparam FPGA_UNKNOWN_BYTE = 8'h2F;
+	 
+	 //Listed commands to set config
+	 localparam BIP_3_VREF = 8'h40;
+	 localparam BIP_2_5_VREF = 8'h41;
+	 localparam BIP_1_5_VREF = 8'h42;
+	 localparam BIP_1_2_5_VREF = 8'h43;
+	 localparam BIP_0_6_2_5_VREF = 8'h44;
 	   
     //Commands bytes
     localparam START_BYTE = 8'h01;//Start of frame byte
@@ -341,8 +351,8 @@ module slaver_states_main (
     localparam CALC_PHASORS = 5'b10010;//Requesting SRAM data of 86580 bytes
     localparam DELAY_SAMPLES = 5'b10011;//Requesting SRAM data of 86580 bytes
     localparam AWAIT_CORRENTE_TX = 5'b10100; //Request 84 bytes which is all data available (phasors bytes, temp and 4-20mA bytes and reserved ones)
-    localparam AWAIT_HIGH = 5'b10101; 
-    localparam AWAIT_LOW = 5'b10110;
+    localparam AWAIT_TX_TO_LOW = 5'b10101; 
+    localparam AWAIT_TX_TO_HIGH = 5'b10110;
 	 localparam REQUEST__DATA_ADS1118 = 5'b10111;
     (* preserve *) reg [4:0] current_state;
 
@@ -364,7 +374,7 @@ module slaver_states_main (
             current_state <= CHECK_SOH;
             txd_reg <= 1'b1;
 				
-            is_finished  <= 22'd0;
+            is_finished  <= 28'd0;
             frequency <= 1'b0;
             select0_1 <= 1'b0;
             select1_1 <= 1'b0;
@@ -431,32 +441,62 @@ module slaver_states_main (
 					 
 			   end
 				
+				//Check on each clock if there is error in uart receptor
+				if (uart_error != 8'b00) begin
+				
+				    alarm_out <= UART_FAILURE_BYTE;
+					 
+				end
+				//Check on each clock if there is a set_configuration command not listed
+				if((adc_word_reg[7:0] != 8'h00) && (adc_word_reg[7:0] != BIP_3_VREF) && (adc_word_reg[7:0] != BIP_2_5_VREF)
+				&& (adc_word_reg[7:0] != BIP_1_5_VREF) && (adc_word_reg[7:0] != BIP_1_2_5_VREF)
+				&& (adc_word_reg[7:0] != BIP_0_6_2_5_VREF)) begin
+				
+				    alarm_out <= CONFIGURATION_MISMATCH_BYTE;
+					 
+				end
+				
             //state machine
             case (current_state)			  
 
-                AWAIT_HIGH:
+                AWAIT_TX_TO_LOW:
 
                 begin
 
-                    is_finished <= is_finished + 22'd1;
-                    if (is_finished == 22'd2367) begin
+                    is_finished <= is_finished + 28'd1;
+						  //To be adjusted in new protocol
+                    if (is_finished == 28'd2367) begin
 
-                        is_finished <= 22'd0;
+                        is_finished <= 28'd0;
                         txd_reg <= 1'b0;
-                        current_state <= AWAIT_LOW;
+                        current_state <= AWAIT_TX_TO_HIGH;
 
                     end
 
                 end
 
-                AWAIT_LOW:
+                AWAIT_TX_TO_HIGH:
 
                 begin
-
-                    if (in == 1'b1) begin
+					 
+						  is_finished <= is_finished + 28'd1;
+							
+                    if ((in == 1'b1)) begin
+								
                         txd_reg <= 1'b1;
+								is_finished <= 28'd0;
                         current_state <= CHECK_SOH;
-                    end	
+								
+                    end
+						  
+						  //Timeout of propagation pulse await after 2 sec 
+					     else if(is_finished == 28'd200000000) begin
+						      alarm_out <= TRANSMIT_TIMEOUT_BYTE;
+						      txd_reg <= 1'b1;
+						      is_finished <= 28'd0;
+								current_state <= CHECK_SOH;
+								
+						  end 						   
 
                 end
 
@@ -684,8 +724,6 @@ module slaver_states_main (
                         end
 
                     endcase
-						  
-						  
 						  
 					 end
 				
@@ -1110,6 +1148,11 @@ module slaver_states_main (
 									 else if ((set_get_adc_done_signal == 1'd0) && (set_get_adc_reset == 1'b0)) begin
 									 
 									 //Only awaits for 32 clocks of spi on 6 adc convertes
+					
+									 if(channel_mask_in == 8'b00000000) begin
+										  //Not selected channel
+									     alarm_out <= NOT_SELECTED_BYTE;
+									 end
 									 
 									 end
 									 
@@ -1304,6 +1347,13 @@ module slaver_states_main (
 									
 								    else if (payload_bytes_counter < SET_CONFIG_SIZE) begin
 									 
+									     if(channel_mask_in == 8'b00000000) begin
+										  
+										     //Not selected channel
+									        alarm_out <= NOT_SELECTED_BYTE;
+									 
+									     end
+										  
 										  //Send bytes of payload through uart
 									     case (payload_bytes_counter)
 										  
@@ -1466,7 +1516,6 @@ module slaver_states_main (
 									 
 								end
 
-								
                     end
 
 						  PROPAGATION_BYTE: begin
@@ -1475,7 +1524,7 @@ module slaver_states_main (
                         select0_1 <= 1'b1;
 								select1_1 <= 1'b0;
 								
-								current_state <= AWAIT_HIGH;
+								current_state <= AWAIT_TX_TO_LOW;
 								
                     end
 
@@ -1770,10 +1819,10 @@ module slaver_states_main (
 
                         convst <= 1'b0;
 
-                        is_finished <= is_finished + 1;
+                        is_finished <= is_finished + 28'd1;
 
-                        if (is_finished == 22'd2000000) begin
-                            is_finished <= 22'd0;
+                        if (is_finished == 28'd2000000) begin
+                            is_finished <= 28'd0;
                             current_state <= PREPARE_CONVERSION;
                         end
 
@@ -1785,17 +1834,17 @@ module slaver_states_main (
 
                 begin
 
-                    if(is_finished < 10000) begin
-                        is_finished  <= is_finished + 22'd1;    
+                    if(is_finished < 28'd10000) begin
+                        is_finished  <= is_finished + 28'd1;    
                     end
                     else begin
-                        is_finished  <= 10000;
+                        is_finished  <= 28'd10000;
                     end
 
-                    if ((is_finished == 10000) & (in == 1'b0)) begin
+                    if ((is_finished == 28'd10000) & (in == 1'b0)) begin
                         host_mode <= MODE_ACQ;
                         current_state <= START_CONVERSION;
-                        is_finished <= 22'd0;
+                        is_finished <= 28'd0;
                     end
                     else begin
                         current_state <= PREPARE_CONVERSION;
@@ -1807,9 +1856,14 @@ module slaver_states_main (
 
                 begin
 
+					     is_finished <= is_finished  + 28'd1;
+						  
                     if (ed_new_pulse == 1'b1) begin
-
+						  
+							   is_finished <= 28'd0;
+								
                         if (frequency == 1'b0) begin
+								
                             convst <= 1'b1;
 
                         end				
@@ -1821,9 +1875,20 @@ module slaver_states_main (
                         current_state <= AWAIT_END_CONVERSION;
 
                     end
+						  
+						  //Timeout of sync 60 or 50 Hz pulse await after 2 sec 
+					     else if(is_finished == 28'd200000000) begin
+						      
+						      is_finished <= 28'd0;
+								alarm_out <= TRANSMIT_TIMEOUT_BYTE;
+								current_state <= CHECK_SOH;
+								
+						  end
 
                     else begin
+						  
                         current_state <= START_CONVERSION;
+								
                     end
 
                 end
@@ -1832,14 +1897,14 @@ module slaver_states_main (
 
                 begin
 
-                    if(is_finished < 22'd3500000) begin
-                        is_finished  <= is_finished + 1;    
+                    if(is_finished < 28'd3500000) begin
+                        is_finished  <= is_finished + 28'd1;    
                     end
                     else begin
-                        is_finished  <= 22'd3500000;
+                        is_finished  <= 28'd3500000;
                     end
 
-                    if (is_finished == 22'd3500000) begin
+                    if (is_finished == 28'd3500000) begin
                         current_state <= DIS_W_1;
 
                         byte_to_send <= 8'h00;
@@ -1850,7 +1915,7 @@ module slaver_states_main (
 
                         host_mode <= MODE_CFG_FPGA;
 
-                        is_finished <= 22'd0;
+                        is_finished <= 28'd0;
                     end
                     else begin
                         current_state <= AWAIT_END_CONVERSION;
@@ -2023,13 +2088,13 @@ module slaver_states_main (
 
                 DELAY_SAMPLES:
                 begin
-                    is_finished  <= is_finished + 1;
-                    if (is_finished == 22'd50) begin
+                    is_finished  <= is_finished + 28'd1;
+                    if (is_finished == 28'd50) begin
                         //Command to read another first byte of next word
                         bytes_counter <= 4'd1;
                         command_new_byte <= 1'b1;
                         byte_to_send <= 8'h00;
-                        is_finished  <= 22'd0;
+                        is_finished  <= 28'd0;
                         current_state <= CALC_PHASORS;
                     end
                 end
