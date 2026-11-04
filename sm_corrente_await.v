@@ -521,7 +521,11 @@ module slaver_states_main (
                         end
 
                         else begin
+								
+								    //Frame don't start correctly
+								    alarm_out <= INVALID_FRAME_BYTE;
                             current_state <= CHECK_SOH;
+									 
                         end
 
                     end
