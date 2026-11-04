@@ -10,6 +10,7 @@ module luts(
 );
 //localparam [12:0] data_addr = 13'h0008;
 wire rst_global;
+//Signal to keep ufp ip at reset when is not in rw_data mode or dft process is over
 assign rst_global = rst || (addr  == 13'd7215); 
 
 (* preserve, noprune *) reg [15:0] sin_reg;

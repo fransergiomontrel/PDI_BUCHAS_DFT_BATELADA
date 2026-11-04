@@ -65,7 +65,6 @@ module slaver_states_main (
 	 reg dp_rx_reg;
 	 reg [7:0] fpga_error_byte;
 	 
-	 
     wire host_sclk_fpga;
     wire host_mosi;
 
@@ -75,6 +74,7 @@ module slaver_states_main (
     assign acquire_again_out = acquire_again;
     assign select0_1_out = select0_1;
     assign select1_1_out = select1_1;
+	 //When in state command of GET_CONFIG_BYTE type or SET_CONFIG_BYTE type switch to ncs_signal to enable adc converter both write and read
     assign convst_out = ((current_state == DO_COMMAND) && ((type_reg == GET_CONFIG_BYTE) || (type_reg == SET_CONFIG_BYTE))) ? ncs_signal : convst;
     assign host_sclk_out = ((current_state == DO_COMMAND) && ((type_reg == GET_CONFIG_BYTE) || (type_reg == SET_CONFIG_BYTE))) ? host_sclk_set_get_adc : host_sclk_fpga_rw_8;
     assign host_mosi_out = ((current_state == DO_COMMAND) && ((type_reg == GET_CONFIG_BYTE) || (type_reg == SET_CONFIG_BYTE))) ? host_mosi_set_get_adc : host_mosi_fpga_rw_8;
@@ -122,6 +122,7 @@ module slaver_states_main (
 	 //Reg of 8 bits to store crc high
     reg [7:0] crc_high_reg;
 	 
+	 //Reg of eight bits reserved in payload GET_ID response
 	 reg[7:0] id_reserved;
 	 
     //8 bit size register to store one byte returned through SPI
@@ -130,13 +131,17 @@ module slaver_states_main (
     //Signal that indicates when spi communication is over
     wire signal_spi_done;
     
-	 
 	 //To restart crc16 after one frame received
 	 reg crc_restart;
+	 //Reg to store 1 byte to be input of CRC 16 false
 	 reg [7:0] data_in_crc;
+	 //Reg to enable CRC16 calculus to be made on each clock
 	 reg crc_en_reg;
+	 //16 bits size reg to convey output of CRC 16 false
 	 wire [15:0] crc_result;
+	 //Signal which allows reset CRC 16 false module
 	 wire crc_global_reset;
+	 //Reset when is not in aquisition mode even not rw_data one or when crc_restart is high.  
 	 assign crc_global_reset = rst | crc_restart;
 	 
 	 //Instance of crc16-CCITT False to calculate crc 16 bits data
@@ -156,7 +161,7 @@ module slaver_states_main (
 	 wire [47:0] current_adc_config;
 	 wire ncs_signal;
 	 wire set_get_adc_done_signal;
-	 
+	 //Reg to reset modulo read adc converter
 	 reg set_get_adc_reset;
 	 reg [7:0] channel_mask_in;
 	 wire set_get_adc_global_reset;
@@ -219,7 +224,9 @@ module slaver_states_main (
 
     );
 	 
+	 //Reg to start uart transmission
 	 reg start_8_ctl;
+	 //Signal set when uart transmission is over
 	 wire done_8_ctl;
 	 
 	 uart_tx_8 u_uart_tx_8(
@@ -255,7 +262,9 @@ module slaver_states_main (
         .rising_edge(ed_new_pulse)  
     );
 	 
+	 //Signal set when FPGA ID is valid
 	 wire id_valid;
+	 //Signal of 64 buses which convey FPGA ID
 	 wire [63:0] fpga_id;
 	 //Instance to get id of MAX1008SCE144
 	 
@@ -1057,7 +1066,7 @@ module slaver_states_main (
 									 
 									 end
 									 
-									 else if (payload_bytes_counter == GET_ID_SIZE ) begin
+									 else if (payload_bytes_counter == GET_ID_SIZE) begin
 									 
 									     //Send byte of end through uart
 									     start_8_ctl <= 1'b1;
@@ -1161,15 +1170,14 @@ module slaver_states_main (
 									 end
 									 
 									 else if ((set_get_adc_done_signal == 1'd1) && (set_get_adc_reset == 1'b0)) begin
-									 //Only register 6 least significant bytes of each converter
 									 
+									 //Only register 6 least significant bytes of each converter
 										  payload_reg[1] <= current_adc_config[7:0];
 										  payload_reg[2] <= current_adc_config[15:8];
 										  payload_reg[3] <= current_adc_config[23:16];
 										  payload_reg[4] <= current_adc_config[31:24];
 										  payload_reg[5] <= current_adc_config[39:32];
 										  payload_reg[6] <= current_adc_config[47:40];
-										  
 										  
 										  set_get_adc_reset <= 1'b1;
 										  
@@ -1575,16 +1583,14 @@ module slaver_states_main (
                     end
 						  
 						  BYPASS_ON_BYTE: begin
-                
-							   //Register signal when DP completes
 								
 								select0_1 <= 1'b0;
                         select1_1 <= 1'b0;
 								
 								dp_rx_reg <= dp_rx_in;
+								//Register signal when DP completes
 							   dp_complete_reg <= dp_complete_in;
 							   
-								
 							   if (dp_complete_reg == 1'b1) begin
 									 
 								    dp_complete_reg <= 1'b0;
@@ -1598,8 +1604,8 @@ module slaver_states_main (
 						  
 						  BYPASS_OFF_BYTE: begin
 						      
-                       
 								
+                       
                     end
 						  
 						  

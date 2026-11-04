@@ -71,6 +71,7 @@ begin
 	HI_busy = RDM_busy or AM_busy;
 
 	case HI_mode[] is
+	   --Makes connections to enable writing in ram memory
 		when MODE_CONFIG_CPLD =>
 			-- Host Interface
 			
@@ -99,6 +100,7 @@ begin
 			HI_MISO = CM_MISO;
 
 		when MODE_CONFIGURATION =>
+		   --Makes connections to configure 6 adc convertes in daisy-chain topology
 			-- Host Interface
 			HI_MISO = AI_sdi[5];
 			
@@ -129,10 +131,9 @@ begin
 
 		when MODE_AQUISITION =>
 			-- Host Interface
-			
+			--Makes connections to command conversion and after read values from it. Also writes data into ram memory.
 			-- RAM Interface
 			RI_addr_clr = AM_addr_clr;
-			RI_addr_inc_read = Gnd;
 			RI_addr_inc_write = AM_addr_inc_write;
 			RI_data_in[] = AM_data[];
 			RI_we_n = AM_we_n;
@@ -155,7 +156,8 @@ begin
 			HI_MISO = Gnd;
 
 		when MODE_RW_DATA =>
-			-- Host Interface		
+			-- Host Interface
+	      --Makes connections to read data from ram memory and after write data zero on each block		
 			HI_MISO = RDM_MISO;
 			
 			-- RAM Interface
@@ -191,6 +193,7 @@ begin
 			
 			when MODE_GET_CONFIGURATION =>
 			-- Host Interface
+			--Makes connections to read configuration directly from converter simultaneously and individually
 			HI_MISO = Gnd;
 			
 			-- RAM Interface
@@ -225,7 +228,8 @@ begin
 			HI_MISO = Gnd;
 			
 			when MODE_SET_CONFIGURATION =>
-			-- Host Interface
+			--Host Interface
+			--Makes connections to configure adc converter as channel is selected 
 			HI_MISO = Gnd;
 			
 			-- RAM Interface
@@ -301,8 +305,6 @@ begin
 
          
          end case;
-			
-			
 			
 			-- Acquisition Module
 			AM_adc_sdi[] = Gnd;

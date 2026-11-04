@@ -28,7 +28,6 @@ subdesign dft_locale(
 	start_tx: output;
 	end_tx: input;
 	debug: output;
-	debug_res: output;
 	luts_addr_out[12..0]: output;
 		
 )
@@ -68,8 +67,6 @@ begin
 	 luts_addr_out[] = sample_counter[].q;
 	 
 	 debug = start_tx;
-	 
-	 debug_res = channel_number[1].q;
 	 
 	 tx_status_ff.clk = clk;
 	 tx_status_ff.clrn = !sreset;
