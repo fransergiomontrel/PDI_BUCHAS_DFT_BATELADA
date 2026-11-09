@@ -314,11 +314,11 @@ module slaver_states_main (
 	 localparam FPGA_UNKNOWN_BYTE = 8'h2F;
 	 
 	 //Listed commands to set config
-	 localparam BIP_3_VREF = 8'h40;
-	 localparam BIP_2_5_VREF = 8'h41;
-	 localparam BIP_1_5_VREF = 8'h42;
-	 localparam BIP_1_2_5_VREF = 8'h43;
-	 localparam BIP_0_6_2_5_VREF = 8'h44;
+	 localparam BIP_3_VREF = 8'hF0;
+	 localparam BIP_2_5_VREF = 8'hF1;
+	 localparam BIP_1_5_VREF = 8'hF2;
+	 localparam BIP_1_2_5_VREF = 8'hF3;
+	 localparam BIP_0_6_2_5_VREF = 8'hF4;
 	   
     //Commands bytes
     localparam START_BYTE = 8'h01;//Start of frame byte
@@ -472,11 +472,8 @@ module slaver_states_main (
 
                 begin
 
-                    is_finished <= is_finished + 29'd1;
-						  //To be adjusted in new protocol
-                    if (is_finished == 29'd2367) begin
+                    if (in == 1'b0) begin
 
-                        is_finished <= 29'd0;
                         txd_reg <= 1'b0;
                         current_state <= AWAIT_TX_TO_HIGH;
 
@@ -498,7 +495,7 @@ module slaver_states_main (
 								
                     end
 						  
-						  //Timeout of propagation pulse await after 2 sec 
+						  //Timeout of propagation pulse await after 5 sec 
 					     else if(is_finished == 29'd500000000) begin
 						      alarm_out <= TRANSMIT_TIMEOUT_BYTE;
 						      txd_reg <= 1'b1;

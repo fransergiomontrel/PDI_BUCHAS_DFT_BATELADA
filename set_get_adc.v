@@ -145,8 +145,9 @@ module set_get_ads8691 (
                         end
                     end
                     else begin
-						      // Captura os primeiros 16 bits apenas no frame de resposta.
-						      if (second_frame && (bit_cnt >= 6'd24) && (cmd_word[31:27] == READ_COMMAND)) begin
+						      //Captura os primeiros 8 bits apenas no frame de resposta, exceto o 31, 29 e 28, pois sao reserved
+						      if (second_frame && (bit_cnt >= 6'd24) && (bit_cnt != 6'd31) && (bit_cnt != 6'd29)
+							       && (bit_cnt != 6'd28) && (cmd_word[31:27] == READ_COMMAND)) begin
 								
 									 miso_buffer_1[bit_cnt - 6'd24] <= miso_1 | ~(channel_mask_reg[0]);
 									 miso_buffer_2[bit_cnt - 6'd24] <= miso_2 | ~(channel_mask_reg[1]);
