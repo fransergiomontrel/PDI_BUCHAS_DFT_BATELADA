@@ -25,11 +25,11 @@ module driver_ADS1118 (
 	//ASSIGN ADS1118 TO DRIVER OUTPUT
 	assign driver_data_out = {
 	
-	array_data[4],
-	array_data[3],
-	array_data[2],
+	array_data[0],
 	array_data[1],
-	array_data[0]
+	array_data[2],
+	array_data[3],
+	array_data[4]
 	
 	};
 	

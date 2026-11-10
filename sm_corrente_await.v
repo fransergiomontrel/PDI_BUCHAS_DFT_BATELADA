@@ -529,7 +529,7 @@ module slaver_states_main (
                         else begin
 								
 								    //Frame don't start correctly
-								    alarm_out <= INVALID_FRAME_BYTE;
+								    //alarm_out <= INVALID_FRAME_BYTE;
                             current_state <= CHECK_SOH;
 									 
                         end
@@ -1826,12 +1826,12 @@ module slaver_states_main (
 
                         convst <= 1'b0;
 
-                        is_finished <= is_finished + 29'd1;
+                        //is_finished <= is_finished + 29'd1;
 
-                        if (is_finished == 29'd2000000) begin
-                            is_finished <= 29'd0;
-                            current_state <= PREPARE_CONVERSION;
-                        end
+                        //if (is_finished == 29'd2000000) begin
+                        //    is_finished <= 29'd0;
+                        current_state <= PREPARE_CONVERSION;
+                        //end
 
                     end
 
@@ -1883,7 +1883,7 @@ module slaver_states_main (
 
                     end
 						  
-						  //Timeout of sync 60 or 50 Hz pulse await after 2 sec 
+						  //Timeout of sync 60 or 50 Hz pulse await after 5 sec 
 					     else if(is_finished == 28'd500000000) begin
 						      
 						      is_finished <= 29'd0;
