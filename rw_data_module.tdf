@@ -85,7 +85,6 @@ begin
 	dft_caller.clk = clk;
 	dft_caller.sreset = sreset;
 	
-	--dft_caller.word[] = H"0000";
 	dft_caller.tx_status = shift.loading_tx;
 	dft_caller.end_tx = done_tx;
 	dft_caller.await_lut = luts_table.await_data;
@@ -110,20 +109,34 @@ begin
 	dft_result[10][].d = dft_caller.cos_out6[];
 	dft_result[11][].d = dft_caller.sin_out6[];
 	 
-	
+	--Send from  CHANNEL 0 to CHANNEL 5(1-real/2-imaginary)
 	--Connect array dft bus to output which in data in to uart tx
-	data_out_to_uart_tx[47..0] = dft_result[0][].q;
-	data_out_to_uart_tx[95..48] = dft_result[1][].q;
-	data_out_to_uart_tx[143..96] = dft_result[2][].q;
-	data_out_to_uart_tx[191..144] = dft_result[3][].q;
-	data_out_to_uart_tx[239..192] = dft_result[4][].q;
-	data_out_to_uart_tx[287..240] = dft_result[5][].q;
-	data_out_to_uart_tx[335..288] = dft_result[6][].q;
-	data_out_to_uart_tx[383..336] = dft_result[7][].q;
-	data_out_to_uart_tx[431..384] = dft_result[8][].q;
-	data_out_to_uart_tx[479..432] = dft_result[9][].q;
-	data_out_to_uart_tx[527..480] = dft_result[10][].q;
-	data_out_to_uart_tx[575..528] = dft_result[11][].q;
+	--data_out_to_uart_tx[47..0] = dft_result[0][].q;
+	--data_out_to_uart_tx[95..48] = dft_result[1][].q;
+	--data_out_to_uart_tx[143..96] = dft_result[2][].q;
+	--data_out_to_uart_tx[191..144] = dft_result[3][].q;
+	--data_out_to_uart_tx[239..192] = dft_result[4][].q;
+	--data_out_to_uart_tx[287..240] = dft_result[5][].q;
+	--data_out_to_uart_tx[335..288] = dft_result[6][].q;
+	--data_out_to_uart_tx[383..336] = dft_result[7][].q;
+	--data_out_to_uart_tx[431..384] = dft_result[8][].q;
+	--data_out_to_uart_tx[479..432] = dft_result[9][].q;
+	--data_out_to_uart_tx[527..480] = dft_result[10][].q;
+	--data_out_to_uart_tx[575..528] = dft_result[11][].q;
+	
+	--Send from  CHANNEL 5 to channel 0(1-real/2-imaginary)
+	data_out_to_uart_tx[47..0] = dft_result[10][].q;
+	data_out_to_uart_tx[95..48] = dft_result[11][].q;
+	data_out_to_uart_tx[143..96] = dft_result[8][].q;
+	data_out_to_uart_tx[191..144] = dft_result[9][].q;
+	data_out_to_uart_tx[239..192] = dft_result[6][].q;
+	data_out_to_uart_tx[287..240] = dft_result[7][].q;
+	data_out_to_uart_tx[335..288] = dft_result[4][].q;
+	data_out_to_uart_tx[383..336] = dft_result[5][].q;
+	data_out_to_uart_tx[431..384] = dft_result[2][].q;
+	data_out_to_uart_tx[479..432] = dft_result[3][].q;
+	data_out_to_uart_tx[527..480] = dft_result[0][].q;
+	data_out_to_uart_tx[575..528] = dft_result[1][].q;
 			
 	
 	ready_ff.clk = clk;
